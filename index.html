@@ -452,59 +452,7 @@
                 <li>Discount applies to initial development cost only</li>
                 <li>Maintenance and updates priced separately</li>
                 <li>Custom quotes available upon request</li>
-              </ul>
-              <!-- Custom Quote Calculator -->
-              <div class="calculator-container">
-                <h3>Custom Quote Calculator</h3>
-                <form id="custom-quote-form">
-                  <div class="form-group">
-                    <label for="project-type">Project Type:</label>
-                    <select id="project-type" name="project-type" required>
-                      <option value="">Select Project Type</option>
-                      <option value="web-development">Web Development</option>
-                      <option value="desktop-application">Desktop Application</option>
-                      <option value="mobile-application">Mobile Application</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="features">Features:</label>
-                    <ul id="features">
-                      <li>
-                        <input type="checkbox" id="feature-1" name="features[]" value="Feature 1">
-                        <label for="feature-1">Feature 1</label>
-                      </li>
-                      <li>
-                        <input type="checkbox" id="feature-2" name="features[]" value="Feature 2">
-                        <label for="feature-2">Feature 2</label>
-                      </li>
-                      <li>
-                        <input type="checkbox" id="feature-3" name="features[]" value="Feature 3">
-                        <label for="feature-3">Feature 3</label>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="form-group">
-                    <label for="complexity">Complexity:</label>
-                    <select id="complexity" name="complexity" required>
-                      <option value="">Select Complexity</option>
-                      <option value="low">Low</option>
-                      <option value="medium">Medium</option>
-                      <option value="high">High</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="deadline">Deadline:</label>
-                    <input type="date" id="deadline" name="deadline" required>
-                  </div>
-                  <button type="submit">Calculate Quote</button>
-                </form>
-                <div id="quote-result">
-                  <h3>Custom Quote:</h3>
-                  <p id="quote-amount"></p>
-                  <p id="quote-breakdown"></p>
-                </div>
-              </div>
- 
+              </ul>  
               <!-- Contact Us -->
               <h3>Contact Us</h3>
               <p_For more information or to request a custom quote, please contact us:</p>
@@ -542,7 +490,132 @@
               </form>
             </div>
 
-        </section>
+        </section> 
+        <section id="shop" class="section hidden">
+            <h2>Custom Quote Calculator</h2>
+            <div class="calculator-container">
+              <h3>Get a Custom Quote for Your Project</h3>
+              <form id="custom-quote-form">
+                <!-- Project Type -->
+                <div class="form-group">
+                  <label for="project-type">Project Type:</label>
+                  <select id="project-type" name="project-type" required>
+                    <option value="">Select Project Type</option>
+                    <option value="web-development">Web Development</option>
+                    <option value="desktop-application">Desktop Application</option>
+                    <option value="mobile-application">Mobile Application</option>
+                  </select>
+                </div>
+          
+                <!-- Features -->
+                <div class="form-group">
+                  <label for="features">Features:</label>
+                  <ul id="features">
+                    <li>
+                      <input type="checkbox" id="feature-1" name="features[]" value="Feature 1">
+                      <label for="feature-1">Feature 1</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="feature-2" name="features[]" value="Feature 2">
+                      <label for="feature-2">Feature 2</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="feature-3" name="features[]" value="Feature 3">
+                      <label for="feature-3">Feature 3</label>
+                    </li>
+                  </ul>
+                </div>
+          
+                <!-- Template Groups -->
+                <div class="form-group">
+                  <label for="template-groups">Template Groups:</label>
+                  <ul id="template-groups">
+                    <li>
+                      <div class="template-group-header">
+                        <h4>Basic Templates <i class="fas fa-caret-down"></i></h4>
+                      </div>
+                      <ul class="template-group-content" style="display: none;">
+                        <li>
+                          <input type="checkbox" id="template-homepage" name="template-groups[]" value="Homepage">
+                          <label for="template-homepage">Homepage</label>
+                          <button class="preview-button" data-url="https://example.com/homepage">Preview</button>
+                        </li>
+                        <li>
+                          <input type="checkbox" id="template-about" name="template-groups[]" value="About Us">
+                          <label for="template-about">About Us</label>
+                          <button class="preview-button" data-url="https://example.com/about">Preview</button>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="template-group-header">
+                        <h4>Advanced Templates <i class="fas fa-caret-down"></i></h4>
+                      </div>
+                      <ul class="template-group-content" style="display: none;">
+                        <li>
+                          <input type="checkbox" id="template-contact" name="template-groups[]" value="Contact Us">
+                          <label for="template-contact">Contact Us</label>
+                          <button class="preview-button" data-url="https://example.com/contact">Preview</button>
+                        </li>
+                        <li>
+                          <input type="checkbox" id="template-services" name="template-groups[]" value="Services">
+                          <label for="template-services">Services</label>
+                          <button class="preview-button" data-url="https://example.com/services">Preview</button>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="template-group-header">
+                        <h4>E-commerce Templates <i class="fas fa-caret-down"></i></h4>
+                      </div>
+                      <ul class="template-group-content" style="display: none;">
+                        <li>
+                          <input type="checkbox" id="template-shop" name="template-groups[]" value="Shop">
+                          <label for="template-shop">Shop</label>
+                          <button class="preview-button" data-url="https://example.com/shop">Preview</button>
+                        </li>
+                        <li>
+                          <input type="checkbox" id="template-product" name="template-groups[]" value="Product">
+                          <label for="template-product">Product</label>
+                          <button class="preview-button" data-url="https://example.com/product">Preview</button>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+          
+                          <!-- Complexity -->
+                    <div class="form-group">
+                      <label for="complexity">Complexity:</label>
+                      <select id="complexity" name="complexity" required>
+                        <option value="">Select Complexity</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
+          
+                    <!-- Project Timeline -->
+                    <div class="form-group">
+                      <label for="project-timeline">Project Timeline:</label>
+                      <label for="start-date">Start Date:</label>
+                      <input type="date" id="start-date" name="start-date" required>
+                      <label for="end-date">End Date:</label>
+                      <input type="date" id="end-date" name="end-date" required>
+                    </div>
+          
+                    <!-- Submit Button -->
+                    <button type="submit">Calculate Quote</button>
+                  </form>
+                  <div id="quote-result">
+                    <h3>Custom Quote:</h3>
+                    <p id="quote-amount"></p>
+                    <p id="quote-breakdown"></p>
+                    <p id="project-timeline-estimation"></p>
+                  </div>
+                </div>
+              </section> 
+        
         <section id="about" class="section hidden">
           
             <div class="container">
