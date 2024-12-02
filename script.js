@@ -113,15 +113,19 @@ function updateQuoteResult() {
   let discountAmount = 0;
   let totalAmount = 0;
 
-  console.log(projectType);
-  // Calculate quote amount based on plan and project estimation
-  if (plan === 'basic') {
-    quoteAmount = projectEstimation * 100;
-  } else if (plan === 'premium') {
-    quoteAmount = projectEstimation * 200;
-  } else if (plan === 'enterprise') {
-    quoteAmount = projectEstimation * 500;
-  }
+  projectTypes.forEach((s)=>
+   {
+      if(s.id == projectType)
+      {
+         s.plans.forEach((s2)=>
+          {
+             if(s2.id == plan){
+              quoteAmount = s2.price;
+             }
+          });
+      }
+   });
+  console.log(projectType); 
   console.log(quoteAmount);
 
   // Apply discount if requested
