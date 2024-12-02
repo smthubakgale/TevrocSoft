@@ -493,108 +493,78 @@
         </section> 
         <!-- Shop Section -->
         <section id="shop"  class="section hidden">
-            <div class="container">
-              <h2>Get a Quote</h2>
-              <p>Please select your project type and plan to get a quote.</p>
-           
+            <h2>Get a Quote</h2>
+            <div class="shop-container">
               <!-- Project Type -->
               <div class="form-group">
                 <label for="project-type">Project Type:</label>
-                <select id="project-type" name="project-type" required>
-                  <option value="">Select Project Type</option>
-                  <option value="web-development">Web Development</option>
-                  <option value="desktop-application">Desktop Application</option>
-                  <option value="mobile-application">Mobile Application</option>
+                <select id="project-type" name="project-type">
+                  <option value="website">Website</option>
+                  <option value="application">Application</option>
+                  <option value="software">Software</option>
                 </select>
               </div>
           
-              <!-- Plan Selection -->
-              <div class="form-group" id="plan-selection">
+              <!-- Plan -->
+              <div class="form-group">
                 <label for="plan">Plan:</label>
-                <select id="plan" name="plan" required>
-                  <option value="">Select Plan</option>
-                  <option value="basic" data-price="1000">Basic (R1000)</option>
-                  <option value="premium" data-price="2000">Premium (R2000)</option>
-                  <option value="enterprise" data-price="5000">Enterprise (R5000)</option>
-                  <option value="custom">Custom Quote</option>
+                <select id="plan" name="plan">
+                  <option value="basic">Basic</option>
+                  <option value="premium">Premium</option>
+                  <option value="enterprise">Enterprise</option>
                 </select>
               </div>
           
               <!-- Project Estimation -->
-              <div class="form-group" id="project-estimation">
-                <label for="project-estimation">Project Estimation:</label>
-                <input type="number" id="project-estimation" name="project-estimation" placeholder="Estimated project hours" value="7" readonly required>
+              <div class="form-group">
+                <label for="project-estimation">Project Estimation (hours):</label>
+                <input type="number" id="project-estimation" name="project-estimation">
               </div>
           
-              <!-- Project Duration -->
-              <div class="form-group" id="project-duration">
-                <label for="project-duration">Project Duration:</label>
-                <div>
-                  <label for="start-date">
-                    <i class="fa-solid fa-calendar-days"></i> Start Date:
-                  </label>
-                  <input type="date" id="start-date" />
-                </div>
-                <div>
-                  <label for="end-date">
-                    <i class="fa-solid fa-calendar-days"></i> End Date:
-                  </label>
-                  <input type="date" id="end-date" />
-                </div>
+              <!-- Start Date -->
+              <div class="form-group">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date">
+              </div>
+          
+              <!-- End Date -->
+              <div class="form-group">
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date">
               </div>
           
               <!-- Template Selection -->
-              <div class="template-group-content" id="template-group-content">
-                <h3>Template Selection:</h3>
-                <ul id="templates">
-                  <li>
-                    <input type="checkbox" id="template-1" name="template" value="1" data-template="Template 1">
-                    <label for="template-1">Template 1</label>
-                    <button class="preview-button" data-template="1">Preview</button>
-                    <button class="select-button" data-template="1">Select</button>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="template-2" name="template" value="2" data-template="Template 2">
-                    <label for="template-2">Template 2</label>
-                    <button class="preview-button" data-template="2">Preview</button>
-                    <button class="select-button" data-template="2">Select</button>
-                  </li>
-                </ul>
-              </div>
+              <div id="template-group-content"></div>
+          
+              <!-- Features -->
+              <div id="features-list"></div>
           
               <!-- Discount Request -->
-              <div class="form-group" id="discount-request">
-                <label for="discount-request-checkbox">Request Discount:</label>
-                <input type="checkbox" id="discount-request-checkbox" name="discount-request">
-                <input type="number" id="discount-request-amount" name="discount-request-amount" placeholder="Discount Amount (%)" disabled>
+              <div class="form-group">
+                <input type="checkbox" id="discount-request-checkbox" name="discount-request-checkbox">
+                <label for="discount-request-checkbox">Request Discount</label>
+                <input type="number" id="discount-request-amount" name="discount-request-amount" placeholder="Discount (%)">
               </div>
           
               <!-- Quote Result -->
-              <div class="form-group">
-                <label for="quote-amount">Quote Amount:</label>
-                <div id="quote-amount">
-                  <p>Estimated Project Hours: <span id="estimated-hours">0</span> hours</p>
-                  <p>Estimated Project Days: <span id="estimated-days">0</span> days</p>
-                  <p>Quote Amount: R<span id="quote-amount-value">0.00</span></p>
-                  <p>Discount Amount: R<span id="discount-amount">0.00</span></p>
-                  <p>Total Amount: R<span id="total-amount">0.00</span></p>
-                  <h3>Project Phases:</h3>
-                  <ul id="project-phases"></ul>
-                </div>
+              <div class="quote-result">
+                <p>Quote Amount: R<span id="quote-amount-value">0.00</span></p>
+                <p>Template Price: R<span id="template-price">0.00</span></p>
+                <p>Page Prices: R<span id="page-prices">0.00</span></p>
+                <p>Feature Prices: R<span id="feature-prices">0.00</span></p>
+                <p>Total Amount: R<span id="total-amount">0.00</span></p>
               </div>
           
-              <!-- Project Name and Email -->
-              <div class="form-group">
-                <label for="project-name">Project Name:</label>
-                <input type="text" id="project-name" name="project-name" required>
+              <!-- Project Phases -->
+              <div class="project-phases">
+                <h3>Project Phases:</h3>
+                <ul id="project-phases"></ul>
               </div>
-              <div class="form-group">
-                <label for="project-email">Project Email:</label>
-                <input type="email" id="project-email" name="project-email" required>
-              </div>
-              
+          
               <!-- Form Submission -->
               <form id="shop-form">
+                <input type="text" id="project-name" name="project-name" placeholder="Project Name">
+                <input type="email" id="project-email" name="project-email" placeholder="Project Email">
                 <button id="submit-quote" type="submit">Submit Quote Request</button>
                 <div id="form-status"></div>
               </form>
