@@ -150,7 +150,7 @@ body {
 }
 /* Style the home section */
 #home { 
-  position:absolute;
+  position: relative;
   align-items: center;
   padding: 20px;
   font-family: 'Montserrat', sans-serif;
