@@ -253,6 +253,7 @@ planSelect.addEventListener('change', ()=>{
          }); 
        
          planSelect.innerHTML = html2;
+         console.log(html2);
      }
   });
   updateQuoteResult();
@@ -280,9 +281,11 @@ document.addEventListener('DOMContentLoaded', () => {
             html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" ) + `">` + s2.name + `</option>`;
          });
          planSelect.innerHTML = html2;
+         console.log(html2);
      }
   });
-  
+
+  console.log(html);
   projectTypeSelect.innerHTML = html;
   //:
   // Initialize template pages and features
