@@ -1,58 +1,78 @@
-
-//------------------------------------: Pricing
-// Get form elements
-const form = document.getElementById('custom-quote-form');
-const projectType = document.getElementById('project-type');
-const features = document.getElementById('features');
-const complexity = document.getElementById('complexity');
-const deadline = document.getElementById('deadline');
-const quoteResult = document.getElementById('quote-result');
-const quoteAmount = document.getElementById('quote-amount');
-const quoteBreakdown = document.getElementById('quote-breakdown');
-
-// Define pricing variables
-const basePrices = {
-  'web-development': 5000,
-  'desktop-application': 10000,
-  'mobile-application': 15000,
-};
-
-const featurePrices = {
-  'Feature 1': 1000,
-  'Feature 2': 2000,
-  'Feature 3': 3000,
-};
-
-const complexityMultipliers = {
-  low: 1,
-  medium: 1.5,
-  high: 2,
-};
-
-// Calculate quote
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const selectedProjectType = projectType.value;
-  const selectedFeatures = Array.from(features.children).filter((li) => li.querySelector('input[type="checkbox"]').checked).map((li) => li.querySelector('input[type="checkbox"]').value);
-  const selectedComplexity = complexity.value;
-  const selectedDeadline = deadline.value;
-
-  let totalCost = basePrices[selectedProjectType];
-  selectedFeatures.forEach((feature) => {
-    totalCost += featurePrices[feature];
+//------------------------------------: Shop 
+// Template group header toggle
+document.querySelectorAll('#shop .template-group-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling;
+    content.style.display = content.style.display === 'none' ? 'block' : 'none';
   });
-  totalCost *= complexityMultipliers[selectedComplexity];
+});
 
-  quoteAmount.innerText = `R${totalCost.toLocaleString()}`;
-  quoteBreakdown.innerText = `
-    Base Price: R${basePrices[selectedProjectType].toLocaleString()}
-    Features: R${selectedFeatures.reduce((acc, feature) => acc + featurePrices[feature], 0).toLocaleString()}
-    Complexity: ${selectedComplexity} (${complexityMultipliers[selectedComplexity]}x)
-    Deadline: ${selectedDeadline}
+// Calculate project timeline phases
+function calculateProjectTimelinePhases(startDate, endDate) {
+  const projectDuration = Math.round((endDate - startDate) / (1000 * 3600 * 24));
+
+  // Estimated phase durations (in weeks)
+  const discoveryPhase = Math.ceil(projectDuration / 20);
+  const designPhase = Math.ceil(projectDuration / 15);
+  const developmentPhase = Math.ceil(projectDuration / 10);
+  const testingPhase = Math.ceil(projectDuration / 15);
+  const launchPhase = Math.ceil(projectDuration / 20);
+
+  return {
+    discoveryPhase,
+    designPhase,
+    developmentPhase,
+    testingPhase,
+    launchPhase,
+  };
+}
+
+// Update quote result with project timeline estimation
+function updateQuoteResult(quoteAmount, quoteBreakdown, projectTimelineEstimation) {
+  document.getElementById('quote-amount').innerHTML = `Quote Amount: $${quoteAmount}`;
+  document.getElementById('quote-breakdown').innerHTML = quoteBreakdown;
+  document.getElementById('project-timeline-estimation').innerHTML = `Project Timeline Estimation: ${projectTimelineEstimation}`;
+}
+
+// Form submission handler
+document.getElementById('custom-quote-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const startDate = new Date(document.getElementById('start-date').value);
+  const endDate = new Date(document.getElementById('end-date').value);
+
+  const projectTimelinePhases = calculateProjectTimelinePhases(startDate, endDate);
+
+  const projectTimelineEstimation = `
+    Discovery Phase: ${projectTimelinePhases.discoveryPhase} weeks
+    Design Phase: ${projectTimelinePhases.designPhase} weeks
+    Development Phase: ${projectTimelinePhases.developmentPhase} weeks
+    Testing Phase: ${projectTimelinePhases.testingPhase} weeks
+    Launch Phase: ${projectTimelinePhases.launchPhase} weeks
   `;
 
-  quoteResult.style.display = 'block';
+  updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 });
+
+// Preview button handler
+document.querySelectorAll('#shop .preview-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const url = button.getAttribute('data-url');
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.innerHTML = `
+      <iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
+      <button class="close-button">Back</button>
+    `;
+
+    document.body.appendChild(popup);
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+      popup.remove();
+    });
+  });
+});
+//------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
     height: 200,
