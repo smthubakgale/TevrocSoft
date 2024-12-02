@@ -430,6 +430,64 @@ body {
 #pricing button:hover {
   background-color: #23527c;
 }
+/* Form Styling */
+#pricing #quote-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#pricing #quote-form .form-group {
+  margin-bottom: 20px;
+}
+
+#pricing #quote-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+#pricing #quote-form input, #pricing #quote-form textarea, #pricing #quote-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#pricing #quote-form input[type="submit"] {
+  background-color: #337ab7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pricing #quote-form input[type="submit"]:hover {
+  background-color: #23527c;
+}
+
+#pricing #quote-form textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Error Messages */
+#pricing #quote-form .error {
+  color: #f00;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Success Message */
+#pricing #quote-form .success {
+  color: #0f0;
+  font-size: 12px;
+  margin-top: 5px;
+}
 /* Tags Styles */
 
 
