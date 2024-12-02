@@ -490,137 +490,129 @@ body {
   margin-top: 5px;
 } 
 /* Shop Section */
-/* Shop Section Styles */
+
+/* Shop Section */
 
 #shop {
   background-color: #f9f9f9;
-  padding: 50px 0;
+  padding: 50px;
 }
 
-#shop .container {
-  max-width: 1200px;
+#shop .shop-container {
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#shop h2 {
+#shop .shop-container h2 {
   color: #333;
-  font-weight: bold;
+  margin-top: 0;
+}
+
+#shop .form-group {
   margin-bottom: 20px;
 }
 
-#shop p {
-  color: #666;
-  margin-bottom: 30px;
-}
-
-/* Form Group Styles */
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
+#shop .form-group label {
   display: block;
-  color: #333;
-  font-weight: bold;
   margin-bottom: 10px;
+  color: #666;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="number"],
-.form-group select {
+#shop .form-group input[type="text"],
+#shop .form-group input[type="email"],
+#shop .form-group input[type="number"],
+#shop .form-group select {
   width: 100%;
+  height: 40px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.form-group input[type="checkbox"] {
+#shop .form-group input[type="checkbox"] {
   margin-right: 10px;
 }
 
-/* Template Selection Styles */
-
-.template-group-content {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.template-group-content h3 {
-  color: #333;
-  font-weight: bold;
+#shop .template-option {
   margin-bottom: 20px;
 }
 
-.template-group-content ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.template-group-content li {
-  margin-bottom: 20px;
-}
-
-.template-group-content input[type="checkbox"] {
+#shop .template-option input[type="radio"] {
   margin-right: 10px;
 }
 
-.preview-button,
-.select-button {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+#shop .template-pages {
+  margin-left: 20px;
 }
 
-.preview-button:hover,
-.select-button:hover {
-  background-color: #555;
+#shop .page-option {
+  margin-bottom: 10px;
 }
 
-/* Quote Result Styles */
+#shop .page-option input[type="checkbox"] {
+  margin-right: 10px;
+}
 
-#quote-amount {
-  background-color: #fff;
-  border: 1px solid #ddd;
+#shop .feature-option {
+  margin-bottom: 10px;
+}
+
+#shop .feature-option input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#shop .quote-result {
+  background-color: #f9f9f9;
   padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#quote-amount p {
-  color: #333;
-  font-weight: bold;
   margin-bottom: 20px;
 }
 
-#quote-amount span {
+#shop .quote-result p {
+  margin-bottom: 10px;
   color: #666;
 }
 
-/* Project Phases Styles */
+#shop .project-phases {
+  margin-bottom: 20px;
+}
 
-#project-phases {
+#shop .project-phases h3 {
+  margin-top: 0;
+}
+
+#shop .project-phases ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#project-phases li {
+#shop .project-phases li {
+  margin-bottom: 10px;
+  color: #666;
+}
+
+#shop #shop-form {
+  margin-top: 20px;
+}
+
+#shop #shop-form input[type="text"],
+#shop #shop-form input[type="email"] {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   margin-bottom: 20px;
 }
 
-/* Submit Button Styles */
-
-#submit-quote {
+#shop #submit-quote {
   background-color: #333;
   color: #fff;
   padding: 10px 20px;
@@ -629,8 +621,51 @@ body {
   cursor: pointer;
 }
 
-#submit-quote:hover {
-  background-color: #555;
+#shop #submit-quote:hover {
+  background-color: #444;
+}
+
+#shop #form-status {
+  color: #666;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+
+#shop@media (max-width: 768px) {
+  .shop-container {
+    padding: 10px;
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .template-option {
+    margin-bottom: 10px;
+  }
+  .quote-result {
+    padding: 10px;
+  }
+  .project-phases {
+    margin-bottom: 10px;
+  }
+}
+
+#shop@media (max-width: 480px) {
+  .shop-container {
+    padding: 5px;
+  }
+  .form-group {
+    margin-bottom: 5px;
+  }
+  .template-option {
+    margin-bottom: 5px;
+  }
+  .quote-result {
+    padding: 5px;
+  }
+  .project-phases {
+    margin-bottom: 5px;
+  }
 }
 /* Tags Styles */
 
