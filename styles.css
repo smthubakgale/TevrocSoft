@@ -150,9 +150,7 @@ body {
 }
 
 /* Style the home section */
-#home {
-  display: flex;
-  flex-direction: column;
+#home {  
   align-items: center;
   padding: 20px;
   font-family: 'Montserrat', sans-serif;
