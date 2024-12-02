@@ -69,6 +69,39 @@ function setInitialDates() {
 // Call function on page load
 document.addEventListener('DOMContentLoaded', setInitialDates);
 // Function to update quote result
+const projectTypes = [
+  {
+    id: 'website',
+    name: 'Website',
+    multiplier: 1,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 500 },
+      { id: 'premium', name: 'Premium', price: 2000 },
+      { id: 'enterprise', name: 'Enterprise', price: 5000 },
+    ],
+  },
+  {
+    id: 'application',
+    name: 'Application',
+    multiplier: 3,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 1500 },
+      { id: 'premium', name: 'Premium', price: 6000 },
+      { id: 'enterprise', name: 'Enterprise', price: 15000 },
+    ],
+  },
+  {
+    id: 'software',
+    name: 'Software',
+    multiplier: 6,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 3000 },
+      { id: 'premium', name: 'Premium', price: 12000 },
+      { id: 'enterprise', name: 'Enterprise', price: 30000 },
+    ],
+  },
+];
+
 function updateQuoteResult() {
   calculateProjectEstimation();
  
@@ -86,6 +119,7 @@ function updateQuoteResult() {
   let discountAmount = 0;
   let totalAmount = 0;
 
+  console.log(projectType);
   // Calculate quote amount based on plan and project estimation
   if (plan === 'basic') {
     quoteAmount = projectEstimation * 100;
