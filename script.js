@@ -27,7 +27,8 @@ function updateQuoteResult() {
   const projectEstimation = projectEstimationInput.value;
   const startDate = new Date(startDateInput.value);
   const endDate = new Date(endDateInput.value);
-  const templateId = templateSelect.querySelector('.select-button:checked').getAttribute('data-template');
+  const selectedTemplate = templateSelect.querySelector('.select-button:checked');
+  const templateId = selectedTemplate ? selectedTemplate.getAttribute('data-template') : null;
   const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
   const discountRequestAmount = discountAmountInput;
 
@@ -102,12 +103,12 @@ form.addEventListener('submit', (e) => {
   const projectEstimation = projectEstimationInput.value;
   const startDate = startDateInput.value;
   const endDate = endDateInput.value;
-  const templateId = templateSelect.querySelector('.select-button:checked').getAttribute('data-template');
+  const templateId = templateSelect.querySelector('.select-button:checked')?.getAttribute('data-template');
   const quoteAmount = quoteAmountValue.textContent;
   const discountAmount = discountAmountInput.value;
-  const projectPhases = projectPhasesList.innerHTML;
+    const projectPhases = projectPhasesList.innerHTML;
 
-   const quoteRequest = {
+  const quoteRequest = {
     from_name: projectName,
     message: `
       Project Type: ${projectType}
@@ -146,7 +147,9 @@ templateSelect.addEventListener('change', updateQuoteResult);
 discountAmountInput.addEventListener('input', updateQuoteResult);
 
 // Initialize quote result
-updateQuoteResult();
+document.addEventListener('DOMContentLoaded', () => {
+  updateQuoteResult();
+});
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
