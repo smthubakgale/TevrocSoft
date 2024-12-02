@@ -490,182 +490,147 @@ body {
   margin-top: 5px;
 } 
 /* Shop Section */
+/* Shop Section Styles */
 
-/* Shop Section */
 #shop {
-  background-color: #f7f7f7;
-  padding: 50px;
+  background-color: #f9f9f9;
+  padding: 50px 0;
 }
 
-/* Calculator Container */
-#shop .calculator-container {
-  max-width: 800px;
+#shop .container {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Calculator Header */
-#shop .calculator-container h3 {
-  text-align: center;
+#shop h2 {
+  color: #333;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* Form Groups */
-#shop .form-group {
+#shop p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Form Group Styles */
+
+.form-group {
   margin-bottom: 20px;
 }
 
-#shop .form-group label {
+.form-group label {
   display: block;
+  color: #333;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-#shop .form-group select, 
-#shop .form-group input[type="date"] {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Features List */
-#shop .form-group ul#features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Template Selection Styles */
+
+.template-group-content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.template-group-content h3 {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.template-group-content ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#shop .form-group ul#features li {
-  flex: 1 1 30%;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+.template-group-content li {
+  margin-bottom: 20px;
 }
 
-#shop .form-group ul#features li:hover {
-  background-color: #f2f2f2;
-}
-
-#shop .form-group ul#features li input[type="checkbox"] {
+.template-group-content input[type="checkbox"] {
   margin-right: 10px;
 }
 
-#shop .form-group ul#features li input[type="checkbox"]:checked + label {
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-/* Template Group */
-#shop .template-group-header {
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+.preview-button,
+.select-button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-#shop .template-group-header h4 {
+.preview-button:hover,
+.select-button:hover {
+  background-color: #555;
+}
+
+/* Quote Result Styles */
+
+#quote-amount {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#quote-amount p {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#quote-amount span {
+  color: #666;
+}
+
+/* Project Phases Styles */
+
+#project-phases {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-#shop .template-group-content {
-  padding: 10px;
-  display: none;
-  flex-wrap: wrap;
-  gap: 10px;
+#project-phases li {
+  margin-bottom: 20px;
 }
 
-#shop .template-group-content li {
-  flex: 1 1 30%;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+/* Submit Button Styles */
+
+#submit-quote {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
   border-radius: 5px;
-  padding: 15px;
-  display: flex;
-  align-items: center;
   cursor: pointer;
 }
 
-#shop .template-group-content li:hover {
-  background-color: #f2f2f2;
-}
-
-#shop .template-group-content li input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#shop .template-group-content li input[type="checkbox"]:checked + label {
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-/* Preview Button */
-#shop .preview-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-#shop .preview-button:hover {
-  background-color: #3e8e41;
-}
-
-/* Quote Result */
-#shop #quote-result {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-top: 20px;
-}
-
-#shop #quote-result h3 {
-  margin-top: 0;
-}
-
-/* Popup */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup iframe {
-  width: 80%;
-  height: 80%;
-  border: none;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  background-color: #3e8e41;
+#submit-quote:hover {
+  background-color: #555;
 }
 /* Tags Styles */
 
