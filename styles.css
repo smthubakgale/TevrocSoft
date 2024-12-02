@@ -490,11 +490,13 @@ body {
   margin-top: 5px;
 }
 /* Shop */
+/* Shop Section */
 #shop {
   background-color: #f7f7f7;
   padding: 50px;
 }
 
+/* Calculator Container */
 #shop .calculator-container {
   max-width: 800px;
   margin: 0 auto;
@@ -504,11 +506,13 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Calculator Header */
 #shop .calculator-container h3 {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Form Groups */
 #shop .form-group {
   margin-bottom: 20px;
 }
@@ -518,26 +522,30 @@ body {
   margin-bottom: 10px;
 }
 
-#shop .form-group select, #shop .form-group input[type="date"] {
+#shop .form-group select, 
+#shop .form-group input[type="date"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
 }
 
-#shop .form-group ul {
+/* Features List */
+#shop .form-group ul#features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#shop .form-group li {
-  margin-bottom: 10px;
+#shop .form-group ul#features li {
+  flex: 1 1 30%;
+  display: flex;
+  align-items: center;
 }
 
-#shop .form-group input[type="checkbox"] {
-  margin-right: 10px;
-}
-
+/* Template Group */
 #shop .template-group-header {
   background-color: #f0f0f0;
   padding: 10px;
@@ -552,8 +560,20 @@ body {
 #shop .template-group-content {
   padding: 10px;
   display: none;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
+#shop .template-group-content li {
+  flex: 1 1 30%;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Preview Button */
 #shop .preview-button {
   background-color: #4CAF50;
   color: #fff;
@@ -567,6 +587,7 @@ body {
   background-color: #3e8e41;
 }
 
+/* Quote Result */
 #shop #quote-result {
   background-color: #f0f0f0;
   padding: 20px;
@@ -576,6 +597,41 @@ body {
 
 #shop #quote-result h3 {
   margin-top: 0;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup iframe {
+  width: 80%;
+  height: 80%;
+  border: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #3e8e41;
 }
 /* Tags Styles */
 
