@@ -1,20 +1,4 @@
 //------------------------------------: Shop 
-const form = $('#shop-form');
-const projectNameInput = $('#project-name');
-const projectEmailInput = $('#project-email');
-const projectTypeSelect = $('#project-type');
-const planSelect = $('#plan');
-const projectEstimationInput = $('#project-estimation');
-const startDateInput = $('#start-date');
-const endDateInput = $('#end-date');
-const templateSelect = $('#template-group-content');
-const quoteAmountValue = $('#quote-amount-value');
-const discountAmountInput = $('#discount-request-amount');
-const formStatus = $('#form-status');
-const submitButton = $('#submit-quote');
-const projectPhasesList = $('#project-phases');
-const featuresList = $('#features-list');
-
 // Project types
 const projectTypes = [
   {
@@ -84,18 +68,15 @@ const features = [
 
 function init_shop()
 {
-  projectTypeSelect.html('');
+  $('#project-type').html('');
   projectTypes.forEach((s) =>
-    { 
+  { 
       console.log(s);
-      
-      projectTypeSelect.append( `
-        <option value="${s.id}">${s.name} </option>
-      `);
+      $('#project-type').append($('<li/>').attr('value' , s.id).html(s.name)) ;
   });
 }
 
-$(window).on('load' , ()=>{ init_shop(); })
+init_shop()
 
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
