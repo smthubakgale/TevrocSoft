@@ -21,6 +21,40 @@ const submitButton = document.getElementById('submit-quote');
 const projectPhasesList = document.getElementById('project-phases');
 const featuresList = document.getElementById('features-list');
 
+// Project types
+const projectTypes = [
+  {
+    id: 'website',
+    name: 'Website',
+    multiplier: 1,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 500 },
+      { id: 'premium', name: 'Premium', price: 2000 },
+      { id: 'enterprise', name: 'Enterprise', price: 5000 },
+    ],
+  },
+  {
+    id: 'application',
+    name: 'Application',
+    multiplier: 3,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 1500 },
+      { id: 'premium', name: 'Premium', price: 6000 },
+      { id: 'enterprise', name: 'Enterprise', price: 15000 },
+    ],
+  },
+  {
+    id: 'software',
+    name: 'Software',
+    multiplier: 6,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 3000 },
+      { id: 'premium', name: 'Premium', price: 12000 },
+      { id: 'enterprise', name: 'Enterprise', price: 30000 },
+    ],
+  },
+];
+
 // Template pages with prices
 const templatePages = [
   {
@@ -204,7 +238,25 @@ form.addEventListener('submit', (e) => {
 
 // Update quote result on input change
 projectTypeSelect.addEventListener('change', updateQuoteResult);
-planSelect.addEventListener('change', updateQuoteResult);
+
+
+planSelect.addEventListener('change', ()=>{
+  var v = this.value;
+  projectTypes.forEach((s)=>
+  {  
+     if(s.id == v)
+     {
+         var html2 = "<option value="">Select Plan</option>";
+         s.plan.forEach((s2 , k2)=>
+         {
+            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" )`">` + s2.name + `</option>`;
+         }); 
+       
+         planSelect.innerHTML = html2;
+     }
+  });
+  updateQuoteResult();
+});
 projectEstimationInput.addEventListener('input', updateQuoteResult);
 startDateInput.addEventListener('input', updateQuoteResult);
 endDateInput.addEventListener('input', updateQuoteResult);
@@ -214,7 +266,25 @@ featuresList.addEventListener('change', updateQuoteResult);
 // Initialize quote result
 document.addEventListener('DOMContentLoaded', () => {
   updateQuoteResult();
+  // Initialize Project Type and Plan  
+  var html = "<option value="">Select Project Type</option>"; 
+  
+  projectTypes.forEach((s , k)=>
+  { 
+     html += `<option value="` + s.id + (k == 0 ? "selected " : "" )`">` + s.name + `</option>`;
 
+     if(k == 0){
+         var html2 = "<option value="">Select Plan</option>";
+         s.plan.forEach((s2 , k2)=>
+         {
+            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" )`">` + s2.name + `</option>`;
+         });
+         planSelect.innerHTML = html2;
+     }
+  });
+  
+  projectTypeSelect.innerHTML = html;
+  //:
   // Initialize template pages and features
   templatePages.forEach((template) => {
     const templateHTML = `
