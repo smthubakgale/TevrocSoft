@@ -1,83 +1,168 @@
 //------------------------------------: Shop 
-// Project types
-const projectTypes = [
-  {
-    id: 'website',
-    name: 'Website',
-    multiplier: 1,
-    plans: [
-      { id: 'basic', name: 'Basic', price: 500 },
-      { id: 'premium', name: 'Premium', price: 2000 },
-      { id: 'enterprise', name: 'Enterprise', price: 5000 },
-    ],
-  },
-  {
-    id: 'application',
-    name: 'Application',
-    multiplier: 3,
-    plans: [
-      { id: 'basic', name: 'Basic', price: 1500 },
-      { id: 'premium', name: 'Premium', price: 6000 },
-      { id: 'enterprise', name: 'Enterprise', price: 15000 },
-    ],
-  },
-  {
-    id: 'software',
-    name: 'Software',
-    multiplier: 6,
-    plans: [
-      { id: 'basic', name: 'Basic', price: 3000 },
-      { id: 'premium', name: 'Premium', price: 12000 },
-      { id: 'enterprise', name: 'Enterprise', price: 30000 },
-    ],
-  },
-];
+// Project type select element
+const projectTypeSelect = $('#project-type');
 
-// Template pages with prices
-const templatePages = [
-  {
-    id: 1,
-    name: 'Template 1',
-    price: 2000,
-    pages: [
-      { name: 'Home', price: 500, url: 'https://example.com/home' },
-      { name: 'About', price: 300, url: 'https://example.com/about' },
-      { name: 'Contact', price: 200, url: 'https://example.com/contact' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Template 2',
-    price: 3500,
-    pages: [
-      { name: 'Home', price: 700, url: 'https://example.com/home' },
-      { name: 'Services', price: 500, url: 'https://example.com/services' },
-      { name: 'Portfolio', price: 800, url: 'https://example.com/portfolio' },
-    ],
-  },
-];
+// Plan select element
+const planSelect = $('#plan');
 
-// Features with prices
-const features = [
-  { id: 1, name: 'Responsive Design', price: 500 },
-  { id: 2, name: 'Customizable', price: 1000 },
-  { id: 3, name: 'SEO Optimized', price: 800 },
-  { id: 4, name: 'Secure', price: 1200 },
-  { id: 5, name: 'Scalable', price: 1500 },
-];
+// Project estimation input element
+const projectEstimationInput = $('#project-estimation');
 
-function init_shop()
-{
-  $('#project-type').html('');
-  projectTypes.forEach((s) =>
-  { 
-      console.log(s);
-      $('#project-type').append($('<li/>').attr('value' , s.id).html(s.name)) ;
+// Template select elements
+const templateSelect = $('input[name="template"]');
+
+// Page checkboxes
+const pageCheckboxes = $('.page-checkbox');
+
+// Feature checkboxes
+const featureCheckboxes = $('.feature-checkbox');
+
+// Discount request checkbox
+const discountRequestCheckbox = $('#discount-request-checkbox');
+
+// Discount amount input
+const discountAmountInput = $('#discount-amount-input');
+
+// Quote result elements
+const quoteAmountValue = $('#quote-amount-value');
+const templatePrice = $('#template-price');
+const pagePrices = $('#page-prices');
+const featurePrices = $('#feature-prices');
+const totalAmount = $('#total-amount');
+
+// Plans data
+const plansData = {
+  website: [
+    { id: 1, name: 'Basic', price: 1000, pages: 5, features: ['Responsive Design', 'Customizable'] },
+    { id: 2, name: 'Premium', price: 3000, pages: 10, features: ['Responsive Design', 'Customizable', 'SEO Optimized'] },
+    { id: 3, name: 'Enterprise', price: 5000, pages: 20, features: ['Responsive Design', 'Customizable', 'SEO Optimized', 'Secure', 'Scalable'] }
+  ],
+  application: [
+    { id: 4, name: 'Basic', price: 2000, pages: 5, features: ['Responsive Design', 'Customizable'] },
+    { id: 5, name: 'Premium', price: 5000, pages: 10, features: ['Responsive Design', 'Customizable', 'SEO Optimized'] },
+    { id: 6, name: 'Enterprise', price: 10000, pages: 20, features: ['Responsive Design', 'Customizable', 'SEO Optimized', 'Secure', 'Scalable'] }
+  ],
+  software: [
+    { id: 7, name: 'Basic', price: 5000, pages: 5, features: ['Responsive Design', 'Customizable'] },
+    { id: 8, name: 'Premium', price: 10000, pages: 10, features: ['Responsive Design', 'Customizable', 'SEO Optimized'] },
+    { id: 9, name: 'Enterprise', price: 20000, pages: 20, features: ['Responsive Design', 'Customizable', 'SEO Optimized', 'Secure', 'Scalable'] }
+  ]
+};
+
+// Function to update plan options
+function updatePlanOptions() {
+  const projectType = projectTypeSelect.val();
+  const plans = plansData[projectType];
+
+  planSelect.empty();
+
+  $.each(plans, (index, plan) => {
+    planSelect.append(`<option value="${plan.id}">${plan.name} ($${plan.price})</option>`);
   });
+
+  updateQuoteResult();
 }
 
-init_shop()
+// Function to update quote result
+function updateQuoteResult() {
+  const projectType = projectTypeSelect.val();
+  const planId = planSelect.val();
+  const projectEstimation = parseFloat(projectEstimationInput.val());
+  const templatePriceValue = parseFloat(templateSelect.val());
+  const pagePricesValue = getPagePrices();
+  const featurePricesValue = getFeaturePrices();
+  const discountRequest = discountRequestCheckbox.is(':checked');
+  const discountAmount = parseFloat(discountAmountInput.val());
 
+  const plan = getPlan(projectType, planId);
+
+  if (plan) {
+    const quoteAmount = calculateQuoteAmount(plan, projectEstimation, templatePriceValue, pagePricesValue, featurePricesValue);
+    const total = calculateTotal(quoteAmount, discountRequest, discountAmount);
+
+    quoteAmountValue.text(`$${quoteAmount.toFixed(2)}`);
+    templatePrice.text(`$${templatePriceValue.toFixed(2)}`);
+    pagePrices.text(`$${pagePricesValue.toFixed(2)}`);
+    featurePrices.text(`$${featurePricesValue.toFixed(2)}`);
+    totalAmount.text(`$${total.toFixed(2)}`);
+  }
+}
+
+// Function to get plan
+function getPlan(projectType, planId) {
+  const plans = plansData[projectType];
+
+  return plans.find((plan) => plan.id === parseInt(planId));
+}
+
+// Function to calculate quote amount
+function calculateQuoteAmount(plan, projectEstimation, templatePriceValue, pagePricesValue, featurePricesValue) {
+  return plan.price + projectEstimation + templatePriceValue + pagePricesValue + featurePricesValue;
+}
+
+// Function to calculate total
+function calculateTotal(quoteAmount, discountRequest, discountAmount) {
+  if (discountRequest) {
+    return quoteAmount - discountAmount;
+      } else {
+    return quoteAmount;
+  }
+}
+
+// Function to get page prices
+function getPagePrices() {
+  let pagePrices = 0;
+
+  pageCheckboxes.each((index, checkbox) => {
+    if ($(checkbox).is(':checked')) {
+      pagePrices += parseFloat($(checkbox).val());
+    }
+  });
+
+  return pagePrices;
+}
+
+// Function to get feature prices
+function getFeaturePrices() {
+  let featurePrices = 0;
+
+  featureCheckboxes.each((index, checkbox) => {
+    if ($(checkbox).is(':checked')) {
+      featurePrices += parseFloat($(checkbox).val());
+    }
+  });
+
+  return featurePrices;
+}
+
+// Initialize plan options
+$(document).ready(() => {
+  updatePlanOptions();
+});
+
+// Update plan options on project type change
+projectTypeSelect.change(updatePlanOptions);
+
+// Update quote result on plan change
+planSelect.change(updateQuoteResult);
+
+// Update quote result on project estimation change
+projectEstimationInput.keyup(updateQuoteResult);
+
+// Update quote result on template change
+templateSelect.change(updateQuoteResult);
+
+// Update quote result on page checkbox change
+pageCheckboxes.change(updateQuoteResult);
+
+// Update quote result on feature checkbox change
+featureCheckboxes.change(updateQuoteResult);
+
+// Update quote result on discount request checkbox change
+discountRequestCheckbox.change(updateQuoteResult);
+
+// Update quote result on discount amount input change
+discountAmountInput.keyup(updateQuoteResult);
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
