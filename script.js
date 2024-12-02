@@ -12,6 +12,24 @@ const accordionTriggers = document.querySelectorAll('.accordion');
 const alertCloseButtons = document.querySelectorAll('.alert .close-button');
 const asideToggle = document.querySelector('.aside-toggle'); 
 
+// Replace textarea with CKEditor
+  CKEDITOR.replace('editor', {
+    height: 200,
+    toolbar: [
+      { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord' ] },
+      { name: 'editing', items: [ 'Find', 'Replace', 'SelectAll' ] },
+      { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+      '/',
+      { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat' ] },
+      { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'BidiLtr', 'BidiRtl' ] },
+      { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+      { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak' ] },
+      '/',
+      { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+      { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+      { name: 'tools', items: [ 'Maximize', 'ShowBlocks', 'About' ] }
+    ]
+  });
 // Add event listeners
 navLinks.forEach(link => link.addEventListener('click', handleNavLinkClick));
 subNavTriggers.forEach(trigger => trigger.addEventListener('mouseover', handleSubNavTrigger));
