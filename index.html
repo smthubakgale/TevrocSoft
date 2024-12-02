@@ -496,7 +496,27 @@
             <div class="container">
               <h2>Get a Quote</h2>
               <p>Please select your project type and plan to get a quote.</p>
-          
+          <!-- Project Details -->
+          <label>
+            Project Name:
+            <input type="text" id="project-name" />
+          </label>
+          <label>
+            Project Email:
+            <input type="email" id="project-email" />
+          </label>
+          <label>
+            Project Type:
+            <select id="project-type">
+              <option value="website">Website</option>
+              <option value="application">Application</option>
+              <option value="software">Software</option>
+            </select>
+          </label>
+          <label>
+            Plan:
+            <select id="plan"></select>
+          </label>
               <!-- Project Type -->
               <div class="form-group">
                 <label for="project-type">Project Type:</label>
@@ -507,21 +527,8 @@
                   <option value="mobile-application">Mobile Application</option>
                 </select>
               </div>
-          
-              <!-- Plan Selection -->
-              <div class="form-group" id="plan-selection">
-                <label for="plan">Plan:</label>
-                <select id="plan" name="plan" required>
-                  <option value="">Select Plan</option>
-                </select>
-              </div>
-          
-              <!-- Discount Request -->
-              <div class="form-group" id="discount-request">
-                <label for="discount-request-checkbox">Request Discount:</label>
-                <input type="checkbox" id="discount-request-checkbox" name="discount-request">
-                <input type="number" id="discount-request-amount" name="discount-request-amount" placeholder="Discount Amount (%)" disabled>
-              </div>
+           
+           
           
               <!-- Template Selection -->
               <div class="template-group-content" id="template-group-content">
