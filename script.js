@@ -249,7 +249,7 @@ planSelect.addEventListener('change', ()=>{
          var html2 = `<option value="">Select Plan</option>`;
          s.plan.forEach((s2 , k2)=>
          {
-            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" )`">` + s2.name + `</option>`;
+            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" ) + `">` + s2.name + `</option>`;
          }); 
        
          planSelect.innerHTML = html2;
@@ -271,13 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
   projectTypes.forEach((s , k)=>
   { 
-     html += `<option value="` + s.id + (k == 0 ? "selected " : "" )`">` + s.name + `</option>`;
+     html += `<option value="` + s.id + (k == 0 ? "selected " : "" ) + `">` + s.name + `</option>`;
 
      if(k == 0){
          var html2 = `<option value="">Select Plan</option>`;
          s.plan.forEach((s2 , k2)=>
          {
-            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" )`">` + s2.name + `</option>`;
+            html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" ) + `">` + s2.name + `</option>`;
          });
          planSelect.innerHTML = html2;
      }
