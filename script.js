@@ -1,17 +1,58 @@
-// Get elements
-const topNav = document.querySelector('.top-nav');
-const sideNav = document.querySelector('.side-nav');
-const docsNav = document.querySelector('.docs-nav');
-const mainContent = document.querySelector('.main-content'); 
-const sections = document.querySelectorAll('.section');
-const navLinks = document.querySelectorAll('.nav-link');
-const subNavTriggers = document.querySelectorAll('.dropdown');
-const subNavs = document.querySelectorAll('.sub-nav');
-const modals = document.querySelectorAll('.modal');
-const accordionTriggers = document.querySelectorAll('.accordion');
-const alertCloseButtons = document.querySelectorAll('.alert .close-button');
-const asideToggle = document.querySelector('.aside-toggle'); 
 
+//------------------------------------: Pricing
+// Get form elements
+const form = document.getElementById('custom-quote-form');
+const projectType = document.getElementById('project-type');
+const features = document.getElementById('features');
+const complexity = document.getElementById('complexity');
+const deadline = document.getElementById('deadline');
+const quoteResult = document.getElementById('quote-result');
+const quoteAmount = document.getElementById('quote-amount');
+const quoteBreakdown = document.getElementById('quote-breakdown');
+
+// Define pricing variables
+const basePrices = {
+  'web-development': 5000,
+  'desktop-application': 10000,
+  'mobile-application': 15000,
+};
+
+const featurePrices = {
+  'Feature 1': 1000,
+  'Feature 2': 2000,
+  'Feature 3': 3000,
+};
+
+const complexityMultipliers = {
+  low: 1,
+  medium: 1.5,
+  high: 2,
+};
+
+// Calculate quote
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const selectedProjectType = projectType.value;
+  const selectedFeatures = Array.from(features.children).filter((li) => li.querySelector('input[type="checkbox"]').checked).map((li) => li.querySelector('input[type="checkbox"]').value);
+  const selectedComplexity = complexity.value;
+  const selectedDeadline = deadline.value;
+
+  let totalCost = basePrices[selectedProjectType];
+  selectedFeatures.forEach((feature) => {
+    totalCost += featurePrices[feature];
+  });
+  totalCost *= complexityMultipliers[selectedComplexity];
+
+  quoteAmount.innerText = `R${totalCost.toLocaleString()}`;
+  quoteBreakdown.innerText = `
+    Base Price: R${basePrices[selectedProjectType].toLocaleString()}
+    Features: R${selectedFeatures.reduce((acc, feature) => acc + featurePrices[feature], 0).toLocaleString()}
+    Complexity: ${selectedComplexity} (${complexityMultipliers[selectedComplexity]}x)
+    Deadline: ${selectedDeadline}
+  `;
+
+  quoteResult.style.display = 'block';
+});
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
     height: 200,
@@ -30,6 +71,20 @@ const asideToggle = document.querySelector('.aside-toggle');
       { name: 'tools', items: [ 'Maximize', 'ShowBlocks', 'About' ] }
     ]
   });
+//-----------------------------: Layout 
+// Get elements
+const topNav = document.querySelector('.top-nav');
+const sideNav = document.querySelector('.side-nav');
+const docsNav = document.querySelector('.docs-nav');
+const mainContent = document.querySelector('.main-content'); 
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav-link');
+const subNavTriggers = document.querySelectorAll('.dropdown');
+const subNavs = document.querySelectorAll('.sub-nav');
+const modals = document.querySelectorAll('.modal');
+const accordionTriggers = document.querySelectorAll('.accordion');
+const alertCloseButtons = document.querySelectorAll('.alert .close-button');
+const asideToggle = document.querySelector('.aside-toggle'); 
 // Add event listeners
 navLinks.forEach(link => link.addEventListener('click', handleNavLinkClick));
 subNavTriggers.forEach(trigger => trigger.addEventListener('mouseover', handleSubNavTrigger));
