@@ -488,8 +488,9 @@ body {
   color: #0f0;
   font-size: 12px;
   margin-top: 5px;
-}
-/* Shop */
+} 
+/* Shop Section */
+
 /* Shop Section */
 #shop {
   background-color: #f7f7f7;
@@ -541,8 +542,26 @@ body {
 
 #shop .form-group ul#features li {
   flex: 1 1 30%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+#shop .form-group ul#features li:hover {
+  background-color: #f2f2f2;
+}
+
+#shop .form-group ul#features li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#shop .form-group ul#features li input[type="checkbox"]:checked + label {
+  font-weight: bold;
+  color: #4CAF50;
 }
 
 /* Template Group */
@@ -566,11 +585,26 @@ body {
 
 #shop .template-group-content li {
   flex: 1 1 30%;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  cursor: pointer;
+}
+
+#shop .template-group-content li:hover {
+  background-color: #f2f2f2;
+}
+
+#shop .template-group-content li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#shop .template-group-content li input[type="checkbox"]:checked + label {
+  font-weight: bold;
+  color: #4CAF50;
 }
 
 /* Preview Button */
@@ -607,7 +641,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
