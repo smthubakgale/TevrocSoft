@@ -197,9 +197,8 @@ endDateInput.addEventListener('input', updateQuoteResult);
 templateSelect.addEventListener('change', updateQuoteResult);
 discountAmountInput.addEventListener('input', updateQuoteResult);
 
-// Initialize quote result
-updateQuoteResult();
-
+// Initialize quote result 
+document.addEventListener('DOMContentLoaded', updateQuoteResult);
   
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
