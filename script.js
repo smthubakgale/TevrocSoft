@@ -1,46 +1,154 @@
 //------------------------------------: Shop 
-// Plan data
-const planData = {
-  website: [
-    { id: 1, name: 'Basic', price: 1000 },
-    { id: 2, name: 'Premium', price: 3000 },
-    { id: 3, name: 'Enterprise', price: 5000 }
-  ],
-  application: [
-    { id: 4, name: 'Basic', price: 2000 },
-    { id: 5, name: 'Premium', price: 5000 },
-    { id: 6, name: 'Enterprise', price: 10000 }
-  ],
-  software: [
-    { id: 7, name: 'Basic', price: 5000 },
-    { id: 8, name: 'Premium', price: 10000 },
-    { id: 9, name: 'Enterprise', price: 20000 }
-  ]
-};
+ // Initialize EmailJS
+(function() {
+  emailjs.init('OiMEAcHFuztUoVBi0');
+})();
 
-// Function to update plan options
-function updatePlanOptions() {
-  const projectType = document.getElementById('project-type').value;
-  const plans = planData[projectType];
-  const planSelect = document.getElementById('plan');
+// Get form elements
+const form = document.getElementById('shop-form');
+const projectNameInput = document.getElementById('project-name');
+const projectEmailInput = document.getElementById('project-email');
+const projectTypeSelect = document.getElementById('project-type');
+const planSelect = document.getElementById('plan');
+const projectEstimationInput = document.getElementById('project-estimation');
+const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
+const templateSelect = document.getElementById('template-group-content');
+const quoteAmountValue = document.getElementById('quote-amount-value');
+const discountAmountInput = document.getElementById('discount-request-amount');
+const formStatus = document.getElementById('form-status');
+const submitButton = document.getElementById('submit-quote');
+const projectPhasesList = document.getElementById('project-phases');
 
-  planSelect.innerHTML = '';
+// Function to update quote result
+function updateQuoteResult() {
+  const projectType = projectTypeSelect.value;
+  const plan = planSelect.value;
+  const projectEstimation = projectEstimationInput.value;
+  const startDate = new Date(startDateInput.value);
+  const endDate = new Date(endDateInput.value);
+  const selectedTemplate = templateSelect.querySelector('.select-button:checked');
+  const templateId = selectedTemplate ? selectedTemplate.getAttribute('data-template') : null;
+  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
+  const discountRequestAmount = discountAmountInput;
 
-  plans.forEach((plan) => {
-    const option = document.createElement('option');
-    option.value = plan.id;
-    option.text = `${plan.name} ($${plan.price})`;
-    planSelect.appendChild(option);
+  let quoteAmount = 0;
+  let discountAmount = 0;
+  let totalAmount = 0;
+
+  // Calculate quote amount based on plan and project estimation
+  if (plan === 'basic') {
+    quoteAmount = projectEstimation * 100;
+  } else if (plan === 'premium') {
+    quoteAmount = projectEstimation * 200;
+  } else if (plan === 'enterprise') {
+    quoteAmount = projectEstimation * 500;
+  }
+
+  // Apply discount if requested
+  if (discountRequestCheckbox.checked) {
+    discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
+    totalAmount = quoteAmount - discountAmount;
+  } else {
+    totalAmount = quoteAmount;
+  }
+
+  // Update quote result HTML
+  quoteAmountValue.textContent = quoteAmount.toFixed(2);
+  discountAmountInput.value = discountRequestAmount.value;
+  document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+
+  // Determine project phases
+  const phases = [];
+  const estimatedDays = Math.ceil(projectEstimation / 8);
+  if (estimatedDays >= 40) {
+    phases.push({ name: 'Deployment', start: 36, end: 40 });
+    phases.push({ name: 'Testing', start: 31, end: 35 });
+    phases.push({ name: 'Development', start: 16, end: 30 });
+    phases.push({ name: 'Design', start: 6, end: 15 });
+    phases.push({ name: 'Planning', start: 1, end: 5 });
+  } else if (estimatedDays >= 30) {
+    phases.push({ name: 'Testing', start: 26, end: 30 });
+    phases.push({ name: 'Development', start: 16, end: 25 });
+    phases.push({ name: 'Design', start: 6, end: 15 });
+    phases.push({ name: 'Planning', start: 1, end: 5 });
+  } else if (estimatedDays >= 15) {
+    phases.push({ name: 'Development', start: 11, end: 15 });
+    phases.push({ name: 'Design', start: 6, end: 10 });
+    phases.push({ name: 'Planning', start: 1, end: 5 });
+  } else {
+    phases.push({ name: 'Planning', start: 1, end: estimatedDays });
+  }
+
+  // Update project phases HTML
+  projectPhasesList.innerHTML = '';
+  phases.forEach((phase) => {
+    const phaseHTML = `
+      <li>
+        ${phase.name} (Days ${phase.start} - ${phase.end})
+      </li>
+    `;
+    projectPhasesList.innerHTML += phaseHTML;
   });
 }
 
-// Initialize plan options
-document.addEventListener('DOMContentLoaded', () => {
-  updatePlanOptions();
+// Form submission handler
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const projectName = projectNameInput.value;
+  const projectEmail = projectEmailInput.value;
+  const projectType = projectTypeSelect.value;
+  const plan = planSelect.value;
+  const projectEstimation = projectEstimationInput.value;
+  const startDate = startDateInput.value;
+  const endDate = endDateInput.value;
+  const templateId = templateSelect.querySelector('.select-button:checked')?.getAttribute('data-template');
+  const quoteAmount = quoteAmountValue.textContent;
+  const discountAmount = discountAmountInput.value;
+  const projectPhases = projectPhasesList.innerHTML; 
+  const quoteRequest = {
+    from_name: projectName,
+    message: `
+      Project Type: ${projectType}
+      Plan: ${plan}
+      Project Estimation: ${projectEstimation} hours
+      Start Date: ${startDate}
+      End Date: ${endDate}
+      Template ID: ${templateId}
+      Quote Amount: R${quoteAmount}
+      Discount Amount: ${discountAmount}%
+      Project Phases: ${projectPhases}
+    `,
+    from_email: projectEmail,
+    reply_to: projectEmail,
+  };
+
+  // Send quote request using EmailJS
+  emailjs.send("service_44zo6pj", "template_m3vjj5x", quoteRequest)
+    .then(() => {
+      console.log('SUCCESS!');
+      formStatus.innerHTML = 'Quote sent successfully!';
+      submitButton.disabled = true;
+    }, (error) => {
+      console.log('FAILED...', error);
+      formStatus.innerHTML = 'Error sending quote. Please try again.';
+    });
 });
 
-// Update plan options on project type change
-document.getElementById('project-type').addEventListener('change', updatePlanOptions);
+// Update quote result on input change
+projectTypeSelect.addEventListener('change', updateQuoteResult);
+planSelect.addEventListener('change', updateQuoteResult);
+projectEstimationInput.addEventListener('input', updateQuoteResult);
+startDateInput.addEventListener('input', updateQuoteResult);
+endDateInput.addEventListener('input', updateQuoteResult);
+templateSelect.addEventListener('change', updateQuoteResult);
+discountAmountInput.addEventListener('input', updateQuoteResult);
+
+// Initialize quote result
+updateQuoteResult();
+
+  
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
