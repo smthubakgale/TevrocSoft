@@ -494,76 +494,65 @@
         <!-- Shop Section -->
         <section id="shop"  class="section hidden">
             <div class="container">
-            <h2>Shop</h2>
-            <form id="shop-form">
-              <label>
-                Project Name:
-                <input type="text" id="project-name" />
-              </label>
-              <label>
-                Project Email:
-                <input type="email" id="project-email" />
-              </label>
-              <label>
-                Project Type:
-                <select id="project-type">
-                  <option value="website">Website</option>
-                  <option value="application">Application</option>
-                  <option value="software">Software</option>
+              <h2>Get a Quote</h2>
+              <p>Please select your project type and plan to get a quote.</p>
+          
+              <!-- Project Type -->
+              <div class="form-group">
+                <label for="project-type">Project Type:</label>
+                <select id="project-type" name="project-type" required>
+                  <option value="">Select Project Type</option>
+                  <option value="web-development">Web Development</option>
+                  <option value="desktop-application">Desktop Application</option>
+                  <option value="mobile-application">Mobile Application</option>
                 </select>
-              </label>
-              <label>
-                Plan:
-                <select id="plan"></select>
-              </label>
-              <label>
-                Project Estimation (hours):
-                <input type="number" id="project-estimation" />
-              </label>
-              <label>
-                Start Date:
-                <input type="date" id="start-date" />
-              </label>
-              <label>
-                End Date:
-                <input type="date" id="end-date" />
-              </label>
-              <label>
-                Template:
-                <div id="template-group-content">
-                  <h3>Template Selection</h3>
-                  <div id="template-container"></div>
-                </div>
-              </label>
-              <label>
-                Features:
-                <div id="features-list">
-                  <h3>Feature Selection</h3>
-                  <div id="feature-container"></div>
-                </div>
-              </label>
-              <label>
-                Discount Request:
-                <input type="checkbox" id="discount-request-checkbox" />
-                <input type="number" id="discount-amount-input" />
-              </label>
-              <button id="submit-button">Submit</button>
-              <div id="quote-result">
-                <h3>Quote Result</h3>
-                <p>Quote Amount: <span id="quote-amount-value">$0.00</span></p>
-                <p>Template Price: <span id="template-price">$0.00</span></p>
-                <p>Page Prices: <span id="page-prices">$0.00</span></p>
-                <p>Feature Prices: <span id="feature-prices">$0.00</span></p>
-                <p>Total Amount: <span id="total-amount">$0.00</span></p>
               </div>
-            </form>
-            <div id="popup-iframe-container" style="display: none;">
-              <iframe id="popup-iframe" frameborder="0" width="100%" height="500"></iframe>
-              <button id="close-popup">Close</button>
+          
+              <!-- Plan Selection -->
+              <div class="form-group" id="plan-selection">
+                <label for="plan">Plan:</label>
+                <select id="plan" name="plan" required>
+                  <option value="">Select Plan</option>
+                </select>
+              </div>
+          
+              <!-- Discount Request -->
+              <div class="form-group" id="discount-request">
+                <label for="discount-request-checkbox">Request Discount:</label>
+                <input type="checkbox" id="discount-request-checkbox" name="discount-request">
+                <input type="number" id="discount-request-amount" name="discount-request-amount" placeholder="Discount Amount (%)" disabled>
+              </div>
+          
+              <!-- Template Selection -->
+              <div class="template-group-content" id="template-group-content">
+                <h3>Template Selection:</h3>
+                <ul id="templates">
+                  {#templates}
+                  <li>
+                    <input type="checkbox" id="template-{id}" name="template" value="{id}" data-template="{name}">
+                    <label for="template-{id}">{name}</label>
+                    <button class="preview-button" data-template="{id}">Preview</button>
+                    <button class="select-button" data-template="{id}">Select</button>
+                  </li>
+                  {/templates}
+                </ul>
+              </div>
+          
+              <!-- Iframe Container -->
+              <div id="iframe-container" style="display: none;">
+                <iframe id="template-preview" frameborder="0" width="100%" height="500"></iframe>
+              </div>
+          
+              <!-- Quote Result -->
+              <div class="form-group">
+                <label for="quote-amount">Quote Amount:</label>
+                <p id="quote-amount">R0.00</p>
+              </div>
+          
+              <!-- Submit Button -->
+              <button type="submit" id="submit-quote">Submit Quote Request</button>
             </div>
-            <div id="form-status"></div>
-          </div>
-        </section>
+          </section>
         <section id="about" class="section hidden">
           
             <div class="container">
