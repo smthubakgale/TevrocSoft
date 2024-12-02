@@ -489,15 +489,66 @@ body {
   font-size: 12px;
   margin-top: 5px;
 } 
-/* Shop Section */
-
-/* Shop Section */
+/* Shop Section */ 
 
 #shop {
   background-color: #f9f9f9;
   padding: 50px;
 }
+/* Form Group Styles */
+#shop .form-group {
+  margin-bottom: 20px;
+}
 
+/* Date Input Fields */
+#shop .date-container input[type="date"] {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#shop .date-container input[type="date"]:focus {
+  outline: none;
+  border-color: #aaa;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Date Label Styles */
+#shop .date-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Date Container Styles */
+#shop .date-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#shop .date-container label {
+  margin-right: 10px;
+}
+
+/* Optional: Add icons */
+#shop .date-container i {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  #shop .date-container {
+    flex-direction: column;
+  }
+  #shop .date-container label {
+    margin-right: 0;
+  }
+}
 #shop .shop-container {
   max-width: 800px;
   margin: 0 auto;
