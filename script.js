@@ -1,5 +1,95 @@
 //------------------------------------: Shop 
+// Project type selection handler
+document.getElementById('project-type').addEventListener('change', () => {
+  const projectType = document.getElementById('project-type').value;
+  const planSelection = document.getElementById('plan-selection');
+  planSelection.innerHTML = `
+    <label for="plan">Plan:</label>
+    <select id="plan" name="plan" required>
+      <option value="">Select Plan</option>
+    </select>
+  `;
 
+  if (projectType === 'web-development') {
+    document.getElementById('plan').innerHTML += `
+      <option value="basic-web" data-price="5000">Basic (R5,000)</option>
+      <option value="premium-web" data-price="25000">Premium (R25,000)</option>
+      <option value="enterprise-web" data-price="custom">Enterprise (Custom Quote)</option>
+    `;
+  } else if (projectType === 'desktop-application') {
+    document.getElementById('plan').innerHTML += `
+      <option value="basic-desktop" data-price="10000">Basic (R10,000)</option>
+      <option value="premium-desktop" data-price="50000">Premium (R50,000)</option>
+      <option value="enterprise-desktop" data-price="custom">Enterprise (Custom Quote)</option>
+    `;
+  } else if (projectType === 'mobile-application') {
+    document.getElementById('plan').innerHTML += `
+      <option value="basic-mobile" data-price="8000">Basic (R8,000)</option>
+      <option value="premium-mobile" data-price="40000">Premium (R40,000)</option>
+      <option value="enterprise-mobile" data-price="custom">Enterprise (Custom Quote)</option>
+    `;
+  }
+
+  planSelection.style.display = 'block';
+
+  // Update quote result
+  updateQuoteResult();
+});
+
+// Plan selection handler
+document.getElementById('plan').addEventListener('change', () => {
+  updateQuoteResult();
+});
+
+// Discount request checkbox handler
+document.getElementById('discount-request-checkbox').addEventListener('change', () => {
+  const discountRequestAmount = document.getElementById('discount-request-amount');
+  if (document.getElementById('discount-request-checkbox').checked) {
+    discountRequestAmount.disabled = false;
+  } else {
+    discountRequestAmount.disabled = true;
+    discountRequestAmount.value = '';
+  }
+
+  // Update quote result
+  updateQuoteResult();
+});
+
+// Discount request amount handler
+document.getElementById('discount-request-amount').addEventListener('input', () => {
+  updateQuoteResult();
+});
+
+// Update quote result function
+function updateQuoteResult() {
+  const projectType = document.getElementById('project-type').value;
+  const plan = document.getElementById('plan').value;
+  let quoteAmount = 0;
+
+  const planPrice = document.querySelector(`#plan [value="${plan}"]`).getAttribute('data-price');
+  if (planPrice !== 'custom') {
+    quoteAmount = parseInt(planPrice);
+  } else {
+    quoteAmount = 'Custom Quote';
+  }
+
+  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
+  const discountRequestAmount = document.getElementById('discount-request-amount');
+
+  if (discountRequestCheckbox.checked && discountRequestAmount.value !== '') {
+    const discountAmount = (quoteAmount * parseFloat(discountRequestAmount.value)) / 100;
+    quoteAmount -= discountAmount;
+  }
+
+  if (quoteAmount === 'Custom Quote') {
+    document.getElementById('quote-amount').innerHTML = quoteAmount;
+  } else {
+    document.getElementById('quote-amount').innerHTML = `Quote Amount: R${quoteAmount.toFixed(2)}`;
+  }
+}
+function updateQuoteResult() {
+  
+}
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
