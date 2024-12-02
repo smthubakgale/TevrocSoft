@@ -463,15 +463,31 @@
                 <li>Address: 123 Main Street, Johannesburg, South Africa</li>
               </ul>
           
-              <!-- Get a Quote -->
+              <!-- Get a Quote --> 
               <h3>Get a Quote</h3>
-              <button>Request a Quote</button>
-              <!-- OR -->
-              <form>
-                <input type="text" placeholder="Name" name="name">
-                <input type="email" placeholder="Email" name="email">
-                <textarea placeholder="Message" name="message"></textarea>
-                <button type="submit">Send</button>
+              <form id="quote-form">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="message">Message:</label>
+                  <textarea id="message" name="message" placeholder="Describe your project..." required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="project-type">Project Type:</label>
+                  <select id="project-type" name="project-type" required>
+                    <option value="">Select Project Type</option>
+                    <option value="web-development">Web Development</option>
+                    <option value="desktop-application">Desktop Application</option>
+                    <option value="mobile-application">Mobile Application</option>
+                  </select>
+                </div>
+                <button type="submit">Submit</button>
               </form>
             </div>
 
