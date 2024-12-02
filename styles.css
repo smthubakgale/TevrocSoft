@@ -650,76 +650,123 @@ body {
 }
 
 /* Style the contact section */
-
 #contact {
-  background-color: #F7F7F7; /* Light Gray */
-  padding: 2em;
-}
-
-#contact h1 {
-  margin-top: 0;
-  color: #1A1D23; /* Main Navy */
+  background-color: #f9f9f9;
+  padding: 50px;
 }
 
 #contact h2 {
-  margin-bottom: 10px;
-  color: #343A40; /* Secondary Navy */
+  color: #333;
 }
 
 #contact p {
-  margin-bottom: 20px;
-  color: #6C757D; /* Dark Gray */
+  color: #666;
+  font-size: 18px;
 }
 
+#contact .container {
+  max-width: 1200px;
+  margin: auto;
+}
 
-#contact ul {
+#contact .contact-info {
+  float: left;
+  width: 40%;
+}
+
+#contact .contact-info h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+#contact .contact-info ul {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
-#contact li {
-  margin-bottom: 20px;
+#contact .contact-info li {
+  margin-bottom: 10px;
 }
 
-#contact a {
+#contact .contact-info a {
   text-decoration: none;
-  color: #4C9DFE; /* Accent Blue */
+  color: #337ab7;
 }
 
-#contact a:hover {
-  color: #34C759; /* Green */
+#contact .contact-info a:hover {
+  color: #23527c;
+}
+
+#contact .contact-form {
+  float: right;
+  width: 60%;
+}
+
+#contact .contact-form h3 {
+  color: #333;
+  margin-top: 0;
 }
 
 #contact form {
-  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
 }
 
-#contact label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-#contact input, #contact textarea {
+#contact input[type="text"], #contact input[type="email"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #CCCCCC; /* Light Gray */
+  border: 1px solid #ccc;
+}
+
+#contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
 }
 
 #contact button[type="submit"] {
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-  border: none;
+  background-color: #337ab7;
+  color: #fff;
   padding: 10px 20px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 #contact button[type="submit"]:hover {
-  background-color: #4C9DFE; /* Accent Blue */
+  background-color: #23527c;
 }
 
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  #contact .contact-info {
+    float: none;
+    width: 100%;
+  }
+  #contact .contact-form {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #contact input[type="text"], #contact input[type="email"] {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  #contact textarea {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  #contact button[type="submit"] {
+    padding: 5px 10px;
+  }
+}
 /* Flex Container */
 
 .flex-container {
