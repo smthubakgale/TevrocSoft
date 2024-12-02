@@ -19,7 +19,26 @@ const discountAmountInput = document.getElementById('discount-request-amount');
 const formStatus = document.getElementById('form-status');
 const submitButton = document.getElementById('submit-quote');
 const projectPhasesList = document.getElementById('project-phases');
+// Function to calculate project estimation
+function calculateProjectEstimation() {
+  const startDateInput = document.getElementById('start-date');
+  const endDateInput = document.getElementById('end-date');
+  const projectEstimationInput = document.getElementById('project-estimation');
 
+  const startDate = new Date(startDateInput.value);
+  const endDate = new Date(endDateInput.value);
+
+  // Calculate date difference in hours
+  const dateDifference = endDate.getTime() - startDate.getTime();
+  const hoursDifference = dateDifference / (1000 * 3600);
+
+  // Update project estimation input field
+  projectEstimationInput.value = hoursDifference;
+}
+
+// Event listeners for start and end date inputs
+document.getElementById('start-date').addEventListener('change', calculateProjectEstimation);
+document.getElementById('end-date').addEventListener('change', calculateProjectEstimation);
 // Function to update quote result
 function updateQuoteResult() {
   const projectType = projectTypeSelect.value;
