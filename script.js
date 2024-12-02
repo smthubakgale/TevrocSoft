@@ -85,15 +85,20 @@ const features = [
 function init_shop()
 {
   projectTypeSelect.innerHTML = '';
-  projectTypes.forEach((s) => {
-    const planOptionHTML = `
-      <option value="${s.id}">${s.name} </option>
-    `;
-    projectTypeSelect.innerHTML += planOptionHTML;
+  projectTypes.forEach((s) =>
+    { 
+      console.log(s);
+      
+      projectTypeSelect.innerHTML += `
+        <option value="${s.id}">${s.name} </option>
+      `;
   });
 }
 
-init_shop();
+document.addEventListener('DOMContentLoaded', () => {
+  init_shop();
+});
+
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
