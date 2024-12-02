@@ -44,6 +44,7 @@ function updateQuoteResult() {
   } else if (plan === 'enterprise') {
     quoteAmount = projectEstimation * 500;
   }
+  console.log(quoteAmount);
 
   // Apply discount if requested
   if (discountRequestCheckbox.checked) {
@@ -52,6 +53,7 @@ function updateQuoteResult() {
   } else {
     totalAmount = quoteAmount;
   }
+  console.log(quoteAmount);
 
   // Update quote result HTML
   quoteAmountValue.textContent = quoteAmount.toFixed(2);
