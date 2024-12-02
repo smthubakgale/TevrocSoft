@@ -1,19 +1,19 @@
 //------------------------------------: Shop 
-const form = document.getElementById('shop-form');
-const projectNameInput = document.getElementById('project-name');
-const projectEmailInput = document.getElementById('project-email');
-const projectTypeSelect = document.getElementById('project-type');
-const planSelect = document.getElementById('plan');
-const projectEstimationInput = document.getElementById('project-estimation');
-const startDateInput = document.getElementById('start-date');
-const endDateInput = document.getElementById('end-date');
-const templateSelect = document.getElementById('template-group-content');
-const quoteAmountValue = document.getElementById('quote-amount-value');
-const discountAmountInput = document.getElementById('discount-request-amount');
-const formStatus = document.getElementById('form-status');
-const submitButton = document.getElementById('submit-quote');
-const projectPhasesList = document.getElementById('project-phases');
-const featuresList = document.getElementById('features-list');
+const form = $('#shop-form');
+const projectNameInput = $('#project-name');
+const projectEmailInput = $('#project-email');
+const projectTypeSelect = $('#project-type');
+const planSelect = $('#plan');
+const projectEstimationInput = $('#project-estimation');
+const startDateInput = $('#start-date');
+const endDateInput = $('#end-date');
+const templateSelect = $('#template-group-content');
+const quoteAmountValue = $('#quote-amount-value');
+const discountAmountInput = $('#discount-request-amount');
+const formStatus = $('#form-status');
+const submitButton = $('#submit-quote');
+const projectPhasesList = $('#project-phases');
+const featuresList = $('#features-list');
 
 // Project types
 const projectTypes = [
@@ -84,20 +84,18 @@ const features = [
 
 function init_shop()
 {
-  projectTypeSelect.innerHTML = '';
+  projectTypeSelect.html('');
   projectTypes.forEach((s) =>
     { 
       console.log(s);
       
-      projectTypeSelect.innerHTML += `
+      projectTypeSelect.append( `
         <option value="${s.id}">${s.name} </option>
-      `;
+      `);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  init_shop();
-});
+$(window).on('load' , ()=>{ init_shop(); })
 
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
