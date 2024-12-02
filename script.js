@@ -108,8 +108,8 @@ function updateTemplateOptions() {
     const templateHtml = `
       <div class="template">
         <h4>${template.name}</h4>
-        <p>Price: $${template.price
-                             <ul>
+        <p>Price: $${template.price}
+          <ul>
           ${template.pages.map((page) => `
             <li>
               <input type="checkbox" class="page-checkbox" value="${page.price}" />
