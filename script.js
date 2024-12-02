@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
     featuresList.innerHTML += featureHTML;
   });
   //
-  updateQuoteResult();
+  //updateQuoteResult();
 });
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
