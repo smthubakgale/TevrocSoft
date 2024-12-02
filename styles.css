@@ -430,6 +430,81 @@ body {
 #pricing button:hover {
   background-color: #23527c;
 }
+/* Custom Quote Calculator Styling */
+#pricing .calculator-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#pricing .calculator-container h3 {
+  margin-top: 0;
+}
+
+#pricing .calculator-container #custom-quote-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#pricing .calculator-container .form-group {
+  margin-bottom: 20px;
+}
+
+#pricing .calculator-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+#pricing .calculator-container select, #pricing .calculator-container input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#pricing .calculator-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#pricing .calculator-container li {
+  margin-bottom: 10px;
+}
+
+#pricing .calculator-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#pricing .calculator-container #quote-result {
+  display: none;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#pricing .calculator-container #quote-result h3 {
+  margin-top: 0;
+}
+
+#pricing .calculator-container #quote-amount {
+  font-size: 24px;
+  font-weight: bold;
+  color: #337ab7;
+}
+
+#pricing .calculator-container #quote-breakdown {
+  white-space: pre-wrap;
+}
 /* Form Styling */
 #pricing #quote-form {
   background-color: #f9f9f9;
