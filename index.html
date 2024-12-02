@@ -495,25 +495,24 @@
         <section id="shop" class="section"> 
             <h2>Get a Quote</h2>
             <div class="shop-container">
-              <!-- Project Type -->
-              <div class="form-group">
-                <label for="project-type">Project Type:</label>
-                <select id="project-type" name="project-type">
-                  <option value="website">Website</option>
-                  <option value="application">Application</option>
-                  <option value="software">Software</option>
-                </select>
-              </div>
-          
-              <!-- Plan -->
-              <div class="form-group">
-                <label for="plan">Plan:</label>
-                <select id="plan" name="plan">
-                  <option value="basic">Basic</option>
-                  <option value="premium">Premium</option>
-                  <option value="enterprise">Enterprise</option>
-                </select>
-              </div>
+             <!-- Project Type -->
+            <div class="form-group">
+              <label for="project-type">Project Type:</label>
+              <select id="project-type" name="project-type" required>
+                <option value="">Select Project Type</option>
+                <option value="web-development">Web Development</option>
+                <option value="desktop-application">Desktop Application</option>
+                <option value="mobile-application">Mobile Application</option>
+              </select>
+            </div>
+
+            <!-- Plan Selection -->
+            <div class="form-group" id="plan-selection">
+              <label for="plan">Plan:</label>
+              <select id="plan" name="plan" required>
+                <option value="">Select Plan</option>
+              </select>
+            </div>
           
               <!-- Project Estimation -->
               <div class="form-group">
