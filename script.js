@@ -19,21 +19,27 @@ const discountAmountInput = document.getElementById('discount-request-amount');
 const formStatus = document.getElementById('form-status');
 const submitButton = document.getElementById('submit-quote');
 const projectPhasesList = document.getElementById('project-phases');
+
 // Function to calculate project estimation
 function calculateProjectEstimation() {
   const startDateInput = document.getElementById('start-date');
   const endDateInput = document.getElementById('end-date');
   const projectEstimationInput = document.getElementById('project-estimation');
 
-  const startDate = new Date(startDateInput.value);
-  const endDate = new Date(endDateInput.value);
+  const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
+  const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
 
-  // Calculate date difference in hours
-  const dateDifference = endDate.getTime() - startDate.getTime();
-  const hoursDifference = dateDifference / (1000 * 3600);
+  if (startDate && endDate) {
+    // Calculate date difference in hours
+    const dateDifference = endDate.getTime() - startDate.getTime();
+    const hoursDifference = dateDifference / (1000 * 3600);
 
-  // Update project estimation input field
-  projectEstimationInput.value = hoursDifference;
+    // Update project estimation input field
+    projectEstimationInput.value = hoursDifference;
+  } else {
+    // Set project estimation to 0 if dates are null
+    projectEstimationInput.value = 0;
+  }
 }
 
 // Event listeners for start and end date inputs
@@ -41,6 +47,8 @@ document.getElementById('start-date').addEventListener('change', calculateProjec
 document.getElementById('end-date').addEventListener('change', calculateProjectEstimation);
 // Function to update quote result
 function updateQuoteResult() {
+  calculateProjectEstimation();
+ 
   const projectType = projectTypeSelect.value;
   const plan = planSelect.value;
   const projectEstimation = projectEstimationInput.value;
