@@ -45,6 +45,29 @@ function calculateProjectEstimation() {
 // Event listeners for start and end date inputs
 document.getElementById('start-date').addEventListener('change', calculateProjectEstimation);
 document.getElementById('end-date').addEventListener('change', calculateProjectEstimation);
+
+// Function to set initial start and end dates
+function setInitialDates() {
+  const startDateInput = document.getElementById('start-date');
+  const endDateInput = document.getElementById('end-date');
+
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+
+  // Format dates as YYYY-MM-DD
+  const startDateString = startDate.toISOString().slice(0, 10);
+  const endDateString = endDate.toISOString().slice(0, 10);
+
+  startDateInput.value = startDateString;
+  endDateInput.value = endDateString;
+
+  // Calculate initial project estimation
+  calculateProjectEstimation();
+}
+
+// Call function on page load
+document.addEventListener('DOMContentLoaded', setInitialDates);
 // Function to update quote result
 function updateQuoteResult() {
   calculateProjectEstimation();
