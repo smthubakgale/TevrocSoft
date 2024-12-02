@@ -148,6 +148,162 @@ body {
   background-color: #F7F7F7; /* Light Gray */
   padding: 2em;
 }
+/* Style the home section */
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#home .hero {
+  background-color: #1A1D23; /* Primary background color */
+  color: #fff;
+  padding: 100px;
+  text-align: center;
+}
+
+#home .hero-content {
+  z-index: 1;
+}
+
+#home .hero-background img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#home .featured {
+  background-color: #F7F7F7; /* Secondary background color */
+  padding: 50px;
+}
+
+#home .project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#home .project-card {
+  background-color: #fff;
+  border: 1px solid #E5E5E5; /* Border color */
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  width: calc(33.33% - 20px);
+}
+
+#home .project-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#home .testimonials {
+  background-color: #fff;
+  border: 1px solid #E5E5E5; /* Border color */
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+#home blockquote {
+  margin-bottom: 20px;
+}
+
+#home blockquote p {
+  font-style: italic;
+  color: #666; /* Text color */
+}
+
+#home cite {
+  font-weight: bold;
+  color: #333; /* Text color */
+}
+
+#home .what-we-do {
+  background-color: #1A1D23; /* Primary background color */
+  color: #fff;
+  padding: 50px;
+  text-align: center;
+}
+
+#home .service-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#home .service-icon {
+  background-color: #333; /* Icon background color */
+  border: 1px solid #444; /* Icon border color */
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  width: calc(33.33% - 20px);
+}
+
+#home .service-icon i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff; /* Icon color */
+}
+
+#home .why-choose-us {
+  background-color: #F7F7F7; /* Secondary background color */
+  padding: 50px;
+}
+
+#home .reasons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#home .reason {
+  background-color: #fff;
+  border: 1px solid #E5E5E5; /* Border color */
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  width: calc(33.33% - 20px);
+}
+
+#home .reason i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333; /* Icon color */
+}
+
+#home .cta {
+  background-color: #1A1D23; /* Primary background color */
+  color: #fff;
+  padding: 50px;
+  text-align: center;
+}
+
+#home .cta-btn {
+  background-color: #333; /* Button background color */
+  border: none;
+  border-radius: 10px;
+  color: #fff; /* Button text color */
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+#home .cta-btn:hover {
+  background-color: #444; /* Button hover background color */
+}
 
 /* Style portfolio section */
 #portfolio .portfolio-container {
