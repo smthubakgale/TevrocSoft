@@ -149,6 +149,79 @@ body {
   padding: 2em;
 }
 
+/* Style portfolio section */
+#portfolio .portfolio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#portfolio .project {
+  margin: 20px;
+  width: calc(33.33% - 20px);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#portfolio .screenshot {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#portfolio .project h3 {
+  margin-top: 0;
+}
+
+#portfolio .project p {
+  margin-bottom: 20px;
+}
+
+#portfolio .tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#portfolio .tags li {
+  display: inline-block;
+  background-color: #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#portfolio .tags li:last-child {
+  margin-right: 0;
+}
+
+#portfolio .features ul, #portfolio .tech-stack ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#portfolio .features ul li, #portfolio .tech-stack ul li {
+  margin-bottom: 10px;
+}
+
+#portfolio .screenshots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#portfolio .screenshots img {
+  width: calc(33.33% - 10px);
+  height: 100px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 10px;
+}
 /* Style the about section */
 
 #about {
