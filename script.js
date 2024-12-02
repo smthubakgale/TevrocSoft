@@ -19,86 +19,43 @@ const discountAmountInput = document.getElementById('discount-request-amount');
 const formStatus = document.getElementById('form-status');
 const submitButton = document.getElementById('submit-quote');
 const projectPhasesList = document.getElementById('project-phases');
+const featuresList = document.getElementById('features-list');
 
-// Function to calculate project estimation
-function calculateProjectEstimation() {
-  const startDateInput = document.getElementById('start-date');
-  const endDateInput = document.getElementById('end-date');
-  const projectEstimationInput = document.getElementById('project-estimation');
-
-  const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
-  const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
-
-  if (startDate && endDate) {
-    // Calculate date difference in hours
-    const dateDifference = endDate.getTime() - startDate.getTime();
-    const hoursDifference = dateDifference / (1000 * 3600);
-
-    // Update project estimation input field
-    projectEstimationInput.value = hoursDifference;
-  } else {
-    // Set project estimation to 0 if dates are null
-    projectEstimationInput.value = 0;
-  }
-}
-
-// Event listeners for start and end date inputs
-document.getElementById('start-date').addEventListener('change', calculateProjectEstimation);
-document.getElementById('end-date').addEventListener('change', calculateProjectEstimation);
-
-// Function to set initial start and end dates
-function setInitialDates() {
-  const startDateInput = document.getElementById('start-date');
-  const endDateInput = document.getElementById('end-date');
-
-  const today = new Date();
-  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-
-  // Format dates as YYYY-MM-DD
-  const startDateString = startDate.toISOString().slice(0, 10);
-  const endDateString = endDate.toISOString().slice(0, 10);
-
-  startDateInput.value = startDateString;
-  endDateInput.value = endDateString;
-
-  // Calculate initial project estimation
-  calculateProjectEstimation();
-}
-
-// Call function on page load
-document.addEventListener('DOMContentLoaded', setInitialDates);
-// Function to update quote result
-const projectTypes = [
+// Template pages with prices
+const templatePages = [
   {
-    id: 'web-development', 
-    plans: [
-      { id: 'basic',  price: 500 },
-      { id: 'premium',  price: 2000 },
-      { id: 'enterprise',  price: 5000 },
+    id: 1,
+    name: 'Template 1',
+    price: 2000,
+    pages: [
+      { name: 'Home', price: 500, url: 'https://example.com/home' },
+      { name: 'About', price: 300, url: 'https://example.com/about' },
+      { name: 'Contact', price: 200, url: 'https://example.com/contact' },
     ],
   },
   {
-    id: 'desktop-application', 
-    plans: [
-      { id: 'basic',  price: 1500 },
-      { id: 'premium',  price: 6000 },
-      { id: 'enterprise',  price: 15000 },
-    ],
-  },
-  {
-    id: 'mobile-application', 
-    plans: [
-      { id: 'basic',  price: 3000 },
-      { id: 'premium',  price: 12000 },
-      { id: 'enterprise',  price: 30000 },
+    id: 2,
+    name: 'Template 2',
+    price: 3500,
+    pages: [
+      { name: 'Home', price: 700, url: 'https://example.com/home' },
+      { name: 'Services', price: 500, url: 'https://example.com/services' },
+      { name: 'Portfolio', price: 800, url: 'https://example.com/portfolio' },
     ],
   },
 ];
 
+// Features with prices
+const features = [
+  { id: 1, name: 'Responsive Design', price: 500 },
+  { id: 2, name: 'Customizable', price: 1000 },
+  { id: 3, name: 'SEO Optimized', price: 800 },
+  { id: 4, name: 'Secure', price: 1200 },
+  { id: 5, name: 'Scalable', price: 1500 },
+];
+
+// Function to update quote result
 function updateQuoteResult() {
-  calculateProjectEstimation();
- 
   const projectType = projectTypeSelect.value;
   const plan = planSelect.value;
   const projectEstimation = projectEstimationInput.value;
@@ -106,41 +63,54 @@ function updateQuoteResult() {
   const endDate = new Date(endDateInput.value);
   const selectedTemplate = templateSelect.querySelector('.select-button:checked');
   const templateId = selectedTemplate ? selectedTemplate.getAttribute('data-template') : null;
-  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
-  const discountRequestAmount = discountAmountInput;
+  const templatePrice = templatePages.find((t) => t.id === parseInt(templateId)).price;
+  const selectedPages = templateSelect.querySelectorAll('.page-checkbox:checked');
+  const selectedFeatures = featuresList.querySelectorAll('.feature-checkbox:checked');
 
   let quoteAmount = 0;
   let discountAmount = 0;
   let totalAmount = 0;
+  let pagePrices = 0;
+  let featurePrices = 0;
 
-  projectTypes.forEach((s)=>
-   {
-      if(s.id == projectType)
-      {
-         s.plans.forEach((s2)=>
-          {
-             if(s2.id == plan){
-              quoteAmount = s2.price;
-             }
-          });
-      }
-   });
-  console.log(projectType); 
-  console.log(quoteAmount);
+  // Calculate quote amount based on plan and project estimation
+  if (plan === 'basic') {
+    quoteAmount = projectEstimation * 100;
+  } else if (plan === 'premium') {
+    quoteAmount = projectEstimation * 200;
+  } else if (plan === 'enterprise') {
+    quoteAmount = projectEstimation * 500;
+  }
+
+  // Calculate page prices
+  selectedPages.forEach((page) => {
+    const pagePrice = templatePages.find((t) => t.id === parseInt(templateId)).pages.find((p) => p.name === page.value).price;
+    pagePrices += pagePrice;
+  });
+
+  // Calculate feature prices
+  selectedFeatures.forEach((feature) => {
+    const featurePrice = features.find((f) => f.id === parseInt(feature.value)).price;
+    featurePrices += featurePrice;
+  });
 
   // Apply discount if requested
+  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
+  const discountRequestAmount = discountAmountInput;
   if (discountRequestCheckbox.checked) {
     discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
-    totalAmount = quoteAmount - discountAmount;
+    totalAmount = quoteAmount - discountAmount + templatePrice + pagePrices + featurePrices;
   } else {
-    totalAmount = quoteAmount;
+    totalAmount = quoteAmount + templatePrice + pagePrices + featurePrices;
   }
-  console.log(quoteAmount);
 
   // Update quote result HTML
   quoteAmountValue.textContent = quoteAmount.toFixed(2);
   discountAmountInput.value = discountRequestAmount.value;
   document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+    document.getElementById('template-price').textContent = templatePrice.toFixed(2);
+  document.getElementById('page-prices').textContent = pagePrices.toFixed(2);
+  document.getElementById('feature-prices').textContent = featurePrices.toFixed(2);
 
   // Determine project phases
   const phases = [];
@@ -188,9 +158,15 @@ form.addEventListener('submit', (e) => {
   const startDate = startDateInput.value;
   const endDate = endDateInput.value;
   const templateId = templateSelect.querySelector('.select-button:checked')?.getAttribute('data-template');
+  const selectedPages = templateSelect.querySelectorAll('.page-checkbox:checked');
+  const selectedFeatures = featuresList.querySelectorAll('.feature-checkbox:checked');
   const quoteAmount = quoteAmountValue.textContent;
   const discountAmount = discountAmountInput.value;
-  const projectPhases = projectPhasesList.innerHTML; 
+  const templatePrice = document.getElementById('template-price').textContent;
+  const pagePrices = document.getElementById('page-prices').textContent;
+  const featurePrices = document.getElementById('feature-prices').textContent;
+  const projectPhases = projectPhasesList.innerHTML;
+
   const quoteRequest = {
     from_name: projectName,
     message: `
@@ -200,8 +176,14 @@ form.addEventListener('submit', (e) => {
       Start Date: ${startDate}
       End Date: ${endDate}
       Template ID: ${templateId}
+      Selected Pages: ${Array.from(selectedPages).map((page) => page.value).join(', ')}
+      Selected Features: ${Array.from(selectedFeatures).map((feature) => feature.value).join(', ')}
       Quote Amount: R${quoteAmount}
       Discount Amount: ${discountAmount}%
+      Template Price: R${templatePrice}
+      Page Prices: R${pagePrices}
+      Feature Prices: R${featurePrices}
+      Total Amount: R${document.getElementById('total-amount').textContent}
       Project Phases: ${projectPhases}
     `,
     from_email: projectEmail,
@@ -227,11 +209,40 @@ projectEstimationInput.addEventListener('input', updateQuoteResult);
 startDateInput.addEventListener('input', updateQuoteResult);
 endDateInput.addEventListener('input', updateQuoteResult);
 templateSelect.addEventListener('change', updateQuoteResult);
-discountAmountInput.addEventListener('input', updateQuoteResult);
+featuresList.addEventListener('change', updateQuoteResult);
 
-// Initialize quote result 
-document.addEventListener('DOMContentLoaded', updateQuoteResult);
-  
+document.addEventListener('DOMContentLoaded', () => {
+  updateQuoteResult();
+
+  // Initialize template pages and features
+  templatePages.forEach((template) => {
+    const templateHTML = `
+      <div class="template-option">
+        <input type="radio" id="template-${template.id}" name="template" value="${template.id}" data-template="${template.id}">
+        <label for="template-${template.id}">${template.name}</label>
+        <div class="template-pages">
+          ${template.pages.map((page) => `
+            <div class="page-option">
+              <input type="checkbox" id="page-${page.name}" name="page" value="${page.name}" data-price="${page.price}">
+              <label for="page-${page.name}">${page.name}</label>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    templateSelect.innerHTML += templateHTML;
+  });
+
+  features.forEach((feature) => {
+    const featureHTML = `
+      <div class="feature-option">
+        <input type="checkbox" id="feature-${feature.id}" name="feature" value="${feature.id}" data-price="${feature.price}">
+        <label for="feature-${feature.id}">${feature.name}</label>
+      </div>
+    `;
+    featuresList.innerHTML += featureHTML;
+  });
+});
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
