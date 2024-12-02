@@ -430,125 +430,7 @@ body {
 #pricing button:hover {
   background-color: #23527c;
 }
-/* Custom Quote Calculator Styling */
-#pricing .calculator-container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-/* Features styling */
-#pricing .calculator-container #features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
 
-#pricing .calculator-container #features li {
-  display: flex;
-  align-items: center;
-  flex-basis: 45%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#pricing .calculator-container #features input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#pricing .calculator-container #features label {
-  font-weight: normal;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  #pricing .calculator-container #features li {
-    flex-basis: 100%;
-    text-align: center;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  #pricing .calculator-container #features li {
-    flex-basis: 50%;
-  }
-}
-
-@media (min-width: 1025px) {
-  #pricing .calculator-container #features li {
-    flex-basis: 33.33%;
-  }
-}
-#pricing .calculator-container h3 {
-  margin-top: 0;
-}
-
-#pricing .calculator-container #custom-quote-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#pricing .calculator-container .form-group {
-  margin-bottom: 20px;
-}
-
-#pricing .calculator-container label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #333;
-}
-
-#pricing .calculator-container select, #pricing .calculator-container input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#pricing .calculator-container ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#pricing .calculator-container li {
-  margin-bottom: 10px;
-}
-
-#pricing .calculator-container input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#pricing .calculator-container #quote-result {
-  display: none;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-#pricing .calculator-container #quote-result h3 {
-  margin-top: 0;
-}
-
-#pricing .calculator-container #quote-amount {
-  font-size: 24px;
-  font-weight: bold;
-  color: #337ab7;
-}
-
-#pricing .calculator-container #quote-breakdown {
-  white-space: pre-wrap;
-}
 /* Form Styling */
 #pricing #quote-form {
   background-color: #f9f9f9;
@@ -606,6 +488,94 @@ body {
   color: #0f0;
   font-size: 12px;
   margin-top: 5px;
+}
+/* Shop */
+#shop {
+  background-color: #f7f7f7;
+  padding: 50px;
+}
+
+#shop .calculator-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#shop .calculator-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#shop .form-group {
+  margin-bottom: 20px;
+}
+
+#shop .form-group label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#shop .form-group select, #shop .form-group input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+#shop .form-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#shop .form-group li {
+  margin-bottom: 10px;
+}
+
+#shop .form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#shop .template-group-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#shop .template-group-header h4 {
+  margin: 0;
+}
+
+#shop .template-group-content {
+  padding: 10px;
+  display: none;
+}
+
+#shop .preview-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#shop .preview-button:hover {
+  background-color: #3e8e41;
+}
+
+#shop #quote-result {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+#shop #quote-result h3 {
+  margin-top: 0;
 }
 /* Tags Styles */
 
