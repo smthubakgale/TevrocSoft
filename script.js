@@ -71,33 +71,27 @@ document.addEventListener('DOMContentLoaded', setInitialDates);
 // Function to update quote result
 const projectTypes = [
   {
-    id: 'website',
-    name: 'Website',
-    multiplier: 1,
+    id: 'web-development', 
     plans: [
-      { id: 'basic', name: 'Basic', price: 500 },
-      { id: 'premium', name: 'Premium', price: 2000 },
-      { id: 'enterprise', name: 'Enterprise', price: 5000 },
+      { id: 'basic',  price: 500 },
+      { id: 'premium',  price: 2000 },
+      { id: 'enterprise',  price: 5000 },
     ],
   },
   {
-    id: 'application',
-    name: 'Application',
-    multiplier: 3,
+    id: 'desktop-application', 
     plans: [
-      { id: 'basic', name: 'Basic', price: 1500 },
-      { id: 'premium', name: 'Premium', price: 6000 },
-      { id: 'enterprise', name: 'Enterprise', price: 15000 },
+      { id: 'basic',  price: 1500 },
+      { id: 'premium',  price: 6000 },
+      { id: 'enterprise',  price: 15000 },
     ],
   },
   {
-    id: 'software',
-    name: 'Software',
-    multiplier: 6,
+    id: 'mobile-application', 
     plans: [
-      { id: 'basic', name: 'Basic', price: 3000 },
-      { id: 'premium', name: 'Premium', price: 12000 },
-      { id: 'enterprise', name: 'Enterprise', price: 30000 },
+      { id: 'basic',  price: 3000 },
+      { id: 'premium',  price: 12000 },
+      { id: 'enterprise',  price: 30000 },
     ],
   },
 ];
