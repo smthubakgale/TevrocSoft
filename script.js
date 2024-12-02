@@ -63,7 +63,7 @@ function updateQuoteResult() {
   const endDate = new Date(endDateInput.value);
   const selectedTemplate = templateSelect.querySelector('.select-button:checked');
   const templateId = selectedTemplate ? selectedTemplate.getAttribute('data-template') : null;
-  const templatePrice = templatePages.find((t) => t.id === parseInt(templateId)).price;
+  const templatePrice = templateId ? templatePages.find((t) => t.id === parseInt(templateId)).price : 0;
   const selectedPages = templateSelect.querySelectorAll('.page-checkbox:checked');
   const selectedFeatures = featuresList.querySelectorAll('.feature-checkbox:checked');
 
