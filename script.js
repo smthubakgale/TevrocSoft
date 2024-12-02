@@ -265,7 +265,7 @@ featuresList.addEventListener('change', updateQuoteResult);
 
 // Initialize quote result
 document.addEventListener('DOMContentLoaded', () => {
-  updateQuoteResult();
+  
   // Initialize Project Type and Plan  
   var html = "<option value="">Select Project Type</option>"; 
   
@@ -313,6 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     featuresList.innerHTML += featureHTML;
   });
+  //
+  updateQuoteResult();
 });
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
