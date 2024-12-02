@@ -1,95 +1,99 @@
 //------------------------------------: Shop 
-// Project type selection handler
-document.getElementById('project-type').addEventListener('change', () => {
-  const projectType = document.getElementById('project-type').value;
-  const planSelection = document.getElementById('plan-selection');
-  planSelection.innerHTML = `
-    <label for="plan">Plan:</label>
-    <select id="plan" name="plan" required>
-      <option value="">Select Plan</option>
-    </select>
-  `;
+const form = document.getElementById('shop-form');
+const projectNameInput = document.getElementById('project-name');
+const projectEmailInput = document.getElementById('project-email');
+const projectTypeSelect = document.getElementById('project-type');
+const planSelect = document.getElementById('plan');
+const projectEstimationInput = document.getElementById('project-estimation');
+const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
+const templateSelect = document.getElementById('template-group-content');
+const quoteAmountValue = document.getElementById('quote-amount-value');
+const discountAmountInput = document.getElementById('discount-request-amount');
+const formStatus = document.getElementById('form-status');
+const submitButton = document.getElementById('submit-quote');
+const projectPhasesList = document.getElementById('project-phases');
+const featuresList = document.getElementById('features-list');
 
-  if (projectType === 'web-development') {
-    document.getElementById('plan').innerHTML += `
-      <option value="basic-web" data-price="5000">Basic (R5,000)</option>
-      <option value="premium-web" data-price="25000">Premium (R25,000)</option>
-      <option value="enterprise-web" data-price="custom">Enterprise (Custom Quote)</option>
+// Project types
+const projectTypes = [
+  {
+    id: 'website',
+    name: 'Website',
+    multiplier: 1,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 500 },
+      { id: 'premium', name: 'Premium', price: 2000 },
+      { id: 'enterprise', name: 'Enterprise', price: 5000 },
+    ],
+  },
+  {
+    id: 'application',
+    name: 'Application',
+    multiplier: 3,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 1500 },
+      { id: 'premium', name: 'Premium', price: 6000 },
+      { id: 'enterprise', name: 'Enterprise', price: 15000 },
+    ],
+  },
+  {
+    id: 'software',
+    name: 'Software',
+    multiplier: 6,
+    plans: [
+      { id: 'basic', name: 'Basic', price: 3000 },
+      { id: 'premium', name: 'Premium', price: 12000 },
+      { id: 'enterprise', name: 'Enterprise', price: 30000 },
+    ],
+  },
+];
+
+// Template pages with prices
+const templatePages = [
+  {
+    id: 1,
+    name: 'Template 1',
+    price: 2000,
+    pages: [
+      { name: 'Home', price: 500, url: 'https://example.com/home' },
+      { name: 'About', price: 300, url: 'https://example.com/about' },
+      { name: 'Contact', price: 200, url: 'https://example.com/contact' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Template 2',
+    price: 3500,
+    pages: [
+      { name: 'Home', price: 700, url: 'https://example.com/home' },
+      { name: 'Services', price: 500, url: 'https://example.com/services' },
+      { name: 'Portfolio', price: 800, url: 'https://example.com/portfolio' },
+    ],
+  },
+];
+
+// Features with prices
+const features = [
+  { id: 1, name: 'Responsive Design', price: 500 },
+  { id: 2, name: 'Customizable', price: 1000 },
+  { id: 3, name: 'SEO Optimized', price: 800 },
+  { id: 4, name: 'Secure', price: 1200 },
+  { id: 5, name: 'Scalable', price: 1500 },
+];
+
+function init_shop()
+{
+  projectTypeSelect.innerHTML = '';
+  projectTypes.forEach((s) => {
+    const planOptionHTML = `
+      <option value="${s.id}">${s.name} </option>
     `;
-  } else if (projectType === 'desktop-application') {
-    document.getElementById('plan').innerHTML += `
-      <option value="basic-desktop" data-price="10000">Basic (R10,000)</option>
-      <option value="premium-desktop" data-price="50000">Premium (R50,000)</option>
-      <option value="enterprise-desktop" data-price="custom">Enterprise (Custom Quote)</option>
-    `;
-  } else if (projectType === 'mobile-application') {
-    document.getElementById('plan').innerHTML += `
-      <option value="basic-mobile" data-price="8000">Basic (R8,000)</option>
-      <option value="premium-mobile" data-price="40000">Premium (R40,000)</option>
-      <option value="enterprise-mobile" data-price="custom">Enterprise (Custom Quote)</option>
-    `;
-  }
-
-  planSelection.style.display = 'block';
-
-  // Update quote result
-  updateQuoteResult();
-});
-
-// Plan selection handler
-document.getElementById('plan').addEventListener('change', () => {
-  updateQuoteResult();
-});
-
-// Discount request checkbox handler
-document.getElementById('discount-request-checkbox').addEventListener('change', () => {
-  const discountRequestAmount = document.getElementById('discount-request-amount');
-  if (document.getElementById('discount-request-checkbox').checked) {
-    discountRequestAmount.disabled = false;
-  } else {
-    discountRequestAmount.disabled = true;
-    discountRequestAmount.value = '';
-  }
-
-  // Update quote result
-  updateQuoteResult();
-});
-
-// Discount request amount handler
-document.getElementById('discount-request-amount').addEventListener('input', () => {
-  updateQuoteResult();
-});
-
-// Update quote result function
-function updateQuoteResult() {
-  const projectType = document.getElementById('project-type').value;
-  const plan = document.getElementById('plan').value;
-  let quoteAmount = 0;
-
-  const planPrice = document.querySelector(`#plan [value="${plan}"]`).getAttribute('data-price');
-  if (planPrice !== 'custom') {
-    quoteAmount = parseInt(planPrice);
-  } else {
-    quoteAmount = 'Custom Quote';
-  }
-
-  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
-  const discountRequestAmount = document.getElementById('discount-request-amount');
-
-  if (discountRequestCheckbox.checked && discountRequestAmount.value !== '') {
-    const discountAmount = (quoteAmount * parseFloat(discountRequestAmount.value)) / 100;
-    quoteAmount -= discountAmount;
-  }
-
-  if (quoteAmount === 'Custom Quote') {
-    document.getElementById('quote-amount').innerHTML = quoteAmount;
-  } else {
-    document.getElementById('quote-amount').innerHTML = `Quote Amount: R${quoteAmount.toFixed(2)}`;
-  }
+    projectTypeSelect.innerHTML += planOptionHTML;
+  });
 }
-function updateQuoteResult() {
-  
-}
+
+init_shop();
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
