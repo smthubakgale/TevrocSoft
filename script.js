@@ -247,7 +247,7 @@ planSelect.addEventListener('change', ()=>{
      if(s.id == v)
      {
          var html2 = `<option value="">Select Plan</option>`;
-         s.plan.forEach((s2 , k2)=>
+         s.plans.forEach((s2 , k2)=>
          {
             html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" ) + `">` + s2.name + `</option>`;
          }); 
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
      if(k == 0){
          var html2 = `<option value="">Select Plan</option>`;
-         s.plan.forEach((s2 , k2)=>
+         s.plans.forEach((s2 , k2)=>
          {
             html2 += `<option value="` + s2.id + (k2 == 0 ? "selected " : "" ) + `">` + s2.name + `</option>`;
          });
