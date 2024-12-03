@@ -7,6 +7,7 @@
   const planSelect = document.getElementById('plan-select');  
   const templatePageIframe = document.getElementById('template-page-iframe'); 
   const discountAmountInput = document.getElementById('discount-request-amount');
+  const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
 
   const projectTypes = [
