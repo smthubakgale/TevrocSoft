@@ -490,283 +490,59 @@ body {
   margin-top: 5px;
 } 
 /* Shop Section */
-
 #shop {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
   background-color: #f9f9f9;
-  padding: 50px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Features list */
-
-#shop .form-group ul#features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+#shop .template-group-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
-#shop .form-group ul#features li {
-  flex: 1 1 30%;
-  display: flex;
-  align-items: center;
+#shop .template-group-header h4 {
+  margin-top: 0;
 }
-
-/* Template group content list */
 
 #shop .template-group-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-#shop .template-group-content li {
-  flex: 1 1 30%;
-  display: flex;
-  align-items: center;
-  background-color: #f9f9f9;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #ccc;
 }
 
-#shop .template-group-content li:hover {
-  background-color: #f2f2f2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Form Group Styles */
-
-#shop .form-group {
-  margin-bottom: 20px;
-}
-
-/* Date Input Fields */
-
-#shop .date-container input[type="date"] {
-  width: 150px;
-  height: 30px;
-  padding: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-#shop .date-container input[type="date"]:focus {
-  outline: none;
-  border-color: #aaa;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Date Label Styles */
-
-#shop .date-container label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-/* Date Container Styles */
-
-#shop .date-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#shop .date-container label {
-  margin-right: 10px;
-}
-
-/* Optional: Add icons */
-
-#shop .date-container i {
-  font-size: 16px;
-  margin-right: 5px;
-}
-
-/* Media Query for Responsive Design */
-
-@media (max-width: 768px) {
-  #shop .date-container {
-    flex-direction: column;
-  }
-  #shop .date-container label {
-    margin-right: 0;
-  }
-}
-
-#shop .shop-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#shop .shop-container h2 {
-  color: #333;
-  margin-top: 0;
-}
-
-#shop .form-group {
-  margin-bottom: 20px;
-}
-
-#shop .form-group label {
-  display: block;
-  margin-bottom: 10px;
-  color: #666;
-}
-
-#shop .form-group input[type="text"],
-#shop .form-group input[type="email"],
-#shop .form-group input[type="number"],
-#shop .form-group select {
-  width: 100%;
-  height: 40px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#shop .form-group input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#shop .template-option {
-  margin-bottom: 20px;
-}
-
-#shop .template-option input[type="radio"] {
-  margin-right: 10px;
-}
-
-#shop .template-pages {
-  margin-left: 20px;
-}
-
-#shop .page-option {
-  margin-bottom: 10px;
-}
-
-#shop .page-option input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#shop .feature-option {
-  margin-bottom: 10px;
-}
-
-#shop .feature-option input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#shop .quote-result {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-#shop .quote-result p {
-  margin-bottom: 10px;
-  color: #666;
-}
-
-#shop .project-phases {
-  margin-bottom: 20px;
-}
-
-#shop .project-phases h3 {
-  margin-top: 0;
-}
-
-#shop .project-phases ul {
+#shop .template-group-content ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#shop .project-phases li {
+#shop .template-group-content li {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
-  color: #666;
-}
-
-#shop #shop-form {
-  margin-top: 20px;
-}
-
-#shop #shop-form input[type="text"],
-#shop #shop-form input[type="email"] {
-  width: 100%;
   height: 40px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
 }
 
-#shop #submit-quote {
-  background-color: #333;
+#shop .template-group-content input[type="checkbox"] {
+  margin-right: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#shop .preview-button {
+  background-color: #4CAF50;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 10px;
 }
-
-#shop #submit-quote:hover {
-  background-color: #444;
-}
-
-#shop #form-status {
-  color: #666;
-  margin-top: 10px;
-}
-
-/* Responsive Design */
-
-#shop@media (max-width: 768px) {
-  .shop-container {
-    padding: 10px;
-  }
-  .form-group {
-    margin-bottom: 10px;
-  }
-  .template-option {
-    margin-bottom: 10px;
-  }
-  .quote-result {
-    padding: 10px;
-  }
-  .project-phases {
-    margin-bottom: 10px;
-  }
-}
-
-#shop@media (max-width: 480px) {
-  .shop-container {
-    padding: 5px;
-  }
-  .form-group {
-    margin-bottom: 5px;
-  }
-  .template-option {
-    margin-bottom: 5px;
-  }
-  .quote-result {
-    padding: 5px;
-  }
-  .project-phases {
-    margin-bottom: 5px;
-  }
-}
-
-/* Popup Styles */
 
 #shop .popup {
   position: fixed;
@@ -778,21 +554,93 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 #shop .popup iframe {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#shop .popup .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#shop .calculator-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#shop .calculator-container h3 {
+  margin-top: 0;
+}
+
+#shop .form-group {
+  margin-bottom: 20px;
+}
+
+#shop .form-group label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#shop .form-group input[type="text"], #shop .form-group input[type="email"], #shop .form-group input[type="tel"], #shop .form-group input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+#shop .form-group select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+#shop .form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#shop .form-group button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#shop #quote-result {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#shop #quote-result h3 {
+  margin-top: 0;
+}
+#shop #quote-result p {
+  margin-bottom: 20px;
 }
 
 #shop .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #333;
+  background-color: #4CAF50;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -801,9 +649,16 @@ body {
 }
 
 #shop .close-button:hover {
-  background-color: #444;
+  background-color: #3e8e41;
 }
 
+#shop .popup {
+  display: none;
+}
+
+#shop .popup.show {
+  display: block;
+}
 /* Tags Styles */
 
 
