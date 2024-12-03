@@ -270,9 +270,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
   projectTypeSelect.addEventListener('change', (event) => {
     const selectedProjectTypeId = event.target.value;
     const selectedProjectType = projectTypes.find(projectType => projectType.id == selectedProjectTypeId);
-	 
-	console.log(selectedProjectType);
-    
+ 
     if (selectedProjectType) {
 		
 	  const pname = document.querySelector('.pname');
