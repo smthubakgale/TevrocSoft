@@ -1,7 +1,7 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array
-  const projectTypeSelect = document.getElementById('project-type');
+  // load project types dynamically from the JSON array
+  var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select'); 
@@ -260,6 +260,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 });
 
   projectTypeSelect.parentNode.innerHTML += projectTypeHtml;
+  projectTypeSelect = document.getElementById('project-type');
   featuresContainer.innerHTML = featuresHtml;
   planSelect.innerHTML = plansHtml;
 
@@ -372,7 +373,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
-  }); 
+  });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
