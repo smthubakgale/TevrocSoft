@@ -6,6 +6,7 @@
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select');  
   const templatePageIframe = document.getElementById('template-page-iframe'); 
+const discountAmountInput = document.getElementById('discount-request-amount');
   const projectPhasesList = document.getElementById('project-phases');
 
   const projectTypes = [
