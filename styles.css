@@ -491,7 +491,7 @@ body {
 } 
 
 /* Shop Section */
-#shop {
+ {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
@@ -505,6 +505,7 @@ body {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
+  margin-bottom:10px;
 }
 
 #shop .template-group-header h4 {
