@@ -511,8 +511,10 @@ body {
 }
 
 #shop .template-group-content {
-  padding: 10px;
+  padding: 20px;
   border-bottom: 1px solid #ccc;
+  background-color: #f7f7f7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #shop .template-group-content ul {
@@ -526,18 +528,43 @@ body {
   align-items: center;
   margin-bottom: 10px;
   height: 40px;
-}
-
-#shop #features ul li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 #shop .template-group-content input[type="checkbox"] {
   margin-right: 10px;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+#shop #features {
+  margin-top: 20px;
+}
+
+#shop #features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#shop #features ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#shop #features label {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 6px;
+  font-weight: bold;
+}
+
+#shop #features input[type="checkbox"] {
+  margin-right: 10px;
 }
 
 #shop .preview-button {
@@ -602,12 +629,6 @@ body {
   margin-top: 6px;
 }
 
-#shop #features label {
-  display: block;
-  margin-bottom: 10px;
-  margin-top: 6px;
-}
-
 #shop .form-group input[type="text"], #shop .form-group input[type="email"], #shop .form-group input[type="tel"], #shop .form-group input[type="date"] {
   width: 100%;
   padding: 10px;
@@ -661,6 +682,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+
 #shop .close-button:hover {
   background-color: #3e8e41;
 }
