@@ -718,6 +718,26 @@ body {
   gap: 19px;
   margin-bottom:10px;
 }
+
+shop #discounts {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#shop #discounts label {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 6px;
+  font-weight: bold;
+}
+
+#shop #discounts input[type="checkbox"] {
+  margin-right: 10px;
+}
+
 /* Tags Styles */
 
 
