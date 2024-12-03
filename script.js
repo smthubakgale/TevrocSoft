@@ -376,7 +376,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  document.getElementById('feature-prices').textContent = featurePrices.toFixed(2);
 	// Determine project phases
 	  const phases = [];
-	  const estimatedDays = Math.ceil(projectEstimation / 8);
+	  
 	  if (estimatedDays >= 40) {
 		phases.push({ name: 'Deployment', start: 36, end: 40 });
 		phases.push({ name: 'Testing', start: 31, end: 35 });
