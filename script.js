@@ -227,6 +227,7 @@ templateGroupsContainer.querySelectorAll('.template-group-header').forEach(heade
 // Add event listener to the dynamically created buttons
 templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
   button.addEventListener('click', (event) => { 
+    event.preventDefault();
 	const popupElement = document.querySelector('.popup');
 	if (popupElement) {
 	  popupElement.remove();
