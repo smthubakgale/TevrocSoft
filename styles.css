@@ -531,6 +531,7 @@ body {
 #shop #features ul li {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 #shop .template-group-content input[type="checkbox"] {
@@ -660,7 +661,6 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
-
 #shop .close-button:hover {
   background-color: #3e8e41;
 }
