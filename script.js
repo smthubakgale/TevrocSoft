@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array
+  // load project types dynamically from the JSON array
   const projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -239,7 +239,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	if (popupElement) {
 	  popupElement.remove();
 	}
-	const url = button.getAttribute('data-url');
+	const url = button.getAttribute('data-link');
     const popup = document.createElement('div');
     popup.classList.add('popup');
     popup.style.position = 'fixed';
@@ -372,8 +372,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	// 
 	
   });
- 
-//------------------------------------: Pricing
+//------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
     height: 200,
