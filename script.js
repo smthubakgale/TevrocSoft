@@ -181,15 +181,7 @@
       <p class="pdesc">${firstProjectType.description}</p>
     </div>
   `;
-  
-  projectTypeSelect.addEventListener('change', (event) => {
-	  const selectedValue = event.target.value;
-	  const selectedProjectType = projectTypes.find((projectType) => projectType.id === selectedValue);
-
-	  projectTypeSelect.parentNode.querySelector('.pname').innerHTML = selectedProjectType.name;
-	  projectTypeSelect.parentNode.querySelector('.pdesc').innerHTML = selectedProjectType.description; 
-  });
-
+   
   const featuresHtml = firstProjectType.features.map(feature => `
     <div class="form-group">
       <div class="checkbox">
@@ -274,8 +266,17 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
   projectTypeSelect.addEventListener('change', (event) => {
     const selectedProjectTypeId = event.target.value;
     const selectedProjectType = projectTypes.find(projectType => projectType.id == selectedProjectTypeId);
+	 
+	console.log(selectedProjectType);
     
     if (selectedProjectType) {
+		
+	  const pname = document.querySelector('.pname');
+	  const pdesc = document.querySelector('.pdesc');
+	  
+	  pname.innerHTML = selectedProjectType.name;
+	  pdesc.innerHTML = selectedProjectType.description; 
+	  
       const projectTypeHtml = `
         <div class="form-group">
           <h4>${selectedProjectType.name}</h4>
@@ -371,8 +372,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
-  });
- 
+  }); 
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
