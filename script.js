@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array
+  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -9,27 +9,6 @@
   const discountAmountInput = document.getElementById('discount-request-amount');
   const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
-  const startDateInput = document.getElementById('start-date');
-  const endDateInput = document.getElementById('end-date');
-
-  const today = new Date();
-  const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
-  startDateInput.value = formatDate(today, 'yyyy-mm-dd');
-  endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
-
-function formatDate(date, format) {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  
-  if (format === 'dd-mm-yyyy') {
-    return `${day}-${month}-${year}`;
-  } else if (format === 'yyyy-mm-dd') {
-    return `${year}-${month}-${day}`;
-  }
-}
-
   
   // Template group header toggle
 	document.querySelectorAll('#shop .template-group-header').forEach(header => {
@@ -520,7 +499,32 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	
   }
 
+  const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
+
+const today = new Date();
+const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+startDateInput.value = formatDate(today, 'yyyy-mm-dd');
+endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+
+function formatDate(date, format) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
   
+  if (format === 'dd-mm-yyyy') {
+    return `${day}-${month}-${year}`;
+  } else if (format === 'yyyy-mm-dd') {
+    return `${year}-${month}-${day}`;
+  } else if (format === 'yyyy-mm-ddTHH:mm:ss') {
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   discountAmountInput.value = 30;
   updateQuoteResult();
