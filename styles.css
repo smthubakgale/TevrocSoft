@@ -587,25 +587,39 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1000; 
+  align-items: center;
 }
 
 #shop .popup iframe {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   border: none;
 }
 
-#shop .popup .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+#shop .popup iframe .popup-content {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+  padding: 20px;
+}
+
+#shop .popup .close-button {  
   background-color: #4CAF50;
   color: #fff;
-  padding: 10px 20px;
-  border: none;
+  padding: 10px 20px; 
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer; 
+  position: absolute;
+  top: calc(100% - 40px);
+  left: calc(100% - 40px); 
+  border: none;
+  padding: 10px; 
+}
+
+#shop .popup .close-button:hover {
+  background-color: #ddd;
 }
 
 #shop .calculator-container {
@@ -694,6 +708,7 @@ body {
 #shop .popup.show {
   display: block;
 }
+ 
 /* Tags Styles */
 
 
