@@ -716,6 +716,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 19px;
+  margin-bottom:10px;
 }
 /* Tags Styles */
 
