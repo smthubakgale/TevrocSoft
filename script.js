@@ -390,6 +390,12 @@ function formatDate(date) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 } 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const quoteButton = document.querySelector('.quote-button');
+  quoteButton.click();
+});
+
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
