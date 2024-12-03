@@ -434,7 +434,7 @@ function formatDate(date, format) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-   
+  discountAmountInput.value = 30;
   const quoteButton = document.querySelector('#quote-button');
   quoteButton.click();
 });
