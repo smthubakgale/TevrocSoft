@@ -1,11 +1,11 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array
+  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select'); 
-  const quoteContainer = document.getElementById('quote-container');
+  const quoteResult = document.getElementById('quote-result');
   const templatePageIframe = document.getElementById('template-page-iframe'); 
 
   const projectTypes = [
@@ -270,7 +270,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
   projectTypeSelect.addEventListener('change', (event) => {
     const selectedProjectTypeId = event.target.value;
     const selectedProjectType = projectTypes.find(projectType => projectType.id == selectedProjectTypeId);
- 
+	  
     if (selectedProjectType) {
 		
 	  const pname = document.querySelector('.pname');
@@ -356,7 +356,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
       <p>Your quote is: R${totalPrice}</p>
     `;
 
-    quoteContainer.innerHTML = quoteHtml;
+    quoteResult.innerHTML = quoteHtml;
 	// Time 
 	const startDate = new Date(document.getElementById('start-date').value);
     const endDate = new Date(document.getElementById('end-date').value);
