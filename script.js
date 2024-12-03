@@ -374,8 +374,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
 	  discountAmountInput.value = discountRequestAmount.value;
 	  
-	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2);
-	  document.getElementById('template-price').innerHTML = templatePrice.toFixed(2);
+	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
 	  document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
 	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2);
 	// Determine project phases
