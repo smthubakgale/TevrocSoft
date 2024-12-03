@@ -354,12 +354,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	// 
 	
   });
-
-  popup.addEventListener('click', (event) => {
-    if (event.target == popup) {
-      popup.style.display = 'none';
-    }
-  });
+ 
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
