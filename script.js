@@ -9,11 +9,20 @@
   const discountAmountInput = document.getElementById('discount-request-amount');
   const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
+  
+  // Template group header toggle
+	document.querySelectorAll('#shop .template-group-header').forEach(header => {
+	  header.addEventListener('click', () => {
+		const content = header.nextElementSibling;
+		content.style.display = content.style.display === 'none' ? 'block' : 'none';
+	  });
+	});
 
   const projectTypes = [
     {
       "id": 1,
       "name": "Web Development",
+	  "type": "web" ,
       "description": "Web development projects",
       "features": [
         {
@@ -50,6 +59,7 @@
     {
       "id": 2,
       "name": "Mobile App Development",
+	  "type": "mobile" ,
       "description": "Mobile app development projects",
       "features": [
         {
@@ -86,6 +96,7 @@
     {
       "id": 3,
       "name": "E-commerce Development",
+	  "type": "desktop" ,
       "description": "E-commerce development projects",
       "features": [
         {
@@ -164,6 +175,75 @@
     }
   ];
 
+  // Price Adjustments
+	const complexityMultipliers = {
+	  web: {
+		low: 0.6,
+		medium: 1.0,
+		high: 1.4,
+	  },
+	  desktop: {
+		low: 0.5,
+		medium: 1.0,
+		high: 1.5,
+	  },
+	  mobile: {
+		low: 0.7,
+		medium: 1.0,
+		high: 1.3,
+	  },
+	};
+
+	const projectTypeMultipliers = {
+	  web: {
+		basic: 0.8,
+		premium: 1.0,
+		enterprise: 1.2,
+	  },
+	  desktop: {
+		basic: 0.7,
+		premium: 1.0,
+		enterprise: 1.3,
+	  },
+	  mobile: {
+		basic: 0.8,
+		premium: 1.0,
+		enterprise: 1.2,
+	  },
+	};
+
+	const projectDurationMultipliers = (days) => {
+	  if (days <= 30) {
+		return 1.5; // very short-term (less than 1 month)
+	  } else if (days <= 90) {
+		return 1.2; // short-term (1-3 months)
+	  } else if (days <= 180) {
+		return 1.0; // medium-term (3-6 months)
+	  } else if (days <= 365) {
+		return 0.9; // long-term (6-12 months)
+	  } else if (days <= 730) {
+		return 0.8; // very long-term (1-2 years)
+	  } else if (days <= 1460) {
+		return 0.7; // extremely long-term (2-4 years)
+	  } else if (days <= 2920) {
+		return 0.6; // ultra-long-term (4-6 years)
+	  } else if (days <= 3650) {
+		return 0.5; // maximum long-term (6-10 years)
+	  } else {
+		return 0.4; // beyond maximum long-term (> 10 years)
+	  }
+	};
+
+	function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
+	  const complexityMultiplier = complexityMultipliers[platform][complexity];
+	  const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+	  const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
+
+	  const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
+	  return adjustedPrice;
+	}
+	  //
+  
   projectTypes.forEach(projectType => {
     const projectTypeOption = document.createElement('option');
     projectTypeOption.value = projectType.id;
@@ -188,7 +268,7 @@
     <div class="form-group">
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+          <input onchange="updateQuoteResult()" type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
         </label>
       </div>
     </div>
@@ -207,7 +287,7 @@
   ${template.pages.map(page => `
   
       <li>
-		<input type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
+		<input  onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
 		<label for="template-contact"> ${page.name} - R${page.price} </label>
 		<button class="preview-button" data-link="${page.link}">Preview</button>
 	  </li>   
@@ -292,7 +372,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
         <div class="form-group">
           <div class="checkbox">
             <label>
-              <input type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+              <input  onchange="updateQuoteResult()" type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
             </label>
           </div>
         </div>
@@ -304,6 +384,8 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
  
       featuresContainer.innerHTML = featuresHtml;
       planSelect.innerHTML = plansHtml;
+	  
+	  updateQuoteResult()
     }
   });
 
@@ -335,9 +417,8 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
    }
    
   
-  document.getElementById('custom-quote-form').addEventListener('submit', (e) => {
-    
-	e.preventDefault();
+  function updateQuoteResult(){
+     
 	// Time  
 	const startDate = new Date(document.getElementById('start-date').value);
     const endDate = new Date(document.getElementById('end-date').value);
@@ -356,9 +437,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	var quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
 	var pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
 	var featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
-	
-	console.log(quoteAmount , pagePrices , featurePrices);
-
+	 
     // Apply discount if requested
 	  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
 	  const discountRequestAmount = discountAmountInput;
@@ -368,8 +447,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  } else {
 		totalAmount = quoteAmount + pagePrices + featurePrices;
 	  } 
-	  
-	  console.log(discountAmount , totalAmount);
+	   
     // Update quote result HTML
 	  quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
 	  discountAmountInput.value = discountRequestAmount.value;
@@ -377,6 +455,15 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
 	  document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
 	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2);
+	// Price Adjustments 
+		const basePrice = totalAmount;
+		const complexity = document.getElementById('complexity').value.toLowerCase();
+		const projectType = selectedPlan.toLowerCase();
+		const platform = 'web';
+		const projectDurationDays = estimatedDays;
+
+		const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays);
+		console.log(`Adjusted price: R ${adjustedPrice.toFixed(2)}`);
 	// Determine project phases
 	  const phases = [];
 	  if (estimatedDays >= 40) {
@@ -410,9 +497,9 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  });
 	// 
 	
-  });
+  }
 
-const startDateInput = document.getElementById('start-date');
+  const startDateInput = document.getElementById('start-date');
 const endDateInput = document.getElementById('end-date');
 
 const today = new Date();
@@ -435,8 +522,14 @@ function formatDate(date, format) {
 
 document.addEventListener('DOMContentLoaded', () => {
   discountAmountInput.value = 30;
-  const quoteButton = document.querySelector('#quote-button');
-  quoteButton.click();
+  updateQuoteResult();
+  
+  planSelect.addEventListener('change', updateQuoteResult);
+  discountAmountInput.addEventListener('change', updateQuoteResult);
+  startDateInput.addEventListener('change', updateQuoteResult);
+  endDateInput.addEventListener('change', updateQuoteResult);
+  document.getElementById('complexity').addEventListener('change', updateQuoteResult);
+  
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
