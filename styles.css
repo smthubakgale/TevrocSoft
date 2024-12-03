@@ -489,13 +489,15 @@ body {
   font-size: 12px;
   margin-top: 5px;
 } 
-/* Shop Section */ 
+/* Shop Section */
 
 #shop {
   background-color: #f9f9f9;
   padding: 50px;
 }
+
 /* Features list */
+
 #shop .form-group ul#features {
   display: flex;
   flex-wrap: wrap;
@@ -509,6 +511,7 @@ body {
 }
 
 /* Template group content list */
+
 #shop .template-group-content {
   display: flex;
   flex-wrap: wrap;
@@ -519,13 +522,27 @@ body {
   flex: 1 1 30%;
   display: flex;
   align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#shop .template-group-content li:hover {
+  background-color: #f2f2f2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 /* Form Group Styles */
+
 #shop .form-group {
   margin-bottom: 20px;
 }
 
 /* Date Input Fields */
+
 #shop .date-container input[type="date"] {
   width: 150px;
   height: 30px;
@@ -543,12 +560,14 @@ body {
 }
 
 /* Date Label Styles */
+
 #shop .date-container label {
   display: block;
   margin-bottom: 10px;
 }
 
 /* Date Container Styles */
+
 #shop .date-container {
   display: flex;
   justify-content: space-between;
@@ -560,12 +579,14 @@ body {
 }
 
 /* Optional: Add icons */
+
 #shop .date-container i {
   font-size: 16px;
   margin-right: 5px;
 }
 
 /* Media Query for Responsive Design */
+
 @media (max-width: 768px) {
   #shop .date-container {
     flex-direction: column;
@@ -574,6 +595,7 @@ body {
     margin-right: 0;
   }
 }
+
 #shop .shop-container {
   max-width: 800px;
   margin: 0 auto;
@@ -743,6 +765,45 @@ body {
     margin-bottom: 5px;
   }
 }
+
+/* Popup Styles */
+
+#shop .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#shop .popup iframe {
+  width: 80%;
+  height: 80%;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#shop .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#shop .close-button:hover {
+  background-color: #444;
+}
+
 /* Tags Styles */
 
 
