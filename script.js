@@ -6,7 +6,7 @@
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select');  
   const templatePageIframe = document.getElementById('template-page-iframe'); 
-const discountAmountInput = document.getElementById('discount-request-amount');
+  const discountAmountInput = document.getElementById('discount-request-amount');
   const projectPhasesList = document.getElementById('project-phases');
 
   const projectTypes = [
@@ -363,9 +363,9 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  const discountRequestAmount = discountAmountInput;
 	  if (discountRequestCheckbox.checked) {
 		discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
-		totalAmount = quoteAmount - discountAmount + templatePrice + pagePrices + featurePrices;
+		totalAmount = quoteAmount - discountAmount + pagePrices + featurePrices;
 	  } else {
-		totalAmount = quoteAmount + templatePrice + pagePrices + featurePrices;
+		totalAmount = quoteAmount + pagePrices + featurePrices;
 	  } 
 	  
 	  console.log(discountAmount , totalAmount);
