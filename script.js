@@ -6,6 +6,7 @@
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select');  
   const templatePageIframe = document.getElementById('template-page-iframe'); 
+  const projectPhasesList = document.getElementById('project-phases');
 
   const projectTypes = [
     {
@@ -331,41 +332,80 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  };
    }
    
-   // Update quote result with project timeline estimation
-	function updateQuoteResult(quoteAmount, quoteBreakdown, projectTimelineEstimation) {
-	  document.getElementById('quote-amount').innerHTML = `Quote Amount: R ${quoteAmount}`;
-	  document.getElementById('quote-breakdown').innerHTML = quoteBreakdown;
-	  document.getElementById('project-timeline-estimation').innerHTML = `Project Timeline Estimation: ${projectTimelineEstimation}`;
-	}
-	
+  
   document.getElementById('custom-quote-form').addEventListener('submit', (e) => {
     
 	e.preventDefault();
+	// Time  
+	const startDate = new Date(document.getElementById('start-date').value);
+    const endDate = new Date(document.getElementById('end-date').value);
+
+    const estimatedDays = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24)); 
 	// Amount
     const selectedProjectType = projectTypes.find(projectType => projectType.id == projectTypeSelect.value);
     const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => templatePage.value);
     const selectedFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(feature => feature.value);
     const selectedPlan = planSelect.value;
+	
+	let quoteAmount = 0;
+    let discountAmount = 0;
+    let totalAmount = 0;
+    let pagePrices = 0;
+    let featurePrices = 0;
 
-    const totalPrice = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0) +
-                        selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) +
-                        selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
+    // Calculate quote amount based on plan and project estimation
+	quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
+	pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
+	featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
 
-     
-	// Time 
-	const startDate = new Date(document.getElementById('start-date').value);
-    const endDate = new Date(document.getElementById('end-date').value);
+    // Apply discount if requested
+	  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
+	  const discountRequestAmount = discountAmountInput;
+	  if (discountRequestCheckbox.checked) {
+		discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
+		totalAmount = quoteAmount - discountAmount + templatePrice + pagePrices + featurePrices;
+	  } else {
+		totalAmount = quoteAmount + templatePrice + pagePrices + featurePrices;
+	  } 
+    // Update quote result HTML
+	  quoteAmountValue.textContent = quoteAmount.toFixed(2);
+	  discountAmountInput.value = discountRequestAmount.value;
+	  document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+		document.getElementById('template-price').textContent = templatePrice.toFixed(2);
+	  document.getElementById('page-prices').textContent = pagePrices.toFixed(2);
+	  document.getElementById('feature-prices').textContent = featurePrices.toFixed(2);
+	// Determine project phases
+	  const phases = [];
+	  const estimatedDays = Math.ceil(projectEstimation / 8);
+	  if (estimatedDays >= 40) {
+		phases.push({ name: 'Deployment', start: 36, end: 40 });
+		phases.push({ name: 'Testing', start: 31, end: 35 });
+		phases.push({ name: 'Development', start: 16, end: 30 });
+		phases.push({ name: 'Design', start: 6, end: 15 });
+		phases.push({ name: 'Planning', start: 1, end: 5 });
+	  } else if (estimatedDays >= 30) {
+		phases.push({ name: 'Testing', start: 26, end: 30 });
+		phases.push({ name: 'Development', start: 16, end: 25 });
+		phases.push({ name: 'Design', start: 6, end: 15 });
+		phases.push({ name: 'Planning', start: 1, end: 5 });
+	  } else if (estimatedDays >= 15) {
+		phases.push({ name: 'Development', start: 11, end: 15 });
+		phases.push({ name: 'Design', start: 6, end: 10 });
+		phases.push({ name: 'Planning', start: 1, end: 5 });
+	  } else {
+		phases.push({ name: 'Planning', start: 1, end: estimatedDays });
+	  }
 
-    const projectTimelinePhases = calculateProjectTimelinePhases(startDate, endDate);
-	const projectTimelineEstimation = `
-    Discovery Phase: ${projectTimelinePhases.discoveryPhase} days
-    Design Phase: ${projectTimelinePhases.designPhase} days 
-    Development Phase: ${projectTimelinePhases.developmentPhase} days 
-    Testing Phase: ${projectTimelinePhases.testingPhase} days 
-    Launch Phase: ${projectTimelinePhases.launchPhase} days 
-  `;
-
-    updateQuoteResult(totalPrice + "", "Breakdown: ...", projectTimelineEstimation);
+  // Update project phases HTML
+	  projectPhasesList.innerHTML = '';
+	  phases.forEach((phase) => {
+		const phaseHTML = `
+		  <li>
+			${phase.name} (Days ${phase.start} - ${phase.end})
+		  </li>
+		`;
+		projectPhasesList.innerHTML += phaseHTML;
+	  });
 	// 
 	
   });
