@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array
+ // load project types dynamically from the JSON array 
   const projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -177,10 +177,18 @@
 
   const projectTypeHtml = `
     <div class="form-group">
-      <h4>${firstProjectType.name}</h4>
-      <p>${firstProjectType.description}</p>
+      <h4 class="pname">${firstProjectType.name}</h4>
+      <p class="pdesc">${firstProjectType.description}</p>
     </div>
   `;
+  
+  projectTypeSelect.addEventListener('change', (event) => {
+	  const selectedValue = event.target.value;
+	  const selectedProjectType = projectTypes.find((projectType) => projectType.id === selectedValue);
+
+	  projectTypeSelect.parentNode.querySelector('.pname').innerHTML = selectedProjectType.name;
+	  projectTypeSelect.parentNode.querySelector('.pdesc').innerHTML = selectedProjectType.description; 
+  });
 
   const featuresHtml = firstProjectType.features.map(feature => `
     <div class="form-group">
@@ -352,7 +360,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
-  });
+  }); 
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
