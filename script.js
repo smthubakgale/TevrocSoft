@@ -346,17 +346,16 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => templatePage.value);
     const selectedFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(feature => feature.value);
     const selectedPlan = planSelect.value;
-	
-	let quoteAmount = 0;
-    let discountAmount = 0;
-    let totalAmount = 0;
-    let pagePrices = 0;
-    let featurePrices = 0;
+	 
+    var discountAmount = 0;
+    var totalAmount = 0; 
 
     // Calculate quote amount based on plan and project estimation
-	quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
-	pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
-	featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
+	var quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
+	var pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
+	var featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
+	
+	console.log(quoteAmount , pagePrices , featurePrices);
 
     // Apply discount if requested
 	  const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
@@ -367,16 +366,18 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  } else {
 		totalAmount = quoteAmount + templatePrice + pagePrices + featurePrices;
 	  } 
+	  
+	  console.log(discountAmount , totalAmount);
     // Update quote result HTML
-	  quoteAmountValue.textContent = quoteAmount.toFixed(2);
+	  quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
 	  discountAmountInput.value = discountRequestAmount.value;
-	  document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
-		document.getElementById('template-price').textContent = templatePrice.toFixed(2);
-	  document.getElementById('page-prices').textContent = pagePrices.toFixed(2);
-	  document.getElementById('feature-prices').textContent = featurePrices.toFixed(2);
+	  
+	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2);
+	  document.getElementById('template-price').innerHTML = templatePrice.toFixed(2);
+	  document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
+	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2);
 	// Determine project phases
 	  const phases = [];
-	  
 	  if (estimatedDays >= 40) {
 		phases.push({ name: 'Deployment', start: 36, end: 40 });
 		phases.push({ name: 'Testing', start: 31, end: 35 });
