@@ -4,8 +4,7 @@
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
-  const planSelect = document.getElementById('plan-select'); 
-  const quoteResult = document.getElementById('quote-result');
+  const planSelect = document.getElementById('plan-select');  
   const templatePageIframe = document.getElementById('template-page-iframe'); 
 
   const projectTypes = [
@@ -190,7 +189,7 @@
         </label>
       </div>
     </div>
-  `).join(''); 
+  `).join('');
 
   const plansHtml = firstProjectType.plans.map(plan => `
     <option value="${plan.name}">${plan.name} - R${plan.price}</option>
@@ -334,7 +333,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
    
    // Update quote result with project timeline estimation
 	function updateQuoteResult(quoteAmount, quoteBreakdown, projectTimelineEstimation) {
-	  document.getElementById('quote-amount').innerHTML = `Quote Amount: $${quoteAmount}`;
+	  document.getElementById('quote-amount').innerHTML = `Quote Amount: R ${quoteAmount}`;
 	  document.getElementById('quote-breakdown').innerHTML = quoteBreakdown;
 	  document.getElementById('project-timeline-estimation').innerHTML = `Project Timeline Estimation: ${projectTimelineEstimation}`;
 	}
@@ -352,11 +351,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
                         selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) +
                         selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
 
-    const quoteHtml = `
-      <p>Your quote is: R${totalPrice}</p>
-    `;
-
-    quoteResult.innerHTML = quoteHtml;
+     
 	// Time 
 	const startDate = new Date(document.getElementById('start-date').value);
     const endDate = new Date(document.getElementById('end-date').value);
@@ -364,13 +359,13 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     const projectTimelinePhases = calculateProjectTimelinePhases(startDate, endDate);
 	const projectTimelineEstimation = `
     Discovery Phase: ${projectTimelinePhases.discoveryPhase} days
-    Design Phase: ${projectTimelinePhases.designPhase} weeks
-    Development Phase: ${projectTimelinePhases.developmentPhase} weeks
-    Testing Phase: ${projectTimelinePhases.testingPhase} weeks
-    Launch Phase: ${projectTimelinePhases.launchPhase} weeks
+    Design Phase: ${projectTimelinePhases.designPhase} days 
+    Development Phase: ${projectTimelinePhases.developmentPhase} days 
+    Testing Phase: ${projectTimelinePhases.testingPhase} days 
+    Launch Phase: ${projectTimelinePhases.launchPhase} days 
   `;
 
-    updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
+    updateQuoteResult(totalPrice + "", "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
   });
@@ -395,7 +390,7 @@ function formatDate(date, format) {
     return `${year}-${month}-${day}`;
   }
 }
- 
+
 document.addEventListener('DOMContentLoaded', () => {
    
   const quoteButton = document.querySelector('#quote-button');
