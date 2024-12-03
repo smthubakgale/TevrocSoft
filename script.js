@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
-  // load project types dynamically from the JSON array
+ // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -374,6 +374,22 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	// 
 	
   });
+
+const startDateInput = document.getElementById('startDate');
+const endDateInput = document.getElementById('endDate');
+
+const today = new Date();
+const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+startDateInput.value = formatDate(today);
+endDateInput.value = formatDate(endDate);
+
+function formatDate(date) {
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+} 
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
