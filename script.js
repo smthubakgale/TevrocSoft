@@ -1,5 +1,207 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
+
+//----------------------------:
+ // Add event listeners to add buttons
+  document.getElementById('add-ip').addEventListener('click', addIp);
+  document.getElementById('add-browser').addEventListener('click', addBrowser);
+  document.getElementById('add-project').addEventListener('click', addProject);
+  document.getElementById('add-anc').addEventListener('click', addAnc);
+  document.getElementById('add-file').addEventListener('click', addFile);
+  document.getElementById('add-temp').addEventListener('click', addTemp);
+  document.getElementById('add-sql').addEventListener('click', addSql);
+  document.getElementById('add-ui-api').addEventListener('click', addUiApi);
+  document.getElementById('add-social-auth').addEventListener('click', addSocialAuth);
+
+  // Functions to add new fields
+  function addIp() {
+    const ipsContainer = document.getElementById('ips-container');
+    const newIp = document.createElement('div');
+    newIp.innerHTML = `
+      <input type="text" name="ips[]" placeholder="Enter IP">
+      <button type="button" class="remove-ip">Remove</button>
+    `;
+    ipsContainer.appendChild(newIp);
+    newIp.querySelector('.remove-ip').addEventListener('click', removeIp);
+  }
+
+  function addBrowser() {
+    const browsersContainer = document.getElementById('browsers-container');
+    const newBrowser = document.createElement('div');
+    newBrowser.innerHTML = `
+      <input type="text" name="browsers[]" placeholder="Enter browser">
+      <button type="button" class="remove-browser">Remove</button>
+    `;
+    browsersContainer.appendChild(newBrowser);
+    newBrowser.querySelector('.remove-browser').addEventListener('click', removeBrowser);
+  }
+    function addProject() {
+    const projectsContainer = document.getElementById('projects-container');
+    const newProject = document.createElement('div');
+    newProject.innerHTML = `
+      <input type="text" name="projects[]" placeholder="Enter project">
+      <button type="button" class="remove-project">Remove</button>
+    `;
+    projectsContainer.appendChild(newProject);
+    newProject.querySelector('.remove-project').addEventListener('click', removeProject);
+  }
+
+  function addAnc() {
+    const ancsContainer = document.getElementById('ancs-container');
+    const newAnc = document.createElement('div');
+    newAnc.innerHTML = `
+      <h2>ANC</h2>
+      <label for="anc-id">ID:</label>
+      <input type="text" id="anc-id" name="ancs[id][]">
+      <label for="anc-users">Users:</label>
+      <input type="text" id="anc-users" name="ancs[users][]">
+      <label for="anc-not">Not:</label>
+      <input type="checkbox" id="anc-not" name="ancs[not][]">
+      <button type="button" class="remove-anc">Remove</button>
+    `;
+    ancsContainer.appendChild(newAnc);
+    newAnc.querySelector('.remove-anc').addEventListener('click', removeAnc);
+  }
+
+  function addFile() {
+    const filesContainer = document.getElementById('files-container');
+    const newFile = document.createElement('div');
+    newFile.innerHTML = `
+      <h2>File</h2>
+      <label for="file-p">P:</label>
+      <input type="text" id="file-p" name="files[p][]">
+      <label for="file-u">U:</label>
+      <input type="text" id="file-u" name="files[u][]">
+      <button type="button" class="remove-file">Remove</button>
+    `;
+    filesContainer.appendChild(newFile);
+    newFile.querySelector('.remove-file').addEventListener('click', removeFile);
+  }
+
+  function addTemp() {
+    const tempsContainer = document.getElementById('temps-container');
+    const newTemp = document.createElement('div');
+    newTemp.innerHTML = `
+      <h2>Temp</h2>
+      <label for="temp-p">P:</label>
+      <input type="text" id="temp-p" name="temps[p][]">
+      <label for="temp-u">U:</label>
+      <input type="text" id="temp-u" name="temps[u][]">
+      <button type="button" class="remove-temp">Remove</button>
+    `;
+    tempsContainer.appendChild(newTemp);
+    newTemp.querySelector('.remove-temp').addEventListener('click', removeTemp);
+  }
+
+  function addSql() {
+    const sqlContainer = document.getElementById('sql-container');
+    const newSql = document.createElement('div');
+    newSql.innerHTML = `
+      <h2>SQL</h2>
+      <label for="sql-type">Type:</label>
+      <input type="text" id="sql-type" name="sql[type][]">
+      <label for="sql-encrypt">Encrypt:</label>
+      <input type="text" id="sql-encrypt" name="sql[encrypt][]">
+      <button type="button" class="remove-sql">Remove</button>
+    `;
+    sqlContainer.appendChild(newSql);
+    newSql.querySelector('.remove-sql').addEventListener('click', removeSql);
+  }
+
+  function addUiApi() {
+    const uiApiContainer = document.getElementById('ui-api-container');
+    const newUiApi = document.createElement('div');
+    newUiApi.innerHTML = `
+      <h2>UI API</h2>
+      <label for="ui-api-client-id">Client ID:</label>
+      <input type="text" id="ui-api-client-id" name="ui_api[client_id][]">
+      <label for="ui-api-project-id">Project ID:</label>
+      <input type="text" id="ui-api-project-id" name="ui_api[project_id][]">
+      <button type="button" class="remove-ui-api">Remove</button>
+    `;
+    uiApiContainer.appendChild(newUiApi);
+    newUiApi.querySelector('.remove-ui-api').addEventListener('click', removeUiApi);
+  }
+
+  function addSocialAuth() {
+    const socialAuthContainer = document.getElementById('social-auth-container');
+    const newSocialAuth = document.createElement('div');
+    newSocialAuth.innerHTML = `
+      <h2>Social Auth</h2>
+      <label for="social-auth-provider">Provider:</label>
+      <input type="text" id="social-auth-provider" name="social_auth[provider][]">
+      <label for="social-auth-client-id">Client ID:</label>
+      <input type="text" id="social-auth-client-id" name="social_auth[client_id][]">
+      <button type="button" class="remove-social-auth">Remove</button>
+    `;
+    socialAuthContainer.appendChild(newSocialAuth);
+    newSocialAuth.querySelector('.remove-social-auth').addEventListener('click', removeSocialAuth);
+  }
+
+  // Functions to remove fields
+  function removeIp(event) {
+    const ip = event.target.parentNode;
+    ip.parentNode.removeChild(ip);
+  }
+
+  function removeBrowser(event) {
+    const browser = event.target.parentNode;
+    browser.parentNode.removeChild(browser);
+  }
+
+  function removeProject(event) {
+    const project = event.target.parentNode;
+    project.parentNode.removeChild(project);
+  }
+
+  function removeAnc(event) {
+    const anc = event.target.parentNode;
+    anc.parentNode.removeChild(anc);
+  }
+
+  function removeFile(event) {
+    const file = event.target.parentNode;
+    file.parentNode.removeChild(file);
+  }
+
+  function removeTemp(event) {
+    const temp = event.target.parentNode;
+    temp.parentNode.removeChild(temp);
+  }
+
+  function removeSql(event) {
+    const sql = event.target.parentNode;
+    sql.parentNode.removeChild(sql);
+  }
+
+  function removeUiApi(event) {
+    const uiApi = event.target.parentNode;
+    uiApi.parentNode.removeChild(uiApi);
+  }
+
+  function removeSocialAuth(event) {
+    const socialAuth = event.target.parentNode;
+    socialAuth.parentNode.removeChild(socialAuth);
+  }
+
+  // Function to handle form submission
+  document.getElementById('json-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const jsonData = {};
+    for (const [key, value] of formData) {
+      if (!jsonData[key]) {
+        jsonData[key] = value;
+      } else if (Array.isArray(jsonData[key])) {
+        jsonData[key].push(value);
+      } else {
+        jsonData[key] = [jsonData[key], value];
+      }
+    }
+    console.log(jsonData);
+    // Send the JSON data to your server or API
+  });
+//----------------------------:
   // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
