@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
-  // load project types dynamically from the JSON array
+ // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -250,11 +250,13 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 		<button class="close-button" style="left:calc(100% - 80px); top:calc(100% - 46px); position:absolute;" >Close</button>
 	  </div> 
     `;
-
+	
+    document.body.style.overflow = 'hidden';
     document.body.appendChild(popup);
 
     document.querySelector('.close-button').addEventListener('click', () => {
       popup.remove();
+	  document.body.style.overflow = 'auto';
     });
   });
 });
@@ -373,7 +375,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
-  });
+  }); 
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
