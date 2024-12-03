@@ -375,24 +375,29 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	
   });
 
+const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
+
+const today = new Date();
+const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+startDateInput.value = formatDate(today, 'yyyy-mm-dd');
+endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+
+function formatDate(date, format) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  
+  if (format === 'dd-mm-yyyy') {
+    return `${day}-${month}-${year}`;
+  } else if (format === 'yyyy-mm-dd') {
+    return `${year}-${month}-${day}`;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    const startDateInput = document.getElementById('start-date');
-	const endDateInput = document.getElementById('end-date');
-
-	const today = new Date();
-	const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
-	startDateInput.value = formatDate(today);
-	endDateInput.value = formatDate(endDate);
-
-	function formatDate(date) {
-	  const day = date.getDate().toString().padStart(2, '0');
-	  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-	  const year = date.getFullYear();
-	  return `${day}-${month}-${year}`;
-	} 
-
+   
   const quoteButton = document.querySelector('#quote-button');
   quoteButton.click();
 });
