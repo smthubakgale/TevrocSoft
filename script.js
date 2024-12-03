@@ -190,7 +190,7 @@
         </label>
       </div>
     </div>
-  `).join('');
+  `).join(''); 
 
   const plansHtml = firstProjectType.plans.map(plan => `
     <option value="${plan.name}">${plan.name} - R${plan.price}</option>
@@ -381,8 +381,20 @@ const endDateInput = document.getElementById('end-date');
 const today = new Date();
 const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
-startDateInput.valueAsDate = today;
-endDateInput.valueAsDate = endDate;
+startDateInput.value = formatDate(today, 'yyyy-mm-dd');
+endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+
+function formatDate(date, format) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  
+  if (format === 'dd-mm-yyyy') {
+    return `${day}-${month}-${year}`;
+  } else if (format === 'yyyy-mm-dd') {
+    return `${year}-${month}-${day}`;
+  }
+}
  
 document.addEventListener('DOMContentLoaded', () => {
    
