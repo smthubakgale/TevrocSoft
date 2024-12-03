@@ -9,6 +9,27 @@
   const discountAmountInput = document.getElementById('discount-request-amount');
   const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
+  const startDateInput = document.getElementById('start-date');
+  const endDateInput = document.getElementById('end-date');
+
+  const today = new Date();
+  const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+  startDateInput.value = formatDate(today, 'yyyy-mm-dd');
+  endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+
+function formatDate(date, format) {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  
+  if (format === 'dd-mm-yyyy') {
+    return `${day}-${month}-${year}`;
+  } else if (format === 'yyyy-mm-dd') {
+    return `${year}-${month}-${day}`;
+  }
+}
+
   
   // Template group header toggle
 	document.querySelectorAll('#shop .template-group-header').forEach(header => {
@@ -499,31 +520,9 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	
   }
 
-
-
+  
 document.addEventListener('DOMContentLoaded', () => {
   discountAmountInput.value = 30;
- const startDateInput = document.getElementById('start-date');
- const endDateInput = document.getElementById('end-date');
-
- const today = new Date();
- const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
- startDateInput.value = formatDate(today, 'yyyy-mm-dd');
- endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
-
-function formatDate(date, format) {
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  
-  if (format === 'dd-mm-yyyy') {
-    return `${day}-${month}-${year}`;
-  } else if (format === 'yyyy-mm-dd') {
-    return `${year}-${month}-${day}`;
-  }
-}
-	
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
