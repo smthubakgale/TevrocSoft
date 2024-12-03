@@ -301,8 +301,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
       const plansHtml = selectedProjectType.plans.map(plan => `
         <option value="${plan.name}">${plan.name} - R${plan.price}</option>
       `).join('');
-
-      projectTypeSelect.parentNode.innerHTML = projectTypeHtml;
+ 
       featuresContainer.innerHTML = featuresHtml;
       planSelect.innerHTML = plansHtml;
     }
@@ -376,7 +375,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
     updateQuoteResult(10000, "Breakdown: ...", projectTimelineEstimation);
 	// 
 	
-  }); 
+  });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
