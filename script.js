@@ -499,14 +499,18 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	
   }
 
-  const startDateInput = document.getElementById('start-date');
-const endDateInput = document.getElementById('end-date');
 
-const today = new Date();
-const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
-startDateInput.value = formatDate(today, 'yyyy-mm-dd');
-endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+document.addEventListener('DOMContentLoaded', () => {
+  discountAmountInput.value = 30;
+ const startDateInput = document.getElementById('start-date');
+ const endDateInput = document.getElementById('end-date');
+
+ const today = new Date();
+ const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+ startDateInput.value = formatDate(today, 'yyyy-mm-dd');
+ endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
 
 function formatDate(date, format) {
   const year = date.getFullYear();
@@ -519,9 +523,7 @@ function formatDate(date, format) {
     return `${year}-${month}-${day}`;
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  discountAmountInput.value = 30;
+	
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
