@@ -6,8 +6,7 @@
   const featuresContainer = document.getElementById('features-container');
   const planSelect = document.getElementById('plan-select'); 
   const quoteContainer = document.getElementById('quote-container');
-  const templatePageIframe = document.getElementById('template-page-iframe');
-  const popup = document.querySelector('.popup');
+  const templatePageIframe = document.getElementById('template-page-iframe'); 
 
   const projectTypes = [
     {
@@ -225,11 +224,11 @@ templateGroupsContainer.querySelectorAll('.template-group-header').forEach(heade
 
 // Add event listener to the dynamically created buttons
 templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
-  button.addEventListener('click', (event) => {
-    const link = button.getAttribute('data-link');
-    templatePageIframe.src = link + `?<button class="close-button" onclick="parent.document.querySelector('.popup').style.display='none';">Close</button>`;
-    popup.style.display = 'block';
-	
+  button.addEventListener('click', (event) => { 
+	const popupElement = document.querySelector('.popup');
+	if (popupElement) {
+	  popupElement.remove();
+	}
 	const url = button.getAttribute('data-url');
     const popup = document.createElement('div');
     popup.classList.add('popup'); 
@@ -354,7 +353,6 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	// 
 	
   });
- 
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
