@@ -1,6 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
- // load project types dynamically from the JSON array 
+  // load project types dynamically from the JSON array
   const projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -222,6 +222,8 @@
   </ul>
 `).join('');
  
+
+ templateGroupsContainer.innerHTML = templateGroupsHtml;
 // Add event listener for Template group header toggle
 templateGroupsContainer.querySelectorAll('.template-group-header').forEach(header => {
   header.addEventListener('click', () => {
@@ -258,7 +260,6 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
   projectTypeSelect.parentNode.innerHTML += projectTypeHtml;
   featuresContainer.innerHTML = featuresHtml;
   planSelect.innerHTML = plansHtml;
-  templateGroupsContainer.innerHTML = templateGroupsHtml;
 
   projectTypeSelect.addEventListener('change', (event) => {
     const selectedProjectTypeId = event.target.value;
