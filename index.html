@@ -535,9 +535,9 @@
           	  <div class="form-group">
           		<label for="project-timeline">Project Timeline:</label>
           		<label for="start-date">Start Date:</label>
-          		<input type="date" id="start-date" name="start-date" required>
+          		<input type="datetime-local" id="start-date" name="start-date" required>
           		<label for="end-date">End Date:</label>
-          		<input type="date" id="end-date" name="end-date" required>
+          		<input type="datetime-local" id="end-date" name="end-date" required>
           	  </div>
           	  
           	  <!-- Discount Request -->
@@ -549,31 +549,62 @@
           
           		</div>
           	  </div>
-             
-          	  <!-- Submit Button --> 
-          	  <div class="button-container">
-          	     <button id="quote-button" class="btn btn-primary">Get Quote</button>
-          	     <button id="email-quote" class="btn btn-primary"> Submit Quote </button>
-          	  </div>
+                
           	  
             </form>
-           
-            <!-- Quote Result -->
-            <div class="quote-result">
-          	<p>Quote Amount: R<span id="quote-amount-value">0.00</span></p>
-          	<p>Template Price: R<span id="template-price">0.00</span></p>
-          	<p>Page Prices: R<span id="page-prices">0.00</span></p>
-          	<p>Feature Prices: R<span id="feature-prices">0.00</span></p>
-          	<p>Total Amount: R<span id="total-amount">0.00</span></p>
-            </div>
-          
-            <!-- Project Phases -->
-            <div class="project-phases">
-          	<h3>Project Phases:</h3>
-          	<ul id="project-phases"></ul>
+            
+            <!-- Quote Report -->
+            <div class="form-group">
+          	<label for="template-groups"> Quote Report :</label>
+          	<ul id="template-groups">
+          	  <li>
+          		<div class="template-group-header">
+          		  <h4> Quote Result <i class="fas fa-caret-down"></i></h4>
+          		</div>
+          		<div class="template-group-content" style="display: none;">
+          		   <div class="quote-result">
+          			<p>Quote Amount: R<span id="quote-amount-value">0.00</span></p>
+          			<p>Page Prices: R<span id="page-prices">0.00</span></p>
+          			<p>Feature Prices: R<span id="feature-prices">0.00</span></p>
+          			<p>Total Amount: R<span id="total-amount">0.00</span></p>
+          			<p>Adjusted Amount: R<span id="adjusted-price">0.00</span></p>
+          		  </div>
+          		</div>
+          	  </li>
+          	  <li>
+          		<div class="template-group-header">
+          		  <h4> Project Phase <i class="fas fa-caret-down"></i></h4>
+          		</div>
+          		<div class="template-group-content" style="display: none;">
+          		   <ul id="project-phases"></ul>
+          		</div>
+          	  </li>
+          	</ul> 
             </div>
             
-          </div>        
+            <!-- Specifications and Requirements -->
+            <div class="form-group">
+          	<label for="template-groups"> Specifications and Requirements :</label>
+          	<ul id="template-groups">
+          	  <li>
+          		<div class="template-group-header">
+          		  <h4> Specifications <i class="fas fa-caret-down"></i></h4>
+          		</div>
+          		<div class="template-group-content" style="display: none;">
+          		    TODO
+          		</div>
+          	  </li>
+          	  <li>
+          		<div class="template-group-header">
+          		  <h4> Requirements <i class="fas fa-caret-down"></i></h4>
+          		</div>
+          		<div class="template-group-content" style="display: none;">
+          		   TODO 
+          		</div>
+          	  </li>
+          	</ul> 
+            </div>
+          </div>                 
         </section>
         
         <section id="about" class="section hidden">
