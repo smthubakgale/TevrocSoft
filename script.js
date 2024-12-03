@@ -375,8 +375,8 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	
   });
 
-const startDateInput = document.getElementById('startDate');
-const endDateInput = document.getElementById('endDate');
+const startDateInput = document.getElementById('start-date');
+const endDateInput = document.getElementById('end-date');
 
 const today = new Date();
 const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
@@ -392,10 +392,9 @@ function formatDate(date) {
 } 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const quoteButton = document.querySelector('.quote-button');
+  const quoteButton = document.querySelector('#quote-button');
   quoteButton.click();
 });
-
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
