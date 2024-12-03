@@ -505,8 +505,8 @@ const endDateInput = document.getElementById('end-date');
 const today = new Date();
 const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
-startDateInput.value = formatDate(today, 'yyyy-mm-dd');
-endDateInput.value = formatDate(endDate, 'yyyy-mm-dd');
+startDateInput.value = formatDate(today, 'yyyy-mm-ddTHH:mm:ss');
+endDateInput.value = formatDate(endDate, 'yyyy-mm-ddTHH:mm:ss');
 
 function formatDate(date, format) {
   const year = date.getFullYear();
