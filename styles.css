@@ -528,6 +528,11 @@ body {
   height: 40px;
 }
 
+#shop #features ul li {
+  display: flex;
+  align-items: center;
+}
+
 #shop .template-group-content input[type="checkbox"] {
   margin-right: 10px;
   margin-top: auto;
@@ -593,6 +598,13 @@ body {
 #shop .form-group label {
   display: block;
   margin-bottom: 10px;
+  margin-top: 6px;
+}
+
+#shop #features label {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 6px;
 }
 
 #shop .form-group input[type="text"], #shop .form-group input[type="email"], #shop .form-group input[type="tel"], #shop .form-group input[type="date"] {
@@ -632,6 +644,7 @@ body {
 #shop #quote-result h3 {
   margin-top: 0;
 }
+
 #shop #quote-result p {
   margin-bottom: 20px;
 }
