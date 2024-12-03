@@ -73,6 +73,25 @@ document.querySelectorAll('#shop .preview-button').forEach(button => {
     });
   });
 });
+
+// Live Demo button handler
+document.querySelectorAll('#shop .live-demo-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const url = button.getAttribute('data-url');
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    popup.innerHTML = `
+      <iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
+      <button class="close-button">Close</button>
+    `;
+
+    document.body.appendChild(popup);
+
+    document.querySelector('.close-button').addEventListener('click', () => {
+      popup.remove();
+    });
+  });
+});
 //------------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
