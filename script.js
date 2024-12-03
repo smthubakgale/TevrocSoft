@@ -37,10 +37,7 @@ function updateQuoteResult(quoteAmount, quoteBreakdown, projectTimelineEstimatio
 
 // Form submission handler
 document.getElementById('custom-quote-form').addEventListener('submit', (e) => {
-  if (e.submitter.classList.contains('live-demo-button')) {
-    e.preventDefault();
-    return;
-  }
+  e.preventDefault();
 
   const startDate = new Date(document.getElementById('start-date').value);
   const endDate = new Date(document.getElementById('end-date').value);
@@ -77,35 +74,6 @@ document.querySelectorAll('#shop .preview-button').forEach(button => {
     popup.innerHTML = `
       <iframe src="${url}" frameborder="0" width="90%" height="90%"></iframe>
       <button class="close-button">Back</button>
-    `;
-
-    document.body.appendChild(popup);
-
-    document.querySelector('.close-button').addEventListener('click', () => {
-      popup.remove();
-    });
-  });
-});
-
-// Live Demo button handler
-document.querySelectorAll('#shop .live-demo-button').forEach(button => {
-  button.addEventListener('click', () => {
-    const url = button.getAttribute('data-url');
-    const popup = document.createElement('div');
-    popup.classList.add('popup');
-    popup.style.position = 'fixed';
-    popup.style.top = '0';
-    popup.style.left = '0';
-    popup.style.width = '100%';
-    popup.style.height = '100%';
-    popup.style.background = 'rgba(0, 0, 0, 0.5)';
-    popup.style.display = 'flex';
-    popup.style.justifyContent = 'center';
-    popup.style.alignItems = 'center';
-    popup.style.zIndex = '1000';
-    popup.innerHTML = `
-      <iframe src="${url}" frameborder="0" width="90%" height="90%"></iframe>
-      <button class="close-button">Close</button>
     `;
 
     document.body.appendChild(popup);
