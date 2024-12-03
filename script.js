@@ -37,7 +37,10 @@ function updateQuoteResult(quoteAmount, quoteBreakdown, projectTimelineEstimatio
 
 // Form submission handler
 document.getElementById('custom-quote-form').addEventListener('submit', (e) => {
-  e.preventDefault();
+  if (e.submitter.classList.contains('live-demo-button')) {
+    e.preventDefault();
+    return;
+  }
 
   const startDate = new Date(document.getElementById('start-date').value);
   const endDate = new Date(document.getElementById('end-date').value);
