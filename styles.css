@@ -710,6 +710,12 @@ body {
 #shop .popup.show {
   display: block;
 }
+
+#shop .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 19px;
+}
 /* Tags Styles */
 
 
