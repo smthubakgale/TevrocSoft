@@ -232,7 +232,14 @@ export const formConfig2 = {
 <p> "maven" , "csharp" </p>
 <p><i> Hybrid </i></p> 
 <p> "tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask" </p>
-      `
+      ` , 
+    	options :[
+		"html5" , "flask" , "php" ,"mvc" , "express" , "springboot" ,
+		"xamarin.android" , "java.android" ,
+		"electron" , "javafx" , "owin.core" , "pyweb" ,
+		"maven" , "csharp" ,
+		"tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask"
+       ]
     },
     {
       label: "Email",
