@@ -405,10 +405,47 @@ export const formConfig2 = {
        ]
     },
     {
-      label: "Email",
-      name: "email",
+      label: "Interface Design Layouts",
+      name: "--layout",
       type: "email",
-      description: "Enter your email address"
+      description: `
+<h2>1. Empty Layout</h2>
+<table>
+	<tr>
+		<th>Description</th>
+		<td>The Empty layout features a blank or minimalistic design, often used for login screens, loading screens, or introductory screens.</td>
+	</tr>
+	<tr>
+		<th>Characteristics</th>
+		<td>Minimal or no content, simple background color or image, focus on a single call-to-action (CTA)</td>
+	</tr>
+	<tr>
+		<th>Use cases</th>
+		<td>Login screens, loading screens, introductory screens</td>
+	</tr>
+	<tr>
+		<th>Benefits</th>
+		<td>Provides a simple and easy-to-understand design, works well for login screens, loading screens, or introductory screens, easy to implement</td>
+	</tr>
+	<tr>
+		<th>Example Projects</th>
+		<td><a href="#" onclick="popupWindow('https://www.airbnb.com/'); return false;">Airbnb</a>, <a href="#" onclick="popupWindow('https://www.dropbox.com/'); return false;">Dropbox</a></td>
+	</tr>
+</table>
+
+<!-- Add more layouts here -->
+
+<script>
+function popupWindow(url) {
+	var popup = window.open("", "popup", "width=" + screen.width + ",height=" + screen.height + ",top=0,left=0,scrollbars=yes");
+	popup.document.write("<html><head><title>Popup Window</title></head><body style='margin:0;padding:0;'>");
+	popup.document.write("<iframe src='" + url + "' width='100%' height='100%' frameborder='0' scrolling='yes'></iframe>");
+	popup.document.write("<button style='position:fixed;top:10px;right:10px;' onclick='window.close();'>Close</button>");
+	popup.document.write("<script>window.onunload = function(){ window.opener = null; }</script>");
+	popup.document.write("</body></html>");
+}
+</script>
+      `
     },
     {
       label: "Email",
