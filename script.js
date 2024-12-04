@@ -152,7 +152,7 @@
 	  ]
 	};
     // 
-class FormGenerator {
+ class FormGenerator {
   constructor(form, importButton, fileInput, formConfig, callback) {
     this.form = form;
     this.importButton = importButton;
@@ -162,6 +162,7 @@ class FormGenerator {
 
     this.renderForm();
     this.addEventListeners();
+    this.loadFormDataFromLocalStorage();
   }
 
   renderForm() {
@@ -246,31 +247,27 @@ class FormGenerator {
 
               fieldSet.appendChild(addButton);
 
-              this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
-
-              parentElement.appendChild(fieldSet);
+              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
-                const nextFieldIndex = field.fields.indexOf(field.fields[0]) + 1;
-                if (nextFieldIndex < field.fields.length) {
-                  const nextField = field.fields[nextFieldIndex];
-                  const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
-                  const removeButton = document.createElement("button");
-                  removeButton.type = "button";
-                  removeButton.textContent = "Remove";
-                  removeButton.classList.add("remove-button");
+                const newSubForm = subFormElement.cloneNode(true);
+                const inputs = newSubForm.querySelectorAll("input, select, textarea");
+                inputs.forEach((input) => {
+                  input.value = "";
+                });
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.classList.add("remove-button");
+                newSubForm.appendChild(removeButton);
+                fieldSet.appendChild(newSubForm);
 
-                  newSubForm.appendChild(removeButton);
-
-                  removeButton.addEventListener("click", () => {
-                    newSubForm.remove();
-                  });
-
-                  field.fields.splice(nextFieldIndex, 1); // remove the field from the array
-                } else {
-                  console.log("No more fields to add");
-                }
+                removeButton.addEventListener("click", () => {
+                  newSubForm.remove();
+                });
               });
+
+              parentElement.appendChild(fieldSet);
               return;
             default:
               inputElement = document.createElement("input");
@@ -302,13 +299,12 @@ class FormGenerator {
 
           let inputElement;
 
-                    switch (field.type) {
+          switch (field.type) {
             case "select":
               inputElement = document.createElement("select");
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
-
-              field.options.forEach((option) => {
+			                field.options.forEach((option) => {
                 const optionElement = document.createElement("option");
                 optionElement.value = option.value;
                 optionElement.textContent = option.label;
@@ -335,6 +331,42 @@ class FormGenerator {
 
                 fieldSet.appendChild(labelElement);
               });
+              return;
+            case "subform":
+              const fieldSetElement = document.createElement("fieldset");
+              fieldSetElement.legend = field.label;
+              fieldSetElement.style.border = "1px solid #ccc";
+              fieldSetElement.style.padding = "10px";
+              fieldSetElement.style.marginBottom = "20px";
+
+              const addButton = document.createElement("button");
+              addButton.type = "button";
+              addButton.textContent = "Add new " + field.label;
+              addButton.classList.add("add-button");
+
+              fieldSetElement.appendChild(addButton);
+
+              const subFormElement = this.renderSubForm(fieldSetElement, [field.fields[0]], parentName + "_" + field.name);
+              fieldSetElement.appendChild(subFormElement);
+
+              addButton.addEventListener("click", () => {
+                const newSubForm = subFormElement.cloneNode(true);
+                const inputs = newSubForm.querySelectorAll("input, select, textarea");
+                inputs.forEach((input) => {
+                  input.value = "";
+                });
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.classList.add("remove-button");
+                newSubForm.appendChild(removeButton);
+                fieldSetElement.appendChild(newSubForm);
+
+                removeButton.addEventListener("click", () => {
+                  newSubForm.remove();
+                });
+              });
+
+              fieldSet.appendChild(fieldSetElement);
               return;
             default:
               inputElement = document.createElement("input");
@@ -374,11 +406,15 @@ class FormGenerator {
           const parentName = name.split("_")[0];
           const childName = name.split("_")[1];
 
-          if (!formData[parentName]) {
-            formData[parentName] = {};
-          }
+          if (parentName === "myForm") {
+            formData[childName] = value;
+          } else {
+            if (!formData[parentName]) {
+              formData[parentName] = {};
+            }
 
-          formData[parentName][childName] = value;
+            formData[parentName][childName] = value;
+          }
         } else {
           formData[name] = value;
         }
@@ -406,11 +442,15 @@ class FormGenerator {
           const parentName = name.split("_")[0];
           const childName = name.split("_")[1];
 
-          if (!formData[parentName]) {
-            formData[parentName] = {};
-          }
+          if (parentName === "myForm") {
+            formData[childName] = value;
+          } else {
+            if (!formData[parentName]) {
+              formData[parentName] = {};
+            }
 
-          formData[parentName][childName] = value;
+            formData[parentName][childName] = value;
+          }
         } else {
           formData[name] = value;
         }
@@ -420,7 +460,7 @@ class FormGenerator {
       const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
+            a.href = url;
       a.download = "form_data.json";
       a.click();
     });
@@ -428,6 +468,7 @@ class FormGenerator {
 
   renderSubForm(parentElement, fields, parentName) {
     const subFormElement = document.createElement("div");
+    subFormElement.classList.add("subform");
 
     fields.forEach((field) => {
       const label = document.createElement("label");
@@ -460,7 +501,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-                case "radio":
+        case "radio":
           field.options.forEach((option) => {
             inputElement = document.createElement("input");
             inputElement.type = "radio";
@@ -490,6 +531,15 @@ class FormGenerator {
       subFormElement.appendChild(fieldSetElement);
     });
 
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.classList.add("remove-button");
+    subFormElement.appendChild(removeButton);
+
+    removeButton.addEventListener("click", () => {
+      subFormElement.remove();
+    });
+
     parentElement.appendChild(subFormElement);
 
     return subFormElement;
@@ -511,6 +561,10 @@ class FormGenerator {
 
       reader.readAsText(file);
     });
+
+    this.form.addEventListener("input", (event) => {
+      this.saveFormDataToLocalStorage();
+    });
   }
 
   fillFormFields(data) {
@@ -526,7 +580,83 @@ class FormGenerator {
       }
     }
   }
+
+  saveFormDataToLocalStorage() {
+    const formData = {};
+    const formElements = this.form.elements;
+
+    for (let i = 0; i < formElements.length; i++) {
+      const element = formElements[i];
+      const name = element.name;
+      const value = element.value;
+
+      if (name.includes("_")) {
+        const parentName = name.split("_")[0];
+        const childName = name.split("_")[1];
+
+        if (parentName === "myForm") {
+          formData[childName] = value;
+        } else {
+          if (!formData[parentName]) {
+            formData[parentName] = {};
+          }
+
+          formData[parentName][childName] = value;
+        }
+      } else {
+        formData[name] = value;
+      }
+    }
+
+    localStorage.setItem("form_data", JSON.stringify(formData));
+  }
+
+  loadFormDataFromLocalStorage() {
+    const storedFormData = localStorage.getItem("form_data");
+
+    if (storedFormData) {
+      const formData = JSON.parse(storedFormData);
+      this.fillFormFields(formData);
+    }
+  }
+
+  downloadFormData() {
+    const formData = {};
+    const formElements = this.form.elements;
+
+    for (let i = 0; i < formElements.length; i++) {
+      const element = formElements[i];
+      const name = element.name;
+      const value = element.value;
+
+      if (name.includes("_")) {
+        const parentName = name.split("_")[0];
+        const childName = name.split("_")[1];
+
+        if (parentName === "myForm") {
+          formData[childName] = value;
+        } else {
+          if (!formData[parentName]) {
+            formData[parentName] = {};
+          }
+
+          formData[parentName][childName] = value;
+        }
+      } else {
+        formData[name] = value;
+      }
+    }
+
+    const json = JSON.stringify(formData, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "form_data.json";
+    a.click();
+  }
 }
+	  
 	//
 
 	const form = document.getElementById("myForm");
