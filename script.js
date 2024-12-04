@@ -152,8 +152,8 @@
 	  ]
 	};
     // 
-	class FormGenerator {
-	  constructor(form, importButton, fileInput , formConfig) {
+	 class FormGenerator {
+	  constructor(form, importButton, fileInput, formConfig) {
 		this.form = form;
 		this.importButton = importButton;
 		this.fileInput = fileInput;
@@ -177,35 +177,26 @@
 			addButton.type = "button";
 			addButton.textContent = "Add new " + field.label;
 			addButton.classList.add("add-button");
-			addButton.onclick = () => {
-			  const newField = {
-				label: field.label,
-				type: "text",
-				name: field.name + "_" + Math.random().toString(36).substr(2, 9),
-				required: true
-			  };
-			  field.fields.push(newField);
-			  this.renderSubForm(fieldSet, newField, parentName + "_" + field.name);
-			};
-
-			const removeButton = document.createElement("button");
-			removeButton.type = "button";
-			removeButton.textContent = "Remove " + field.label;
-			removeButton.classList.add("remove-button");
-			removeButton.onclick = () => {
-			  const index = fields.indexOf(field);
-			  if (index > -1) {
-				fields.splice(index, 1);
-			  }
-			  fieldSet.remove();
-			};
 
 			fieldSet.appendChild(addButton);
-			fieldSet.appendChild(removeButton);
 
-			this.renderSubForm(fieldSet, field.fields, `${parentName}_${field.name}`);
+			this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
 
 			parentElement.appendChild(fieldSet);
+
+			addButton.addEventListener("click", () => {
+			  const nextField = field.fields.shift();
+			  const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
+			  const removeButton = document.createElement("button");
+			  removeButton.type = "button";
+			  removeButton.textContent = "Remove";
+			  removeButton.classList.add("remove-button");
+			  newSubForm.appendChild(removeButton);
+
+			  removeButton.addEventListener("click", () => {
+				newSubForm.remove();
+			  });
+			});
 		  } else {
 			const label = document.createElement("label");
 			label.textContent = field.label;
@@ -264,6 +255,9 @@
 	  }
 
 	  renderSubForm(parentElement, fields, parentName) {
+		const subFormElement = document.createElement("div");
+		parentElement.appendChild(subFormElement);
+
 		fields.forEach((field) => {
 		  const label = document.createElement("label");
 		  label.textContent = field.label;
@@ -302,22 +296,24 @@
 				labelElement.textContent = option.label;
 				labelElement.appendChild(inputElement);
 
-				parentElement.appendChild(labelElement);
+				subFormElement.appendChild(labelElement);
 			  });
 			  return;
-					default:
+			default:
 			  inputElement = document.createElement("input");
 			  inputElement.type = field.type;
 			  inputElement.name = `${parentName}_${field.name}`;
 			  inputElement.required = field.required;
 		  }
 
-		  const fieldSet = document.createElement("div");
+				const fieldSet = document.createElement("div");
 		  fieldSet.appendChild(label);
 		  fieldSet.appendChild(inputElement);
 
-		  parentElement.appendChild(fieldSet);
+		  subFormElement.appendChild(fieldSet);
 		});
+
+		return subFormElement;
 	  }
 
 	  addEventListeners() {
@@ -378,8 +374,7 @@
 		}
 	  }
 	}
-  //
-
+    // 
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
