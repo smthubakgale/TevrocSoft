@@ -328,8 +328,8 @@ export const formConfig2 = {
 	    xhr.send();
 	    return xhr.responseText;
 	  })()
-    },
-options : [
+    ,
+   options : [
     { "value": "empty", "text": "Empty" },
     { "value": "horizontal", "text": "Horizontal" },
     { "value": "detached", "text": "Detached" },
@@ -362,7 +362,7 @@ options : [
     { "value": "tabbed", "text": "Tabbed" },
     { "value": "collapsible", "text": "Collapsible" },
     { "value": "expandable", "text": "Expandable" }
-  ]
+  ]},
     {
       label: "Email",
       name: "email",
