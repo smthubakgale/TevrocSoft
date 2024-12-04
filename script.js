@@ -379,7 +379,7 @@
 		  parentElement.appendChild(fieldSet);
 		}
 	  });
-
+	  }
 	  renderSubForm(parentElement, fields, parentName) {
 		const subFormElement = document.createElement("div");
 
