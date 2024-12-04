@@ -46,6 +46,7 @@ class FormGenerator {
 	const div2 = document.createElement('div');
 	
         description.style.fontSize = "12px";
+        description.style.paddingBottom = "4px";
 	spanTitle.textContent = field.title;
 	spanTitle.style.fontWeight = 'bold';
 	span1.textContent = 'more';
