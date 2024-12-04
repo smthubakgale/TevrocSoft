@@ -220,6 +220,8 @@ export const formConfig2 = {
       label: "Development Framework",
       name: "--frame",
       type: "select",
+      seemore : true , 
+      title : "Select  one the platform specific frameworks" ,
       description: `
 <b> 1. Web </b>
 <p> "html5" , "flask" , "php" ,"mvc" , "express" , "springboot" </p>
