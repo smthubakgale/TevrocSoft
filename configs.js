@@ -1,7 +1,7 @@
 
 //----------------: Shop
 //: Specifications
- export const formConfig = {
+ window.formConfig = {
 	  "fields": [
 		{
 		  "label": "Password",
@@ -135,7 +135,7 @@
 	  ]
 	};
 //: Requirements
-export const formConfig2 = {
+window.formConfig2 = {
   fields: [
     {
       label: "Application Name",
@@ -225,7 +225,7 @@ export const formConfig2 = {
   ]
 };
 //: Quotes 
-export const projectTypes = [
+window.projectTypes = [
     {
       "id": 1,
       "name": "Web Development",
@@ -339,7 +339,7 @@ export const projectTypes = [
     }
   ];
 
-  const templates = [
+window.templates = [
     {
       "name": "Basic Website Template",
       "pages": [
@@ -383,66 +383,62 @@ export const projectTypes = [
   ];
 
   // Price Adjustments
-	const complexityMultipliers = {
-	  web: {
-		low: 0.6,
-		medium: 1.0,
-		high: 1.4,
-	  },
-	  desktop: {
-		low: 0.5,
-		medium: 1.0,
-		high: 1.5,
-	  },
-	  mobile: {
-		low: 0.7,
-		medium: 1.0,
-		high: 1.3,
-	  },
-	};
+window.complexityMultipliers = {
+  web: {
+	low: 0.6,
+	medium: 1.0,
+	high: 1.4,
+  },
+  desktop: {
+	low: 0.5,
+	medium: 1.0,
+	high: 1.5,
+  },
+  mobile: {
+	low: 0.7,
+	medium: 1.0,
+	high: 1.3,
+  },
+};
 
-	const projectTypeMultipliers = {
-	  web: {
-		basic: 0.8,
-		premium: 1.0,
-		enterprise: 1.2,
-	  },
-	  desktop: {
-		basic: 0.7,
-		premium: 1.0,
-		enterprise: 1.3,
-	  },
-	  mobile: {
-		basic: 0.8,
-		premium: 1.0,
-		enterprise: 1.2,
-	  },
-	};
+const projectTypeMultipliers = {
+  web: {
+	basic: 0.8,
+	premium: 1.0,
+	enterprise: 1.2,
+  },
+  desktop: {
+	basic: 0.7,
+	premium: 1.0,
+	enterprise: 1.3,
+  },
+  mobile: {
+	basic: 0.8,
+	premium: 1.0,
+	enterprise: 1.2,
+  },
+};
 
-	const projectDurationMultipliers = (days) => {
-	  if (days <= 30) {
-		return 1.5; // very short-term (less than 1 month)
-	  } else if (days <= 90) {
-		return 1.2; // short-term (1-3 months)
-	  } else if (days <= 180) {
-		return 1.0; // medium-term (3-6 months)
-	  } else if (days <= 365) {
-		return 0.9; // long-term (6-12 months)
-	  } else if (days <= 730) {
-		return 0.8; // very long-term (1-2 years)
-	  } else if (days <= 1460) {
-		return 0.7; // extremely long-term (2-4 years)
-	  } else if (days <= 2920) {
-		return 0.6; // ultra-long-term (4-6 years)
-	  } else if (days <= 3650) {
-		return 0.5; // maximum long-term (6-10 years)
-	  } else {
-		return 0.4; // beyond maximum long-term (> 10 years)
-	  }
-	};
-
-	
-	//
-
+window.projectDurationMultipliers = (days) => {
+  if (days <= 30) {
+	return 1.5; // very short-term (less than 1 month)
+  } else if (days <= 90) {
+	return 1.2; // short-term (1-3 months)
+  } else if (days <= 180) {
+	return 1.0; // medium-term (3-6 months)
+  } else if (days <= 365) {
+	return 0.9; // long-term (6-12 months)
+  } else if (days <= 730) {
+	return 0.8; // very long-term (1-2 years)
+  } else if (days <= 1460) {
+	return 0.7; // extremely long-term (2-4 years)
+  } else if (days <= 2920) {
+	return 0.6; // ultra-long-term (4-6 years)
+  } else if (days <= 3650) {
+	return 0.5; // maximum long-term (6-10 years)
+  } else {
+	return 0.4; // beyond maximum long-term (> 10 years)
+  }
+};
 //:
 //----------------: General 
