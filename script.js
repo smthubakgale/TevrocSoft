@@ -151,14 +151,7 @@
 		}
 	  ]
 	};
-
-
-	const form = document.getElementById("myForm");
-	const importButton = document.getElementById("import-button");
-	const fileInput = document.getElementById("file-input"); 
-    new FormGenerator(form, importButton, fileInput , formConfig);
-  //
-  
+    // 
 	class FormGenerator {
 	  constructor(form, importButton, fileInput , formConfig) {
 		this.form = form;
@@ -386,6 +379,13 @@
 	  }
 	}
   //
+
+	const form = document.getElementById("myForm");
+	const importButton = document.getElementById("import-button");
+	const fileInput = document.getElementById("file-input"); 
+    new FormGenerator(form, importButton, fileInput , formConfig);
+  //
+  
   const projectTypes = [
     {
       "id": 1,
