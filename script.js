@@ -152,12 +152,13 @@
 	  ]
 	};
     // 
-	 class FormGenerator {
-	  constructor(form, importButton, fileInput, formConfig) {
+  class FormGenerator {
+	  constructor(form, importButton, fileInput, formConfig, callback) {
 		this.form = form;
 		this.importButton = importButton;
 		this.fileInput = fileInput;
 		this.formConfig = formConfig;
+		this.callback = callback;
 
 		this.renderForm();
 		this.addEventListeners();
@@ -189,6 +190,11 @@
 			  const label = document.createElement("label");
 			  label.textContent = field.label;
 			  label.htmlFor = `${parentName}_${field.name}`;
+
+			  const description = document.createElement("small");
+			  description.textContent = field.description;
+			  description.style.color = "gray";
+			  description.style.fontSize = "12px";
 
 			  let inputElement;
 
@@ -268,6 +274,7 @@
 
 			  const fieldSetElement = document.createElement("div");
 			  fieldSetElement.appendChild(label);
+			  fieldSetElement.appendChild(description);
 			  fieldSetElement.appendChild(inputElement);
 
 			  parentElement.appendChild(fieldSetElement);
@@ -281,7 +288,12 @@
 			  label.textContent = field.label;
 			  label.htmlFor = `${parentName}_${field.name}`;
 
-			  let inputElement;
+			  const description = document.createElement("small");
+			  description.textContent = field.description;
+			  description.style.color = "gray";
+			  description.style.fontSize = "12px";
+
+						let inputElement;
 
 			  switch (field.type) {
 				case "select":
@@ -302,7 +314,7 @@
 				  inputElement.name = `${parentName}_${field.name}`;
 				  inputElement.required = field.required;
 				  break;
-							case "radio":
+				case "radio":
 				  field.options.forEach((option) => {
 					inputElement = document.createElement("input");
 					inputElement.type = "radio";
@@ -317,39 +329,6 @@
 					fieldSet.appendChild(labelElement);
 				  });
 				  return;
-				case "subform":
-				  const subFieldSet = document.createElement("fieldset");
-				  subFieldSet.legend = field.label;
-				  subFieldSet.style.border = "1px solid #ccc";
-				  subFieldSet.style.padding = "10px";
-				  subFieldSet.style.marginBottom = "20px";
-
-				  const addSubButton = document.createElement("button");
-				  addSubButton.type = "button";
-				  addSubButton.textContent = "Add new " + field.label;
-				  addSubButton.classList.add("add-button");
-
-				  subFieldSet.appendChild(addSubButton);
-
-				  this.renderSubForm(subFieldSet, [field.fields[0]], parentName + "_" + field.name);
-
-				  fieldSet.appendChild(subFieldSet);
-
-				  addSubButton.addEventListener("click", () => {
-					const nextField = field.fields.shift();
-					const newSubForm = this.renderSubForm(subFieldSet, [nextField], parentName + "_" + field.name);
-					const removeButton = document.createElement("button");
-					removeButton.type = "button";
-					removeButton.textContent = "Remove";
-					removeButton.classList.add("remove-button");
-
-					newSubForm.appendChild(removeButton);
-
-					removeButton.addEventListener("click", () => {
-					  newSubForm.remove();
-					});
-				  });
-				  return;
 				default:
 				  inputElement = document.createElement("input");
 				  inputElement.type = field.type;
@@ -359,6 +338,7 @@
 
 			  const fieldSetElement = document.createElement("div");
 			  fieldSetElement.appendChild(label);
+			  fieldSetElement.appendChild(description);
 			  fieldSetElement.appendChild(inputElement);
 
 			  fieldSet.appendChild(fieldSetElement);
@@ -366,6 +346,38 @@
 
 			parentElement.appendChild(fieldSet);
 		  }
+		});
+
+		const jsonButton = document.createElement("button");
+		jsonButton.textContent = "Convert to JSON";
+		jsonButton.classList.add("json-button");
+
+		parentElement.appendChild(jsonButton);
+
+		jsonButton.addEventListener("click", () => {
+		  const formData = {};
+		  const formElements = this.form.elements;
+
+		  for (let i = 0; i < formElements.length; i++) {
+			const element = formElements[i];
+			const name = element.name;
+			const value = element.value;
+
+			if (name.includes("_")) {
+			  const parentName = name.split("_")[0];
+			  const childName = name.split("_")[1];
+
+			  if (!formData[parentName]) {
+				formData[parentName] = {};
+			  }
+
+			  formData[parentName][childName] = value;
+			} else {
+			  formData[name] = value;
+			}
+		  }
+
+		  this.callback(formData);
 		});
 	  }
 
@@ -376,6 +388,11 @@
 		  const label = document.createElement("label");
 		  label.textContent = field.label;
 		  label.htmlFor = `${parentName}_${field.name}`;
+
+		  const description = document.createElement("small");
+		  description.textContent = field.description;
+		  description.style.color = "gray";
+		  description.style.fontSize = "12px";
 
 		  let inputElement;
 
@@ -422,6 +439,7 @@
 
 		  const fieldSetElement = document.createElement("div");
 		  fieldSetElement.appendChild(label);
+		  fieldSetElement.appendChild(description);
 		  fieldSetElement.appendChild(inputElement);
 
 		  subFormElement.appendChild(fieldSetElement);
@@ -441,39 +459,12 @@
 		  const file = event.target.files[0];
 		  const reader = new FileReader();
 
-		  reader.addEventListener("load", (event) => {
+				reader.addEventListener("load", (event) => {
 			const jsonData = JSON.parse(event.target.result);
 			this.fillFormFields(jsonData);
 		  });
 
 		  reader.readAsText(file);
-		});
-
-		this.form.addEventListener("submit", (event) => {
-		  event.preventDefault();
-		  const formData = {};
-		  const formElements = this.form.elements;
-
-		  for (let i = 0; i < formElements.length; i++) {
-			const element = formElements[i];
-			const name = element.name;
-			const value = element.value;
-
-					if (name.includes("_")) {
-			  const parentName = name.split("_")[0];
-			  const childName = name.split("_")[1];
-
-			  if (!formData[parentName]) {
-				formData[parentName] = {};
-			  }
-
-			  formData[parentName][childName] = value;
-			} else {
-			  formData[name] = value;
-			}
-		  }
-
-		  console.log(JSON.stringify(formData, null, 2));
 		});
 	  }
 
@@ -497,11 +488,15 @@
 		}
 	  }
 	}
-	// 
+	//
+
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
-    new FormGenerator(form, importButton, fileInput , formConfig);
+        new FormGenerator(form, importButton, fileInput , formConfig ,
+	  (formData) => {
+		console.log(formData);
+	  });
   //
   
   const projectTypes = [
