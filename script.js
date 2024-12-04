@@ -527,7 +527,7 @@ const formConfig2 = {
 const formGenerator = new FormGenerator(
   document.getElementById("myForm2"),
   document.getElementById("importButton2"),
-  document.getElementById("fileInput2),
+  document.getElementById("fileInput2"),
   formConfig2,
   (formData) => {
     console.log(formData);
