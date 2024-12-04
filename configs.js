@@ -318,7 +318,9 @@ export const formConfig2 = {
     {
       label: "Interface Design Layouts",
       name: "--layout",
-      type: "email",
+      type: "select",
+      seemore : true , 
+      title : "Select  one the ui layouts ... " ,
       description: (function() {
 	    var xhr = new XMLHttpRequest();
 	    xhr.open('GET', 'blogs/ui-layouts.html', false); // synchronous request
@@ -326,6 +328,40 @@ export const formConfig2 = {
 	    return xhr.responseText;
 	  })()
     },
+options : [
+    { "value": "empty", "text": "Empty" },
+    { "value": "horizontal", "text": "Horizontal" },
+    { "value": "detached", "text": "Detached" },
+    { "value": "two-column", "text": "Two Column" },
+    { "value": "vertical", "text": "Vertical" },
+    { "value": "grid", "text": "Grid" },
+    { "value": "masonry", "text": "Masonry" },
+    { "value": "flexbox", "text": "Flexbox" },
+    { "value": "bootstrap", "text": "Bootstrap" },
+    { "value": "material-design", "text": "Material Design" },
+    { "value": "parallax", "text": "Parallax" },
+    { "value": "single-page", "text": "Single-Page" },
+    { "value": "multi-page", "text": "Multi-Page" },
+    { "value": "responsive", "text": "Responsive" },
+    { "value": "adaptive", "text": "Adaptive" },
+    { "value": "liquid", "text": "Liquid" },
+    { "value": "elastic", "text": "Elastic" },
+    { "value": "fixed", "text": "Fixed" },
+    { "value": "sticky", "text": "Sticky" },
+    { "value": "off-canvas", "text": "Off-Canvas" },
+    { "value": "split-screen", "text": "Split-Screen" },
+    { "value": "brick", "text": "Brick" },
+    { "value": "magazine", "text": "Magazine" },
+    { "value": "newspaper", "text": "Newspaper" },
+    { "value": "portfolio", "text": "Portfolio" },
+    { "value": "gallery", "text": "Gallery" },
+    { "value": "carousel", "text": "Carousel" },
+    { "value": "slider", "text": "Slider" },
+    { "value": "accordion", "text": "Accordion" },
+    { "value": "tabbed", "text": "Tabbed" },
+    { "value": "collapsible", "text": "Collapsible" },
+    { "value": "expandable", "text": "Expandable" }
+  ]
     {
       label: "Email",
       name: "email",
