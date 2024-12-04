@@ -236,6 +236,7 @@ export const formConfig2 = {
 	    xhr.send();
 	    return xhr.responseText;
 	  })() 
+	,
     	options :[
         {
           label: 'HTML5',
