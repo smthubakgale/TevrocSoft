@@ -251,18 +251,21 @@
 				  parentElement.appendChild(fieldSet);
 
 				  addButton.addEventListener("click", () => {
-					const nextField = field.fields.shift();
-					const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
-					const removeButton = document.createElement("button");
-					removeButton.type = "button";
-					removeButton.textContent = "Remove";
-					removeButton.classList.add("remove-button");
-
-					newSubForm.appendChild(removeButton);
-
-					removeButton.addEventListener("click", () => {
-					  newSubForm.remove();
-					});
+				    const nextFieldIndex = field.fields.indexOf(field.fields[0]) + 1;
+				    if (nextFieldIndex < field.fields.length) {
+				      const nextField = field.fields[nextFieldIndex];
+				      const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
+				      const removeButton = document.createElement("button");
+				      removeButton.type = "button";
+				      removeButton.textContent = "Remove";
+				      removeButton.classList.add("remove-button");
+				
+				      newSubForm.appendChild(removeButton);
+				
+				      removeButton.addEventListener("click", () => {
+				        newSubForm.remove();
+				      });
+				    }
 				  });
 				  return;
 				default:
