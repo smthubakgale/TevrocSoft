@@ -65,7 +65,7 @@ class FormGenerator {
           label.htmlFor = `${parentName}_${field.name}`;
 
           const description = document.createElement("small");
-          description.textContent = field.description;
+          description.innerHTML = field.description;
           description.style.color = "gray";
           description.style.fontSize = "12px";
 
@@ -165,7 +165,7 @@ class FormGenerator {
           label.htmlFor = `${parentName}_${field.name}`;
 
           const description = document.createElement("small");
-          description.textContent = field.description;
+          description.innerHTML = field.description;
           description.style.color = "gray";
           description.style.fontSize = "12px";
 
@@ -313,7 +313,7 @@ class FormGenerator {
       label.htmlFor = `${parentName}_${field.name}`;
 
       const description = document.createElement("small");
-      description.textContent = field.description;
+      description.innerHTML = field.description;
       description.style.color = "gray";
       description.style.fontSize = "12px";
 
