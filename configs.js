@@ -165,7 +165,68 @@ export const formConfig2 = {
       label: "Licence",
       name: "--license",
       type: "select",
-      description: "Select the license category the final software will be released under",
+      seemore : true , 
+      title : "Select  one the development licenses ... " ,
+      description: `
+<h1>Github Licenses</h1>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>License Name</th>
+    <th>Description</th>
+    <th>Restrictions</th>
+  </tr>
+  <tr>
+    <td><a href="https://opensource.org/licenses/MIT">MIT License</a></td>
+    <td>Permissive license that allows free use, modification, and distribution.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
+    <td>Permissive license that allows free use, modification, and distribution, with some additional provisions for patent grants and trademark usage.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause License</a></td>
+    <td>Permissive license that allows free use, modification, and distribution, with some additional provisions for copyright notices and warranty disclaimers.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a></td>
+    <td>Copyleft license that requires users to make any modifications or derivative works available under the same license.</td>
+    <td>Restrictive</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">LGPLv3</a></td>
+    <td>Copyleft license that is similar to GPLv3, but allows for more flexibility in terms of linking with proprietary software.</td>
+    <td>Restrictive</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a></td>
+    <td>Copyleft license that is similar to GPLv3, but requires users to make any modifications or derivative works available under the same license, even if the software is used over a network.</td>
+    <td>Restrictive</td>
+  </tr>
+  <tr>
+    <td><a href="https://unlicense.org/">Unlicense</a></td>
+    <td>Public domain license that dedicates your software to the public domain, waiving all copyright and related rights.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td>
+    <td>Public domain license that dedicates your software to the public domain, waiving all copyright and related rights.</td>
+    <td>None</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL 2.0</a></td>
+    <td>License that is similar to the LGPL, but with some additional provisions for patent grants and trademark usage.</td>
+    <td>Restrictive</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.eclipse.org/legal/epl-v20.html">EPL 2.0</a></td>
+    <td>License that is similar to the LGPL, but with some additional provisions for patent grants and trademark usage.</td>
+    <td>Restrictive</td>
+  </tr>
+</table>      
+      `,
       options: [
 	        {
 	          label: 'MIT License',
@@ -221,7 +282,7 @@ export const formConfig2 = {
       name: "--frame",
       type: "select",
       seemore : true , 
-      title : "Select  one the platform specific frameworks" ,
+      title : "Select  one the platform specific frameworks ... " ,
       description: `
   <h3>Development Expertise</h3>
   <b>1. Web Development</b>
