@@ -1,5 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
+console.log(window.formConfig);
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
