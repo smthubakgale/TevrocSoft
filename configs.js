@@ -410,7 +410,7 @@ export const formConfig2 = {
       type: "email",
       description: (function() {
 	    var xhr = new XMLHttpRequest();
-	    xhr.open('GET', 'blog.html', false); // synchronous request
+	    xhr.open('GET', 'blogs/ui-layouts.html', false); // synchronous request
 	    xhr.send();
 	    return xhr.responseText;
 	  })()
