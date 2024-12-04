@@ -1,7 +1,7 @@
 
 //----------------: Shop
 //: Specifications
- const formConfig = {
+ export const formConfig = {
 	  "fields": [
 		{
 		  "label": "Password",
@@ -135,7 +135,7 @@
 	  ]
 	};
 //: Requirements
-const formConfig2 = {
+export const formConfig2 = {
   fields: [
     {
       label: "Application Name",
@@ -225,7 +225,7 @@ const formConfig2 = {
   ]
 };
 //: Quotes 
- const projectTypes = [
+export const projectTypes = [
     {
       "id": 1,
       "name": "Web Development",
