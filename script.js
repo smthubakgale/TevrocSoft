@@ -921,7 +921,8 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
       { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
       { name: 'tools', items: [ 'Maximize', 'ShowBlocks', 'About' ] }
-    ]
+    ],
+    disableSecurityWarning: true
   });
 //-----------------------------: Layout 
 // Get elements
