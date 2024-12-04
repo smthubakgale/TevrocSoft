@@ -326,40 +326,8 @@ class FormGenerator {
               inputElement.required = field.required;
               break;
             case "subform":
-              const fieldSet = document.createElement("fieldset");
-              fieldSet.legend = field.label;
-              fieldSet.style.border = "1px solid #ccc";
-              fieldSet.style.padding = "10px";
-              fieldSet.style.marginBottom = "20px";
-
-              const addButton = document.createElement("button");
-              addButton.type = "button";
-              addButton.textContent = "Add new " + field.label;
-              addButton.classList.add("add-button");
-
-              fieldSet.appendChild(addButton);
-
-              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
-              fieldSet.appendChild(subFormElement);
-
-              addButton.addEventListener("click", () => {
-                const newSubForm = subFormElement.cloneNode(true);
-                const inputs = newSubForm.querySelectorAll("input, select, textarea");
-                inputs.forEach((input) => {
-                  input.value = "";
-                });
-                const removeButton = document.createElement("button");
-                removeButton.textContent = "Remove";
-                removeButton.classList.add("remove-button");
-                newSubForm.appendChild(removeButton);
-                fieldSet.appendChild(newSubForm);
-
-                removeButton.addEventListener("click", () => {
-                  newSubForm.remove();
-                });
-              });
-
-              parentElement.appendChild(fieldSet);
+              const subFormElement = this.renderSubForm(parentElement, [field.fields[0]], parentName + "_" + field.name);
+              parentElement.appendChild(subFormElement);
               return;
             default:
               inputElement = document.createElement("input");
@@ -375,168 +343,6 @@ class FormGenerator {
 
           parentElement.appendChild(fieldSetElement);
         });
-      } else {
-        const fieldSet = document.createElement("fieldset");
-        fieldSet.legend = group;
-
-        groupedFields[group].forEach((field) => {
-          const label = document.createElement("label");
-          label.textContent = field.label;
-          label.htmlFor = `${parentName}_${field.name}`;
-
-          const description = document.createElement("small");
-          description.textContent = field.description;
-          description.style.color = "gray";
-          description.style.fontSize = "12px";
-
-          let inputElement;
-
-          switch (field.type) {
-            case "text":
-            case "email":
-            case "tel":
-            case "url":
-              inputElement = document.createElement("input");
-              inputElement.type = field.type;
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "password":
-              inputElement = document.createElement("input");
-              inputElement.type = "password";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "textarea":
-              inputElement = document.createElement("textarea");
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "select":
-              inputElement = document.createElement("select");
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-
-              field.options.forEach((option) => {
-                const optionElement = document.createElement("option");
-                optionElement.value = option.value;
-                optionElement.textContent = option.label;
-                inputElement.appendChild(optionElement);
-              });
-              break;
-            case "checkbox":
-              inputElement = document.createElement("input");
-              inputElement.type = "checkbox";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "radio":
-              field.options.forEach((option) => {
-                inputElement = document.createElement("input");
-                inputElement.type = "radio";
-                inputElement.name = `${parentName}_${field.name}`;
-                inputElement.value = option.value;
-                inputElement.required = field.required;
-
-                                const labelElement = document.createElement("label");
-                labelElement.textContent = option.label;
-                labelElement.appendChild(inputElement);
-
-                fieldSet.appendChild(labelElement);
-              });
-              return;
-            case "date":
-              inputElement = document.createElement("input");
-              inputElement.type = "date";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "time":
-              inputElement = document.createElement("input");
-              inputElement.type = "time";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "datetime-local":
-              inputElement = document.createElement("input");
-              inputElement.type = "datetime-local";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "month":
-              inputElement = document.createElement("input");
-              inputElement.type = "month";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "week":
-              inputElement = document.createElement("input");
-              inputElement.type = "week";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "number":
-              inputElement = document.createElement("input");
-              inputElement.type = "number";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "range":
-              inputElement = document.createElement("input");
-              inputElement.type = "range";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "color":
-              inputElement = document.createElement("input");
-              inputElement.type = "color";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "hidden":
-              inputElement = document.createElement("input");
-              inputElement.type = "hidden";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "file":
-              inputElement = document.createElement("input");
-              inputElement.type = "file";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "reset":
-              inputElement = document.createElement("input");
-              inputElement.type = "reset";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "button":
-              inputElement = document.createElement("button");
-              inputElement.textContent = field.label;
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-              break;
-            case "subform":
-              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
-              fieldSet.appendChild(subFormElement);
-              return;
-            default:
-              inputElement = document.createElement("input");
-              inputElement.type = "text";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
-          }
-
-          const fieldSetElement = document.createElement("div");
-          fieldSetElement.appendChild(label);
-          fieldSetElement.appendChild(description);
-          fieldSetElement.appendChild(inputElement);
-
-          fieldSet.appendChild(fieldSetElement);
-        });
-
-        parentElement.appendChild(fieldSet);
       }
     });
   }
@@ -581,7 +387,7 @@ class FormGenerator {
         case "select":
           inputElement = document.createElement("select");
           inputElement.name = `${parentName}_${field.name}`;
-                    inputElement.required = field.required;
+          inputElement.required = field.required;
 
           field.options.forEach((option) => {
             const optionElement = document.createElement("option");
@@ -629,7 +435,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-        case "month":
+                case "month":
           inputElement = document.createElement("input");
           inputElement.type = "month";
           inputElement.name = `${parentName}_${field.name}`;
@@ -697,8 +503,6 @@ class FormGenerator {
 
       subFormElement.appendChild(fieldSetElement);
     });
-
-    return subFormElement;
   }
 
   addEventListeners() {
@@ -721,6 +525,30 @@ class FormGenerator {
     this.form.addEventListener("input", (event) => {
       this.saveFormDataToLocalStorage();
     });
+
+    const convertToJsonButton = document.createElement("button");
+    convertToJsonButton.textContent = "Convert to JSON";
+    convertToJsonButton.addEventListener("click", () => {
+      const formData = this.getFormData();
+      const json = JSON.stringify(formData, null, 2);
+      console.log(json);
+    });
+
+    const downloadJsonButton = document.createElement("button");
+    downloadJsonButton.textContent = "Download JSON";
+    downloadJsonButton.addEventListener("click", () => {
+      const formData = this.getFormData();
+      const json = JSON.stringify(formData, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "form_data.json";
+      a.click();
+    });
+
+    this.form.appendChild(convertToJsonButton);
+    this.form.appendChild(downloadJsonButton);
   }
 
   fillFormFields(data) {
@@ -731,7 +559,7 @@ class FormGenerator {
       const name = element.name;
       const value = data[name];
 
-            if (value !== undefined) {
+      if (value !== undefined) {
         if (element.type === "checkbox" || element.type === "radio") {
           element.checked = value.includes(element.value);
         } else if (element.type === "select-multiple") {
@@ -752,7 +580,7 @@ class FormGenerator {
 
     for (let i = 0; i < formElements.length; i++) {
       const element = formElements[i];
-      const name = element.name;
+            const name = element.name;
       const value = element.value;
 
       if (name.includes("_")) {
@@ -802,7 +630,7 @@ class FormGenerator {
     }
   }
 
-  downloadFormData() {
+  getFormData() {
     const formData = {};
     const formElements = this.form.elements;
 
@@ -846,13 +674,7 @@ class FormGenerator {
       }
     }
 
-    const json = JSON.stringify(formData, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "form_data.json";
-    a.click();
+    return formData;
   }
 }
 
