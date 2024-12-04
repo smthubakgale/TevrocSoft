@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viz.js Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+</head>
+<body>
+  <div id="diagram"></div>
+  <script>
+    const dot = `
+      digraph {
+        node[shape=box, style=filled];
+        a[label="A"];
+        b[label="B"];
+        c[label="C"];
+        a -> b[label=""];
+        b -> c[label=""];
+      }
+    `;
+    const diagram = Viz(dot);
+    document.getElementById("diagram").innerHTML = diagram;
+  </script>
+</body>
+</html>
