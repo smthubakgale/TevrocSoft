@@ -811,6 +811,7 @@ shop #discounts {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  height:unset;
 }
 
 #shop #form-container .add-button:hover {
