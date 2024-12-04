@@ -234,11 +234,82 @@ export const formConfig2 = {
 <p> "tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask" </p>
       ` , 
     	options :[
-		"html5" , "flask" , "php" ,"mvc" , "express" , "springboot" ,
-		"xamarin.android" , "java.android" ,
-		"electron" , "javafx" , "owin.core" , "pyweb" ,
-		"maven" , "csharp" ,
-		"tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask"
+        {
+          label: 'HTML5',
+          value: 'html5',
+        },
+        {
+          label: 'Flask',
+          value: 'flask',
+        },
+        {
+          label: 'PHP',
+          value: 'php',
+        },
+        {
+          label: 'MVC',
+          value: 'mvc',
+        },
+        {
+          label: 'Express',
+          value: 'express',
+        },
+        {
+          label: 'Spring Boot',
+          value: 'springboot',
+        },
+        {
+          label: 'Xamarin.Android',
+          value: 'xamarin.android',
+        },
+        {
+          label: 'Java.Android',
+          value: 'java.android',
+        },
+        {
+          label: 'Electron',
+          value: 'electron',
+        },
+        {
+          label: 'JavaFX',
+          value: 'javafx',
+        },
+        {
+          label: 'OWIN Core',
+          value: 'owin.core',
+        },
+        {
+          label: 'PyWeb',
+          value: 'pyweb',
+        },
+        {
+          label: 'Maven',
+          value: 'maven',
+        },
+        {
+          label: 'C#',
+          value: 'csharp',
+        },
+        {
+          label: 'Tomcat',
+          value: 'tomcat',
+        },
+        {
+          label: 'Flask.Electron',
+          value: 'flask.electron',
+        },
+        {
+          label: 'Electron.Spring Boot',
+          value: 'electron.springboot',
+        },
+        {
+          label: 'OWIN Framework',
+          value: 'owin.framework',
+        },
+        {
+          label: 'OWIN Flask',
+          value: 'owin.flask',
+        },
        ]
     },
     {
