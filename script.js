@@ -1,5 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
 //------------------------------------: Shop 
  // Initialize EmailJS
+console.log(formConfig);
 console.log(window.formConfig);
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
@@ -788,17 +790,16 @@ function formatDate(date, format) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  discountAmountInput.value = 30;
-  updateQuoteResult();
-  
-  planSelect.addEventListener('change', updateQuoteResult);
-  discountAmountInput.addEventListener('change', updateQuoteResult);
-  startDateInput.addEventListener('change', updateQuoteResult);
-  endDateInput.addEventListener('change', updateQuoteResult);
-  document.getElementById('complexity').addEventListener('change', updateQuoteResult);
-  
-});
+
+discountAmountInput.value = 30;
+updateQuoteResult();
+
+planSelect.addEventListener('change', updateQuoteResult);
+discountAmountInput.addEventListener('change', updateQuoteResult);
+startDateInput.addEventListener('change', updateQuoteResult);
+endDateInput.addEventListener('change', updateQuoteResult);
+document.getElementById('complexity').addEventListener('change', updateQuoteResult);
+
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
@@ -923,3 +924,5 @@ document.addEventListener('click', (event) => {
 
 // Check if mobile device
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+});
