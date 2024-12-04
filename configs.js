@@ -150,7 +150,7 @@ export const formConfig2 = {
       description: "the namespace or package of the application"
     },
     {
-      label: "Organization/Company,
+      label: "Organization/Company",
       name: "--company",
       type: "text",
       description: "Enter the group or comany name of the developer(s)"
