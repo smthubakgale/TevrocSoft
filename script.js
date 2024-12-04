@@ -152,345 +152,345 @@
 	  ]
 	};
     // 
-  class FormGenerator {
-	  constructor(form, importButton, fileInput, formConfig, callback) {
-		this.form = form;
-		this.importButton = importButton;
-		this.fileInput = fileInput;
-		this.formConfig = formConfig;
-		this.callback = callback;
+class FormGenerator {
+  constructor(form, importButton, fileInput, formConfig, callback) {
+    this.form = form;
+    this.importButton = importButton;
+    this.fileInput = fileInput;
+    this.formConfig = formConfig;
+    this.callback = callback;
 
-		this.renderForm();
-		this.addEventListeners();
-	  }
+    this.renderForm();
+    this.addEventListeners();
+  }
 
-	  renderForm() {
-		const fields = this.formConfig.fields;
-		const parentElement = this.form;
-		const parentName = "myForm";
+  renderForm() {
+    const fields = this.formConfig.fields;
+    const parentElement = this.form;
+    const parentName = "myForm";
 
-		const groupedFields = fields.reduce((acc, field) => {
-		  if (field.group) {
-			if (!acc[field.group]) {
-			  acc[field.group] = [];
-			}
-			acc[field.group].push(field);
-		  } else {
-			if (!acc['standalone']) {
-			  acc['standalone'] = [];
-			}
-			acc['standalone'].push(field);
-		  }
-		  return acc;
-		}, {});
+    const groupedFields = fields.reduce((acc, field) => {
+      if (field.group) {
+        if (!acc[field.group]) {
+          acc[field.group] = [];
+        }
+        acc[field.group].push(field);
+      } else {
+        if (!acc['standalone']) {
+          acc['standalone'] = [];
+        }
+        acc['standalone'].push(field);
+      }
+      return acc;
+    }, {});
 
-		Object.keys(groupedFields).forEach((group) => {
-		  if (group === 'standalone') {
-			groupedFields[group].forEach((field) => {
-			  const label = document.createElement("label");
-			  label.textContent = field.label;
-			  label.htmlFor = `${parentName}_${field.name}`;
+    Object.keys(groupedFields).forEach((group) => {
+      if (group === 'standalone') {
+        groupedFields[group].forEach((field) => {
+          const label = document.createElement("label");
+          label.textContent = field.label;
+          label.htmlFor = `${parentName}_${field.name}`;
 
-			  const description = document.createElement("small");
-			  description.textContent = field.description;
-			  description.style.color = "gray";
-			  description.style.fontSize = "12px";
+          const description = document.createElement("small");
+          description.textContent = field.description;
+          description.style.color = "gray";
+          description.style.fontSize = "12px";
 
-			  let inputElement;
+          let inputElement;
 
-			  switch (field.type) {
-				case "select":
-				  inputElement = document.createElement("select");
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
+          switch (field.type) {
+            case "select":
+              inputElement = document.createElement("select");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
 
-				  field.options.forEach((option) => {
-					const optionElement = document.createElement("option");
-					optionElement.value = option.value;
-					optionElement.textContent = option.label;
-					inputElement.appendChild(optionElement);
-				  });
-				  break;
-				case "checkbox":
-				  inputElement = document.createElement("input");
-				  inputElement.type = "checkbox";
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
-				  break;
-				case "radio":
-				  field.options.forEach((option) => {
-					inputElement = document.createElement("input");
-					inputElement.type = "radio";
-					inputElement.name = `${parentName}_${field.name}`;
-					inputElement.value = option.value;
-					inputElement.required = field.required;
+              field.options.forEach((option) => {
+                const optionElement = document.createElement("option");
+                optionElement.value = option.value;
+                optionElement.textContent = option.label;
+                inputElement.appendChild(optionElement);
+              });
+              break;
+            case "checkbox":
+              inputElement = document.createElement("input");
+              inputElement.type = "checkbox";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "radio":
+              field.options.forEach((option) => {
+                inputElement = document.createElement("input");
+                inputElement.type = "radio";
+                inputElement.name = `${parentName}_${field.name}`;
+                inputElement.value = option.value;
+                inputElement.required = field.required;
 
-					const labelElement = document.createElement("label");
-					labelElement.textContent = option.label;
-					labelElement.appendChild(inputElement);
+                const labelElement = document.createElement("label");
+                labelElement.textContent = option.label;
+                labelElement.appendChild(inputElement);
 
-					parentElement.appendChild(labelElement);
-				  });
-				  return;
-				case "subform":
-				  const fieldSet = document.createElement("fieldset");
-				  fieldSet.legend = field.label;
-				  fieldSet.style.border = "1px solid #ccc";
-				  fieldSet.style.padding = "10px";
-				  fieldSet.style.marginBottom = "20px";
+                parentElement.appendChild(labelElement);
+              });
+              return;
+            case "subform":
+              const fieldSet = document.createElement("fieldset");
+              fieldSet.legend = field.label;
+              fieldSet.style.border = "1px solid #ccc";
+              fieldSet.style.padding = "10px";
+              fieldSet.style.marginBottom = "20px";
 
-				  const addButton = document.createElement("button");
-				  addButton.type = "button";
-				  addButton.textContent = "Add new " + field.label;
-				  addButton.classList.add("add-button");
+              const addButton = document.createElement("button");
+              addButton.type = "button";
+              addButton.textContent = "Add new " + field.label;
+              addButton.classList.add("add-button");
 
-				  fieldSet.appendChild(addButton);
+              fieldSet.appendChild(addButton);
 
-				  this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
 
-				  parentElement.appendChild(fieldSet);
+              parentElement.appendChild(fieldSet);
 
-				  addButton.addEventListener("click", () => {
-				    const nextFieldIndex = field.fields.indexOf(field.fields[0]) + 1;
-				    if (nextFieldIndex < field.fields.length) {
-				      const nextField = field.fields[nextFieldIndex];
-				      const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
-				      const removeButton = document.createElement("button");
-				      removeButton.type = "button";
-				      removeButton.textContent = "Remove";
-				      removeButton.classList.add("remove-button");
-				
-				      newSubForm.appendChild(removeButton);
-				
-				      removeButton.addEventListener("click", () => {
-				        newSubForm.remove();
-				      });
-				    }
-				  });
-				  return;
-				default:
-				  inputElement = document.createElement("input");
-				  inputElement.type = field.type;
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
-			  }
+              addButton.addEventListener("click", () => {
+                const nextFieldIndex = field.fields.indexOf(field.fields[0]) + 1;
+                if (nextFieldIndex < field.fields.length) {
+                  const nextField = field.fields[nextFieldIndex];
+                  const newSubForm = this.renderSubForm(fieldSet, [nextField], parentName + "_" + field.name);
+                  const removeButton = document.createElement("button");
+                  removeButton.type = "button";
+                  removeButton.textContent = "Remove";
+                  removeButton.classList.add("remove-button");
 
-			  const fieldSetElement = document.createElement("div");
-			  fieldSetElement.appendChild(label);
-			  fieldSetElement.appendChild(description);
-			  fieldSetElement.appendChild(inputElement);
+                  newSubForm.appendChild(removeButton);
 
-			  parentElement.appendChild(fieldSetElement);
-			});
-		  } else {
-			const fieldSet = document.createElement("fieldset");
-			fieldSet.legend = group;
+                  removeButton.addEventListener("click", () => {
+                    newSubForm.remove();
+                  });
+                }
+              });
+              return;
+            default:
+              inputElement = document.createElement("input");
+              inputElement.type = field.type;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+          }
 
-			groupedFields[group].forEach((field) => {
-			  const label = document.createElement("label");
-			  label.textContent = field.label;
-			  label.htmlFor = `${parentName}_${field.name}`;
+          const fieldSetElement = document.createElement("div");
+          fieldSetElement.appendChild(label);
+          fieldSetElement.appendChild(description);
+          fieldSetElement.appendChild(inputElement);
 
-			  const description = document.createElement("small");
-			  description.textContent = field.description;
-			  description.style.color = "gray";
-			  description.style.fontSize = "12px";
+          parentElement.appendChild(fieldSetElement);
+        });
+      } else {
+        const fieldSet = document.createElement("fieldset");
+        fieldSet.legend = group;
 
-						let inputElement;
+        groupedFields[group].forEach((field) => {
+          const label = document.createElement("label");
+          label.textContent = field.label;
+          label.htmlFor = `${parentName}_${field.name}`;
 
-			  switch (field.type) {
-				case "select":
-				  inputElement = document.createElement("select");
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
+          const description = document.createElement("small");
+          description.textContent = field.description;
+          description.style.color = "gray";
+          description.style.fontSize = "12px";
 
-				  field.options.forEach((option) => {
-					const optionElement = document.createElement("option");
-					optionElement.value = option.value;
-					optionElement.textContent = option.label;
-					inputElement.appendChild(optionElement);
-				  });
-				  break;
-				case "checkbox":
-				  inputElement = document.createElement("input");
-				  inputElement.type = "checkbox";
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
-				  break;
-				case "radio":
-				  field.options.forEach((option) => {
-					inputElement = document.createElement("input");
-					inputElement.type = "radio";
-					inputElement.name = `${parentName}_${field.name}`;
-					inputElement.value = option.value;
-					inputElement.required = field.required;
+          let inputElement;
 
-					const labelElement = document.createElement("label");
-					labelElement.textContent = option.label;
-					labelElement.appendChild(inputElement);
+          switch (field.type) {
+                        case "select":
+              inputElement = document.createElement("select");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
 
-					fieldSet.appendChild(labelElement);
-				  });
-				  return;
-				default:
-				  inputElement = document.createElement("input");
-				  inputElement.type = field.type;
-				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.required = field.required;
-			  }
+              field.options.forEach((option) => {
+                const optionElement = document.createElement("option");
+                optionElement.value = option.value;
+                optionElement.textContent = option.label;
+                inputElement.appendChild(optionElement);
+              });
+              break;
+            case "checkbox":
+              inputElement = document.createElement("input");
+              inputElement.type = "checkbox";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "radio":
+              field.options.forEach((option) => {
+                inputElement = document.createElement("input");
+                inputElement.type = "radio";
+                inputElement.name = `${parentName}_${field.name}`;
+                inputElement.value = option.value;
+                inputElement.required = field.required;
 
-			  const fieldSetElement = document.createElement("div");
-			  fieldSetElement.appendChild(label);
-			  fieldSetElement.appendChild(description);
-			  fieldSetElement.appendChild(inputElement);
+                const labelElement = document.createElement("label");
+                labelElement.textContent = option.label;
+                labelElement.appendChild(inputElement);
 
-			  fieldSet.appendChild(fieldSetElement);
-			});
+                fieldSet.appendChild(labelElement);
+              });
+              return;
+            default:
+              inputElement = document.createElement("input");
+              inputElement.type = field.type;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+          }
 
-			parentElement.appendChild(fieldSet);
-		  }
-		});
+          const fieldSetElement = document.createElement("div");
+          fieldSetElement.appendChild(label);
+          fieldSetElement.appendChild(description);
+          fieldSetElement.appendChild(inputElement);
 
-		const jsonButton = document.createElement("button");
-		jsonButton.textContent = "Convert to JSON";
-		jsonButton.classList.add("json-button");
+          fieldSet.appendChild(fieldSetElement);
+        });
 
-		parentElement.appendChild(jsonButton);
+        parentElement.appendChild(fieldSet);
+      }
+    });
 
-		jsonButton.addEventListener("click", () => {
-		  const formData = {};
-		  const formElements = this.form.elements;
+    const jsonButton = document.createElement("button");
+    jsonButton.textContent = "Convert to JSON";
+    jsonButton.classList.add("json-button");
 
-		  for (let i = 0; i < formElements.length; i++) {
-			const element = formElements[i];
-			const name = element.name;
-			const value = element.value;
+    parentElement.appendChild(jsonButton);
 
-			if (name.includes("_")) {
-			  const parentName = name.split("_")[0];
-			  const childName = name.split("_")[1];
+    jsonButton.addEventListener("click", () => {
+      const formData = {};
+      const formElements = this.form.elements;
 
-			  if (!formData[parentName]) {
-				formData[parentName] = {};
-			  }
+      for (let i = 0; i < formElements.length; i++) {
+        const element = formElements[i];
+        const name = element.name;
+        const value = element.value;
 
-			  formData[parentName][childName] = value;
-			} else {
-			  formData[name] = value;
-			}
-		  }
+        if (name.includes("_")) {
+          const parentName = name.split("_")[0];
+          const childName = name.split("_")[1];
 
-		  this.callback(formData);
-		});
-	  }
+          if (!formData[parentName]) {
+            formData[parentName] = {};
+          }
 
-	  renderSubForm(parentElement, fields, parentName) {
-		const subFormElement = document.createElement("div");
+          formData[parentName][childName] = value;
+        } else {
+          formData[name] = value;
+        }
+      }
 
-		fields.forEach((field) => {
-		  const label = document.createElement("label");
-		  label.textContent = field.label;
-		  label.htmlFor = `${parentName}_${field.name}`;
+      this.callback(formData);
+    });
+  }
 
-		  const description = document.createElement("small");
-		  description.textContent = field.description;
-		  description.style.color = "gray";
-		  description.style.fontSize = "12px";
+  renderSubForm(parentElement, fields, parentName) {
+    const subFormElement = document.createElement("div");
 
-		  let inputElement;
+    fields.forEach((field) => {
+      const label = document.createElement("label");
+      label.textContent = field.label;
+      label.htmlFor = `${parentName}_${field.name}`;
 
-		  switch (field.type) {
-			case "select":
-			  inputElement = document.createElement("select");
-			  inputElement.name = `${parentName}_${field.name}`;
-			  inputElement.required = field.required;
+      const description = document.createElement("small");
+      description.textContent = field.description;
+      description.style.color = "gray";
+      description.style.fontSize = "12px";
 
-			  field.options.forEach((option) => {
-				const optionElement = document.createElement("option");
-				optionElement.value = option.value;
-				optionElement.textContent = option.label;
-				inputElement.appendChild(optionElement);
-			  });
-			  break;
-			case "checkbox":
-			  inputElement = document.createElement("input");
-			  inputElement.type = "checkbox";
-			  inputElement.name = `${parentName}_${field.name}`;
-			  inputElement.required = field.required;
-			  break;
-			case "radio":
-			  field.options.forEach((option) => {
-				inputElement = document.createElement("input");
-				inputElement.type = "radio";
-				inputElement.name = `${parentName}_${field.name}`;
-				inputElement.value = option.value;
-				inputElement.required = field.required;
+      let inputElement;
 
-				const labelElement = document.createElement("label");
-				labelElement.textContent = option.label;
-				labelElement.appendChild(inputElement);
+      switch (field.type) {
+        case "select":
+          inputElement = document.createElement("select");
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
 
-				subFormElement.appendChild(labelElement);
-			  });
-			  return;
-			default:
-			  inputElement = document.createElement("input");
-			  inputElement.type = field.type;
-			  inputElement.name = `${parentName}_${field.name}`;
-			  inputElement.required = field.required;
-		  }
+          field.options.forEach((option) => {
+            const optionElement = document.createElement("option");
+            optionElement.value = option.value;
+            optionElement.textContent = option.label;
+            inputElement.appendChild(optionElement);
+          });
+          break;
+        case "checkbox":
+          inputElement = document.createElement("input");
+          inputElement.type = "checkbox";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "radio":
+          field.options.forEach((option) => {
+            inputElement = document.createElement("input");
+            inputElement.type = "radio";
+            inputElement.name = `${parentName}_${field.name}`;
+            inputElement.value = option.value;
+            inputElement.required = field.required;
 
-		  const fieldSetElement = document.createElement("div");
-		  fieldSetElement.appendChild(label);
-		  fieldSetElement.appendChild(description);
-		  fieldSetElement.appendChild(inputElement);
+            const labelElement = document.createElement("label");
+            labelElement.textContent = option.label;
+            labelElement.appendChild(inputElement);
 
-		  subFormElement.appendChild(fieldSetElement);
-		});
+            subFormElement.appendChild(labelElement);
+          });
+          return;
+        default:
+          inputElement = document.createElement("input");
+          inputElement.type = field.type;
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+      }
 
-		parentElement.appendChild(subFormElement);
+      const fieldSetElement = document.createElement("div");
+      fieldSetElement.appendChild(label);
+      fieldSetElement.appendChild(description);
+      fieldSetElement.appendChild(inputElement);
 
-		return subFormElement;
-	  }
+      subFormElement.appendChild(fieldSetElement);
+    });
 
-	  addEventListeners() {
-		this.importButton.addEventListener("click", () => {
-		  this.fileInput.click();
-		});
+    parentElement.appendChild(subFormElement);
 
-		this.fileInput.addEventListener("change", (event) => {
-		  const file = event.target.files[0];
-		  const reader = new FileReader();
+    return subFormElement;
+  }
 
-				reader.addEventListener("load", (event) => {
-			const jsonData = JSON.parse(event.target.result);
-			this.fillFormFields(jsonData);
-		  });
+  addEventListeners() {
+    this.importButton.addEventListener("click", () => {
+      this.fileInput.click();
+    });
 
-		  reader.readAsText(file);
-		});
-	  }
+    this.fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
 
-	  fillFormFields(data) {
-		const formElements = this.form.elements;
+            reader.addEventListener("load", (event) => {
+        const jsonData = JSON.parse(event.target.result);
+        this.fillFormFields(jsonData);
+      });
 
-		for (let i = 0; i < formElements.length; i++) {
-		  const element = formElements[i];
-		  const name = element.name;
+      reader.readAsText(file);
+    });
+  }
 
-		  if (data[name]) {
-			element.value = data[name];
-		  } else if (name.includes("_")) {
-			const parentName = name.split("_")[0];
-			const childName = name.split("_")[1];
+  fillFormFields(data) {
+    const formElements = this.form.elements;
 
-			if (data[parentName] && data[parentName][childName]) {
-			  element.value = data[parentName][childName];
-			}
-		  }
-		}
-	  }
-	}
+    for (let i = 0; i < formElements.length; i++) {
+      const element = formElements[i];
+      const name = element.name;
+
+      if (data[name]) {
+        element.value = data[name];
+      } else if (name.includes("_")) {
+        const parentName = name.split("_")[0];
+        const childName = name.split("_")[1];
+
+        if (data[parentName] && data[parentName][childName]) {
+          element.value = data[parentName][childName];
+        }
+      }
+    }
+  }
+}
 	//
 
 	const form = document.getElementById("myForm");
@@ -500,8 +500,40 @@
 	  (formData) => {
 		console.log(formData);
 	  });
+       //
+const formConfig2 = {
+  fields: [
+    {
+      label: "First Name",
+      name: "firstName",
+      type: "text",
+      description: "Enter your first name"
+    },
+    {
+      label: "Last Name",
+      name: "lastName",
+      type: "text",
+      description: "Enter your last name"
+    },
+    {
+      label: "Email",
+      name: "email",
+      type: "email",
+      description: "Enter your email address"
+    }
+  ]
+};
+
+const formGenerator = new FormGenerator(
+  document.getElementById("myForm2"),
+  document.getElementById("importButton2"),
+  document.getElementById("fileInput2),
+  formConfig2,
+  (formData) => {
+    console.log(formData);
+  }
+);
   //
-  
   const projectTypes = [
     {
       "id": 1,
