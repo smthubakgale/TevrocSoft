@@ -13,6 +13,354 @@ body {
   color: #1A1D23; /* Main Navy */
   background-color: #FFFFFF; /* Main Background */
 }
+/* Links */
+
+a {
+  text-decoration: none;
+  color: #4C9DFE; /* Accent Blue */
+}
+
+a:hover {
+  color: #34C759; /* Green */
+}
+
+/* Buttons */
+
+button {
+  background-color: #1A1D23; /* Main Navy */
+  color: #FFFFFF; /* White */
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4C9DFE; /* Accent Blue */
+}
+
+/* Forms */
+
+form {
+  margin-top: 1em;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #CCCCCC; /* Light Gray */
+}
+
+button[type="submit"] {
+  background-color: #1A1D23; /* Main Navy */
+  color: #FFFFFF; /* White */
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #4C9DFE; /* Accent Blue */
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: left;
+}
+
+th {
+  background-color: #F7F7F7; /* Light Gray */
+}
+
+/* Alerts */
+
+.alert {
+  background-color: #F7F7F7; /* Light Gray */
+  color: #6C757D; /* Dark Gray */
+  padding: 0.5em;
+  border: 1px solid #CCCCCC; /* Light Gray */
+  margin-bottom: 1em;
+}
+
+.alert-success {
+  background-color: #C6F4D6; /* Green */
+  color: #0f0;
+}
+
+.alert-error {
+  background-color: #F2DEDE; /* Red */
+  color: #f00;
+}
+
+/* Modals */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #FFFFFF; /* Main Background */
+  padding: 2em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  margin: 5% auto;
+}
+
+.close-button {
+  float: right;
+  background-color: #1A1D23; /* Main Navy */
+  color: #FFFFFF; /* White */
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #4C9DFE; /* Accent Blue */
+}
+
+/* Accordion */
+
+.accordion {
+  background-color: #F7F7F7; /* Light Gray */
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.accordion-content {
+  display: none;
+  padding: 1em;
+  border-bottom: 1px solid #CCCCCC; /* Light Gray */
+}
+
+.accordion-content:last-child {
+  border-bottom: none;
+}
+
+.accordion:hover {
+  background-color: #1A1D23; /* Main Navy */
+  color: #FFFFFF; /* White */
+}
+
+.accordion:after {
+  content: "\2795";
+  font-size: 1em;
+  float: right;
+}
+
+.accordion-content.show {
+  display: block;
+}
+
+.accordion-content.show + .accordion:after {
+  content: "\2796";
+}
+
+
+/* Mobile Navigation */
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF; /* Main Background */
+  padding: 1em;
+  z-index: 1000;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav li {
+  margin-bottom: 10px;
+}
+
+.mobile-nav a {
+  color: #1A1D23; /* Main Navy */
+  text-decoration: none;
+}
+
+.mobile-nav a:hover {
+  color: #4C9DFE; /* Accent Blue */
+}
+
+/* Overlay */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+
+/* Animations */
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Utility Classes */
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.mt-2 {
+  margin-top: 2em;
+}
+
+.mb-1 {
+  margin-bottom: 1em;
+}
+
+.mb-2 {
+  margin-bottom: 2em;
+}
+
+.p-1 {
+  padding: 1em;
+}
+
+.p-2 {
+  padding: 2em;
+}
+
+.bg-white {
+  background-color: #FFFFFF; /* Main Background */
+}
+
+.bg-light-gray {
+  background-color: #F7F7F7; /* Light Gray */
+}
+
+.bg-navy {
+  background-color: #1A1D23; /* Main Navy */
+}
+
+.bg-accent-blue {
+  background-color: #4C9DFE; /* Accent Blue */
+}
+
+.color-white {
+  color: #FFFFFF; /* White */
+}
+
+.color-navy {
+  color: #1A1D23; /* Main Navy */
+}
+
+.color-accent-blue {
+  color: #4C9DFE; /* Accent Blue */
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+/* Custom Components */
+
+.custom-button {
+  background-color: #1A1D23; /* Main Navy */
+  color: #FFFFFF; /* White */
+  border: none;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #4C9DFE; /* Accent Blue */
+}
+
+.custom-input {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #CCCCCC; /* Light Gray */
+}
+
+.custom-select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #CCCCCC; /* Light Gray */
+}
+
+.custom-textarea {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #CCCCCC; /* Light Gray */
+}
 
 /* Navigation */
 
@@ -1480,351 +1828,3 @@ p {
   color: #6C757D; /* Dark Gray */
 }
 
-/* Links */
-
-a {
-  text-decoration: none;
-  color: #4C9DFE; /* Accent Blue */
-}
-
-a:hover {
-  color: #34C759; /* Green */
-}
-
-/* Buttons */
-
-button {
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #4C9DFE; /* Accent Blue */
-}
-
-/* Forms */
-
-form {
-  margin-top: 1em;
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid #CCCCCC; /* Light Gray */
-}
-
-button[type="submit"] {
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-button[type="submit"]:hover {
-  background-color: #4C9DFE; /* Accent Blue */
-}
-
-/* Tables */
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 0.5em;
-  text-align: left;
-}
-
-th {
-  background-color: #F7F7F7; /* Light Gray */
-}
-
-/* Alerts */
-
-.alert {
-  background-color: #F7F7F7; /* Light Gray */
-  color: #6C757D; /* Dark Gray */
-  padding: 0.5em;
-  border: 1px solid #CCCCCC; /* Light Gray */
-  margin-bottom: 1em;
-}
-
-.alert-success {
-  background-color: #C6F4D6; /* Green */
-  color: #0f0;
-}
-
-.alert-error {
-  background-color: #F2DEDE; /* Red */
-  color: #f00;
-}
-
-/* Modals */
-
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: #FFFFFF; /* Main Background */
-  padding: 2em;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 50%;
-  margin: 5% auto;
-}
-
-.close-button {
-  float: right;
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  background-color: #4C9DFE; /* Accent Blue */
-}
-
-/* Accordion */
-
-.accordion {
-  background-color: #F7F7F7; /* Light Gray */
-  padding: 0;
-  border: none;
-  cursor: pointer;
-}
-
-.accordion-content {
-  display: none;
-  padding: 1em;
-  border-bottom: 1px solid #CCCCCC; /* Light Gray */
-}
-
-.accordion-content:last-child {
-  border-bottom: none;
-}
-
-.accordion:hover {
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-}
-
-.accordion:after {
-  content: "\2795";
-  font-size: 1em;
-  float: right;
-}
-
-.accordion-content.show {
-  display: block;
-}
-
-.accordion-content.show + .accordion:after {
-  content: "\2796";
-}
-
-
-/* Mobile Navigation */
-
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #FFFFFF; /* Main Background */
-  padding: 1em;
-  z-index: 1000;
-}
-
-.mobile-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.mobile-nav li {
-  margin-bottom: 10px;
-}
-
-.mobile-nav a {
-  color: #1A1D23; /* Main Navy */
-  text-decoration: none;
-}
-
-.mobile-nav a:hover {
-  color: #4C9DFE; /* Accent Blue */
-}
-
-/* Overlay */
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  display: none;
-}
-
-/* Animations */
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-out {
-  animation: fadeOut 0.5s ease-in-out;
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Utility Classes */
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.mt-1 {
-  margin-top: 1em;
-}
-
-.mt-2 {
-  margin-top: 2em;
-}
-
-.mb-1 {
-  margin-bottom: 1em;
-}
-
-.mb-2 {
-  margin-bottom: 2em;
-}
-
-.p-1 {
-  padding: 1em;
-}
-
-.p-2 {
-  padding: 2em;
-}
-
-.bg-white {
-  background-color: #FFFFFF; /* Main Background */
-}
-
-.bg-light-gray {
-  background-color: #F7F7F7; /* Light Gray */
-}
-
-.bg-navy {
-  background-color: #1A1D23; /* Main Navy */
-}
-
-.bg-accent-blue {
-  background-color: #4C9DFE; /* Accent Blue */
-}
-
-.color-white {
-  color: #FFFFFF; /* White */
-}
-
-.color-navy {
-  color: #1A1D23; /* Main Navy */
-}
-
-.color-accent-blue {
-  color: #4C9DFE; /* Accent Blue */
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-/* Custom Components */
-
-.custom-button {
-  background-color: #1A1D23; /* Main Navy */
-  color: #FFFFFF; /* White */
-  border: none;
-  padding: 0.5em 1em;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.custom-button:hover {
-  background-color: #4C9DFE; /* Accent Blue */
-}
-
-.custom-input {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid #CCCCCC; /* Light Gray */
-}
-
-.custom-select {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid #CCCCCC; /* Light Gray */
-}
-
-.custom-textarea {
-  width: 100%;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid #CCCCCC; /* Light Gray */
-}
