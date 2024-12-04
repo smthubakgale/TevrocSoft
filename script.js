@@ -152,7 +152,7 @@
 	  ]
 	};
     // 
-	class FormGenerator {
+	 class FormGenerator {
 	  constructor(form, importButton, fileInput, formConfig) {
 		this.form = form;
 		this.importButton = importButton;
@@ -251,12 +251,6 @@
 					removeButton.type = "button";
 					removeButton.textContent = "Remove";
 					removeButton.classList.add("remove-button");
-					removeButton.style.background = "red";
-					removeButton.style.color = "white";
-					removeButton.style.border = "none";
-					removeButton.style.padding = "5px 10px";
-					removeButton.style.cursor = "pointer";
-					removeButton.style.float = "right";
 
 					newSubForm.appendChild(removeButton);
 
@@ -302,84 +296,79 @@
 					inputElement.appendChild(optionElement);
 				  });
 				  break;
-						  case "checkbox":
-				inputElement = document.createElement("input");
-				inputElement.type = "checkbox";
-				inputElement.name = `${parentName}_${field.name}`;
-				inputElement.required = field.required;
-				break;
-			  case "radio":
-				field.options.forEach((option) => {
+				case "checkbox":
 				  inputElement = document.createElement("input");
-				  inputElement.type = "radio";
+				  inputElement.type = "checkbox";
 				  inputElement.name = `${parentName}_${field.name}`;
-				  inputElement.value = option.value;
 				  inputElement.required = field.required;
+				  break;
+							case "radio":
+				  field.options.forEach((option) => {
+					inputElement = document.createElement("input");
+					inputElement.type = "radio";
+					inputElement.name = `${parentName}_${field.name}`;
+					inputElement.value = option.value;
+					inputElement.required = field.required;
 
-				  const labelElement = document.createElement("label");
-				  labelElement.textContent = option.label;
-				  labelElement.appendChild(inputElement);
+					const labelElement = document.createElement("label");
+					labelElement.textContent = option.label;
+					labelElement.appendChild(inputElement);
 
-				  fieldSet.appendChild(labelElement);
-				});
-				return;
-			  case "subform":
-				const subFieldSet = document.createElement("fieldset");
-				subFieldSet.legend = field.label;
-				subFieldSet.style.border = "1px solid #ccc";
-				subFieldSet.style.padding = "10px";
-				subFieldSet.style.marginBottom = "20px";
-
-				const addSubButton = document.createElement("button");
-				addSubButton.type = "button";
-				addSubButton.textContent = "Add new " + field.label;
-				addSubButton.classList.add("add-button");
-
-				subFieldSet.appendChild(addSubButton);
-
-				this.renderSubForm(subFieldSet, [field.fields[0]], parentName + "_" + field.name);
-
-				fieldSet.appendChild(subFieldSet);
-
-				addSubButton.addEventListener("click", () => {
-				  const nextField = field.fields.shift();
-				  const newSubForm = this.renderSubForm(subFieldSet, [nextField], parentName + "_" + field.name);
-				  const removeButton = document.createElement("button");
-				  removeButton.type = "button";
-				  removeButton.textContent = "Remove";
-				  removeButton.classList.add("remove-button");
-				  removeButton.style.background = "red";
-				  removeButton.style.color = "white";
-				  removeButton.style.border = "none";
-				  removeButton.style.padding = "5px 10px";
-				  removeButton.style.cursor = "pointer";
-				  removeButton.style.float = "right";
-
-				  newSubForm.appendChild(removeButton);
-
-				  removeButton.addEventListener("click", () => {
-					newSubForm.remove();
+					fieldSet.appendChild(labelElement);
 				  });
-				});
-				return;
-			  default:
-				inputElement = document.createElement("input");
-				inputElement.type = field.type;
-				inputElement.name = `${parentName}_${field.name}`;
-				inputElement.required = field.required;
-			}
+				  return;
+				case "subform":
+				  const subFieldSet = document.createElement("fieldset");
+				  subFieldSet.legend = field.label;
+				  subFieldSet.style.border = "1px solid #ccc";
+				  subFieldSet.style.padding = "10px";
+				  subFieldSet.style.marginBottom = "20px";
 
-			const fieldSetElement = document.createElement("div");
-			fieldSetElement.appendChild(label);
-			fieldSetElement.appendChild(inputElement);
+				  const addSubButton = document.createElement("button");
+				  addSubButton.type = "button";
+				  addSubButton.textContent = "Add new " + field.label;
+				  addSubButton.classList.add("add-button");
 
-			fieldSet.appendChild(fieldSetElement);
-		  });
+				  subFieldSet.appendChild(addSubButton);
 
-		  parentElement.appendChild(fieldSet);
-		}
-	  });
+				  this.renderSubForm(subFieldSet, [field.fields[0]], parentName + "_" + field.name);
+
+				  fieldSet.appendChild(subFieldSet);
+
+				  addSubButton.addEventListener("click", () => {
+					const nextField = field.fields.shift();
+					const newSubForm = this.renderSubForm(subFieldSet, [nextField], parentName + "_" + field.name);
+					const removeButton = document.createElement("button");
+					removeButton.type = "button";
+					removeButton.textContent = "Remove";
+					removeButton.classList.add("remove-button");
+
+					newSubForm.appendChild(removeButton);
+
+					removeButton.addEventListener("click", () => {
+					  newSubForm.remove();
+					});
+				  });
+				  return;
+				default:
+				  inputElement = document.createElement("input");
+				  inputElement.type = field.type;
+				  inputElement.name = `${parentName}_${field.name}`;
+				  inputElement.required = field.required;
+			  }
+
+			  const fieldSetElement = document.createElement("div");
+			  fieldSetElement.appendChild(label);
+			  fieldSetElement.appendChild(inputElement);
+
+			  fieldSet.appendChild(fieldSetElement);
+			});
+
+			parentElement.appendChild(fieldSet);
+		  }
+		});
 	  }
+
 	  renderSubForm(parentElement, fields, parentName) {
 		const subFormElement = document.createElement("div");
 
@@ -452,7 +441,7 @@
 		  const file = event.target.files[0];
 		  const reader = new FileReader();
 
-				reader.addEventListener("load", (event) => {
+		  reader.addEventListener("load", (event) => {
 			const jsonData = JSON.parse(event.target.result);
 			this.fillFormFields(jsonData);
 		  });
@@ -470,7 +459,7 @@
 			const name = element.name;
 			const value = element.value;
 
-			if (name.includes("_")) {
+					if (name.includes("_")) {
 			  const parentName = name.split("_")[0];
 			  const childName = name.split("_")[1];
 
@@ -508,27 +497,7 @@
 		}
 	  }
 	}
-		fillFormFields(data) {
-		const formElements = this.form.elements;
-
-		for (let i = 0; i < formElements.length; i++) {
-		  const element = formElements[i];
-		  const name = element.name;
-
-		  if (data[name]) {
-			element.value = data[name];
-		  } else if (name.includes("_")) {
-			const parentName = name.split("_")[0];
-			const childName = name.split("_")[1];
-
-			if (data[parentName] && data[parentName][childName]) {
-			  element.value = data[parentName][childName];
-			}
-		  }
-		}
-	  }
-	}
-	//
+	// 
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
