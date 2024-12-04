@@ -1,24 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Viz.js Example</title>
-  <script src="https://cdn.jsdelivr.net/npm/viz.js@2.1.2/full.render.js"></script>
+  <title>Activity Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mxgraph@4.2.2/dist/mxClient.min.js"></script>
+  <style>
+    #graphContainer {
+      width: 800px;
+      height: 600px;
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
-  <div id="diagram"></div>
+  <div id="graphContainer"></div>
+
   <script>
-    const dot = `
-      digraph {
-        node[shape=box, style=filled];
-        a[label="A"];
-        b[label="B"];
-        c[label="C"];
-        a -> b[label=""];
-        b -> c[label=""];
-      }
-    `;
-    const diagram = Viz(dot);
-    document.getElementById("diagram").innerHTML = diagram;
+    // Create the graph container
+    const container = document.getElementById("graphContainer");
+
+    // Create the mxGraph instance
+    const graph = new mxGraph(container);
+
+    // Define the JSON data for the activity diagram
+    const jsonData = {
+      "nodes": [
+        {
+          "id": "start",
+          "type": "start",
+          "x": 100,
+          "y": 100
+        },
+        {
+          "id": "activity1",
+          "type": "activity",
+          "x": 200,
+          "y": 100,
+          "width": 100,
+          "height": 50
+        },
+        {
+          "id": "decision",
+          "type": "decision",
+          "x": 300,
+          "y": 100,
+          "width": 50,
+          "height": 50
+        },
+        {
+          "id": "activity2",
+          "type": "activity",
+          "x": 400,
+          "y": 100,
+          "width": 100,
+          "height": 50
+        },
+        {
+          "id": "end",
+          "type": "end",
+          "x": 500,
+          "y": 100
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge1",
+          "source": "start",
+          "target": "activity1"
+        },
+        {
+          "id": "edge2",
+          "source": "activity1",
+          "target": "decision"
+        },
+        {
+          "id": "edge3",
+          "source": "decision",
+          "target": "activity2"
+        },
+        {
+          "id": "edge4",
+          "source": "activity2",
+          "target": "end"
+        }
+      ]
+    };
+
+    // Create the model
+    const model = new mxGraphModel();
+
+    // Create the nodes
+    jsonData.nodes.forEach((node) => {
+      const vertex = graph.insertVertex(model, null, node.type, node.x, node.y, node.width, node.height);
+      vertex.setId(node.id);
+    });
+
+    // Create the edges
+    jsonData.edges.forEach((edge) => {
+      const source = model.getCell(edge.source);
+      const target = model.getCell(edge.target);
+      graph.insertEdge(model, null, "", source, target);
+    });
+
+    // Set the model
+    graph.setModel(model);
   </script>
 </body>
 </html>
