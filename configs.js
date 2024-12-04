@@ -167,66 +167,13 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select  one the development licenses ... " ,
-      description: `
-<h1>Github Licenses</h1>
-<table border="1" cellpadding="5" cellspacing="0">
-  <tr>
-    <th>License Name</th>
-    <th>Description</th>
-    <th>Restrictions</th>
-  </tr>
-  <tr>
-    <td><a href="https://opensource.org/licenses/MIT">MIT License</a></td>
-    <td>Permissive license that allows free use, modification, and distribution.</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a></td>
-    <td>Permissive license that allows free use, modification, and distribution, with some additional provisions for patent grants and trademark usage.</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td><a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause License</a></td>
-    <td>Permissive license that allows free use, modification, and distribution, with some additional provisions for copyright notices and warranty disclaimers.</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a></td>
-    <td>Copyleft license that requires users to make any modifications or derivative works available under the same license.</td>
-    <td>Restrictive</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">LGPLv3</a></td>
-    <td>Copyleft license that is similar to GPLv3, but allows for more flexibility in terms of linking with proprietary software.</td>
-    <td>Restrictive</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPLv3</a></td>
-    <td>Copyleft license that is similar to GPLv3, but requires users to make any modifications or derivative works available under the same license, even if the software is used over a network.</td>
-    <td>Restrictive</td>
-  </tr>
-  <tr>
-    <td><a href="https://unlicense.org/">Unlicense</a></td>
-    <td>Public domain license that dedicates your software to the public domain, waiving all copyright and related rights.</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></td>
-    <td>Public domain license that dedicates your software to the public domain, waiving all copyright and related rights.</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL 2.0</a></td>
-    <td>License that is similar to the LGPL, but with some additional provisions for patent grants and trademark usage.</td>
-    <td>Restrictive</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.eclipse.org/legal/epl-v20.html">EPL 2.0</a></td>
-    <td>License that is similar to the LGPL, but with some additional provisions for patent grants and trademark usage.</td>
-    <td>Restrictive</td>
-  </tr>
-</table>      
-      `,
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/github-licenses.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })()
+,
       options: [
 	        {
 	          label: 'MIT License',
@@ -283,48 +230,12 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select  one the platform specific frameworks ... " ,
-      description: `
-  <h3>Development Expertise</h3>
-  <b>1. Web Development</b>
-  <ul>
-    <li>"html5" - Standard markup framework for web content</li>
-    <li>"flask" - Lightweight Python web framework</li>
-    <li>"php" - Server-side scripting framework</li>
-    <li>"mvc" - Model-View-Controller architectural framework</li>
-    <li>"express" - Node.js web application framework</li>
-    <li>"springboot" - Java-based web application framework</li>
-  </ul>
-
-  <b>2. Mobile App Development</b>
-  <ul>
-    <li>"xamarin.android" - Cross-platform mobile app framework</li>
-    <li>"java.android" - Android mobile app development framework</li>
-  </ul>
-
-  <b>3. Desktop Application Development</b>
-  <ul>
-    <li><i>GUI Development:</i></li>
-    <ul>
-      <li>"electron" - Cross-platform desktop app framework</li>
-      <li>"javafx" - Java-based GUI framework</li>
-      <li>"owin.core" - .NET-based web server framework</li>
-      <li>"pyweb" - Python-based web framework</li>
-    </ul>
-    <li><i>Console Application Development:</i></li>
-    <ul>
-      <li>"maven" - Java-based build automation framework</li>
-      <li>"csharp" - Object-oriented programming framework</li>
-    </ul>
-    <li><i>Hybrid Application Development:</i></li>
-    <ul>
-      <li>"tomcat" - Java-based web server framework</li>
-      <li>"flask.electron" - Cross-platform desktop app framework</li>
-      <li>"electron.springboot" - Cross-platform desktop app framework</li>
-      <li>"owin.framework" - .NET-based web framework</li>
-      <li>"owin.flask" - Cross-platform web framework</li>
-    </ul>
-  </ul> 
-      ` , 
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/development-frameworks.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })() 
     	options :[
         {
           label: 'HTML5',
