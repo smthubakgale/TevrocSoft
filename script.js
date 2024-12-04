@@ -152,7 +152,7 @@
 	  ]
 	};
     // 
- class FormGenerator {
+class FormGenerator {
   constructor(form, importButton, fileInput, formConfig, callback) {
     this.form = form;
     this.importButton = importButton;
@@ -304,7 +304,8 @@
               inputElement = document.createElement("select");
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
-			                field.options.forEach((option) => {
+
+                            field.options.forEach((option) => {
                 const optionElement = document.createElement("option");
                 optionElement.value = option.value;
                 optionElement.textContent = option.label;
@@ -331,42 +332,6 @@
 
                 fieldSet.appendChild(labelElement);
               });
-              return;
-            case "subform":
-              const fieldSetElement = document.createElement("fieldset");
-              fieldSetElement.legend = field.label;
-              fieldSetElement.style.border = "1px solid #ccc";
-              fieldSetElement.style.padding = "10px";
-              fieldSetElement.style.marginBottom = "20px";
-
-              const addButton = document.createElement("button");
-              addButton.type = "button";
-              addButton.textContent = "Add new " + field.label;
-              addButton.classList.add("add-button");
-
-              fieldSetElement.appendChild(addButton);
-
-              const subFormElement = this.renderSubForm(fieldSetElement, [field.fields[0]], parentName + "_" + field.name);
-              fieldSetElement.appendChild(subFormElement);
-
-              addButton.addEventListener("click", () => {
-                const newSubForm = subFormElement.cloneNode(true);
-                const inputs = newSubForm.querySelectorAll("input, select, textarea");
-                inputs.forEach((input) => {
-                  input.value = "";
-                });
-                const removeButton = document.createElement("button");
-                removeButton.textContent = "Remove";
-                removeButton.classList.add("remove-button");
-                newSubForm.appendChild(removeButton);
-                fieldSetElement.appendChild(newSubForm);
-
-                removeButton.addEventListener("click", () => {
-                  newSubForm.remove();
-                });
-              });
-
-              fieldSet.appendChild(fieldSetElement);
               return;
             default:
               inputElement = document.createElement("input");
@@ -460,7 +425,7 @@
       const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-            a.href = url;
+      a.href = url;
       a.download = "form_data.json";
       a.click();
     });
@@ -501,7 +466,7 @@
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-        case "radio":
+                case "radio":
           field.options.forEach((option) => {
             inputElement = document.createElement("input");
             inputElement.type = "radio";
@@ -530,17 +495,6 @@
 
       subFormElement.appendChild(fieldSetElement);
     });
-
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.classList.add("remove-button");
-    subFormElement.appendChild(removeButton);
-
-    removeButton.addEventListener("click", () => {
-      subFormElement.remove();
-    });
-
-    parentElement.appendChild(subFormElement);
 
     return subFormElement;
   }
@@ -655,8 +609,7 @@
     a.download = "form_data.json";
     a.click();
   }
-}
-	  
+} 
 	//
 
 	const form = document.getElementById("myForm");
