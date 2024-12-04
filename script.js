@@ -1,208 +1,6 @@
 //------------------------------------: Shop 
  // Initialize EmailJS
-
-//----------------------------:
- // Add event listeners to add buttons
-  document.getElementById('add-ip').addEventListener('click', addIp);
-  document.getElementById('add-browser').addEventListener('click', addBrowser);
-  document.getElementById('add-project').addEventListener('click', addProject);
-  document.getElementById('add-anc').addEventListener('click', addAnc);
-  document.getElementById('add-file').addEventListener('click', addFile);
-  document.getElementById('add-temp').addEventListener('click', addTemp);
-  document.getElementById('add-sql').addEventListener('click', addSql);
-  document.getElementById('add-ui-api').addEventListener('click', addUiApi);
-  document.getElementById('add-social-auth').addEventListener('click', addSocialAuth);
-
-  // Functions to add new fields
-  function addIp() {
-    const ipsContainer = document.getElementById('ips-container');
-    const newIp = document.createElement('div');
-    newIp.innerHTML = `
-      <input type="text" name="ips[]" placeholder="Enter IP">
-      <button type="button" class="remove-ip">Remove</button>
-    `;
-    ipsContainer.appendChild(newIp);
-    newIp.querySelector('.remove-ip').addEventListener('click', removeIp);
-  }
-
-  function addBrowser() {
-    const browsersContainer = document.getElementById('browsers-container');
-    const newBrowser = document.createElement('div');
-    newBrowser.innerHTML = `
-      <input type="text" name="browsers[]" placeholder="Enter browser">
-      <button type="button" class="remove-browser">Remove</button>
-    `;
-    browsersContainer.appendChild(newBrowser);
-    newBrowser.querySelector('.remove-browser').addEventListener('click', removeBrowser);
-  }
-    function addProject() {
-    const projectsContainer = document.getElementById('projects-container');
-    const newProject = document.createElement('div');
-    newProject.innerHTML = `
-      <input type="text" name="projects[]" placeholder="Enter project">
-      <button type="button" class="remove-project">Remove</button>
-    `;
-    projectsContainer.appendChild(newProject);
-    newProject.querySelector('.remove-project').addEventListener('click', removeProject);
-  }
-
-  function addAnc() {
-    const ancsContainer = document.getElementById('ancs-container');
-    const newAnc = document.createElement('div');
-    newAnc.innerHTML = `
-      <h2>ANC</h2>
-      <label for="anc-id">ID:</label>
-      <input type="text" id="anc-id" name="ancs[id][]">
-      <label for="anc-users">Users:</label>
-      <input type="text" id="anc-users" name="ancs[users][]">
-      <label for="anc-not">Not:</label>
-      <input type="checkbox" id="anc-not" name="ancs[not][]">
-      <button type="button" class="remove-anc">Remove</button>
-    `;
-    ancsContainer.appendChild(newAnc);
-    newAnc.querySelector('.remove-anc').addEventListener('click', removeAnc);
-  }
-
-  function addFile() {
-    const filesContainer = document.getElementById('files-container');
-    const newFile = document.createElement('div');
-    newFile.innerHTML = `
-      <h2>File</h2>
-      <label for="file-p">P:</label>
-      <input type="text" id="file-p" name="files[p][]">
-      <label for="file-u">U:</label>
-      <input type="text" id="file-u" name="files[u][]">
-      <button type="button" class="remove-file">Remove</button>
-    `;
-    filesContainer.appendChild(newFile);
-    newFile.querySelector('.remove-file').addEventListener('click', removeFile);
-  }
-
-  function addTemp() {
-    const tempsContainer = document.getElementById('temps-container');
-    const newTemp = document.createElement('div');
-    newTemp.innerHTML = `
-      <h2>Temp</h2>
-      <label for="temp-p">P:</label>
-      <input type="text" id="temp-p" name="temps[p][]">
-      <label for="temp-u">U:</label>
-      <input type="text" id="temp-u" name="temps[u][]">
-      <button type="button" class="remove-temp">Remove</button>
-    `;
-    tempsContainer.appendChild(newTemp);
-    newTemp.querySelector('.remove-temp').addEventListener('click', removeTemp);
-  }
-
-  function addSql() {
-    const sqlContainer = document.getElementById('sql-container');
-    const newSql = document.createElement('div');
-    newSql.innerHTML = `
-      <h2>SQL</h2>
-      <label for="sql-type">Type:</label>
-      <input type="text" id="sql-type" name="sql[type][]">
-      <label for="sql-encrypt">Encrypt:</label>
-      <input type="text" id="sql-encrypt" name="sql[encrypt][]">
-      <button type="button" class="remove-sql">Remove</button>
-    `;
-    sqlContainer.appendChild(newSql);
-    newSql.querySelector('.remove-sql').addEventListener('click', removeSql);
-  }
-
-  function addUiApi() {
-    const uiApiContainer = document.getElementById('ui-api-container');
-    const newUiApi = document.createElement('div');
-    newUiApi.innerHTML = `
-      <h2>UI API</h2>
-      <label for="ui-api-client-id">Client ID:</label>
-      <input type="text" id="ui-api-client-id" name="ui_api[client_id][]">
-      <label for="ui-api-project-id">Project ID:</label>
-      <input type="text" id="ui-api-project-id" name="ui_api[project_id][]">
-      <button type="button" class="remove-ui-api">Remove</button>
-    `;
-    uiApiContainer.appendChild(newUiApi);
-    newUiApi.querySelector('.remove-ui-api').addEventListener('click', removeUiApi);
-  }
-
-  function addSocialAuth() {
-    const socialAuthContainer = document.getElementById('social-auth-container');
-    const newSocialAuth = document.createElement('div');
-    newSocialAuth.innerHTML = `
-      <h2>Social Auth</h2>
-      <label for="social-auth-provider">Provider:</label>
-      <input type="text" id="social-auth-provider" name="social_auth[provider][]">
-      <label for="social-auth-client-id">Client ID:</label>
-      <input type="text" id="social-auth-client-id" name="social_auth[client_id][]">
-      <button type="button" class="remove-social-auth">Remove</button>
-    `;
-    socialAuthContainer.appendChild(newSocialAuth);
-    newSocialAuth.querySelector('.remove-social-auth').addEventListener('click', removeSocialAuth);
-  }
-
-  // Functions to remove fields
-  function removeIp(event) {
-    const ip = event.target.parentNode;
-    ip.parentNode.removeChild(ip);
-  }
-
-  function removeBrowser(event) {
-    const browser = event.target.parentNode;
-    browser.parentNode.removeChild(browser);
-  }
-
-  function removeProject(event) {
-    const project = event.target.parentNode;
-    project.parentNode.removeChild(project);
-  }
-
-  function removeAnc(event) {
-    const anc = event.target.parentNode;
-    anc.parentNode.removeChild(anc);
-  }
-
-  function removeFile(event) {
-    const file = event.target.parentNode;
-    file.parentNode.removeChild(file);
-  }
-
-  function removeTemp(event) {
-    const temp = event.target.parentNode;
-    temp.parentNode.removeChild(temp);
-  }
-
-  function removeSql(event) {
-    const sql = event.target.parentNode;
-    sql.parentNode.removeChild(sql);
-  }
-
-  function removeUiApi(event) {
-    const uiApi = event.target.parentNode;
-    uiApi.parentNode.removeChild(uiApi);
-  }
-
-  function removeSocialAuth(event) {
-    const socialAuth = event.target.parentNode;
-    socialAuth.parentNode.removeChild(socialAuth);
-  }
-
-  // Function to handle form submission
-  document.getElementById('json-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const jsonData = {};
-    for (const [key, value] of formData) {
-      if (!jsonData[key]) {
-        jsonData[key] = value;
-      } else if (Array.isArray(jsonData[key])) {
-        jsonData[key].push(value);
-      } else {
-        jsonData[key] = [jsonData[key], value];
-      }
-    }
-    console.log(jsonData);
-    // Send the JSON data to your server or API
-  });
-//----------------------------:
-  // load project types dynamically from the JSON array
+ // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
   const featuresContainer = document.getElementById('features-container');
@@ -219,7 +17,375 @@
 		content.style.display = content.style.display === 'none' ? 'block' : 'none';
 	  });
 	});
+  //
+  const formConfig = {
+	  "fields": [
+		{
+		  "label": "Password",
+		  "type": "password",
+		  "name": "password",
+		  "required": true
+		},
+		{
+		  "label": "IPs",
+		  "type": "subform",
+		  "name": "ips",
+		  "fields": [
+			{
+			  "label": "IP",
+			  "type": "text",
+			  "name": "ip",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "Browsers",
+		  "type": "subform",
+		  "name": "browsers",
+		  "fields": [
+			{
+			  "label": "Browser",
+			  "type": "text",
+			  "name": "browser",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "Projects",
+		  "type": "subform",
+		  "name": "projects",
+		  "fields": [
+			{
+			  "label": "Project",
+			  "type": "text",
+			  "name": "project",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "ANCs",
+		  "type": "subform",
+		  "name": "ancs",
+		  "fields": [
+			{
+			  "label": "ANC",
+			  "type": "text",
+			  "name": "anc",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "Type",
+		  "type": "text",
+		  "name": "type",
+		  "required": true
+		},
+		{
+		  "label": "Files",
+		  "type": "subform",
+		  "name": "files",
+		  "fields": [
+			{
+			  "label": "File",
+			  "type": "text",
+			  "name": "file",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "Temps",
+		  "type": "subform",
+		  "name": "temps",
+		  "fields": [
+			{
+			  "label": "Temp",
+			  "type": "text",
+			  "name": "temp",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "SQL",
+		  "type": "subform",
+		  "name": "sql",
+		  "fields": [
+			{
+			  "label": "SQL",
+			  "type": "text",
+			  "name": "sql",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  "label": "UI API",
+		  "type": "subform",
+		  "name": "ui_api",
+		  "fields": [
+			{
+			  "label": "UI API",
+			  "type": "text",
+			  "name": "ui_api",
+			  "required": true
+			}
+		  ]
+		},
+		 {
+		  "label": "Social Auth",
+		  "type": "subform",
+		  "name": "social_auth",
+		  "fields": [
+			{
+			  "label": "Social Auth",
+			  "type": "text",
+			  "name": "social_auth",
+			  "required": true
+			}
+		  ]
+		}
+	  ]
+	};
 
+
+	const form = document.getElementById("myForm");
+	const importButton = document.getElementById("import-button");
+	const fileInput = document.getElementById("file-input"); 
+    new FormGenerator(form, importButton, fileInput , formConfig);
+  //
+  
+	class FormGenerator {
+	  constructor(form, importButton, fileInput , formConfig) {
+		this.form = form;
+		this.importButton = importButton;
+		this.fileInput = fileInput;
+		this.formConfig = formConfig;
+
+		this.renderForm();
+		this.addEventListeners();
+	  }
+
+	  renderForm() {
+		const fields = this.formConfig.fields;
+		const parentElement = this.form;
+		const parentName = "myForm";
+
+		fields.forEach((field) => {
+		  if (field.type === "subform") {
+			const fieldSet = document.createElement("fieldset");
+			fieldSet.legend = field.label;
+
+			const addButton = document.createElement("button");
+			addButton.type = "button";
+			addButton.textContent = "Add new " + field.label;
+			addButton.classList.add("add-button");
+			addButton.onclick = () => {
+			  const newField = {
+				label: field.label,
+				type: "text",
+				name: field.name + "_" + Math.random().toString(36).substr(2, 9),
+				required: true
+			  };
+			  field.fields.push(newField);
+			  this.renderSubForm(fieldSet, newField, parentName + "_" + field.name);
+			};
+
+			const removeButton = document.createElement("button");
+			removeButton.type = "button";
+			removeButton.textContent = "Remove " + field.label;
+			removeButton.classList.add("remove-button");
+			removeButton.onclick = () => {
+			  const index = fields.indexOf(field);
+			  if (index > -1) {
+				fields.splice(index, 1);
+			  }
+			  fieldSet.remove();
+			};
+
+			fieldSet.appendChild(addButton);
+			fieldSet.appendChild(removeButton);
+
+			this.renderSubForm(fieldSet, field.fields, `${parentName}_${field.name}`);
+
+			parentElement.appendChild(fieldSet);
+		  } else {
+			const label = document.createElement("label");
+			label.textContent = field.label;
+			label.htmlFor = `${parentName}_${field.name}`;
+
+			let inputElement;
+
+			switch (field.type) {
+			  case "select":
+				inputElement = document.createElement("select");
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+
+				field.options.forEach((option) => {
+				  const optionElement = document.createElement("option");
+				  optionElement.value = option.value;
+				  optionElement.textContent = option.label;
+				  inputElement.appendChild(optionElement);
+				});
+				break;
+			  case "checkbox":
+				inputElement = document.createElement("input");
+				inputElement.type = "checkbox";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+				break;
+			  case "radio":
+				field.options.forEach((option) => {
+				  inputElement = document.createElement("input");
+				  inputElement.type = "radio";
+				  inputElement.name = `${parentName}_${field.name}`;
+				  inputElement.value = option.value;
+				  inputElement.required = field.required;
+
+				  const labelElement = document.createElement("label");
+				  labelElement.textContent = option.label;
+				  labelElement.appendChild(inputElement);
+
+				  parentElement.appendChild(labelElement);
+				});
+				return;
+			  default:
+				inputElement = document.createElement("input");
+				inputElement.type = field.type;
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+			}
+
+			const fieldSet = document.createElement("div");
+			fieldSet.appendChild(label);
+			fieldSet.appendChild(inputElement);
+
+			parentElement.appendChild(fieldSet);
+		  }
+		});
+	  }
+
+	  renderSubForm(parentElement, fields, parentName) {
+		fields.forEach((field) => {
+		  const label = document.createElement("label");
+		  label.textContent = field.label;
+		  label.htmlFor = `${parentName}_${field.name}`;
+
+		  let inputElement;
+
+		  switch (field.type) {
+			case "select":
+			  inputElement = document.createElement("select");
+			  inputElement.name = `${parentName}_${field.name}`;
+			  inputElement.required = field.required;
+
+			  field.options.forEach((option) => {
+				const optionElement = document.createElement("option");
+				optionElement.value = option.value;
+				optionElement.textContent = option.label;
+				inputElement.appendChild(optionElement);
+			  });
+			  break;
+			case "checkbox":
+			  inputElement = document.createElement("input");
+			  inputElement.type = "checkbox";
+			  inputElement.name = `${parentName}_${field.name}`;
+			  inputElement.required = field.required;
+			  break;
+			case "radio":
+			  field.options.forEach((option) => {
+				inputElement = document.createElement("input");
+				inputElement.type = "radio";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.value = option.value;
+				inputElement.required = field.required;
+
+				const labelElement = document.createElement("label");
+				labelElement.textContent = option.label;
+				labelElement.appendChild(inputElement);
+
+				parentElement.appendChild(labelElement);
+			  });
+			  return;
+					default:
+			  inputElement = document.createElement("input");
+			  inputElement.type = field.type;
+			  inputElement.name = `${parentName}_${field.name}`;
+			  inputElement.required = field.required;
+		  }
+
+		  const fieldSet = document.createElement("div");
+		  fieldSet.appendChild(label);
+		  fieldSet.appendChild(inputElement);
+
+		  parentElement.appendChild(fieldSet);
+		});
+	  }
+
+	  addEventListeners() {
+		this.importButton.addEventListener("click", () => {
+		  this.fileInput.click();
+		});
+
+		this.fileInput.addEventListener("change", (event) => {
+		  const file = event.target.files[0];
+		  const reader = new FileReader();
+
+		  reader.addEventListener("load", (event) => {
+			const jsonData = JSON.parse(event.target.result);
+			this.fillFormFields(jsonData);
+		  });
+
+		  reader.readAsText(file);
+		});
+
+		this.form.addEventListener("submit", (event) => {
+		  event.preventDefault();
+		  const formData = {};
+		  const formElements = this.form.elements;
+
+		  for (let i = 0; i < formElements.length; i++) {
+			const element = formElements[i];
+			const name = element.name;
+			const value = element.value;
+
+			if (name.includes("_")) {
+			  const parentName = name.split("_")[0];
+			  const childName = name.split("_")[1];
+
+			  if (!formData[parentName]) {
+				formData[parentName] = {};
+			  }
+
+			  formData[parentName][childName] = value;
+			} else {
+			  formData[name] = value;
+			}
+		  }
+
+		  console.log(JSON.stringify(formData, null, 2));
+		});
+	  }
+
+	  fillFormFields(data) {
+		const formElements = this.form.elements;
+
+		for (let i = 0; i < formElements.length; i++) {
+		  const element = formElements[i];
+		  const name = element.name;
+
+		  if (data[name]) {
+			element.value = data[name];
+		  }
+		}
+	  }
+	}
+  //
   const projectTypes = [
     {
       "id": 1,
