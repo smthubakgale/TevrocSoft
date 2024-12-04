@@ -401,7 +401,7 @@ export const complexityMultipliers = {
   },
 };
 
-const projectTypeMultipliers = {
+export const projectTypeMultipliers = {
   web: {
 	basic: 0.8,
 	premium: 1.0,
