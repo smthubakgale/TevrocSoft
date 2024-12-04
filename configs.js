@@ -223,17 +223,46 @@ export const formConfig2 = {
       seemore : true , 
       title : "Select  one the platform specific frameworks" ,
       description: `
-<b> 1. Web </b>
-<p> "html5" , "flask" , "php" ,"mvc" , "express" , "springboot" </p>
-<b> 2. Mobile </b>
-<p> "xamarin.android" , "java.android" </p>
-<b> 3. Desktop </b>
-<p><i> GUI </i></p>
-<p> "electron" , "javafx" , "owin.core" , "pyweb" </p>
-<p><i> Console </i></p>
-<p> "maven" , "csharp" </p>
-<p><i> Hybrid </i></p> 
-<p> "tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask" </p>
+  <h3>Development Expertise</h3>
+  <b>1. Web Development</b>
+  <ul>
+    <li>"html5" - Standard markup framework for web content</li>
+    <li>"flask" - Lightweight Python web framework</li>
+    <li>"php" - Server-side scripting framework</li>
+    <li>"mvc" - Model-View-Controller architectural framework</li>
+    <li>"express" - Node.js web application framework</li>
+    <li>"springboot" - Java-based web application framework</li>
+  </ul>
+
+  <b>2. Mobile App Development</b>
+  <ul>
+    <li>"xamarin.android" - Cross-platform mobile app framework</li>
+    <li>"java.android" - Android mobile app development framework</li>
+  </ul>
+
+  <b>3. Desktop Application Development</b>
+  <ul>
+    <li><i>GUI Development:</i></li>
+    <ul>
+      <li>"electron" - Cross-platform desktop app framework</li>
+      <li>"javafx" - Java-based GUI framework</li>
+      <li>"owin.core" - .NET-based web server framework</li>
+      <li>"pyweb" - Python-based web framework</li>
+    </ul>
+    <li><i>Console Application Development:</i></li>
+    <ul>
+      <li>"maven" - Java-based build automation framework</li>
+      <li>"csharp" - Object-oriented programming framework</li>
+    </ul>
+    <li><i>Hybrid Application Development:</i></li>
+    <ul>
+      <li>"tomcat" - Java-based web server framework</li>
+      <li>"flask.electron" - Cross-platform desktop app framework</li>
+      <li>"electron.springboot" - Cross-platform desktop app framework</li>
+      <li>"owin.framework" - .NET-based web framework</li>
+      <li>"owin.flask" - Cross-platform web framework</li>
+    </ul>
+  </ul> 
       ` , 
     	options :[
         {
