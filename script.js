@@ -250,7 +250,11 @@ class FormGenerator {
                 labelElement.textContent = option.label;
                 labelElement.appendChild(inputElement);
 
-                parentElement.appendChild(labelElement);
+                if (parentElement) {
+                  parentElement.appendChild(labelElement);
+                } else {
+                  console.error("Parent element is null.");
+                }
               });
               return;
             case "date":
@@ -327,7 +331,11 @@ class FormGenerator {
               break;
             case "subform":
               const subFormElement = this.renderSubForm(parentElement, [field.fields[0]], parentName + "_" + field.name);
-              parentElement.appendChild(subFormElement);
+              if (parentElement) {
+                parentElement.appendChild(subFormElement);
+              } else {
+                console.error("Parent element is null.");
+              }
               return;
             default:
               inputElement = document.createElement("input");
@@ -336,13 +344,201 @@ class FormGenerator {
               inputElement.required = field.required;
           }
 
-          const fieldSetElement = document.createElement("div");
-          fieldSetElement.appendChild(label);
-          fieldSetElement.appendChild(description);
-          fieldSetElement.appendChild(inputElement);
+          if (inputElement) {
+            const fieldSetElement = document.createElement("div");
+            fieldSetElement.appendChild(label);
+            fieldSetElement.appendChild(description);
+            fieldSetElement.appendChild(inputElement);
 
-          parentElement.appendChild(fieldSetElement);
+            if (parentElement) {
+              parentElement.appendChild(fieldSetElement);
+            } else {
+              console.error("Parent element is null.");
+            }
+          } else {
+            console.error("Input element is null.");
+          }
         });
+      } else {
+        const fieldSetElement = document.createElement("fieldset");
+        const legendElement = document.createElement("legend");
+        legendElement.textContent = group;
+        fieldSetElement.appendChild(legendElement);
+
+        groupedFields[group].forEach((field) => {
+          const label = document.createElement("label");
+          label.textContent = field.label;
+          label.htmlFor = `${parentName}_${field.name}`;
+
+          const description = document.createElement("small");
+          description.textContent = field.description;
+          description.style.color = "gray";
+          description.style.fontSize = "12px";
+
+          let inputElement;
+
+          switch (field.type) {
+            case "text":
+            case "email":
+            case "tel":
+            case "url":
+              inputElement = document.createElement("input");
+              inputElement.type = field.type;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "password":
+              inputElement = document.createElement("input");
+              inputElement.type = "password";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "textarea":
+              inputElement = document.createElement("textarea");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "select":
+              inputElement = document.createElement("select");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+
+              field.options.forEach((option) => {
+                const optionElement = document.createElement("option");
+                optionElement.value = option.value;
+                optionElement.textContent = option.label;
+                inputElement.appendChild(optionElement);
+              });
+              break;
+            case "checkbox":
+              inputElement = document.createElement("input");
+              inputElement.type = "checkbox";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "radio":
+              field.options.forEach((option) => {
+                inputElement = document.createElement("input");
+                inputElement.type = "radio";
+                inputElement.name = `${parentName}_${field.name}`;
+                inputElement.value = option.value;
+                inputElement.required = field.required;
+
+                const labelElement = document.createElement("label");
+                labelElement.textContent = option.label;
+                labelElement.appendChild(inputElement);
+
+                if (parentElement) {
+                  parentElement.appendChild(labelElement);
+                } else {
+                  console.error("Parent element is null.");
+                }
+              });
+              return;
+            case "date":
+              inputElement = document.createElement("input");
+              inputElement.type = "date";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "time":
+              inputElement = document.createElement("input");
+              inputElement.type = "time";
+                            inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "month":
+              inputElement = document.createElement("input");
+              inputElement.type = "month";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "week":
+              inputElement = document.createElement("input");
+              inputElement.type = "week";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "range":
+              inputElement = document.createElement("input");
+              inputElement.type = "range";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "color":
+              inputElement = document.createElement("input");
+              inputElement.type = "color";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "hidden":
+              inputElement = document.createElement("input");
+              inputElement.type = "hidden";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "reset":
+              inputElement = document.createElement("input");
+              inputElement.type = "reset";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "button":
+              inputElement = document.createElement("button");
+              inputElement.textContent = field.label;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "subform":
+              const subFormElement = this.renderSubForm(parentElement, [field.fields[0]], parentName + "_" + field.name);
+              if (parentElement) {
+                parentElement.appendChild(subFormElement);
+              } else {
+                console.error("Parent element is null.");
+              }
+              return;
+            default:
+              inputElement = document.createElement("input");
+              inputElement.type = "text";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+          }
+
+          if (inputElement) {
+            const fieldSetElement = document.createElement("div");
+            fieldSetElement.appendChild(label);
+            fieldSetElement.appendChild(description);
+            fieldSetElement.appendChild(inputElement);
+
+            fieldSetElement.appendChild(fieldSetElement);
+          } else {
+            console.error("Input element is null.");
+          }
+        });
+
+        if (parentElement) {
+          parentElement.appendChild(fieldSetElement);
+        } else {
+          console.error("Parent element is null.");
+        }
       }
     });
   }
@@ -392,7 +588,7 @@ class FormGenerator {
           field.options.forEach((option) => {
             const optionElement = document.createElement("option");
             optionElement.value = option.value;
-            optionElement.textContent = option.label;
+                        optionElement.textContent = option.label;
             inputElement.appendChild(optionElement);
           });
           break;
@@ -414,7 +610,11 @@ class FormGenerator {
             labelElement.textContent = option.label;
             labelElement.appendChild(inputElement);
 
-            subFormElement.appendChild(labelElement);
+            if (subFormElement) {
+              subFormElement.appendChild(labelElement);
+            } else {
+              console.error("Subform element is null.");
+            }
           });
           return;
         case "date":
@@ -435,7 +635,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-                case "month":
+        case "month":
           inputElement = document.createElement("input");
           inputElement.type = "month";
           inputElement.name = `${parentName}_${field.name}`;
@@ -489,6 +689,14 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
+        case "subform":
+          const subFormElement = this.renderSubForm(subFormElement, [field.fields[0]], parentName + "_" + field.name);
+          if (subFormElement) {
+            subFormElement.appendChild(subFormElement);
+          } else {
+            console.error("Subform element is null.");
+          }
+          return;
         default:
           inputElement = document.createElement("input");
           inputElement.type = "text";
@@ -496,13 +704,23 @@ class FormGenerator {
           inputElement.required = field.required;
       }
 
-      const fieldSetElement = document.createElement("div");
-      fieldSetElement.appendChild(label);
-      fieldSetElement.appendChild(description);
-      fieldSetElement.appendChild(inputElement);
+      if (inputElement) {
+        const fieldSetElement = document.createElement("div");
+        fieldSetElement.appendChild(label);
+        fieldSetElement.appendChild(description);
+        fieldSetElement.appendChild(inputElement);
 
-      subFormElement.appendChild(fieldSetElement);
+        if (subFormElement) {
+          subFormElement.appendChild(fieldSetElement);
+        } else {
+          console.error("Subform element is null.");
+        }
+      } else {
+        console.error("Input element is null.");
+      }
     });
+
+    return subFormElement;
   }
 
   addEventListeners() {
@@ -515,7 +733,7 @@ class FormGenerator {
       const reader = new FileReader();
 
       reader.addEventListener("load", (event) => {
-        const jsonData = JSON.parse(event.target.result);
+                const jsonData = JSON.parse(event.target.result);
         this.fillFormFields(jsonData);
       });
 
@@ -530,154 +748,78 @@ class FormGenerator {
     convertToJsonButton.textContent = "Convert to JSON";
     convertToJsonButton.addEventListener("click", () => {
       const formData = this.getFormData();
-      const json = JSON.stringify(formData, null, 2);
-      console.log(json);
-    });
-
-    const downloadJsonButton = document.createElement("button");
-    downloadJsonButton.textContent = "Download JSON";
-    downloadJsonButton.addEventListener("click", () => {
-      const formData = this.getFormData();
-      const json = JSON.stringify(formData, null, 2);
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "form_data.json";
-      a.click();
+      const jsonData = JSON.stringify(formData, null, 2);
+      console.log(jsonData);
+      this.callback(jsonData);
     });
 
     this.form.appendChild(convertToJsonButton);
-    this.form.appendChild(downloadJsonButton);
   }
 
-  fillFormFields(data) {
+  fillFormFields(jsonData) {
     const formElements = this.form.elements;
-
-    for (let i = 0; i < formElements.length; i++) {
-      const element = formElements[i];
-      const name = element.name;
-      const value = data[name];
-
-      if (value !== undefined) {
-        if (element.type === "checkbox" || element.type === "radio") {
-          element.checked = value.includes(element.value);
-        } else if (element.type === "select-multiple") {
-          const selectedOptions = value;
-          Array.from(element.options).forEach((option) => {
-            option.selected = selectedOptions.includes(option.value);
-          });
-        } else {
-          element.value = value;
+    for (const element of formElements) {
+      if (element.name) {
+        const fieldName = element.name.replace("myForm_", "");
+        if (jsonData[fieldName]) {
+          switch (element.type) {
+            case "checkbox":
+            case "radio":
+              if (jsonData[fieldName] === element.value) {
+                element.checked = true;
+              }
+              break;
+            case "select-one":
+              element.value = jsonData[fieldName];
+              break;
+            default:
+              element.value = jsonData[fieldName];
+          }
         }
       }
     }
   }
 
   saveFormDataToLocalStorage() {
-    const formData = {};
-    const formElements = this.form.elements;
-
-    for (let i = 0; i < formElements.length; i++) {
-      const element = formElements[i];
-            const name = element.name;
-      const value = element.value;
-
-      if (name.includes("_")) {
-        const parentName = name.split("_")[0];
-        const childName = name.split("_")[1];
-
-        if (parentName === "myForm") {
-          if (!formData[childName]) {
-            formData[childName] = [];
-          }
-          formData[childName].push(value);
-        } else {
-          if (!formData[parentName]) {
-            formData[parentName] = {};
-          }
-          if (!formData[parentName][childName]) {
-            formData[parentName][childName] = [];
-          }
-          formData[parentName][childName].push(value);
-        }
-      } else {
-        if (element.type === "checkbox" || element.type === "radio") {
-          if (!formData[name]) {
-            formData[name] = [];
-          }
-          if (element.checked) {
-            formData[name].push(value);
-          }
-        } else if (element.type === "select-multiple") {
-          const selectedOptions = Array.from(element.selectedOptions).map((option) => option.value);
-          formData[name] = selectedOptions;
-        } else {
-          formData[name] = value;
-        }
-      }
-    }
-
-    localStorage.setItem("formData", JSON.stringify(formData));
-  }
-
-  loadFormDataFromLocalStorage() {
-    const storedFormData = localStorage.getItem("formData");
-
-    if (storedFormData) {
-      const formData = JSON.parse(storedFormData);
-      this.fillFormFields(formData);
-    }
+    const formData = this.getFormData();
+    const jsonData = JSON.stringify(formData);
+    localStorage.setItem("formData", jsonData);
   }
 
   getFormData() {
     const formData = {};
     const formElements = this.form.elements;
-
-    for (let i = 0; i < formElements.length; i++) {
-      const element = formElements[i];
-      const name = element.name;
-      const value = element.value;
-
-      if (name.includes("_")) {
-        const parentName = name.split("_")[0];
-        const childName = name.split("_")[1];
-
-        if (parentName === "myForm") {
-          if (!formData[childName]) {
-            formData[childName] = [];
-          }
-          formData[childName].push(value);
-        } else {
-          if (!formData[parentName]) {
-            formData[parentName] = {};
-          }
-          if (!formData[parentName][childName]) {
-            formData[parentName][childName] = [];
-          }
-          formData[parentName][childName].push(value);
-        }
-      } else {
-        if (element.type === "checkbox" || element.type === "radio") {
-          if (!formData[name]) {
-            formData[name] = [];
-          }
-          if (element.checked) {
-            formData[name].push(value);
-          }
-        } else if (element.type === "select-multiple") {
-          const selectedOptions = Array.from(element.selectedOptions).map((option) => option.value);
-          formData[name] = selectedOptions;
-        } else {
-          formData[name] = value;
+    for (const element of formElements) {
+      if (element.name) {
+        const fieldName = element.name.replace("myForm_", "");
+        switch (element.type) {
+          case "checkbox":
+            formData[fieldName] = element.checked;
+            break;
+          case "radio":
+            if (element.checked) {
+              formData[fieldName] = element.value;
+            }
+            break;
+          case "select-one":
+            formData[fieldName] = element.value;
+            break;
+          default:
+            formData[fieldName] = element.value;
         }
       }
     }
-
     return formData;
   }
-}
 
+  loadFormDataFromLocalStorage() {
+    const storedFormData = localStorage.getItem("formData");
+    if (storedFormData) {
+      const jsonData = JSON.parse(storedFormData);
+      this.fillFormFields(jsonData);
+    }
+  }
+}
 	//
 
 	const form = document.getElementById("myForm");
