@@ -1,7 +1,7 @@
 
 //----------------: Shop
 //: Specifications
- window.formConfig = {
+ export const formConfig = {
 	  "fields": [
 		{
 		  "label": "Password",
@@ -135,7 +135,7 @@
 	  ]
 	};
 //: Requirements
-window.formConfig2 = {
+export const formConfig2 = {
   fields: [
     {
       label: "Application Name",
@@ -225,7 +225,7 @@ window.formConfig2 = {
   ]
 };
 //: Quotes 
-window.projectTypes = [
+export const projectTypes = [
     {
       "id": 1,
       "name": "Web Development",
@@ -339,7 +339,7 @@ window.projectTypes = [
     }
   ];
 
-window.templates = [
+export const templates = [
     {
       "name": "Basic Website Template",
       "pages": [
@@ -383,7 +383,7 @@ window.templates = [
   ];
 
   // Price Adjustments
-window.complexityMultipliers = {
+export const complexityMultipliers = {
   web: {
 	low: 0.6,
 	medium: 1.0,
@@ -419,7 +419,7 @@ const projectTypeMultipliers = {
   },
 };
 
-window.projectDurationMultipliers = (days) => {
+export const projectDurationMultipliers = (days) => {
   if (days <= 30) {
 	return 1.5; // very short-term (less than 1 month)
   } else if (days <= 90) {
