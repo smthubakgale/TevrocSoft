@@ -45,18 +45,22 @@ class FormGenerator {
 	const span1 = document.createElement('span');
 	const div2 = document.createElement('div');
 	
+        description.style.fontSize = "12px";
 	spanTitle.textContent = field.title;
 	spanTitle.style.fontWeight = 'bold';
-	span1.textContent = '. see more .';
+	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
-	div2.textContent = field.description;
+	span1.style.cursor = 'pointer'
+	div2.innerHTML = field.description;
 	div2.style.display = 'none';
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
 	    div2.style.display = 'block';
+	    span1.textContent = 'less';
 	  } else {
 	    div2.style.display = 'none';
+	    span1.textContent = 'more';
 	  }
 	});
 	
