@@ -265,6 +265,10 @@ class FormGenerator {
                   removeButton.addEventListener("click", () => {
                     newSubForm.remove();
                   });
+
+                  field.fields.splice(nextFieldIndex, 1); // remove the field from the array
+                } else {
+                  console.log("No more fields to add");
                 }
               });
               return;
@@ -298,8 +302,8 @@ class FormGenerator {
 
           let inputElement;
 
-          switch (field.type) {
-                        case "select":
+                    switch (field.type) {
+            case "select":
               inputElement = document.createElement("select");
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
@@ -382,6 +386,44 @@ class FormGenerator {
 
       this.callback(formData);
     });
+
+    const downloadButton = document.createElement("button");
+    downloadButton.textContent = "Download";
+    downloadButton.classList.add("download-button");
+
+    parentElement.appendChild(downloadButton);
+
+    downloadButton.addEventListener("click", () => {
+      const formData = {};
+      const formElements = this.form.elements;
+
+      for (let i = 0; i < formElements.length; i++) {
+        const element = formElements[i];
+        const name = element.name;
+        const value = element.value;
+
+        if (name.includes("_")) {
+          const parentName = name.split("_")[0];
+          const childName = name.split("_")[1];
+
+          if (!formData[parentName]) {
+            formData[parentName] = {};
+          }
+
+          formData[parentName][childName] = value;
+        } else {
+          formData[name] = value;
+        }
+      }
+
+      const json = JSON.stringify(formData, null, 2);
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "form_data.json";
+      a.click();
+    });
   }
 
   renderSubForm(parentElement, fields, parentName) {
@@ -418,7 +460,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-        case "radio":
+                case "radio":
           field.options.forEach((option) => {
             inputElement = document.createElement("input");
             inputElement.type = "radio";
@@ -462,7 +504,7 @@ class FormGenerator {
       const file = event.target.files[0];
       const reader = new FileReader();
 
-            reader.addEventListener("load", (event) => {
+      reader.addEventListener("load", (event) => {
         const jsonData = JSON.parse(event.target.result);
         this.fillFormFields(jsonData);
       });
@@ -477,16 +519,10 @@ class FormGenerator {
     for (let i = 0; i < formElements.length; i++) {
       const element = formElements[i];
       const name = element.name;
+      const value = data[name];
 
-      if (data[name]) {
-        element.value = data[name];
-      } else if (name.includes("_")) {
-        const parentName = name.split("_")[0];
-        const childName = name.split("_")[1];
-
-        if (data[parentName] && data[parentName][childName]) {
-          element.value = data[parentName][childName];
-        }
+      if (value) {
+        element.value = value;
       }
     }
   }
