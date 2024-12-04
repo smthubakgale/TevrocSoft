@@ -211,6 +211,30 @@ export const formConfig2 = {
       required: true, 
     },
     {
+      label: "Specification File Location",
+      name: "--config",
+      type: "text",
+      description: "the relative or absolute path of the configuration json file ,  e.g src/configs.json"
+    },
+    {
+      label: "Development Framework",
+      name: "--frame",
+      type: "select",
+      description: `
+<b> 1. Web </b>
+<p> "html5" , "flask" , "php" ,"mvc" , "express" , "springboot" </p>
+<b> 2. Mobile </b>
+<p> "xamarin.android" , "java.android" </p>
+<b> 3. Desktop </b>
+<p><i> GUI </i></p>
+<p> "electron" , "javafx" , "owin.core" , "pyweb" </p>
+<p><i> Console </i></p>
+<p> "maven" , "csharp" </p>
+<p><i> Hybrid </i></p> 
+<p> "tomcat" ,"flask.electron", "electron.springboot" ,"owin.framework", "owin.flask" </p>
+      `
+    },
+    {
       label: "Email",
       name: "email",
       type: "email",
