@@ -623,16 +623,83 @@ class FormGenerator {
 const formConfig2 = {
   fields: [
     {
-      label: "First Name",
-      name: "firstName",
+      label: "Application Name",
+      name: "--name",
       type: "text",
-      description: "Enter your first name"
+      description: "Enter the name of the application"
     },
     {
-      label: "Last Name",
-      name: "lastName",
+      label: "Development Namespace",
+      name: "--group",
       type: "text",
-      description: "Enter your last name"
+      description: "the namespace or package of the application"
+    },
+    {
+      label: "Organization/Company,
+      name: "--company",
+      type: "text",
+      description: "Enter the group or comany name of the developer(s)"
+    },
+    {
+      label: "Development Team Leader",
+      name: "--author",
+      type: "text",
+      description: "Enter developer or member details"
+    },
+    {
+      label: "Licence",
+      name: "--license",
+      type: "select",
+      description: "Select the license category the final software will be released under",
+      options: [
+	        {
+	          label: 'MIT License',
+	          value: 'MIT License',
+	        },
+	        {
+	          label: 'Apache License 2.0',
+	          value: 'Apache License 2.0',
+	        },
+	        {
+	          label: 'GNU General Public License v3.0',
+	          value: 'GNU General Public License v3.0',
+	        },
+	        {
+	          label: 'BSD 3-Clause "New" or "Revised" License',
+	          value: 'BSD 3-Clause "New" or "Revised" License',
+	        },
+	        {
+	          label: 'Mozilla Public License 2.0',
+	          value: 'Mozilla Public License 2.0',
+	        },
+	        {
+	          label: 'Unlicense',
+	          value: 'Unlicense',
+	        },
+	        {
+	          label: 'GNU Affero General Public License v3.0',
+	          value: 'GNU Affero General Public License v3.0',
+	        },
+	        {
+	          label: 'Eclipse Public License 2.0',
+	          value: 'Eclipse Public License 2.0',
+	        },
+	        {
+	          label: 'Creative Commons Zero v1.0 Universal',
+	          value: 'Creative Commons Zero v1.0 Universal',
+	        },
+	        {
+	          label: 'GNU Lesser General Public License v3.0',
+	          value: 'GNU Lesser General Public License v3.0',
+	        },
+      ],
+      required: true, 
+    },
+    {
+      label: "Email",
+      name: "email",
+      type: "email",
+      description: "Enter your email address"
     },
     {
       label: "Email",
