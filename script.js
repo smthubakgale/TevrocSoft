@@ -36,7 +36,43 @@ class FormGenerator {
     this.addEventListeners();
     this.loadFormDataFromLocalStorage();
   }
+  createDescription(field){
+    let description;
 
+      if(field.title && field.seemore == true){
+	description = document.createElement('div');
+	const spanTitle = document.createElement('span');
+	const span1 = document.createElement('span');
+	const div2 = document.createElement('div');
+	
+	spanTitle.textContent = field.title;
+	spanTitle.style.fontWeight = 'bold';
+	span1.textContent = '. see more .';
+	span1.style.color = '#007bff'; // blueish color
+	div2.textContent = field.description;
+	div2.style.display = 'none';
+	
+	span1.addEventListener('click', () => {
+	  if (div2.style.display === 'none') {
+	    div2.style.display = 'block';
+	  } else {
+	    div2.style.display = 'none';
+	  }
+	});
+	
+	description.appendChild(spanTitle);
+	description.appendChild(span1);
+	description.appendChild(div2);
+      }
+      else {
+	description = document.createElement("small");
+        description.innerHTML = field.description;
+        description.style.color = "gray";
+        description.style.fontSize = "12px";	    
+      }
+	  
+      return description;
+  }
   renderForm() {
     const fields = this.formConfig.fields;
     const parentElement = this.form;
@@ -64,10 +100,7 @@ class FormGenerator {
           label.textContent = field.label;
           label.htmlFor = `${parentName}_${field.name}`;
 
-          const description = document.createElement("small");
-          description.innerHTML = field.description;
-          description.style.color = "gray";
-          description.style.fontSize = "12px";
+          const description = this.createDescription(field);
 
           let inputElement;
 
@@ -164,10 +197,7 @@ class FormGenerator {
           label.textContent = field.label;
           label.htmlFor = `${parentName}_${field.name}`;
 
-          const description = document.createElement("small");
-          description.innerHTML = field.description;
-          description.style.color = "gray";
-          description.style.fontSize = "12px";
+          const description = this.createDescription(field);
 
           let inputElement;
 
@@ -312,41 +342,8 @@ class FormGenerator {
       label.textContent = field.label;
       label.htmlFor = `${parentName}_${field.name}`;
 
-      let description;
-
-      if(field.title && field.seemore == true){
-	const description = document.createElement('div');
-	const spanTitle = document.createElement('span');
-	const span1 = document.createElement('span');
-	const div2 = document.createElement('div');
-	
-	spanTitle.textContent = field.title;
-	spanTitle.style.fontWeight = 'bold';
-	span1.textContent = '. see more .';
-	span1.style.color = '#007bff'; // blueish color
-	div2.textContent = field.description;
-	div2.style.display = 'none';
-	
-	span1.addEventListener('click', () => {
-	  if (div2.style.display === 'none') {
-	    div2.style.display = 'block';
-	  } else {
-	    div2.style.display = 'none';
-	  }
-	});
-	
-	description.appendChild(spanTitle);
-	description.appendChild(span1);
-	description.appendChild(div2);
-      }
-      else {
-	description = document.createElement("small");
-        description.innerHTML = field.description;
-        description.style.color = "gray";
-        description.style.fontSize = "12px";	    
-      }
+      const description = this.createDescription(field);
       
-
       let inputElement;
 
       switch (field.type) {
