@@ -200,6 +200,26 @@ class FormGenerator {
           let inputElement;
 
           switch (field.type) {
+            case "text":
+            case "email":
+            case "tel":
+            case "url":
+              inputElement = document.createElement("input");
+              inputElement.type = field.type;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "password":
+              inputElement = document.createElement("input");
+              inputElement.type = "password";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "textarea":
+              inputElement = document.createElement("textarea");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
             case "select":
               inputElement = document.createElement("select");
               inputElement.name = `${parentName}_${field.name}`;
@@ -233,6 +253,78 @@ class FormGenerator {
                 parentElement.appendChild(labelElement);
               });
               return;
+            case "date":
+              inputElement = document.createElement("input");
+              inputElement.type = "date";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "time":
+              inputElement = document.createElement("input");
+              inputElement.type = "time";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "month":
+              inputElement = document.createElement("input");
+              inputElement.type = "month";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "week":
+              inputElement = document.createElement("input");
+              inputElement.type = "week";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "range":
+              inputElement = document.createElement("input");
+              inputElement.type = "range";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+                        case "color":
+              inputElement = document.createElement("input");
+              inputElement.type = "color";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "hidden":
+              inputElement = document.createElement("input");
+              inputElement.type = "hidden";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "reset":
+              inputElement = document.createElement("input");
+              inputElement.type = "reset";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "button":
+              inputElement = document.createElement("button");
+              inputElement.textContent = field.label;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
             case "subform":
               const fieldSet = document.createElement("fieldset");
               fieldSet.legend = field.label;
@@ -271,7 +363,7 @@ class FormGenerator {
               return;
             default:
               inputElement = document.createElement("input");
-              inputElement.type = field.type;
+              inputElement.type = "text";
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
           }
@@ -300,12 +392,32 @@ class FormGenerator {
           let inputElement;
 
           switch (field.type) {
+            case "text":
+            case "email":
+            case "tel":
+            case "url":
+              inputElement = document.createElement("input");
+              inputElement.type = field.type;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "password":
+              inputElement = document.createElement("input");
+              inputElement.type = "password";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "textarea":
+              inputElement = document.createElement("textarea");
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
             case "select":
               inputElement = document.createElement("select");
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
 
-                            field.options.forEach((option) => {
+              field.options.forEach((option) => {
                 const optionElement = document.createElement("option");
                 optionElement.value = option.value;
                 optionElement.textContent = option.label;
@@ -326,16 +438,92 @@ class FormGenerator {
                 inputElement.value = option.value;
                 inputElement.required = field.required;
 
-                const labelElement = document.createElement("label");
+                                const labelElement = document.createElement("label");
                 labelElement.textContent = option.label;
                 labelElement.appendChild(inputElement);
 
                 fieldSet.appendChild(labelElement);
               });
               return;
+            case "date":
+              inputElement = document.createElement("input");
+              inputElement.type = "date";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "time":
+              inputElement = document.createElement("input");
+              inputElement.type = "time";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "month":
+              inputElement = document.createElement("input");
+              inputElement.type = "month";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "week":
+              inputElement = document.createElement("input");
+              inputElement.type = "week";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "range":
+              inputElement = document.createElement("input");
+              inputElement.type = "range";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "color":
+              inputElement = document.createElement("input");
+              inputElement.type = "color";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "hidden":
+              inputElement = document.createElement("input");
+              inputElement.type = "hidden";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "reset":
+              inputElement = document.createElement("input");
+              inputElement.type = "reset";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "button":
+              inputElement = document.createElement("button");
+              inputElement.textContent = field.label;
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "subform":
+              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              fieldSet.appendChild(subFormElement);
+              return;
             default:
               inputElement = document.createElement("input");
-              inputElement.type = field.type;
+              inputElement.type = "text";
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
           }
@@ -350,84 +538,6 @@ class FormGenerator {
 
         parentElement.appendChild(fieldSet);
       }
-    });
-
-    const jsonButton = document.createElement("button");
-    jsonButton.textContent = "Convert to JSON";
-    jsonButton.classList.add("json-button");
-
-    parentElement.appendChild(jsonButton);
-
-    jsonButton.addEventListener("click", () => {
-      const formData = {};
-      const formElements = this.form.elements;
-
-      for (let i = 0; i < formElements.length; i++) {
-        const element = formElements[i];
-        const name = element.name;
-        const value = element.value;
-
-        if (name.includes("_")) {
-          const parentName = name.split("_")[0];
-          const childName = name.split("_")[1];
-
-          if (parentName === "myForm") {
-            formData[childName] = value;
-          } else {
-            if (!formData[parentName]) {
-              formData[parentName] = {};
-            }
-
-            formData[parentName][childName] = value;
-          }
-        } else {
-          formData[name] = value;
-        }
-      }
-
-      this.callback(formData);
-    });
-
-    const downloadButton = document.createElement("button");
-    downloadButton.textContent = "Download";
-    downloadButton.classList.add("download-button");
-
-    parentElement.appendChild(downloadButton);
-
-    downloadButton.addEventListener("click", () => {
-      const formData = {};
-      const formElements = this.form.elements;
-
-      for (let i = 0; i < formElements.length; i++) {
-        const element = formElements[i];
-        const name = element.name;
-        const value = element.value;
-
-        if (name.includes("_")) {
-          const parentName = name.split("_")[0];
-          const childName = name.split("_")[1];
-
-          if (parentName === "myForm") {
-            formData[childName] = value;
-          } else {
-            if (!formData[parentName]) {
-              formData[parentName] = {};
-            }
-
-            formData[parentName][childName] = value;
-          }
-        } else {
-          formData[name] = value;
-        }
-      }
-
-      const json = JSON.stringify(formData, null, 2);
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "form_data.json";
-      a.click();
     });
   }
 
@@ -448,10 +558,30 @@ class FormGenerator {
       let inputElement;
 
       switch (field.type) {
+        case "text":
+        case "email":
+        case "tel":
+        case "url":
+          inputElement = document.createElement("input");
+          inputElement.type = field.type;
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "password":
+          inputElement = document.createElement("input");
+          inputElement.type = "password";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "textarea":
+          inputElement = document.createElement("textarea");
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
         case "select":
           inputElement = document.createElement("select");
           inputElement.name = `${parentName}_${field.name}`;
-          inputElement.required = field.required;
+                    inputElement.required = field.required;
 
           field.options.forEach((option) => {
             const optionElement = document.createElement("option");
@@ -466,7 +596,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           break;
-                case "radio":
+        case "radio":
           field.options.forEach((option) => {
             inputElement = document.createElement("input");
             inputElement.type = "radio";
@@ -481,9 +611,81 @@ class FormGenerator {
             subFormElement.appendChild(labelElement);
           });
           return;
+        case "date":
+          inputElement = document.createElement("input");
+          inputElement.type = "date";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "time":
+          inputElement = document.createElement("input");
+          inputElement.type = "time";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "datetime-local":
+          inputElement = document.createElement("input");
+          inputElement.type = "datetime-local";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "month":
+          inputElement = document.createElement("input");
+          inputElement.type = "month";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "week":
+          inputElement = document.createElement("input");
+          inputElement.type = "week";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "number":
+          inputElement = document.createElement("input");
+          inputElement.type = "number";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "range":
+          inputElement = document.createElement("input");
+          inputElement.type = "range";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "color":
+          inputElement = document.createElement("input");
+          inputElement.type = "color";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "hidden":
+          inputElement = document.createElement("input");
+          inputElement.type = "hidden";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "file":
+          inputElement = document.createElement("input");
+          inputElement.type = "file";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "reset":
+          inputElement = document.createElement("input");
+          inputElement.type = "reset";
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
+        case "button":
+          inputElement = document.createElement("button");
+          inputElement.textContent = field.label;
+          inputElement.name = `${parentName}_${field.name}`;
+          inputElement.required = field.required;
+          break;
         default:
           inputElement = document.createElement("input");
-          inputElement.type = field.type;
+          inputElement.type = "text";
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
       }
@@ -529,8 +731,17 @@ class FormGenerator {
       const name = element.name;
       const value = data[name];
 
-      if (value) {
-        element.value = value;
+            if (value !== undefined) {
+        if (element.type === "checkbox" || element.type === "radio") {
+          element.checked = value.includes(element.value);
+        } else if (element.type === "select-multiple") {
+          const selectedOptions = value;
+          Array.from(element.options).forEach((option) => {
+            option.selected = selectedOptions.includes(option.value);
+          });
+        } else {
+          element.value = value;
+        }
       }
     }
   }
@@ -549,24 +760,41 @@ class FormGenerator {
         const childName = name.split("_")[1];
 
         if (parentName === "myForm") {
-          formData[childName] = value;
+          if (!formData[childName]) {
+            formData[childName] = [];
+          }
+          formData[childName].push(value);
         } else {
           if (!formData[parentName]) {
             formData[parentName] = {};
           }
-
-          formData[parentName][childName] = value;
+          if (!formData[parentName][childName]) {
+            formData[parentName][childName] = [];
+          }
+          formData[parentName][childName].push(value);
         }
       } else {
-        formData[name] = value;
+        if (element.type === "checkbox" || element.type === "radio") {
+          if (!formData[name]) {
+            formData[name] = [];
+          }
+          if (element.checked) {
+            formData[name].push(value);
+          }
+        } else if (element.type === "select-multiple") {
+          const selectedOptions = Array.from(element.selectedOptions).map((option) => option.value);
+          formData[name] = selectedOptions;
+        } else {
+          formData[name] = value;
+        }
       }
     }
 
-    localStorage.setItem("form_data", JSON.stringify(formData));
+    localStorage.setItem("formData", JSON.stringify(formData));
   }
 
   loadFormDataFromLocalStorage() {
-    const storedFormData = localStorage.getItem("form_data");
+    const storedFormData = localStorage.getItem("formData");
 
     if (storedFormData) {
       const formData = JSON.parse(storedFormData);
@@ -588,16 +816,33 @@ class FormGenerator {
         const childName = name.split("_")[1];
 
         if (parentName === "myForm") {
-          formData[childName] = value;
+          if (!formData[childName]) {
+            formData[childName] = [];
+          }
+          formData[childName].push(value);
         } else {
           if (!formData[parentName]) {
             formData[parentName] = {};
           }
-
-          formData[parentName][childName] = value;
+          if (!formData[parentName][childName]) {
+            formData[parentName][childName] = [];
+          }
+          formData[parentName][childName].push(value);
         }
       } else {
-        formData[name] = value;
+        if (element.type === "checkbox" || element.type === "radio") {
+          if (!formData[name]) {
+            formData[name] = [];
+          }
+          if (element.checked) {
+            formData[name].push(value);
+          }
+        } else if (element.type === "select-multiple") {
+          const selectedOptions = Array.from(element.selectedOptions).map((option) => option.value);
+          formData[name] = selectedOptions;
+        } else {
+          formData[name] = value;
+        }
       }
     }
 
@@ -609,7 +854,8 @@ class FormGenerator {
     a.download = "form_data.json";
     a.click();
   }
-} 
+}
+
 	//
 
 	const form = document.getElementById("myForm");
