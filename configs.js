@@ -4,12 +4,12 @@
  export const formConfig = {
 	 "fields": [ 
 	        {
-		   group : "Document" ,
+		    
 		   label: "Members",
-		   name: "id_title",
+		   name: "members",
 		   type: "subform", 
 		   description: "Secify all the members involved " ,
-		  "fields": [
+		   fields: [
 			{
 			  "label": "Member Id",
 			  "type": "text",
