@@ -389,7 +389,7 @@ export const formConfig2 = {
 	   ]
         },
         {
-	   label:"E-commerce Templates"" ,
+	   label:"E-commerce Templates" ,
 	   options: [
 	     { "value": "E-commerce Templates", "label": "E-commerce Templates" },
 	     { "value": "OpenCart Templates", "label": "OpenCart Templates" },
