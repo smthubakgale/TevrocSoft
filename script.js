@@ -284,7 +284,7 @@ class FormGenerator {
 	         });
 	      }
 
-              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
 
 
@@ -589,7 +589,7 @@ class FormGenerator {
 	         });
 	      }
 
-              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
  
               parentElement.appendChild(fieldSet);
