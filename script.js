@@ -89,12 +89,14 @@ class FormGenerator {
 	  inputElement.appendChild(optionElement);
        });  
      }
-     if(field.optgroup)
+     if(field.optgroups)
      {
-	 const optionElement = document.createElement(optgroup"); 
-	 optionElement.setAttribute('label', field.optgroup.label);
-	 this.createSelect(field.optgroup.options , optionElement);
-	 inputElement.appendChild(optionElement);
+	field.optgroups.forEach((opgroup) => {
+	    const optionElement = document.createElement("optgroup"); 
+	    optionElement.setAttribute('label', opgroup.label);
+	    this.createSelect(opgroup.options , optionElement);
+	    inputElement.appendChild(optionElement);
+        }); 
      }
   }
   renderForm() {
