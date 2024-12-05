@@ -91,7 +91,7 @@ class FormGenerator {
      if(field.optgroups)
      { 
 	var ts = this;
-	field.optgroups.forEach((opgroup) => {
+	field.optgroups.forEach((optgroup) => {
 	    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
 	    
 	    if(nested){ 
@@ -103,9 +103,9 @@ class FormGenerator {
 		optgroupElement.appendChild(optionElement);
 	    }
 	    else{
-		optgroupElement.setAttribute('label', opgroup.label);    
+		optgroupElement.setAttribute('label', optgroup.label);    
 	    }
-	    ts.createSelect(opgroup , optgroupElement, true);
+	    ts.createSelect(optgroup , optgroupElement, true);
 	    inputElement.appendChild(optgroupElement);
         }); 
      }
