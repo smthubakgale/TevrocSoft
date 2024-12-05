@@ -1276,6 +1276,16 @@ shop #discounts {
   background-color: #3e8e41;
 }
 
+#shop .nested-dropdown {
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  border-left: 5px solid #3498db;
+}
 /* Tags Styles */
 
 
