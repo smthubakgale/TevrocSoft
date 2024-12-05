@@ -124,8 +124,7 @@ class FormGenerator {
 		 //  
 	         const selectedValue = init ? field.optgroups[0].label : inputElement.value;
 	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
-
-		 console.log(field , selectedOptgroup);
+ 
 		 let selectElement = document.createElement("select");
 		 selectElement.name = `${field.name}_${selectedOptgroup.label}`;
 		 selectElement.required = field.required;
@@ -251,7 +250,10 @@ class FormGenerator {
               return;
             case "subform":
               const fieldSet = document.createElement("fieldset");
-              fieldSet.legend = field.label;
+	      const legend = document.createElement("legend");
+	      legend.textContent = field.label;
+	      fieldSet.appendChild(legend);
+		      
               fieldSet.style.border = "1px solid #ccc";
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
@@ -351,6 +353,45 @@ class FormGenerator {
 
                 fieldSet.appendChild(labelElement);
               });
+              return;
+            case "subform":
+              const fieldSet = document.createElement("fieldset"); 
+	      const legend = document.createElement("legend");
+	      legend.textContent = field.label;
+	      fieldSet.appendChild(legend);
+			  
+              fieldSet.style.border = "1px solid #ccc";
+              fieldSet.style.padding = "10px";
+              fieldSet.style.marginBottom = "20px";
+
+              const addButton = document.createElement("button");
+              addButton.type = "button";
+              addButton.textContent = "Add new " + field.label;
+              addButton.classList.add("add-button");
+
+              fieldSet.appendChild(addButton);
+
+              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              fieldSet.appendChild(subFormElement);
+
+              addButton.addEventListener("click", () => {
+                const newSubForm = subFormElement.cloneNode(true);
+                const inputs = newSubForm.querySelectorAll("input, select, textarea");
+                inputs.forEach((input) => {
+                  input.value = "";
+                });
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.classList.add("remove-button");
+                newSubForm.appendChild(removeButton);
+                fieldSet.appendChild(newSubForm);
+
+                removeButton.addEventListener("click", () => {
+                  newSubForm.remove();
+                });
+              });
+
+              parentElement.appendChild(fieldSet);
               return;
             default:
               inputElement = document.createElement("input");
@@ -455,8 +496,8 @@ class FormGenerator {
   }
 
   renderSubForm(parentElement, fields, parentName) {
-    const subFormElement = document.createElement("div");
-    subFormElement.classList.add("subform");
+    const Element = document.createElement("div");
+    Element.classList.add("");
 
     fields.forEach((field) => {
       const label = document.createElement("label");
@@ -505,6 +546,45 @@ class FormGenerator {
             subFormElement.appendChild(labelElement);
           });
           return;
+            case "subform":
+              const fieldSet = document.createElement("fieldset");
+	      const legend = document.createElement("legend");
+	      legend.textContent = field.label;
+	      fieldSet.appendChild(legend);
+		      
+              fieldSet.style.border = "1px solid #ccc";
+              fieldSet.style.padding = "10px";
+              fieldSet.style.marginBottom = "20px";
+
+              const addButton = document.createElement("button");
+              addButton.type = "button";
+              addButton.textContent = "Add new " + field.label;
+              addButton.classList.add("add-button");
+
+              fieldSet.appendChild(addButton);
+
+              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              fieldSet.appendChild(subFormElement);
+
+              addButton.addEventListener("click", () => {
+                const newSubForm = subFormElement.cloneNode(true);
+                const inputs = newSubForm.querySelectorAll("input, select, textarea");
+                inputs.forEach((input) => {
+                  input.value = "";
+                });
+                const removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.classList.add("remove-button");
+                newSubForm.appendChild(removeButton);
+                fieldSet.appendChild(newSubForm);
+
+                removeButton.addEventListener("click", () => {
+                  newSubForm.remove();
+                });
+              });
+
+              parentElement.appendChild(fieldSet);
+              return;
         default:
           inputElement = document.createElement("input");
           inputElement.type = field.type;
