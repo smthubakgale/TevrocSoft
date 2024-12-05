@@ -15,7 +15,7 @@ import {
   const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
   
-  // Template group header toggle
+  // Template  header toggle
 	document.querySelectorAll('#shop .template-group-header').forEach(header => {
 	  header.addEventListener('click', () => {
 		const content = header.nextElementSibling;
@@ -301,7 +301,9 @@ class FormGenerator {
         });
       } else {
         const fieldSet = document.createElement("fieldset");
-        fieldSet.legend = group;
+        const legend = document.createElement("legent");
+        legend.textContent = group;
+	fieldSet.appendChild(legend);
 
         groupedFields[group].forEach((field) => {
           const label = document.createElement("label");
