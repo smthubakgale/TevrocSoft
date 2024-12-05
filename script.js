@@ -78,32 +78,28 @@ class FormGenerator {
       return description;
   }
   checkNested(field , index){
-      
+      var ret = index + 0;
       if(field.optgroups)
-      {
-	index = index + 1; 
+      {  
+        ret = index + 1;
 	field.optgroups.forEach((optgroup)=>
-        {
-	   let rf = index;
-	   this.checkNested(optgroup , rf);
-           if(rf > index)
+        { 
+	   var rf = this.checkNested(optgroup , ret);
+           if(rf > ret)
 	   {
-	     index = rf;
+	     ret = rf;
 	   }
 	});
-	console.log(index , field);
+	console.log(ret , field);
 	
       }
+      return ret;
   }
   createSelect(field , inputElement , nested = false)
   {
-      var sn = false;
-      if(nested == false){ 
-	  var index = 0;
-	  this.checkNested(field , index);
-	  sn = index > 1;
-     }
-     if(sn){ console.log(field); }
+      var sn = (nested) ? false : this.checkNested(field , index) > 1;
+      console.log(sn);
+      if(sn){ console.log(field); }
 
      if(field.options)
      {
