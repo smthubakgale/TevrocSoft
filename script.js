@@ -79,10 +79,10 @@ class FormGenerator {
   }
   checkNested(field , index){
       
-      if(field.optgroup)
+      if(field.optgroups)
       {
 	index++;
-	this.checkNested(field , index);
+	this.checkNested(field.optgroups , index);
       }
   }
   createSelect(field , inputElement , nested = false)
