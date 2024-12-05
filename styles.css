@@ -1304,6 +1304,12 @@ shop #discounts {
 #shop fieldset fieldset legend {
   color: #333333;
 }
+#shop fieldset fieldset fieldset legend {
+  font-size:14px;
+}
+#shop fieldset fieldset fieldset fieldset legend {
+  font-style:italic;
+}
 #shop .setnav{
   display:flex; 
   gap:8px; 
