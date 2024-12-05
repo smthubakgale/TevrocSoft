@@ -95,7 +95,7 @@ class FormGenerator {
 	    let optionElement = document.createElement("optgroup"); 
 	    optionElement.setAttribute('label', opgroup.label);field
 	    
-	    ts.createSelect(opgroup.options , optionElement);
+	    ts.createSelect(opgroup , optionElement);
 	    inputElement.appendChild(optionElement);
         }); 
      }
