@@ -367,7 +367,84 @@ export const formConfig2 = {
       label: "Template",
       name: "--template",
       type: "text",
-      description: "Enter your email address"
+      description: "Enter your email address",
+      optgroups:[
+        {
+	   label:"Admin Templates",
+	   options: [
+	      { "value": "AdminLTE", "label": "AdminLTE" },
+	      { "value": "SB Admin 2", "label": "SB Admin 2" },
+	      { "value": "Materialize Admin", "label": "Materialize Admin" },
+	      { "value": "Gentelella", "label": "Gentelella" },
+	      { "value": "Ample Admin", "label": "Ample Admin" },
+	      { "value": "Flat Admin", "label": "Flat Admin" },
+	      { "value": "Modern Admin", "label": "Modern Admin" },
+	      { "value": "CoreUI", "label": "CoreUI" },
+	      { "value": "Tabler", "label": "Tabler" }  
+	   ]
+        },
+        {
+	   label:"Web Application Templates",
+	   options: [
+	      { "value": "Bootstrap Templates", "label": "Bootstrap Templates" },
+	      { "value": "HTML5 UP", "label": "HTML5 UP" },
+	      { "value": "Templated", "label": "Templated" },
+	      { "value": "CSS Templates", "label": "CSS Templates" },
+	      { "value": "Free CSS Templates", "label": "Free CSS Templates" },
+	      { "value": "W3Layouts", "label": "W3Layouts" },
+	      { "value": "TemplateMonster", "label": "TemplateMonster" },
+	      { "value": "ThemeForest", "label": "ThemeForest" },
+	      { "value": "Creative Market", "label": "Creative Market" }  
+	   ]
+        },
+        {
+	   label:"Mobile Application Templates",
+	   options: [
+	      { "value": "HTML5 Mobile Templates", "label": "HTML5 Mobile Templates" },
+	      { "value": "Mobile Bootstrap Templates", "label": "Mobile Bootstrap Templates" },
+	      { "value": "Onsen UI Templates", "label": "Onsen UI Templates" },
+	      { "value": "Framework7 Templates", "label": "Framework7 Templates" },
+	      { "value": "Ionic Templates", "label": "Ionic Templates" },
+	      { "value": "React Native Templates", "label": "React Native Templates" },
+	      { "value": "Flutter Templates", "label": "Flutter Templates" }  
+	   ]
+        },
+        {
+	   label:"Landing Page Templates",
+	   options: [
+	      { "value": "Landing Page Templates", "label": "Landing Page Templates" },
+	      { "value": "One Page Love", "label": "One Page Love" },
+	      { "value": "Landkit", "label": "Landkit" },
+	      { "value": "Launchkit", "label": "Launchkit" },
+	      { "value": "Startup Template", "label": "Startup Template" },
+	      { "value": "Landing Template", "label": "Landing Template" },
+	      { "value": "OnePage Template", "label": "OnePage Template" },
+	      { "value": "TemplateKit", "label": "TemplateKit" }  
+	   ]
+        },
+        {
+	   label:"E-commerce Templates"" ,
+	   options: [
+	     { "value": "E-commerce Templates", "label": "E-commerce Templates" },
+	     { "value": "OpenCart Templates", "label": "OpenCart Templates" },
+	     { "value": "PrestaShop Templates", "label": "PrestaShop Templates" },
+	     { "value": "WooCommerce Templates", "label": "WooCommerce Templates" },
+	     { "value": "Magento Templates", "label": "Magento Templates" },
+	     { "value": "Shopify Templates", "label": "Shopify Templates" },
+	     { "value": "BigCommerce Templates", "label": "BigCommerce Templates" }
+	   ]
+        },
+        {
+	   label:"Blog Templates",
+	   options: [
+	     { "value": "Blog Templates", "label": "Blog Templates" },
+	     { "value": "WordPress Themes", "label": "WordPress Themes" },
+	     { "value": "Blogger Templates", "label": "Blogger Templates" },
+	     { "value": "Joomla Templates", "label": "Joomla Templates" },
+	     { "value": "Drupal Themes", "label": "Drupal Themes" }   
+	   ]
+        }
+      ]
     },
     {
       label: "Email",
