@@ -614,8 +614,8 @@ class FormGenerator {
 	  newSubForm.style.borderTop = '2px solid #87CEEB';
 	  newSubForm.style.paddingTop = '20px';
 	
-	  // Get all FIELDSET children of the fieldSet
-	const subforms = Array.from(fieldSet.children).filter(child => child.tagName === 'FIELDSET');
+	  // Find all elements with class "subform" in fieldSet
+           const subforms = fieldSet.querySelectorAll('.subform');
 	
 	// Hide all subforms except the cloned one
 	for (let i = 0; i < subforms.length; i++) {
