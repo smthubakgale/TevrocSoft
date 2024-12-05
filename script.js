@@ -634,9 +634,9 @@ class FormGenerator {
 	    // Create Next and Previous buttons
 	    const nextButton = document.createElement('button');
 	    nextButton.textContent = 'Next';
-	    nextButton.onclick = () => {
-		subforms = fieldSet.querySelectorAll('.subform');
-		console.log(subforms , currentSubformIndex , subforms.length - 1);
+	    nextButton.onclick = (e) => {
+		e.preventDefault();
+		subforms = fieldSet.querySelectorAll('.subform'); 
 	        subforms[currentSubformIndex].style.display = 'none';
 		    
 	      // Hide current subform
@@ -656,9 +656,9 @@ class FormGenerator {
 	    const prevButton = document.createElement('button');
 	    prevButton.textContent = 'Previous';
 	    prevButton.onclick = () => {
+		e.preventDefault();
 	      subforms = fieldSet.querySelectorAll('.subform');
-	      // Hide current subform
-		console.log(subforms , currentSubformIndex , subforms.length - 1);
+	      // Hide current subform 
 	        subforms[currentSubformIndex].style.display = 'none';
 	
 	      // Show previous subform
