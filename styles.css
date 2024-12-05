@@ -1308,7 +1308,7 @@ shop #discounts {
   display:flex; 
   gap:8px; 
   padding-top:10px;
-  padding-bottom:20px;
+  padding-bottom:10px;
 }
 #shop .setnav button{
   height:40px;
