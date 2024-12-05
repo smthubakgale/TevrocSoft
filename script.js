@@ -282,6 +282,9 @@ class FormGenerator {
 
               addButton.addEventListener("click", () => {
                 const newSubForm = subFormElement.cloneNode(true);
+		newSubform.style.borderTop = '2px solid #87CEEB';
+                newSubform.style.paddingTop = '20px';
+		      
                 const inputs = newSubForm.querySelectorAll("input, select, textarea");
                 inputs.forEach((input) => {
                   input.value = "";
@@ -401,6 +404,9 @@ class FormGenerator {
 
               addButton.addEventListener("click", () => {
                 const newSubForm = subFormElement.cloneNode(true);
+		newSubform.style.borderTop = '2px solid #87CEEB';
+                newSubform.style.paddingTop = '20px';
+		      
                 const inputs = newSubForm.querySelectorAll("input, select, textarea");
                 inputs.forEach((input) => {
                   input.value = "";
@@ -609,6 +615,9 @@ class FormGenerator {
 
               addButton.addEventListener("click", () => {
                 const newSubForm = subFormElement.cloneNode(true);
+		newSubform.style.borderTop = '2px solid #87CEEB';
+                newSubform.style.paddingTop = '20px';
+		      
                 const inputs = newSubForm.querySelectorAll("input, select, textarea");
                 inputs.forEach((input) => {
                   input.value = "";
