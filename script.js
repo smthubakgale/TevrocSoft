@@ -100,7 +100,7 @@ class FormGenerator {
 	        optionElement.textContent = optgroup.label;
 		    
 		optgroupElement.style.paddingLeft = "20px";
-		optgroupElement.appendChild(optionElement);
+		inputElement.appendChild(optionElement);
 	    }
 	    else{
 		optgroupElement.setAttribute('label', optgroup.label);    
