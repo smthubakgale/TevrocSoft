@@ -1304,6 +1304,17 @@ shop #discounts {
 #shop fieldset fieldset legend {
   color: #333333;
 }
+
+#shop .setnav button{
+  margin-left:4px;
+}
+#shop .setnav input{
+   width:unset;
+  margin-left:$px;
+}
+#shop .setnav span{
+  
+}
 /* Tags Styles */
 
 
