@@ -5,7 +5,7 @@
 	 "fields": [ 
 	        {
 		   group : "developer" ,
-		   label: "Application Icon",
+		   label: "Application Logo",
 		   name: "logo_png",
 		   type: "file",
 		   accept:".png" ,
@@ -13,7 +13,7 @@
 		},
 		{
 		   group : "developer" ,
-		   label: "Apprication Icon2",
+		   label: "Apprication Icon",
 		   name: "logo_ico",
 		   type: "file",
 		   accept:".ico" ,
