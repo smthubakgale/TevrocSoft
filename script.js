@@ -629,7 +629,12 @@ class FormGenerator {
 	
 	  console.log(subforms.length);
 	  // Function to create buttons
-	  function createButtons() {
+	  function createButtons() 
+	  {
+	    if (fieldset.querySelector('div.setnav')) { return; }
+	    // Create a new div element with class "setnav"
+		const setnavDiv = document.createElement('div');
+		setnavDiv.classList.add('setnav'); ; 
 	    // Create Next and Previous buttons
 	    const nextButton = document.createElement('button');
 	    nextButton.textContent = 'Next';
@@ -693,17 +698,14 @@ class FormGenerator {
 	      formNumberInput.max = subforms.length;
 	    }
 	
-	    // Get the add button
-	    const addButton = fieldSet.querySelector('button.add-button');
-	
-	    // Check if add button exists
-	    if (addButton) {  
-	      // Insert Next and Previous buttons, input type number, and subform counter text before the add button
-	      fieldSet.insertBefore(nextButton, addButton);
-	      fieldSet.insertBefore(prevButton, nextButton);
-	      fieldSet.insertBefore(formNumberInput, prevButton);
-	      fieldSet.insertBefore(subformCounterText, formNumberInput);
-	    }
+	    // Add elements to the setnavDiv
+		setnavDiv.appendChild(prevButton);
+		setnavDiv.appendChild(nextButton);
+		setnavDiv.appendChild(formNumberInput);
+		setnavDiv.appendChild(subformCounterText);
+		
+		// Add the setnavDiv to the fieldset
+		fieldset.appendChild(setnavDiv);
 	  }
 	
 	  // Call the function to create buttons
