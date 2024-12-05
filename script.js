@@ -356,24 +356,25 @@ class FormGenerator {
               return;
             case "subform":
               inputElement = document.createElement("div");
-              const fieldSet2 = document.createElement("fieldset"); 
+			  
+              const fieldSet = document.createElement("fieldset");
 	      const legend = document.createElement("legend");
 	      legend.textContent = field.label;
-	      fieldSet2.appendChild(legend);
-			  
-              fieldSet2.style.border = "1px solid #ccc";
-              fieldSet2.style.padding = "10px";
-              fieldSet2.style.marginBottom = "20px";
+	      fieldSet.appendChild(legend);
+		      
+              fieldSet.style.border = "1px solid #ccc";
+              fieldSet.style.padding = "10px";
+              fieldSet.style.marginBottom = "20px";
 
               const addButton = document.createElement("button");
               addButton.type = "button";
               addButton.textContent = "Add new " + field.label;
               addButton.classList.add("add-button");
 
-              fieldSet2.appendChild(addButton);
+              fieldSet.appendChild(addButton);
 
-              const subFormElement = this.renderSubForm(fieldSet2, [field.fields[0]], parentName + "_" + field.name);
-              fieldSet2.appendChild(subFormElement);
+              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
                 const newSubForm = subFormElement.cloneNode(true);
@@ -385,14 +386,16 @@ class FormGenerator {
                 removeButton.textContent = "Remove";
                 removeButton.classList.add("remove-button");
                 newSubForm.appendChild(removeButton);
-                fieldSet2.appendChild(newSubForm);
+                fieldSet.appendChild(newSubForm);
 
                 removeButton.addEventListener("click", () => {
                   newSubForm.remove();
                 });
               });
- 
-	      inputElement.prepend(fieldSet2);
+
+              parentElement.appendChild(fieldSet);
+			  
+	      inputElement.appendChild(fieldSet);
               return;
             default:
               inputElement = document.createElement("input");
