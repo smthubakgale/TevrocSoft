@@ -78,6 +78,25 @@ class FormGenerator {
 	  
       return description;
   }
+  createSelect(field , inputElement)
+  {
+     if(field.options)
+     {
+	field.options.forEach((option) => {
+	  const optionElement = document.createElement("option");
+	  optionElement.value = option.value;
+	  optionElement.textContent = option.label;
+	  inputElement.appendChild(optionElement);
+       });  
+     }
+     if(field.optgroup)
+     {
+	 const optionElement = document.createElement(optgroup"); 
+	 optionElement.setAttribute('label', field.optgroup.label);
+	 this.createSelect(field.optgroup.options , optionElement);
+	 inputElement.appendChild(optionElement);
+     }
+  }
   renderForm() {
     const fields = this.formConfig.fields;
     const parentElement = this.form;
@@ -115,12 +134,7 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
 
-              field.options.forEach((option) => {
-                const optionElement = document.createElement("option");
-                optionElement.value = option.value;
-                optionElement.textContent = option.label;
-                inputElement.appendChild(optionElement);
-              });
+              this.createSelect(field , inputElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -212,12 +226,7 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
 
-                            field.options.forEach((option) => {
-                const optionElement = document.createElement("option");
-                optionElement.value = option.value;
-                optionElement.textContent = option.label;
-                inputElement.appendChild(optionElement);
-              });
+              this.createSelect(field , inputElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -357,12 +366,7 @@ class FormGenerator {
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
 
-          field.options.forEach((option) => {
-            const optionElement = document.createElement("option");
-            optionElement.value = option.value;
-            optionElement.textContent = option.label;
-            inputElement.appendChild(optionElement);
-          });
+          this.createSelect(field , inputElement);
           break;
         case "checkbox":
           inputElement = document.createElement("input");
