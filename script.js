@@ -271,19 +271,22 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-              const addButton = document.createElement("button");
-              addButton.type = "button";
-              addButton.textContent = "Add new " + field.label;
-              addButton.classList.add("add-button");
-
-              fieldSet.appendChild(addButton);
+              if(field.multiple)
+	      {  
+                 const addButton = document.createElement("button");
+                 addButton.type = "button";
+                 addButton.textContent = "Add new " + field.label;
+                 addButton.classList.add("add-button");
+                 fieldSet.appendChild(addButton);
+		      
+	         addButton.addEventListener("click", () => {
+		   ts.addButtonEvent(fieldSet, subFormElement);
+	         });
+	      }
 
               const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
 
-              addButton.addEventListener("click", () => {
-		 ts.addButtonEvent(fieldSet, subFormElement);
-              });
 
               parentElement.appendChild(fieldSet);
               return;
@@ -377,22 +380,22 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-              const addButton = document.createElement("button");
-              addButton.type = "button";
-              addButton.textContent = "Add new " + field.label;
-              addButton.classList.add("add-button");
-
-              fieldSet.appendChild(addButton);
+              if(field.multiple)
+	      {  
+                 const addButton = document.createElement("button");
+                 addButton.type = "button";
+                 addButton.textContent = "Add new " + field.label;
+                 addButton.classList.add("add-button");
+                 fieldSet.appendChild(addButton);
+		      
+	         addButton.addEventListener("click", () => {
+		   ts.addButtonEvent(fieldSet, subFormElement);
+	         });
+	      }
 
               const subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
-
-              addButton.addEventListener("click", () => {
-		 ts.addButtonEvent(fieldSet, subFormElement);
-              });
-
-              //parentElement.appendChild(fieldSet);
-	      
+  
               inputElement = document.createElement("div");
 			  	  
 	      inputElement.appendChild(fieldSet);
@@ -572,20 +575,22 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-              const addButton = document.createElement("button");
-              addButton.type = "button";
-              addButton.textContent = "Add new " + field.label;
-              addButton.classList.add("add-button");
-
-              fieldSet.appendChild(addButton);
+              if(field.multiple)
+	      {  
+                 const addButton = document.createElement("button");
+                 addButton.type = "button";
+                 addButton.textContent = "Add new " + field.label;
+                 addButton.classList.add("add-button");
+                 fieldSet.appendChild(addButton);
+		      
+	         addButton.addEventListener("click", () => {
+		   ts.addButtonEvent(fieldSet, subFormElement);
+	         });
+	      }
 
               const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
-
-              addButton.addEventListener("click", () => {
-    		 ts.addButtonEvent(fieldSet, subFormElement);
-              });
-
+ 
               parentElement.appendChild(fieldSet);
               return;
         default:
