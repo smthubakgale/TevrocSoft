@@ -4,7 +4,14 @@
  export const formConfig = {
 	 "fields": [ 
 	        {
-		   group : "developer" ,
+		   group : "Document" ,
+		   label: "Document Title",
+		   name: "id_title",
+		   type: "text", 
+		   description: "Enter the title for your documentation"
+		},
+	        {
+		   group : "Development" ,
 		   label: "Application Logo",
 		   name: "logo_png",
 		   type: "file",
@@ -12,7 +19,7 @@
 		   description: "Upload your icon in .png format"
 		},
 		{
-		   group : "developer" ,
+		   group : "Development" ,
 		   label: "Apprication Icon",
 		   name: "logo_ico",
 		   type: "file",
