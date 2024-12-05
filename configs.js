@@ -241,35 +241,35 @@ export const formConfig2 = {
     {
       "label": "Web Development",
       "options": [
-        { "value": "HTML5", "label": "Standard markup framework for web content" },
-        { "value": "Flask", "label": "Lightweight Python web framework" },
-        { "value": "PHP", "label": "Server-side scripting framework" },
-        { "value": "MVC", "label": "Model-View-Controller architectural framework" },
-        { "value": "Express", "label": "Node.js web application framework" },
-        { "value": "Spring Boot", "label": "Java-based web application framework" }
+        { "value": "HTML5", "label": "HTML 5" },
+        { "value": "Flask", "label": "Flask" },
+        { "value": "PHP", "label": "PHP" },
+        { "value": "MVC", "label": "MVC" },
+        { "value": "Express", "label": "Express" },
+        { "value": "Spring Boot", "label": "Spring Boot" }
       ]
     },
     {
       "label": "Mobile App Development",
       "options": [
-        { "value": "Xamarin.Android", "label": "Cross-platform mobile app framework" },
-        { "value": "Java.Android", "label": "Android mobile app development framework" }
+        { "value": "Xamarin.Android", "label": "Xamarin Android" },
+        { "value": "Java.Android", "label": "Java Android" }
       ]
     },
     {
       "label": "Desktop Application Development",
       "options": [
-        { "value": "Electron", "label": "Cross-platform desktop app framework" },
-        { "value": "JavaFX", "label": "Java-based GUI framework" },
-        { "value": "Owin.Core", "label": ".NET-based web server framework" },
-        { "value": "PyWeb", "label": "Python-based web framework" },
-        { "value": "Maven", "label": "Java-based build automation framework" },
-        { "value": "C#", "label": "Object-oriented programming framework" },
-        { "value": "Tomcat", "label": "Java-based web server framework" },
-        { "value": "Flask.Electron", "label": "Cross-platform desktop app framework" },
-        { "value": "Electron.SpringBoot", "label": "Cross-platform desktop app framework" },
-        { "value": "Owin.Framework", "label": ".NET-based web framework" },
-        { "value": "Owin.Flask", "label": "Cross-platform web framework" }
+        { "value": "Electron", "label": "Electron" },
+        { "value": "JavaFX", "label": "JavaFX" },
+        { "value": "Owin.Core", "label": "Owin Core" },
+        { "value": "PyWeb", "label": "PyWeb" },
+        { "value": "Maven", "label": "Maven" },
+        { "value": "C#", "label": "C Sharp" },
+        { "value": "Tomcat", "label": "Tomcat" },
+        { "value": "Flask.Electron", "label": "Flask Electron" },
+        { "value": "Electron.SpringBoot", "label": "Electron Spring Boot" },
+        { "value": "Owin.Framework", "label": "Owin Framework" },
+        { "value": "Owin.Flask", "label": "Owin Flask" }
       ]
     }
   ]
