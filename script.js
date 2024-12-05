@@ -635,6 +635,7 @@ class FormGenerator {
 	    const nextButton = document.createElement('button');
 	    nextButton.textContent = 'Next';
 	    nextButton.onclick = () => {
+		subforms = fieldSet.querySelectorAll('.subform');
 		console.log(subforms , currentSubformIndex , subforms.length - 1);
 	        subforms[currentSubformIndex].style.display = 'none';
 		    
@@ -655,6 +656,7 @@ class FormGenerator {
 	    const prevButton = document.createElement('button');
 	    prevButton.textContent = 'Previous';
 	    prevButton.onclick = () => {
+	      subforms = fieldSet.querySelectorAll('.subform');
 	      // Hide current subform
 		console.log(subforms , currentSubformIndex , subforms.length - 1);
 	        subforms[currentSubformIndex].style.display = 'none';
@@ -677,6 +679,7 @@ class FormGenerator {
 	    formNumberInput.max = subforms.length + 1;
 	    formNumberInput.value = currentSubformIndex + 1;
 	    formNumberInput.onchange = () => {
+	      subforms = fieldSet.querySelectorAll('.subform');
 	      const newIndex = parseInt(formNumberInput.value) - 1;
 	      if (newIndex >= 0 && newIndex < subforms.length) {
 	        subforms[currentSubformIndex].style.display = 'none';
