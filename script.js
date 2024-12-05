@@ -227,6 +227,18 @@ class FormGenerator {
               inputElement.required = field.required;
               inputElement.accept = field.accept;
               break;
+            case "email":
+              inputElement = document.createElement("input");
+              inputElement.type = "email";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required;
+              break;
             case "checkbox":
               inputElement = document.createElement("input");
               inputElement.type = "checkbox";
@@ -332,6 +344,18 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               inputElement.accept = field.accept;
+              break;
+            case "email":
+              inputElement = document.createElement("input");
+              inputElement.type = "email";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required;
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -527,6 +551,18 @@ class FormGenerator {
               inputElement = document.createElement("input");
               inputElement.type = "file";
               inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
+            case "email":
+              inputElement = document.createElement("input");
+              inputElement.type = "email";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
         case "checkbox":
