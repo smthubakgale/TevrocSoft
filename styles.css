@@ -1291,6 +1291,10 @@ shop #discounts {
   justify-content: center;
   gap: 10px;
 }
+
+#shop fieldset legend {
+  color: #3498db;
+}
 /* Tags Styles */
 
 
