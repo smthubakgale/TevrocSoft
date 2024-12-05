@@ -122,9 +122,16 @@ class FormGenerator {
 		 removeSiblingsAfter(inputElement); 
 		 //  
 	         const selectedValue = init ? field.optgroups[0].label : inputElement.value;
-	         const optgroups = field.optgroups.find(optgroup => optgroup.label === selectedValue)
+	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
 
 		 console.log(selectedOptgroup);
+		    let optionElement = document.createElement("select");
+		      optionElement.name = `${parentName}_${field.name}`;
+		      optionElement.required = field.required;
+	
+		      this.createSelect(selectedOptgroup , optionElement , false , parentElement);
+		      parentElement.appendChild(optionElement);
+		    /*
                  if(selectedOptgroup.optgroups){
 			selectedOptgroup.optgroups.forEach((optgroup) => 
 		         { 
@@ -136,6 +143,10 @@ class FormGenerator {
 			      parentElement.appendChild(optionElement);
 			 }); 
 		 } 
+		    else{
+			    
+		    } 
+		    */
 		 // 
 	    }
 	    createNext();
