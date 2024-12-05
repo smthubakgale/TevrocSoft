@@ -1307,6 +1307,7 @@ shop #discounts {
 #shop .setnav{
   display:flex; 
   gap:8px; 
+  padding-top:10px;
   padding-bottom:20px;
 }
 #shop .setnav button{
@@ -1314,6 +1315,7 @@ shop #discounts {
 }
 #shop .setnav input{
    width:unset; 
+   margin-right:10px;
 }
 #shop .setnav span{
   
