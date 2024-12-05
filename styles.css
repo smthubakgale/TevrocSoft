@@ -1309,6 +1309,7 @@ shop #discounts {
   gap:8px; 
   padding-top:10px;
   padding-bottom:10px;
+  padding-right:10px;
 }
 #shop .setnav button{
   height:40px;
@@ -1318,7 +1319,8 @@ shop #discounts {
    margin-right:10px;
 }
 #shop .setnav span{
-  
+  display:inline-block; 
+  margin-top:5px
 }
 /* Tags Styles */
 
