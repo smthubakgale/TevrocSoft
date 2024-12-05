@@ -8,11 +8,12 @@
 		   label: "Members",
 		   name: "members",
 		   type: "subform", 
-		   description: "Secify all the members involved " ,
+		   multiple:true ,
+		   description: "Specify all the members involved " ,
 		   fields: [
 			{
 			  "label": "Member Id",
-			  "type": "text",
+			  "type": "number",
 			  "name": "id",
 			  "required": true ,
 			   readonly:true ,
@@ -53,6 +54,111 @@
 			  "required": true,
 			   description:"Enter Member's Github Username"
 			}
+		  ]
+		},
+	        {
+		   group:"Document" ,
+		   label: "Development Tools" ,
+		   name: "dev",
+		   type: "subform",  
+		   description: "Specify the development tools needed " ,
+		   fields: [
+			{
+			  "label": "Programming Language",
+			  "type": "subform",
+			  "name": "lang",
+		           multiple:true , 
+			   description:"Specify the programming languages" ,
+			   fields : [
+			      {
+				 label : "ID" ,
+				 type : "number" ,
+				 name : "id" ,
+				 description : "it will auto generate thus readonly"
+			      } ,
+			      {
+				 label : "Name" ,
+				 type : "text" ,
+				 name : "name" ,
+				 description : "Enter the programming language of your choice"
+			      } 
+			   ]
+			},
+			{
+			  "label": "Development Framework",
+			  "type": "subform",
+			  "name": "framework", 
+		           multiple:true , 
+			  description: "Specify the different frameworks",
+			   fields : [
+			      {
+				 label : "ID" ,
+				 type : "number" ,
+				 name : "id" ,
+				 description : "it will auto generate thus readonly"
+			      } ,
+			      {
+				 label : "Name" ,
+				 type : "text" ,
+				 name : "name" ,
+				 description : "Enter the framework of your choice"
+			      } ,
+			      {
+				 label : "Author" ,
+				 type : "text" ,
+				 name : "author" ,
+				 description : "Enter the author details "
+			      } ,
+			      {
+				 label : "Description" ,
+				 type : "text" ,
+				 name : "desc" ,
+				 description : "Enter the framework description"
+			      } 
+			   ]
+			},
+			{
+			  "label": "Integrated Development Environment (IDE) ",
+			  "type": "subform",
+			  "name": "ide", 
+		           multiple:true , 
+			   description: "Specify the different ides",
+			   fields : [
+			      {
+				 label : "ID" ,
+				 type : "number" ,
+				 name : "id" ,
+				 description : "it will auto generate thus readonly"
+			      } ,
+			      {
+				 label : "Name" ,
+				 type : "text" ,
+				 name : "name" ,
+				 description : "Enter the ide of your choice"
+			      } 
+			   ]
+			},
+			{
+			  "label": "Software Development Kit (SDK)",
+			  "type": "subform",
+			  "name": "sdk", 
+		           multiple:true , 
+			   description: "Specify the different sdks",
+			   fields : [
+			      {
+				 label : "ID" ,
+				 type : "number" ,
+				 name : "id" ,
+				 description : "it will auto generate thus readonly"
+			      } ,
+			      {
+				 label : "Name" ,
+				 type : "text" ,
+				 name : "name" ,
+				 description : "Enter the sdk of your choice"
+			      } 
+			   ]
+			} 
 		  ]
 		},
 	        {
