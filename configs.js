@@ -4,6 +4,7 @@
  export const formConfig = {
 	 "fields": [ 
 	        {
+		   group : "developer" ,
 		   label: "Application Icon",
 		   name: "logo_png",
 		   type: "file",
