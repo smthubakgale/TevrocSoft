@@ -129,9 +129,16 @@ class FormGenerator {
 		 let selectElement = document.createElement("select");
 		 selectElement.name = `${field.name}_${selectedOptgroup.label}`;
 		 selectElement.required = field.required;
-	
+	         
 		 ts.createSelect(selectedOptgroup , selectElement , false , parentElement);
-		 parentElement.appendChild(selectElement); 
+		 if(init)
+		 {
+		    parentElement.prepend(selectElement);  
+		 }
+		 else{
+		    parentElement.appendChild(selectElement);    
+		  }
+		 
 		 // 
 	    }
 	    createNext();
@@ -168,7 +175,7 @@ class FormGenerator {
 			optgroupElement.setAttribute('label', optgroup.label);    
 		    }
 		    ts.createSelect(optgroup , optgroupElement, true);
-		    inputElement.appendChild(optgroupElement);
+		    inputElement.prepend(optgroupElement);
 	        }); 
 	     }	  
 	      } 
@@ -212,7 +219,7 @@ class FormGenerator {
               selectElement.required = field.required;
 
               this.createSelect(field , selectElement , false , inputElement);
-	      inputElement.appendChild(selectElement);
+	      inputElement.prepend(selectElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -306,7 +313,7 @@ class FormGenerator {
               selectElement.required = field.required;
 
               this.createSelect(field , selectElement , false , inputElement);
-	      inputElement.appendChild(selectElement);
+	      inputElement.prepend(selectElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -448,7 +455,7 @@ class FormGenerator {
           selectElement.required = field.required;
 
           this.createSelect(field , selectElement , false , inputElement);
-          inputElement.appendChild(selectElement);
+          inputElement.prepend(selectElement);
           break;
         case "checkbox":
           inputElement = document.createElement("input");
