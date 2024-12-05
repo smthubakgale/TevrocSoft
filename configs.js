@@ -12,6 +12,7 @@
 		   description: "Upload your icon in .png format"
 		},
 		{
+		   group : "developer" ,
 		   label: "Apprication Icon2",
 		   name: "logo_ico",
 		   type: "file",
