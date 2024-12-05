@@ -610,9 +610,7 @@ class FormGenerator {
   {
 	  // Clone the original subform
 	  const newSubForm = subFormElement.cloneNode(true);
-	  newSubForm.id = 'cloned-subform';
-	  newSubForm.style.borderTop = '2px solid #87CEEB';
-	  newSubForm.style.paddingTop = '20px';
+	  newSubForm.id = 'cloned-subform'; 
 	
 	  // Find all elements with class "subform" in fieldSet
            const subforms = fieldSet.querySelectorAll('.subform');
