@@ -832,10 +832,13 @@ class FormGenerator {
 		
 		// Initialize current subform index
 		let currentSubformIndex = subforms.length - 1;
+
+		console.log(subforms.length);
 		// Function to create buttons
 		function createButtons() {
 		  // Create Next and Previous buttons
 		  const nextButton = document.createElement('button');
+	          prevButton.style.marginLeft = "4px";
 		  nextButton.textContent = 'Next';
 		  nextButton.onclick = () => {
 		    // Hide current subform
@@ -853,6 +856,7 @@ class FormGenerator {
 		  };
 		
 		  const prevButton = document.createElement('button');
+	          prevButton.style.marginLeft = "4px";
 		  prevButton.textContent = 'Previous';
 		  prevButton.onclick = () => {
 		    // Hide current subform
@@ -874,6 +878,8 @@ class FormGenerator {
 		  formNumberInput.min = 1;
 		  formNumberInput.max = subforms.length;
 		  formNumberInput.value = currentSubformIndex + 1;
+	          formNumberInput.style.marginLeft = "4px";
+	          formNumberInput.style.width = "unset";
 		  formNumberInput.onchange = () => {
 		    const newIndex = parseInt(formNumberInput.value) - 1;
 		    if (newIndex >= 0 && newIndex < subforms.length) {
