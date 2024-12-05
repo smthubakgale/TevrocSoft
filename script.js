@@ -99,6 +99,7 @@ class FormGenerator {
      
       if(sn)
       {
+	   parentElement.classList.add('nested-dropdown');
 	   // Generate main select options
 	    field.optgroups.forEach(optgroup => {
 	      const option = document.createElement('option');
@@ -220,7 +221,7 @@ class FormGenerator {
               optionElement.required = field.required;
 
               this.createSelect(field , optionElement , false , inputElement);
-	      inputElement.appendChild(optionEement);
+	      inputElement.appendChild(optionElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -314,7 +315,7 @@ class FormGenerator {
               optionElement.required = field.required;
 
               this.createSelect(field , optionElement , false , inputElement);
-	      inputElement.appendChild(optionEement);
+	      inputElement.appendChild(optionElement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -456,7 +457,7 @@ class FormGenerator {
           optionElement.required = field.required;
 
           this.createSelect(field , optionElement , false , inputElement);
-          inputElement.appendChild(optionEement);
+          inputElement.appendChild(optionElement);
           break;
         case "checkbox":
           inputElement = document.createElement("input");
