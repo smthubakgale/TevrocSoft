@@ -275,7 +275,7 @@ class FormGenerator {
 	      {  
                  const addButton = document.createElement("button");
                  addButton.type = "button";
-                 addButton.textContent = "Add new " + field.label;
+                 addButton.textContent = "Add new " + (field.button ? field.button : field.label);
                  addButton.classList.add("add-button");
                  fieldSet.appendChild(addButton);
 		      
@@ -384,7 +384,7 @@ class FormGenerator {
 	      {  
                  const addButton = document.createElement("button");
                  addButton.type = "button";
-                 addButton.textContent = "Add new " + field.label;
+                 addButton.textContent = "Add new " + (field.button ? field.button : field.label);
                  addButton.classList.add("add-button");
                  fieldSet.appendChild(addButton);
 		      
@@ -579,7 +579,7 @@ class FormGenerator {
 	      {  
                  const addButton = document.createElement("button");
                  addButton.type = "button";
-                 addButton.textContent = "Add new " + field.label;
+                 addButton.textContent = "Add new " + (field.button ? field.button : field.label);
                  addButton.classList.add("add-button");
                  fieldSet.appendChild(addButton);
 		      
