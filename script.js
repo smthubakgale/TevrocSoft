@@ -221,6 +221,13 @@ class FormGenerator {
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
               break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              inputElement.accept = field.accept;
+              break;
             case "checkbox":
               inputElement = document.createElement("input");
               inputElement.type = "checkbox";
@@ -314,6 +321,13 @@ class FormGenerator {
 
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
+              break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              inputElement.accept = field.accept;
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -457,11 +471,18 @@ class FormGenerator {
           this.createSelect(field , selectElement , false , inputElement);
           inputElement.prepend(selectElement);
           break;
+            case "file":
+              inputElement = document.createElement("input");
+              inputElement.type = "file";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              break;
         case "checkbox":
           inputElement = document.createElement("input");
           inputElement.type = "checkbox";
           inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
+          inputElement.accept = field.accept;
           break;
                 case "radio":
           field.options.forEach((option) => {
