@@ -91,10 +91,13 @@ class FormGenerator {
      }
      if(field.optgroups)
      {
+	console.log(field.optgroups);
+	var ts = this;
 	field.optgroups.forEach((opgroup) => {
 	    const optionElement = document.createElement("optgroup"); 
-	    optionElement.setAttribute('label', opgroup.label);
-	    this.createSelect(opgroup.options , optionElement);
+	    optionElement.setAttribute('label', opgroup.label);field
+	    console.log(opgroup.options);
+	    ts.createSelect(opgroup.options , optionElement);
 	    inputElement.appendChild(optionElement);
         }); 
      }
