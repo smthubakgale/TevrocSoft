@@ -614,13 +614,15 @@ class FormGenerator {
 	  newSubForm.style.borderTop = '2px solid #87CEEB';
 	  newSubForm.style.paddingTop = '20px';
 	
-	  // Hide all subforms except the cloned one
-	  const subforms = fieldSet.children;
-	  for (let i = 0; i < subforms.length; i++) {
-	    if (subforms[i].id !== 'cloned-subform') {
-	      subforms[i].style.display = 'none';
-	    }
+	  // Get all FIELDSET children of the fieldSet
+	const subforms = Array.from(fieldSet.children).filter(child => child.tagName === 'FIELDSET');
+	
+	// Hide all subforms except the cloned one
+	for (let i = 0; i < subforms.length; i++) {
+	  if (subforms[i].id !== 'cloned-subform') {
+	    subforms[i].style.display = 'none';
 	  }
+	}
 	
 	  // Initialize current subform index
 	  let currentSubformIndex = subforms.length - 1;
@@ -695,10 +697,7 @@ class FormGenerator {
 	    const addButton = fieldSet.querySelector('button.add-button');
 	
 	    // Check if add button exists
-	    if (addButton) {
-	      // Add event listener to add button
-	      addButton.onclick = addNewSubform;
-	
+	    if (addButton) {  
 	      // Insert Next and Previous buttons, input type number, and subform counter text before the add button
 	      fieldSet.insertBefore(nextButton, addButton);
 	      fieldSet.insertBefore(prevButton, nextButton);
