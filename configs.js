@@ -4,7 +4,7 @@
  export const formConfig = {
 	 "fields": [ 
 	        {
-		    
+		   group:"Document",
 		   label: "Members",
 		   name: "members",
 		   type: "subform", 
