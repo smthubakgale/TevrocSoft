@@ -355,7 +355,7 @@ class FormGenerator {
               });
               return;
             case "subform":
-              const fieldSet2 = document.createElement("fieldset"); 
+              let fieldSet2 = document.createElement("fieldset"); 
 	      const legend = document.createElement("legend");
 	      legend.textContent = field.label;
 	      fieldSet2.appendChild(legend);
@@ -391,7 +391,7 @@ class FormGenerator {
                 });
               });
 
-              inputElement.appendChild(fieldSet2);
+              inputElement = fieldSet2;
               return;
             default:
               inputElement = document.createElement("input");
