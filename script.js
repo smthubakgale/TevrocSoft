@@ -623,9 +623,7 @@ class FormGenerator {
 	}
 	
 	  // Initialize current subform index
-	  let currentSubformIndex = subforms.length - 1;
-	
-	  console.log(subforms.length);
+	  let currentSubformIndex = subforms.length; 
 	  // Function to create buttons
 	  function createButtons() 
 	  {
@@ -671,8 +669,8 @@ class FormGenerator {
 	    // Create input type number to show a specific form
 	    const formNumberInput = document.createElement('input');
 	    formNumberInput.type = 'number';
-	    formNumberInput.min = 1;
-	    formNumberInput.max = subforms.length;
+	    formNumberInput.min = subforms.length;
+	    formNumberInput.max = subforms.length + 1;
 	    formNumberInput.value = currentSubformIndex + 1;
 	    formNumberInput.onchange = () => {
 	      const newIndex = parseInt(formNumberInput.value) - 1;
@@ -686,7 +684,7 @@ class FormGenerator {
 	
 	    // Create subform counter text element
 	    const subformCounterText = document.createElement('span');
-	    subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
+	    subformCounterText.textContent = `${subforms.length}/${subforms.length + 1}`;
 	
 	    // Function to update the subform counter text
 	    function updateSubformCounterText() {
