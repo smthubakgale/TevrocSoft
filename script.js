@@ -497,7 +497,7 @@ class FormGenerator {
 
   renderSubForm(parentElement, fields, parentName) {
     const Element = document.createElement("div");
-    Element.classList.add("");
+    Element.classList.add("subform");
 
     fields.forEach((field) => {
       const label = document.createElement("label");
