@@ -238,41 +238,41 @@ export const formConfig2 = {
 	  })() 
 	,
     	"optgroups": [
-    {
-      "label": "Web Development",
-      "options": [
-        { "value": "HTML5", "label": "HTML 5" },
-        { "value": "Flask", "label": "Flask" },
-        { "value": "PHP", "label": "PHP" },
-        { "value": "MVC", "label": "MVC" },
-        { "value": "Express", "label": "Express" },
-        { "value": "Spring Boot", "label": "Spring Boot" }
-      ]
-    },
-    {
-      "label": "Mobile App Development",
-      "options": [
-        { "value": "Xamarin.Android", "label": "Xamarin Android" },
-        { "value": "Java.Android", "label": "Java Android" }
-      ]
-    },
-    {
-      "label": "Desktop Application Development",
-      "options": [
-        { "value": "Electron", "label": "Electron" },
-        { "value": "JavaFX", "label": "JavaFX" },
-        { "value": "Owin.Core", "label": "Owin Core" },
-        { "value": "PyWeb", "label": "PyWeb" },
-        { "value": "Maven", "label": "Maven" },
-        { "value": "C#", "label": "C Sharp" },
-        { "value": "Tomcat", "label": "Tomcat" },
-        { "value": "Flask.Electron", "label": "Flask Electron" },
-        { "value": "Electron.SpringBoot", "label": "Electron Spring Boot" },
-        { "value": "Owin.Framework", "label": "Owin Framework" },
-        { "value": "Owin.Flask", "label": "Owin Flask" }
-      ]
-    }
-  ]
+	    {
+	      "label": "Web Development",
+	      "options": [
+	        { "value": "HTML5", "label": "HTML 5" },
+	        { "value": "Flask", "label": "Flask" },
+	        { "value": "PHP", "label": "PHP" },
+	        { "value": "MVC", "label": "MVC" },
+	        { "value": "Express", "label": "Express" },
+	        { "value": "Spring Boot", "label": "Spring Boot" }
+	      ]
+	    },
+	    {
+	      "label": "Mobile App Development",
+	      "options": [
+	        { "value": "Xamarin.Android", "label": "Xamarin Android" },
+	        { "value": "Java.Android", "label": "Java Android" }
+	      ]
+	    },
+	    {
+	      "label": "Desktop Application Development",
+	      "options": [
+	        { "value": "Electron", "label": "Electron" },
+	        { "value": "JavaFX", "label": "JavaFX" },
+	        { "value": "Owin.Core", "label": "Owin Core" },
+	        { "value": "PyWeb", "label": "PyWeb" },
+	        { "value": "Maven", "label": "Maven" },
+	        { "value": "C#", "label": "C Sharp" },
+	        { "value": "Tomcat", "label": "Tomcat" },
+	        { "value": "Flask.Electron", "label": "Flask Electron" },
+	        { "value": "Electron.SpringBoot", "label": "Electron Spring Boot" },
+	        { "value": "Owin.Framework", "label": "Owin Framework" },
+	        { "value": "Owin.Flask", "label": "Owin Flask" }
+	      ]
+	    }
+	]
     },
     {
       label: "Interface Design Layouts",
