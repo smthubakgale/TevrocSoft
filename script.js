@@ -116,13 +116,15 @@ class FormGenerator {
 		    sibling = element.nextSibling;
 		  }
 		}
-	    function createNext()
+	    function createNext(init = true)
 	    {
 		 //
 		 removeSiblingsAfter(inputElement); 
 		 //  
-	         const selectedValue = inputElement.value;
+	         const selectedValue = init ? field.optgroups[0].label : inputElement.value;
 	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
+
+		 console.log(selectedOptgroup);
                  
 		 selectedOptgroup.optgroups.forEach((optgroup) => 
 	         { 
@@ -137,7 +139,7 @@ class FormGenerator {
 	    }
 	    createNext();
 	    inputElement.addEventListener('change', () => {
-	     
+	       createNext(false);
 	    }); 
       }
       else
