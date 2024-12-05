@@ -366,8 +366,16 @@ export const formConfig2 = {
     {
       label: "Template",
       name: "--template",
-      type: "text",
-      description: "Enter your email address",
+      type: "select",
+      seemore : true , 
+      title : "Select one of the recommended templates ... " ,
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/templates.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })()
+     ,
       optgroups:[
         {
 	   label:"Admin Templates",
