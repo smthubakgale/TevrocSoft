@@ -73,8 +73,9 @@
 			   description:"Specify the programming languages" ,
 			   fields : [
 			      {
-				 label : "ID" ,
+				 label : "Language ID" ,
 				 type : "number" ,
+				 readonly:true , 
 				 name : "id" ,
 				 description : "it will auto generate thus readonly"
 			      } ,
@@ -95,9 +96,10 @@
 			   description: "Specify the different frameworks",
 			   fields : [
 			      {
-				 label : "ID" ,
+				 label : "Framework ID" ,
 				 type : "number" ,
 				 name : "id" ,
+				 readonly:true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
 			      {
@@ -129,9 +131,10 @@
 			   description: "Specify the different ides",
 			   fields : [
 			      {
-				 label : "ID" ,
+				 label : "IDE ID" ,
 				 type : "number" ,
 				 name : "id" ,
+				 readonly:true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
 			      {
@@ -151,9 +154,10 @@
 			   description: "Specify the different sdks",
 			   fields : [
 			      {
-				 label : "ID" ,
+				 label : "SDK ID" ,
 				 type : "number" ,
 				 name : "id" ,
+				 readonly:true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
 			      {
