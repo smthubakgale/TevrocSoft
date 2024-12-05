@@ -368,12 +368,16 @@ class FormGenerator {
         parentElement.appendChild(fieldSet);
       }
     });
+    
+    const buttonContainer = document.createElement("div"); 
+    buttonContainer.classList.add("button-container");
+    parentElement.appendChild(buttonContainer);
 
     const jsonButton = document.createElement("button");
     jsonButton.textContent = "Convert to JSON";
     jsonButton.classList.add("json-button");
 
-    parentElement.appendChild(jsonButton);
+    buttonContainer.appendChild(jsonButton);
 
     jsonButton.addEventListener("click", () => {
       const formData = {};
@@ -409,7 +413,7 @@ class FormGenerator {
     downloadButton.textContent = "Download";
     downloadButton.classList.add("download-button");
 
-    parentElement.appendChild(downloadButton);
+    buttonContainer.appendChild(downloadButton);
 
     downloadButton.addEventListener("click", () => {
       const formData = {};
