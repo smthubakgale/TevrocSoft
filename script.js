@@ -77,7 +77,7 @@ class FormGenerator {
 	  
       return description;
   }
-  createSelect(field , inputElement)
+  createSelect(field , inputElement , nested = false)
   {
      if(field.options)
      {
@@ -92,10 +92,11 @@ class FormGenerator {
      { 
 	var ts = this;
 	field.optgroups.forEach((opgroup) => {
-	    let optionElement = document.createElement("optgroup"); 
-	    optionElement.setAttribute('label', opgroup.label);field
+	    let optionElement = document.createElement(nested ? "div": "optgroup"); 
+	    optionElement.setAttribute('label', opgroup.label);
+	    if(nested){ optionElement.style.paddingLeft = "20px"; }
 	    
-	    ts.createSelect(opgroup , optionElement);
+	    ts.createSelect(opgroup , optionElement, true);
 	    inputElement.appendChild(optionElement);
         }); 
      }
