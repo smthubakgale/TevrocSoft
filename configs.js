@@ -2,7 +2,21 @@
 //----------------: Shop
 //: Specifications
  export const formConfig = {
-	  "fields": [
+	 "fields": [ 
+	        {
+		   label: "Application Icon",
+		   name: "logo_png",
+		   type: "file,
+		   accept:".png" ,
+		   description: "Upload your icon in .png format"
+		},
+		{
+		   label: "Apprication Icon2",
+		   name: "logo_ico",
+		   type: "file",
+		   accept:".ico" ,
+		   description: "pload your icon in .ico format"
+		},
 		{
 		  "label": "Password",
 		  "type": "password",
@@ -426,18 +440,6 @@ export const formConfig2 = {
 	   ]
         }
       ]
-    },
-    {
-      label: "Email",
-      name: "email",
-      type: "email",
-      description: "Enter your email address"
-    },
-    {
-      label: "Email",
-      name: "email",
-      type: "email",
-      description: "Enter your email address"
     }
   ]
 };
