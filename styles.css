@@ -1125,7 +1125,7 @@ shop #discounts {
 }
 
 #shop #form-container button[type="button"] {
-  width: 150px;
+  min-width: 150px;
   height: unset;
   background-color: #4CAF50;
   color: #fff;
@@ -1161,7 +1161,7 @@ shop #discounts {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  height:unset;
+  height:unset; 
 }
 
 #shop #form-container .add-button:hover {
