@@ -81,7 +81,8 @@ class FormGenerator {
       
       if(field.optgroups)
       {
-	index++;
+	index = index + 1;
+	console.log(index , field);
 	this.checkNested(field.optgroups , index);
       }
   }
