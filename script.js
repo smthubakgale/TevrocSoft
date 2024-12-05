@@ -93,7 +93,7 @@ class FormGenerator {
       }
       return ret;
   }
-  createSelect(field , inputElement , nested = false)
+  createSelect(field , inputElement , nested = false , parentElement)
   {
       var sn = (nested) ? false : this.checkNested(field , 0) > 1;
      
@@ -214,11 +214,13 @@ class FormGenerator {
 
           switch (field.type) {
             case "select":
-              inputElement = document.createElement("select");
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
+              inputElement = document.createElement("div");
+              let optionElement = document.createElement("select");
+              optionElement.name = `${parentName}_${field.name}`;
+              optionElement.required = field.required;
 
-              this.createSelect(field , inputElement);
+              this.createSelect(field , optionElement , false , inputElement);
+	      inputElement.appendChild(optionEement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -305,12 +307,14 @@ class FormGenerator {
           let inputElement;
 
           switch (field.type) {
-            case "select":
-              inputElement = document.createElement("select");
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
+            case "select": 
+              inputElement = document.createElement("div");
+              let optionElement = document.createElement("select");
+              optionElement.name = `${parentName}_${field.name}`;
+              optionElement.required = field.required;
 
-              this.createSelect(field , inputElement);
+              this.createSelect(field , optionElement , false , inputElement);
+	      inputElement.appendChild(optionEement);
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -446,11 +450,13 @@ class FormGenerator {
 
       switch (field.type) {
         case "select":
-          inputElement = document.createElement("select");
-          inputElement.name = `${parentName}_${field.name}`;
-          inputElement.required = field.required;
+           inputElement = document.createElement("div");
+          let optionElement = document.createElement("select");
+          optionElement.name = `${parentName}_${field.name}`;
+          optionElement.required = field.required;
 
-          this.createSelect(field , inputElement);
+          this.createSelect(field , optionElement , false , inputElement);
+          inputElement.appendChild(optionEement);
           break;
         case "checkbox":
           inputElement = document.createElement("input");
