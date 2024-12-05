@@ -8,7 +8,7 @@
 		   label: "Members",
 		   name: "members",
 		   type: "subform", 
-	           button; "Member",
+	           button: "Member",
 		   multiple:true ,
 		   description: "Specify all the members involved " ,
 		   fields: [
