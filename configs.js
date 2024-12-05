@@ -364,6 +364,18 @@ export const formConfig2 = {
     { value: "expandable", label: "Expandable" }
   ]},
     {
+      label: "Template",
+      name: "--template",
+      type: "text",
+      description: "Enter your email address"
+    },
+    {
+      label: "Email",
+      name: "email",
+      type: "email",
+      description: "Enter your email address"
+    },
+    {
       label: "Email",
       name: "email",
       type: "email",
