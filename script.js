@@ -4,8 +4,7 @@ import {
   } from './configs.js';
 
 //------------------------------------: Shop 
- // Initialize EmailJS
-console.log(formConfig);
+ // Initialize EmailJS 
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
@@ -90,13 +89,12 @@ class FormGenerator {
        });  
      }
      if(field.optgroups)
-     {
-	console.log(field.optgroups);
+     { 
 	var ts = this;
 	field.optgroups.forEach((opgroup) => {
-	    const optionElement = document.createElement("optgroup"); 
+	    let optionElement = document.createElement("optgroup"); 
 	    optionElement.setAttribute('label', opgroup.label);field
-	    console.log(opgroup.options);
+	    
 	    ts.createSelect(opgroup.options , optionElement);
 	    inputElement.appendChild(optionElement);
         }); 
