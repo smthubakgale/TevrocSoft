@@ -238,7 +238,10 @@ class FormGenerator {
               inputElement = document.createElement("input");
               inputElement.type = "number";
               inputElement.name = `${parentName}_${field.name}`; 
-              inputElement.required = field.required;
+              inputElement.required = field.required; 
+              inputElement.min = field.min; 
+              inputElement.max = field.max; 
+              inputElement.readonly = field.readonly;
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -346,7 +349,10 @@ class FormGenerator {
               inputElement = document.createElement("input");
               inputElement.type = "number";
               inputElement.name = `${parentName}_${field.name}`; 
-              inputElement.required = field.required;
+              inputElement.required = field.required; 
+              inputElement.min = field.min; 
+              inputElement.max = field.max; 
+              inputElement.readonly = field.readonly;
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -542,7 +548,10 @@ class FormGenerator {
               inputElement = document.createElement("input");
               inputElement.type = "number";
               inputElement.name = `${parentName}_${field.name}`; 
-              inputElement.required = field.required;
+              inputElement.required = field.required; 
+              inputElement.min = field.min; 
+              inputElement.max = field.max; 
+              inputElement.readonly = field.readonly;
               break;
         case "checkbox":
           inputElement = document.createElement("input");
