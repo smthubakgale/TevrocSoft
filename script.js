@@ -97,7 +97,7 @@ class FormGenerator {
   }
   createSelect(field , inputElement , nested = false)
   {
-      var sn = (nested) ? false : this.checkNested(field , index) > 1;
+      var sn = (nested) ? false : this.checkNested(field , 0) > 1;
       console.log(sn);
       if(sn){ console.log(field); }
 
