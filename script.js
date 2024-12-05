@@ -183,6 +183,7 @@ class FormGenerator {
     const fields = this.formConfig.fields;
     const parentElement = this.form;
     const parentName = "myForm";
+    const ts = this;
 
     const groupedFields = fields.reduce((acc, field) => {
       if (field.group) {
@@ -281,124 +282,7 @@ class FormGenerator {
               fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
-		// Clone the original subform
-		const newSubForm = subFormElement.cloneNode(true);
-		newSubForm.id = 'cloned-subform';
-		newSubForm.style.borderTop = '2px solid #87CEEB';
-		newSubForm.style.paddingTop = '20px';
-		
-		// Hide all subforms except the cloned one
-		const subforms = fieldSet.children;
-		for (let i = 0; i < subforms.length; i++) {
-		  if (subforms[i].id !== 'cloned-subform') {
-		    subforms[i].style.display = 'none';
-		  }
-		}
-		
-		// Initialize current subform index
-		let currentSubformIndex = subforms.length - 1;
-		// Function to create buttons
-		function createButtons() {
-		  // Create Next and Previous buttons
-		  const nextButton = document.createElement('button');
-		  nextButton.textContent = 'Next';
-		  nextButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show next subform
-		    currentSubformIndex++;
-		    if (currentSubformIndex >= subforms.length) {
-		      currentSubformIndex = 0;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		
-		  const prevButton = document.createElement('button');
-		  prevButton.textContent = 'Previous';
-		  prevButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show previous subform
-		    currentSubformIndex--;
-		    if (currentSubformIndex < 0) {
-		      currentSubformIndex = subforms.length - 1;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		  // Create input type number to show a specific form
-		  const formNumberInput = document.createElement('input');
-		  formNumberInput.type = 'number';
-		  formNumberInput.min = 1;
-		  formNumberInput.max = subforms.length;
-		  formNumberInput.value = currentSubformIndex + 1;
-		  formNumberInput.onchange = () => {
-		    const newIndex = parseInt(formNumberInput.value) - 1;
-		    if (newIndex >= 0 && newIndex < subforms.length) {
-		      subforms[currentSubformIndex].style.display = 'none';
-		      currentSubformIndex = newIndex;
-		      subforms[currentSubformIndex].style.display = 'block';
-		      updateSubformCounterText();
-		    }
-		  };
-		  // Create subform counter text element
-		  const subformCounterText = document.createElement('span');
-		  subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		  // Function to update the subform counter text
-		  function updateSubformCounterText() {
-		    subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		    formNumberInput.value = currentSubformIndex + 1;
-		    formNumberInput.min = 1;
-		    formNumberInput.max = subforms.length;
-		  }
-		  // Function to add new subform
-		  function addNewSubform() {
-		    const newSubform = subFormElement.cloneNode(true);
-		    newSubform.style.borderTop = '2px solid #87CEEB';
-		    newSubform.style.paddingTop = '20px';
-		    fieldSet.appendChild(newSubform);
-		    updateSubformCounterText();
-		  }
-		  // Get the add button
-		  const addButton = fieldSet.querySelector('button.add-button');
-		  // Check if add button exists
-		  if (addButton) {
-		    // Add event listener to add button
-		    addButton.onclick = addNewSubform;
-		
-		    // Insert Next and Previous buttons, input type number, and subform counter text before the add button
-		    fieldSet.insertBefore(nextButton, addButton);
-		    fieldSet.insertBefore(prevButton, nextButton);
-		    fieldSet.insertBefore(formNumberInput, prevButton);
-		    fieldSet.insertBefore(subformCounterText, formNumberInput);
-		  }
-		}
-		// Call the function to create buttons
-		createButtons();
-		// Clear Form 
-		const inputs = newSubForm.querySelectorAll("input, select, textarea");
-		
-		inputs.forEach((input) => {
-		  input.value = "";
-		});
-		// Remove Button 
-		const removeButton = document.createElement("button");
-		removeButton.textContent = "Remove";
-		removeButton.classList.add("remove-button");
-		newSubForm.appendChild(removeButton);
-		fieldSet.appendChild(newSubForm);
-		
-		removeButton.addEventListener("click", () => {
-		  newSubForm.remove();
-		}); 
-		// 
+		 ts.addButtonEvent(fieldSet, subFormElement);
               });
 
               parentElement.appendChild(fieldSet);
@@ -504,124 +388,7 @@ class FormGenerator {
               fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
-		// Clone the original subform
-		const newSubForm = subFormElement.cloneNode(true);
-		newSubForm.id = 'cloned-subform';
-		newSubForm.style.borderTop = '2px solid #87CEEB';
-		newSubForm.style.paddingTop = '20px';
-		
-		// Hide all subforms except the cloned one
-		const subforms = fieldSet.children;
-		for (let i = 0; i < subforms.length; i++) {
-		  if (subforms[i].id !== 'cloned-subform') {
-		    subforms[i].style.display = 'none';
-		  }
-		}
-		
-		// Initialize current subform index
-		let currentSubformIndex = subforms.length - 1;
-		// Function to create buttons
-		function createButtons() {
-		  // Create Next and Previous buttons
-		  const nextButton = document.createElement('button');
-		  nextButton.textContent = 'Next';
-		  nextButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show next subform
-		    currentSubformIndex++;
-		    if (currentSubformIndex >= subforms.length) {
-		      currentSubformIndex = 0;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		
-		  const prevButton = document.createElement('button');
-		  prevButton.textContent = 'Previous';
-		  prevButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show previous subform
-		    currentSubformIndex--;
-		    if (currentSubformIndex < 0) {
-		      currentSubformIndex = subforms.length - 1;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		  // Create input type number to show a specific form
-		  const formNumberInput = document.createElement('input');
-		  formNumberInput.type = 'number';
-		  formNumberInput.min = 1;
-		  formNumberInput.max = subforms.length;
-		  formNumberInput.value = currentSubformIndex + 1;
-		  formNumberInput.onchange = () => {
-		    const newIndex = parseInt(formNumberInput.value) - 1;
-		    if (newIndex >= 0 && newIndex < subforms.length) {
-		      subforms[currentSubformIndex].style.display = 'none';
-		      currentSubformIndex = newIndex;
-		      subforms[currentSubformIndex].style.display = 'block';
-		      updateSubformCounterText();
-		    }
-		  };
-		  // Create subform counter text element
-		  const subformCounterText = document.createElement('span');
-		  subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		  // Function to update the subform counter text
-		  function updateSubformCounterText() {
-		    subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		    formNumberInput.value = currentSubformIndex + 1;
-		    formNumberInput.min = 1;
-		    formNumberInput.max = subforms.length;
-		  }
-		  // Function to add new subform
-		  function addNewSubform() {
-		    const newSubform = subFormElement.cloneNode(true);
-		    newSubform.style.borderTop = '2px solid #87CEEB';
-		    newSubform.style.paddingTop = '20px';
-		    fieldSet.appendChild(newSubform);
-		    updateSubformCounterText();
-		  }
-		  // Get the add button
-		  const addButton = fieldSet.querySelector('button.add-button');
-		  // Check if add button exists
-		  if (addButton) {
-		    // Add event listener to add button
-		    addButton.onclick = addNewSubform;
-		
-		    // Insert Next and Previous buttons, input type number, and subform counter text before the add button
-		    fieldSet.insertBefore(nextButton, addButton);
-		    fieldSet.insertBefore(prevButton, nextButton);
-		    fieldSet.insertBefore(formNumberInput, prevButton);
-		    fieldSet.insertBefore(subformCounterText, formNumberInput);
-		  }
-		}
-		// Call the function to create buttons
-		createButtons();
-		// Clear Form 
-		const inputs = newSubForm.querySelectorAll("input, select, textarea");
-		
-		inputs.forEach((input) => {
-		  input.value = "";
-		});
-		// Remove Button 
-		const removeButton = document.createElement("button");
-		removeButton.textContent = "Remove";
-		removeButton.classList.add("remove-button");
-		newSubForm.appendChild(removeButton);
-		fieldSet.appendChild(newSubForm);
-		
-		removeButton.addEventListener("click", () => {
-		  newSubForm.remove();
-		}); 
-		// 
+		 ts.addButtonEvent(fieldSet, subFormElement);
               });
 
               //parentElement.appendChild(fieldSet);
@@ -816,130 +583,7 @@ class FormGenerator {
               fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
-    		// Clone the original subform
-		const newSubForm = subFormElement.cloneNode(true);
-		newSubForm.id = 'cloned-subform';
-		newSubForm.style.borderTop = '2px solid #87CEEB';
-		newSubForm.style.paddingTop = '20px';
-		
-		// Hide all subforms except the cloned one
-		const subforms = fieldSet.children;
-		for (let i = 0; i < subforms.length; i++) {
-		  if (subforms[i].id !== 'cloned-subform') {
-		    subforms[i].style.display = 'none';
-		  }
-		}
-		
-		// Initialize current subform index
-		let currentSubformIndex = subforms.length - 1;
-
-		console.log(subforms.length);
-		// Function to create buttons
-		function createButtons() {
-		  // Create Next and Previous buttons
-		  const nextButton = document.createElement('button');
-	          prevButton.style.marginLeft = "4px";
-		  nextButton.textContent = 'Next';
-		  nextButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show next subform
-		    currentSubformIndex++;
-		    if (currentSubformIndex >= subforms.length) {
-		      currentSubformIndex = 0;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		
-		  const prevButton = document.createElement('button');
-	          prevButton.style.marginLeft = "4px";
-		  prevButton.textContent = 'Previous';
-		  prevButton.onclick = () => {
-		    // Hide current subform
-		    subforms[currentSubformIndex].style.display = 'none';
-		
-		    // Show previous subform
-		    currentSubformIndex--;
-		    if (currentSubformIndex < 0) {
-		      currentSubformIndex = subforms.length - 1;
-		    }
-		    subforms[currentSubformIndex].style.display = 'block';
-		
-		    // Update the subform counter text
-		    updateSubformCounterText();
-		  };
-		  // Create input type number to show a specific form
-		  const formNumberInput = document.createElement('input');
-		  formNumberInput.type = 'number';
-		  formNumberInput.min = 1;
-		  formNumberInput.max = subforms.length;
-		  formNumberInput.value = currentSubformIndex + 1;
-	          formNumberInput.style.marginLeft = "4px";
-	          formNumberInput.style.width = "unset";
-		  formNumberInput.onchange = () => {
-		    const newIndex = parseInt(formNumberInput.value) - 1;
-		    if (newIndex >= 0 && newIndex < subforms.length) {
-		      subforms[currentSubformIndex].style.display = 'none';
-		      currentSubformIndex = newIndex;
-		      subforms[currentSubformIndex].style.display = 'block';
-		      updateSubformCounterText();
-		    }
-		  };
-		  // Create subform counter text element
-		  const subformCounterText = document.createElement('span');
-		  subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		  // Function to update the subform counter text
-		  function updateSubformCounterText() {
-		    subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
-		    formNumberInput.value = currentSubformIndex + 1;
-		    formNumberInput.min = 1;
-		    formNumberInput.max = subforms.length;
-		  }
-		  // Function to add new subform
-		  function addNewSubform() {
-		    const newSubform = subFormElement.cloneNode(true);
-		    newSubform.style.borderTop = '2px solid #87CEEB';
-		    newSubform.style.paddingTop = '20px';
-		    fieldSet.appendChild(newSubform);
-		    updateSubformCounterText();
-		  }
-		  // Get the add button
-		  const addButton = fieldSet.querySelector('button.add-button');
-		  // Check if add button exists
-		  if (addButton) {
-		    // Add event listener to add button
-		    addButton.onclick = addNewSubform;
-		
-		    // Insert Next and Previous buttons, input type number, and subform counter text before the add button
-		    fieldSet.insertBefore(nextButton, addButton);
-		    fieldSet.insertBefore(prevButton, nextButton);
-		    fieldSet.insertBefore(formNumberInput, prevButton);
-		    fieldSet.insertBefore(subformCounterText, formNumberInput);
-		  }
-		}
-		// Call the function to create buttons
-		createButtons();
-		// Clear Form 
-		const inputs = newSubForm.querySelectorAll("input, select, textarea");
-		
-		inputs.forEach((input) => {
-		  input.value = "";
-		});
-		// Remove Button 
-		const removeButton = document.createElement("button");
-		removeButton.textContent = "Remove";
-		removeButton.classList.add("remove-button");
-		newSubForm.appendChild(removeButton);
-		fieldSet.appendChild(newSubForm);
-		
-		removeButton.addEventListener("click", () => {
-		  newSubForm.remove();
-		}); 
-		// 
+    		 ts.addButtonEvent(fieldSet, subFormElement);
               });
 
               parentElement.appendChild(fieldSet);
@@ -961,6 +605,129 @@ class FormGenerator {
 
     return subFormElement;
   }
+	
+  addButtonEvent(fieldSet, subFormElement) 
+  {
+	  // Clone the original subform
+	  const newSubForm = subFormElement.cloneNode(true);
+	  newSubForm.id = 'cloned-subform';
+	  newSubForm.style.borderTop = '2px solid #87CEEB';
+	  newSubForm.style.paddingTop = '20px';
+	
+	  // Hide all subforms except the cloned one
+	  const subforms = fieldSet.children;
+	  for (let i = 0; i < subforms.length; i++) {
+	    if (subforms[i].id !== 'cloned-subform') {
+	      subforms[i].style.display = 'none';
+	    }
+	  }
+	
+	  // Initialize current subform index
+	  let currentSubformIndex = subforms.length - 1;
+	
+	  console.log(subforms.length);
+	  // Function to create buttons
+	  function createButtons() {
+	    // Create Next and Previous buttons
+	    const nextButton = document.createElement('button');
+	    nextButton.textContent = 'Next';
+	    nextButton.onclick = () => {
+	      // Hide current subform
+	      subforms[currentSubformIndex].style.display = 'none';
+	
+	      // Show next subform
+	      currentSubformIndex++;
+	      if (currentSubformIndex >= subforms.length) {
+	        currentSubformIndex = 0;
+	      }
+	      subforms[currentSubformIndex].style.display = 'block';
+	
+	      // Update the subform counter text
+	      updateSubformCounterText();
+	    };
+	
+	    const prevButton = document.createElement('button');
+	    prevButton.textContent = 'Previous';
+	    prevButton.onclick = () => {
+	      // Hide current subform
+	      subforms[currentSubformIndex].style.display = 'none';
+	
+	      // Show previous subform
+	      currentSubformIndex--;
+	      if (currentSubformIndex < 0) {
+	        currentSubformIndex = subforms.length - 1;
+	      }
+	      subforms[currentSubformIndex].style.display = 'block';
+	
+	      // Update the subform counter text
+	      updateSubformCounterText();
+	    };
+	
+	    // Create input type number to show a specific form
+	    const formNumberInput = document.createElement('input');
+	    formNumberInput.type = 'number';
+	    formNumberInput.min = 1;
+	    formNumberInput.max = subforms.length;
+	    formNumberInput.value = currentSubformIndex + 1;
+	    formNumberInput.onchange = () => {
+	      const newIndex = parseInt(formNumberInput.value) - 1;
+	      if (newIndex >= 0 && newIndex < subforms.length) {
+	        subforms[currentSubformIndex].style.display = 'none';
+	        currentSubformIndex = newIndex;
+	        subforms[currentSubformIndex].style.display = 'block';
+	        updateSubformCounterText();
+	      }
+	    };
+	
+	    // Create subform counter text element
+	    const subformCounterText = document.createElement('span');
+	    subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
+	
+	    // Function to update the subform counter text
+	    function updateSubformCounterText() {
+	      subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
+	      formNumberInput.value = currentSubformIndex + 1;
+	      formNumberInput.min = 1;
+	      formNumberInput.max = subforms.length;
+	    }
+	
+	    // Get the add button
+	    const addButton = fieldSet.querySelector('button.add-button');
+	
+	    // Check if add button exists
+	    if (addButton) {
+	      // Add event listener to add button
+	      addButton.onclick = addNewSubform;
+	
+	      // Insert Next and Previous buttons, input type number, and subform counter text before the add button
+	      fieldSet.insertBefore(nextButton, addButton);
+	      fieldSet.insertBefore(prevButton, nextButton);
+	      fieldSet.insertBefore(formNumberInput, prevButton);
+	      fieldSet.insertBefore(subformCounterText, formNumberInput);
+	    }
+	  }
+	
+	  // Call the function to create buttons
+	  createButtons();
+	
+	  // Clear Form 
+	  const inputs = newSubForm.querySelectorAll("input, select, textarea");
+	
+	  inputs.forEach((input) => {
+	    input.value = "";
+	  });
+	
+	  // Remove Button 
+	  const removeButton = document.createElement("button");
+	  removeButton.textContent = "Remove";
+	  removeButton.classList.add("remove-button");
+	  newSubForm.appendChild(removeButton);
+	  fieldSet.appendChild(newSubForm);
+	
+	 removeButton.addEventListener("click", () => {
+	    newSubForm.remove();
+	  });
+}
 
   addEventListeners() {
     this.importButton.addEventListener("click", () => {
