@@ -613,7 +613,7 @@ class FormGenerator {
 	  newSubForm.id = 'cloned-subform'; 
 	
 	  // Find all elements with class "subform" in fieldSet
-           const subforms = fieldSet.querySelectorAll('.subform');
+           let subforms = fieldSet.querySelectorAll('.subform');
 	
 	// Hide all subforms except the cloned one
 	for (let i = 0; i < subforms.length; i++) {
@@ -695,6 +695,8 @@ class FormGenerator {
 	
 	    // Function to update the subform counter text
 	    function updateSubformCounterText() {
+	      subforms = fieldSet.querySelectorAll('.subform');
+		    
 	      subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
 	      formNumberInput.value = currentSubformIndex + 1;
 	      formNumberInput.min = 1;
