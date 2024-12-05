@@ -258,7 +258,7 @@ export const formConfig2 = {
 	    },
 	    {
 	      "label": "Desktop Application Development",
-	      "options": [
+	      "optgroups": [
 	        {
 	          "label": "GUI Development",
 	          "options": [
