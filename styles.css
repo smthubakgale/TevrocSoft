@@ -1276,8 +1276,7 @@ shop #discounts {
   background-color: #3e8e41;
 }
 
-#shop .nested-dropdown {
-  width: 200px;
+#shop .nested-dropdown { 
   margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
