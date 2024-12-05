@@ -623,7 +623,7 @@ class FormGenerator {
 	}
 	
 	  // Initialize current subform index
-	  let currentSubformIndex = subforms.length; 
+	  let currentSubformIndex = subforms.length - 1; 
 	  // Function to create buttons
 	  function createButtons() 
 	  {
@@ -635,6 +635,9 @@ class FormGenerator {
 	    const nextButton = document.createElement('button');
 	    nextButton.textContent = 'Next';
 	    nextButton.onclick = () => {
+		console.log(currentSubformIndex , subforms.length - 1);
+	        subforms[currentSubformIndex].style.display = 'none';
+		    
 	      // Hide current subform
 	      subforms[currentSubformIndex].style.display = 'none';
 	
@@ -653,7 +656,8 @@ class FormGenerator {
 	    prevButton.textContent = 'Previous';
 	    prevButton.onclick = () => {
 	      // Hide current subform
-	      subforms[currentSubformIndex].style.display = 'none';
+		console.log(currentSubformIndex , subforms.length - 1);
+	        subforms[currentSubformIndex].style.display = 'none';
 	
 	      // Show previous subform
 	      currentSubformIndex--;
