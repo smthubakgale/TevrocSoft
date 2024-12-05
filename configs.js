@@ -237,84 +237,42 @@ export const formConfig2 = {
 	    return xhr.responseText;
 	  })() 
 	,
-    	options :[
-        {
-          label: 'HTML5',
-          value: 'html5',
-        },
-        {
-          label: 'Flask',
-          value: 'flask',
-        },
-        {
-          label: 'PHP',
-          value: 'php',
-        },
-        {
-          label: 'MVC',
-          value: 'mvc',
-        },
-        {
-          label: 'Express',
-          value: 'express',
-        },
-        {
-          label: 'Spring Boot',
-          value: 'springboot',
-        },
-        {
-          label: 'Xamarin.Android',
-          value: 'xamarin.android',
-        },
-        {
-          label: 'Java.Android',
-          value: 'java.android',
-        },
-        {
-          label: 'Electron',
-          value: 'electron',
-        },
-        {
-          label: 'JavaFX',
-          value: 'javafx',
-        },
-        {
-          label: 'OWIN Core',
-          value: 'owin.core',
-        },
-        {
-          label: 'PyWeb',
-          value: 'pyweb',
-        },
-        {
-          label: 'Maven',
-          value: 'maven',
-        },
-        {
-          label: 'C#',
-          value: 'csharp',
-        },
-        {
-          label: 'Tomcat',
-          value: 'tomcat',
-        },
-        {
-          label: 'Flask.Electron',
-          value: 'flask.electron',
-        },
-        {
-          label: 'Electron.Spring Boot',
-          value: 'electron.springboot',
-        },
-        {
-          label: 'OWIN Framework',
-          value: 'owin.framework',
-        },
-        {
-          label: 'OWIN Flask',
-          value: 'owin.flask',
-        },
-       ]
+    	"optgroups": [
+    {
+      "label": "Web Development",
+      "options": [
+        { "value": "HTML5", "label": "Standard markup framework for web content" },
+        { "value": "Flask", "label": "Lightweight Python web framework" },
+        { "value": "PHP", "label": "Server-side scripting framework" },
+        { "value": "MVC", "label": "Model-View-Controller architectural framework" },
+        { "value": "Express", "label": "Node.js web application framework" },
+        { "value": "Spring Boot", "label": "Java-based web application framework" }
+      ]
+    },
+    {
+      "label": "Mobile App Development",
+      "options": [
+        { "value": "Xamarin.Android", "label": "Cross-platform mobile app framework" },
+        { "value": "Java.Android", "label": "Android mobile app development framework" }
+      ]
+    },
+    {
+      "label": "Desktop Application Development",
+      "options": [
+        { "value": "Electron", "label": "Cross-platform desktop app framework" },
+        { "value": "JavaFX", "label": "Java-based GUI framework" },
+        { "value": "Owin.Core", "label": ".NET-based web server framework" },
+        { "value": "PyWeb", "label": "Python-based web framework" },
+        { "value": "Maven", "label": "Java-based build automation framework" },
+        { "value": "C#", "label": "Object-oriented programming framework" },
+        { "value": "Tomcat", "label": "Java-based web server framework" },
+        { "value": "Flask.Electron", "label": "Cross-platform desktop app framework" },
+        { "value": "Electron.SpringBoot", "label": "Cross-platform desktop app framework" },
+        { "value": "Owin.Framework", "label": ".NET-based web framework" },
+        { "value": "Owin.Flask", "label": "Cross-platform web framework" }
+      ]
+    }
+  ]
     },
     {
       label: "Interface Design Layouts",
