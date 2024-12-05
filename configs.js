@@ -6,7 +6,7 @@
 	        {
 		   label: "Application Icon",
 		   name: "logo_png",
-		   type: "file,
+		   type: "file",
 		   accept:".png" ,
 		   description: "Upload your icon in .png format"
 		},
