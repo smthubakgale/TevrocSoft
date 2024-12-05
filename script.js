@@ -395,7 +395,7 @@ class FormGenerator {
 
               parentElement.appendChild(fieldSet);
 			  
-	      inputElement.appendChild(fieldSet);
+	      //inputElement.appendChild(fieldSet);
               return;
             default:
               inputElement = document.createElement("input");
