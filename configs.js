@@ -237,7 +237,7 @@ export const formConfig2 = {
 	    return xhr.responseText;
 	  })() 
 	,
-    	"optgroups": [
+    	"optgroups": [ 
 	    {
 	      "label": "Web Development",
 	      "options": [
@@ -259,19 +259,34 @@ export const formConfig2 = {
 	    {
 	      "label": "Desktop Application Development",
 	      "options": [
-	        { "value": "Electron", "label": "Electron" },
-	        { "value": "JavaFX", "label": "JavaFX" },
-	        { "value": "Owin.Core", "label": "Owin Core" },
-	        { "value": "PyWeb", "label": "PyWeb" },
-	        { "value": "Maven", "label": "Maven" },
-	        { "value": "C#", "label": "C Sharp" },
-	        { "value": "Tomcat", "label": "Tomcat" },
-	        { "value": "Flask.Electron", "label": "Flask Electron" },
-	        { "value": "Electron.SpringBoot", "label": "Electron Spring Boot" },
-	        { "value": "Owin.Framework", "label": "Owin Framework" },
-	        { "value": "Owin.Flask", "label": "Owin Flask" }
+	        {
+	          "label": "GUI Development",
+	          "options": [
+	            { "value": "Electron", "label": "Electron" },
+	            { "value": "JavaFX", "label": "JavaFX" },
+	            { "value": "Owin.Core", "label": "Owin Core" },
+	            { "value": "PyWeb", "label": "PyWeb" }
+	          ]
+	        },
+	        {
+	          "label": "Console Application Development",
+	          "options": [
+	            { "value": "Maven", "label": "Maven" },
+	            { "value": "C#", "label": "C Sharp" }
+	          ]
+	        },
+	        {
+	          "label": "Hybrid Application Development",
+	          "options": [
+	            { "value": "Tomcat", "label": "Tomcat" },
+	            { "value": "Flask.Electron", "label": "Flask Electron" },
+	            { "value": "Electron.SpringBoot", "label": "Electron Spring Boot" },
+	            { "value": "Owin.Framework", "label": "Owin Framework" },
+	            { "value": "Owin.Flask", "label": "Owin Flask" }
+	          ]
+	        }
 	      ]
-	    }
+	    } 
 	]
     },
     {
