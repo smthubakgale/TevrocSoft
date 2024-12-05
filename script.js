@@ -92,12 +92,21 @@ class FormGenerator {
      { 
 	var ts = this;
 	field.optgroups.forEach((opgroup) => {
-	    let optionElement = document.createElement(nested ? "div": "optgroup"); 
-	    optionElement.setAttribute('label', opgroup.label);
-	    if(nested){ optionElement.style.paddingLeft = "20px"; }
+	    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
 	    
-	    ts.createSelect(opgroup , optionElement, true);
-	    inputElement.appendChild(optionElement);
+	    if(nested){ 
+		const optionElement = document.createElement("option"); 
+		optionElement.disabled = true; 
+	        optionElement.textContent = optgroup.label;
+		    
+		optgroupElement.style.paddingLeft = "20px";
+		optgroupElement.appendChild(optionElement);
+	    }
+	    else{
+		optgroupElement.setAttribute('label', opgroup.label);    
+	    }
+	    ts.createSelect(opgroup , optgroupElement, true);
+	    inputElement.appendChild(optgroupElement);
         }); 
      }
   }
