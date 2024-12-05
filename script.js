@@ -81,9 +81,18 @@ class FormGenerator {
       
       if(field.optgroups)
       {
-	index = index + 1;
+	index = index + 1; 
+	field.optgroups.forEach((optgroup)=>
+        {
+	   let rf = index;
+	   this.checkNested(optgroup , rf);
+           if(rf > index)
+	   {
+	     index = rf;
+	   }
+	});
 	console.log(index , field);
-	this.checkNested(field.optgroups , index);
+	
       }
   }
   createSelect(field , inputElement , nested = false)
