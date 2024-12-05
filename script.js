@@ -109,43 +109,35 @@ class FormGenerator {
 	    });
 	
 	    // Add event listener to main select
+	       function removeSiblingsAfter(element) {
+		  let sibling = element.nextSibling;
+		  while (sibling) {
+		    sibling.remove();
+		    sibling = element.nextSibling;
+		  }
+		}
+	    function createNext()
+	    {
+		 //
+		 removeSiblingsAfter(inputElement); 
+		 //  
+	         const selectedValue = inputElement.value;
+	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
+                 
+		 selectedOptgroup.optgroups.forEach((optgroup) => 
+	         { 
+	              let optionElement = document.createElement("select");
+	              optionElement.name = `${parentName}_${field.name}`;
+	              optionElement.required = field.required;
+	
+	              this.createSelect(field , optionElement , false , parentElement);
+		      parentElement.appendChild(optionElement);
+		 }); 
+		 // 
+	    }
+	    createNext();
 	    inputElement.addEventListener('change', () => {
-	      const selectedValue = inputElement.value;
-	      const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue);
-	
-	      // Create nested options container dynamically
-	      const nestedOptionsContainer = document.createElement('div');
-	      nestedOptionsContainer.className = 'nested-options-container';
-	
-	      // Generate nested options
-	      if (selectedOptgroup.options) {
-	        const nestedSelect = document.createElement('select');
-	        selectedOptgroup.options.forEach(option => {
-	          const nestedOption = document.createElement('option');
-	          nestedOption.value = option.value;
-	          nestedOption.text = option.label;
-	          nestedSelect.appendChild(nestedOption);
-	        });
-	        nestedOptionsContainer.appendChild(nestedSelect);
-	      } else if (selectedOptgroup.optgroups) {
-	        selectedOptgroup.optgroups.forEach(optgroup => {
-	          const nestedSelect = document.createElement('select');
-	          nestedSelect.label = optgroup.label;
-	          optgroup.options.forEach(option => {
-	            const nestedOption = document.createElement('option');
-	            nestedOption.value = option.value;
-	            nestedOption.text = option.label;
-	            nestedSelect.appendChild(nestedOption);
-	          });
-	          nestedOptionsContainer.appendChild(nestedSelect);
-	        });
-	      }
-	
-	      // Append nested options container to the DOM
-	      inputElement.parentNode.appendChild(nestedOptionsContainer);
-	
-	      // Show nested options container
-	      nestedOptionsContainer.style.display = 'block';
+	     
 	    }); 
       }
       else
