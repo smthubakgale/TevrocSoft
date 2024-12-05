@@ -8,6 +8,7 @@
 		   label: "Members",
 		   name: "members",
 		   type: "subform", 
+	           button; "Member",
 		   multiple:true ,
 		   description: "Specify all the members involved " ,
 		   fields: [
@@ -67,7 +68,8 @@
 			  "label": "Programming Language",
 			  "type": "subform",
 			  "name": "lang",
-		           multiple:true , 
+		           multiple:true ,
+			   button: "Language",
 			   description:"Specify the programming languages" ,
 			   fields : [
 			      {
@@ -89,7 +91,8 @@
 			  "type": "subform",
 			  "name": "framework", 
 		           multiple:true , 
-			  description: "Specify the different frameworks",
+			   button: "Framework",
+			   description: "Specify the different frameworks",
 			   fields : [
 			      {
 				 label : "ID" ,
@@ -122,6 +125,7 @@
 			  "type": "subform",
 			  "name": "ide", 
 		           multiple:true , 
+			   button: "IDE",
 			   description: "Specify the different ides",
 			   fields : [
 			      {
@@ -143,6 +147,7 @@
 			  "type": "subform",
 			  "name": "sdk", 
 		           multiple:true , 
+			   button: "SDK",
 			   description: "Specify the different sdks",
 			   fields : [
 			      {
