@@ -308,11 +308,11 @@ class FormGenerator {
 	fieldSet.appendChild(legend);
 
         groupedFields[group].forEach((field) => {
-          const label = document.createElement("label");
+          let label = document.createElement("label");
           label.textContent = field.label;
           label.htmlFor = `${parentName}_${field.name}`;
 
-          const description = this.createDescription(field);
+          let description = this.createDescription(field);
 
           let inputElement;
 
@@ -355,6 +355,7 @@ class FormGenerator {
               });
               return;
             case "subform":
+	      label = null;
               const fieldSet = document.createElement("fieldset");
 	      const legend = document.createElement("legend");
 	      legend.textContent = field.label;
@@ -405,7 +406,7 @@ class FormGenerator {
           }
 
           const fieldSetElement = document.createElement("div");
-          fieldSetElement.appendChild(label);
+          if(label){ fieldSetElement.appendChild(label); }
           fieldSetElement.appendChild(description);
           fieldSetElement.appendChild(inputElement);
 
