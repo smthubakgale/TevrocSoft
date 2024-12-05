@@ -77,8 +77,24 @@ class FormGenerator {
 	  
       return description;
   }
+  checkNested(field , index){
+      
+      if(field.optgroup)
+      {
+	index++;
+	this.checkNested(field , index);
+      }
+  }
   createSelect(field , inputElement , nested = false)
   {
+      var sn = false;
+      if(nested == false}{ 
+	  var index = 0;
+	  this.checkNested(field , index);
+	  sn = index > 1;
+     }
+     if(sn){ console.log(field); }
+
      if(field.options)
      {
 	field.options.forEach((option) => {
