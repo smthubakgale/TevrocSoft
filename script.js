@@ -89,48 +89,98 @@ class FormGenerator {
 	   {
 	     ret = rf;
 	   }
-	});
-	console.log(ret , field);
-	
+	}); 
       }
       return ret;
   }
   createSelect(field , inputElement , nested = false)
   {
       var sn = (nested) ? false : this.checkNested(field , 0) > 1;
-      console.log(sn);
-      if(sn){ console.log(field); }
-
-     if(field.options)
-     {
-	field.options.forEach((option) => {
-	  const optionElement = document.createElement("option");
-	  optionElement.value = option.value;
-	  optionElement.textContent = option.label;
-	  inputElement.appendChild(optionElement);
-       });  
-     }
-     if(field.optgroups)
-     { 
-	var ts = this;
-	field.optgroups.forEach((optgroup) => {
-	    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
-	    
-	    if(nested){ 
-		const optionElement = document.createElement("option"); 
-		optionElement.disabled = true; 
-	        optionElement.textContent = optgroup.label;
+     
+      if(sn)
+      {
+	   // Generate main select options
+	    field.optgroups.forEach(optgroup => {
+	      const option = document.createElement('option');
+	      option.value = optgroup.label;
+	      option.text = optgroup.label;
+	      mainSelect.appendChild(option);
+	    });
+	
+	    // Add event listener to main select
+	    mainSelect.addEventListener('change', () => {
+	      const selectedValue = mainSelect.value;
+	      const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue);
+	
+	      // Create nested options container dynamically
+	      const nestedOptionsContainer = document.createElement('div');
+	      nestedOptionsContainer.className = 'nested-options-container';
+	
+	      // Generate nested options
+	      if (selectedOptgroup.options) {
+	        const nestedSelect = document.createElement('select');
+	        selectedOptgroup.options.forEach(option => {
+	          const nestedOption = document.createElement('option');
+	          nestedOption.value = option.value;
+	          nestedOption.text = option.label;
+	          nestedSelect.appendChild(nestedOption);
+	        });
+	        nestedOptionsContainer.appendChild(nestedSelect);
+	      } else if (selectedOptgroup.optgroups) {
+	        selectedOptgroup.optgroups.forEach(optgroup => {
+	          const nestedSelect = document.createElement('select');
+	          nestedSelect.label = optgroup.label;
+	          optgroup.options.forEach(option => {
+	            const nestedOption = document.createElement('option');
+	            nestedOption.value = option.value;
+	            nestedOption.text = option.label;
+	            nestedSelect.appendChild(nestedOption);
+	          });
+	          nestedOptionsContainer.appendChild(nestedSelect);
+	        });
+	      }
+	
+	      // Append nested options container to the DOM
+	      mainSelect.parentNode.appendChild(nestedOptionsContainer);
+	
+	      // Show nested options container
+	      nestedOptionsContainer.style.display = 'block';
+	    });
+	  });
+      }
+      else
+      {
+	    if(field.options)
+	     {
+		field.options.forEach((option) => {
+		  const optionElement = document.createElement("option");
+		  optionElement.value = option.value;
+		  optionElement.textContent = option.label;
+		  inputElement.appendChild(optionElement);
+	       });  
+	     }
+	     if(field.optgroups)
+	     { 
+		var ts = this;
+		field.optgroups.forEach((optgroup) => {
+		    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
 		    
-		optgroupElement.style.paddingLeft = "20px";
-		inputElement.appendChild(optionElement);
-	    }
-	    else{
-		optgroupElement.setAttribute('label', optgroup.label);    
-	    }
-	    ts.createSelect(optgroup , optgroupElement, true);
-	    inputElement.appendChild(optgroupElement);
-        }); 
-     }
+		    if(nested){ 
+			const optionElement = document.createElement("option"); 
+			optionElement.disabled = true; 
+		        optionElement.textContent = optgroup.label;
+			    
+			optgroupElement.style.paddingLeft = "20px";
+			inputElement.appendChild(optionElement);
+		    }
+		    else{
+			optgroupElement.setAttribute('label', optgroup.label);    
+		    }
+		    ts.createSelect(optgroup , optgroupElement, true);
+		    inputElement.appendChild(optgroupElement);
+	        }); 
+	     }	  
+	      } 
   }
   renderForm() {
     const fields = this.formConfig.fields;
