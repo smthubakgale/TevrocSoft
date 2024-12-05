@@ -396,7 +396,7 @@ class FormGenerator {
 
               fieldSet.appendChild(addButton);
 
-              const subFormElement = this.renderSubForm(fieldSet, [field.fields[0]], parentName + "_" + field.name);
+              const subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
 
               addButton.addEventListener("click", () => {
