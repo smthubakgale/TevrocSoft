@@ -1304,13 +1304,15 @@ shop #discounts {
 #shop fieldset fieldset legend {
   color: #333333;
 }
-
+#shop .setnav{
+  display:flex; 
+  gap:8px; 
+}
 #shop .setnav button{
-  margin-left:4px;
+  height:40px;
 }
 #shop .setnav input{
-   width:unset;
-  margin-left:$px;
+   width:unset; 
 }
 #shop .setnav span{
   
