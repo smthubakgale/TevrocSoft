@@ -301,7 +301,7 @@ class FormGenerator {
         });
       } else {
         const fieldSet = document.createElement("fieldset");
-        const legend = document.createElement("legent");
+        const legend = document.createElement("legend");
         legend.textContent = group;
 	fieldSet.appendChild(legend);
 
