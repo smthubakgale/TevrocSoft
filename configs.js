@@ -5,10 +5,55 @@
 	 "fields": [ 
 	        {
 		   group : "Document" ,
-		   label: "Document Title",
+		   label: "Members",
 		   name: "id_title",
-		   type: "text", 
-		   description: "Enter the title for your documentation"
+		   type: "subform", 
+		   description: "Secify all the members involved " ,
+		  "fields": [
+			{
+			  "label": "Member Id",
+			  "type": "text",
+			  "name": "id",
+			  "required": true ,
+			   readonly:true ,
+			   description:"it will auto generate thus readonly"
+			},
+			{
+			  "label": "Email Address",
+			  "type": "email",
+			  "name": "email",
+			  "required": true ,
+			  description: "Enter the Member's Email Address"
+			},
+			{
+			  "label": "First Name",
+			  "type": "text",
+			  "name": "fname",
+			  "required": true ,
+			  description: "Enter the Member's First Name"
+			},
+			{
+			  "label": "Middle Name",
+			  "type": "text",
+			  "name": "mname",
+			  "required": false ,
+			   description: "Enter Member's middle name (Optional)"
+			},
+			{
+			   "label": "Last Name",
+			   "type": "text",
+			   "name": "lname",
+			   "required": true ,
+			   description:"Enter Member's Last Name"
+			},
+			{
+			  "label": "Github Username",
+			  "type": "text",
+			  "name": "github",
+			  "required": true,
+			   description:"Enter Member's Github Username"
+			}
+		  ]
 		},
 	        {
 		   group : "Development" ,
