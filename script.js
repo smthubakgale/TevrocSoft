@@ -145,8 +145,7 @@ class FormGenerator {
 	
 	      // Show nested options container
 	      nestedOptionsContainer.style.display = 'block';
-	    });
-	  });
+	    }); 
       }
       else
       {
