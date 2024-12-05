@@ -15,7 +15,7 @@
 		   name: "logo_ico",
 		   type: "file",
 		   accept:".ico" ,
-		   description: "pload your icon in .ico format"
+		   description: "Upload your icon in .ico format"
 		},
 		{
 		  "label": "Password",
