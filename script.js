@@ -704,9 +704,11 @@ class FormGenerator {
 		setnavDiv.appendChild(formNumberInput);
 		setnavDiv.appendChild(subformCounterText);
 		
-		// Add the setnavDiv to the fieldSet
-		fieldSet.appendChild(setnavDiv);
-		// 
+		// Get the add button
+		const addButton = fieldSet.querySelector('button.add-button');
+		
+		// Insert setnavDiv after the add button
+		fieldSet.insertBefore(setnavDiv, addButton.nextSibling); 
 	  }
 	
 	  // Call the function to create buttons
