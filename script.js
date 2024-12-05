@@ -635,7 +635,7 @@ class FormGenerator {
 	    const nextButton = document.createElement('button');
 	    nextButton.textContent = 'Next';
 	    nextButton.onclick = () => {
-		console.log(currentSubformIndex , subforms.length - 1);
+		console.log(subforms , currentSubformIndex , subforms.length - 1);
 	        subforms[currentSubformIndex].style.display = 'none';
 		    
 	      // Hide current subform
@@ -656,7 +656,7 @@ class FormGenerator {
 	    prevButton.textContent = 'Previous';
 	    prevButton.onclick = () => {
 	      // Hide current subform
-		console.log(currentSubformIndex , subforms.length - 1);
+		console.log(subforms , currentSubformIndex , subforms.length - 1);
 	        subforms[currentSubformIndex].style.display = 'none';
 	
 	      // Show previous subform
