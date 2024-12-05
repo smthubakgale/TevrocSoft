@@ -104,12 +104,12 @@ class FormGenerator {
 	      const option = document.createElement('option');
 	      option.value = optgroup.label;
 	      option.text = optgroup.label;
-	      mainSelect.appendChild(option);
+	      inputElement.appendChild(option);
 	    });
 	
 	    // Add event listener to main select
-	    mainSelect.addEventListener('change', () => {
-	      const selectedValue = mainSelect.value;
+	    inputElement.addEventListener('change', () => {
+	      const selectedValue = inputElement.value;
 	      const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue);
 	
 	      // Create nested options container dynamically
@@ -141,7 +141,7 @@ class FormGenerator {
 	      }
 	
 	      // Append nested options container to the DOM
-	      mainSelect.parentNode.appendChild(nestedOptionsContainer);
+	      inputElement.parentNode.appendChild(nestedOptionsContainer);
 	
 	      // Show nested options container
 	      nestedOptionsContainer.style.display = 'block';
