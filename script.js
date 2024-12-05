@@ -631,7 +631,7 @@ class FormGenerator {
 	  // Function to create buttons
 	  function createButtons() 
 	  {
-	    if (fieldset.querySelector('div.setnav')) { return; }
+	    if (fieldSet.querySelector('div.setnav')) { return; }
 	    // Create a new div element with class "setnav"
 		const setnavDiv = document.createElement('div');
 		setnavDiv.classList.add('setnav'); ; 
@@ -704,8 +704,9 @@ class FormGenerator {
 		setnavDiv.appendChild(formNumberInput);
 		setnavDiv.appendChild(subformCounterText);
 		
-		// Add the setnavDiv to the fieldset
-		fieldset.appendChild(setnavDiv);
+		// Add the setnavDiv to the fieldSet
+		fieldSet.appendChild(setnavDiv);
+		// 
 	  }
 	
 	  // Call the function to create buttons
