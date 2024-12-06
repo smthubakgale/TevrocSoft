@@ -36,7 +36,7 @@ const create =
   <span style="color: #FF6600" onclick="myFunction(this)"> Click Me !</span>
   <div></div>
   <script>
-    function myFunction(span) { 
+      window.myFunction = myFunction(span) { 
        const div = span.nextElementSibling;
 	if (span.hasAttribute('shown')) {
 	    span.removeAttribute('shown');
@@ -493,7 +493,7 @@ const create =
 				label : "System feasibility" ,
 				 type : "subform" ,
 				 name : "system" , 
-				 description : "assesses whether the system can be successfully developed, implemented, and maintained" ,
+				 description : "whether the system can be successfully developed, implemented, and maintained" ,
 				 fields : [
 				    {
 					label : "Create" ,
