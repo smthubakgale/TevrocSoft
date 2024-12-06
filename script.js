@@ -231,15 +231,14 @@ class FormGenerator {
 	      }
 	    });
 	    //:
-			  
+	  });	  
 	// Observe the document body for changes
 	observer2.observe(document.body, {
 	  childList: true,
 	  subtree: true
-	});
-	}     
+	});     
 	      
-	
+	}
      }
   }
   createSelect(field , inputElement , nested = false , parentElement)
