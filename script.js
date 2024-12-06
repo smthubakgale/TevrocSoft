@@ -778,17 +778,10 @@ class FormGenerator {
 	  newSubForm.appendChild(removeButton);
 	  fieldSet.appendChild(newSubForm);
 	  // Get all subforms
-           const subforms2 = fieldSet.querySelectorAll('.subform');
-	  // Loop through all subforms
-	   subforms2.forEach((subform, index) => {
-		   if (index === subforms.length - 1) {
-		    // Last subform, display block
-		    subform.style.display = 'block';
-		   } else {
-		    // Other subforms, display none
-		    subform.style.display = 'none';
-		   }
-           });
+           const subforms2 = fieldSet.querySelectorAll('.subform'); 
+	   subforms2.forEach((subform, index) => { subform.style.display = 'none';  });
+	   newSubForm.style.display = "block";
+	   //
 	   // Update subfield Nav 
 	   if (fieldSet.querySelector('.setnav')) 
 	   {
