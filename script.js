@@ -152,10 +152,12 @@ class FormGenerator {
      } 
      if(field.route)
      {
+	console.log("A");
 	window.radioRefs = window.radioRefs || [];
 	// 
 	if(field.observe == "subform")
 	{
+		console.log("B");
 		  const observer = new MutationObserver((mutations) => {
 		  mutations.forEach((mutation) => {
 		    if (mutation.type === 'childList') {
