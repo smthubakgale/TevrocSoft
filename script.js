@@ -24,14 +24,14 @@ import {
 	});
   //
 class FormGenerator {
-  constructor(form, importButton, fileInput, formConfig, callback) {
+  constructor(form, importButton, fileInput, formConfig, fname , callback) {
     this.form = form;
     this.importButton = importButton;
     this.fileInput = fileInput;
     this.formConfig = formConfig;
     this.callback = callback;
 
-    this.renderForm();
+    this.renderForm(fname);
     this.addEventListeners();
     this.loadFormDataFromLocalStorage();
   }
@@ -248,10 +248,10 @@ class FormGenerator {
 	  subtree: true
 	});
   }
-  renderForm() {
+  renderForm(fname = "myForm") {
     const fields = this.formConfig.fields;
     const parentElement = this.form;
-    const parentName = "myForm";
+    const parentName = fname;
     const ts = this;
 
     const groupedFields = fields.reduce((acc, field) => {
@@ -1118,7 +1118,7 @@ class FormGenerator {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
-        new FormGenerator(form, importButton, fileInput , formConfig ,
+        new FormGenerator(form, importButton, fileInput , formConfig, "Spec" ,
 	  (formData) => {
 		console.log(formData);
 	  });
@@ -1128,6 +1128,7 @@ const formGenerator = new FormGenerator(
   document.getElementById("myForm2"),
   document.getElementById("import-button2"),
   document.getElementById("file-input2"),
+  "Reqs" ,
   formConfig2,
   (formData) => {
     console.log(formData);
