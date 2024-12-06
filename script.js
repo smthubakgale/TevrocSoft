@@ -669,6 +669,7 @@ class FormGenerator {
 	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
 
 		console.log(idx , currentSubformIndex);
+	        if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	        subforms[currentSubformIndex].style.display = 'none';
 		    
@@ -695,7 +696,8 @@ class FormGenerator {
 	      let idx = subnav.getAttribute("index");
 	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
 
-		console.log(idx , currentSubformIndex);
+	      console.log(idx , currentSubformIndex);
+	      if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	      // Hide current subform 
 	        subforms[currentSubformIndex].style.display = 'none';
@@ -724,7 +726,8 @@ class FormGenerator {
 	      let idx = subnav.getAttribute("index");
 	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
 
-		console.log(idx , currentSubformIndex);
+	      console.log(idx , currentSubformIndex);
+	      if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	      const newIndex = parseInt(formNumberInput.value) - 1;
 	      if (newIndex >= 0 && newIndex < subforms.length) {
