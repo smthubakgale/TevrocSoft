@@ -787,6 +787,12 @@ class FormGenerator {
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
 		{
 		    var n = input.step && input.step != "undefined" ? parseInt(input.step) : 1;
+		    // Get the last subform in the fieldSet
+                    const lastSubform = fieldSet.querySelectorAll('.subform').item(fieldSet.querySelectorAll('.subform').length - 1);
+		    const lastSubformInput = lastSubform.querySelector(`input[name="${input.name}"]`);
+		    console.log(lastSubformInput);
+		    console.log(lastSubformInput.value);
+		    // 
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
 		    var c = m*n;
 			
