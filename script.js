@@ -95,6 +95,7 @@ class FormGenerator {
   }
   createAutoComplete(inputElement , textElement , suggestions)
   { 
+	  
      function getNextDatalistId() {
 	  window.dataListIds = window.dataListIds || [];
 	  const nextId = window.dataListIds.length + 1;
@@ -153,77 +154,50 @@ class FormGenerator {
      {
 	window.radioRefs = window.radioRefs || [];
 	// 
-	     const elements = document.querySelectorAll('[name="spec_members_id"]');
-
-		elements.forEach((element) => {
-		  console.log(`Element value: ${element.value}`);
+	if(field.observe == "subform")
+	{
+		  const observer = new MutationObserver((mutations) => {
+		  mutations.forEach((mutation) => {
+		    if (mutation.type === 'childList') {
+		      mutation.addedNodes.forEach((node) => {
+			if (node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
+			  console.log('Subform with element "spec_members_id" added');
+			  const specMembersIdElement = node.querySelector('[name="spec_members_id"]');
+			  createRadioButton(specMembersIdElement);
+			}
+		      });
+		      mutation.removedNodes.forEach((node) => {
+			if (node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
+			  console.log('Subform with element "spec_members_id" removed');
+			}
+		      });
+		    }
+		  });
 		});
-	    // Create a MutationObserver
-		// Create a MutationObserver
-const observer2 = new MutationObserver((mutations) => {
-  console.log('Mutations:', mutations);
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'childList') {
-      console.log('Added nodes:', mutation.addedNodes);
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeName === 'INPUT' && node.getAttribute('name') === 'spec_members_id') {
-          console.log('Element with name "spec_members_id" added');
-          console.log(node);
-        }
-      });
-    }
-  });
-});
 
-// Observe the entire document for changes
-observer2.observe(document, {
-  childList: true,
-  subtree: true
-});
-	// Create a MutationObserver to watch for changes
-	const observer = new MutationObserver((mutations) => {
-	  mutations.forEach((mutation) => {
-	    if (mutation.type === 'childList') {
-	      mutation.addedNodes.forEach((node) => {
-	        if (node.getAttribute && node.getAttribute('name') === 'spec_members_id')
-		{
-	           console.log('Element with name "spec_members_id" added');
-		   let inputElement = document.createElement("input");
-                   inputElement.type = "radio";
-                   inputElement.name = `${parentName}_${field.name}`;
-                   inputElement.value = node.value;
-                   inputElement.required = field.required;
+		function createRadioButton(specMembersIdElement) {
+		    console.log('Element with name "spec_members_id" added');
+		    let inputElement = document.createElement("input");
+                    inputElement.type = "radio";
+                    inputElement.name = `${parentName}_${field.name}`;
+                    inputElement.value = node.value;
+                    inputElement.required = field.required;
 
-	           const labelElement = document.createElement("label");
-	           labelElement.textContent = node.value;
-	           labelElement.appendChild(inputElement);
+	            const labelElement = document.createElement("label");
+	            labelElement.textContent = node.value;
+	            labelElement.appendChild(inputElement);
 	
-	           parentElement.appendChild(labelElement);
+	            parentElement.appendChild(labelElement);
 			
-		   radioRefs.push({ id : radioId , node: node  , ref : inputElement });
-	        }
-	      });
-	      mutation.removedNodes.forEach((node) => {
-	        if (node.getAttribute && node.getAttribute('name') === 'spec_members_id') 
-		{
-	           console.log('Element with name "spec_members_id" removed');
-	        }
-	      });
-	    } else if (mutation.type === 'attributes') {
-	      if (mutation.target.getAttribute('name') === 'spec_members_id' && mutation.attributeName === 'value') {
-	        console.log('Value of element with name "spec_members_id" changed to:', mutation.target.value);
-	      }
-	    }
-	  });
-	});
-	
-	// Observe the entire document for changes
-	observer.observe(document, {
-	  childList: true,
-	  subtree: true,
-	  attributeFilter: ['value'],
-	  attributes: true
-	});	     
+		    radioRefs.push({ id : radioId , node: node  , ref : inputElement });
+		}
+
+		observer.observe(document, {
+		  childList: true,
+		  subtree: true
+		});
+	}     
+	      
 	
      }
   }
@@ -335,8 +309,7 @@ observer2.observe(document, {
 		    var descendants = subform.querySelectorAll("*");
 		     
 		    descendants.forEach(function(descendant) {
-		      if (descendant.hasAttribute(setterId) && proc) { 
-			 console.log("Calling Setter");
+		      if (descendant.hasAttribute(setterId) && proc) {  
 			 proc = false;
 		         try{
 		             setter(subform , inputElement);  
