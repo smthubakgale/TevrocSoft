@@ -330,9 +330,9 @@
 				 description : "this will be used to get the day , month and time" ,
 				 setter: (subform , inputElement) => {
 					 // Sibling Elements 
-					 var _start = subform.querySelector("#start");
- 					 var _month = subform.querySelector("#month");
-					 var _year = subform.querySelector("#year");
+					 var _start = subform.querySelector("[name='start']");
+ 					 var _month = subform.querySelector("[name='month']");
+					 var _year = subform.querySelector("[name='year']");
 
 					 // Set its value to now if it's null
 					if (inputElement.value === "") {
