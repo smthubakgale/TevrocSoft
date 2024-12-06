@@ -160,14 +160,14 @@ class FormGenerator {
 		  mutations.forEach((mutation) => {
 		    if (mutation.type === 'childList') {
 		      mutation.addedNodes.forEach((node) => {
-			if (node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
+			if (node.classList && node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
 			  console.log('Subform with element "spec_members_id" added');
 			  const specMembersIdElement = node.querySelector('[name="spec_members_id"]');
 			  createRadioButton(specMembersIdElement);
 			}
 		      });
 		      mutation.removedNodes.forEach((node) => {
-			if (node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
+			if (node.classList && node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
 			  console.log('Subform with element "spec_members_id" removed');
 			}
 		      });
