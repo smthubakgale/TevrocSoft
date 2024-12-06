@@ -559,10 +559,8 @@ class FormGenerator {
 			  
               break;
             case "checkbox":
-              inputElement = document.createElement("input");
-              inputElement.type = "checkbox";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
+              inputElement = document.createElement("div");
+              ts.createCheckboxButtons(field, inputElement , parentName);  
               break;
             case "radio":  
               inputElement = document.createElement("div");
@@ -708,10 +706,8 @@ class FormGenerator {
 			  
               break;
             case "checkbox":
-              inputElement = document.createElement("input");
-              inputElement.type = "checkbox";
-              inputElement.name = `${parentName}_${field.name}`;
-              inputElement.required = field.required;
+              inputElement = document.createElement("div");
+              ts.createCheckboxButtons(field, inputElement , parentName);  
               break;
             case "radio":
               inputElement = document.createElement("div");
@@ -944,12 +940,9 @@ class FormGenerator {
 			  
               break;
         case "checkbox":
-          inputElement = document.createElement("input");
-          inputElement.type = "checkbox";
-          inputElement.name = `${parentName}_${field.name}`;
-          inputElement.required = field.required;
-          inputElement.accept = field.accept;
-          break;
+          inputElement = document.createElement("div");
+              ts.createCheckboxButtons(field, inputElement , parentName);  
+              break;
         case "radio":
           inputElement = document.createElement("div");
           ts.createRadioButtons(field, inputElement , parentName);  
