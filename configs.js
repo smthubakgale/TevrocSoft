@@ -2,7 +2,44 @@
 //----------------: Shop
 //: Specifications
 
-const schedule2 = [
+const schedule2a = [
+    {
+	label : "API ID" ,
+	 type : "number" ,
+	 readonly : true ,
+	 autoincrement:true , 
+	 name : "name" , 
+	 description : ""
+    } , 
+    {
+	label : "Name" ,
+	 type : "text" ,
+	 name : "name" , 
+	 description : ""
+    } , 
+    {
+	label : "Description" ,
+	 type : "text" ,
+	 name : "desc" , 
+	 description : ""
+    } , 
+    {
+	label : "URL" ,
+	 type : "text" ,
+	 name : "url" , 
+	 description : ""
+    } , 
+];
+
+const schedule2b = [
+    {
+	label : "Library ID" ,
+	 type : "number" ,
+	 readonly : true ,
+	 autoincrement:true , 
+	 name : "name" , 
+	 description : ""
+    } , 
     {
 	label : "Name" ,
 	 type : "text" ,
@@ -39,7 +76,7 @@ const create =
 			       return xhr.responseText;
 			    })() 
 	 ,
-	 fields: schedule2
+	 fields: schedule2a
      },	
      {
 	 label : "Libraries" ,
@@ -54,7 +91,7 @@ const create =
 			       xhr.send();
 			       return xhr.responseText;
 			    })() , 
-	 fields: schedule2
+	 fields: schedule2b
      },	 	 
  ];
 
