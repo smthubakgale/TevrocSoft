@@ -767,6 +767,7 @@ class FormGenerator {
 		    var n = input.step ? parseInt(input.step) : 1;
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
 		    var c = m*n;
+		    console.log(n , m , c);
 		    input.value = c;
 		}
 		    else{
