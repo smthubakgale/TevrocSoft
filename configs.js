@@ -60,6 +60,14 @@ const schedule2a = [
 	 route: "spec_members_id" ,
 	 observe:"subform" ,
 	 pre : " Member "
+    } , 
+    {
+	label : "Secondary Members" ,
+	 type : "checkbox" ,
+	 name : "su" ,  
+	 route: "spec_members_id" ,
+	 observe:"subform" ,
+	 pre : " Member "
     } 
 ];
 
@@ -120,6 +128,14 @@ const schedule2b = [
 	 name : "pu" ,  
 	 route: "spec_members_id",
 	 observe:"subform",
+	 pre : " Member "
+    } , 
+    {
+	label : "Secondary Members" ,
+	 type : "checkbox" ,
+	 name : "su" ,  
+	 route: "spec_members_id" ,
+	 observe:"subform" ,
 	 pre : " Member "
     } 
 ];
