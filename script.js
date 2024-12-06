@@ -759,10 +759,10 @@ class FormGenerator {
 	  {
 	    if(input.type == "number")
 	    {
-		console.log(input.autoincrement == "true" , input.readOnly);
-		console.log(input.autoincrement == "true" && input.readOnly);
+		console.log(input.getAttribute('autoincrement') == "true" , input.readOnly);
+		console.log(input.getAttribute('autoincrement') == "true" && input.readOnly);
 		    
-		if(input.autoincrement == "true" && input.readOnly)    
+		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
 		{
 		    var n = input.step ? parseInt(input.step) : 1;
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
