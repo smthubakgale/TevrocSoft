@@ -6,7 +6,7 @@ const schedule2 = [
 							 
 ];
 
-constr create = 
+const create = 
 [
     {
 	label : "APIs" ,
