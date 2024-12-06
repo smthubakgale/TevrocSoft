@@ -37,9 +37,7 @@ class FormGenerator {
   }
   createDescription(field){
       let description;
-
-      console.log(field):
-
+ 
       if(field.title && field.seemore == true){
 	description = document.createElement('div');
 	const spanTitle = document.createElement('span');
@@ -70,12 +68,16 @@ class FormGenerator {
 	description.appendChild(span1);
 	description.appendChild(div2);
       }
-      else {
+      else if(field.description) {
 	description = document.createElement("small");
         description.innerHTML = field.description;
         description.style.color = "gray";
         description.style.fontSize = "12px";	    
       }
+      else{
+	 console.error(field);  
+      }
+ 
 	  
       return description;
   }
