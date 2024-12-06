@@ -111,18 +111,7 @@ class FormGenerator {
  
      inputElement.appendChild(datalist); 
      // Populate the datalist with suggestions
-	suggestions.sort((a, b) => {
-	  const aValue = a.toLowerCase();
-	  const bValue = b.toLowerCase();
-	
-	  if (aValue < bValue) {
-	    return -1;
-	  } else if (aValue > bValue) {
-	    return 1;
-	  } else {
-	    return 0;
-	  }
-	});
+	suggestions = [...new Set(suggestions)].sort();
 	  
 	suggestions.forEach(suggestion => {
 	  const option = document.createElement('option');
