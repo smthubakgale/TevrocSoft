@@ -1345,16 +1345,12 @@ shop #discounts {
   display:inline-block; 
   margin-top:5px
 }
+/* CKE Editor */
+.cke_notification {
+  display: none;
+}
 /* Tags Styles */
-
-.cke_dialog_background_cover {
-  display: none !important;
-}
-
-.cke_dialog_background {
-  display: none !important;
-}
-
+ 
 #portfolio .tags {
   list-style: none;
   padding: 0;
