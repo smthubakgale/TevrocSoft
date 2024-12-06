@@ -242,7 +242,7 @@ class FormGenerator {
               inputElement.min = field.min; 
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
-              inputElement.autoincrement = field.autoincrement; 
+              inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
 	      if(field.readonly && field.autoincrement)
 	      {
@@ -358,8 +358,8 @@ class FormGenerator {
               inputElement.required = field.required; 
               inputElement.min = field.min; 
               inputElement.max = field.max; 
-              inputElement.readOnly = field.readonly;
-              inputElement.autoincrement = field.autoincrement; 
+              inputElement.readOnly = field.readonly; 
+              inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
 	      if(field.readonly && field.autoincrement)
 	      {
@@ -564,7 +564,7 @@ class FormGenerator {
               inputElement.min = field.min; 
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
-              inputElement.autoincrement = field.autoincrement; 
+              inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
 	      if(field.readonly && field.autoincrement)
 	      {
