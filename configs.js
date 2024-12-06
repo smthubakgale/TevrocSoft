@@ -58,7 +58,7 @@ const schedule2a = [
 	 type : "radio" ,
 	 name : "pu" ,  
 	 route: "spec_members_id"
-    } , 
+    } 
 ];
 
 const schedule2b = [
@@ -87,7 +87,37 @@ const schedule2b = [
 	 type : "text" ,
 	 name : "url" , 
 	 description : ""
+    } ,  
+    {
+	label : "Earliest Start" ,
+	 type : "number" ,
+	 name : "es" ,  
+	 description : ""
     } , 
+    {
+	label : "Earliest Finish" ,
+	 type : "number" ,
+	 name : "ef" ,  
+	 description : ""
+    } , 
+    {
+	label : "Latest Start" ,
+	 type : "number" ,
+	 name : "ls" ,  
+	 description : ""
+    } , 
+    {
+	label : "Latest Finish" ,
+	 type : "number" ,
+	 name : "ef" ,  
+	 description : ""
+    } , 
+    {
+	label : "Primary Member" ,
+	 type : "radio" ,
+	 name : "pu" ,  
+	 route: "spec_members_id"
+    } 
 ];
 
 const create = 
