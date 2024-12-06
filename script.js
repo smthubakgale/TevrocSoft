@@ -381,11 +381,24 @@ class FormGenerator {
 
               if(field.multiple)
 	      {  
+                 // Create a new div
+		const viewNavDiv = document.createElement('div');
+		viewNavDiv.className = 'viewnav';
+		 // Create a view button
+		 const viewButton = document.createElement('button');
+		 viewButton.textContent = 'View';
+		 viewButton.className = 'view-button';
+		 viewButton.style.display = "none";
+		 // Create an add button    
                  const addButton = document.createElement("button");
                  addButton.type = "button";
                  addButton.textContent = "Add new " + (field.button ? field.button : field.label);
                  addButton.classList.add("add-button");
-                 fieldSet.appendChild(addButton);
+		 // Append the view and add buttons to the div
+		 viewNavDiv.appendChild(viewButton);
+		 viewNavDiv.appendChild(addButton);
+		 //
+                 fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
 		   ts.addButtonEvent(fieldSet, subFormElement);
@@ -524,11 +537,24 @@ class FormGenerator {
 
               if(field.multiple)
 	      {  
+                 // Create a new div
+		const viewNavDiv = document.createElement('div');
+		viewNavDiv.className = 'viewnav';
+		 // Create a view button
+		 const viewButton = document.createElement('button');
+		 viewButton.textContent = 'View';
+		 viewButton.className = 'view-button';
+		 viewButton.style.display = "none";
+		 // Create an add button    
                  const addButton = document.createElement("button");
                  addButton.type = "button";
                  addButton.textContent = "Add new " + (field.button ? field.button : field.label);
                  addButton.classList.add("add-button");
-                 fieldSet.appendChild(addButton);
+		 // Append the view and add buttons to the div
+		 viewNavDiv.appendChild(viewButton);
+		 viewNavDiv.appendChild(addButton);
+		 //
+                 fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
 		   ts.addButtonEvent(fieldSet, subFormElement);
