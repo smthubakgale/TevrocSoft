@@ -248,6 +248,16 @@ class FormGenerator {
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
               break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              
+	      if(field.setter){
+		 field.setter(parentElement , inputElement);
+	      }
+              break;
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
@@ -380,6 +390,16 @@ class FormGenerator {
 
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
+              break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              
+	      if(field.setter){
+		 field.setter(fieldSet , inputElement);
+	      }
               break;
             case "file":
               inputElement = document.createElement("input");
@@ -603,6 +623,16 @@ class FormGenerator {
           this.createSelect(field , selectElement , false , inputElement);
           inputElement.prepend(selectElement);
           break;
+            case "datetime-local":
+              inputElement = document.createElement("input");
+              inputElement.type = "datetime-local";
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required;
+              
+	      if(field.setter){
+		 field.setter(subFormElement , inputElement);
+	      }
+              break;
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
