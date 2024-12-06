@@ -102,6 +102,7 @@ const create =
 			  "name": "id",
 			  "required": true ,
 			   readonly:true ,
+			   autoincrement: true , 
 			   description:"it will auto generate thus readonly"
 			},
 			{
