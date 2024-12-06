@@ -196,6 +196,45 @@ class FormGenerator {
 		  childList: true,
 		  subtree: true
 		});
+
+		// Create a MutationObserver instance
+	var observer2 = new MutationObserver(function(mutations) {
+	  mutations.forEach(function(mutation) {
+	    if (mutation.addedNodes) {
+	      mutation.addedNodes.forEach(function(node) {
+		  //: 
+		  var subforms = document.querySelectorAll(".subform");  
+		  subforms.forEach(function(subform) { 
+		    var descendants = subform.querySelectorAll("*");
+		     
+		    descendants.forEach(function(descendant) {
+		      if (descendant.getAttribute('name') === 'spec_members_id') {  
+			  console.log("found 2");
+		      }
+		    });
+		    //:
+		  }); 
+	      });
+	    }
+	  });
+	});
+	 //: 
+	  var subforms = document.querySelectorAll(".subform");  
+	  subforms.forEach(function(subform) { 
+	    var descendants = subform.querySelectorAll("*");
+	     
+	    descendants.forEach(function(descendant) {
+	      if (descendant.getAttribute('name') === 'spec_members_id') {  
+		  console.log("found 2");
+	      }
+	    });
+	    //:
+			  
+	// Observe the document body for changes
+	observer2.observe(document.body, {
+	  childList: true,
+	  subtree: true
+	});
 	}     
 	      
 	
