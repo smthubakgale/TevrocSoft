@@ -759,7 +759,7 @@ class FormGenerator {
 	  {
 	    if(input.type == "number")
 	    {
-		if(input.autoincrement == "true" and input.readOnly)    
+		if(input.autoincrement == "true" && input.readOnly)    
 		{
 		    var n = input.step ? parseInt(input.step) ? 1;
 		    let m = fieldSet.querySelectorAll('.subform').ength + 1;
