@@ -55,7 +55,7 @@ const schedule2a = [
     } , 
     {
 	label : "Primary Member" ,
-	 type : "radio" ,
+	 type : "select" ,
 	 name : "pu" ,  
 	 route: "spec_members_id" ,
 	 observe:"subform" ,
