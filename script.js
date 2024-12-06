@@ -45,26 +45,21 @@ class FormGenerator {
 	const div2 = document.createElement('div');
 	
         description.style.fontSize = "12px";
-        description.style.paddingBottom = "4px";
-	description.style.overflowX = 'auto';
-        description.style.whiteSpace = 'nowrap'    
+        description.style.paddingBottom = "4px";     
 	spanTitle.textContent = field.title;
 	spanTitle.style.color = "gray";
 	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
 	span1.style.cursor = 'pointer' 
-	div2.style.display = 'none';
-	div2.style.display = 'inline-block';
-        div2.style.whiteSpace = 'normal';
+	div2.style.display = 'none'; 
+        div2.innerHTML = field.description;
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
 	    div2.style.display = 'block';
-            div2.innerHTML = field.description;
 	    span1.textContent = 'less';
 	  } else {
-	    div2.style.display = 'none';
-            div2.innerHTML = "";
+	    div2.style.display = 'none'; 
 	    span1.textContent = 'more';
 	  }
 	});
