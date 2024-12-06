@@ -245,7 +245,7 @@ const schedule2b = [
 	label : "Development Requirements" ,
 	 type : "subform" ,
 	 name : "reqs" ,  
-	 description : "what is needed to complete the task ,
+	 description : "what is needed to complete the task" ,
 	 fields:[
 	    {
                 label : "Programming Languages" ,
