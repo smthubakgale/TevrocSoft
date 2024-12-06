@@ -127,7 +127,7 @@ const schedule2a = [
 	          label: 'Full-Experience',
 	          value: 'full',
 	        },{
-	          label: 'Partial-Experuence',
+	          label: 'Partial-Experience',
 	          value: 'partial',
 	        }
 		   ]
