@@ -162,20 +162,19 @@ class FormGenerator {
 			inputElement.name = `${parentName}_${field.name}`;
 			inputElement.value = node.value;
 			inputElement.required = field.required;
-			inputElement.style.marginRight = '5px'; // add some space between radio button and label
-			inputElement.style.width = 'auto'; // set width to auto
-			inputElement.style.height = '20px'; // set height
+			inputElement.style.marginRight = '5px';  
 			
-			const labelElement = document.createElement("label");
-			labelElement.textContent = node.value;
-			labelElement.style.fontSize = '16px'; // set font size
-			labelElement.style.fontFamily = 'Arial, sans-serif'; // set font family
-			labelElement.style.color = '#333'; // set text color
-			labelElement.style.display = 'flex'; // display as flex
-			labelElement.style.alignItems = 'center'; // align items to center
-			labelElement.prepend(inputElement);
-	
-		    parentElement.appendChild(labelElement);
+			const dv = document.createElement("div");
+			dv.style.display = 'flex';
+			const dv1 = document.createElement("div");
+			dv1.append(inputElement);
+			const dv2 = document.createElement("div"); 
+			dv.style.flex = 1;
+
+			dv.appendChild(dv1);
+			dv.appendChild(dv2);
+			 
+		        parentElement.appendChild(dv);
 			
 		    radioRefs.push({ id : radioId , node: node  , ref : inputElement });
 		}
