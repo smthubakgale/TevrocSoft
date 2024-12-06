@@ -95,13 +95,12 @@ class FormGenerator {
   }
   createAutoComplete(inputElement , textElement , suggestions)
   { 
-     // Function to get the next available datalist ID
-	function getNextDatalistId() {
-	  const existingDatalistIds = Array.from(document.querySelectorAll('datalist.dynamiclist')).map(datalist => parseInt(datalist.id.replace('datalist-', '')));
-	  const nextId = existingDatalistIds.length === 0 ? 1 : Math.max(...existingDatalistIds) + 1;
+     function getNextDatalistId() {
+	  window.dataListIds = window.dataListIds || [];
+	  const nextId = window.dataListIds.length + 1;
+	  window.dataListIds.push(nextId);
 	  return `datalist-${nextId}`;
 	}
-      //
      const datalistId = getNextDatalistId();
 	  
      const datalist = document.createElement('datalist');
