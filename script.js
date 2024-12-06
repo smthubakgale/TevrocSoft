@@ -667,6 +667,8 @@ class FormGenerator {
 	  function createButtons() 
 	  {
 	    if (fieldSet.querySelector('div.setnav')) { return; }
+	    const viewButton = fieldSet.querySelector('.viewnav .view-button');
+	    viewButton.style.display = "block";
 	    // Create a new div element with class "setnav"
 		const setnavDiv = document.createElement('div');
 		setnavDiv.classList.add('setnav'); ; 
@@ -679,9 +681,7 @@ class FormGenerator {
 	        let subnav = fieldSet.querySelector('.setnav');
 		subforms = fieldSet.querySelectorAll('.subform'); 
 	        let idx = subnav.getAttribute("index");
-	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
-
-		console.log(idx , currentSubformIndex);
+	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
 	        if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	        subforms[currentSubformIndex].style.display = 'none';
@@ -707,9 +707,7 @@ class FormGenerator {
 	      let subnav = fieldSet.querySelector('.setnav');
 	      subforms = fieldSet.querySelectorAll('.subform');
 	      let idx = subnav.getAttribute("index");
-	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
-
-	      console.log(idx , currentSubformIndex);
+	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
 	      if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	      // Hide current subform 
@@ -737,9 +735,7 @@ class FormGenerator {
 	      let subnav = fieldSet.querySelector('.setnav');
 	      subforms = fieldSet.querySelectorAll('.subform');
 	      let idx = subnav.getAttribute("index");
-	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
-
-	      console.log(idx , currentSubformIndex);
+	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
 	      if(idx != currentSubformIndex){ currentSubformIndex = idx; subnav.removeAttribute("index"); }
 		    
 	      const newIndex = parseInt(formNumberInput.value) - 1;
@@ -787,15 +783,13 @@ class FormGenerator {
 	  inputs.forEach((input) => 
 	  {
 	    if(input.type == "number")
-	    { 
-		console.log(input.getAttribute('autoincrement') == "true" && input.readOnly);
-		    
+	    {  
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
 		{
 		    var n = input.step && input.step != "undefined" ? parseInt(input.step) : 1;
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
 		    var c = m*n;
-		    console.log(input.step , n , m , c);
+			
 		    input.value = c;
 		}
 		    else{
@@ -821,6 +815,10 @@ class FormGenerator {
 	   // Update subfield Nav 
 	   if (fieldSet.querySelector('.setnav')) 
 	   {
+	      review();
+	   }
+
+	   function review(){
 	      let subforms = fieldSet.querySelectorAll('.subform');
 	      let subnav = fieldSet.querySelector('.setnav');
 	      let subformCounterText = fieldSet.querySelector('.setnav span');
@@ -835,6 +833,7 @@ class FormGenerator {
 	  
 	 removeButton.addEventListener("click", () => {
 	    newSubForm.remove();
+	    review();
 	  });
 }
 
