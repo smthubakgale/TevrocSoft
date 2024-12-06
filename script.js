@@ -777,10 +777,7 @@ class FormGenerator {
 	  removeButton.classList.add("remove-button");
 	  newSubForm.appendChild(removeButton);
 	  fieldSet.appendChild(newSubForm);
-	  
-	  // Get all subforms
-	  const subforms = fieldSet.querySelectorAll('.subform');
-	
+	   
 	  // Loop through all subforms
 	   subforms.forEach((subform, index) => {
 		   if (index === subforms.length - 1) {
