@@ -93,6 +93,37 @@ class FormGenerator {
       }
       return ret;
   }
+  createAutoComplete(inputElement , textElement , suggestions)
+  { 
+     // Function to get the next available datalist ID
+	function getNextDatalistId() {
+	  const existingDatalistIds = Array.from(document.querySelectorAll('datalist.dynamiclist')).map(datalist => parseInt(datalist.id.replace('datalist-', '')));
+	  const nextId = existingDatalistIds.length === 0 ? 1 : Math.max(...existingDatalistIds) + 1;
+	  return `datalist-${nextId}`;
+	}
+      //
+     const datalistId = getNextDatalistId();
+	  
+     const datalist = document.createElement('datalist');
+     datalist.id = datalistId;
+     datalist.classList.add('dynamiclist');
+ 
+     inputElement.appendChild(datalist); 
+     // Populate the datalist with suggestions
+	suggestions.forEach(suggestion => {
+	  const option = document.createElement('option');
+	  option.value = suggestion;
+	  datalist.appendChild(option);
+	});
+	
+	inputField.addEventListener('input', () => {
+	  const inputValue = inputField.value.toLowerCase();
+	  const matchingSuggestions = Array.from(datalist.options).filter(option => option.value.toLowerCase().includes(inputValue));
+	  datalist.innerHTML = '';
+	  matchingSuggestions.forEach(option => datalist.appendChild(option));
+	});
+      // 
+  }
   createSelect(field , inputElement , nested = false , parentElement)
   {
       var sn = (nested) ? false : this.checkNested(field , 0) > 1;
@@ -234,6 +265,20 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
+	    case "text":
+              inputElement = document.createElement("div");
+			  
+              textElement = document.createElement("div");
+              textElement.name = `${parentName}_${field.name}`;
+              textElement.type = "number";
+
+	      if(field.autocomplete && Array.isArray(field.suggestions))
+	      {
+		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
+	      }
+
+	      inputElement.appendChild(textElement);
+	      break;
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
