@@ -231,7 +231,12 @@ class FormGenerator {
 		      if (descendant.hasAttribute(setterId) && proc) { 
 			 console.log("Calling Setter");
 			 proc = false;
-		         setter(subform , inputElement); 
+		         try{
+		             setter(subform , inputElement);  
+			 }
+		         catch(e){
+			      console.error(e);
+		         }
 	                 observer.disconnect();
 		      }
 		    });
