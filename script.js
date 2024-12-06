@@ -413,6 +413,22 @@ class FormGenerator {
 		 inputElement.style.outline = 'none';
 	      }
               break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required; 
+              inputElement.min = field.min; 
+              inputElement.max = field.max; 
+              inputElement.readOnly = field.readonly;
+              inputElement.setAttribute('autoincrement', field.autoincrement); 
+              inputElement.step = field.step; 
+	      if(field.readonly && field.autoincrement)
+	      {
+		 inputElement.value = field.start ? field.start : 1;
+		 inputElement.style.outline = 'none';
+	      }
+              break;
             case "checkbox":
               inputElement = document.createElement("input");
               inputElement.type = "checkbox";
@@ -602,6 +618,22 @@ class FormGenerator {
               inputElement.type = "email";
               inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
+              break;
+            case "number":
+              inputElement = document.createElement("input");
+              inputElement.type = "number";
+              inputElement.name = `${parentName}_${field.name}`; 
+              inputElement.required = field.required; 
+              inputElement.min = field.min; 
+              inputElement.max = field.max; 
+              inputElement.readOnly = field.readonly;
+              inputElement.setAttribute('autoincrement', field.autoincrement); 
+              inputElement.step = field.step; 
+	      if(field.readonly && field.autoincrement)
+	      {
+		 inputElement.value = field.start ? field.start : 1;
+		 inputElement.style.outline = 'none';
+	      }
               break;
             case "number":
               inputElement = document.createElement("input");
