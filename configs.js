@@ -6,19 +6,19 @@ const schedule2 = [
     {
 	label : "Name" ,
 	 type : "text" ,
-	 name : "name" ,    ,
+	 name : "name" , 
 	 description : ""
     } , 
     {
 	label : "Description" ,
 	 type : "text" ,
-	 name : "desc" ,    ,
+	 name : "desc" , 
 	 description : ""
     } , 
     {
 	label : "URL" ,
 	 type : "text" ,
-	 name : "url" ,    ,
+	 name : "url" , 
 	 description : ""
     } , 
 ];
