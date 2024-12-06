@@ -763,7 +763,7 @@ class FormGenerator {
 		    
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
 		{
-		    var n = input.step ? parseInt(input.step) : 1;
+		    var n = input.step && input.step != "undefined" ? parseInt(input.step) : 1;
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
 		    var c = m*n;
 		    console.log(input.step , n , m , c);
