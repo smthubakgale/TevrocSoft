@@ -281,7 +281,7 @@ class FormGenerator {
           label.textContent = field.label;
           label.htmlFor = `${parentName}_${field.name}`;
 
-          const description = this.createDescription(field);
+          const description = ts.createDescription(field);
 
           let inputElement;
 
@@ -436,7 +436,7 @@ class FormGenerator {
           label.textContent = field.label;
           label.htmlFor = `${parentName}_${field.name}`;
 
-          let description = this.createDescription(field);
+          let description = ts.createDescription(field);
 
           let inputElement;
 
