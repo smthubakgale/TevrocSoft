@@ -50,23 +50,24 @@ class FormGenerator {
 	spanTitle.style.fontWeight = 'bold';
 	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
-	span1.style.cursor = 'pointer'
-	div2.innerHTML = field.description;
+	span1.style.cursor = 'pointer' 
 	div2.style.display = 'none';
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
-	    description.appendChild(div2);
 	    div2.style.display = 'block';
+            div2.innerHTML = field.description;
 	    span1.textContent = 'less';
 	  } else {
-	    description.appendChild(div2);
+	    div2.style.display = 'none';
+            div2.innerHTML = "";
 	    span1.textContent = 'more';
 	  }
 	});
 	
 	description.appendChild(spanTitle);
 	description.appendChild(span1);
+	description.appendChild(div2);
       }
       else {  
 	description = document.createElement("small");
