@@ -758,8 +758,7 @@ class FormGenerator {
 	  inputs.forEach((input) => 
 	  {
 	    if(input.type == "number")
-	    {
-		console.log(input.getAttribute('autoincrement') , input.getAttribute('autoincrement') == "true" , input.readOnly);
+	    { 
 		console.log(input.getAttribute('autoincrement') == "true" && input.readOnly);
 		    
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
@@ -767,7 +766,7 @@ class FormGenerator {
 		    var n = input.step ? parseInt(input.step) : 1;
 		    let m = fieldSet.querySelectorAll('.subform').length + 1;
 		    var c = m*n;
-		    console.log(n , m , c);
+		    console.log(input.step , n , m , c);
 		    input.value = c;
 		}
 		    else{
