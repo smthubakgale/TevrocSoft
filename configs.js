@@ -78,13 +78,15 @@
 				 readonly:true , 
 				 autoincrement: true , 
 				 name : "id" ,
-				 description : "it will auto generate thus readonly"
+				 description : "it will auto generate thus readonly" 
 			      } ,
 			      {
 				 label : "Name" ,
 				 type : "text" ,
 				 name : "name" ,
-				 description : "Enter the programming language of your choice"
+				 description : "Enter the programming language of your choice",
+				 autocomplete:true ,
+				 suggestions : [ "" ]
 			      } 
 			   ]
 			},
@@ -108,7 +110,9 @@
 				 label : "Name" ,
 				 type : "text" ,
 				 name : "name" ,
-				 description : "Enter the framework of your choice"
+				 description : "Enter the framework of your choice",
+				 autocomplete:true ,
+				 suggestions : [ "" ]
 			      } ,
 			      {
 				 label : "Author" ,
@@ -144,7 +148,9 @@
 				 label : "Name" ,
 				 type : "text" ,
 				 name : "name" ,
-				 description : "Enter the ide of your choice"
+				 description : "Enter the ide of your choice",
+				 autocomplete:true ,
+				 suggestions : [ "" ]
 			      } 
 			   ]
 			},
@@ -168,7 +174,9 @@
 				 label : "Name" ,
 				 type : "text" ,
 				 name : "name" ,
-				 description : "Enter the sdk of your choice"
+				 description : "Enter the sdk of your choice",
+				 autocomplete:true ,
+				 suggestions : [ "" ]
 			      } 
 			   ]
 			} 
