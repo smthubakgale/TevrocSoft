@@ -175,6 +175,8 @@ class FormGenerator {
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
 			dv2.innerHTML = tx;
+			dv2.style.paddingLeft = "10px";
+			dv2.style.paddingTop = "7px";
 
 			dv.appendChild(dv1);
 			dv.appendChild(dv2);
