@@ -344,7 +344,7 @@ class FormGenerator {
 	{ 
 		function createSelectButton(node) {
 		      
-		       let optionElement = document.createElement("optioninput"); 
+		       let optionElement = document.createElement("option"); 
 			optionElement.value = node.Value;
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
@@ -352,10 +352,7 @@ class FormGenerator {
 			optionElement.innerHTML = tx; 
 
 			inputElement.appendChild(optionElement);
-
-			console.log(inputElement , "Appended");
-			console.log(optionElement);
-			
+ 
 		       selectRefs.push({ id : selectId , node: node  , ref : optionElement });
 		}
  
@@ -375,8 +372,7 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(selectId) ) { 
-					   console.log("found2");
+			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(selectId) ) {  
 					   descendant.setAttribute(selectId, 'true'); 
 					   createSelectButton(descendant);
 			               }
