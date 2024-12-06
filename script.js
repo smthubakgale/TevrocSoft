@@ -662,7 +662,13 @@ class FormGenerator {
 	    nextButton.textContent = 'Next';
 	    nextButton.onclick = (e) => {
 		e.preventDefault();
+		    
+	        let subnav = fieldSet.querySelector('.setnav');
 		subforms = fieldSet.querySelectorAll('.subform'); 
+	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
+
+		console.log(idx , currentSubformIndex);
+		    
 	        subforms[currentSubformIndex].style.display = 'none';
 		    
 	      // Hide current subform
@@ -683,7 +689,12 @@ class FormGenerator {
 	    prevButton.textContent = 'Previous';
 	    prevButton.onclick = (e) => {
 		e.preventDefault();
+	      let subnav = fieldSet.querySelector('.setnav');
 	      subforms = fieldSet.querySelectorAll('.subform');
+	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
+
+		console.log(idx , currentSubformIndex);
+		    
 	      // Hide current subform 
 	        subforms[currentSubformIndex].style.display = 'none';
 	
@@ -705,7 +716,14 @@ class FormGenerator {
 	    formNumberInput.max = subforms.length + 1;
 	    formNumberInput.value = currentSubformIndex + 1;
 	    formNumberInput.onchange = () => {
+		    
+	      let subnav = fieldSet.querySelector('.setnav');
 	      subforms = fieldSet.querySelectorAll('.subform');
+	      let idx = subnav.getAttribute("index");
+	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
+
+		console.log(idx , currentSubformIndex);
+		    
 	      const newIndex = parseInt(formNumberInput.value) - 1;
 	      if (newIndex >= 0 && newIndex < subforms.length) {
 	        subforms[currentSubformIndex].style.display = 'none';
@@ -786,6 +804,7 @@ class FormGenerator {
 	   if (fieldSet.querySelector('.setnav')) 
 	   {
 	      let subforms = fieldSet.querySelectorAll('.subform');
+	      let subnav = fieldSet.querySelector('.setnav');
 	      let subformCounterText = fieldSet.querySelector('.setnav span');
 	      let formNumberInput = fieldSet.querySelector('.setnav input');
 		    
@@ -793,6 +812,7 @@ class FormGenerator {
 	      formNumberInput.value = subforms.length;
 	      formNumberInput.min = 1;
 	      formNumberInput.max = subforms.length;
+	      subnav.setAttribute("index" , subforms.length - 1)
 	   }
 	  
 	 removeButton.addEventListener("click", () => {
