@@ -57,7 +57,8 @@ const schedule2a = [
 	label : "Primary Member" ,
 	 type : "radio" ,
 	 name : "pu" ,  
-	 route: "spec_members_id"
+	 route: "spec_members_id" ,
+	 observe:"subform"
     } 
 ];
 
@@ -116,7 +117,8 @@ const schedule2b = [
 	label : "Primary Member" ,
 	 type : "radio" ,
 	 name : "pu" ,  
-	 route: "spec_members_id"
+	 route: "spec_members_id",
+	 observe:"subform"
     } 
 ];
 
