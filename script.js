@@ -36,7 +36,9 @@ class FormGenerator {
     this.loadFormDataFromLocalStorage();
   }
   createDescription(field){
-    let description;
+      let description;
+
+      console.log(field):
 
       if(field.title && field.seemore == true){
 	description = document.createElement('div');
