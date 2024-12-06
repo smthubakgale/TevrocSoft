@@ -1,6 +1,73 @@
 
 //----------------: Shop
 //: Specifications
+
+const schedule2 = [
+							 
+];
+
+constr create = 
+[
+    {
+	label : "APIs" ,
+	 type : "subform" ,
+	 name : "apis" ,    
+	 seemore : true , 
+	 title : " Application Programming Interface ... " ,
+	 description : `
+  <span style="color: #FF6600" onclick="myFunction(this)"> Click Me !</span>
+  <div></div>
+  <script>
+    function myFunction(span) { 
+       const div = span.nextElementSibling;
+	if (span.hasAttribute('shown')) {
+	    span.removeAttribute('shown');
+	    div.innerHTML = ''; 
+	} else {
+	    span.setAttribute('shown', '');
+	    div.innerHTML = (function() {
+			       var xhr = new XMLHttpRequest();
+			       xhr.open('GET', 'blogs/apis.html', false); 
+			       xhr.send();
+			       return xhr.responseText;
+			    })();
+	 }
+    }
+  </script>
+` ,
+	 fields: schedule2
+     },	
+     {
+	label : "Libraries" ,
+	 type : "subform" ,
+	 name : "apis" ,       
+	 seemore : true , 
+	 title : " Pre-written code collections ... " ,
+	 description : `
+  <span style="color: #FF6600" onclick="myFunction(this)"> Click Me !</span>
+  <div></div>
+  <script>
+    function myFunction(span) { 
+       const div = span.nextElementSibling;
+	if (span.hasAttribute('shown')) {
+	    span.removeAttribute('shown');
+	    div.innerHTML = ''; 
+	} else {
+	    span.setAttribute('shown', '');
+	    div.innerHTML = (function() {
+			       var xhr = new XMLHttpRequest();
+			       xhr.open('GET', 'blogs/libraries.html', false); 
+			       xhr.send();
+			       return xhr.responseText;
+			    })();
+	 }
+    }
+  </script>
+` , 
+	 fields: schedule2
+     },	 	 
+ ];
+
  export const formConfig = {
 	 "fields": [ 
 	        {
@@ -300,7 +367,7 @@
 		   label: "Project Start" ,
 		   name: "start",
 		   type: "subform",  
-		   description: "Specify the development tools needed " ,
+		   description: "Specify when the project will commence " ,
 		   fields: [ 
 			     {
 				label : "Day" ,
@@ -380,6 +447,59 @@
 			      } ,
 		   ]
 		}, 
+		 
+	        {
+		   group:"Document" ,
+		   label: "Project Feasibility" ,
+		   name: "feasibility",
+		   type: "subform",  
+		   description: "Specify the feasibility of the project " ,
+		   fields: [ 
+			     {
+				label : "Risk Index" ,
+				 type : "number" ,
+				 name : "risk" , 
+				 step : 0.01 , 
+				 description : " a numerical score that represents the likelihood and potential impact of a risk occurring . eg 1.5" ,
+			     },
+			     {
+				label : "Planning Index" ,
+				 type : "number" ,
+				 name : "planning" ,  
+				 step : 0.01 ,  
+				 description : "a numerical score that represents the effectiveness of a plan in mitigating or managing a risk , e.g 2.0" ,
+			     },
+			     {
+				label : "System feasibility" ,
+				 type : "subform" ,
+				 name : "system" , 
+				 description : "assesses whether the system can be successfully developed, implemented, and maintained" ,
+				 fields : [
+				    {
+					label : "Create" ,
+					 type : "subform" ,
+					 name : "create" ,    
+					 description : "developing new systems" ,
+					 fields: create
+				     },	 
+				     {
+					label : "Recreate" ,
+					 type : "subform" ,
+					 name : "recreate" ,    
+					 description : "developing as system from based on existing systems" ,
+					 fields: create 
+				     },	  
+				     {
+					label : "Reuse" ,
+					 type : "subform" ,
+					 name : "recreate" ,    
+					 description : "implementing existing existing systems" ,
+					 fields:  create
+				     },	 
+				 ]
+			     },
+			   ]
+		 } ,
 	        {
 		   group : "Development" ,
 		   label: "Application Logo",
