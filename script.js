@@ -56,17 +56,17 @@ class FormGenerator {
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
+	    description.appendChild(div2);
 	    div2.style.display = 'block';
 	    span1.textContent = 'less';
 	  } else {
-	    div2.style.display = 'none';
+	    description.appendChild(div2);
 	    span1.textContent = 'more';
 	  }
 	});
 	
 	description.appendChild(spanTitle);
 	description.appendChild(span1);
-	description.appendChild(div2);
       }
       else {  
 	description = document.createElement("small");
