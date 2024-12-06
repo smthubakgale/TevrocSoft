@@ -1205,7 +1205,7 @@ class FormGenerator {
 	  inputs.forEach((input) => 
 	  {
 	     Array.prototype.slice.call(input.attributes).forEach((attribute) => {
-	        if (attribute.name.includes('radio-') || attribute.name.includes('checkbox-')) 
+	        if (attribute.name.includes('radio-') || attribute.name.includes('checkbox-') || attribute.name.includes('select-')) 
 		{
 	            input.removeAttribute(attribute.name);
 	        }
