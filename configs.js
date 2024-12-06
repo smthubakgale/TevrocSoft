@@ -86,7 +86,11 @@
 				 name : "name" ,
 				 description : "Enter the programming language of your choice",
 				 autocomplete:true ,
-				 suggestions : [ "" ]
+				 suggestions : [
+					 "Java", "Python", "JavaScript", "C++", "C#", "Swift", "Ruby", "PHP", "Go", 
+					 "Kotlin", "TypeScript", "Rust", "Scala", "Perl", "Haskell", "MATLAB", "SQL", 
+					 "Visual Basic"
+				 ]
 			      } 
 			   ]
 			},
@@ -112,7 +116,30 @@
 				 name : "name" ,
 				 description : "Enter the framework of your choice",
 				 autocomplete:true ,
-				 suggestions : [ "" ]
+				 suggestions : [ 
+					 "React", "Angular", "Vue.js", "Django", "Flask", "Ruby on Rails", 
+					  "Laravel", "Express.js", "Spring", "ASP.NET", "Ember.js", "Backbone.js", 
+					  "Symfony", "CakePHP", "CodeIgniter", "Zend Framework", "Yii", "Phalcon", 
+					  "FuelPHP", "Kohana", "Slim", "Silex", "Aurora", "Nette", "Fat-Free Framework", 
+					  "Bullet", "Hanami", "Padrino", "Ramaze", "Camping", "Sinatra", "Padrino", 
+					  "Grape", "Rails", "Hanami", "Trailblazer", "Roda", "Cuba", "Lotus", 
+					  "NYNY", "Proton", "Racket", "Webmachine", "Yesod", "Happstack", "Snap", 
+					  "Scotty", "Yesod", "Wai", "Warp", "MFlow", "Haskell on Heroku", "Snap", 
+					  "Yesod", "Wai", "Warp", "Django", "Flask", "Pyramid", "Bottle", "Tornado", 
+					  "Sanic", "FastAPI", "Starlette", "Responder", "Sanic", "Vibora", "Vapor", 
+					  "Kitura", "Perfect", "Zewo", "Clean Architecture", "ASP.NET", "ASP.NET Core", 
+					  "ASP.NET MVC", "ASP.NET Web API", "ASP.NET Web Forms", "MonoRail", "Castle Monorail", 
+					  "ASP.NET MVC", "ASP.NET Web API", "ASP.NET Web Forms", "MonoRail", "Castle Monorail", 
+					  "React", "Angular", "Vue.js", "Ember.js", "Backbone.js", "Marionette.js", 
+					  "Chaplin.js", "Batman.js", "Spine.js", "Dojo", "Ext JS", "jQuery", "MooTools", 
+					  "Prototype", "Script.aculo.us", "YUI Library", "Google Web Toolkit", "jQuery UI", 
+					  "jQuery Mobile", "React Native", "Xamarin", "Flutter", "Ionic", "PhoneGap", 
+					  "Apache Cordova", "Qt", "wxWidgets", "GTK+", "FLTK", "FOX Toolkit", "GLUT", 
+					  "GTK+","Qt", "wxWidgets", "FLTK", "FOX Toolkit", "GLUT", "SDL", "SFML", 
+					  "Allegro", " ClanLib", "Enlightenment Foundation Libraries (EFL)", "FLTK", "FOX Toolkit", 
+					  "GTK+", "IUP", "KDE Frameworks", "LessTif", "Motif", "Qt", "wxWidgets", "XForms", 
+					  "XUL", "Zenity"
+					 ]
 			      } ,
 			      {
 				 label : "Author" ,
@@ -150,7 +177,38 @@
 				 name : "name" ,
 				 description : "Enter the ide of your choice",
 				 autocomplete:true ,
-				 suggestions : [ "" ]
+				 suggestions : [
+					 "Visual Studio", "Visual Studio Code", "IntelliJ IDEA", "Eclipse", "NetBeans", 
+					  "Sublime Text", "Atom", "Brackets", "WebStorm", "PHPStorm", "PyCharm", "RubyMine", 
+					  "Android Studio", "Xcode", "AppCode", "CLion", "DataGrip", "GoLand", "IntelliJ IDEA", 
+					  "MPS", "PhpStorm", "PyCharm", "ReSharper", "ReSharper C++", "Rider", "RubyMine", 
+					  "TeamCity", "WebStorm", "YouTrack", "AWS Cloud9", "AWS CodeStar", "CodeAnywhere", 
+					  "Codenvy", "Eclipse Che", "Google Colab", "Koding", "Microsoft Visual Studio Online", 
+					  "Repl.it", "Sourcelair", "Araxis Merge", "AWS CodeCommit", "Beanstalk", "Bitbucket", 
+					  "Codebase", "CodePlex", "Deveo", "GitHub", "GitLab", "Helix TeamHub", "Kiln", 
+					  "Launchpad", "Perforce", "Phabricator", "Plastic SCM", "ProjectPier", "Redmine", 
+					  "Rhodecode", "SourceForge", "Springloops", "Subversion", "Trello", "Unfuddle", 
+					  "Veracity", "Visual Studio Team Services", "Wercker", "Anjuta", "Aptana Studio", 
+					  "BlueGriffon", "Bluefish", "Codelite", "CodeLite", "Code::Blocks", "Dev-C++", 
+					  "Eclipse", "Eric", "Geany", "GNOME Builder", "KDevelop", "Krita", "Light Table", 
+					  "MonoDevelop", "NetBeans", "Orwell Dev-C++", "PyScripter", "Qt Creator", "SharpDevelop", 
+					  "Sublime Text", "TeXstudio", "Textadept", "UltraEdit", "Visual Studio Express", 
+					  "Wing IDE", "Xcode", "Zend Studio", "Aptana RadRails", "Aptana Studio", "Aptana Studio 3", 
+					  "Eclipse", "IntelliJ IDEA", "NetBeans", "RubyMine", "TextMate", "Visual Studio Code", 
+					  "AWS Cloud9", "AWS CodeStar", "CodeAnywhere", "Codenvy", "Eclipse Che", "Google Colab", 
+					  "Koding", "Microsoft Visual Studio Online", "Repl.it", "Sourcelair", "Anjuta", 
+					  "Aptana Studio", "BlueGriffon", "Bluefish", "Codelite", "CodeLite", "Code::Blocks", 
+					  "Dev-C++", "Eclipse", "Eric", "Geany", "GNOME Builder", "KDevelop", "Krita", 
+					  "Light Table", "MonoDevelop", "NetBeans", "Orwell Dev-C++", "PyScripter", "Qt Creator", 
+					  "SharpDevelop", "Sublime Text", "TeXstudio", "Textadept", "UltraEdit", "Visual Studio Express", 
+					  "Wing IDE", "Xcode", "Zend Studio", "Aptana RadRails", "Aptana Studio", "Aptana Studio 3", 
+					  "Eclipse", "IntelliJ IDEA", "NetBeans", "RubyMine", "TextMate", "Visual Studio Code", 
+					  "AWS Cloud9", "AWS CodeStar", "CodeAnywhere", "Codenvy", "Eclipse Che", "Google Colab", 
+					  "Koding", "Microsoft Visual Studio Online", "Repl.it", "Sourcelair", "Aptana", "AWS Cloud9", 
+					  "AWS CodeStar", "Bitbucket", "CodeAnywhere", "Codepen", "Codenvy", "Eclipse Che", 
+					  "GitHub", "GitLab", "Google Colab", "Koding", "Microsoft Visual Studio Online", 
+					  "Repl.it", "Sourcelair", "StackBlitz", "Teletype for Atom", "Visual Studio Live Share"
+				 ]
 			      } 
 			   ]
 			},
