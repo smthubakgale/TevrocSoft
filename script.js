@@ -456,8 +456,10 @@ class FormGenerator {
               inputElement.required = field.required;
               break;
             case "radio":  
-              ts.createRadioButtons(field, parentElement, parentName); 
-              return;
+              inputElement = document.createElement("div");
+              ts.createRadioButtons(field, inputElement , parentName); 
+              inputElement.prepend(selectElement);
+              break;
             case "subform":
               const fieldSet = document.createElement("fieldset");
 	      const legend = document.createElement("legend");
@@ -604,8 +606,10 @@ class FormGenerator {
               inputElement.required = field.required;
               break;
             case "radio":
-              ts.createRadioButtons(field, parentElement, parentName); 
-              return;
+              inputElement = document.createElement("div");
+              ts.createRadioButtons(field, inputElement , parentName); 
+              inputElement.prepend(selectElement);
+              break;
             case "subform":
 	      label = null;
               const fieldSet = document.createElement("fieldset");
@@ -840,8 +844,10 @@ class FormGenerator {
           inputElement.accept = field.accept;
           break;
         case "radio":
-          ts.createRadioButtons(field, parentElement, parentName); 
-              return;
+          inputElement = document.createElement("div");
+          ts.createRadioButtons(field, inputElement , parentName); 
+          inputElement.prepend(selectElement);
+          break;
             case "subform":
               const fieldSet = document.createElement("fieldset");
 	      const legend = document.createElement("legend");
