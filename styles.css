@@ -1313,6 +1313,19 @@ shop #discounts {
 #shop .viewnav{
   display:flex;
 }
+#shop .viewnav .view-button {
+  border: 1px solid #03A9F4; /* blue border */
+  color: #03A9F4; /* blue text */
+  padding: 10px 20px; /* padding */
+  font-size: 16px; /* font size */
+  cursor: pointer; /* pointer cursor */
+  transition: background-color 0.3s ease; /* smooth transition */
+}
+
+#shop .viewnav .view-button:hover {
+  background-color: #03A9F4; /* blue background on hover */
+  color: #fff; /* white text on hover */
+}
 #shop .setnav{
   display:flex; 
   gap:8px; 
