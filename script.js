@@ -68,22 +68,16 @@ class FormGenerator {
 	description.appendChild(span1);
 	description.appendChild(div2);
       }
-      else if(field.description) {
+      else  
 	description = document.createElement("small");
         description.innerHTML = field.description;
         description.style.color = "gray";
         description.style.fontSize = "12px";	    
       }
-      else{
-	 console.error(field);  
-	 
-	description = document.createElement("small");
-        description.innerHTML = "";
-        description.style.color = "gray";
-        description.style.fontSize = "12px";	
-      }
- 
-	  
+       
+      console.log(field); 
+      console.log(description);
+      
       return description;
   }
   checkNested(field , index){
@@ -415,11 +409,11 @@ class FormGenerator {
 	      }
 
               const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-              fieldSet.appendChild(subFormElement);
-
-
-              parentElement.appendChild(fieldSet);
-              return;
+	      fieldSet.appendChild(subFormElement);
+  
+              inputElement = document.createElement("div"); 
+	      inputElement.appendChild(fieldSet);
+              break;
             default:
               inputElement = document.createElement("input");
               inputElement.type = field.type;
@@ -573,8 +567,7 @@ class FormGenerator {
               const subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
   
-              inputElement = document.createElement("div");
-			  	  
+              inputElement = document.createElement("div"); 
 	      inputElement.appendChild(fieldSet);
               break;
             default:
@@ -815,9 +808,10 @@ class FormGenerator {
 
               const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
               fieldSet.appendChild(subFormElement);
- 
-              parentElement.appendChild(fieldSet);
-              return;
+  
+              inputElement = document.createElement("div"); 
+	      inputElement.appendChild(fieldSet);
+              break;
         default:
           inputElement = document.createElement("input");
           inputElement.type = field.type;
