@@ -111,19 +111,24 @@ class FormGenerator {
  
      inputElement.appendChild(datalist); 
      // Populate the datalist with suggestions
+	suggestions.sort((a, b) => {
+	  const aValue = a.toLowerCase();
+	  const bValue = b.toLowerCase();
+	
+	  if (aValue < bValue) {
+	    return -1;
+	  } else if (aValue > bValue) {
+	    return 1;
+	  } else {
+	    return 0;
+	  }
+	});
+	  
 	suggestions.forEach(suggestion => {
 	  const option = document.createElement('option');
 	  option.value = suggestion;
 	  datalist.appendChild(option);
-	});
-	/*
-	textElement.addEventListener('input', () => {
-	  const inputValue = textElement.value.toLowerCase();
-	  const matchingSuggestions = Array.from(datalist.options).filter(option => option.value.toLowerCase().includes(inputValue));
-	  datalist.innerHTML = '';
-	  matchingSuggestions.forEach(option => datalist.appendChild(option));
-	});
-	  */
+	}); 
       // 
   }
   createSelect(field , inputElement , nested = false , parentElement)
