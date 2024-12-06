@@ -294,7 +294,7 @@
 			   ]
 			} 
 		  ]
-		},,
+		},
 	        {
 		   group:"Document" ,
 		   label: "Project Start" ,
@@ -346,7 +346,7 @@
 				 }
 			      } ,
 		   ]
-		}
+		}, 
 	        {
 		   group : "Development" ,
 		   label: "Application Logo",
