@@ -306,6 +306,11 @@ class FormGenerator {
 		 ts.createSetter(inputElement , field.setter); 
 	      }
               break;
+            case "textarea":
+              inputElement = document.createElement("textarea"); 
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required; 
+              break;
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
@@ -460,6 +465,11 @@ class FormGenerator {
 	      if(field.setter){
 		 ts.createSetter(inputElement , field.setter); 
 	      }
+              break;
+            case "textarea":
+              inputElement = document.createElement("textarea"); 
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required; 
               break;
             case "file":
               inputElement = document.createElement("input");
@@ -703,6 +713,11 @@ class FormGenerator {
 	      if(field.setter){ 
 		 ts.createSetter(inputElement , field.setter); 
 	      }
+              break;
+            case "textarea":
+              inputElement = document.createElement("textarea"); 
+              inputElement.name = `${parentName}_${field.name}`;
+              inputElement.required = field.required; 
               break;
             case "file":
               inputElement = document.createElement("input");
