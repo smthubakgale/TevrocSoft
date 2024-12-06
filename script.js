@@ -665,6 +665,7 @@ class FormGenerator {
 		    
 	        let subnav = fieldSet.querySelector('.setnav');
 		subforms = fieldSet.querySelectorAll('.subform'); 
+	        let idx = subnav.getAttribute("index");
 	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
 
 		console.log(idx , currentSubformIndex);
@@ -691,6 +692,7 @@ class FormGenerator {
 		e.preventDefault();
 	      let subnav = fieldSet.querySelector('.setnav');
 	      subforms = fieldSet.querySelectorAll('.subform');
+	      let idx = subnav.getAttribute("index");
 	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex;
 
 		console.log(idx , currentSubformIndex);
