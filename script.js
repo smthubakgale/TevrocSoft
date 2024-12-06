@@ -107,6 +107,8 @@ class FormGenerator {
      const datalist = document.createElement('datalist');
      datalist.id = datalistId;
      datalist.classList.add('dynamiclist');
+
+    textElement.setAttribute('list', datalistId)
  
      inputElement.appendChild(datalist); 
      // Populate the datalist with suggestions
@@ -278,7 +280,7 @@ class FormGenerator {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
 
-	      inputElement.appendChild(textElement);
+	      inputElement.prepend(textElement);
 	      break;
             case "number":
               inputElement = document.createElement("input");
@@ -411,7 +413,7 @@ class FormGenerator {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
 
-	      inputElement.appendChild(textElement);
+	      inputElement.prepend(textElement);
 	      break; 
             case "number":
               inputElement = document.createElement("input");
@@ -632,7 +634,7 @@ class FormGenerator {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
 
-	      inputElement.appendChild(textElement);
+	      inputElement.prepend(textElement);
 	      break; 
             case "number":
               inputElement = document.createElement("input");
