@@ -1042,6 +1042,12 @@ class FormGenerator {
 	
 	  inputs.forEach((input) => 
 	  {
+	     Array.prototype.slice.call(input.attributes).forEach((attribute) => {
+	        if (attribute.name.includes('radio-')) 
+		{
+	            input.removeAttribute(attribute.name);
+	        }
+	    });
 	    if(input.tagName.toLowerCase() === "datalist"){
 		input.remove();
 	    }
