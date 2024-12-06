@@ -159,24 +159,27 @@ class FormGenerator {
 		  console.log(`Element value: ${element.value}`);
 		});
 	    // Create a MutationObserver
-		const observer2 = new MutationObserver((mutations) => {
-		  mutations.forEach((mutation) => {
-		    if (mutation.type === 'childList') {
-		      mutation.addedNodes.forEach((node) => {
-		        if (node.nodeName === 'INPUT' && node.getAttribute('name') === 'spec_members_id') {
-		          console.log('Element with name "spec_members_id" added');
-		          console.log(node);
-		        }
-		      });
-		    }
-		  });
-		});
-		
-		// Observe the entire document for changes
-		observer2.observe(document, {
-		  childList: true,
-		  subtree: true
-		});
+		// Create a MutationObserver
+const observer2 = new MutationObserver((mutations) => {
+  console.log('Mutations:', mutations);
+  mutations.forEach((mutation) => {
+    if (mutation.type === 'childList') {
+      console.log('Added nodes:', mutation.addedNodes);
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeName === 'INPUT' && node.getAttribute('name') === 'spec_members_id') {
+          console.log('Element with name "spec_members_id" added');
+          console.log(node);
+        }
+      });
+    }
+  });
+});
+
+// Observe the entire document for changes
+observer2.observe(document, {
+  childList: true,
+  subtree: true
+});
 	// Create a MutationObserver to watch for changes
 	const observer = new MutationObserver((mutations) => {
 	  mutations.forEach((mutation) => {
