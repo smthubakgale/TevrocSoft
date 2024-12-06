@@ -46,12 +46,16 @@ class FormGenerator {
 	
         description.style.fontSize = "12px";
         description.style.paddingBottom = "4px";
+	description.style.overflowX = 'auto';
+        description.style.whiteSpace = 'nowrap'    
 	spanTitle.textContent = field.title;
 	spanTitle.style.color = "gray";
 	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
 	span1.style.cursor = 'pointer' 
 	div2.style.display = 'none';
+	div2.style.display = 'inline-block';
+        div2.style.whiteSpace = 'normal';
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
