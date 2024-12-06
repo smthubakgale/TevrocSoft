@@ -343,11 +343,10 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
-	      if(field.readonly && field.autoincrement)
-	      {
-		 inputElement.value = field.start ? field.start : 1;
-		 inputElement.style.outline = 'none';
-	      }
+			  
+	      if(field.readonly){ inputElement.style.outline = 'none'; }
+	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
+			  
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -486,11 +485,10 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
-	      if(field.readonly && field.autoincrement)
-	      {
-		 inputElement.value = field.start ? field.start : 1;
-		 inputElement.style.outline = 'none';
-	      }
+	      
+	      if(field.readonly){ inputElement.style.outline = 'none'; }
+	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
+			  
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -717,11 +715,10 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
-	      if(field.readonly && field.autoincrement)
-	      {
-		 inputElement.value = field.start ? field.start : 1;
-		 inputElement.style.outline = 'none';
-	      }
+	      
+	      if(field.readonly){ inputElement.style.outline = 'none'; }
+	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
+			  
               break;
         case "checkbox":
           inputElement = document.createElement("input");
