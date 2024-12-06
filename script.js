@@ -832,16 +832,17 @@ class FormGenerator {
 	      subnav.setAttribute("index" , subforms.length - 1)
 	   }
 	  
-	 removeButton.addEventListener("click", () =>
+	 removeButton.addEventListener("click", (e) =>
 	 { 
+	   e.preventDEfault();
            const subforms3 = fieldSet.querySelectorAll('.subform');  
 	   let sLength = subforms3.length;
 
 	   if(sIndex == sLength){
-		subforms3[Index - 2] .style.display = "block";  
+		subforms3[sIndex - 2] .style.display = "block";  
 	   }
 	   if(sIndex < sLength){
-		 subforms3[Index] .style.display = "block";    
+		 subforms3[sIndex] .style.display = "block";    
 	   }
 	    newSubForm.remove();
 	    review();
