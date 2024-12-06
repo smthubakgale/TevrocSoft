@@ -791,7 +791,7 @@ class FormGenerator {
                     const lastSubform = fieldSet.querySelectorAll('.subform').item(fieldSet.querySelectorAll('.subform').length - 1);
 		    const lastSubformInput = lastSubform.querySelector(`input[name="${input.name}"]`); 
 		    //  
-		    var c = lastSubformInput.value + n;
+		    var c = parseInt(lastSubformInput.value) + n;
 			
 		    input.value = c;
 		}
