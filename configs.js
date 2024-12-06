@@ -53,7 +53,7 @@ const create =
 			       xhr.open('GET', 'blogs/libraries.html', false); 
 			       xhr.send();
 			       return xhr.responseText;
-			    })(); , 
+			    })() , 
 	 fields: schedule2
      },	 	 
  ];
