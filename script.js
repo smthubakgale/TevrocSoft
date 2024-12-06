@@ -789,8 +789,8 @@ class FormGenerator {
 	      let subformCounterText = fieldSet.querySelector('.setnav span');
 	      let formNumberInput = fieldSet.querySelector('.setnav input');
 		    
-	      subformCounterText.textContent = `${subforms.length - 1}/${subforms.length}`;
-	      formNumberInput.value = currentSubformIndex + 1;
+	      subformCounterText.textContent = `${subforms.length}/${subforms.length}`;
+	      formNumberInput.value = subforms.length;
 	      formNumberInput.min = 1;
 	      formNumberInput.max = subforms.length;
 	   }
