@@ -27,7 +27,8 @@ const create =
 [
     {
 	label : "APIs" ,
-	 type : "subform" ,
+	type : "subform" ,
+	 multiple:true ,
 	 name : "apis" ,    
 	 seemore : true , 
 	 title : " Application Programming Interface ... " ,
@@ -55,8 +56,9 @@ const create =
 	 fields: schedule2
      },	
      {
-	label : "Libraries" ,
+	 label : "Libraries" ,
 	 type : "subform" ,
+	 multiple:true ,
 	 name : "apis" ,       
 	 seemore : true , 
 	 title : " Pre-written code collections ... " ,
