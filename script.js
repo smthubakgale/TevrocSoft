@@ -180,13 +180,15 @@ class FormGenerator {
 		            mutation.addedNodes.forEach(function(node)
 		            {
 			       //: 
+			       var proc = true;
 			       var subforms = document.querySelectorAll(".subform");  
 			       subforms.forEach(function(subform)
 			       { 
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id') {  
+			               if (descendant.getAttribute('name') === 'spec_members_id' && proc) { 
+					   proc = false;
 				           console.log("found 2");
 					   createRadioButton(descendant);
 			               }
