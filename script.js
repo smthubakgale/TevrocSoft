@@ -1118,7 +1118,7 @@ class FormGenerator {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
-        new FormGenerator(form, importButton, fileInput , formConfig, "Spec" ,
+        new FormGenerator(form, importButton, fileInput , formConfig, "spec" ,
 	  (formData) => {
 		console.log(formData);
 	  });
@@ -1128,7 +1128,7 @@ const formGenerator = new FormGenerator(
   document.getElementById("myForm2"),
   document.getElementById("import-button2"),
   document.getElementById("file-input2"),
-  "Reqs" ,
+  "req" ,
   formConfig2,
   (formData) => {
     console.log(formData);
