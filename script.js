@@ -187,7 +187,7 @@ class FormGenerator {
 			     
 			           descendants.forEach(function(descendant) {
 			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(radioId) ) { 
-					   element.setAttribute(radioId, 'true');
+					   descendant.setAttribute(radioId, 'true');
 					   proc = false;
 				           console.log("found 2");
 					   createRadioButton(descendant);
