@@ -268,9 +268,10 @@ class FormGenerator {
 	    case "text":
               inputElement = document.createElement("div");
 			  
-              let textElement = document.createElement("div");
+              let textElement = document.createElement("input");
               textElement.name = `${parentName}_${field.name}`;
-              textElement.type = "number";
+              textElement.type = "text";
+              textElement.required = field.required;
 
 	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
@@ -402,7 +403,8 @@ class FormGenerator {
 			  
               let textElement = document.createElement("div");
               textElement.name = `${parentName}_${field.name}`;
-              textElement.type = "number";
+              textElement.type = "text";
+              textElement.required = field.required;
 
 	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
@@ -620,9 +622,10 @@ class FormGenerator {
 	    case "text":
               inputElement = document.createElement("div");
 			  
-              let textElement = document.createElement("div");
+              let textElement = document.createElement("input");
               textElement.name = `${parentName}_${field.name}`;
-              textElement.type = "number";
+              textElement.type = "text";
+              textElement.required = field.required;
 
 	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
