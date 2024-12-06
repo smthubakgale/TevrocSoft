@@ -223,7 +223,7 @@ class FormGenerator {
 	    if (mutation.addedNodes) {
 	      mutation.addedNodes.forEach(function(node) {
 		  //: 
-		  var subforms = document.querySelectorAll("subform"); 
+		  var subforms = document.querySelectorAll(".subform"); 
 		      console.log(subforms);
 		  subforms.forEach(function(subform) { 
 		    var descendants = subform.querySelectorAll("*");
