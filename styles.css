@@ -1310,6 +1310,9 @@ shop #discounts {
 #shop fieldset fieldset fieldset fieldset legend {
   font-style:italic;
 }
+#shop .viewnav{
+  display:flex;
+}
 #shop .setnav{
   display:flex; 
   gap:8px; 
