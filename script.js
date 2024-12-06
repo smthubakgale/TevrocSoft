@@ -328,89 +328,156 @@ class FormGenerator {
   }
   createSelect(field , inputElement , nested = false , parentElement)
   {
-      var sn = (nested) ? false : this.checkNested(field , 0) > 1;
-	  var ts = this;
-     
-      if(sn)
+      function getNextSelectId() {
+	 window.selectIds = window.selectIds || [];
+	 const nextId = window.selectIds.length + 1;
+	 window.selectIds.push(nextId);
+	 return `select-${nextId}`;
+     }
+
+     const selectId = getNextSelectId();
+      if(field.route)
       {
-	   parentElement.classList.add('nested-dropdown');
-	   // Generate main select options
-	    field.optgroups.forEach(optgroup => {
-	      const option = document.createElement('option');
-	      option.value = optgroup.label;
-	      option.text = optgroup.label;
-	      inputElement.appendChild(option);
-	    });
-	
-	    // Add event listener to main select
-	       function removeSiblingsAfter(element) {
-		  let sibling = element.nextSibling;
-		  while (sibling) {
-		    sibling.remove();
-		    sibling = element.nextSibling;
-		  }
+        window.selectRefs = window.selectRefs || [];
+	// 
+	if(field.observe == "subform")
+	{ 
+		function createSelectButton(node) {
+		      
+		       let optionElement = document.createElement("optioninput"); 
+			optionElement.value = node.Value;
+			var tx = node.value;
+			tx = (field.pre) ? field.pre + tx : tx;
+			tx = (field.post) ? tx + field.post : tx;
+			optionElement.innerHTML = tx;
+			 
+		        inputElement.appendChild(dv);
+			
+		    selectRefs.push({ id : selectId , node: node  , ref : optionElement });
 		}
-	    function createNext(init = true)
-	    {
-		 //
-		 removeSiblingsAfter(inputElement); 
-		 //  
-	         const selectedValue = init ? field.optgroups[0].label : inputElement.value;
-	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
  
-		 let selectElement = document.createElement("select");
-		 selectElement.name = `${field.name}_${selectedOptgroup.label}`;
-		 selectElement.required = field.required;
-	         
-		 ts.createSelect(selectedOptgroup , selectElement , false , parentElement);
-		 if(init)
-		 {
-		    parentElement.prepend(selectElement);  
-		 }
-		 else{
-		    parentElement.appendChild(selectElement);    
-		  }
-		 
-		 // 
-	    }
-	    createNext();
-	    inputElement.addEventListener('change', () => {
-	       createNext(false);
-	    }); 
+		// Create a MutationObserver instance
+		  var observer2 = new MutationObserver(function(mutations)
+                  {
+		       mutations.forEach(function(mutation) 
+		       {
+		         if (mutation.addedNodes) 
+		         {
+		            mutation.addedNodes.forEach(function(node)
+		            {
+			       //:  
+			       var subforms = document.querySelectorAll(".subform");  
+			       subforms.forEach(function(subform)
+			       { 
+			           var descendants = subform.querySelectorAll("*");
+			     
+			           descendants.forEach(function(descendant) {
+			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(selectId) ) { 
+					   descendant.setAttribute(selectId, 'true'); 
+					   createSelectButton(descendant);
+			               }
+			           });
+			       }); 
+			       //:
+		            });
+		         }
+	              });
+	           }); 	  
+		// Observe the document body for changes
+		  observer2.observe(document.body, {
+		     childList: true,
+		     subtree: true
+		  });     
+	        // 
+	}	      
       }
       else
       {
-	    if(field.options)
-	     {
-		field.options.forEach((option) => {
-		  const selectElement = document.createElement("option");
-		  selectElement.value = option.value;
-		  selectElement.textContent = option.label;
-		  inputElement.appendChild(selectElement);
-	       });  
-	     }
-	     if(field.optgroups)
-	     { 
-		var ts = this;
-		field.optgroups.forEach((optgroup) => {
-		    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
-		    
-		    if(nested){ 
-			const selectElement = document.createElement("option"); 
-			selectElement.disabled = true; 
-		        selectElement.textContent = optgroup.label;
+	      var sn = (nested) ? false : this.checkNested(field , 0) > 1;
+		  var ts = this;
+	     
+	      if(sn)
+	      {
+		   parentElement.classList.add('nested-dropdown');
+		   // Generate main select options
+		    field.optgroups.forEach(optgroup => {
+		      const option = document.createElement('option');
+		      option.value = optgroup.label;
+		      option.text = optgroup.label;
+		      inputElement.appendChild(option);
+		    });
+		
+		    // Add event listener to main select
+		       function removeSiblingsAfter(element) {
+			  let sibling = element.nextSibling;
+			  while (sibling) {
+			    sibling.remove();
+			    sibling = element.nextSibling;
+			  }
+			}
+		    function createNext(init = true)
+		    {
+			 //
+			 removeSiblingsAfter(inputElement); 
+			 //  
+		         const selectedValue = init ? field.optgroups[0].label : inputElement.value;
+		         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
+	 
+			 let selectElement = document.createElement("select");
+			 selectElement.name = `${field.name}_${selectedOptgroup.label}`;
+			 selectElement.required = field.required;
+		         
+			 ts.createSelect(selectedOptgroup , selectElement , false , parentElement);
+			 if(init)
+			 {
+			    parentElement.prepend(selectElement);  
+			 }
+			 else{
+			    parentElement.appendChild(selectElement);    
+			  }
+			 
+			 // 
+		    }
+		    createNext();
+		    inputElement.addEventListener('change', () => {
+		       createNext(false);
+		    }); 
+	      }
+	      else
+	      {
+		    if(field.options)
+		     {
+			field.options.forEach((option) => {
+			  const selectElement = document.createElement("option");
+			  selectElement.value = option.value;
+			  selectElement.textContent = option.label;
+			  inputElement.appendChild(selectElement);
+		       });  
+		     }
+		     if(field.optgroups)
+		     { 
+			var ts = this;
+			field.optgroups.forEach((optgroup) => {
+			    let optgroupElement = document.createElement(nested ? "div": "optgroup"); 
 			    
-			optgroupElement.style.paddingLeft = "20px";
-			inputElement.appendChild(selectElement);
-		    }
-		    else{
-			optgroupElement.setAttribute('label', optgroup.label);    
-		    }
-		    ts.createSelect(optgroup , optgroupElement, true);
-		    inputElement.prepend(optgroupElement);
-	        }); 
-	     }	  
-	      } 
+			    if(nested){ 
+				const selectElement = document.createElement("option"); 
+				selectElement.disabled = true; 
+			        selectElement.textContent = optgroup.label;
+				    
+				optgroupElement.style.paddingLeft = "20px";
+				inputElement.appendChild(selectElement);
+			    }
+			    else{
+				optgroupElement.setAttribute('label', optgroup.label);    
+			    }
+			    ts.createSelect(optgroup , optgroupElement, true);
+			    inputElement.prepend(optgroupElement);
+		        }); 
+		     }	  
+	       } 	      
+      }
+
   }
   createSetter(inputElement , setter)
   { 
