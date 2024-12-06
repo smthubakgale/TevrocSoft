@@ -759,7 +759,7 @@ class FormGenerator {
 	  {
 	    if(input.type == "number")
 	    {
-		console.log(input.getAttribute('autoincrement') == "true" , input.readOnly);
+		console.log(input.getAttribute('autoincrement') , input.getAttribute('autoincrement') == "true" , input.readOnly);
 		console.log(input.getAttribute('autoincrement') == "true" && input.readOnly);
 		    
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
