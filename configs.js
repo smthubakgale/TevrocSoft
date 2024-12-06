@@ -32,27 +32,13 @@ const create =
 	 name : "apis" ,    
 	 seemore : true , 
 	 title : " Application Programming Interface ... " ,
-	 description : `
-  <span style="color: #FF6600" onclick="myFunction(this)"> Click Me !</span>
-  <div></div>
-  <script>
-      window.myFunction = myFunction(span) { 
-       const div = span.nextElementSibling;
-	if (span.hasAttribute('shown')) {
-	    span.removeAttribute('shown');
-	    div.innerHTML = ''; 
-	} else {
-	    span.setAttribute('shown', '');
-	    div.innerHTML = (function() {
+	 description : (function() {
 			       var xhr = new XMLHttpRequest();
 			       xhr.open('GET', 'blogs/apis.html', false); 
 			       xhr.send();
 			       return xhr.responseText;
-			    })();
-	 }
-    }
-  </script>
-` ,
+			    })() 
+	 ,
 	 fields: schedule2
      },	
      {
@@ -62,27 +48,12 @@ const create =
 	 name : "apis" ,       
 	 seemore : true , 
 	 title : " Pre-written code collections ... " ,
-	 description : `
-  <span style="color: #FF6600" onclick="myFunction(this)"> Click Me !</span>
-  <div></div>
-  <script>
-    function myFunction(span) { 
-       const div = span.nextElementSibling;
-	if (span.hasAttribute('shown')) {
-	    span.removeAttribute('shown');
-	    div.innerHTML = ''; 
-	} else {
-	    span.setAttribute('shown', '');
-	    div.innerHTML = (function() {
+	 description : (function() {
 			       var xhr = new XMLHttpRequest();
 			       xhr.open('GET', 'blogs/libraries.html', false); 
 			       xhr.send();
 			       return xhr.responseText;
-			    })();
-	 }
-    }
-  </script>
-` , 
+			    })(); , 
 	 fields: schedule2
      },	 	 
  ];
