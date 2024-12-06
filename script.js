@@ -152,6 +152,12 @@ class FormGenerator {
      if(field.route)
      {
 	window.radioRefs = window.radioRefs || [];
+	// 
+	     const elements = document.querySelectorAll('[name="spec_members_id"]');
+
+		elements.forEach((element) => {
+		  console.log(`Element value: ${element.value}`);
+		});
 	// Create a MutationObserver to watch for changes
 	const observer = new MutationObserver((mutations) => {
 	  mutations.forEach((mutation) => {
