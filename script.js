@@ -883,11 +883,14 @@ class FormGenerator {
 	  createButtons();
 	
 	  // Reset Form 
-	  const inputs = newSubForm.querySelectorAll("input, select, textarea");
+	  const inputs = newSubForm.querySelectorAll("input, select, textarea , datalist");
 	
 	  inputs.forEach((input) => 
 	  {
-	    if(input.type == "number")
+	    if(input.tagName.toLowerCase() === "datalist"){
+		input.remove();
+	    }
+	    else if(input.type == "number")
 	    {  
 		if(input.getAttribute('autoincrement') == "true" && input.readOnly)    
 		{
