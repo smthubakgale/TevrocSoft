@@ -206,18 +206,27 @@ class FormGenerator {
 	     }	  
 	      } 
   }
-  createSetter(subform , inputElement , setter)
+  createSetter(inputElement , setter)
   {
 	// Create a MutationObserver instance
 	var observer = new MutationObserver(function(mutations) {
 	  mutations.forEach(function(mutation) {
 	    if (mutation.addedNodes) {
 	      mutation.addedNodes.forEach(function(node) {
-	        if (node == subform) { 
-	          setter(fieldSet , inputElement);
+		  //: 
+		  var subforms = document.querySelectorAll("subform"); 
+		  subforms.forEach(function(subform) { 
+		    var descendants = subform.querySelectorAll("*");
+		     
+		    descendants.forEach(function(descendant) {
+		      if (descendant == inputElement) { 
 			
-	          observer.disconnect();
-	        }
+		         setter(subform , inputElement); 
+	                 observer.disconnect();
+		      }
+		    });
+		    //:
+		  }); 
 	      });
 	    }
 	  });
@@ -278,7 +287,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 ts.createSetter(parentElement , inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter); 
 	      }
               break;
             case "file":
@@ -421,7 +430,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 ts.createSetter(fieldSet , inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter); 
 	      }
               break;
             case "file":
@@ -625,8 +634,7 @@ class FormGenerator {
   renderSubForm(parentElement, fields, parentName) {
     const subFormElement = document.createElement("div");
     subFormElement.classList.add("subform");
-    var ts = this;
-    var ins = [];
+    var ts = this; 
 
     fields.forEach((field) => {
       const label = document.createElement("label");
@@ -654,7 +662,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){ 
-		 ins.push(()=>{ ts.createSetter(subFormElement , inputElement , field.setter); }); 
+		 ts.createSetter(inputElement , field.setter); 
 	      }
               break;
             case "file":
