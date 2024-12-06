@@ -811,6 +811,7 @@ class FormGenerator {
            const subforms2 = fieldSet.querySelectorAll('.subform'); 
 	   subforms2.forEach((subform, index) => { subform.style.display = 'none';  });
 	   newSubForm.style.display = "block";
+	   let sIndex = subforms2.length;
 	   //
 	   // Update subfield Nav 
 	   if (fieldSet.querySelector('.setnav')) 
@@ -831,7 +832,17 @@ class FormGenerator {
 	      subnav.setAttribute("index" , subforms.length - 1)
 	   }
 	  
-	 removeButton.addEventListener("click", () => {
+	 removeButton.addEventListener("click", () =>
+	 { 
+           const subforms3 = fieldSet.querySelectorAll('.subform');  
+	   let sLength = subforms3.length;
+
+	   if(sIndex == sLength){
+		subforms3[Index - 2] .style.display = "block";  
+	   }
+	   if(sIndex < sLength){
+		 subforms3[Index] .style.display = "block";    
+	   }
 	    newSubForm.remove();
 	    review();
 	  });
