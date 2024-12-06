@@ -162,7 +162,8 @@ class FormGenerator {
 			inputElement.name = `${parentName}_${field.name}`;
 			inputElement.value = node.value;
 			inputElement.required = field.required;
-			inputElement.style.marginRight = '5px';  
+			inputElement.style.marginRight = '5px';
+			inputElement.style.width = '15px';  
 			
 			const dv = document.createElement("div");
 			dv.style.display = 'flex';
