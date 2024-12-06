@@ -173,7 +173,7 @@ class FormGenerator {
 			labelElement.style.color = '#333'; // set text color
 			labelElement.style.display = 'flex'; // display as flex
 			labelElement.style.alignItems = 'center'; // align items to center
-			labelElement.appendChild(inputElement);
+			labelElement.prepend(inputElement);
 	
 		    parentElement.appendChild(labelElement);
 			
