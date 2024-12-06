@@ -464,7 +464,9 @@ const create =
 				label : "System feasibility" ,
 				 type : "subform" ,
 				 name : "system" , 
-				 description : "whether the system can be successfully developed, implemented, and maintained" ,
+				 seemore :true , 
+				 title : "the feasibility of the system" ,
+				 description : "" , 
 				 fields : [
 				    {
 					label : "Create" ,
