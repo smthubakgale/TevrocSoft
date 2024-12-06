@@ -834,7 +834,7 @@ class FormGenerator {
 	  
 	 removeButton.addEventListener("click", (e) =>
 	 { 
-	   e.preventDEfault();
+	   e.preventDefault();
            const subforms3 = fieldSet.querySelectorAll('.subform');  
 	   let sLength = subforms3.length;
 
