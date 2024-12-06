@@ -244,7 +244,7 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.autoincrement = field.autoincrement; 
               inputElement.step = field.step; 
-	      if(field.readonly && fielld.autoincrement)
+	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
 	      }
@@ -361,7 +361,7 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.autoincrement = field.autoincrement; 
               inputElement.step = field.step; 
-	      if(field.readonly && fielld.autoincrement)
+	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
 	      }
@@ -566,7 +566,7 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.autoincrement = field.autoincrement; 
               inputElement.step = field.step; 
-	      if(field.readonly && fielld.autoincrement)
+	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
 	      }
