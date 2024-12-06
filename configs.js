@@ -76,6 +76,7 @@
 				 label : "Language ID" ,
 				 type : "number" ,
 				 readonly:true , 
+				 autoincrement: true , 
 				 name : "id" ,
 				 description : "it will auto generate thus readonly"
 			      } ,
@@ -99,6 +100,7 @@
 				 label : "Framework ID" ,
 				 type : "number" ,
 				 name : "id" ,
+				 autoincrement: true , 
 				 readonly:true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
@@ -134,6 +136,7 @@
 				 label : "IDE ID" ,
 				 type : "number" ,
 				 name : "id" ,
+				 autoincrement: true , 
 				 readonly:true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
@@ -158,6 +161,7 @@
 				 type : "number" ,
 				 name : "id" ,
 				 readonly:true , 
+				 autoincrement: true , 
 				 description : "it will auto generate thus readonly"
 			      } ,
 			      {
