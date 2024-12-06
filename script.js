@@ -647,14 +647,7 @@ class FormGenerator {
 	
 	  // Find all elements with class "subform" in fieldSet
            let subforms = fieldSet.querySelectorAll('.subform');
-	
-	// Hide all subforms except the cloned one
-	for (let i = 0; i < subforms.length; i++) {
-	  if (subforms[i].id !== 'cloned-subform') {
-	    subforms[i].style.display = 'none';
-	  }
-	}
-	
+
 	  // Initialize current subform index
 	  let currentSubformIndex = subforms.length - 1; 
 	  // Function to create buttons
@@ -784,7 +777,33 @@ class FormGenerator {
 	  removeButton.classList.add("remove-button");
 	  newSubForm.appendChild(removeButton);
 	  fieldSet.appendChild(newSubForm);
+	  
+	  // Get all subforms
+	  const subforms = fieldSet.querySelectorAll('.subform');
 	
+	  // Loop through all subforms
+	   subforms.forEach((subform, index) => {
+		   if (index === subforms.length - 1) {
+		    // Last subform, display block
+		    subform.style.display = 'block';
+		   } else {
+		    // Other subforms, display none
+		    subform.style.display = 'none';
+		   }
+           });
+	   // Update subfield Nav 
+	   if (fieldSet.querySelector('.setnav')) 
+	   {
+	      let subforms = fieldSet.querySelectorAll('.subform');
+	      let subformCounterText = fieldSet.querySelector('.setnav span');
+	      let formNumberInput = fieldSet.querySelector('.setnav input');
+		    
+	      subformCounterText.textContent = `${subforms.length - 1}/${subforms.length}`;
+	      formNumberInput.value = currentSubformIndex + 1;
+	      formNumberInput.min = 1;
+	      formNumberInput.max = subforms.length;
+	   }
+	  
 	 removeButton.addEventListener("click", () => {
 	    newSubForm.remove();
 	  });
