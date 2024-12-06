@@ -351,7 +351,10 @@ class FormGenerator {
 			tx = (field.post) ? tx + field.post : tx;
 			optionElement.innerHTML = tx; 
 
-			inputElement.sppendChild(optionElement);
+			inputElement.appendChild(optionElement);
+
+			console.log(inputElement , "Appended");
+			console.log(optionElement);
 			
 		       selectRefs.push({ id : selectId , node: node  , ref : optionElement });
 		}
@@ -373,6 +376,7 @@ class FormGenerator {
 			     
 			           descendants.forEach(function(descendant) {
 			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(selectId) ) { 
+					   console.log("found2");
 					   descendant.setAttribute(selectId, 'true'); 
 					   createSelectButton(descendant);
 			               }
