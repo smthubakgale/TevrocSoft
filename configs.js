@@ -3,7 +3,24 @@
 //: Specifications
 
 const schedule2 = [
-							 
+    {
+	label : "Name" ,
+	 type : "text" ,
+	 name : "name" ,    ,
+	 description : ""
+    } , 
+    {
+	label : "Description" ,
+	 type : "text" ,
+	 name : "desc" ,    ,
+	 description : ""
+    } , 
+    {
+	label : "URL" ,
+	 type : "text" ,
+	 name : "url" ,    ,
+	 description : ""
+    } , 
 ];
 
 const create = 
