@@ -294,7 +294,59 @@
 			   ]
 			} 
 		  ]
-		},
+		},,
+	        {
+		   group:"Document" ,
+		   label: "Project Start" ,
+		   name: "dev",
+		   type: "subform",  
+		   description: "Specify the development tools needed " ,
+		   fields: [ 
+			      {
+				 label : "Datetime Local" ,
+				 type : "datetime-local" ,
+				 name : "datetime" , 
+				 description : "this will be used to get the day , month and time" ,
+				 setter: (subform , inputElement) => {
+					 // Sibling Elements 
+					 var _start = subform.querySelector("#start");
+ 					 var _month = subform.querySelector("#month");
+					 var _year = subform.querySelector("#year");
+
+					 // Set its value to now if it's null
+					if (inputElement.value === "") {
+					  var now = new Date();
+					  var year = now.getFullYear();
+					  var month = String(now.getMonth() + 1).padStart(2, "0");
+					  var day = String(now.getDate()).padStart(2, "0");
+					  var hour = String(now.getHours()).padStart(2, "0");
+					  var minute = String(now.getMinutes()).padStart(2, "0");
+					  
+					  inputElement.value = `${year}-${month}-${day}T${hour}:${minute}`;
+					  // Set the month, year, and day to the corresponding elements
+					  _month.value = date.getMonth() + 1;;
+					  _year.value = date.getFullYear();
+					  _day.value = date.getDate();
+					  //
+					}
+					 // Get the month, year, and day from InputElement
+					inputElement.addEventListener("change", function() {
+					  var date = new Date(InputElement.value);
+					  var month = date.getMonth() + 1; // getMonth() returns 0-11, so add 1
+					  var year = date.getFullYear();
+					  var day = date.getDate();
+					  
+					  // Set the month, year, and day to the corresponding elements
+					  _month.value = month;
+					  _year.value = year;
+					  _day.value = day;
+					  //
+					});
+					 //
+				 }
+			      } ,
+		   ]
+		}
 	        {
 		   group : "Development" ,
 		   label: "Application Logo",
