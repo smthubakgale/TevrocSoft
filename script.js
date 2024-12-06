@@ -759,6 +759,9 @@ class FormGenerator {
 	  {
 	    if(input.type == "number")
 	    {
+		console.log(input.autoincrement == "true" , input.readOnly);
+		console.log(input.autoincrement == "true" && input.readOnly);
+		    
 		if(input.autoincrement == "true" && input.readOnly)    
 		{
 		    var n = input.step ? parseInt(input.step) : 1;
@@ -766,6 +769,9 @@ class FormGenerator {
 		    var c = m*n;
 		    input.value = c;
 		}
+		    else{
+			input.value = "";    
+		    }
 	    }
 	    else {
 		    input.value = "";
