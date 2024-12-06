@@ -179,15 +179,14 @@ class FormGenerator {
 		         {
 		            mutation.addedNodes.forEach(function(node)
 		            {
-			       //: 
-			       var proc = true;
+			       //:  
 			       var subforms = document.querySelectorAll(".subform");  
 			       subforms.forEach(function(subform)
 			       { 
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !element.hasAttribute(radioId) && proc) { 
+			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(radioId) ) { 
 					   element.setAttribute(radioId, 'true');
 					   proc = false;
 				           console.log("found 2");
