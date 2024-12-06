@@ -345,9 +345,9 @@
 					  
 					  inputElement.value = `${year}-${month}-${day}T${hour}:${minute}`;
 					  // Set the month, year, and day to the corresponding elements
-					  _month.value = date.getMonth() + 1;;
-					  _year.value = date.getFullYear();
-					  _day.value = date.getDate();
+					  _month.value = now.getMonth() + 1;;
+					  _year.value = now.getFullYear();
+					  _day.value = now.getDate();
 					  //
 					}
 					 // Get the month, year, and day from InputElement
