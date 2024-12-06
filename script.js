@@ -626,6 +626,7 @@ class FormGenerator {
     const subFormElement = document.createElement("div");
     subFormElement.classList.add("subform");
     var ts = this;
+    var ins = [];
 
     fields.forEach((field) => {
       const label = document.createElement("label");
@@ -653,7 +654,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){ 
-		 ts.createSetter(subFormElement , inputElement , field.setter); 
+		 ins.push(()=>{ ts.createSetter(subFormElement , inputElement , field.setter); }); 
 	      }
               break;
             case "file":
