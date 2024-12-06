@@ -59,7 +59,8 @@ const schedule2a = [
 	 name : "pu" ,  
 	 route: "spec_members_id" ,
 	 observe:"subform" ,
-	 pre : " Member "
+	 pre : " Member ",  
+	 description : ""
     } , 
     {
 	label : "Secondary Members" ,
@@ -67,7 +68,14 @@ const schedule2a = [
 	 name : "su" ,  
 	 route: "spec_members_id" ,
 	 observe:"subform" ,
-	 pre : " Member "
+	 pre : " Member ",  
+	 description : ""
+    } , 
+    {
+	label : "Estimated Lines Of Code" ,
+	 type : "number" ,
+	 name : "eLOC" ,  
+	 description : ""
     } 
 ];
 
@@ -128,7 +136,8 @@ const schedule2b = [
 	 name : "pu" ,  
 	 route: "spec_members_id",
 	 observe:"subform",
-	 pre : " Member "
+	 pre : " Member ",  
+	 description : ""
     } , 
     {
 	label : "Secondary Members" ,
@@ -136,7 +145,14 @@ const schedule2b = [
 	 name : "su" ,  
 	 route: "spec_members_id" ,
 	 observe:"subform" ,
-	 pre : " Member "
+	 pre : " Member ",  
+	 description : ""
+    } , 
+    {
+	label : "Estimated Lines Of Code" ,
+	 type : "number" ,
+	 name : "eLOC" ,  
+	 description : ""
     } 
 ];
 
