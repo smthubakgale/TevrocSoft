@@ -76,6 +76,11 @@ class FormGenerator {
       }
       else{
 	 console.error(field);  
+	 
+	description = document.createElement("small");
+        description.innerHTML = "";
+        description.style.color = "gray";
+        description.style.fontSize = "12px";	
       }
  
 	  
