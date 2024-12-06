@@ -169,7 +169,7 @@
 			      } ,
 			      {
 				 label : "Description" ,
-				 type : "text" ,
+				 type : "textarea" ,
 				 name : "desc" ,
 				 description : "Enter the framework description"
 			      } 
