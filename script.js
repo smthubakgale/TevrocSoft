@@ -68,16 +68,13 @@ class FormGenerator {
 	description.appendChild(span1);
 	description.appendChild(div2);
       }
-      else  
+      else {  
 	description = document.createElement("small");
         description.innerHTML = field.description;
         description.style.color = "gray";
         description.style.fontSize = "12px";	    
       }
-       
-      console.log(field); 
-      console.log(description);
-      
+        
       return description;
   }
   checkNested(field , index){
