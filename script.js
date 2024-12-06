@@ -120,6 +120,81 @@ class FormGenerator {
 	}); 
       // 
   }
+  createRadioButtons(field, parentElement, parentName) 
+  {
+     function getNextRadioId() {
+	 window.radioIds = window.radioIds || [];
+	 const nextId = window.radioIds.length + 1;
+	 window.radioIds.push(nextId);
+	 return `radio-${nextId}`;
+     }
+
+     const radioId = getNextRadioId();
+     if(field.options){
+	   field.options.forEach((option) => {
+		inputElement = document.createElement("input");
+		inputElement.type = "radio";
+		inputElement.name = `${parentName}_${field.name}`;
+		inputElement.value = option.value;
+		inputElement.required = field.required;
+	
+		const labelElement = document.createElement("label");
+		labelElement.textContent = option.label;
+		labelElement.appendChild(inputElement);
+	
+		parentElement.appendChild(labelElement);
+	      });   
+     } 
+     if(field.route)
+     {
+	window.radioRefs = window.radioRefs || [];
+	// Create a MutationObserver to watch for changes
+	const observer = new MutationObserver((mutations) => {
+	  mutations.forEach((mutation) => {
+	    if (mutation.type === 'childList') {
+	      mutation.addedNodes.forEach((node) => {
+	        if (node.getAttribute && node.getAttribute('name') === 'spec_members_id')
+		{
+	           console.log('Element with name "spec_members_id" added');
+		   let inputElement = document.createElement("input");
+                   inputElement.type = "radio";
+                   inputElement.name = `${parentName}_${field.name}`;
+                   inputElement.value = node.value;
+                   inputElement.required = field.required;
+
+	           const labelElement = document.createElement("label");
+	           labelElement.textContent = node.value;
+	           labelElement.appendChild(inputElement);
+	
+	           parentElement.appendChild(labelElement);
+			
+		   radioRefs.push({ id : radioId , node: node  , ref : inputElement });
+	        }
+	      });
+	      mutation.removedNodes.forEach((node) => {
+	        if (node.getAttribute && node.getAttribute('name') === 'spec_members_id') 
+		{
+	           console.log('Element with name "spec_members_id" removed');
+	        }
+	      });
+	    } else if (mutation.type === 'attributes') {
+	      if (mutation.target.getAttribute('name') === 'spec_members_id' && mutation.attributeName === 'value') {
+	        console.log('Value of element with name "spec_members_id" changed to:', mutation.target.value);
+	      }
+	    }
+	  });
+	});
+	
+	// Observe the entire document for changes
+	observer.observe(document, {
+	  childList: true,
+	  subtree: true,
+	  attributeFilter: ['value'],
+	  attributes: true
+	});	     
+	
+     }
+  }
   createSelect(field , inputElement , nested = false , parentElement)
   {
       var sn = (nested) ? false : this.checkNested(field , 0) > 1;
@@ -359,20 +434,8 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               break;
-            case "radio":
-              field.options.forEach((option) => {
-                inputElement = document.createElement("input");
-                inputElement.type = "radio";
-                inputElement.name = `${parentName}_${field.name}`;
-                inputElement.value = option.value;
-                inputElement.required = field.required;
-
-                const labelElement = document.createElement("label");
-                labelElement.textContent = option.label;
-                labelElement.appendChild(inputElement);
-
-                parentElement.appendChild(labelElement);
-              });
+            case "radio":  
+              ts.createRadioButtons(field, parentElement, parentName); 
               return;
             case "subform":
               const fieldSet = document.createElement("fieldset");
@@ -520,19 +583,7 @@ class FormGenerator {
               inputElement.required = field.required;
               break;
             case "radio":
-              field.options.forEach((option) => {
-                inputElement = document.createElement("input");
-                inputElement.type = "radio";
-                inputElement.name = `${parentName}_${field.name}`;
-                inputElement.value = option.value;
-                inputElement.required = field.required;
-
-                const labelElement = document.createElement("label");
-                labelElement.textContent = option.label;
-                labelElement.appendChild(inputElement);
-
-                fieldSet.appendChild(labelElement);
-              });
+              ts.createRadioButtons(field, parentElement, parentName); 
               return;
             case "subform":
 	      label = null;
@@ -767,21 +818,9 @@ class FormGenerator {
           inputElement.required = field.required;
           inputElement.accept = field.accept;
           break;
-                case "radio":
-          field.options.forEach((option) => {
-            inputElement = document.createElement("input");
-            inputElement.type = "radio";
-            inputElement.name = `${parentName}_${field.name}`;
-            inputElement.value = option.value;
-            inputElement.required = field.required;
-
-            const labelElement = document.createElement("label");
-            labelElement.textContent = option.label;
-            labelElement.appendChild(inputElement);
-
-            subFormElement.appendChild(labelElement);
-          });
-          return;
+        case "radio":
+          ts.createRadioButtons(field, parentElement, parentName); 
+              return;
             case "subform":
               const fieldSet = document.createElement("fieldset");
 	      const legend = document.createElement("legend");
