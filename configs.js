@@ -122,7 +122,15 @@ const schedule2a = [
 	 type : "select" ,
 	 name : "mode" ,     
 	 description : "Select compenent experience type" ,
-	 options : [ "full" , "partial" ]
+	 options : [ 
+		{
+	          label: 'Full-Experience',
+	          value: 'full',
+	        },{
+	          label: 'Partial-Experuence',
+	          value: 'partial',
+	        }
+		   ]
     } 
 ];
 
