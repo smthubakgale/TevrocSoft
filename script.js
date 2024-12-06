@@ -47,7 +47,7 @@ class FormGenerator {
         description.style.fontSize = "12px";
         description.style.paddingBottom = "4px";
 	spanTitle.textContent = field.title;
-	spanTitle.style.fontWeight = 'bold';
+	spanTitle.style.color = "gray";
 	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
 	span1.style.cursor = 'pointer' 
