@@ -681,7 +681,7 @@ class FormGenerator {
 	
 	    const prevButton = document.createElement('button');
 	    prevButton.textContent = 'Previous';
-	    prevButton.onclick = () => {
+	    prevButton.onclick = (e) => {
 		e.preventDefault();
 	      subforms = fieldSet.querySelectorAll('.subform');
 	      // Hide current subform 
