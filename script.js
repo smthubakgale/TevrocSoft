@@ -116,8 +116,8 @@ class FormGenerator {
 	  datalist.appendChild(option);
 	});
 	
-	inputField.addEventListener('input', () => {
-	  const inputValue = inputField.value.toLowerCase();
+	textElement.addEventListener('input', () => {
+	  const inputValue = textElement.value.toLowerCase();
 	  const matchingSuggestions = Array.from(datalist.options).filter(option => option.value.toLowerCase().includes(inputValue));
 	  datalist.innerHTML = '';
 	  matchingSuggestions.forEach(option => datalist.appendChild(option));
