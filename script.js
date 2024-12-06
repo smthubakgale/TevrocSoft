@@ -349,11 +349,9 @@ class FormGenerator {
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
-			optionElement.innerHTML = tx;
-			 
-		        inputElement.appendChild(dv);
+			optionElement.innerHTML = tx; 
 			
-		    selectRefs.push({ id : selectId , node: node  , ref : optionElement });
+		       selectRefs.push({ id : selectId , node: node  , ref : optionElement });
 		}
  
 		// Create a MutationObserver instance
