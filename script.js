@@ -242,6 +242,12 @@ class FormGenerator {
               inputElement.min = field.min; 
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
+              inputElement.autoincrement = field.sautoincrement; 
+              inputElement.step = field.step; 
+	      if(field.readonly && fielld.autoincrement)
+	      {
+		 inputElement.value = field.start ? field.start : 1;
+	      }
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -353,6 +359,11 @@ class FormGenerator {
               inputElement.min = field.min; 
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
+              inputElement.step = field.step; 
+	      if(field.readonly && fielld.autoincrement)
+	      {
+		 inputElement.value = field.start ? field.start : 1;
+	      }
               break;
             case "checkbox":
               inputElement = document.createElement("input");
@@ -552,6 +563,11 @@ class FormGenerator {
               inputElement.min = field.min; 
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
+              inputElement.step = field.step; 
+	      if(field.readonly && fielld.autoincrement)
+	      {
+		 inputElement.value = field.start ? field.start : 1;
+	      }
               break;
         case "checkbox":
           inputElement = document.createElement("input");
@@ -734,11 +750,24 @@ class FormGenerator {
 	  // Call the function to create buttons
 	  createButtons();
 	
-	  // Clear Form 
+	  // Reset Form 
 	  const inputs = newSubForm.querySelectorAll("input, select, textarea");
 	
-	  inputs.forEach((input) => {
-	    input.value = "";
+	  inputs.forEach((input) => 
+	  {
+	    if(input.type == "number")
+	    {
+		if(input.autoincrement == "true" and input.readOnly)    
+		{
+		    var n = input.step ? parseInt(input.step) ? 1;
+		    let m = fieldSet.querySelectorAll('.subform').ength + 1;
+		    var c = m*n;
+		    input.value = c;
+		}
+	    }
+	    else {
+		    input.value = "";
+	    }
 	  });
 	
 	  // Remove Button 
