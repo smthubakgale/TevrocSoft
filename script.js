@@ -171,6 +171,11 @@ class FormGenerator {
 			const dv2 = document.createElement("div"); 
 			dv.style.flex = 1;
 
+			var tx = node.value;
+			tx = (field.pre) ? field.pre + tx : tx;
+			tx = (field.post) ? tx + field.post : tx;
+			dv2.innerHTML = tx;
+
 			dv.appendChild(dv1);
 			dv.appendChild(dv2);
 			 
