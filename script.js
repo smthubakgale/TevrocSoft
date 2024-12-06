@@ -130,6 +130,10 @@ class FormGenerator {
      }
 
      const radioId = getNextRadioId();
+
+     console.log("Create Radio" , radioId);
+     console.log(field);
+	  
      if(field.options){
 	   field.options.forEach((option) => {
 		inputElement = document.createElement("input");
