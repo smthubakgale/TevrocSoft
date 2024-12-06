@@ -155,15 +155,25 @@ class FormGenerator {
 	{ 
 		function createRadioButton(node) {
 		    console.log('Element with name "spec_members_id" added');
-		    let inputElement = document.createElement("input");
-		    inputElement.type = "radio";
-		    inputElement.name = `${parentName}_${field.name}`;
-		    inputElement.value = node.value;
-		    inputElement.required = field.required;
-	
-		    const labelElement = document.createElement("label");
-		    labelElement.textContent = node.value;
-		    labelElement.appendChild(inputElement);
+  
+			
+		       let inputElement = document.createElement("input");
+			inputElement.type = "radio";
+			inputElement.name = `${parentName}_${field.name}`;
+			inputElement.value = node.value;
+			inputElement.required = field.required;
+			inputElement.style.marginRight = '5px'; // add some space between radio button and label
+			inputElement.style.width = 'auto'; // set width to auto
+			inputElement.style.height = '20px'; // set height
+			
+			const labelElement = document.createElement("label");
+			labelElement.textContent = node.value;
+			labelElement.style.fontSize = '16px'; // set font size
+			labelElement.style.fontFamily = 'Arial, sans-serif'; // set font family
+			labelElement.style.color = '#333'; // set text color
+			labelElement.style.display = 'flex'; // display as flex
+			labelElement.style.alignItems = 'center'; // align items to center
+			labelElement.appendChild(inputElement);
 	
 		    parentElement.appendChild(labelElement);
 			
