@@ -206,6 +206,29 @@ class FormGenerator {
 	     }	  
 	      } 
   }
+  createSetter(subform , inputElement , setter)
+  {
+	// Create a MutationObserver instance
+	var observer = new MutationObserver(function(mutations) {
+	  mutations.forEach(function(mutation) {
+	    if (mutation.addedNodes) {
+	      mutation.addedNodes.forEach(function(node) {
+	        if (node == subform) { 
+	          setter(fieldSet , inputElement);
+			
+	          observer.disconnect();
+	        }
+	      });
+	    }
+	  });
+	});
+	
+	// Observe the document body for changes
+	observer.observe(document.body, {
+	  childList: true,
+	  subtree: true
+	});
+  }
   renderForm() {
     const fields = this.formConfig.fields;
     const parentElement = this.form;
@@ -255,7 +278,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 field.setter(parentElement , inputElement);
+		 ts.createSetter(parentElement , inputElement , field.setter); 
 	      }
               break;
             case "file":
@@ -398,7 +421,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 field.setter(fieldSet , inputElement);
+		 ts.createSetter(fieldSet , inputElement , field.setter); 
 	      }
               break;
             case "file":
@@ -629,8 +652,8 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               
-	      if(field.setter){
-		 field.setter(subFormElement , inputElement);
+	      if(field.setter){ 
+		 ts.createSetter(subFormElement , inputElement , field.setter); 
 	      }
               break;
             case "file":
