@@ -187,8 +187,8 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.classList.contains('radio_link') && proc) { 
-					   descendant.classList.add('radio_linked');
+			               if (descendant.getAttribute('name') === 'spec_members_id' && !element.hasAttribute(radioId) && proc) { 
+					   element.setAttribute(radioId, 'true');
 					   proc = false;
 				           console.log("found 2");
 					   createRadioButton(descendant);
