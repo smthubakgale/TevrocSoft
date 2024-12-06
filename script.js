@@ -171,7 +171,6 @@ class FormGenerator {
 			dv1.append(inputElement);
 			const dv2 = document.createElement("div"); 
 			dv.style.flex = 1;
-			dv.style.marginBottom = "-25px";
 
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
@@ -182,6 +181,11 @@ class FormGenerator {
 
 			dv.appendChild(dv1);
 			dv.appendChild(dv2);
+
+			const lastChild = parentElement.children.length > 0 ? parentElement.children[parentElement.children.length - 1] : null;
+			if(lastChild){
+			   lastChild.style.marginBottom = "-25px"; 
+			}
 			 
 		        parentElement.appendChild(dv);
 			
@@ -272,8 +276,7 @@ class FormGenerator {
 			const dv1 = document.createElement("div");
 			dv1.append(inputElement);
 			const dv2 = document.createElement("div"); 
-			dv.style.flex = 1;
-			dv.style.marginBottom = "-25px";
+			dv.style.flex = 1; 
 
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
@@ -284,7 +287,11 @@ class FormGenerator {
 
 			dv.appendChild(dv1);
 			dv.appendChild(dv2);
-			 
+			
+			const lastChild = parentElement.children.length > 0 ? parentElement.children[parentElement.children.length - 1] : null;
+			if(lastChild){
+			   lastChild.style.marginBottom = "-25px"; 
+			}
 		        parentElement.appendChild(dv);
 			
 		    radioRefs.push({ id : radioId , node: node  , ref : inputElement });
