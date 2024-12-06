@@ -153,7 +153,7 @@ class FormGenerator {
 	         const selectedOptgroup = field.optgroups.find(optgroup => optgroup.label === selectedValue)
  
 		 let selectElement = document.createElement("select");
-		 selectElement.name = `${selectedOptgroup.label}`;
+		 selectElement.name = `${field.name}_${selectedOptgroup.label}`;
 		 selectElement.required = field.required;
 	         
 		 ts.createSelect(selectedOptgroup , selectElement , false , parentElement);
@@ -274,7 +274,7 @@ class FormGenerator {
         groupedFields[group].forEach((field) => {
           const label = document.createElement("label");
           label.textContent = field.label;
-          label.htmlFor = `${field.name}`;
+          label.htmlFor = `${parentName}_${field.name}`;
 
           const description = this.createDescription(field);
 
@@ -284,7 +284,7 @@ class FormGenerator {
             case "select":
               inputElement = document.createElement("div");
               let selectElement = document.createElement("select");
-              selectElement.name = `${field.name}`;
+              selectElement.name = `${parentName}_${field.name}`;
               selectElement.required = field.required;
 
               this.createSelect(field , selectElement , false , inputElement);
@@ -293,7 +293,7 @@ class FormGenerator {
             case "datetime-local":
               inputElement = document.createElement("input");
               inputElement.type = "datetime-local";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               
 	      if(field.setter){
@@ -303,21 +303,21 @@ class FormGenerator {
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               inputElement.accept = field.accept;
               break;
             case "email":
               inputElement = document.createElement("input");
               inputElement.type = "email";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
 	    case "text":
               inputElement = document.createElement("div");
 			  
               let textElement = document.createElement("input");
-              textElement.name = `${field.name}`;
+              textElement.name = `${parentName}_${field.name}`;
               textElement.type = "text";
               textElement.required = field.required;
 
@@ -331,7 +331,7 @@ class FormGenerator {
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required; 
               inputElement.min = field.min; 
               inputElement.max = field.max; 
@@ -347,14 +347,14 @@ class FormGenerator {
             case "checkbox":
               inputElement = document.createElement("input");
               inputElement.type = "checkbox";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               break;
             case "radio":
               field.options.forEach((option) => {
                 inputElement = document.createElement("input");
                 inputElement.type = "radio";
-                inputElement.name = `${field.name}`;
+                inputElement.name = `${parentName}_${field.name}`;
                 inputElement.value = option.value;
                 inputElement.required = field.required;
 
@@ -397,7 +397,7 @@ class FormGenerator {
             default:
               inputElement = document.createElement("input");
               inputElement.type = field.type;
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
           }
 
@@ -417,7 +417,7 @@ class FormGenerator {
         groupedFields[group].forEach((field) => {
           let label = document.createElement("label");
           label.textContent = field.label;
-          label.htmlFor = `${field.name}`;
+          label.htmlFor = `${parentName}_${field.name}`;
 
           let description = this.createDescription(field);
 
@@ -427,7 +427,7 @@ class FormGenerator {
             case "select": 
               inputElement = document.createElement("div");
               let selectElement = document.createElement("select");
-              selectElement.name = `${field.name}`;
+              selectElement.name = `${parentName}_${field.name}`;
               selectElement.required = field.required;
 
               this.createSelect(field , selectElement , false , inputElement);
@@ -436,7 +436,7 @@ class FormGenerator {
             case "datetime-local":
               inputElement = document.createElement("input");
               inputElement.type = "datetime-local";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               
 	      if(field.setter){
@@ -446,21 +446,21 @@ class FormGenerator {
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               inputElement.accept = field.accept;
               break;
             case "email":
               inputElement = document.createElement("input");
               inputElement.type = "email";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
 	    case "text":
               inputElement = document.createElement("div");
 			  
               let textElement = document.createElement("div");
-              textElement.name = `${field.name}`;
+              textElement.name = `${parentName}_${field.name}`;
               textElement.type = "text";
               textElement.required = field.required;
 
@@ -474,7 +474,7 @@ class FormGenerator {
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required; 
               inputElement.min = field.min; 
               inputElement.max = field.max; 
@@ -490,14 +490,14 @@ class FormGenerator {
             case "checkbox":
               inputElement = document.createElement("input");
               inputElement.type = "checkbox";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               break;
             case "radio":
               field.options.forEach((option) => {
                 inputElement = document.createElement("input");
                 inputElement.type = "radio";
-                inputElement.name = `${field.name}`;
+                inputElement.name = `${parentName}_${field.name}`;
                 inputElement.value = option.value;
                 inputElement.required = field.required;
 
@@ -542,7 +542,7 @@ class FormGenerator {
             default:
               inputElement = document.createElement("input");
               inputElement.type = field.type;
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
           }
 
@@ -649,7 +649,7 @@ class FormGenerator {
     fields.forEach((field) => {
       const label = document.createElement("label");
       label.textContent = field.label;
-      label.htmlFor = `${field.name}`;
+      label.htmlFor = `${parentName}_${field.name}`;
 
       const description = this.createDescription(field);
       
@@ -659,7 +659,7 @@ class FormGenerator {
         case "select":
            inputElement = document.createElement("div");
           let selectElement = document.createElement("select");
-          selectElement.name = `${field.name}`;
+          selectElement.name = `${parentName}_${field.name}`;
           selectElement.required = field.required;
 
           this.createSelect(field , selectElement , false , inputElement);
@@ -668,7 +668,7 @@ class FormGenerator {
             case "datetime-local":
               inputElement = document.createElement("input");
               inputElement.type = "datetime-local";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               
 	      if(field.setter){ 
@@ -678,20 +678,20 @@ class FormGenerator {
             case "file":
               inputElement = document.createElement("input");
               inputElement.type = "file";
-              inputElement.name = `${field.name}`;
+              inputElement.name = `${parentName}_${field.name}`;
               inputElement.required = field.required;
               break;
             case "email":
               inputElement = document.createElement("input");
               inputElement.type = "email";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
 	    case "text":
               inputElement = document.createElement("div");
 			  
               let textElement = document.createElement("input");
-              textElement.name = `${field.name}`;
+              textElement.name = `${parentName}_${field.name}`;
               textElement.type = "text";
               textElement.required = field.required;
 
@@ -705,7 +705,7 @@ class FormGenerator {
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
-              inputElement.name = `${field.name}`; 
+              inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required; 
               inputElement.min = field.min; 
               inputElement.max = field.max; 
@@ -721,7 +721,7 @@ class FormGenerator {
         case "checkbox":
           inputElement = document.createElement("input");
           inputElement.type = "checkbox";
-          inputElement.name = `${field.name}`;
+          inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
           inputElement.accept = field.accept;
           break;
@@ -729,7 +729,7 @@ class FormGenerator {
           field.options.forEach((option) => {
             inputElement = document.createElement("input");
             inputElement.type = "radio";
-            inputElement.name = `${field.name}`;
+            inputElement.name = `${parentName}_${field.name}`;
             inputElement.value = option.value;
             inputElement.required = field.required;
 
@@ -784,7 +784,7 @@ class FormGenerator {
         default:
           inputElement = document.createElement("input");
           inputElement.type = field.type;
-          inputElement.name = `${field.name}`;
+          inputElement.name = `${parentName}_${field.name}`;
           inputElement.required = field.required;
       }
 
@@ -1118,7 +1118,7 @@ class FormGenerator {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
-        new FormGenerator(form, importButton, fileInput , formConfig, "spec" ,
+        new FormGenerator(form, importButton, fileInput , formConfig , "spec" ,
 	  (formData) => {
 		console.log(formData);
 	  });
@@ -1128,8 +1128,8 @@ const formGenerator = new FormGenerator(
   document.getElementById("myForm2"),
   document.getElementById("import-button2"),
   document.getElementById("file-input2"),
-  "req" ,
   formConfig2,
+  "spec" ,
   (formData) => {
     console.log(formData);
   }
