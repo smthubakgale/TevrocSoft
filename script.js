@@ -121,6 +121,110 @@ class FormGenerator {
 	}); 
       // 
   }
+  createCheckboxButtons(field, parentElement, parentName) 
+  {
+     function getNextCheckboxId() {
+	 window.checkboxIds = window.checkboxIds || [];
+	 const nextId = window.checkboxIds.length + 1;
+	 window.checkboxIds.push(nextId);
+	 return `checkbox-${nextId}`;
+     }
+
+     const checkboxId = getNextCheckboxId();
+ 
+     if(field.options){
+	   field.options.forEach((option) => {
+		inputElement = document.createElement("input");
+		inputElement.type = "checkbox";
+		inputElement.name = `${parentName}_${field.name}`;
+		inputElement.value = option.value;
+		inputElement.required = field.required;
+	
+		const labelElement = document.createElement("label");
+		labelElement.textContent = option.label;
+		labelElement.appendChild(inputElement);
+	
+		parentElement.appendChild(labelElement);
+	      });   
+     } 
+     if(field.route)
+     { 
+	window.checkboxRefs = window.checkboxRefs || [];
+	// 
+	if(field.observe == "subform")
+	{ 
+		function createCheckboxButton(node) {
+		    console.log('Element with name "spec_members_id" added');
+  
+			
+		       let inputElement = document.createElement("input");
+			inputElement.type = "checkbox";
+			inputElement.name = `${parentName}_${field.name}`;
+			inputElement.value = node.value;
+			inputElement.required = field.required;
+			inputElement.style.marginRight = '5px';
+			inputElement.style.width = '15px';  
+			
+			const dv = document.createElement("div");
+			dv.style.display = 'flex';
+			const dv1 = document.createElement("div");
+			dv1.append(inputElement);
+			const dv2 = document.createElement("div"); 
+			dv.style.flex = 1;
+			dv.style.marginBottom = "-25px";
+
+			var tx = node.value;
+			tx = (field.pre) ? field.pre + tx : tx;
+			tx = (field.post) ? tx + field.post : tx;
+			dv2.innerHTML = tx;
+			dv2.style.paddingLeft = "10px";
+			dv2.style.paddingTop = "7px";
+
+			dv.appendChild(dv1);
+			dv.appendChild(dv2);
+			 
+		        parentElement.appendChild(dv);
+			
+		    checkboxRefs.push({ id : checkboxId , node: node  , ref : inputElement });
+		}
+ 
+		// Create a MutationObserver instance
+		  var observer2 = new MutationObserver(function(mutations)
+                  {
+		       mutations.forEach(function(mutation) 
+		       {
+		         if (mutation.addedNodes) 
+		         {
+		            mutation.addedNodes.forEach(function(node)
+		            {
+			       //:  
+			       var subforms = document.querySelectorAll(".subform");  
+			       subforms.forEach(function(subform)
+			       { 
+			           var descendants = subform.querySelectorAll("*");
+			     
+			           descendants.forEach(function(descendant) {
+			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(checkboxId) ) { 
+					   descendant.setAttribute(checkboxId, 'true'); 
+					   createCheckboxButton(descendant);
+			               }
+			           });
+			       }); 
+			       //:
+		            });
+		         }
+	              });
+	           }); 	  
+		// Observe the document body for changes
+		  observer2.observe(document.body, {
+		     childList: true,
+		     subtree: true
+		  });     
+	        // 
+	}
+     }
+  }
+
   createRadioButtons(field, parentElement, parentName) 
   {
      function getNextRadioId() {
@@ -154,9 +258,7 @@ class FormGenerator {
 	if(field.observe == "subform")
 	{ 
 		function createRadioButton(node) {
-		    console.log('Element with name "spec_members_id" added');
-  
-			
+		      
 		       let inputElement = document.createElement("input");
 			inputElement.type = "radio";
 			inputElement.name = `${parentName}_${field.name}`;
@@ -1043,7 +1145,7 @@ class FormGenerator {
 	  inputs.forEach((input) => 
 	  {
 	     Array.prototype.slice.call(input.attributes).forEach((attribute) => {
-	        if (attribute.name.includes('radio-')) 
+	        if (attribute.name.includes('radio-') || attribute.name.includes('checkbox-')) 
 		{
 	            input.removeAttribute(attribute.name);
 	        }
