@@ -247,6 +247,7 @@ class FormGenerator {
 	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
+		 inputElement.style.outline = 'none';
 	      }
               break;
             case "checkbox":
@@ -364,6 +365,7 @@ class FormGenerator {
 	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
+		 inputElement.style.outline = 'none';
 	      }
               break;
             case "checkbox":
@@ -569,6 +571,7 @@ class FormGenerator {
 	      if(field.readonly && field.autoincrement)
 	      {
 		 inputElement.value = field.start ? field.start : 1;
+		 inputElement.style.outline = 'none';
 	      }
               break;
         case "checkbox":
