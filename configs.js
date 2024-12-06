@@ -298,7 +298,7 @@
 	        {
 		   group:"Document" ,
 		   label: "Project Start" ,
-		   name: "dev",
+		   name: "start",
 		   type: "subform",  
 		   description: "Specify the development tools needed " ,
 		   fields: [ 
@@ -330,9 +330,9 @@
 				 description : "this will be used to get the day , month and time" ,
 				 setter: (subform , inputElement) => {
 					 // Sibling Elements 
-					 var _day = subform.querySelector("[name='spec_day']");
- 					 var _month = subform.querySelector("[name='spec_month']");
-					 var _year = subform.querySelector("[name='spec_year']");
+					 var _day = subform.querySelector("[name='spec_start_day']");
+ 					 var _month = subform.querySelector("[name='spec_start_month']");
+					 var _year = subform.querySelector("[name='spec_start_year']");
 
 					 // Set its value to now if it's null
 					if (inputElement.value === "") {
