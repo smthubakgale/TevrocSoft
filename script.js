@@ -131,10 +131,7 @@ class FormGenerator {
      }
 
      const radioId = getNextRadioId();
-
-     console.log("Create Radio" , radioId);
-     console.log(field);
-	  
+ 
      if(field.options){
 	   field.options.forEach((option) => {
 		inputElement = document.createElement("input");
@@ -151,93 +148,61 @@ class FormGenerator {
 	      });   
      } 
      if(field.route)
-     {
-	console.log("A");
+     { 
 	window.radioRefs = window.radioRefs || [];
 	// 
 	if(field.observe == "subform")
-	{
-		console.log("B");
-		  const observer = new MutationObserver((mutations) => {
-		  mutations.forEach((mutation) => {
-		    if (mutation.type === 'childList') {
-		      mutation.addedNodes.forEach((node) => {
-			if (node.classList && node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
-			  console.log('Subform with element "spec_members_id" added');
-			  const specMembersIdElement = node.querySelector('[name="spec_members_id"]');
-			  createRadioButton(specMembersIdElement);
-			}
-		      });
-		      mutation.removedNodes.forEach((node) => {
-			if (node.classList && node.classList.contains('subform') && node.querySelector('[name="spec_members_id"]')) {
-			  console.log('Subform with element "spec_members_id" removed');
-			}
-		      });
-		    }
-		  });
-		});
-
-		function createRadioButton(specMembersIdElement) {
+	{ 
+		function createRadioButton(node) {
 		    console.log('Element with name "spec_members_id" added');
 		    let inputElement = document.createElement("input");
-                    inputElement.type = "radio";
-                    inputElement.name = `${parentName}_${field.name}`;
-                    inputElement.value = node.value;
-                    inputElement.required = field.required;
-
-	            const labelElement = document.createElement("label");
-	            labelElement.textContent = node.value;
-	            labelElement.appendChild(inputElement);
+		    inputElement.type = "radio";
+		    inputElement.name = `${parentName}_${field.name}`;
+		    inputElement.value = node.value;
+		    inputElement.required = field.required;
 	
-	            parentElement.appendChild(labelElement);
+		    const labelElement = document.createElement("label");
+		    labelElement.textContent = node.value;
+		    labelElement.appendChild(inputElement);
+	
+		    parentElement.appendChild(labelElement);
 			
 		    radioRefs.push({ id : radioId , node: node  , ref : inputElement });
 		}
-
-		observer.observe(document, {
-		  childList: true,
-		  subtree: true
-		});
-
+ 
 		// Create a MutationObserver instance
-	var observer2 = new MutationObserver(function(mutations) {
-	  mutations.forEach(function(mutation) {
-	    if (mutation.addedNodes) {
-	      mutation.addedNodes.forEach(function(node) {
-		  //: 
-		  var subforms = document.querySelectorAll(".subform");  
-		  subforms.forEach(function(subform) { 
-		    var descendants = subform.querySelectorAll("*");
-		     
-		    descendants.forEach(function(descendant) {
-		      if (descendant.getAttribute('name') === 'spec_members_id') {  
-			  console.log("found 2");
-		      }
-		    });
-		    //:
-		  }); 
-	      });
-	    }
-	  });
-	});
-	 //: 
-	  var subforms = document.querySelectorAll(".subform");  
-	  subforms.forEach(function(subform) { 
-	    var descendants = subform.querySelectorAll("*");
-	     
-	    descendants.forEach(function(descendant) {
-	      if (descendant.getAttribute('name') === 'spec_members_id') {  
-		  console.log("found 2");
-	      }
-	    });
-	    //:
-	  });	  
-	// Observe the document body for changes
-	observer2.observe(document.body, {
-	  childList: true,
-	  subtree: true
-	});     
-	      
+		  var observer2 = new MutationObserver(function(mutations)
+                  {
+		       mutations.forEach(function(mutation) 
+		       {
+		         if (mutation.addedNodes) 
+		         {
+		            mutation.addedNodes.forEach(function(node)
+		            {
+			       //: 
+			       var subforms = document.querySelectorAll(".subform");  
+			       subforms.forEach(function(subform)
+			       { 
+			           var descendants = subform.querySelectorAll("*");
+			     
+			           descendants.forEach(function(descendant) {
+			               if (descendant.getAttribute('name') === 'spec_members_id') {  
+				           console.log("found 2");
+					   createRadioButton(descendant);
+			               }
+			           });
+			       }); 
+			       //:
+		            });
+		         }
+	              });
+	           }); 	  
+		// Observe the document body for changes
+		  observer2.observe(document.body, {
+		     childList: true,
+		     subtree: true
+		  });     
+	        // 
 	}
      }
   }
