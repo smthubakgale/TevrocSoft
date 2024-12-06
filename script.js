@@ -207,8 +207,7 @@ class FormGenerator {
 	      } 
   }
   createSetter(inputElement , setter)
-  {
-	console.log("Created MUtation Observer");
+  { 
         function getEventSetterId() {
 	  window.eventSetterIds = window.eventSetterIds || [];
 	  const nextId = window.eventSetterIds.length + 1;
@@ -216,6 +215,7 @@ class FormGenerator {
 	  return `setter-${nextId}`;
 	}
 	let setterId = getEventSetterId();
+	let proc = true;
 	inputElement.setAttribute( setterId , "true");
 	// Create a MutationObserver instance
 	var observer = new MutationObserver(function(mutations) {
@@ -223,14 +223,14 @@ class FormGenerator {
 	    if (mutation.addedNodes) {
 	      mutation.addedNodes.forEach(function(node) {
 		  //: 
-		  var subforms = document.querySelectorAll(".subform"); 
-		      console.log(subforms);
+		  var subforms = document.querySelectorAll(".subform");  
 		  subforms.forEach(function(subform) { 
 		    var descendants = subform.querySelectorAll("*");
 		     
 		    descendants.forEach(function(descendant) {
-		      if (descendant.hasAttribute(setterId)) { 
+		      if (descendant.hasAttribute(setterId) && proc) { 
 			 console.log("Calling Setter");
+			 proc = false;
 		         setter(subform , inputElement); 
 	                 observer.disconnect();
 		      }
