@@ -1083,7 +1083,7 @@ shop #discounts {
 #shop #form-container {
   width: calc(100% - 10px);
   margin: 40px auto;
-  padding: 15px;
+  padding: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
