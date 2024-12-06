@@ -171,6 +171,7 @@ class FormGenerator {
 			dv1.append(inputElement);
 			const dv2 = document.createElement("div"); 
 			dv.style.flex = 1;
+			dv.style.marginBottom = "-25px";
 
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
@@ -205,7 +206,6 @@ class FormGenerator {
 			           descendants.forEach(function(descendant) {
 			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(radioId) ) { 
 					   descendant.setAttribute(radioId, 'true'); 
-				           console.log("found 2");
 					   createRadioButton(descendant);
 			               }
 			           });
