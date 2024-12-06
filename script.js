@@ -268,7 +268,7 @@ class FormGenerator {
 	    case "text":
               inputElement = document.createElement("div");
 			  
-              textElement = document.createElement("div");
+              let textElement = document.createElement("div");
               textElement.name = `${parentName}_${field.name}`;
               textElement.type = "number";
 
@@ -397,22 +397,20 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
-            case "number":
-              inputElement = document.createElement("input");
-              inputElement.type = "number";
-              inputElement.name = `${parentName}_${field.name}`; 
-              inputElement.required = field.required; 
-              inputElement.min = field.min; 
-              inputElement.max = field.max; 
-              inputElement.readOnly = field.readonly; 
-              inputElement.setAttribute('autoincrement', field.autoincrement); 
-              inputElement.step = field.step; 
-	      if(field.readonly && field.autoincrement)
+	    case "text":
+              inputElement = document.createElement("div");
+			  
+              let textElement = document.createElement("div");
+              textElement.name = `${parentName}_${field.name}`;
+              textElement.type = "number";
+
+	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
-		 inputElement.value = field.start ? field.start : 1;
-		 inputElement.style.outline = 'none';
+		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
-              break;
+
+	      inputElement.appendChild(textElement);
+	      break; 
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
@@ -619,22 +617,20 @@ class FormGenerator {
               inputElement.name = `${parentName}_${field.name}`; 
               inputElement.required = field.required;
               break;
-            case "number":
-              inputElement = document.createElement("input");
-              inputElement.type = "number";
-              inputElement.name = `${parentName}_${field.name}`; 
-              inputElement.required = field.required; 
-              inputElement.min = field.min; 
-              inputElement.max = field.max; 
-              inputElement.readOnly = field.readonly;
-              inputElement.setAttribute('autoincrement', field.autoincrement); 
-              inputElement.step = field.step; 
-	      if(field.readonly && field.autoincrement)
+	    case "text":
+              inputElement = document.createElement("div");
+			  
+              let textElement = document.createElement("div");
+              textElement.name = `${parentName}_${field.name}`;
+              textElement.type = "number";
+
+	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
-		 inputElement.value = field.start ? field.start : 1;
-		 inputElement.style.outline = 'none';
+		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
-              break;
+
+	      inputElement.appendChild(textElement);
+	      break; 
             case "number":
               inputElement = document.createElement("input");
               inputElement.type = "number";
