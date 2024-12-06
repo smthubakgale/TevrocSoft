@@ -208,6 +208,7 @@ class FormGenerator {
   }
   createSetter(inputElement , setter)
   {
+	console.log("Created MUtation Observer");
 	// Create a MutationObserver instance
 	var observer = new MutationObserver(function(mutations) {
 	  mutations.forEach(function(mutation) {
@@ -215,12 +216,13 @@ class FormGenerator {
 	      mutation.addedNodes.forEach(function(node) {
 		  //: 
 		  var subforms = document.querySelectorAll("subform"); 
+		      console.log(subforms);
 		  subforms.forEach(function(subform) { 
 		    var descendants = subform.querySelectorAll("*");
 		     
 		    descendants.forEach(function(descendant) {
 		      if (descendant == inputElement) { 
-			
+			 console.log("Calling Setter");
 		         setter(subform , inputElement); 
 	                 observer.disconnect();
 		      }
