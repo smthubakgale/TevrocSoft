@@ -22,6 +22,36 @@ const schedule = [
 	 description : "Enter the documentation URL of your API"
     } ,	
     {
+	label : "Start Day" ,
+	 type : "number" ,
+	 name : "us" ,  
+	 description : ""
+    } , 
+    {
+	label : "End Day" ,
+	 type : "number" ,
+	 name : "uf" ,  
+	 description : ""
+    } , 
+    {
+	label : "Price" ,
+	 type : "number" ,
+	 name : "price" ,  
+	 step : 0.01 ,
+	 description : ""
+    } ,  
+    {
+	label : "Rate" ,
+	 type : "select" ,
+	 name : "rate" ,  
+	 description : "" ,
+	 options:[
+		 { label: "Week" , value:"week" }, 
+		 { label: "Month" , value:"Month" }, 
+		 { label: "Year" , value: "Year" }, 
+	 ]
+    } , 
+    {
 	label : "Primary Member" ,
 	 type : "select" ,
 	 name : "pu" ,  
@@ -197,13 +227,8 @@ const schedule2 = [
 	 name : "mode" ,     
 	 description : "Select compenent experience type" ,
 	 options : [ 
-	   {
-	     label: 'Full-Experience',
-	     value: 'full',
-  	   },{
-	     label: 'Partial-Experience',
-	     value: 'partial',
-	   }
+	   { label: 'Full-Experience', value: 'full' } ,
+	   { label: 'Partial-Experience', value: 'partial', }
 	]
     } 
 ];
