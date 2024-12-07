@@ -974,14 +974,40 @@ const create =
 							 type : "subform" , 
 							 name : "provider" ,    
 							 description : "" ,
-							 fields:[]
-						     }, 
+							 fields:[
+							     {
+								label : "Name" ,
+								 type : "text" , 
+								 name : "name" , 
+								 description : ""
+							     } ,
+							     {
+								label : "Description" ,
+								 type : "textarea" , 
+								 name : "desc" , 
+								 description : ""
+							     } 								 
+							 ]
+						     },	
 						     {
-							label : "Browser Version" ,
+							label : "Database Details" ,
 							 type : "subform" , 
 							 name : "database" ,    
 							 description : "" ,
-							 fields:[]
+							 fields:[
+							     {
+								label : "Name" ,
+								 type : "text" , 
+								 name : "name" , 
+								 description : ""
+							     } ,
+							     {
+								label : "Description" ,
+								 type : "textarea" , 
+								 name : "desc" , 
+								 description : ""
+							     } 
+							 ]
 						     }
 						 ]
 					     }	,
