@@ -197,9 +197,9 @@ class FormGenerator {
 			   descendants.forEach(function(descendant) {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(checkboxId) ) { 
 				   descendant.setAttribute(checkboxId, 'true'); 
-				   if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   descentent.addEventListener('change', function() {
-					if(descendent.value){ dv2.innerHTML = descendent.value; }
+					if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   });
 			       }
 			   });
@@ -316,9 +316,9 @@ class FormGenerator {
 			   descendants.forEach(function(descendant) {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(radioId) ) { 
 				   descendant.setAttribute(radioId, 'true'); 
-				   if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   descentent.addEventListener('change', function() {
-					if(descendent.value){ dv2.innerHTML = descendent.value; }
+					if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   });
 			       }
 			   });
@@ -396,9 +396,9 @@ class FormGenerator {
 			   descendants.forEach(function(descendant) {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(selectId) ) { 
 				   descendant.setAttribute(selectId, 'true'); 
-				   if(descendent.value){ optionElement.innerHTML = descendent.value; }
+				   if(descendant.value){ optionElement.innerHTML = descendant.value; }
 				   descentent.addEventListener('change', function() {
-					if(descendent.value){ optionElement.innerHTML = descendent.value; }
+					if(descendant.value){ optionElement.innerHTML = descendant.value; }
 				   });
 			       }
 			   });
