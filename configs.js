@@ -11,7 +11,7 @@ const schedule = [
     } , 
     {
 	label : "Description" ,
-	 type : "text" ,
+	 type : "textarea" ,
 	 name : "desc" , 
 	 description : "Enter the description of your API"
     } , 
@@ -169,7 +169,7 @@ const schedule2 = [
     } , 
     {
 	label : "Description" ,
-	 type : "text" ,
+	 type : "textarea" ,
 	 name : "desc" , 
 	 description : "Enter the description of your API"
     } , 
@@ -1180,7 +1180,58 @@ const create =
 		   type: "subform",  
 		   description: "Uncertain events impacting project goals" ,
 		   fields: [
-			   
+		      {
+			label : "Description" ,
+			 type : "textarea" ,
+			 name : "desc" , 
+			 description : ""
+		      } , 
+		      {
+			label : "Category" ,
+			 type : "select" ,
+			 name : "categ" , 
+			 description : "" ,
+			 options:[
+			        { "label": "Cybersecurity Risks", "value": "CY"},
+				{"label": "Data Risks", "value": "DA"},
+				{"label": "Technology Risks", "value": "TE"},
+				{"label": "Technical Risks", "value": "TR"},
+				{"label": "Delivery and Execution Risks", "value": "DE"},
+				{"label": "Project Management Risks", "value": "PR"},
+				{"label": "Financial Risks", "value": "FN"},
+				{"label": "Regulatory Risks", "value": "RE"},
+				{"label": "Information Security Risks", "value": "IS"},
+				{"label": "Intellectual Property Risks", "value": "IT"},
+				{"label": "Management Risks", "value": "MS"},
+				{"label": "Communication Risks", "value": "CO"},
+				{"label": "Strategic Risks", "value": "SR"},
+				{"label": "Utility Risks", "value": "UA"},
+				{"label": "Vendor Risks", "value": "VD"},
+				{"label": "Network Risks", "value": "NR"},
+				{"label": "API Risks", "value": "AP"},
+				{"label": "Architecture Risks", "value": "AR"},
+				{"label": "Code Quality Risks", "value": "CD"},
+				{"label": "Compatibility Risks", "value": "CP"},
+				{"label": "Database Risks", "value": "DB"},
+				{"label": "Data Storage Risks", "value": "DS"},
+				{"label": "Hardware Risks", "value": "HW"},
+				{"label": "Integration Risks", "value": "IN"},
+				{"label": "Latency Risks", "value": "LA"},
+				{"label": "Localization Risks", "value": "LO"},
+				{"label": "Maintenance Risks", "value": "MT"},
+				{"label": "Network Congestion Risks", "value": "NW"},
+				{"label": "Operating System Risks", "value": "OS"},
+				{"label": "Performance Risks", "value": "PE"},
+				{"label": "Scalability Risks", "value": "SC"},
+				{"label": "Security Vulnerability Risks", "value": "SE"},
+				{"label": "Software Dependency Risks", "value": "SF"},
+				{"label": "Service Level Agreement (SLA) Risks", "value": "SL"},
+				{"label": "Testing and Certification Risks", "value": "TC"},
+				{"label": "User Interface Risks", "value": "UI"},
+				{"label": "User Experience Risks", "value": "US"},
+				{"label": "Vendor Lock-in Risks", "value": "VE"}
+			 ]
+		      } , 			   
 		   ]
 		},
 	        {
