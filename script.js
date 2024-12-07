@@ -175,7 +175,7 @@ class FormGenerator {
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
-			c
+			dv2.innerHTML = tx;
 			dv2.style.paddingLeft = "10px";
 			dv2.style.paddingTop = "7px";
 
