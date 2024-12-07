@@ -2,7 +2,46 @@
 //----------------: Shop
 //: Specifications
 
-const schedule = [];
+const schedule = [
+    {
+	label : "Name" ,
+	 type : "text" ,
+	 name : "name" , 
+	 description : "Enter the name of your API"
+    } , 
+    {
+	label : "Description" ,
+	 type : "text" ,
+	 name : "desc" , 
+	 description : "Enter the description of your API"
+    } , 
+    {
+	label : "URL" ,
+	 type : "text" ,
+	 name : "url" , 
+	 description : "Enter the documentation URL of your API"
+    } ,	
+    {
+	label : "Primary Member" ,
+	 type : "select" ,
+	 name : "pu" ,  
+	 route: "spec_members_id" ,
+	 routeref: "spec_members_email" , 
+	 observe:"subform" ,
+	 pre : " Member ",  
+	 description : "Select the member assigned this task"
+    } , 
+    {
+	label : "Secondary Members" ,
+	 type : "checkbox" ,
+	 name : "su" ,  
+	 route: "spec_members_id" ,
+	 routeref: "spec_members_email" , 
+	 observe:"subform" ,
+	 pre : " Member ",  
+	 description : "Select members who will offer support"
+    } , 
+];
 const schedulea = [
     ...
     [{
