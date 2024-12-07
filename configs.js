@@ -128,31 +128,31 @@ const schedule2 = [
     } 
 ];
 const schedule2a = [
-    [...
-       [{
-	   label : "API ID" ,
-	   type : "number" ,
-	   readonly : true ,
-	   autoincrement:true , 
-	   name : "id" , 
-	   description : "it will auto generate thus readonly"
-       }]
-    ],
-    ...schedule2
+    ...
+    [{
+	label : "API ID" ,
+	type : "number" ,
+	readonly : true ,
+	autoincrement:true , 
+	name : "id" , 
+	description : "it will auto generate thus readonly"
+    }] ,
+    ...
+    schedule2
 ];
 
 const schedule2b = [
-    [...
-       [{
-	   label : "Library ID" ,
-	   type : "number" ,
-	   readonly : true ,
-	   autoincrement:true , 
-	   name : "id" , 
-	   description : "it will auto generate thus readonly"
-       }]
-    ],
-    ...schedule2
+    ...
+    [{
+	label : "Library ID" ,
+	type : "number" ,
+	readonly : true ,
+	autoincrement:true , 
+	name : "id" , 
+	description : "it will auto generate thus readonly"
+   }] ,
+    ...
+    schedule2
 ];
 
 const create = 
