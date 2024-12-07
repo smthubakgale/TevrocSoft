@@ -153,7 +153,7 @@ class FormGenerator {
 	// 
 	if(field.observe == "subform")
 	{ 
-		function createCheckboxButton(node) {
+		function createCheckboxButton(node , subform) {
 		    console.log('Element with name "spec_members_id" added');
   
 			
@@ -175,7 +175,7 @@ class FormGenerator {
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
-			dv2.innerHTML = tx;
+			c
 			dv2.style.paddingLeft = "10px";
 			dv2.style.paddingTop = "7px";
 
@@ -189,7 +189,21 @@ class FormGenerator {
 			 
 		        parentElement.appendChild(dv);
 			
-		    checkboxRefs.push({ id : checkboxId , node: node  , ref : inputElement });
+		        checkboxRefs.push({ id : checkboxId , node: node  , ref : inputElement });
+
+			if(field.routeref){
+			   var descendants = subform.querySelectorAll("*");
+		     
+			   descendants.forEach(function(descendant) {
+			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(checkboxId) ) { 
+				   descendant.setAttribute(checkboxId, 'true'); 
+				   if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   descentent.addEventListener('change', function() {
+					if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   });
+			       }
+			   });
+			}
 		}
  
 		// Create a MutationObserver instance
@@ -208,9 +222,9 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(checkboxId) ) { 
+			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(checkboxId) ) { 
 					   descendant.setAttribute(checkboxId, 'true'); 
-					   createCheckboxButton(descendant);
+					   createCheckboxButton(descendant , subform);
 			               }
 			           });
 			       }); 
@@ -261,7 +275,7 @@ class FormGenerator {
 	// 
 	if(field.observe == "subform")
 	{ 
-		function createRadioButton(node) {
+		function createRadioButton(node , subform) {
 		      
 		       let inputElement = document.createElement("input");
 			inputElement.type = "radio";
@@ -294,7 +308,21 @@ class FormGenerator {
 			}
 		        parentElement.appendChild(dv);
 			
-		    radioRefs.push({ id : radioId , node: node  , ref : inputElement });
+		        radioRefs.push({ id : radioId , node: node  , ref : inputElement });
+			
+			if(field.routeref){
+			   var descendants = subform.querySelectorAll("*");
+		     
+			   descendants.forEach(function(descendant) {
+			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(radioId) ) { 
+				   descendant.setAttribute(radioId, 'true'); 
+				   if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   descentent.addEventListener('change', function() {
+					if(descendent.value){ dv2.innerHTML = descendent.value; }
+				   });
+			       }
+			   });
+			}
 		}
  
 		// Create a MutationObserver instance
@@ -313,9 +341,9 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(radioId) ) { 
+			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(radioId) ) { 
 					   descendant.setAttribute(radioId, 'true'); 
-					   createRadioButton(descendant);
+					   createRadioButton(descendant , subform);
 			               }
 			           });
 			       }); 
@@ -349,7 +377,7 @@ class FormGenerator {
 	// 
 	if(field.observe == "subform")
 	{ 
-		function createSelectButton(node) {
+		function createSelectButton(node , subform) {
 		      
 		       let optionElement = document.createElement("option"); 
 			optionElement.value = node.Value;
@@ -360,7 +388,21 @@ class FormGenerator {
 
 			inputElement.appendChild(optionElement);
  
-		       selectRefs.push({ id : selectId , node: node  , ref : optionElement });
+		        selectRefs.push({ id : selectId , node: node  , ref : optionElement });
+			
+			if(field.routeref){
+			   var descendants = subform.querySelectorAll("*");
+		     
+			   descendants.forEach(function(descendant) {
+			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(selectId) ) { 
+				   descendant.setAttribute(selectId, 'true'); 
+				   if(descendent.value){ optionElement.innerHTML = descendent.value; }
+				   descentent.addEventListener('change', function() {
+					if(descendent.value){ optionElement.innerHTML = descendent.value; }
+				   });
+			       }
+			   });
+			}
 		}
  
 		// Create a MutationObserver instance
@@ -379,9 +421,9 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === 'spec_members_id' && !descendant.hasAttribute(selectId) ) {  
+			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(selectId) ) {  
 					   descendant.setAttribute(selectId, 'true'); 
-					   createSelectButton(descendant);
+					   createSelectButton(descendant , subform);
 			               }
 			           });
 			       }); 
