@@ -674,9 +674,9 @@ const create =
 						 name : "ram" , 
 						 description: "units of measurement for RAM" ,
 						 options:[
-							 { label:"KiloByte" , "KB"} ,
-							 { label:"MegaByte" , "MB"} ,
-							 { label:"GigaByte" , "GB"} , 
+							 { label:"KiloByte" , value:"KB"} ,
+							 { label:"MegaByte" , value:"MB"} ,
+							 { label:"GigaByte" , value:"GB"} , 
 						 ]
 					     },
 					     {
@@ -699,9 +699,9 @@ const create =
 						 name : "storage_unit" , 
 						 description: "units of measurement for storage space" ,
 						 options:[
-							 { label:"KiloByte" , "KB"} ,
-							 { label:"MegaByte" , "MB"} ,
-							 { label:"GigaByte" , "GB"} , 
+							 { label:"KiloByte" , value:"KB"} ,
+							 { label:"MegaByte" , value:"MB"} ,
+							 { label:"GigaByte" , value:"GB"} , 
 						 ]
 					     },
 					 ]
