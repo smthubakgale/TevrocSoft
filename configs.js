@@ -799,7 +799,75 @@ const create =
 					 type : "subform" ,
 					 name : "hardware" ,    
 					 description : "physical components of a computer or device" ,
-					 fields:  []
+					 fields:  [
+					     {
+						label : "User Estimates" ,
+						 type : "subform" ,
+						 name : "users" , 
+						 seemore :true , 
+						 title : "the number of users expected to use the system" ,
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Minimum" ,
+							 type : "number" ,
+							 min : 0 ,
+							 name : "min" ,    
+							 description : "the minimum users" 
+						     },	 
+						     {
+							label : "Maximum" ,
+							 type : "number" ,
+							 min : 0 ,
+							 name : "max" ,    
+							 description : "the maximum users" 
+						     }
+						 ]
+					     }	,
+					     {
+						label : "RAM" ,
+						 type : "number" ,
+						 name : "ram" , 
+						 min : 0 ,
+						 description: "computer memory" 
+					     },
+					     {
+						label : "RAM UNIT" ,
+						 type : "number" ,
+						 name : "ram" , 
+						 description: "units of measurement for RAM" ,
+						 options:[
+							 { label:"KiloByte" , "KB"} ,
+							 { label:"MegaByte" , "MB"} ,
+							 { label:"GigaByte" , "GB"} , 
+						 ]
+					     },
+					     {
+						label : "CPU Cores" ,
+						 type : "number" ,
+						 name : "ram" , 
+						 min : 0 ,
+						 description: "computer memory" 
+					     },
+					     {
+						label : "Storage Space" ,
+						 type : "number" ,
+						 name : "storage_space" , 
+						 min : 0 ,
+						 description: "amount of disk space available to store files" 
+					     },
+					     {
+						label : "Storage Space UNIT" ,
+						 type : "number" ,
+						 name : "storage_unit" , 
+						 description: "units of measurement for storage space" ,
+						 options:[
+							 { label:"KiloByte" , "KB"} ,
+							 { label:"MegaByte" , "MB"} ,
+							 { label:"GigaByte" , "GB"} , 
+						 ]
+					     },
+					 ]
 				     },	 
 				 ]
 			     }
