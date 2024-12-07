@@ -873,7 +873,7 @@ const create =
 					label : "Software" ,
 					 type : "subform" ,
 					 name : "software" ,    
-					 description : "programs that run on computers or devices" ,
+					 description : "practicality of a software project" ,
 					 fields:  [
 					     {
 						label : "Desktop" ,
@@ -1011,6 +1011,15 @@ const create =
 						     }
 						 ]
 					     }	,
+					 ]
+				     },	
+				     {
+					label : "Economic" ,
+					 type : "subform" ,
+					 name : "economic" ,    
+					 description : "project's cost-effectiveness" ,
+					 fields:  [
+						 
 					 ]
 				     }
 				 ]
