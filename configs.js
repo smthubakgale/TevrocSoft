@@ -290,7 +290,7 @@ const schedule2 = [
 		 type : "checkbox" ,
 		 name : "framework" ,  
 		 route: "spec_dev_framework_id" ,
-		 routeref: "spec_dev_framework_ref" ,
+		 routeref: "spec_dev_framework_name" ,
 		 observe:"subform" ,
 		 pre : "Framework ",  
 		 description : "Select required frameworks"
