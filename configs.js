@@ -966,20 +966,22 @@ const create =
 							 type : "number" ,
 							 readonly : true ,
 							 autoincrement:true , 
-							 name : "name" , 
+							 name : "id" , 
 							 description : "it will auto generate thus readonly"
 						     } , 							 
 						     {
-							label : "Browser Name" ,
-							 type : "text" , 
-							 name : "browser_name" ,    
-							 description : "" 
+							label : "Provider Details" ,
+							 type : "subform" , 
+							 name : "provider" ,    
+							 description : "" ,
+							 fields:[]
 						     }, 
 						     {
 							label : "Browser Version" ,
-							 type : "text" , 
-							 name : "browser_version" ,    
-							 description : "" 
+							 type : "subform" , 
+							 name : "database" ,    
+							 description : "" ,
+							 fields:[]
 						     }
 						 ]
 					     }	,
