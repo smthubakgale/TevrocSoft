@@ -1119,16 +1119,54 @@ const create =
 					 name : "LOC" ,    
 					 description : "amount of code generated for a specfic duration by team" ,
 					 fields:  [
-					     
+					    {
+						label : "Amount" ,
+						 type : "number" ,
+						 name : "value" ,  
+						 step : 0.01 ,
+						 description : ""
+					    } ,  
+					    {
+						label : "Rate" ,
+						 type : "select" ,
+						 name : "rate" ,  
+						 description : "" ,
+						 options:[
+							 { label: "Hour" , value:"hour" },
+							 { label: "Day" , value:"day" },
+							 { label: "Week" , value:"week" }, 
+							 { label: "Month" , value:"Month" }, 
+							 { label: "Year" , value: "Year" }, 
+						 ]
+					    } 					     
 					 ]
 				     },
 				     {
 					label : "Labour Rate" ,
 					 type : "subform" ,
-					 name : "LOC" ,    
+					 name : "BLR" ,    
 					 description : "the cost of an employee's work for a specific duration" ,
 					 fields:  [
-					     
+					    {
+						label : "Price" ,
+						 type : "number" ,
+						 name : "value" ,  
+						 step : 0.01 ,
+						 description : ""
+					    } ,  
+					    {
+						label : "Rate" ,
+						 type : "select" ,
+						 name : "rate" ,  
+						 description : "" ,
+						 options:[
+							 { label: "Hour" , value:"hour" }, 
+							 { label: "Day" , value:"day" }, 
+							 { label: "Week" , value:"week" }, 
+							 { label: "Month" , value:"Month" }, 
+							 { label: "Year" , value: "Year" }, 
+						 ]
+					    } 					     
 					 ]
 				     }				     
 				 ]
