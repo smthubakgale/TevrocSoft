@@ -762,8 +762,7 @@ const create =
 				 }
 			      } ,
 		   ]
-		}, 
-		 
+		},  
 	        {
 		   group:"Document" ,
 		   label: "Project Feasibility" ,
@@ -1042,20 +1041,65 @@ const create =
 						 ]
 					     }	,
 					 ]
+				     }
+			     },
+			     {
+				label : "Economic" ,
+				 type : "subform" ,
+				 name : "economic" ,    
+				 description : "project's cost-effectiveness" ,
+				 fields:  [
+				    {
+					label : "Hosting" ,
+					type : "subform" ,
+					 multiple:true ,
+					 name : "apis" ,    
+					 seemore : true , 
+					 title : " Hosting PLatforms ... " ,
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/hosting.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() 
+					 ,
+					 fields: schedulea
+				     },	
+				    {
+					label : "APIs" ,
+					type : "subform" ,
+					 multiple:true ,
+					 name : "apis" ,    
+					 seemore : true , 
+					 title : " Application Programming Interface ... " ,
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/apis.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() 
+					 ,
+					 fields: scheduleb
 				     },	
 				     {
-					label : "Economic" ,
+					 label : "Libraries" ,
 					 type : "subform" ,
-					 name : "economic" ,    
-					 description : "project's cost-effectiveness" ,
-					 fields:  [
-						 
-					 ]
-				     }
+					 multiple:true ,
+					 name : "apis" ,       
+					 seemore : true , 
+					 title : " Pre-written code collections ... " ,
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/libraries.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() , 
+					 fields: schedulec
+				     },	 						 
 				 ]
 			     }
-			   ]
-		 } ,
+			   ]  
+	        } ,
 	        {
 		   group : "Development" ,
 		   label: "Application Logo",
