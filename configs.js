@@ -1113,7 +1113,24 @@ const create =
 				 name : "operational" ,    
 				 description : "project's cost-effectiveness" ,
 				 fields:  [
-				     
+				     {
+					label : "Lines Of Code" ,
+					 type : "subform" ,
+					 name : "LOC" ,    
+					 description : "amount of code generated for a specfic duration by team" ,
+					 fields:  [
+					     
+					 ]
+				     },
+				     {
+					label : "Labour Rate" ,
+					 type : "subform" ,
+					 name : "LOC" ,    
+					 description : "the cost of an employee's work for a specific duration" ,
+					 fields:  [
+					     
+					 ]
+				     }				     
 				 ]
 			     }
 			   ]  
