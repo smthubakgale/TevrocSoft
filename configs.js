@@ -81,7 +81,7 @@ const schedule = [
                 label : "Programming Languages" ,
 		 type : "checkbox" ,
 		 name : "lang" ,  
-		 route: "spec_dev_lang" ,
+		 route: "spec_dev_lang_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required languages"
@@ -90,7 +90,7 @@ const schedule = [
                 label : "Frameworks" ,
 		 type : "checkbox" ,
 		 name : "framework" ,  
-		 route: "spec_dev_framework" ,
+		 route: "spec_dev_framework_id" ,
 		 observe:"subform" ,
 		 pre : "Framework ",  
 		 description : "Select required frameworks"
@@ -99,7 +99,7 @@ const schedule = [
                 label : "IDEs" ,
 		 type : "checkbox" ,
 		 name : "ide" ,  
-		 route: "spec_dev_ide" ,
+		 route: "spec_dev_ide_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required ides"
@@ -108,7 +108,7 @@ const schedule = [
                 label : "SDKs" ,
 		 type : "checkbox" ,
 		 name : "sdk" ,  
-		 route: "spec_dev_sdk" ,
+		 route: "spec_dev_sdk_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required sdks"
@@ -275,7 +275,7 @@ const schedule2 = [
                 label : "Programming Languages" ,
 		 type : "checkbox" ,
 		 name : "lang" ,  
-		 route: "spec_dev_lang" ,
+		 route: "spec_dev_lang_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required languages"
@@ -284,7 +284,7 @@ const schedule2 = [
                 label : "Frameworks" ,
 		 type : "checkbox" ,
 		 name : "framework" ,  
-		 route: "spec_dev_framework" ,
+		 route: "spec_dev_framework_id" ,
 		 observe:"subform" ,
 		 pre : "Framework ",  
 		 description : "Select required frameworks"
@@ -293,7 +293,7 @@ const schedule2 = [
                 label : "IDEs" ,
 		 type : "checkbox" ,
 		 name : "ide" ,  
-		 route: "spec_dev_ide" ,
+		 route: "spec_dev_ide_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required ides"
@@ -302,7 +302,7 @@ const schedule2 = [
                 label : "SDKs" ,
 		 type : "checkbox" ,
 		 name : "sdk" ,  
-		 route: "spec_dev_sdk" ,
+		 route: "spec_dev_sdk_id" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required sdks"
