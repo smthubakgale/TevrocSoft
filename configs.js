@@ -1042,6 +1042,7 @@ const create =
 					     }	,
 					 ]
 				     }
+			          ]
 			     },
 			     {
 				label : "Economic" ,
