@@ -198,7 +198,7 @@ class FormGenerator {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(checkboxId) ) { 
 				   descendant.setAttribute(checkboxId, 'true'); 
 				   if(descendant.value){ dv2.innerHTML = descendant.value; }
-				   descentent.addEventListener('change', function() {
+				   descendant.addEventListener('change', function() {
 					if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   });
 			       }
@@ -317,7 +317,7 @@ class FormGenerator {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(radioId) ) { 
 				   descendant.setAttribute(radioId, 'true'); 
 				   if(descendant.value){ dv2.innerHTML = descendant.value; }
-				   descentent.addEventListener('change', function() {
+				   descendant.addEventListener('change', function() {
 					if(descendant.value){ dv2.innerHTML = descendant.value; }
 				   });
 			       }
@@ -397,7 +397,7 @@ class FormGenerator {
 			       if (descendant.getAttribute('name') === field.routeref && !descendant.hasAttribute(selectId) ) { 
 				   descendant.setAttribute(selectId, 'true'); 
 				   if(descendant.value){ optionElement.innerHTML = descendant.value; }
-				   descentent.addEventListener('change', function() {
+				   descendant.addEventListener('change', function() {
 					if(descendant.value){ optionElement.innerHTML = descendant.value; }
 				   });
 			       }
