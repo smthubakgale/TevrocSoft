@@ -1231,7 +1231,25 @@ const create =
 				{"label": "User Experience Risks", "value": "US"},
 				{"label": "Vendor Lock-in Risks", "value": "VE"}
 			 ]
-		      } , 			   
+		      } , 
+		      {
+			label : "Probability" ,
+			 type : "number" ,
+			 name : "probability" ,  
+			 step : 0.1 ,
+			 min:0 ,
+			 max:100 ,
+			 description : ""
+		     } , 
+		      {
+			label : "Impact" ,
+			 type : "number" ,
+			 name : "impact" ,  
+			 step : 0.1 ,
+			 min: 1 ,
+			 max: 5 ,
+			 description : ""
+		     } , 
 		   ]
 		},
 	        {
