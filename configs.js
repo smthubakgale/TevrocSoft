@@ -2,15 +2,7 @@
 //----------------: Shop
 //: Specifications
 
-const schedule2a = [
-    {
-	label : "API ID" ,
-	 type : "number" ,
-	 readonly : true ,
-	 autoincrement:true , 
-	 name : "name" , 
-	 description : "it will auto generate thus readonly"
-    } , 
+const schedule2 = [ 
     {
 	label : "Name" ,
 	 type : "text" ,
@@ -135,187 +127,32 @@ const schedule2a = [
 	]
     } 
 ];
+const schedule2a = [
+    [...
+       [{
+	   label : "API ID" ,
+	   type : "number" ,
+	   readonly : true ,
+	   autoincrement:true , 
+	   name : "id" , 
+	   description : "it will auto generate thus readonly"
+       }]
+    ],
+    ...schedule2
+];
 
 const schedule2b = [
-    {
-	label : "Library ID" ,
-	 type : "number" ,
-	 readonly : true ,
-	 autoincrement:true , 
-	 name : "name" , 
-	 description : "it will auto generate thus readonly"
-    } , 
-    {
-	label : "Name" ,
-	 type : "text" ,
-	 name : "name" , 
-	 description : "Enter the name of your API"
-    } , 
-    {
-	label : "Description" ,
-	 type : "text" ,
-	 name : "desc" , 
-	 description : "Enter the description of your API"
-    } , 
-    {
-	label : "URL" ,
-	 type : "text" ,
-	 name : "url" , 
-	 description : "Enter the documentation URL of your API"
-    } ,
-    {
-	label : "Earliest Start" ,
-	 type : "number" ,
-	 name : "es" ,  
-	 description : "Enter the eariest day to start"
-    } , 
-    {
-	label : "Earliest Finish" ,
-	 type : "number" ,
-	 name : "ef" ,  
-	 description : "Enter the earliest day to finish"
-    } , 
-    {
-	label : "Latest Start" ,
-	 type : "number" ,
-	 name : "ls" ,  
-	 description : "Ebter the latest day to start "
-    } , 
-    {
-	label : "Latest Finish" ,
-	 type : "number" ,
-	 name : "ef" ,  
-	 description : ""
-    } , 
-    {
-	label : "Primary Member" ,
-	 type : "select" ,
-	 name : "pu" ,  
-	 route: "spec_members_id" ,
-	 routeref: "spec_members_email" , 
-	 observe:"subform" ,
-	 pre : " Member ",  
-	 description : "Select the member assigned this task"
-    } , 
-    {
-	label : "Secondary Members" ,
-	 type : "checkbox" ,
-	 name : "su" ,  
-	 route: "spec_members_id" ,
-	 routeref: "spec_members_email" , 
-	 observe:"subform" ,
-	 pre : " Member ",  
-	 description : "Select members who will offer support"
-    } , 
-    {
-	label : "Estimated Lines Of Code" ,
-	 type : "number" ,
-	 name : "eLOC" ,  
-	 description : "Enter the estimaned lines of code for this task"
-    } , 
-    {
-	label : "Process Based Estimation" ,
-	 type : "subform" ,
-	 name : "ePBE" ,  
-	 description : "estimating the effort required for task" ,
-	 fields:[
-	    {
-		label : "Analysis Effort" ,
-		 type : "number" ,
-		 min : 1 ,
-		 max : 5 ,
-		 name : "analysis" ,  
-		 description : "Enter the analysis effort between 1 and 5"
-	    } ,
-	    {
-		label : "Design Effort" ,
-		 type : "number" ,
-		 min : 1 ,
-		 max : 5 ,
-		 name : "design" ,  
-		 description : "Enter the design effort between 1 and 5"
-	    } ,
-	    {
-		label : "Coding Effort" ,
-		 type : "number" ,
-		 min : 1 ,
-		 max : 5 ,
-		 name : "code" ,  
-		 description : "Enter the analysis effort between 1 and 5"
-	    } , 
-	    {
-		label : "Testing Effort" ,
-		 type : "number" ,
-		 min : 1 ,
-		 max : 5 ,
-		 name : "test" ,  
-		 description : "Enter the analysis effort between 1 and 5"
-	    } 	 
-	 ]
-    }  , 
-    {
-	label : "Development Requirements" ,
-	 type : "subform" ,
-	 name : "reqs" ,  
-	 description : "what is needed to complete the task" ,
-	 fields:[
-	    {
-                label : "Programming Languages" ,
-		 type : "checkbox" ,
-		 name : "lang" ,  
-		 route: "spec_dev_lang_id" ,
-	         routeref: "spec_dev_lang_name" , 
-		 observe:"subform" ,
-		 pre : " Language ",  
-		 description : "Select required languages"
-	    } ,
-	    {
-                label : "Frameworks" ,
-		 type : "checkbox" ,
-		 name : "framework" ,  
-		 route: "spec_dev_framework_id" ,
-	         routeref: "spec_dev_framework_name" , 
-		 observe:"subform" ,
-		 pre : "Framework ",  
-		 description : "Select required frameworks"
-	    } ,
-	    {
-                label : "IDEs" ,
-		 type : "checkbox" ,
-		 name : "ide" ,  
-		 route: "spec_dev_ide_id" ,
-	         routeref: "spec_dev_ide_name" , 
-		 observe:"subform" ,
-		 pre : " Language ",  
-		 description : "Select required ides"
-	    } , 
-	    {
-                label : "SDKs" ,
-		 type : "checkbox" ,
-		 name : "sdk" ,  
-		 route: "spec_dev_sdk_id" ,
-	         routeref: "spec_dev_sdk_name" , 
-		 observe:"subform" ,
-		 pre : " Language ",  
-		 description : "Select required sdks"
-	    }   
-	 ]
-    } ,
-    {
-	label : "Component Experience Type" ,
-	 type : "select" ,
-	 name : "mode" ,     
-	 description : "Select compenent experience type" ,
-	 options : [ 
-	   {
-	     label: 'Full-Experience',
-	     value: 'full',
-  	   },{
-	     label: 'Partial-Experience',
-	     value: 'partial',
-	   }
-	]
-    } 
+    [...
+       [{
+	   label : "Library ID" ,
+	   type : "number" ,
+	   readonly : true ,
+	   autoincrement:true , 
+	   name : "id" , 
+	   description : "it will auto generate thus readonly"
+       }]
+    ],
+    ...schedule2
 ];
 
 const create = 
