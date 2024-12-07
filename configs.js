@@ -82,6 +82,7 @@ const schedule = [
 		 type : "checkbox" ,
 		 name : "lang" ,  
 		 route: "spec_dev_lang_id" ,
+		 routeref: "spec_dev_lang_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required languages"
@@ -91,6 +92,7 @@ const schedule = [
 		 type : "checkbox" ,
 		 name : "framework" ,  
 		 route: "spec_dev_framework_id" ,
+		 routeref: "spec_dev_framework_name" ,
 		 observe:"subform" ,
 		 pre : "Framework ",  
 		 description : "Select required frameworks"
@@ -100,6 +102,7 @@ const schedule = [
 		 type : "checkbox" ,
 		 name : "ide" ,  
 		 route: "spec_dev_ide_id" ,
+		 routeref: "spec_dev_ide_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required ides"
@@ -109,6 +112,7 @@ const schedule = [
 		 type : "checkbox" ,
 		 name : "sdk" ,  
 		 route: "spec_dev_sdk_id" ,
+		 routeref: "spec_dev_sdk_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required sdks"
@@ -276,6 +280,7 @@ const schedule2 = [
 		 type : "checkbox" ,
 		 name : "lang" ,  
 		 route: "spec_dev_lang_id" ,
+		 routeref: "spec_dev_lang_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required languages"
@@ -285,6 +290,7 @@ const schedule2 = [
 		 type : "checkbox" ,
 		 name : "framework" ,  
 		 route: "spec_dev_framework_id" ,
+		 routeref: "spec_dev_framework_ref" ,
 		 observe:"subform" ,
 		 pre : "Framework ",  
 		 description : "Select required frameworks"
@@ -294,6 +300,7 @@ const schedule2 = [
 		 type : "checkbox" ,
 		 name : "ide" ,  
 		 route: "spec_dev_ide_id" ,
+		 routeref: "spec_dev_ide_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required ides"
@@ -303,6 +310,7 @@ const schedule2 = [
 		 type : "checkbox" ,
 		 name : "sdk" ,  
 		 route: "spec_dev_sdk_id" ,
+		 routeref: "spec_dev_sdk_name" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required sdks"
