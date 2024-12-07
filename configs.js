@@ -868,7 +868,123 @@ const create =
 						 ]
 					     },
 					 ]
-				     },	 
+				     },	
+				     {
+					label : "Software" ,
+					 type : "subform" ,
+					 name : "software" ,    
+					 description : "programs that run on computers or devices" ,
+					 fields:  [
+					     {
+						label : "Desktop" ,
+						 type : "subform" ,
+						 name : "desktop" ,  
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Operating System Name" ,
+							 type : "text" , 
+							 name : "os_name" ,    
+							 description : "" 
+						     }, 
+						     {
+							label : "Operating System Version" ,
+							 type : "text" , 
+							 name : "os_version" ,    
+							 description : "" 
+						     }
+						 ]
+					     },
+					     {
+						label : "Desktop Web Browser" ,
+						 type : "subform" ,
+						 name : "pc_web" ,  
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Browser Name" ,
+							 type : "text" , 
+							 name : "browser_name" ,    
+							 description : "" 
+						     }, 
+						     {
+							label : "Browser Version" ,
+							 type : "text" , 
+							 name : "browser_version" ,    
+							 description : "" 
+						     }
+						 ]
+					     },
+					     {
+						label : "Mobile" ,
+						 type : "subform" ,
+						 name : "mobile" ,  
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Operating System Name" ,
+							 type : "text" , 
+							 name : "os_name" ,    
+							 description : "" 
+						     }, 
+						     {
+							label : "Operating System Version" ,
+							 type : "text" , 
+							 name : "os_version" ,    
+							 description : "" 
+						     }
+						 ]
+					     }, 
+					     {
+						label : "Mobile Web Browser" ,
+						 type : "subform" ,
+						 name : "mobile_web" ,  
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Browser Name" ,
+							 type : "text" , 
+							 name : "browser_name" ,    
+							 description : "" 
+						     }, 
+						     {
+							label : "Browser Version" ,
+							 type : "text" , 
+							 name : "browser_version" ,    
+							 description : "" 
+						     }
+						 ]
+					     },
+					     {
+						label : "Server" ,
+						 type : "subform" ,
+						 name : "server" ,  
+						 description : "" ,
+						 fields : [
+						     {
+							label : "Server ID" ,
+							 type : "number" ,
+							 readonly : true ,
+							 autoincrement:true , 
+							 name : "name" , 
+							 description : "it will auto generate thus readonly"
+						     } , 							 
+						     {
+							label : "Browser Name" ,
+							 type : "text" , 
+							 name : "browser_name" ,    
+							 description : "" 
+						     }, 
+						     {
+							label : "Browser Version" ,
+							 type : "text" , 
+							 name : "browser_version" ,    
+							 description : "" 
+						     }
+						 ]
+					     }	,
+					 ]
+				     }
 				 ]
 			     }
 			   ]
