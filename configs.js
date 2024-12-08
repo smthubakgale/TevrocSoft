@@ -1487,6 +1487,7 @@ const create =
 				 
 				   parentElement.appendChild(dv); 
 
+				   console.log(sibling.innerHTML);
 				   const tag = sibling.querySelectorAll('[name="spec_users_user"]');
 				   console.log(tag);
 					
