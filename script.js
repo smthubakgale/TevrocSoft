@@ -136,6 +136,7 @@ class FormGenerator {
  
      if(field.options){
 	   if(field.options.length == 0){ 
+		console.log("empty");
 		let dv = document.createElement("div"); 
 		dv.name = `${parentName}_${field.name}_empty`;
 		parentElement.appendChild(dv);
