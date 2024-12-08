@@ -173,9 +173,7 @@ class FormGenerator {
 	if(field.observe == "subform")
 	{ 
 		function createCheckboxButton(node , subform) {
-		    console.log('Element with name "spec_members_id" added');
-  
-			
+		   
 		        let inputElement = document.createElement("input");
 			inputElement.type = "checkbox";
 			inputElement.name = `${parentName}_${field.name}`;
