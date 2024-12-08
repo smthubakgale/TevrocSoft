@@ -1396,16 +1396,13 @@ const create =
 		  ]
 		},
 		{
-		  "label": "Projects",
-		  "type": "subform",
+		  "label": "Reference Project Documentation",
+		  "type": "checkbox",
 		  "name": "projects",
-		  "fields": [
-			{
-			  "label": "Project",
-			  "type": "text",
-			  "name": "project",
-			  "required": true
-			}
+		   description: "open-source projects to reference" , 
+		  "options": [ 
+		       { label: "Teuber Food Delivery" , value: "teuber.food.delivery" } ,
+		       { label: "Teuber Hotel Management" , value : "teuber.hotel.management" }
 		  ]
 		},
 		{
