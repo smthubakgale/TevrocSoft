@@ -136,17 +136,34 @@ class FormGenerator {
  
      if(field.options){
 	   field.options.forEach((option) => {
-		inputElement = document.createElement("input");
+		let inputElement = document.createElement("input");
 		inputElement.type = "checkbox";
 		inputElement.name = `${parentName}_${field.name}`;
 		inputElement.value = option.value;
 		inputElement.required = field.required;
-	
-		const labelElement = document.createElement("label");
-		labelElement.textContent = option.label;
-		labelElement.appendChild(inputElement);
-	
-		parentElement.appendChild(labelElement);
+		inputElement.style.marginRight = '5px';
+		inputElement.style.width = '15px';  
+		
+		const dv = document.createElement("div");
+		dv.style.display = 'flex';
+		const dv1 = document.createElement("div");
+		dv1.append(inputElement);
+		const dv2 = document.createElement("div"); 
+		dv.style.flex = 1;
+
+		dv2.innerHTML = option.value;
+		dv2.style.paddingLeft = "10px";
+		dv2.style.paddingTop = "7px";
+
+		dv.appendChild(dv1);
+		dv.appendChild(dv2);
+
+		const lastChild = parentElement.children.length > 0 ? parentElement.children[parentElement.children.length - 1] : null;
+		if(lastChild){
+		   lastChild.style.marginBottom = "-25px"; 
+		}
+		 
+		parentElement.appendChild(dv);
 	      });   
      } 
      if(field.route)
@@ -159,7 +176,7 @@ class FormGenerator {
 		    console.log('Element with name "spec_members_id" added');
   
 			
-		       let inputElement = document.createElement("input");
+		        let inputElement = document.createElement("input");
 			inputElement.type = "checkbox";
 			inputElement.name = `${parentName}_${field.name}`;
 			inputElement.value = node.value;
