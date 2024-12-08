@@ -240,6 +240,9 @@ class FormGenerator {
 			     
 			           descendants.forEach(function(descendant) {
 			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(checkboxId) ) { 
+					   if(field.route == "spec_users_user"){
+						   console.log("A");
+					   }
 					   descendant.setAttribute(checkboxId, 'true'); 
 					   createCheckboxButton(descendant , subform);
 			               }
