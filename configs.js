@@ -8,7 +8,8 @@ const usecase = [
 	type : "select" ,
 	name : "table" , 
 	description : "" ,
-	route : "spec_entities_entity" , 
+	route : "spec_entities_id" , 
+	routeref : "spec_entities_entity" , 
 	pre : "Table"
     } ,
     {
@@ -1445,6 +1446,14 @@ const create =
 		  "name": "entities",
 		  description : "the tables that will be user in the databases" ,
 		  "fields": [
+			  {
+				label : "Table ID" ,
+				type : "number" ,
+				readonly : true ,
+				autoincrement:true , 
+				name : "id" , 
+				description : "it will auto generate thus readonly"
+			},
 			{
 			  "label": "Table Name",
 			  "type": "text",
