@@ -1344,6 +1344,7 @@ class FormGenerator {
 	   // Update subfield Nav 
 	   if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav'))) 
 	   {
+	      console.log(Array.from(fieldSet.children).filter(child => child.classList.contains('setnav')));
 	      review();
 	   }
 
