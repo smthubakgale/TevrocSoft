@@ -1431,10 +1431,12 @@ const create =
 			  "required": true ,
 			   description: "" ,
 			   setter: (subform , inputElement) => {
+				console.log("setter init");
 				 // Sibling Elements 
 				 var inherits = subform.querySelector("[name='spec_users_inherits']"); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
+				 console.log("current siblings " + subformiblings.length);
 			         subformSiblings.forEach(sibling => {
 				     linkSibling(sibling); 
 				 });
