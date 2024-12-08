@@ -2,9 +2,37 @@
 //----------------: Shop
 //: Specifications
 
+const usecase = [
+    {
+	label : "Table" ,
+	type : "select" ,
+	name : "table" , 
+	description : "" ,
+	route : "spec_entities_entity"
+    } ,
+    {
+	 label : "Use" ,
+	 type : "select" ,
+	 name : "use" , 
+	 description : "" ,
+	 options:[
+	     { label: "Create" , value: "create" } , 
+	     { label: "Read" , value: "read" } , 
+	     { label: "Update" , value: "update" } , 
+	     { label: "Delete" , value: "delete" } , 
+	 ]
+    } , 
+    {
+	 label : "User" ,
+	 type : "checkbox" ,
+	 name : "user" , 
+	 description : "" ,
+	 route : "spec_users_user"
+    } 
+];
 const schedule = [
     {
-	label : "Name" ,
+	 label : "Name" ,
 	 type : "text" ,
 	 name : "name" , 
 	 description : "Enter the name of your API"
@@ -1407,7 +1435,22 @@ const create =
 		       { label: "Teuber Food Delivery" , value: "teuber.food.delivery" } ,
 		       { label: "Teuber Hotel Management" , value : "teuber.hotel.management" }
 		  ]
-		},   
+		},  
+		{
+		  group: "Use Cases"
+		  "label": "Entities",
+		  "type": "subform",
+		  "name": "entities",
+		  description : "the tables that will be user in the databases" ,
+		  "fields": [
+			{
+			  "label": "Table Name",
+			  "type": "text",
+			  "name": "entity",
+			  "required": true
+			}
+		  ]
+		}, 
 		{
 		  group:"Use Cases" ,
 		  "label": "User Types",
@@ -1567,6 +1610,16 @@ const create =
 			   ]
 			},
 		  ]
+		}, 
+		{
+		  group:"Use Cases" ,
+		  "label": "Use Cases",
+		  "type": "subform",
+	           button: "Use Case",
+		  "name": "usecase",
+		   multiple:true ,
+		   description: "" ,
+		  "fields": usecase
 		}, 
 		{
 		  "label": "Files",
