@@ -1349,6 +1349,7 @@ class FormGenerator {
 	   function review(){
 	      let fieldtags = fieldSet.children; 
 	      let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'))[0];
+	      let viewnav = Array.from(fieldtags).filter(child => child.classList.contains('viewnav'))[0];
               let subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
 		     
 	      let subformCounterText = subnav.querySelector('span');
@@ -1362,9 +1363,11 @@ class FormGenerator {
 
 	      if(subforms.length == 0){
 		 subnav.style.display = "none";
+		 viewnav.querySelector('.view-button').style.display = "none";
 	      }
 	      else{
 		 subnav.style.display = "flex";
+		 viewnav.querySelector('.view-button').style.display = "flex";
 	      }
 	   }
 	  
