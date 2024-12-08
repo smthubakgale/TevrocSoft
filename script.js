@@ -1175,7 +1175,7 @@ class FormGenerator {
 	  // Function to create buttons
 	  function createButtons() 
 	  {
-	    if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav'))) { return; }
+	    if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav')).length > 0) { return; }
 	    const viewButton = fieldSet.querySelector('.viewnav .view-button');
 	    viewButton.style.display = "block";
 	    // Create a new div element with class "setnav"
@@ -1342,9 +1342,8 @@ class FormGenerator {
 	   let sIndex = subforms2.length;
 	   //
 	   // Update subfield Nav 
-	   if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav'))) 
-	   {
-	      console.log(Array.from(fieldSet.children).filter(child => child.classList.contains('setnav')));
+	   if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav')).length > 0) 
+	   { 
 	      review();
 	   }
 
