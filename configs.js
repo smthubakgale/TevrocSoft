@@ -1436,8 +1436,10 @@ const create =
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
 				 console.log("current siblings " + subformSiblings.length);
+				 var k = 1;
 			         subformSiblings.forEach(sibling => {
-				     linkSibling(sibling); 
+				     linkSibling(sibling , k); 
+				     k++;
 				 });
 
 				 subform.classList.add('observed');
@@ -1445,7 +1447,9 @@ const create =
 				  const newSubform = subform.parentNode.querySelector('.subform:not(.observed)');
 				  if (newSubform) {
 				     newSubform.classList.add('observed');
-				     linkSibling(newSubform);
+				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
+
+				     linkSibling(newSubform , subformSiblings2.length);
 				  }
 				});
 				
@@ -1454,12 +1458,12 @@ const create =
 				  subtree: true
 				});
 
-				function linkSibling(sibling)
+				function linkSibling(sibling , index)
 				{
 				    console.log("linking sibling");
 				    const tag = sibling.querySelectorAll('[name="spec_users_user"]');
 
-				    var tx = "Example";
+				    var tx = "User " + index;
 
 				    let inputElement = document.createElement("input");
 				    inputElement.type = "checkbox";
