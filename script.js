@@ -1175,7 +1175,7 @@ class FormGenerator {
 	  // Function to create buttons
 	  function createButtons() 
 	  {
-	    if (fieldSet.querySelector('div.setnav')) { return; }
+	    if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav'))) { return; }
 	    const viewButton = fieldSet.querySelector('.viewnav .view-button');
 	    viewButton.style.display = "block";
 	    // Create a new div element with class "setnav"
@@ -1188,7 +1188,7 @@ class FormGenerator {
 		e.preventDefault();
 
 		fieldtags = fieldSet.children;
-                let subnav = Array.from(fieldtags).filter(child => child.classList.contains('subnav'));
+                let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
                 subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
 	         
 	        let idx = subnav.getAttribute("index");
@@ -1216,7 +1216,7 @@ class FormGenerator {
 	    prevButton.onclick = (e) => {
 		e.preventDefault();
 	      fieldtags = fieldSet.children;
-              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('subnav'));
+              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
               subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
 		    
 	      let idx = subnav.getAttribute("index");
@@ -1246,7 +1246,7 @@ class FormGenerator {
 	    formNumberInput.onchange = () => {
 		    
 	      fieldtags = fieldSet.children;
-              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('subnav'));
+              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
               subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
 		    
 	      let idx = subnav.getAttribute("index");
@@ -1342,18 +1342,18 @@ class FormGenerator {
 	   let sIndex = subforms2.length;
 	   //
 	   // Update subfield Nav 
-	   if (fieldSet.querySelector('.setnav')) 
+	   if (Array.from(fieldSet.children).filter(child => child.classList.contains('setnav'))) 
 	   {
 	      review();
 	   }
 
 	   function review(){
 	      let fieldtags = fieldSet.children; 
+	      let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
               let subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
-		    
-	      let subnav = fieldSet.querySelector('.setnav');
-	      let subformCounterText = fieldSet.querySelector('.setnav span');
-	      let formNumberInput = fieldSet.querySelector('.setnav input');
+		     
+	      let subformCounterText = subnav.querySelector('span');
+	      let formNumberInput = subnav.querySelector('input');
 		    
 	      subformCounterText.textContent = `${subforms.length}/${subforms.length}`;
 	      formNumberInput.value = subforms.length;
