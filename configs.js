@@ -1438,7 +1438,7 @@ const create =
 				 subform.setAttribute(id , 'true');
 				 const observer = new MutationObserver(() => {
 				  const newSubform = subform.parentNode.querySelector('.subform');
-				  if (newSubform.hasAttribute(id) 
+				  if (newSubform.hasAttribute(id))
 				  { 
 				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
@@ -1486,6 +1486,19 @@ const create =
 				   }
 				 
 				   parentElement.appendChild(dv); 
+
+				   if(tag.value){
+					   dv2.innerHTML = tag.value;
+				   }
+					
+				   tag.addEventListener('change', function() {
+				         if(tag.value){
+					    dv2.innerHTML = tag.value;
+					 }
+					 else{
+					    dv2.innerHTML = tx; 
+					 }
+				   });
 				}
 			    }
 			}, 
