@@ -1425,46 +1425,33 @@ const create =
 			   description: "" ,
 			   setter: (subform , inputElement) => { 
 				 // Sibling Elements  
-				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
-				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
-                                 
-				 function getNextCheckboxId() {
-				    window.checkboxIds = window.checkboxIds || [];
-				    const nextId = window.checkboxIds.length + 1;
-				    window.checkboxIds.push(nextId);
-				    return `checkbox-${nextId}`;
-			         }
-				
-			         const checkboxId = getNextCheckboxId();
-				 var id = "checks_" + checkboxId ;
-				 subform.setAttribute(id  ,'true'); 
-				   
-				 var k = 1;
-			         subformSiblings.forEach(sibling => {
-				     if(!sibling.hasAttribute(id + "_s")){
-					 sibling.setAttribute(id + "_s"  ,'true'); 
-					 linkSibling(sibling , k);   
-				     }
-				     k++;
-				 });
-  
-				 const observer = new MutationObserver(() => {
-				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && !s.hasAttribute(id) && !s.hasAttribute(id +"_s") );
-				    console.log(id , newSubforms);
-				     newSubforms.forEach(newSubform => 
-				    {  
-					 console.log(newSubform.outerHTML);
-					 const checksAttrs = Array.from(subform.attributes).filter(attr => attr.name.startsWith('checks_')).map(attr => attr.name);
-				         newSubform.setAttribute(id + "_s" ,'true'); 
-				         console.log(id + " appends child " + (newSubforms.length + 1));
-				         linkSibling(newSubform , newSubforms.length + 1); 
-				    }); 
-				});
-				
-				observer.observe(subform.parentNode, {
-				  childList: true,
-				  subtree: true
-				});
+				 var parentElement = subform.querySelector('[for="spec_users_inherits"]');  
+				 var inherits = [];
+
+				 function getNextInheritsId() {
+				    window.inheritsIds = window.inheritsIds || [];
+				    const nextId = window.inheritsIds.length + 1;
+				    window.inheritsIds.push(nextId);
+				    return `inherits-${nextId}`;
+			         } 
+
+				 function existInherit(sibling) {
+				    return inherits.some(s => s.getAttribute("inheritor") === sibling.getAttribute("inheritor"));
+				 }
+				 function appendInherit(){
+                                     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
+                                     subformSiblings.forEach(sibling => {
+				         if(!existInherit(sibling)){ 
+				 	    linkSibling(sibling , s.getAttribute("inheritor").replace("inherits-" , ""));   
+				         } 
+				     });
+				 }
+				 
+				 subform.setAttribute("inheritor" , id); 
+
+                                 appendInherit();
+				 const observer = new MutationObserver(() => { appendInherit() }); 
+				 observer.observe(subform.parentNode, { childList: true, subtree: true });
 
 				function linkSibling(sibling , index)
 				{
