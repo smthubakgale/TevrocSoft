@@ -1435,29 +1435,30 @@ const create =
 				    return `inherits-${nextId}`;
 			         } 
 
-				function existInherit(sibling) {
-				  const exists = inherits.some(s => s.getAttribute("inheritor") === sibling.getAttribute("inheritor"));
-				  if (!exists) {
-				    inherits.push(sibling);
-				  }
-				  return exists;
-				}
+				function existInherit(sibling , cb) {
+				    var n = sibling.getAttribute("inheritor");
+				    var k = 0;
+				    var c = setInterval(function()
+				    {
+					 if(k == 300){ clearInterval(c); }
+					 else if(n){
+					   clearInterval(c); 
+					   const exists = inherits.some(s => s === sibling.getAttribute("inheritor"));
+					   if(!exists){
+						inherits.push(sibling.getAttribute("inheritor"));  
+					        cb(n);   
+					   }
+				           
+					 }
+					 k++;
+				   },100);  
+				 }
 				 function appendInherit(){
                                      const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
                                      subformSiblings.forEach(sibling => {
-				         if(!existInherit(sibling)){ 
-					    var n = sibling.getAttribute("inheritor");
-					    var k = 0;
-					    var c = setInterval(function()
-					    {
-						if(k == 300){ clearInterval(c); }
-						else if(n){
-						   clearInterval(c);
-				 	           linkSibling(sibling , n.replace("inherits-" , "")); 
-						}
-						k++;
-					    },100);  
-				         } 
+				          existInherit(sibling , (n) => {
+					    linkSibling(sibling , n.replace("inherits-" , ""));   
+					  }); 
 				     });
 				 }
 				 
