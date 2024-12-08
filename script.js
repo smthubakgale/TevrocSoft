@@ -741,7 +741,7 @@ class FormGenerator {
 		   ts.addButtonEvent(fieldSet, subFormElement);
 	         });
 	      }
-              if(field.empty != true){
+              if(field.multiple == true && field.empty != true){
                  subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
 	         fieldSet.appendChild(subFormElement);
 	      }
@@ -895,7 +895,7 @@ class FormGenerator {
 		   ts.addButtonEvent(fieldSet, subFormElement);
 	         });
 	      }
-              if(field.empty != false){ 
+              if(field.multiple == true && field.empty != false){ 
 	         subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
 	         fieldSet.appendChild(subFormElement);
 	      }
@@ -1135,7 +1135,7 @@ class FormGenerator {
 	         });
 	      }
 		      
-              if(field.empty != false){
+              if(field.multiple == true && field.empty != false){
 		 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
                  fieldSet.appendChild(subFormElement);   
 	      }
