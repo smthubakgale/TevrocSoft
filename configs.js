@@ -8,7 +8,8 @@ const usecase = [
 	type : "select" ,
 	name : "table" , 
 	description : "" ,
-	route : "spec_entities_entity"
+	route : "spec_entities_entity" , 
+	pre : "Table"
     } ,
     {
 	 label : "Use" ,
