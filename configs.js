@@ -1428,12 +1428,23 @@ const create =
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
                                  
-				 var id = "checks_" + (subformSiblings.length);
+				 function getNextCheckboxId() {
+				    window.checkboxIds = window.checkboxIds || [];
+				    const nextId = window.checkboxIds.length + 1;
+				    window.checkboxIds.push(nextId);
+				    return `checkbox-${nextId}`;
+			         }
+				
+			         const checkboxId = getNextCheckboxId();
+				 var id = "checks_" + checkboxId ;
 				 subform.setAttribute(id  ,'true'); 
 				   
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
-				     linkSibling(sibling , k); 
+				     if(!sibling.hasAttribute(id + "_s")){
+					 sibling.setAttribute(id + '_' + s  ,'true'); 
+					 linkSibling(sibling , k);   
+				     }
 				     k++;
 				 });
   
