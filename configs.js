@@ -1468,8 +1468,7 @@ const create =
 				    let inputElement = document.createElement("input");
 				    inputElement.type = "checkbox";
 				    inputElement.name = `spec_users_inherits_inherit`;
-				    inputElement.value = tx;
-				    inputElement.required = field.required;
+				    inputElement.value = tx; 
 				    inputElement.style.marginRight = '5px';
 				    inputElement.style.width = '15px';  
 					
