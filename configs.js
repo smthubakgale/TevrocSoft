@@ -1396,6 +1396,7 @@ const create =
 		  ]
 		},
 		{
+		   group: "Development" ,
 		  "label": "Reference Project Documentation",
 		  "type": "checkbox",
 		  "name": "projects",
@@ -1404,26 +1405,70 @@ const create =
 		       { label: "Teuber Food Delivery" , value: "teuber.food.delivery" } ,
 		       { label: "Teuber Hotel Management" , value : "teuber.hotel.management" }
 		  ]
-		},
+		},   
 		{
-		  "label": "ANCs",
+		  group:"Use Cases" ,
+		  "label": "User Types",
 		  "type": "subform",
-		  "name": "ancs",
+		  "name": "users",
+		   multiple:true ,
+		   description: "a user's interaction with a system to achieve a goal" ,
 		  "fields": [
 			{
-			  "label": "ANC",
+			  "label": "User Type",
 			  "type": "text",
-			  "name": "anc",
+			  "name": "user",
+			  "required": true ,
+			   description: ""
+			},
+			{
+			  "label": "Inherits",
+			  "type": "checkbox",
+			  "name": "inherits",
+			  route: "spec_users_user" ,
 			  "required": true
-			}
+			},
+			{
+			  "label": "Testing Email Address",
+			  "type": "email",
+			  "name": "email",
+			   description : "authentication email address for testing" , 
+			  "required": true
+			},
+			{
+			  "label": "Testing Password",
+			  "type": "password",
+			  "name": "password",
+			   description : "authentication email address for testing" , 
+			  "required": true
+			},
+			{
+			  "label": "Other Testing Credentials",
+			  "type": "subform",
+			  "name": "other",
+			   multiple:true , 
+			   empty: true , 
+			   description : "" , 
+			   fields: [
+				{
+				  "label": "Email Address",
+				  "type": "email",
+				  "name": "email",
+				   description : "authentication email address for testing" , 
+				  "required": true
+				},
+				{
+				  "label": "Password",
+				  "type": "password",
+				  "name": "password",
+				   description : "authentication email address for testing" , 
+				  "required": true
+				}				   
+			   ]
+			},
 		  ]
 		},
-		{
-		  "label": "Type",
-		  "type": "text",
-		  "name": "type",
-		  "required": true
-		},
+		
 		{
 		  "label": "Files",
 		  "type": "subform",
