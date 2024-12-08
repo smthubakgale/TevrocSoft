@@ -1436,7 +1436,7 @@ const create =
 				 });
   
 				 const observer = new MutationObserver(() => {
-				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && s.hasAttribute(id)) && s !== subform);
+				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && !s.hasAttribute(id) && s !== subform);
 				    newSubforms.forEach(newSubform => 
 				    {  
 				         newSubform.setAttribute(id  ,'true'); 
