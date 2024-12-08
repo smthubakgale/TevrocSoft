@@ -676,8 +676,12 @@ class FormGenerator {
 	      {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
 	      }
+			  
+	      if(field.setter){
+		 ts.createSetter(textElement , field.setter); 
+	      }
 
-	      inputElement.prepend(textElement);
+	      inputElement.prepend(textElement); 
 	      break;
             case "number":
               inputElement = document.createElement("input");
@@ -829,6 +833,10 @@ class FormGenerator {
 	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
+	      }
+			  
+	      if(field.setter){
+		 ts.createSetter(textElement , field.setter); 
 	      }
 
 	      inputElement.prepend(textElement);
@@ -1069,6 +1077,10 @@ class FormGenerator {
 	      if(field.autocomplete && Array.isArray(field.suggestions))
 	      {
 		 ts.createAutoComplete(inputElement , textElement , field.suggestions)
+	      }
+			  
+	      if(field.setter){
+		 ts.createSetter(textElement , field.setter); 
 	      }
 
 	      inputElement.prepend(textElement);
