@@ -1358,7 +1358,14 @@ class FormGenerator {
 	      formNumberInput.value = subforms.length;
 	      formNumberInput.min = 1;
 	      formNumberInput.max = subforms.length;
-	      subnav.setAttribute("index" , subforms.length - 1)
+	      subnav.setAttribute("index" , subforms.length - 1);
+
+	      if(subforms.length == 0){
+		 subnav.style.display = "none";
+	      }
+	      else{
+		 subnav.style.display = "flex";
+	      }
 	   }
 	  
 	 removeButton.addEventListener("click", (e) =>
