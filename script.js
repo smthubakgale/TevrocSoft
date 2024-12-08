@@ -1186,8 +1186,8 @@ class FormGenerator {
 		e.preventDefault();
 
 		fieldtags = fieldSet.children;
-                let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
-                subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
+                let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'))[0];
+                subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'))[0];
 	         
 	        let idx = subnav.getAttribute("index");
 	        idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
@@ -1214,8 +1214,8 @@ class FormGenerator {
 	    prevButton.onclick = (e) => {
 		e.preventDefault();
 	      fieldtags = fieldSet.children;
-              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
-              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
+              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'))[0];
+              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'))[0];
 		    
 	      let idx = subnav.getAttribute("index");
 	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
@@ -1244,8 +1244,8 @@ class FormGenerator {
 	    formNumberInput.onchange = () => {
 		    
 	      fieldtags = fieldSet.children;
-              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
-              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
+              let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'))[0];
+              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'))[0];
 		    
 	      let idx = subnav.getAttribute("index");
 	      idx = (idx && idx != "undefined") ? parseInt(idx) : currentSubformIndex; 
@@ -1267,7 +1267,7 @@ class FormGenerator {
 	    // Function to update the subform counter text
 	    function updateSubformCounterText() {
 	      fieldtags = fieldSet.children; 
-              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
+              subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'))[0];
 		    
 	      subformCounterText.textContent = `${currentSubformIndex + 1}/${subforms.length}`;
 	      formNumberInput.value = currentSubformIndex + 1;
@@ -1347,8 +1347,8 @@ class FormGenerator {
 
 	   function review(){
 	      let fieldtags = fieldSet.children; 
-	      let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'));
-              let subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'));
+	      let subnav = Array.from(fieldtags).filter(child => child.classList.contains('setnav'))[0];
+              let subforms = Array.from(fieldtags).filter(child => child.classList.contains('subform'))[0];
 		     
 	      let subformCounterText = subnav.querySelector('span');
 	      let formNumberInput = subnav.querySelector('input');
