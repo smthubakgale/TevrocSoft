@@ -2,6 +2,34 @@
 //----------------: Shop
 //: Specifications
 
+const UI = [
+    {
+	label : "Page URL" ,
+	type : "textarea" ,
+	name : "p" , 
+	description : "" 
+    },
+    {
+	label : "Authorized Users" ,
+	type : "checkbox" ,
+	name : "u" , 
+	description : "" ,
+	route : "spec_users_id" ,
+	routeref : "spec_users_user", 
+	observe:"subform" ,
+	pre : "User "
+    }, 
+    {
+	label : "Uses" ,
+	type : "subform" ,
+	name : "us" , 
+	description : "" ,
+	fields : [
+		
+	]
+    },
+];
+
 const usecase = [
     {
 	label : "Table" ,
@@ -33,7 +61,7 @@ const usecase = [
 	 route : "spec_users_id" ,
 	 routeref : "spec_users_user", 
 	 observe:"subform" ,
-	pre : "User "
+	 pre : "User "
     } 
 ];
 const schedule = [
@@ -1650,28 +1678,16 @@ const create =
 		  group: "Graphical User Interface" ,
 		  "label": "Files",
 		  "type": "subform",
+		   multiple:true , 
 		  "name": "files",
-		  "fields": [
-			{
-			  "label": "File",
-			  "type": "text",
-			  "name": "file",
-			  "required": true
-			}
-		  ]
+		  "fields": UI
 		},
 		{
 		  group: "Graphical User Interface" ,
 		  "label": "Tests",
 		  "type": "subform",
 		  "name": "temps",
-		  "fields": [
-			{
-			  "label": "Temp",
-			  "type": "text",
-			  "name": "temp",
-			  "required": true
-			}
+		  "fields": [ 
 		  ]
 		},
 		{
