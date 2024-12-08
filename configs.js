@@ -1433,12 +1433,12 @@ const create =
 				     linkSibling(sibling , k); 
 				     k++;
 				 });
-
-				 subform.classList.add('observed');
+ 
+				 subform.setAttribute("checks_2_" + (subformSiblings.length) , 'true');
 				 const observer = new MutationObserver(() => {
-				  const newSubform = subform.parentNode.querySelector('.subform:not(.observed)');
-				  if (newSubform) {
-				     newSubform.classList.add('observed');
+				  const newSubform = subform.parentNode.querySelector('.subform');
+				  if (newSubform.hasAttribute("checks_2_" + (subformSiblings.length)) 
+				  { 
 				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
 				     console.log("item " + subformSiblings.length + " appends child " + (subformSiblings2.length + 1));
