@@ -1430,10 +1430,9 @@ const create =
 			  "name": "user",
 			  "required": true ,
 			   description: "" ,
-			   setter: (subform , inputElement) => {
-				console.log("setter init");
+			   setter: (subform , inputElement) => { 
 				 // Sibling Elements 
-				 var inherits = subform.querySelector("[name='spec_users_inherits']"); 
+				 var parentElement = subform.querySelector("[name='spec_users_inherits']"); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
 				 console.log("current siblings " + subformSiblings.length);
@@ -1446,7 +1445,7 @@ const create =
 				  const newSubform = subform.parentNode.querySelector('.subform:not(.observed)');
 				  if (newSubform) {
 				     newSubform.classList.add('observed');
-				     linkSibling(sibling);
+				     linkSibling(newSubform);
 				  }
 				});
 				
@@ -1458,8 +1457,38 @@ const create =
 				function linkSibling(sibling)
 				{
 				    console.log("linking sibling");
-				    const specUsersUserTags = sibling.querySelectorAll('[name="spec_users_user"]');
-				  
+				    const tag = sibling.querySelectorAll('[name="spec_users_user"]');
+
+				    var tx = "Example";
+
+				    let inputElement = document.createElement("input");
+				    inputElement.type = "checkbox";
+				    inputElement.name = `spec_users_inherits_inherit`;
+				    inputElement.value = tx;
+				    inputElement.required = field.required;
+				    inputElement.style.marginRight = '5px';
+				    inputElement.style.width = '15px';  
+					
+				    const dv = document.createElement("div");
+				    dv.style.display = 'flex';
+				   const dv1 = document.createElement("div");
+				   dv1.append(inputElement);
+				   const dv2 = document.createElement("div"); 
+				   dv.style.flex = 1;
+			
+				   dv2.innerHTML = tx;
+				   dv2.style.paddingLeft = "10px";
+				   dv2.style.paddingTop = "7px";
+			
+				   dv.appendChild(dv1);
+				   dv.appendChild(dv2);
+			
+				   const lastChild = parentElement.children.length > 0 ? parentElement.children[parentElement.children.length - 1] : null;
+				   if(lastChild){
+				     lastChild.style.marginBottom = "-25px"; 
+				   }
+				 
+				   parentElement.appendChild(dv); 
 				}
 			    }
 			},
