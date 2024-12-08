@@ -20,9 +20,76 @@ const UI = [
 	pre : "User "
     }, 
     {
-	label : "Uses" ,
+	label : "Usecase Descriptions" ,
 	type : "subform" ,
 	name : "us" , 
+	description : "" ,
+	fields : [
+	    {
+		label : "Table Name" ,
+		type : "select" ,
+		name : "n" , 
+		description : "" ,
+		route : "spec_entities_id" , 
+		routeref : "spec_entities_entity" , 
+		observe:"subform" ,
+		pre : "Table
+	    },	
+	    {
+		label : "Column Name" ,
+		type : "select" ,
+		name : "c" , 
+		description : "" ,
+		route : "spec_fields_id" , 
+		routeref : "spec_fields_entity" , 
+		observe:"subform" ,
+		pre : "Column 
+	    },	
+	   {
+		 label : "Use Case" ,
+		 type : "select" ,
+		 name : "use" , 
+		 description : "" ,
+		 options:[
+		     { label: "Create" , value: "create" } , 
+		     { label: "Read" , value: "read" } , 
+		     { label: "Update" , value: "update" } , 
+		     { label: "Delete" , value: "delete" } , 
+		 ]
+	    } ,
+	    {
+		 label : "Trigger Element" ,
+		 type : "select" ,
+		 name : "em" , 
+		 description : "" ,
+		 options:[
+		     { label: "Button Event" , value: "button" } , 
+		     { label: "Window Event" , value: "window" } , 
+		     { label: "Websocket Event" , value: "socket" }  
+		 ]
+	     } ,
+	    {
+		 label : "Trigger Events" ,
+		 type : "select" ,
+		 name : "em" , 
+		 description : "" ,
+		 optgroups : [ 
+		    {
+		      "label": "Button Events",
+		      "options": [
+		        { "value": "HTML5", "label": "HTML 5" },
+		        { "value": "Flask", "label": "Flask" },
+		        { "value": "PHP", "label": "PHP" }, 
+		      ]
+		    },
+		 ]
+	     } ,
+	]
+    },
+    {
+	label : "Form Validations" ,
+	type : "subform" ,
+	name : "vs" , 
 	description : "" ,
 	fields : [
 		
@@ -1675,55 +1742,27 @@ const create =
 		  "fields": usecase
 		}, 
 		{
-		  group: "Graphical User Interface" ,
-		  "label": "Files",
-		  "type": "subform",
-		   multiple:true , 
-		  "name": "files",
-		  "fields": UI
-		},
-		{
-		  group: "Graphical User Interface" ,
-		  "label": "Tests",
-		  "type": "subform",
-		  "name": "temps",
-		  "fields": [ 
-		  ]
-		},
-		{
-		  group: "Graphical User Interface" ,
-		  "label": "Temps",
-		  "type": "subform",
-		  "name": "temps",
-		  "fields": [
-			{
-			  "label": "Temp",
-			  "type": "text",
-			  "name": "temp",
-			  "required": true
-			}
-		  ]
-		},
-		{
-		  group: "Graphical User Interface" ,
-		  "label": "Pages",
-		  "type": "subform",
-		  "name": "pages",
-		  "fields": [
-			{
-			  "label": "Temp",
-			  "type": "text",
-			  "name": "temp",
-			  "required": true
-			}
-		  ]
-		},
-		{
 		  group:"Database and APIs" ,
-		  "label": "Server",
+		  "label": "Table Columns",
 		  "type": "subform",
-		  "name": "server",
+		  "name": "fields",
 		  "fields": [ 
+		      {
+			label : "Table Name" ,
+			type : "select" ,
+			name : "n" , 
+			description : "" ,
+			route : "spec_entities_id" , 
+			routeref : "spec_entities_entity" , 
+			observe:"subform" ,
+			pre : "Table
+		     },	
+		     {
+			label : "Column Name" ,
+			type : "text" ,
+			name : "field" , 
+			description : "" , 
+		     },	
 		  ]
 		},
 		{
@@ -1766,6 +1805,58 @@ const create =
 			  "label": "Social Auth",
 			  "type": "text",
 			  "name": "social_auth",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  group:"Database and APIs" ,
+		  "label": "Server",
+		  "type": "subform",
+		  "name": "server",
+		  "fields": [ 
+		  ]
+		},
+		{
+		  group: "Graphical User Interface" ,
+		  "label": "Files",
+		  "type": "subform",
+		   multiple:true , 
+		  "name": "files",
+		  "fields": UI
+		},
+		{
+		  group: "Graphical User Interface" ,
+		  "label": "Tests",
+		  "type": "subform",
+		  "name": "temps",
+		  "fields": [ 
+		  ]
+		},
+		{
+		  group: "Graphical User Interface" ,
+		  "label": "Temps",
+		  "type": "subform",
+		  "name": "temps",
+		  "fields": [
+			{
+			  "label": "Temp",
+			  "type": "text",
+			  "name": "temp",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  group: "Graphical User Interface" ,
+		  "label": "Pages",
+		  "type": "subform",
+		  "name": "pages",
+		  "fields": [
+			{
+			  "label": "Temp",
+			  "type": "text",
+			  "name": "temp",
 			  "required": true
 			}
 		  ]
