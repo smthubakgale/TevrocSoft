@@ -10,6 +10,7 @@ const usecase = [
 	description : "" ,
 	route : "spec_entities_id" , 
 	routeref : "spec_entities_entity" , 
+	observe:"subform" ,
 	pre : "Table"
     } ,
     {
@@ -31,6 +32,7 @@ const usecase = [
 	 description : "" ,
 	 route : "spec_users_id" ,
 	 routeref : "spec_users_user", 
+	 observe:"subform" ,
 	pre : "User "
     } 
 ];
