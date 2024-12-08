@@ -1436,7 +1436,7 @@ const create =
 				 var inherits = subform.querySelector("[name='spec_users_inherits']"); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
-				 console.log("current siblings " + subformiblings.length);
+				 console.log("current siblings " + subformSiblings.length);
 			         subformSiblings.forEach(sibling => {
 				     linkSibling(sibling); 
 				 });
