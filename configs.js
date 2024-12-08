@@ -1446,7 +1446,16 @@ const create =
                                      const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
                                      subformSiblings.forEach(sibling => {
 				         if(!existInherit(sibling)){ 
-				 	    linkSibling(sibling , sibling.getAttribute("inheritor").replace("inherits-" , ""));   
+					    var n = sibling.getAttribute("inheritor");
+					    var k = 0;
+					    var c = setInterval(function()
+					    {
+						if(k == 50){ clearInterval(c); }
+						else if(n){
+						   clearInterval(c);
+				 	           linkSibling(sibling , n.replace("inherits-" , "")); 
+						}
+					    },100);  
 				         } 
 				     });
 				 }
