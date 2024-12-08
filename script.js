@@ -280,6 +280,11 @@ class FormGenerator {
      const radioId = getNextRadioId();
  
      if(field.options){
+	   if(field.options.length == 0){ 
+		let dv = document.createElement("div"); 
+		dv.name = `${parentName}_${field.name}_empty`;
+		parentElement.appendChild(dv);
+	   }
 	   field.options.forEach((option) => {
 		inputElement = document.createElement("input");
 		inputElement.type = "radio";
