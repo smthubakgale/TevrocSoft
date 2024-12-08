@@ -1439,10 +1439,11 @@ const create =
   
 				 const observer = new MutationObserver(() => {
 				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && !s.hasAttribute(id) && !s.hasAttribute(id +"_s") );
-				    newSubforms.forEach(newSubform => 
+				    console.log(id , newSubforms);
+				     newSubforms.forEach(newSubform => 
 				    {  
 				         newSubform.setAttribute(id + "_s" ,'true'); 
-				         console.log("item " + subformSiblings.length + " appends child " + (newSubforms.length + 1));
+				         console.log(id + " appends child " + (newSubforms.length + 1));
 				         linkSibling(newSubform , newSubforms.length + 1); 
 				    }); 
 				});
