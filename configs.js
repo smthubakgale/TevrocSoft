@@ -1427,7 +1427,7 @@ const create =
 				 // Sibling Elements  
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
-                                 var id = "checks_2_" + (subformSiblings.length);
+                                 var id = "checks_" + (subformSiblings.length);
 				   
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
@@ -1488,9 +1488,10 @@ const create =
 				   parentElement.appendChild(dv); 
  
 				   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; 
-					
-				   if(tag.value){
-					dv2.innerHTML = tag.value;
+
+				   console.log(tag.value);
+				   if(tag.value){ 
+					//dv2.innerHTML = tag.value;
 				   }
  
 				   tag.addEventListener('change', function() {
@@ -1500,7 +1501,7 @@ const create =
 					 else{
 					    dv2.innerHTML = tx; 
 					 }
-				   });
+				   }); 
 				}
 			    }
 			}, 
