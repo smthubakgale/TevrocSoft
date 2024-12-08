@@ -1440,6 +1440,7 @@ const create =
 		  group: "Use Cases" , 
 		  "label": "Entities",
 		  "type": "subform",
+		   multiple:true , 
 		  "name": "entities",
 		  description : "the tables that will be user in the databases" ,
 		  "fields": [
