@@ -1447,7 +1447,7 @@ const create =
 				     });
 				 }
 				 
-				 subform.setAttribute("inheritor" , id); 
+				 subform.setAttribute("inheritor" , getNextInheritsId()); 
 
                                  appendInherit();
 				 const observer = new MutationObserver(() => { appendInherit() }); 
