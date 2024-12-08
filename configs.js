@@ -1418,18 +1418,48 @@ const create =
 		   description: "a user's interaction with a system to achieve a goal" ,
 		  "fields": [
 			{
+			  "label": "Inherits",
+			  "type": "checkbox",
+			  "name": "inherits", 
+			  "required": true ,
+			   options: []
+			},
+			{
 			  "label": "User Type",
 			  "type": "text",
 			  "name": "user",
 			  "required": true ,
-			   description: ""
-			},
-			{
-			  "label": "Inherits",
-			  "type": "checkbox",
-			  "name": "inherits",
-			  route: "spec_users_user" ,
-			  "required": true
+			   description: "" ,
+			   setter: (subform , inputElement) => {
+				 // Sibling Elements 
+				 var inherits = subform.querySelector("[name='spec_users_inherits']"); 
+				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
+
+			         subformSiblings.forEach(sibling => {
+				     linkSibling(sibling); 
+				 });
+
+				 subform.classList.add('observed');
+				 const observer = new MutationObserver(() => {
+				  const newSubform = subform.parentNode.querySelector('.subform:not(.observed)');
+				  if (newSubform) {
+				     newSubform.classList.add('observed');
+				     linkSibling(sibling);
+				  }
+				});
+				
+				observer.observe(subform.parentNode, {
+				  childList: true,
+				  subtree: true
+				});
+
+				function linkSibling(sibling)
+				{
+				    console.log("linking sibling");
+				    const specUsersUserTags = sibling.querySelectorAll('[name="spec_users_user"]');
+				  
+				}
+			    }
 			},
 			{
 			  "label": "Testing Email Address",
