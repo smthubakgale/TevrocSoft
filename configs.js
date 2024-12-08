@@ -1450,11 +1450,12 @@ const create =
 					    var k = 0;
 					    var c = setInterval(function()
 					    {
-						if(k == 50){ clearInterval(c); }
+						if(k == 300){ clearInterval(c); }
 						else if(n){
 						   clearInterval(c);
 				 	           linkSibling(sibling , n.replace("inherits-" , "")); 
 						}
+						k++;
 					    },100);  
 				         } 
 				     });
