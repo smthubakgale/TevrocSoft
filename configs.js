@@ -1431,13 +1431,10 @@ const create =
 			  "required": true ,
 			   description: "" ,
 			   setter: (subform , inputElement) => { 
-				 // Sibling Elements 
-				 console.log(subform.innerHTML);
-				 console.log(subform.querySelector('[for="spec_users_inherits"]'));
+				 // Sibling Elements  
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
-
-				 console.log("current siblings " + subformSiblings.length); 
+ 
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
 				     linkSibling(sibling , k); 
@@ -1451,7 +1448,8 @@ const create =
 				     newSubform.classList.add('observed');
 				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
-				     linkSibling(newSubform , subformSiblings2.length);
+				     console.log("item " + subformSiblings.length + " appends child " + (subformSiblings2.length + 1));
+				     linkSibling(newSubform , subformSiblings2.length + 1);
 				  }
 				});
 				
