@@ -1432,7 +1432,9 @@ const create =
 			   description: "" ,
 			   setter: (subform , inputElement) => { 
 				 // Sibling Elements 
-				 var parentElement = subform.querySelector("[name='spec_users_inherits']").parentNode; 
+				 console.log(subform);
+				 console.log(subform.querySelector("[name='spec_users_inherits']"));
+				 var parentElement = subform.querySelector("[name='spec_users_inherits']"); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
 				 console.log("current siblings " + subformSiblings.length);
