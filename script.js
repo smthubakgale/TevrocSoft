@@ -711,7 +711,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-	      const subFormElement;
+	      let subFormElement;
               if(field.multiple)
 	      {  
                  // Create a new div
@@ -865,7 +865,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-	      const subFormElement;
+	      let subFormElement;
               if(field.multiple)
 	      {  
                  // Create a new div
@@ -1104,7 +1104,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
-	      const subFormElement;
+	      let subFormElement;
               if(field.multiple)
 	      {  
 		 // Create a new div
