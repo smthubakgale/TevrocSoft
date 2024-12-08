@@ -1506,8 +1506,10 @@ const create =
 					  }); 
 				     });
 				 }
-				 
-				 subform.setAttribute("inheritor" , getNextInheritsId()); 
+
+				  var id = getNextInheritsId();
+				 subform.setAttribute("inheritor" , id); 
+				 inputElement.value = id.replace("inherits-" , "User ");
 
                                  appendInherit();
 				 const observer = new MutationObserver(() => { appendInherit() }); 
