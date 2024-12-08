@@ -1442,6 +1442,8 @@ const create =
 				    console.log(id , newSubforms);
 				     newSubforms.forEach(newSubform => 
 				    {  
+					 console.log(new SUbform.outerHTML);
+					 const checksAttrs = Array.from(subform.attributes).filter(attr => attr.name.startsWith('checks_')).map(attr => attr.name);
 				         newSubform.setAttribute(id + "_s" ,'true'); 
 				         console.log(id + " appends child " + (newSubforms.length + 1));
 				         linkSibling(newSubform , newSubforms.length + 1); 
