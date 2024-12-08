@@ -1511,7 +1511,7 @@ class FormGenerator {
   }
 } 
 	//
-
+document.addEventListener('DOMContentLoaded', () => {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1520,17 +1520,20 @@ class FormGenerator {
 		console.log(formData);
 	  });
        //
+});
 
-const formGenerator = new FormGenerator(
-  document.getElementById("myForm2"),
-  document.getElementById("import-button2"),
-  document.getElementById("file-input2"),
-  formConfig2,
-  "spec" ,
-  (formData) => {
-    console.log(formData);
-  }
-);
+document.addEventListener('DOMContentLoaded', () => {
+	const formGenerator = new FormGenerator(
+	  document.getElementById("myForm2"),
+	  document.getElementById("import-button2"),
+	  document.getElementById("file-input2"),
+	  formConfig2,
+	  "spec" ,
+	  (formData) => {
+	    console.log(formData);
+	  }
+	);
+});
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
 	  const complexityMultiplier = complexityMultipliers[platform][complexity];
