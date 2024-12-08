@@ -1440,7 +1440,7 @@ const create =
 				  const newSubform = subform.parentNode.querySelector('.subform');
 				  if (!newSubform.hasAttribute(id) && !newSubform.hasAttribute(id + "_linked"))
 				  { 
-				     newSubform.setAttribute(id + "_linked");
+				     newSubform.setAttribute(id + "_linked" ,'true');
 				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
 				     console.log("item " + subformSiblings.length + " appends child " + (subformSiblings2.length + 1));
