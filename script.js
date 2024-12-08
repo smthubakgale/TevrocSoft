@@ -739,11 +739,8 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
-		   if(field.empty == true && subFormElement == null)
-		   {
-			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-		   }
-		   ts.addButtonEvent(fieldSet, subFormElement);
+		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name); 
+		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 			  
@@ -898,11 +895,8 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
-		   if(field.empty == true && subFormElement == null)
-		   {
-			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-		   }
-		   ts.addButtonEvent(fieldSet, subFormElement);
+		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
               if(field.empty != true){ 
@@ -1141,11 +1135,8 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
-		   if(field.empty == true && subFormElement == null)
-		   {
-			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-		   }
-		   ts.addButtonEvent(fieldSet, subFormElement);
+		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 		      
@@ -1178,7 +1169,7 @@ class FormGenerator {
   addButtonEvent(fieldSet, subFormElement) 
   {
 	  // Clone the original subform
-	  const newSubForm = subFormElement.cloneNode(true);
+	  const newSubForm = subFormElement;
 	  newSubForm.id = 'cloned-subform'; 
 	
 	  // Find all elements with class "subform" in fieldSet
