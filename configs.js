@@ -1432,13 +1432,12 @@ const create =
 			   description: "" ,
 			   setter: (subform , inputElement) => { 
 				 // Sibling Elements 
-				 console.log(subform);
+				 console.log(subform.innerHTML);
 				 console.log(subform.querySelector("[name='spec_users_inherits']"));
 				 var parentElement = subform.querySelector("[name='spec_users_inherits']"); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
-				 console.log("current siblings " + subformSiblings.length);
-				 consoel.log(parentElement);
+				 console.log("current siblings " + subformSiblings.length); 
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
 				     linkSibling(sibling , k); 
