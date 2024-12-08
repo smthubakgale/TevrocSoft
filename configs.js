@@ -25,7 +25,7 @@ const usecase = [
     } , 
     {
 	 label : "User" ,
-	 type : "checkbox" ,
+	 type : "select" ,
 	 name : "user" , 
 	 description : "" ,
 	 route : "spec_users_user"
