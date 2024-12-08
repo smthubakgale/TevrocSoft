@@ -1367,11 +1367,11 @@ class FormGenerator {
            const subforms3 = fieldSet.querySelectorAll('.subform');  
 	   let sLength = subforms3.length;
 
-	   if(sIndex == sLength){
-		subforms3[sIndex - 2] .style.display = "block";  
+	   if(sIndex == sLength && subforms3[sIndex - 2]){
+		subforms3[sIndex - 2].style.display = "block";  
 	   }
-	   if(sIndex < sLength){
-		 subforms3[sIndex] .style.display = "block";    
+	   if(sIndex < sLength && subforms3[sIndex]){
+		 subforms3[sIndex].style.display = "block";    
 	   }
 	    newSubForm.remove();
 	    review();
