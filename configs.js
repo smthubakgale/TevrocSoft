@@ -1427,17 +1427,18 @@ const create =
 				 // Sibling Elements  
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
- 
+                                 var id = "checks_2_" + (subformSiblings.length);
+				   
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
 				     linkSibling(sibling , k); 
 				     k++;
 				 });
  
-				 subform.setAttribute("checks_2_" + (subformSiblings.length) , 'true');
+				 subform.setAttribute(id , 'true');
 				 const observer = new MutationObserver(() => {
 				  const newSubform = subform.parentNode.querySelector('.subform');
-				  if (newSubform.hasAttribute("checks_2_" + (subformSiblings.length)) 
+				  if (newSubform.hasAttribute(id) 
 				  { 
 				     const subformSiblings2 = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 
