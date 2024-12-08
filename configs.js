@@ -1456,7 +1456,6 @@ const create =
 				function linkSibling(sibling , index)
 				{
 				    console.log("linking sibling");
-				    const tag = sibling.querySelectorAll('[name="spec_users_user"]');
 
 				    var tx = "User " + index;
 
@@ -1488,10 +1487,13 @@ const create =
 				 
 				   parentElement.appendChild(dv); 
 
-				   if(tag.value){
-					   dv2.innerHTML = tag.value;
-				   }
+				   console.log(tag);
 					
+				   const tag = sibling.querySelectorAll('[name="spec_users_user"]');
+				   if(tag.value){
+					dv2.innerHTML = tag.value;
+				   }
+ 
 				   tag.addEventListener('change', function() {
 				         if(tag.value){
 					    dv2.innerHTML = tag.value;
