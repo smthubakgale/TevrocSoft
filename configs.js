@@ -1435,9 +1435,13 @@ const create =
 				    return `inherits-${nextId}`;
 			         } 
 
-				 function existInherit(sibling) {
-				    return inherits.some(s => s.getAttribute("inheritor") === sibling.getAttribute("inheritor"));
-				 }
+				function existInherit(sibling) {
+				  const exists = inherits.some(s => s.getAttribute("inheritor") === sibling.getAttribute("inheritor"));
+				  if (!exists) {
+				    inherits.push(sibling);
+				  }
+				  return exists;
+				}
 				 function appendInherit(){
                                      const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
                                      subformSiblings.forEach(sibling => {
