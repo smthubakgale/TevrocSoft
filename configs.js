@@ -1427,7 +1427,9 @@ const create =
 				 // Sibling Elements  
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]'); 
 				 const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
-                                 var id = "checks_" + (subformSiblings.length);
+                                 
+				 var id = "checks_" + (subformSiblings.length);
+				 subform.setAttribute(id  ,'true'); 
 				   
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
@@ -1436,10 +1438,10 @@ const create =
 				 });
   
 				 const observer = new MutationObserver(() => {
-				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && !s.hasAttribute(id) && s !== subform);
+				    const newSubforms = Array.from(subform.parentNode.children).filter(s => s.classList.contains('subform') && !s.hasAttribute(id) && !s.hasAttribute(id +"_s") );
 				    newSubforms.forEach(newSubform => 
 				    {  
-				         newSubform.setAttribute(id  ,'true'); 
+				         newSubform.setAttribute(id + "_s" ,'true'); 
 				         console.log("item " + subformSiblings.length + " appends child " + (newSubforms.length + 1));
 				         linkSibling(newSubform , newSubforms.length + 1); 
 				    }); 
