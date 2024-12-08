@@ -29,7 +29,9 @@ const usecase = [
 	 type : "select" ,
 	 name : "user" , 
 	 description : "" ,
-	 route : "spec_users_user"
+	 route : "spec_users_id" ,
+	 routeref : "spec_users_user", 
+	pre : "User "
     } 
 ];
 const schedule = [
@@ -1471,6 +1473,14 @@ const create =
 		   multiple:true ,
 		   description: "a user's interaction with a system to achieve a goal" ,
 		  "fields": [
+			{
+				label : "User ID" ,
+				type : "number" ,
+				readonly : true ,
+				autoincrement:true , 
+				name : "id" , 
+				description : "it will auto generate thus readonly"
+			} ,
 			{
 			  "label": "User Type",
 			  "type": "text",
