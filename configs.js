@@ -1437,7 +1437,7 @@ const create =
 		  ]
 		},  
 		{
-		  group: "Use Cases"
+		  group: "Use Cases" , 
 		  "label": "Entities",
 		  "type": "subform",
 		  "name": "entities",
