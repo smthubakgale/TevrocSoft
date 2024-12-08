@@ -1647,6 +1647,7 @@ const create =
 		  "fields": usecase
 		}, 
 		{
+		  group: "Graphical User Interface" ,
 		  "label": "Files",
 		  "type": "subform",
 		  "name": "files",
@@ -1660,6 +1661,21 @@ const create =
 		  ]
 		},
 		{
+		  group: "Graphical User Interface" ,
+		  "label": "Tests",
+		  "type": "subform",
+		  "name": "temps",
+		  "fields": [
+			{
+			  "label": "Temp",
+			  "type": "text",
+			  "name": "temp",
+			  "required": true
+			}
+		  ]
+		},
+		{
+		  group: "Graphical User Interface" ,
 		  "label": "Temps",
 		  "type": "subform",
 		  "name": "temps",
@@ -1673,22 +1689,48 @@ const create =
 		  ]
 		},
 		{
-		  "label": "SQL",
+		  group: "Graphical User Interface" ,
+		  "label": "Pages",
 		  "type": "subform",
-		  "name": "sql",
+		  "name": "pages",
 		  "fields": [
 			{
-			  "label": "SQL",
+			  "label": "Temp",
 			  "type": "text",
-			  "name": "sql",
+			  "name": "temp",
 			  "required": true
 			}
 		  ]
 		},
 		{
+		  group:"Database and APIs" ,
+		  "label": "Server",
+		  "type": "subform",
+		  "name": "server",
+		  "fields": [ 
+		  ]
+		},
+		{
+		  group:"Database and APIs" ,
+		  "label": "Authentication",
+		  "type": "subform",
+		  "name": "sql",
+		  "fields": [ 
+		  ]
+		},
+		{
+		  group:"Database and APIs" ,
 		  "label": "UI API",
 		  "type": "subform",
 		  "name": "ui_api",
+		  "fields": [ 
+		  ]
+		},
+		{
+		  group:"Database and APIs" ,
+		  "label": "Cache",
+		  "type": "subform",
+		  "name": "cache",
 		  "fields": [
 			{
 			  "label": "UI API",
@@ -1699,9 +1741,10 @@ const create =
 		  ]
 		},
 		 {
-		  "label": "Social Auth",
+		  group:"Database and APIs" ,
+		  "label": "SQL",
 		  "type": "subform",
-		  "name": "social_auth",
+		  "name": "sql",
 		  "fields": [
 			{
 			  "label": "Social Auth",
