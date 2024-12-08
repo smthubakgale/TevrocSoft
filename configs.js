@@ -5,7 +5,7 @@
 const usecase = [
     {
 	label : "Table" ,
-	type : "select" ,
+	type : "radio" ,
 	name : "table" , 
 	description : "" ,
 	route : "spec_entities_id" , 
@@ -26,7 +26,7 @@ const usecase = [
     } , 
     {
 	 label : "User" ,
-	 type : "select" ,
+	 type : "checkbox" ,
 	 name : "user" , 
 	 description : "" ,
 	 route : "spec_users_id" ,
