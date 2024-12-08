@@ -1368,7 +1368,7 @@ const create =
 		  "type": "subform",
 		  "name": "ips",
 		   multiple:true ,
-		   descriptionL "the IPs used when testing the system prototype"
+		   description: "the IPs used when testing the system prototype"
 		  "fields": [
 			{
 			  "label": "Address",
