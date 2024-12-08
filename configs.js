@@ -1366,6 +1366,7 @@ const create =
 		   group: "Development" ,
 		  "label": "Internet Protocol Addresses",
 		  "type": "subform",
+	           button: "Addresss",
 		  "name": "ips",
 		   multiple:true ,
 		   description: "the IPs used when testing the system prototype" , 
@@ -1383,6 +1384,7 @@ const create =
 		   group: "Development" ,
 		  "label": "Browsers",
 		  "type": "subform",
+	           button: "Browser",
 		  "name": "browsers",
 		   description:"the Browsers used when testing the system prototype",
 		  "fields": [
@@ -1410,6 +1412,7 @@ const create =
 		  group:"Use Cases" ,
 		  "label": "User Types",
 		  "type": "subform",
+	           button: "User",
 		  "name": "users",
 		   multiple:true ,
 		   description: "a user's interaction with a system to achieve a goal" ,
@@ -1445,6 +1448,7 @@ const create =
 			{
 			  "label": "Other Testing Credentials",
 			  "type": "subform",
+	                   button: "Credential",
 			  "name": "other",
 			   multiple:true , 
 			   empty: true , 
@@ -1467,8 +1471,7 @@ const create =
 			   ]
 			},
 		  ]
-		},
-		
+		}, 
 		{
 		  "label": "Files",
 		  "type": "subform",
