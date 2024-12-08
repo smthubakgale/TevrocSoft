@@ -5,7 +5,7 @@
 const usecase = [
     {
 	label : "Table" ,
-	type : "radio" ,
+	type : "select" ,
 	name : "table" , 
 	description : "" ,
 	route : "spec_entities_id" , 
