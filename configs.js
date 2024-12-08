@@ -1418,13 +1418,6 @@ const create =
 		   description: "a user's interaction with a system to achieve a goal" ,
 		  "fields": [
 			{
-			  "label": "Inherits",
-			  "type": "checkbox",
-			  "name": "inherits", 
-			  "required": true ,
-			   options: []
-			},
-			{
 			  "label": "User Type",
 			  "type": "text",
 			  "name": "user",
@@ -1494,6 +1487,13 @@ const create =
 				   parentElement.appendChild(dv); 
 				}
 			    }
+			}, 
+			{
+			  "label": "Inherits",
+			  "type": "checkbox",
+			  "name": "inherits", 
+			  "required": true ,
+			   options: []
 			},
 			{
 			  "label": "Testing Email Address",
