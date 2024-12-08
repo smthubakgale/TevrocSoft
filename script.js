@@ -711,6 +711,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
+	      const subFormElement;
               if(field.multiple)
 	      {  
                  // Create a new div
@@ -733,12 +734,17 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
+		   if(field.empty == true && subFormElement == null)
+		   {
+			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+		   }
 		   ts.addButtonEvent(fieldSet, subFormElement);
 	         });
 	      }
-
-              const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-	      fieldSet.appendChild(subFormElement);
+              if(field.empty != true){
+                 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
+	         fieldSet.appendChild(subFormElement);
+	      }
   
               inputElement = document.createElement("div"); 
 	      inputElement.appendChild(fieldSet);
@@ -859,6 +865,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
+	      const subFormElement;
               if(field.multiple)
 	      {  
                  // Create a new div
@@ -881,12 +888,17 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
+		   if(field.empty == true && subFormElement == null)
+		   {
+			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+		   }
 		   ts.addButtonEvent(fieldSet, subFormElement);
 	         });
 	      }
-
-              const subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
-              fieldSet.appendChild(subFormElement);
+              if(field.empty != false){ 
+	         subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
+	         fieldSet.appendChild(subFormElement);
+	      }
   
               inputElement = document.createElement("div"); 
 	      inputElement.appendChild(fieldSet);
@@ -1092,6 +1104,7 @@ class FormGenerator {
               fieldSet.style.padding = "10px";
               fieldSet.style.marginBottom = "20px";
 
+	      const subFormElement;
               if(field.multiple)
 	      {  
 		 // Create a new div
@@ -1114,13 +1127,19 @@ class FormGenerator {
                  fieldSet.appendChild(viewNavDiv);
 		      
 	         addButton.addEventListener("click", () => {
+		   if(field.empty == true && subFormElement == null)
+		   {
+			subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+		   }
 		   ts.addButtonEvent(fieldSet, subFormElement);
 	         });
 	      }
-
-              const subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-              fieldSet.appendChild(subFormElement);
-  
+		      
+              if(field.empty != false){
+		 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
+                 fieldSet.appendChild(subFormElement);   
+	      }
+              
               inputElement = document.createElement("div"); 
 	      inputElement.appendChild(fieldSet);
               break;
