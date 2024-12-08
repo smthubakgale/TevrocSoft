@@ -142,6 +142,7 @@ class FormGenerator {
 		parentElement.appendChild(dv);
 		parentElement.name = `${parentName}_${field.name}_empty`;
 		console.log("done empty");
+		console.log(parentElement);
 	   }
 	   field.options.forEach((option) => {
 		let inputElement = document.createElement("input");
