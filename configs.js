@@ -1175,6 +1175,85 @@ const create =
 	        } , 
 	        {
 		   group:"Document" ,
+		   label: "Project Risk Management and Mitigation Methodology" ,
+		   name: "rmmm",
+		   type: "subform",  
+		   description: "process to identify, assess, and mitigate risks" ,
+		   fields: [
+		      {
+			label : "RMMM ID" ,
+			type : "number" ,
+			readonly : true ,
+			autoincrement:true , 
+			name : "id" , 
+			description : "it will auto generate thus readonly"
+		     },
+		      {
+			label : "Plan" ,
+			 type : "subform" ,
+			 name : "plan" , 
+			 description : "" ,
+			 fields :[
+			     {
+				label : "Risk Identification" ,
+				 type : "textarea" ,
+				 name : "desc" , 
+				 description : "what causes the risk to happen"
+			     }, 
+			     {
+				label : "Risk Resolution" ,
+				 type : "textarea" ,
+				 name : "desc" , 
+				 description : "action to minimize or prevent thr risk"
+			      },  
+			      {
+				label : "Start" ,
+				 type : "number" ,
+				 name : "us" , 
+				 description : "resolution implementation start day"
+			      },   
+			      {
+				label : "Finish" ,
+				 type : "number" ,
+				 name : "uf" , 
+				 description : "resolution implementation finish day"
+			      },  
+			      {
+				 label : "Price" ,
+				 type : "number" ,
+				 name : "price" , 
+				 min : 0 ,
+				 step: 0.01 ,
+				 description : "the cost of resolving the risk"
+			      }, 
+			      {
+				 label : "Rating" ,
+				 type : "select" ,
+				 name : "rate" , 
+				 options:[ 
+				   { label: "Day" , value:"day" }, 
+				   { label: "Week" , value:"week" }, 
+				   { label: "Month" , value:"Month" }, 
+				   { label: "Year" , value: "Year" }, 					 
+				 ] ,
+				 description : "the rate of the resolution cost"
+			      }, 
+			      {
+				 label : "Risk Status" ,
+				 type : "select" ,
+				 name : "status" , 
+				 options:[ 
+				   { label: "Unactive" , value:"unactive" }, 
+				   { label: "Active" , value:"active" },  					 
+				 ] ,
+				 description : "the status of the risk"
+			      }	 
+			 ]
+		      } ,
+		    ]
+		}, 
+	        {
+		   group:"Document" ,
 		   label: "Project Risk" ,
 		   name: "risk",
 		   type: "subform",  
@@ -1249,6 +1328,13 @@ const create =
 			 min: 1 ,
 			 max: 5 ,
 			 description : ""
+		     } ,  
+		      {
+			 label : "RMMM ID" ,
+			 type : "select" ,
+			 name : "rmmm_id" , 
+	                 route: "spec_rmmm_id" ,
+			 description : ""
 		     } , 
 		   ]
 		},
@@ -1269,10 +1355,12 @@ const create =
 		   description: "Upload your icon in .ico format"
 		},
 		{
-		  "label": "Password",
-		  "type": "password",
-		  "name": "password",
-		  "required": true
+		   group: "Development" ,
+		   label: "Password",
+		   type: "password",
+		   name: "password",
+		   required: true ,
+		   description: "the password used when testing the system prototype"
 		},
 		{
 		  "label": "IPs",
