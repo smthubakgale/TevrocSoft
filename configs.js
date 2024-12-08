@@ -1442,7 +1442,7 @@ const create =
 				 var k = 1;
 			         subformSiblings.forEach(sibling => {
 				     if(!sibling.hasAttribute(id + "_s")){
-					 sibling.setAttribute(id + '_' + s  ,'true'); 
+					 sibling.setAttribute(id + "_s"  ,'true'); 
 					 linkSibling(sibling , k);   
 				     }
 				     k++;
