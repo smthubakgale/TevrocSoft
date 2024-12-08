@@ -1363,28 +1363,35 @@ const create =
 		   description: "the password used when testing the system prototype"
 		},
 		{
-		  "label": "IPs",
+		   group: "Development" ,
+		  "label": "Internet Protocol Addresses",
 		  "type": "subform",
 		  "name": "ips",
+		   multiple:true ,
+		   descriptionL "the IPs used when testing the system prototype"
 		  "fields": [
 			{
-			  "label": "IP",
+			  "label": "Address",
 			  "type": "text",
 			  "name": "ip",
-			  "required": true
+			  "required": true ,
+			   description :"a unique numerical label for devices on a network , 192.168.1.1"
 			}
 		  ]
 		},
 		{
+		   group: "Development" ,
 		  "label": "Browsers",
 		  "type": "subform",
 		  "name": "browsers",
+		   description:"the Browsers used when testing the system prototype",
 		  "fields": [
 			{
 			  "label": "Browser",
 			  "type": "text",
 			  "name": "browser",
-			  "required": true
+			  "required": true ,
+			  description:""
 			}
 		  ]
 		},
