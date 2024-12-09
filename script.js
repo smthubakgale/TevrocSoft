@@ -1555,8 +1555,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	  const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
 	  const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 
-	 console.log(basePrice , complexityMultiplier , projectTypeMultiplier , projectDurationMultiplier);
-
 	  const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
 	  return adjustedPrice;
 	}
@@ -1771,17 +1769,16 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  
 	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
 	  document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
-	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2);
+	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2); 
 	// Price Adjustments 
-		const basePrice = totalAmount;
-		const complexity = document.getElementById('complexity').value.toLowerCase();
-		const projectType = selectedPlan.toLowerCase();
-		const platform = 'web';
-		const projectDurationDays = estimatedDays;
+	  const basePrice = totalAmount;
+	  const complexity = document.getElementById('complexity').value.toLowerCase();
+	  const projectType = selectedPlan.toLowerCase();
+	  const platform = 'web';
+	  const projectDurationDays = estimatedDays;
 
-	        console.log(basePrice, complexity, projectType, platform, projectDurationDays);
-		const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays);
-		console.log(`Adjusted price: R ${adjustedPrice.toFixed(2)}`);
+	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); 
+	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
 	  const phases = [];
 	  if (estimatedDays >= 40) {
