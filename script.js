@@ -745,7 +745,7 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name); 
-                   subFormElement2.attributes["name"] = `${parentName}_${field.name}`;
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
 		   console.log(subFormElement2.attributes["name"]);
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
@@ -753,7 +753,7 @@ class FormGenerator {
 			  
               if(field.empty != true){ 
                  subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-                 subFormElement.attributes["name"] = `${parentName}_${field.name}`;
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`); 
 		 console.log(subFormElement.attributes["name"]);
 	         fieldSet.appendChild(subFormElement);
 	      }
@@ -905,14 +905,14 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-                   subFormElement2.attributes["name"] = `${parentName}_${field.name}`;
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
 		   console.log(subFormElement2.attributes["name"]);
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
               if(field.empty != true){ 
 	         subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
-                 subFormElement.attributes["name"] = `${parentName}_${field.name}`;
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`);
 		 console.log(subFormElement.attributes["name"]);
 	         fieldSet.appendChild(subFormElement);
 	      }
@@ -1149,7 +1149,7 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-                   subFormElement2.attributes["name"] = `${parentName}_${field.name}`;
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
 		   console.log(subFormElement2.attributes["name"]);
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
@@ -1157,7 +1157,7 @@ class FormGenerator {
 		      
               if(field.empty != true){
 		 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-                 subFormElement.attributes["name"] = `${parentName}_${field.name}`;
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`);
 		 console.log(subFormElement.attributes["name"]);
                  fieldSet.appendChild(subFormElement);   
 	      }
