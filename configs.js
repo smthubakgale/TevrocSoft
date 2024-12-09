@@ -52,12 +52,34 @@ const UI = [
 	            subforms.forEach(function(subform2)
 		    { 
 			var descendant = subform2.querySelector('[name="spec_fields_n"]');
+			var id = subform2.querySelector('[name="spec_fields_n"]');
 		     
 			if(descendant.value == tname.value)
-			{
-			    console.log("found");
+			{ 
 			    var cname = subform2.querySelector('[name="spec_fields_field"]'); 
-			    console.log(cname.value);
+			    
+                            let optionElement = document.createElement("option");
+			    optionElement.value = id;
+				
+			    if(cname.value)
+			    {
+				optionElement.value = cname.value;   
+			    }
+			    else
+			    {
+				optionElement.value = "Column " + id;
+			    }
+
+			   cname.addEventListener('change', function() {
+				if(cname.value)
+				{
+				    optionElement.value = cname.value;   
+				}
+				else
+				{
+				    optionElement.value = "Column " + id;
+			        }
+			   });
 			 }
 		    })
 		}
@@ -1771,6 +1793,14 @@ const create =
 		  "type": "subform",
 		  "name": "fields",
 		  "fields": [ 
+		      {
+			 label : "Column ID" ,
+			 type : "number" ,
+			 readonly : true ,
+			 autoincrement:true , 
+			 name : "id" , 
+			 description : "it will auto generate thus readonly"
+		      } ,
 		      {
 			label : "Caption" ,
 			type : "select" ,
