@@ -239,10 +239,7 @@ class FormGenerator {
 			           var descendants = subform.querySelectorAll("*");
 			     
 			           descendants.forEach(function(descendant) {
-			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(checkboxId) ) { 
-					   if(field.route == "spec_users_user"){
-						   console.log("A");
-					   }
+			               if (descendant.getAttribute('name') === field.route && !descendant.hasAttribute(checkboxId) ) {  
 					   descendant.setAttribute(checkboxId, 'true'); 
 					   createCheckboxButton(descendant , subform);
 			               }
@@ -745,16 +742,14 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name); 
-                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
-		   console.log(subFormElement2.attributes["name"]);
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`); 
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 			  
               if(field.empty != true){ 
                  subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`); 
-		 console.log(subFormElement.attributes["name"]);
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`);  
 	         fieldSet.appendChild(subFormElement);
 	      }
   
@@ -905,15 +900,13 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
-		   console.log(subFormElement2.attributes["name"]);
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`); 
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
               if(field.empty != true){ 
 	         subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
-                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`);
-		 console.log(subFormElement.attributes["name"]);
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`); 
 	         fieldSet.appendChild(subFormElement);
 	      }
   
@@ -1149,16 +1142,14 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`);
-		   console.log(subFormElement2.attributes["name"]);
+                   subFormElement2.setAttribute("name" , `${parentName}_${field.name}`); 
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 		      
               if(field.empty != true){
 		 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`);
-		 console.log(subFormElement.attributes["name"]);
+                 subFormElement.setAttribute("name" , `${parentName}_${field.name}`); 
                  fieldSet.appendChild(subFormElement);   
 	      }
               
@@ -1774,6 +1765,7 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 		const platform = 'web';
 		const projectDurationDays = estimatedDays;
 
+	        console.log(basePrice, complexity, projectType, platform, projectDurationDays);
 		const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays);
 		console.log(`Adjusted price: R ${adjustedPrice.toFixed(2)}`);
 	// Determine project phases
