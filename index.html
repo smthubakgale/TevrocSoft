@@ -606,7 +606,7 @@
             	  <!-- Discount Request -->
             	  <div class="form-group">
             	    <div class="discounts">
-            			<input type="checkbox" id="discount-request-checkbox" name="discount-request-checkbox" checked="checked">
+            			<input onchange="updateQuoteResult()" type="checkbox" id="discount-request-checkbox" name="discount-request-checkbox" checked="checked">
             			<label for="discount-request-checkbox">Request Discount</label>
             			<input type="number" min="0" max="100" id="discount-request-amount" name="discount-request-amount" placeholder="Discount (%)">
             
