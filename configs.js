@@ -43,7 +43,7 @@ const UI = [
 		route : "spec_fields_id" , 
 		routeref : "spec_fields_entity" , 
 		observe:"subform" ,
-		pre : "Column 
+		pre : "Column"
 	    },	
 	   {
 		 label : "Use Case" ,
