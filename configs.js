@@ -40,10 +40,25 @@ const UI = [
 		type : "select" ,
 		name : "c" , 
 		description : "" ,
-		route : "spec_fields_id" , 
-		routeref : "spec_fields_entity" , 
-		observe:"subform" ,
-		pre : "Column"
+		options:[] ,
+		setter: (subform , inputElement) =>
+		{
+		    var tname = subform.querySelector('[name="spec_files_us_n"]');
+		    var subforms = document.querySelectorAll(".subform");  
+	            subforms.forEach(function(subform2)
+		    { 
+			var descendants = subform2.querySelectorAll('[name="spec_fields_n"]');
+		     
+			descendants.forEach(function(descendant) 
+			{
+			    if(descendant.value == tname.value){
+				  console.log("found");
+				  var cname = subform2.querySelector('[name="spec_fields_field"]'); 
+				  console.log(cname.value);
+			    }
+			});
+		    })
+		}
 	    },	
 	   {
 		 label : "Use Case" ,
