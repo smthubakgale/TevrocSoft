@@ -2391,17 +2391,17 @@ export const complexityMultipliers = {
 
 export const projectTypeMultipliers = {
   web: {
-	basic: 0.8,
+	standard: 0.8,
 	premium: 1.0,
 	enterprise: 1.2,
   },
   desktop: {
-	basic: 0.7,
+	standard: 0.7,
 	premium: 1.0,
 	enterprise: 1.3,
   },
   mobile: {
-	basic: 0.8,
+	standard: 0.8,
 	premium: 1.0,
 	enterprise: 1.2,
   },
