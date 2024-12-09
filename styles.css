@@ -1068,7 +1068,7 @@ th {
   flex:1;
 }
 #shop .timeline input{
-  padding:5px;
+  padding:7px;
   margin-top:3px;
 }
 
@@ -1085,6 +1085,8 @@ th {
 
 #shop #discounts input[type="checkbox"] {
   margin-right: 10px;
+  text-align:Center;
+  padding:7px;
 }
 /*: form generator */  
 #shop #form-container {
