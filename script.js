@@ -1555,6 +1555,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	  const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
 	  const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 
+	 console.log(basePrice , complexityMultiplier , projectTypeMultiplier , projectDurationMultiplier);
+
 	  const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
 	  return adjustedPrice;
 	}
