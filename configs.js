@@ -33,7 +33,7 @@ const UI = [
 		route : "spec_entities_id" , 
 		routeref : "spec_entities_entity" , 
 		observe:"subform" ,
-		pre : "Table
+		pre : "Table"
 	    },	
 	    {
 		label : "Column Name" ,
