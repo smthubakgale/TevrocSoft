@@ -745,12 +745,14 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name); 
+                   subFormElement2.name = `${parentName}_${field.name}`;
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 			  
               if(field.empty != true){ 
                  subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
+                 subFormElement.name = `${parentName}_${field.name}`;
 	         fieldSet.appendChild(subFormElement);
 	      }
   
@@ -901,11 +903,13 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+                   subFormElement2.name = `${parentName}_${field.name}`;
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
               if(field.empty != true){ 
 	         subFormElement = this.renderSubForm(fieldSet, field.fields , parentName + "_" + field.name);
+                 subFormElement.name = `${parentName}_${field.name}`;
 	         fieldSet.appendChild(subFormElement);
 	      }
   
@@ -1141,12 +1145,14 @@ class FormGenerator {
 		      
 	         addButton.addEventListener("click", () => {
 		   let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
+                   subFormElement2.name = `${parentName}_${field.name}`;
 		   ts.addButtonEvent(fieldSet, subFormElement2);
 	         });
 	      }
 		      
               if(field.empty != true){
 		 subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
+                 subFormElement.name = `${parentName}_${field.name}`;
                  fieldSet.appendChild(subFormElement);   
 	      }
               
