@@ -1061,12 +1061,8 @@ th {
   display: block;
 } 
 
-shop #discounts {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+#shop .discounts {
+  display: flex; 
 }
 
 #shop #discounts label {
