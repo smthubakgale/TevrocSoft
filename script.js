@@ -637,6 +637,10 @@ class FormGenerator {
 
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
+ 
+	      if(field.setter){
+		 ts.createSetter(inputElement , field.setter); 
+	      }
               break;
             case "datetime-local":
               inputElement = document.createElement("input");
@@ -794,6 +798,10 @@ class FormGenerator {
 
               this.createSelect(field , selectElement , false , inputElement);
 	      inputElement.prepend(selectElement);
+			  
+	      if(field.setter){
+		 ts.createSetter(inputElement , field.setter); 
+	      }
               break;
             case "datetime-local":
               inputElement = document.createElement("input");
@@ -1038,6 +1046,10 @@ class FormGenerator {
 
           this.createSelect(field , selectElement , false , inputElement);
           inputElement.prepend(selectElement);
+		      
+         if(field.setter){
+	    ts.createSetter(inputElement , field.setter); 
+         }
           break;
             case "datetime-local":
               inputElement = document.createElement("input");
