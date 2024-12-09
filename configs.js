@@ -1558,6 +1558,13 @@ const create =
 			  "type": "text",
 			  "name": "entity",
 			  "required": true
+			},
+			{
+			  "label": "Caption",
+			  "type": "text",
+			  "name": "cap",
+			  "required": true ,
+			  description:"single name for the table name"
 			}
 		  ]
 		}, 
@@ -1748,12 +1755,12 @@ const create =
 		  "name": "fields",
 		  "fields": [ 
 		      {
-			label : "Table Name" ,
+			label : "Caption" ,
 			type : "select" ,
 			name : "n" , 
 			description : "" ,
 			route : "spec_entities_id" , 
-			routeref : "spec_entities_entity" , 
+			routeref : "spec_entities_cap" , 
 			observe:"subform" ,
 			pre : "Table"
 		     },	
