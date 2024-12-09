@@ -1730,9 +1730,8 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 		launchPhase,
 	  };
    }
-   
   
-  function updateQuoteResult(){
+window.updateQuoteResult = function(){
      
 	// Time  
 	const startDate = new Date(document.getElementById('start-date').value);
