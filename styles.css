@@ -1061,6 +1061,17 @@ th {
   display: block;
 } 
 
+#shop .timeline{
+  display:flex;
+}
+#shop .timeline .gap{
+  flex:1;
+}
+#shop .timeline input{
+  padding:5px;
+  margin-top:3px;
+}
+
 #shop .discounts {
   display: flex; 
 }
