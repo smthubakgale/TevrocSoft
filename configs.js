@@ -44,7 +44,10 @@ const UI = [
 		setter: (subform , inputElement) =>
 		{
 		    var tname = subform.querySelector('[name="spec_files_us_n"]');
-		    var subforms = document.querySelectorAll(".subform");  
+		    var subforms = document.querySelectorAll(".subform"); 
+
+		    console.log(tname);
+		    console.log(subforms);
 	            subforms.forEach(function(subform2)
 		    { 
 			var descendants = subform2.querySelectorAll('[name="spec_fields_n"]');
