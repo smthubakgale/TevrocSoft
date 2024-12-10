@@ -5,7 +5,7 @@ import {
 
 
 //------------------------------------: Index 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
   const urlHash = window.location.hash.substring(1);
   const targetSection = document.querySelector(`#${urlHash}`);
   
@@ -14,7 +14,7 @@ window.onload = function() {
     targetSection.classList.add('active');
     sideNav.classList.remove('mob-nav');
   }
-};
+});
 //------------------------------------: Shop 
  // Initialize EmailJS 
  // load project types dynamically from the JSON array
@@ -1541,7 +1541,7 @@ class FormGenerator {
   }
 } 
 	//
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1550,9 +1550,9 @@ window.onload = function() {
 		console.log(formData);
 	  });
        //
-}
+});
 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
 	const formGenerator = new FormGenerator(
 	  document.getElementById("myForm2"),
 	  document.getElementById("import-button2"),
@@ -1563,7 +1563,7 @@ window.onload = function() {
 	    console.log(formData);
 	  }
 	);
-}
+});
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
    const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1865,6 +1865,7 @@ window.updateQuoteResult = function(){
 	      <p>Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}</p>
 	      <ul style="list-style-type: disc;">
 	  `;
+		
 	  phase.activities.forEach((activity) => {
 	    projectPhasesList.innerHTML += `
 	        <li style="display: block; height: unset; border-bottom: none;">${activity}</li>
@@ -1909,7 +1910,7 @@ function formatDate(date, format) {
   }
 }
 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
   discountAmountInput.value = 30;
   updateQuoteResult();
   
@@ -1919,7 +1920,7 @@ window.onload = function() {
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
   
-}
+})
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
