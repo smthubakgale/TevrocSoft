@@ -50,6 +50,8 @@ const UI = [
 		    { 
 			var descendant = subform2.querySelector('[name="spec_fields_n"]');
 			var id = subform2.querySelector('[name="spec_fields_n"]').value;
+
+			console.log(subform2.querySelector('[name="spec_fields_n"]').outerHTML);
 		     
 			if(descendant.value == tname.value)
 			{ 
