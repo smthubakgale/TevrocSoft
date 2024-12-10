@@ -1838,24 +1838,24 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	 const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
 	projectPhasesList.innerHTML = '';
 	projectPhasesList.innerHTML += `
-	  <ul>
+	  <ul style="list-style-type: circle;">
 	`;
 	
 	phases.forEach((phase) => {
 	  projectPhasesList.innerHTML += `
-	    <li>
+	    <li style="display: block; height: unset; border-bottom: none;">
 	      <h4>${phase.name}</h4>
 	      <p>Requested Duration: Days ${phase.req_start} - ${phase.req_end}</p>
 	      <p>Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}</p>
-	      <ul>
+	      <ul style="list-style-type: disc;">
 	  `;
 	  phase.activities.forEach((activity) => {
 	    projectPhasesList.innerHTML += `
-	        <li>${activity}</li>
+	        <li style="display: block; height: unset; border-bottom: none;">${activity}</li>
 	  `;
 	  });
 	  projectPhasesList.innerHTML += `
