@@ -1571,14 +1571,14 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
 	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 			
-	const estimatedDuration =  projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier;
+	const estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
 	
 	const ret = 
 	{
 	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
 	   start: start ,
-	   end : estimatedDuration ,
-	   estimatedDuration: estimatedDuration === 'Ongoing' ? 'Ongoing' : `${estimatedDuration} days`
+	   end : isNaN(estimatedDuration) ? "Ongoing" : estimatedDuration ,
+	   estimatedDuration: isNaN(estimatedDuration) ? "Ongoing" : `${estimatedDuration} days`
 	};
 
 	start = estimatedDuration;
