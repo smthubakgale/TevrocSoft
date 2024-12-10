@@ -135,6 +135,8 @@ const UI = [
 		     function init()
 		     {
 			inputElement.innerHTML = "";
+			console.log(v.value);
+			console.log(v.outerHTML);
 		        opts[v.value].forEach((option)=>{
 			    var optionElement = document.createElement("option");
 			    optionElement.value = option.value;
