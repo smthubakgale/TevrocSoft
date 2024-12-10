@@ -1,6 +1,6 @@
 import { 
   formConfig , formConfig2 , projectTypes , templates , complexityMultipliers , 
-  projectTypeMultipliers ,projectPhaseMultipliers , projectDurationMultipliers 
+  projectTypeMultipliers , projectPhases ,projectPhaseMultipliers , projectDurationMultipliers 
   } from './configs.js';
 
 //------------------------------------: Shop 
