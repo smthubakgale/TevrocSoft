@@ -51,11 +51,6 @@ const UI = [
 			var descendant = subform2.querySelector('[name="spec_fields_id"]');
 			var id = subform2.querySelector('[name="spec_fields_id"]').value;
 
-			console.log(subform2.querySelector('[name="spec_fields_id"]').outerHTML);
-			console.log(tname.outerHTML);
-			console.log(document.querySelector('[name="spec_entities_id"]').outerHTML);
-			console.log(descendant.value , tname.value);
-		     
 			if(descendant.value == tname.value)
 			{ 
 			    var cname = subform2.querySelector('[name="spec_fields_field"]'); 
@@ -115,6 +110,11 @@ const UI = [
 		 type : "select" ,
 		 name : "em" , 
 		 description : "" ,
+		 options: [],
+		 setter: (subform , inputElement) => 
+		 {
+			 
+		 },
 		 optgroups : [ 
 		    {
 		      "label": "Button Events",
@@ -1686,9 +1686,7 @@ const create =
 				 observer.observe(subform.parentNode, { childList: true, subtree: true });
 
 				function linkSibling(sibling , index)
-				{
-				    console.log("linking sibling");
-
+				{ 
 				    var tx = "User " + index;
 
 				    let inputElement = document.createElement("input");
@@ -1721,7 +1719,6 @@ const create =
  
 				   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; 
 
-				   console.log(tag.value);
 				   if(tag.value){ 
 					//dv2.innerHTML = tag.value;
 				   }
