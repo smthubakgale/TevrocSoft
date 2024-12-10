@@ -1832,51 +1832,40 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	 const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
 	projectPhasesList.innerHTML = '';
 	projectPhasesList.innerHTML += `
-	  <table>
-	    <thead>
-	      <tr>
-	        <th>Phase</th>
-	        <th>Requested Duration</th>
-	        <th>Proposed Duration</th>
-	        <th>Activities</th>
-	      </tr>
-	    </thead>
-	    <tbody>
+	  <ul>
 	`;
 	
 	phases.forEach((phase) => {
 	  projectPhasesList.innerHTML += `
-	    <tr>
-	      <td rowspan="${phase.activities.length + 1}">${phase.name}</td>
-	      <td rowspan="${phase.activities.length + 1}">Days ${phase.req_start} - ${phase.req_end}</td>
-	      <td rowspan="${phase.activities.length + 1}">Days ${phase.prop_start} - ${phase.prop_end}</td>
+	    <li>
+	      <h4>${phase.name}</h4>
+	      <p>Requested Duration: Days ${phase.req_start} - ${phase.req_end}</p>
+	      <p>Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}</p>
+	      <ul>
 	  `;
-	  projectPhasesList.innerHTML += `
-	      <td>${phase.activities[0]}</td>
-	    </tr>
-	  `;
-	  phase.activities.slice(1).forEach((activity) => {
+	  phase.activities.forEach((activity) => {
 	    projectPhasesList.innerHTML += `
-	    <tr>
-	      <td>${activity}</td>
-	    </tr>
+	        <li>${activity}</li>
 	  `;
 	  });
+	  projectPhasesList.innerHTML += `
+	      </ul>
+	    </li>
+	  `;
 	});
 	
 	projectPhasesList.innerHTML += `
-	    </tbody>
-	  </table>
+	  </ul>
 	`;
 	// 
 	
   }
 
-  const startDateInput = document.getElementById('start-date');
+const startDateInput = document.getElementById('start-date');
 const endDateInput = document.getElementById('end-date');
 
 const today = new Date();
