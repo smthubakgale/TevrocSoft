@@ -1580,8 +1580,12 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
       proposedDuration = Math.max(proposedDuration, estimatedDuration);
     }
   });
- 
+	
   let start = 0;
+  let proj2 = projectDurationDays/7;
+
+  console.log( proj2 , proposedDuration )
+ 	
   const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
     const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1593,9 +1597,9 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
     );
 
    
-    const reqStart = Math.floor(start * (projectDurationDays/(proposedDuration * 7) ));
+    const reqStart = Math.floor(start * (proj2/proposedDuration) );
     const reqEnd = estimatedDuration
-      ? Math.floor((start + estimatedDuration) * (projectDurationDays/(proposedDuration * 7) ))
+      ? Math.floor((start + estimatedDuration) * (proj2/proposedDuration) )
       : "Ongoing";
 
     const ret = {
