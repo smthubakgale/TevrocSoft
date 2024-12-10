@@ -60,6 +60,7 @@ const UI = [
 			    
                             let optionElement = document.createElement("option");
 			    optionElement.value = id;
+			    inputElement.appendChild(optionElement);
 				
 			    if(cname.value)
 			    {
