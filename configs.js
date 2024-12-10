@@ -116,9 +116,12 @@ const UI = [
 		    {
 		      "label": "Button Events",
 		      "options": [
-		        { "value": "HTML5", "label": "HTML 5" },
-		        { "value": "Flask", "label": "Flask" },
-		        { "value": "PHP", "label": "PHP" }, 
+		        { "value": "click", "label": "click" },
+		        { "value": "Double Click", "label": "dblclick" },
+		        { "value": "Mouse Down", "label": "mousedown" }, 
+		        { "value": "Mouse Up", "label": "mouseup" }, 
+		        { "value": "Mouse Over", "label": "mouseover" }, 
+		        { "value": "Mouse Out", "label": "mouseout" }, 
 		      ]
 		    },
 		 ]
