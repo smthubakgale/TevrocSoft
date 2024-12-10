@@ -2412,7 +2412,56 @@ export const projectTypeMultipliers = {
 	enterprise: 1.2,
   },
 };
-
+export const projectPhases = {
+    initiation: [
+	"Define project scope, goals, and deliverables",
+        "Identify stakeholders and their roles",
+        "Develop a preliminary project schedule and budget",
+        "Conduct a feasibility study and risk assessment",
+        "Create a project charter and obtain approval"
+    ],
+    planning: [
+	"Develop a detailed project schedule and budget",
+        "Identify and assess project risks",
+        "Develop a risk management plan",
+        "Create a project management plan",
+        "Define project milestones and deliverables",
+        "Establish a communication plan",
+        "Identify and allocate resources"
+    ],
+    design: [
+	"Develop a detailed design for the project",
+        "Create prototypes or mockups",
+        "Conduct design reviews and iterate on the design",
+        "Develop a technical specification document",
+        "Create a test plan and quality assurance plan"
+    ],
+    implementation: [
+	"Develop the project deliverables",
+        "Conduct unit testing and integration testing",
+        "Identify and fix defects",
+        "Conduct a code review and ensure adherence to coding standards",
+        "Develop a deployment plan"
+    ],
+    testing: [
+	"Conduct system testing and acceptance testing",
+        "Identify and fix defects",
+        "Conduct a quality assurance review and ensure adherence to quality standards",
+        "Develop a test report and quality assurance report"
+    ],
+    deployment: [
+	"Deploy the project deliverables to production",
+        "Conduct post-deployment testing",
+        "Identify and fix defects",
+        "Develop a deployment report"
+    ],
+    maintenance: [
+	"Monitor and maintain the project deliverables",
+        "Identify and fix defects",
+        "Conduct a maintenance review and ensure adherence to maintenance standards",
+        "Develop a maintenance report"
+    ]	
+}
 export const projectPhaseMultipliers = {
   standard: {
     initiation: 5,
