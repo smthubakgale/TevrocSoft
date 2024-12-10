@@ -1811,29 +1811,46 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	  const phases = estimatePhases(complexity, projectType, platform, projectDurationDays); // estimatePhases
 
-	  projectPhasesList.innerHTML = '';
-	  phases.forEach((phase) => {
-		let phaseHTML = `
-		  <li>
-                      <h2> ${phase.name} (Days ${phase.start} - ${phase.end}) </h2>
-	              <ul>
-  `;
-		phase.activities.forEach((activity)=>
-		{
-			phaseHTML += `
-		            <li> ${activity} </li>
-		`;
-		});
-		  
-		phaseHTML += `
-                      </ul>
-                  </li>
-  `;
-		  
-		projectPhasesList.innerHTML += phaseHTML;
+	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	
+	projectPhasesList.innerHTML = '';
+	projectPhasesList.innerHTML += `
+	  <table>
+	    <thead>
+	      <tr>
+	        <th>Phase</th>
+	        <th>Duration</th>
+	        <th>Activities</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	`;
+	
+	phases.forEach((phase) => {
+	  projectPhasesList.innerHTML += `
+	    <tr>
+	      <td>${phase.name}</td>
+	      <td>Days ${phase.start} - ${phase.end}</td>
+	      <td>
+	        <ul>
+	  `;
+	  phase.activities.forEach((activity) => {
+	    projectPhasesList.innerHTML += `
+	          <li>${activity}</li>
+	    `;
 	  });
+	  projectPhasesList.innerHTML += `
+	        </ul>
+	      </td>
+	    </tr>
+	  `;
+	});
+	
+	projectPhasesList.innerHTML += `
+	    </tbody>
+	  </table>
+	`;
 	// 
 	
   }
