@@ -126,9 +126,8 @@ const UI = [
 			 socket:[  ]
 		     };
 
-		     var selectElement = document.createElement("select");
-		     selectElement.name = "spec_files_us_em";
-		     inputElement.appendChild(selectElement);
+		     var selectElement = subform.querySelector('[name="spec_files_us_tr"]');
+		     selectElement.name = "spec_files_us_em"; 
 		     var v = subform.querySelector('[name="spec_files_us_em"]');
                     
 		     init();
@@ -140,7 +139,7 @@ const UI = [
 		        opts[v.value].forEach((option)=>{
 			    var optionElement = document.createElement("option");
 			    optionElement.value = option.value;
-			    option.innerHTML = option.label;  
+			    optionElement.innerHTML = option.label;  
 
 			    selectElement.appendChild(optionElement);
 		        });
