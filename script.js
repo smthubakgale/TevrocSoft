@@ -1815,7 +1815,7 @@ window.updateQuoteResult = function(){
 
 	  projectPhasesList.innerHTML = '';
 	  phases.forEach((phase) => {
-		const phaseHTML = `
+		let phaseHTML = `
 		  <li>
                       <h2> ${phase.name} (Days ${phase.start} - ${phase.end}) </h2>
 	              <ul>
