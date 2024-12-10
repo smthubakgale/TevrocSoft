@@ -57,7 +57,7 @@ const UI = [
 			    
                             let optionElement = document.createElement("option");
 			    optionElement.value = id;
-			    subform.querySelector('[name="spec_files_us_c"]')appendChild(optionElement);
+			    subform.querySelector('[name="spec_files_us_c"]').appendChild(optionElement);
 				
 			    if(cname.value)
 			    {
