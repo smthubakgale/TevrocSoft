@@ -115,15 +115,26 @@ const UI = [
 		 {
 		     var opts = {
 			 button:[ 
-				 { "value": "click", "label": "click" },
-			         { "value": "Double Click", "label": "dblclick" },
-			         { "value": "Mouse Down", "label": "mousedown" }, 
-			         { "value": "Mouse Up", "label": "mouseup" }, 
-			         { "value": "Mouse Over", "label": "mouseover" }, 
-			         { "value": "Mouse Out", "label": "mouseout" },
+				 { "label": "Click", "value": "click" },
+			         { "label": "Double Click", "value": "dblclick" },
+			         { "label": "Mouse Down", "value": "mousedown" }, 
+			         { "label": "Mouse Up", "value": "mouseup" }, 
+			         { "label": "Mouse Over", "value": "mouseover" }, 
+			         { "label": "Mouse Out", "value": "mouseout" },
 			 ],
-			 window:[ ] ,
-			 socket:[  ]
+			 window:[
+				 { "value": "onload", "label": "On Load" },
+				 { "value": "onunload", "label": "On Unload" },
+				 { "value": "onbeforeunload", "label": "On Before Unload" }, 
+			 ] ,
+			 socket:[ 
+				 { "value": "connect", "label": "Connect" },
+				 { "value": "disconnect", "label": "Disconnect" },
+				 { "value": "error", "label": "Error" },
+				 { "value": "timeout", "label": "Timeout" },
+				 { "value": "message", "label": "Message" },
+				 { "value": "data", "label": "Data" },
+			 ]
 		     };
 
 		     var selectElement = subform.querySelector('[name="spec_files_us_tr"]');
