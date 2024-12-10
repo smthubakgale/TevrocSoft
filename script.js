@@ -1565,7 +1565,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function estimatePhases(complexity, projectType, platform, projectDurationDays) {
 
  let proposedDuration = 1;
-
+ let start = 0;
   Object.keys(projectPhaseMultipliers[projectType]).forEach((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
     const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1576,15 +1576,17 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
       projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier
     );
 
+    start += estimatedDuration || 0;
+	  
     if (estimatedDuration) {
-      proposedDuration = Math.max(proposedDuration, estimatedDuration);
+      proposedDuration = Math.max(proposedDuration, start);
     }
   });
 	
-  let start = 0;
-  let proj2 = projectDurationDays/7;
+  start = 0;
+  let proj2 = Math.floor(projectDurationDays/7);
 
-  console.log( proj2 , proposedDuration )
+  console.log( proj2 , proposedDuration );
  	
   const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
