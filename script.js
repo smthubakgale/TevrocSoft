@@ -1579,7 +1579,8 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
 	   start: start ,
 	   end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
-	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" 
+	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" ,
+	   activities: projectPhases[phase]
 	};
 
 	start += (estimatedDuration ? estimatedDuration : 0);
@@ -1816,9 +1817,20 @@ window.updateQuoteResult = function(){
 	  phases.forEach((phase) => {
 		const phaseHTML = `
 		  <li>
-			${phase.name} (Days ${phase.start} - ${phase.end})
-		  </li>
+                      <h2> ${phase.name} (Days ${phase.start} - ${phase.end}) </h2>
+	              <ul>
+  `;
+		phase.activities.forEach((activity)=>
+		{
+			phaseHTML += `
+		            <li> ${activity} </li>
 		`;
+		});
+		  
+		phaseHTML += `
+                      </ul>
+                  </li>
+  `;
 		  
 		projectPhasesList.innerHTML += phaseHTML;
 	  });
