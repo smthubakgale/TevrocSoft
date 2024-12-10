@@ -53,7 +53,7 @@ const UI = [
 
 			console.log(subform2.querySelector('[name="spec_fields_id"]').outerHTML);
 			console.log(tname.outerHTML);
-			console.log(document.querySelectorAll('[name="spec_entities_id"]').outerHTML);
+			console.log(document.querySelector('[name="spec_entities_id"]').outerHTML);
 			console.log(descendant.value , tname.value);
 		     
 			if(descendant.value == tname.value)
