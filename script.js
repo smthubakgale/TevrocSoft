@@ -1582,7 +1582,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" 
 	};
 
-	start += estimatedDuration ? 0 : estimatedDuration;
+	start += (estimatedDuration ? 0 : estimatedDuration);
 
 	return ret;
    });
