@@ -1854,12 +1854,12 @@ window.updateQuoteResult = function(){
 	
 	projectPhasesList.innerHTML = '';
 	projectPhasesList.innerHTML += `
-	  <ul style="list-style-type: circle;">
+	  <ul>
 	`;
 	
 	phases.forEach((phase) => {
 	  projectPhasesList.innerHTML += `
-	    <li style="display: block; height: unset; border-bottom: none;">
+	    <li>
 	      <h4>${phase.name}</h4>
 	      <p>Requested Duration: Days ${phase.req_start} - ${phase.req_end}</p>
 	      <p>Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}</p>
@@ -1868,7 +1868,7 @@ window.updateQuoteResult = function(){
 		
 	  phase.activities.forEach((activity) => {
 	    projectPhasesList.innerHTML += `
-	        <li style="display: block; height: unset; border-bottom: none;">${activity}</li>
+	        <li>${activity}</li>
 	  `;
 	  });
 	  projectPhasesList.innerHTML += `
