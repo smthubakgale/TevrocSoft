@@ -1563,7 +1563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 function estimatePhases(complexity, projectType, platform, projectDurationDays)
 {  
-    let start = "0";
+    let start = 0;
     const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
     { 
 	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
@@ -1571,17 +1571,18 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
 	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 			
-	const estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
-	
+	let estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
+	estimatedDuration = isNaN(estimatedDuration) ? null : parseInt(estimatedDuration);
+	    
 	const ret = 
 	{
 	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
 	   start: start ,
-	   end : isNaN(estimatedDuration) ? "Ongoing" : estimatedDuration ,
-	   estimatedDuration: isNaN(estimatedDuration) ? "Ongoing" : `${estimatedDuration} days`
+	   end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
+	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" 
 	};
 
-	start = estimatedDuration;
+	start += estimatedDuration ? 0 : estimatedDuration;
 
 	return ret;
    });
