@@ -1851,36 +1851,39 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	 const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
 	projectPhasesList.innerHTML = '';
-	projectPhasesList.innerHTML += `
-	  <ul>
-	`;
+	
+	const ul = document.createElement('ul');
+	projectPhasesList.appendChild(ul);
 	
 	phases.forEach((phase) => {
-	  projectPhasesList.innerHTML += `
-	    <li>
-	      <h4>${phase.name}</h4>
-	      <p>Requested Duration: Days ${phase.req_start} - ${phase.req_end}</p>
-	      <p>Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}</p>
-	      <ul style="list-style-type: disc;">
-	  `;
-		
-	  phase.activities.forEach((activity) => {
-	    projectPhasesList.innerHTML += `
-	        <li>${activity}</li>
-	  `;
-	  });
-	  projectPhasesList.innerHTML += `
-	      </ul>
-	    </li>
-	  `;
-	});
+	  const li = document.createElement('li');
+	  ul.appendChild(li);
 	
-	projectPhasesList.innerHTML += `
-	  </ul>
-	`;
+	  const h4 = document.createElement('h4');
+	  h4.textContent = phase.name;
+	  li.appendChild(h4);
+	
+	  const p1 = document.createElement('p');
+	  p1.textContent = `Requested Duration: Days ${phase.req_start} - ${phase.req_end}`;
+	  li.appendChild(p1);
+	
+	  const p2 = document.createElement('p');
+	  p2.textContent = `Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}`;
+	  li.appendChild(p2);
+	
+	  const activitiesUl = document.createElement('ul');
+	  activitiesUl.style.listStyleType = 'disc';
+	  li.appendChild(activitiesUl);
+	
+	  phase.activities.forEach((activity) => {
+	    const activityLi = document.createElement('li');
+	    activityLi.textContent = activity;
+	    activitiesUl.appendChild(activityLi);
+	  });
+	});
 	// 
 	
   }
