@@ -5,7 +5,7 @@ import {
 
 
 //------------------------------------: Index 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
   const urlHash = window.location.hash.substring(1);
   const targetSection = document.querySelector(`#${urlHash}`);
   
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     targetSection.classList.add('active');
     sideNav.classList.remove('mob-nav');
   }
-});
+}
 //------------------------------------: Shop 
  // Initialize EmailJS 
  // load project types dynamically from the JSON array
@@ -1541,7 +1541,7 @@ class FormGenerator {
   }
 } 
 	//
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1550,9 +1550,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log(formData);
 	  });
        //
-});
+}
 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
 	const formGenerator = new FormGenerator(
 	  document.getElementById("myForm2"),
 	  document.getElementById("import-button2"),
@@ -1563,7 +1563,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    console.log(formData);
 	  }
 	);
-});
+}
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
    const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1910,7 +1910,7 @@ function formatDate(date, format) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+window.onload = function() {
   discountAmountInput.value = 30;
   updateQuoteResult();
   
@@ -1920,7 +1920,7 @@ document.addEventListener("DOMContentLoaded", function() {
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
   
-})
+}
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
