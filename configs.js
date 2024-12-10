@@ -127,7 +127,7 @@ const UI = [
 		     };
 
 		     
-		     var v = subform.querySelector("spec_files_us_em");
+		     var v = subform.querySelector('[name="spec_files_us_em"]');
                     
 		     init();
 		     v.addEventListener("change" , ()=>{ init(); });
