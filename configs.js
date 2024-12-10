@@ -43,16 +43,13 @@ const UI = [
 		options:[] ,
 		setter: (subform , inputElement) =>
 		{
-		    var tname = subform.querySelector('[name="spec_files_us_n"]');
+		    var tname = subform.querySelector('[name="spec_files_us_n"]');  
 		    var subforms = document.querySelectorAll('[name="spec_fields"]'); 
-
-		    console.log(tname);
-		    console.log(subforms);
-			
+ 
 	            subforms.forEach(function(subform2)
 		    { 
 			var descendant = subform2.querySelector('[name="spec_fields_n"]');
-			var id = subform2.querySelector('[name="spec_fields_n"]');
+			var id = subform2.querySelector('[name="spec_fields_n"]').value;
 		     
 			if(descendant.value == tname.value)
 			{ 
@@ -60,7 +57,7 @@ const UI = [
 			    
                             let optionElement = document.createElement("option");
 			    optionElement.value = id;
-			    inputElement.appendChild(optionElement);
+			    subform.querySelector('[name="spec_files_us_c"]')appendChild(optionElement);
 				
 			    if(cname.value)
 			    {
