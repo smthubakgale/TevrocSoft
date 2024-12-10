@@ -1561,59 +1561,60 @@ document.addEventListener('DOMContentLoaded', () => {
    const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
    return adjustedPrice;
 }
-function estimatePhases(complexity, projectType, platform, projectDurationDays)
-{  
-    var proposedDuration = 1;
-    Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
-    { 
-	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
-	const complexityMultiplier = complexityMultipliers[platform][complexity];
-	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
-	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
-			
-	let estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
-	estimatedDuration = isNaN(estimatedDuration) ? null : parseInt(estimatedDuration);
 
-	if(estimatedDuration){
-		proposedDuration = (proposedDuration < estimatedDuration) ? estimatedDuration : proposedDuration;
-	}
-    });
+function estimatePhases(complexity, projectType, platform, projectDurationDays) {
+  let proposedDuration = 1;
 
-    console.log(proposedDuration , projectDurationDays);
-	
-    var start = 0;
-    const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
-    { 
-	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
-	const complexityMultiplier = complexityMultipliers[platform][complexity];
-	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
-	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
-			
-	let estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
-	estimatedDuration = isNaN(estimatedDuration) ? null : parseInt(estimatedDuration);
-	    
-	const ret = 
-	{
-	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
-		
-	   req_start: (start*proposedDuration/projectDurationDays).toFixed(0) ,
-	   req_end : estimatedDuration ? ((start + estimatedDuration)*proposedDuration/projectDurationDays).toFixed(0) : "Ongoing" ,
-		
-	   prop_start: start ,
-	   prop_end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
-		
-	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" ,
-	   activities: projectPhases[phase]
-	};
+  Object.keys(projectPhaseMultipliers[projectType]).forEach((phase) => {
+    const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
+    const complexityMultiplier = complexityMultipliers[platform][complexity];
+    const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+    const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 
-	start += (estimatedDuration ? estimatedDuration : 0);
+    const estimatedDuration = Math.floor(
+      projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier
+    );
 
-	return ret;
-   });
+    if (estimatedDuration) {
+      proposedDuration = Math.max(proposedDuration, estimatedDuration);
+    }
+  });
 
-   return estimatedPhase;
-}
- //
+  console.log(proposedDuration, projectDurationDays);
+
+  let start = 0;
+  const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
+    const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
+    const complexityMultiplier = complexityMultipliers[platform][complexity];
+    const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+    const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
+
+    const estimatedDuration = Math.floor(
+      projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier
+    );
+
+    const reqStart = Math.floor((start * proposedDuration) / projectDurationDays);
+    const reqEnd = estimatedDuration
+      ? Math.floor(((start + estimatedDuration) * proposedDuration) / projectDurationDays)
+      : "Ongoing";
+
+    const ret = {
+      name: phase.charAt(0).toUpperCase() + phase.slice(1),
+      req_start: reqStart,
+      req_end: reqEnd,
+      prop_start: start,
+      prop_end: estimatedDuration ? start + estimatedDuration : "Ongoing",
+      estimatedDuration: estimatedDuration ? `${estimatedDuration} days` : "Ongoing",
+      activities: projectPhases[phase],
+    };
+
+    start += estimatedDuration || 0;
+
+    return ret;
+  });
+
+  return estimatedPhases;
+} //
   projectTypes.forEach(projectType => {
     const projectTypeOption = document.createElement('option');
     projectTypeOption.value = projectType.id;
