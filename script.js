@@ -1841,6 +1841,8 @@ window.updateQuoteResult = function(){
 	// Determine project phases
 	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
+	projectPhasesList.innerHTML = "";
+	
 	const ul = document.createElement('ul');
 	ul.style.listStyleType = 'circle';
 	projectPhasesList.appendChild(ul);
