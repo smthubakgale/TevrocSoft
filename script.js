@@ -1563,6 +1563,22 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 function estimatePhases(complexity, projectType, platform, projectDurationDays)
 {  
+    var proposedDuration = 1;
+    const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
+    { 
+	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
+	const complexityMultiplier = complexityMultipliers[platform][complexity];
+	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
+			
+	let estimatedDuration =  (projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier).toFixed(0);
+	estimatedDuration = isNaN(estimatedDuration) ? null : parseInt(estimatedDuration);
+
+	if(estimatedDuration){
+		proposedDuration = (proposedDuration < estimatedDuration) ? estimatedDuration : proposedDuration;
+	}
+    };
+	
     var start = 0;
     const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
     { 
@@ -1577,8 +1593,13 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	const ret = 
 	{
 	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
-	   start: start ,
-	   end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
+		
+	   req_start: start*projectDurationDays/proposedDuration ,
+	   req_end : estimatedDuration ? (start + estimatedDuration)*projectDurationDays/proposedDuration : "Ongoing" ,
+		
+	   prop_start: start ,
+	   prop_end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
+		
 	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" ,
 	   activities: projectPhases[phase]
 	};
@@ -1811,8 +1832,7 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-
-	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	 const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
 	projectPhasesList.innerHTML = '';
 	projectPhasesList.innerHTML += `
@@ -1820,7 +1840,8 @@ window.updateQuoteResult = function(){
 	    <thead>
 	      <tr>
 	        <th>Phase</th>
-	        <th>Duration</th>
+	        <th>Requested Duration</th>
+	        <th>Proposed Duration</th>
 	        <th>Activities</th>
 	      </tr>
 	    </thead>
@@ -1830,21 +1851,21 @@ window.updateQuoteResult = function(){
 	phases.forEach((phase) => {
 	  projectPhasesList.innerHTML += `
 	    <tr>
-	      <td>${phase.name}</td>
-	      <td>Days ${phase.start} - ${phase.end}</td>
-	      <td>
-	        <ul>
+	      <td rowspan="${phase.activities.length + 1}">${phase.name}</td>
+	      <td rowspan="${phase.activities.length + 1}">Days ${phase.req_start} - ${phase.req_end}</td>
+	      <td rowspan="${phase.activities.length + 1}">Days ${phase.prop_start} - ${phase.prop_end}</td>
 	  `;
-	  phase.activities.forEach((activity) => {
-	    projectPhasesList.innerHTML += `
-	          <li>${activity}</li>
-	    `;
-	  });
 	  projectPhasesList.innerHTML += `
-	        </ul>
-	      </td>
+	      <td>${phase.activities[0]}</td>
 	    </tr>
 	  `;
+	  phase.activities.slice(1).forEach((activity) => {
+	    projectPhasesList.innerHTML += `
+	    <tr>
+	      <td>${activity}</td>
+	    </tr>
+	  `;
+	  });
 	});
 	
 	projectPhasesList.innerHTML += `
