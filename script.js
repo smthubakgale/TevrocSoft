@@ -1564,7 +1564,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function estimatePhases(complexity, projectType, platform, projectDurationDays)
 {  
     var proposedDuration = 1;
-    const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
+    Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
     { 
 	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
 	const complexityMultiplier = complexityMultipliers[platform][complexity];
