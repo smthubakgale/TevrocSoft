@@ -100,9 +100,9 @@ const UI = [
 		 name : "em" , 
 		 description : "" ,
 		 options:[
-		     { label: "Button Event" , value: "button" } , 
-		     { label: "Window Event" , value: "window" } , 
-		     { label: "Websocket Event" , value: "socket" }  
+		     { label: "Button Element" , value: "button" } , 
+		     { label: "Window Element" , value: "window" } , 
+		     { label: "Websocket Element" , value: "socket" }  
 		 ]
 	     } ,
 	    {
@@ -113,21 +113,37 @@ const UI = [
 		 options: [],
 		 setter: (subform , inputElement) => 
 		 {
+		     var opts = {
+			 button:[ 
+				 { "value": "click", "label": "click" },
+			         { "value": "Double Click", "label": "dblclick" },
+			         { "value": "Mouse Down", "label": "mousedown" }, 
+			         { "value": "Mouse Up", "label": "mouseup" }, 
+			         { "value": "Mouse Over", "label": "mouseover" }, 
+			         { "value": "Mouse Out", "label": "mouseout" },
+			 ],
+			 window:[ ] ,
+			 socket:[  ]
+		     };
+
+		     
+		     var v = subform.querySelector("spec_files_us_em");
+                    
+		     init();
+		     v.addEventListener("change" , ()=>{ init(); });
 			 
-		 },
-		 optgroups : [ 
-		    {
-		      "label": "Button Events",
-		      "options": [
-		        { "value": "click", "label": "click" },
-		        { "value": "Double Click", "label": "dblclick" },
-		        { "value": "Mouse Down", "label": "mousedown" }, 
-		        { "value": "Mouse Up", "label": "mouseup" }, 
-		        { "value": "Mouse Over", "label": "mouseover" }, 
-		        { "value": "Mouse Out", "label": "mouseout" }, 
-		      ]
-		    },
-		 ]
+		     function init()
+		     {
+			inputElement.innerHTML = "";
+		        opts[v.value].forEach((option)=>{
+			    var optionElement = document.createElement("option");
+			    optionElement.value = option.value;
+			    option.innerHTML = option.label;  
+
+			    inputElement.appendChild(optionElement);
+		        });
+		     }
+		 }
 	     } ,
 	]
     },
