@@ -1606,9 +1606,10 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
       projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier
     );
 
-    const reqStart = Math.floor((start * proposedDuration) /(7* projectDurationDays));
+   
+    const reqStart = Math.floor((start * proposedDuration * 7) /projectDurationDays);
     const reqEnd = estimatedDuration
-      ? Math.floor(((start + estimatedDuration) * proposedDuration) / (7*projectDurationDays))
+      ? Math.floor(((start + estimatedDuration) * proposedDuration * 7) / projectDurationDays)
       : "Ongoing";
 
     const ret = {
