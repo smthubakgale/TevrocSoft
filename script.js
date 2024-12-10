@@ -400,7 +400,10 @@ class FormGenerator {
 	if(field.observe == "subform")
 	{ 
 		function createSelectButton(node , subform) {
-		      
+			
+		       console.log(node.outerHTML);
+		       console.log(node.Value);
+			
 		       let optionElement = document.createElement("option"); 
 			optionElement.value = node.Value;
 			var tx = node.value;
@@ -700,6 +703,7 @@ class FormGenerator {
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step;  
               inputElement.value = 1; 
+              inputElement.setAttribute('value', 1); 
 			  
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
@@ -862,6 +866,7 @@ class FormGenerator {
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
               inputElement.value = 1; 
+              inputElement.setAttribute('value', 1); 
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
@@ -1110,6 +1115,7 @@ class FormGenerator {
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
               inputElement.value = 1; 
+              inputElement.setAttribute('value', 1); 
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
