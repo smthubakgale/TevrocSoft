@@ -61,21 +61,21 @@ const UI = [
 				
 			    if(cname.value)
 			    {
-				optionElement.value = cname.value;   
+				optionElement.innerHTML = cname.value;   
 			    }
 			    else
 			    {
-				optionElement.value = "Column " + id;
+				optionElement.innerHTML = "Column " + id;
 			    }
 
 			   cname.addEventListener('change', function() {
 				if(cname.value)
 				{
-				    optionElement.value = cname.value;   
+				    optionElement.innerHTML = cname.value;   
 				}
 				else
 				{
-				    optionElement.value = "Column " + id;
+				    optionElement.innerHTML = "Column " + id;
 			        }
 			   });
 			 }
