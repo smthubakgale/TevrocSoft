@@ -1563,7 +1563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 function estimatePhases(complexity, projectType, platform, projectDurationDays)
 {  
-    let start = 0;
+    var start = 0;
     const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
     { 
 	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
@@ -1582,7 +1582,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	   estimatedDuration: estimatedDuration ?`${estimatedDuration} days` : "Ongoing" 
 	};
 
-	start += (estimatedDuration ? 0 : estimatedDuration);
+	start += (estimatedDuration ? estimatedDuration : 0);
 
 	return ret;
    });
