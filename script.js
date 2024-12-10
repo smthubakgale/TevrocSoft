@@ -1578,6 +1578,8 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 		proposedDuration = (proposedDuration < estimatedDuration) ? estimatedDuration : proposedDuration;
 	}
     });
+
+    console.log(proposedDuration , projectDurationDays);
 	
     var start = 0;
     const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
@@ -1594,8 +1596,8 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	{
 	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
 		
-	   req_start: start*projectDurationDays/proposedDuration ,
-	   req_end : estimatedDuration ? (start + estimatedDuration)*projectDurationDays/proposedDuration : "Ongoing" ,
+	   req_start: (start*proposedDuration/projectDurationDays).toFixed(0) ,
+	   req_end : estimatedDuration ? ((start + estimatedDuration)*proposedDuration/projectDurationDays).toFixed(0) : "Ongoing" ,
 		
 	   prop_start: start ,
 	   prop_end : estimatedDuration ? start + estimatedDuration : "Ongoing" ,
