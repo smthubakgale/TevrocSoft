@@ -26,6 +26,14 @@ const UI = [
 	description : "" ,
 	fields : [
 	    {
+		label : "Description ID" ,
+		type : "number" ,
+		readonly : true ,
+		autoincrement:true , 
+		name : "id" , 
+		description : "it will auto generate thus readonly"
+	    },
+	    {
 		label : "Table Name" ,
 		type : "select" ,
 		name : "n" , 
