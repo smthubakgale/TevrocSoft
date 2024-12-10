@@ -1,6 +1,6 @@
 import { 
   formConfig , formConfig2 , projectTypes , templates , complexityMultipliers , 
-  projectTypeMultipliers , projectDurationMultipliers 
+  projectTypeMultipliers ,projectPhaseMultipliers , projectDurationMultipliers 
   } from './configs.js';
 
 //------------------------------------: Shop 
@@ -1554,13 +1554,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
-	  const complexityMultiplier = complexityMultipliers[platform][complexity];
-	  const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
-	  const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
+   const complexityMultiplier = complexityMultipliers[platform][complexity];
+   const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+   const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
 
-	  const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
-	  return adjustedPrice;
-	}
+   const adjustedPrice = basePrice * complexityMultiplier * projectTypeMultiplier * projectDurationMultiplier;
+   return adjustedPrice;
+}
+function estimatePhases(complexity, projectType, platform, projectDurationDays)
+{  
+    let start = "0";
+    const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
+    { 
+	const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
+	const complexityMultiplier = complexityMultipliers[platform][complexity];
+	const projectTypeMultiplier = projectTypeMultipliers[platform][projectType];
+	const projectDurationMultiplier = projectDurationMultipliers(projectDurationDays);
+			
+	const estimatedDuration =  projectPhaseMultiplier * projectTypeMultiplier * complexityMultiplier * projectDurationMultiplier;
+	
+	const ret = 
+	{
+	   name: phase.charAt(0).toUpperCase() + phase.slice(1),
+	   start: start ,
+	   end : estimatedDuration ,
+	   estimatedDuration: estimatedDuration === 'Ongoing' ? 'Ongoing' : `${estimatedDuration} days`
+	};
+
+	start = estimatedDuration;
+
+	return ret;
+   });
+
+   return estimatedPhase;
+}
  //
   projectTypes.forEach(projectType => {
     const projectTypeOption = document.createElement('option');
@@ -1779,30 +1806,11 @@ window.updateQuoteResult = function(){
 	  const platform = 'web';
 	  const projectDurationDays = estimatedDays;
 
-	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); 
+	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	  const phases = [];
-	  if (estimatedDays >= 40) {
-		phases.push({ name: 'Deployment', start: 36, end: 40 });
-		phases.push({ name: 'Testing', start: 31, end: 35 });
-		phases.push({ name: 'Development', start: 16, end: 30 });
-		phases.push({ name: 'Design', start: 6, end: 15 });
-		phases.push({ name: 'Planning', start: 1, end: 5 });
-	  } else if (estimatedDays >= 30) {
-		phases.push({ name: 'Testing', start: 26, end: 30 });
-		phases.push({ name: 'Development', start: 16, end: 25 });
-		phases.push({ name: 'Design', start: 6, end: 15 });
-		phases.push({ name: 'Planning', start: 1, end: 5 });
-	  } else if (estimatedDays >= 15) {
-		phases.push({ name: 'Development', start: 11, end: 15 });
-		phases.push({ name: 'Design', start: 6, end: 10 });
-		phases.push({ name: 'Planning', start: 1, end: 5 });
-	  } else {
-		phases.push({ name: 'Planning', start: 1, end: estimatedDays });
-	  }
+	  const phases = estimatePhases(complexity, projectType, platform, projectDurationDays); // estimatePhases
 
-  // Update project phases HTML
 	  projectPhasesList.innerHTML = '';
 	  phases.forEach((phase) => {
 		const phaseHTML = `
@@ -1810,6 +1818,7 @@ window.updateQuoteResult = function(){
 			${phase.name} (Days ${phase.start} - ${phase.end})
 		  </li>
 		`;
+		  
 		projectPhasesList.innerHTML += phaseHTML;
 	  });
 	// 
