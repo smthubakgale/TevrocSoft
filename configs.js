@@ -48,10 +48,11 @@ const UI = [
  
 	            subforms.forEach(function(subform2)
 		    { 
-			var descendant = subform2.querySelector('[name="spec_fields_n"]');
-			var id = subform2.querySelector('[name="spec_fields_n"]').value;
+			var descendant = subform2.querySelector('[name="spec_fields_id"]');
+			var id = subform2.querySelector('[name="spec_fields_id"]').value;
 
-			console.log(subform2.querySelector('[name="spec_fields_n"]').outerHTML);
+			console.log(subform2.querySelector('[name="spec_fields_id"]').outerHTML);
+			console.log(descendant.value , tname.value);
 		     
 			if(descendant.value == tname.value)
 			{ 
