@@ -698,7 +698,8 @@ class FormGenerator {
               inputElement.max = field.max; 
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
-              inputElement.step = field.step; 
+              inputElement.step = field.step;  
+              inputElement.value = 1; 
 			  
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
@@ -860,6 +861,7 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
+              inputElement.value = 1; 
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
@@ -1107,6 +1109,7 @@ class FormGenerator {
               inputElement.readOnly = field.readonly;
               inputElement.setAttribute('autoincrement', field.autoincrement); 
               inputElement.step = field.step; 
+              inputElement.value = 1; 
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
