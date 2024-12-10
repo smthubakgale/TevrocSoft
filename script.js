@@ -1617,8 +1617,6 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
     return ret;
   });
 
-  console.log(estimatedPhases);
-
   return estimatedPhases;
 } //
   projectTypes.forEach(projectType => {
