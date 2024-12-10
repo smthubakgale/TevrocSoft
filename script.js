@@ -400,12 +400,9 @@ class FormGenerator {
 	if(field.observe == "subform")
 	{ 
 		function createSelectButton(node , subform) {
-			
-		       console.log(node.outerHTML);
-		       console.log(node.Value);
-			
+			 
 		       let optionElement = document.createElement("option"); 
-			optionElement.value = node.Value;
+			optionElement.value = node.value;
 			var tx = node.value;
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
