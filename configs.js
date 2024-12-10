@@ -108,7 +108,7 @@ const UI = [
 	    {
 		 label : "Trigger Events" ,
 		 type : "select" ,
-		 name : "em" , 
+		 name : "tr" , 
 		 description : "" ,
 		 options: [],
 		 setter: (subform , inputElement) => 
@@ -126,7 +126,9 @@ const UI = [
 			 socket:[  ]
 		     };
 
-		     
+		     var selectElement = document.createElement("select");
+		     selectElement.name = "spec_files_us_em";
+		     inputElement.appendChild(selectElement);
 		     var v = subform.querySelector('[name="spec_files_us_em"]');
                     
 		     init();
@@ -134,15 +136,13 @@ const UI = [
 			 
 		     function init()
 		     {
-			inputElement.innerHTML = "";
-			console.log(v.value);
-			console.log(v.outerHTML);
+			selectElement.innerHTML = ""; 
 		        opts[v.value].forEach((option)=>{
 			    var optionElement = document.createElement("option");
 			    optionElement.value = option.value;
 			    option.innerHTML = option.label;  
 
-			    inputElement.appendChild(optionElement);
+			    selectElement.appendChild(optionElement);
 		        });
 		     }
 		 }
