@@ -1529,7 +1529,7 @@ class FormGenerator {
   }
 } 
 	//
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1538,9 +1538,9 @@ window.onload = function() {
 		console.log(formData);
 	  });
        //
-}
+})
 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
 	const formGenerator = new FormGenerator(
 	  document.getElementById("myForm2"),
 	  document.getElementById("import-button2"),
@@ -1551,7 +1551,7 @@ window.onload = function() {
 	    console.log(formData);
 	  }
 	);
-}
+})
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
    const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1900,8 +1900,7 @@ function formatDate(date, format) {
   }
 }
 
-window.onload = function() {
-  discountAmountInput.value = 30;
+document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.value = 30;
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
@@ -1910,7 +1909,7 @@ window.onload = function() {
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
   
-}
+});
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
