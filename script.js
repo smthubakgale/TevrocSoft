@@ -3,6 +3,18 @@ import {
   projectTypeMultipliers , projectPhases ,projectPhaseMultipliers , projectDurationMultipliers 
   } from './configs.js';
 
+
+//------------------------------------: Index 
+window.onload = function() {
+  const urlHash = window.location.hash.substring(1);
+  const targetSection = document.querySelector(`#${urlHash}`);
+  
+  if (targetSection) {
+    sections.forEach(section => section.classList.remove('active'));
+    targetSection.classList.add('active');
+    sideNav.classList.remove('mob-nav');
+  }
+};
 //------------------------------------: Shop 
  // Initialize EmailJS 
  // load project types dynamically from the JSON array
@@ -1529,7 +1541,7 @@ class FormGenerator {
   }
 } 
 	//
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = function() {
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1538,9 +1550,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.log(formData);
 	  });
        //
-});
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = function() {
 	const formGenerator = new FormGenerator(
 	  document.getElementById("myForm2"),
 	  document.getElementById("import-button2"),
@@ -1551,7 +1563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	    console.log(formData);
 	  }
 	);
-});
+}
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
    const complexityMultiplier = complexityMultipliers[platform][complexity];
@@ -1897,7 +1909,7 @@ function formatDate(date, format) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = function() {
   discountAmountInput.value = 30;
   updateQuoteResult();
   
@@ -1907,7 +1919,7 @@ document.addEventListener('DOMContentLoaded', () => {
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
   
-});
+}
 //------------------------------: Pricing
 // Replace textarea with CKEditor
   CKEDITOR.replace('editor', {
@@ -1950,16 +1962,6 @@ accordionTriggers.forEach(trigger => trigger.addEventListener('click', handleAcc
 alertCloseButtons.forEach(button => button.addEventListener('click', handleAlertClose));
 
 // Functions
-window.onload = function() {
-  const urlHash = window.location.hash.substring(1);
-  const targetSection = document.querySelector(`#${urlHash}`);
-  
-  if (targetSection) {
-    sections.forEach(section => section.classList.remove('active'));
-    targetSection.classList.add('active');
-    sideNav.classList.remove('mob-nav');
-  }
-};
 function handleNavLinkClick(event) {
   event.preventDefault();
   
