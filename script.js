@@ -3,9 +3,6 @@ import {
   projectTypeMultipliers , projectPhases ,projectPhaseMultipliers , projectDurationMultipliers 
   } from './configs.js';
 
-
-//------------------------------------: Index 
-
 //------------------------------------: Shop 
  // Initialize EmailJS 
  // load project types dynamically from the JSON array
