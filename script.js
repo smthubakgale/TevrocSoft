@@ -1563,8 +1563,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 function estimatePhases(complexity, projectType, platform, projectDurationDays) {
- return [];
-	/*
+
  let proposedDuration = 1;
 
   Object.keys(projectPhaseMultipliers[projectType]).forEach((phase) => {
@@ -1583,7 +1582,6 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
   });
 
   console.log(proposedDuration, projectDurationDays);
-*/
 
   let start = 0;
   const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
