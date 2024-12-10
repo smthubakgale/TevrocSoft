@@ -1858,12 +1858,12 @@ window.updateQuoteResult = function(){
 	  li.appendChild(h4);
 	
 	  const p1 = document.createElement('p');
-	  p1.textContent = `Requested Duration: Days ${phase.req_start} - ${phase.req_end}`;
+	  p1.textContent = `Duration: Days ${phase.req_start} - ${phase.req_end}`;
 	  li.appendChild(p1);
 	
 	  const p2 = document.createElement('p');
 	  p2.textContent = `Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}`;
-	  li.appendChild(p2);
+	  //li.appendChild(p2);
 	
 	  const activitiesUl = document.createElement('ul');
 	  activitiesUl.style.listStyleType = 'disc';
