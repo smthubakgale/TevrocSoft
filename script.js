@@ -1580,9 +1580,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
       proposedDuration = Math.max(proposedDuration, estimatedDuration);
     }
   });
-
-  console.log(proposedDuration, projectDurationDays);
-
+ 
   let start = 0;
   const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
@@ -1866,6 +1864,7 @@ window.updateQuoteResult = function(){
 	  const activitiesUl = document.createElement('ul');
 	  activitiesUl.style.listStyleType = 'disc';
 	  activitiesUl.style.marginLeft = '15px';
+	  activitiesUl.style.marginBottom = '10px';
 	  li.appendChild(activitiesUl);
 	
 	  phase.activities.forEach((activity) => {
