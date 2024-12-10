@@ -1577,7 +1577,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays)
 	if(estimatedDuration){
 		proposedDuration = (proposedDuration < estimatedDuration) ? estimatedDuration : proposedDuration;
 	}
-    };
+    });
 	
     var start = 0;
     const estimatedPhase = Object.keys(projectPhaseMultipliers[projectType]).map(phase => 
