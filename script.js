@@ -1842,6 +1842,7 @@ window.updateQuoteResult = function(){
 	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
 	
 	const ul = document.createElement('ul');
+	ul.style.listStyleType = 'circle';
 	projectPhasesList.appendChild(ul);
 	
 	phases.forEach((phase) => {
@@ -1862,6 +1863,7 @@ window.updateQuoteResult = function(){
 	
 	  const activitiesUl = document.createElement('ul');
 	  activitiesUl.style.listStyleType = 'disc';
+	  activitiesUl.style.marginLeft = '15px';
 	  li.appendChild(activitiesUl);
 	
 	  phase.activities.forEach((activity) => {
