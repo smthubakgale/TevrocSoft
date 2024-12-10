@@ -2413,6 +2413,36 @@ export const projectTypeMultipliers = {
   },
 };
 
+export const projectPhaseMultipliers = {
+  standard: {
+    initiation: 5,
+    planning: 10,
+    design: 15,
+    implementation: 30,
+    testing: 15,
+    deployment: 5,
+    maintenance: 'Ongoing'
+  },
+  enterprise: {
+    initiation: 10,
+    planning: 20,
+    design: 30,
+    implementation: 60,
+    testing: 30,
+    deployment: 10,
+    maintenance: 'Ongoing'
+  },
+  custom: {
+    initiation: 15,
+    planning: 30,
+    design: 45,
+    implementation: 90,
+    testing: 45,
+    deployment: 15,
+    maintenance: 'Ongoing'
+  }
+};
+
 export const projectDurationMultipliers = (days) => {
   if (days <= 30) {
 	return 1.5; // very short-term (less than 1 month)
