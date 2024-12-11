@@ -763,12 +763,12 @@ class FormGenerator {
 		 ts.createSetter(inputElement , field.setter); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 	      if(field.prev_name && field.prev_options){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
@@ -815,10 +815,10 @@ class FormGenerator {
 	      }
 			  
 	      if(field.setter){
-		 ts.createSetter(textElement , field.setter); 
+		 ts.createSetter(parentElement , field.setter); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(parentElement , (subform , inputElement) =>{
 		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
@@ -941,12 +941,12 @@ class FormGenerator {
 		 ts.createSetter(inputElement , field.setter); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 	      if(field.prev_name && field.prev_options){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
@@ -1204,15 +1204,15 @@ class FormGenerator {
           inputElement.prepend(selectElement);
 		      
          if(field.setter){
-	    ts.createSetter(inputElement , field.setter); 
+	    ts.createSetter(subFormElement , field.setter); 
          }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(subFormElement , (subform , inputElement) =>{
 		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 	      if(field.prev_name && field.prev_options){
-	         ts.createSetter(textElement , (subform , inputElement) =>{
+	         ts.createSetter(subFormElement , (subform , inputElement) =>{
 		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
