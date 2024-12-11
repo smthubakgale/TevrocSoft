@@ -389,7 +389,7 @@ class FormGenerator {
 	 // Sibling Elements  
 	  console.log(subform.outerHTML);
 	 console.log(parentName , field.inheritor_name);
-	 var parentElement = subform.querySelector('[for="${parentName}_${field.inheritor_name}"]').parentNode.querySelector('div:last-child');  console.log(parentElement.outerHTML);
+	 var parentElement = subform.querySelector(`[for="${parentName}_${field.inheritor_name}"]`).parentNode.querySelector('div:last-child');  console.log(parentElement.outerHTML);
 	 var inherits = [];
 	
 	 function getNextInheritsId() {
@@ -467,7 +467,7 @@ class FormGenerator {
 	 
 	   parentElement.appendChild(dv); 
 	
-	   const tag = sibling.querySelectorAll('[name="${parentName}_${field.name}"]')[0]; console.log(parentName , field.name);
+	   const tag = sibling.querySelectorAll(`[name="${parentName}_${field.name}"]`)[0]; console.log(parentName , field.name);
 	
 	   if(tag.value){ 
 		//dv2.innerHTML = tag.value;
