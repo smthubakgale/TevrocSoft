@@ -387,11 +387,11 @@ class FormGenerator {
   { 
 	  console.log("create inherits");
 	 // Sibling Elements  
-	 var parentElement = subform.querySelector('[for="${parentName}_${field.inheritor_name}"]');  // label 
+	 var parentElement = subform.querySelector('[for="`+ parentName+`_`+ field.inheritor_name +`"]');  // label 
 	 var inherits = [];
 
 	  console.log(subform.outerHTML);
-	  console.log('[for="${parentName}_${field.inheritor_name}"]' , parentElement);
+	  console.log('[for="`+ parentName+`_`+ field.inheritor_name +`"]' , parentElement);
 	
 	 function getNextInheritsId() {
 	    window.inheritsIds = window.inheritsIds || [];
