@@ -482,32 +482,7 @@ class FormGenerator {
 	   }); 
 	}
 	  
-  }
-  checkInitialized(element , callback){
-     function getNextInitId() {
-	 window.initIds = window.initIds || [];
-	 const nextId = window.initIds.length + 1;
-	 window.initIds.push(nextId);
-	 return `init-${nextId}`;
-      }
-       var id = getNextInitId();
-       element.setAttribute(id, "true");
-	  
-       const observer = new MutationObserver((mutations) =>
-       {
-	   if (element.hasAttribute(id)) 
-	   {
-	      callback();
-	   }
-        });
-	
-	const config = {
-	  childList: true,
-	  subtree: true
-	};
-	
-	observer.observe(element, config);
-  }
+  } 
   createSelect(field , inputElement , nested = false , parentElement)
   {
       function getNextSelectId() {
@@ -812,8 +787,8 @@ class FormGenerator {
 		 ts.createSetter(textElement , field.setter); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.checkInitialized(parentElement , ()=>{
-		    ts.createInherits(parentElement , inputElement  , field , parentName);   
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 
@@ -981,8 +956,8 @@ class FormGenerator {
 	      }
 	      
 	      if(field.inheritor_name && field.inheritor_type){ 
-	         ts.checkInitialized(parentElement , ()=>{
-		    ts.createInherits(parentElement , inputElement  , field , parentName);   
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 
@@ -1234,22 +1209,12 @@ class FormGenerator {
 	      if(field.setter){
 		 ts.createSetter(textElement , field.setter); 
 	      }
-	      /*
+	      
 	      if(field.inheritor_name && field.inheritor_type){ 
-	         ts.checkInitialized(subFormElement , ()=>{
-		     
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
-	      }
-	     */
-
-	     var cts = setInterval(()=>{
-		     try{
-                        ts.createInherits(subFormElement , inputElement  , field , parentName); 
-			clearInterval(cts);
-			console.log("done");
-		     }
-		     catch{}
-	     } ,100);
+	      } 
 
 	      inputElement.prepend(textElement);
 	      break; 
