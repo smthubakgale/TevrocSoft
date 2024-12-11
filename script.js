@@ -385,13 +385,11 @@ class FormGenerator {
   }
   createInherits(subform , inputElement  , field , parentName)
   { 
-	  console.log("create inherits");
-	 // Sibling Elements  
-	 var parentElement = subform.querySelector('[for="`+ parentName+`_`+ field.inheritor_name +`"]');  // label 
-	 var inherits = [];
 
-	  console.log(subform.outerHTML);
-	  console.log('[for="`+ parentName+`_`+ field.inheritor_name +`"]' , parentElement);
+	 // Sibling Elements  
+	 console.log(parentName , field.inheritor_name);
+	 var parentElement = subform.querySelector('[for="spec_users_inherits"]');  
+	 var inherits = [];
 	
 	 function getNextInheritsId() {
 	    window.inheritsIds = window.inheritsIds || [];
@@ -422,19 +420,14 @@ class FormGenerator {
 	     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 	     subformSiblings.forEach(sibling => {
 		  existInherit(sibling , (n) => {
-		        console.log("A");
-			if(field.inheritor_type == "checkbox")
-			{
-				console.log("B");
-		           linkSibling(sibling , n.replace("inherits-" , ""));
-			}   
+		    linkSibling(sibling , n.replace("inherits-" , ""));   
 		  }); 
 	     });
 	 }
 	
 	  var id = getNextInheritsId();
 	 subform.setAttribute("inheritor" , id); 
-	 inputElement.value = id.replace("inherits-" , field.pre ? field.pre : "Item ");
+	 inputElement.value = id.replace("inherits-" , "User "); console.log(field.pre);
 	
 	 appendInherit();
 	 const observer = new MutationObserver(() => { appendInherit() }); 
@@ -442,11 +435,11 @@ class FormGenerator {
 	
 	function linkSibling(sibling , index)
 	{ 
-	    var tx = (field.pre || "Item") + index;
+	    var tx = "User " + index;  console.log(pre);
 	
 	    let inputElement = document.createElement("input");
 	    inputElement.type = "checkbox";
-	    inputElement.name = `${parentName}_${field.inheritor_name}`;
+	    inputElement.name = `spec_users_inherits_inherit`;
 	    inputElement.value = tx; 
 	    inputElement.style.marginRight = '5px';
 	    inputElement.style.width = '15px';  
@@ -472,13 +465,11 @@ class FormGenerator {
 	 
 	   parentElement.appendChild(dv); 
 	
-	   const tag = sibling.querySelectorAll('[name="${parentName}_${field.name}"]')[0]; 
+	   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; console.log(parentName , field.name);
 	
 	   if(tag.value){ 
-		dv2.innerHTML = tag.value;
+		//dv2.innerHTML = tag.value;
 	   }
-
-	   console.log("C");
 	
 	   tag.addEventListener('change', function() {
 		 if(tag.value){
@@ -489,7 +480,6 @@ class FormGenerator {
 		 }
 	   }); 
 	}
-	  
   } 
   createSelect(field , inputElement , nested = false , parentElement)
   {
