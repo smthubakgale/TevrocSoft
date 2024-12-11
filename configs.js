@@ -22,6 +22,7 @@ const UI = [
     {
 	label : "Usecase Descriptions" ,
 	type : "subform" ,
+	multiple: true , 
 	name : "us" , 
 	description : "" ,
 	fields : [
