@@ -507,7 +507,7 @@ class FormGenerator {
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
 			optionElement.innerHTML = tx; 
-s
+
 			inputElement.appendChild(optionElement);
  
 		        selectRefs.push({ id : selectId , node: node  , ref : optionElement });
