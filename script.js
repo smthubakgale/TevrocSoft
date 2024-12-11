@@ -1204,15 +1204,15 @@ class FormGenerator {
           inputElement.prepend(selectElement);
 		      
          if(field.setter){
-	    ts.createSetter(subFormElement , field.setter  , field , parentName); 
+	    ts.createSetter(inputElement , field.setter  , field , parentName); 
          }
 	      if(field.inheritor_name && field.inheritor_type){
-	         ts.createSetter(subFormElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createInherits(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
 	      if(field.prev_name && field.prev_options){
-	         ts.createSetter(subFormElement , (subform , inputElement) =>{
+	         ts.createSetter(inputElement , (subform , inputElement) =>{
 		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
 	         }); 
 	      }
