@@ -391,7 +391,7 @@ class FormGenerator {
 	 var inherits = [];
 
 	  console.log(subform.outerHTML);
-	  console.log('[for="${parentName}_${field.inheritor_name}"]') , parentElement);
+	  console.log('[for="${parentName}_${field.inheritor_name}"]' , parentElement);
 	
 	 function getNextInheritsId() {
 	    window.inheritsIds = window.inheritsIds || [];
