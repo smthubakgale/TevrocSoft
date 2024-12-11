@@ -420,6 +420,7 @@ class FormGenerator {
 	     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 	     subformSiblings.forEach(sibling => {
 		  existInherit(sibling , (n) => {
+			console.log(field.inheritor_types);
 		    linkSibling(sibling , n.replace("inherits-" , ""));   
 		  }); 
 	     });
