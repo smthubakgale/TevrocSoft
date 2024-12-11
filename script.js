@@ -483,6 +483,31 @@ class FormGenerator {
 	}
 	  
   }
+  checkInitialized(element , callback){
+     function getNextInitId() {
+	 window.initIds = window.initIds || [];
+	 const nextId = window.initIds.length + 1;
+	 window.initIds.push(nextId);
+	 return `init-${nextId}`;
+      }
+       var id = getNextInitId();
+       element.setAttribute(id, "true");
+	  
+       const observer = new MutationObserver((mutations) =>
+       {
+	   if (element.hasAttribute(id)) 
+	   {
+	      callback();
+	   }
+        });
+	
+	const config = {
+	  childList: true,
+	  subtree: true
+	};
+	
+	observer.observe(element, config);
+  }
   createSelect(field , inputElement , nested = false , parentElement)
   {
       function getNextSelectId() {
@@ -787,7 +812,9 @@ class FormGenerator {
 		 ts.createSetter(textElement , field.setter); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
-		      ts.createInherits(parentElement , inputElement  , field , parentName);
+	         ts.checkInitialized(parentElement , ()=>{
+		    ts.createInherits(parentElement , inputElement  , field , parentName);   
+	         }); 
 	      }
 
 	      inputElement.prepend(textElement); 
@@ -953,8 +980,10 @@ class FormGenerator {
 		 ts.createSetter(textElement , field.setter); 
 	      }
 	      
-	      if(field.inheritor_name && field.inheritor_type){
-		      ts.createInherits(parentElement , inputElement  , field , parentName);
+	      if(field.inheritor_name && field.inheritor_type){ 
+	         ts.checkInitialized(parentElement , ()=>{
+		    ts.createInherits(parentElement , inputElement  , field , parentName);   
+	         }); 
 	      }
 
 	      inputElement.prepend(textElement);
@@ -1206,8 +1235,10 @@ class FormGenerator {
 		 ts.createSetter(textElement , field.setter); 
 	      }
 	      
-	      if(field.inheritor_name && field.inheritor_type){
-		      ts.createInherits(parentElement , inputElement  , field , parentName);
+	      if(field.inheritor_name && field.inheritor_type){ 
+	         ts.checkInitialized(subFormElement , ()=>{
+		    ts.createInherits(subFormElement , inputElement  , field , parentName);   
+	         }); 
 	      }
 
 	      inputElement.prepend(textElement);
