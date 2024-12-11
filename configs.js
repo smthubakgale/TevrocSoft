@@ -119,8 +119,38 @@ const UI = [
 		 name : "tr" , 
 		 description : "" ,
 		 options: [],
+		 
+		 pre : "User" , 
+		 inheritor_name: "pre" ,
+		 inheritor_type: "checkbox" ,
+
+		 prev_name : "em" ,
+		 prev_options : {
+			 button:[ 
+				 { "label": "Click", "value": "click" },
+			         { "label": "Double Click", "value": "dblclick" },
+			         { "label": "Mouse Down", "value": "mousedown" }, 
+			         { "label": "Mouse Up", "value": "mouseup" }, 
+			         { "label": "Mouse Over", "value": "mouseover" }, 
+			         { "label": "Mouse Out", "value": "mouseout" },
+			 ],
+			 window:[
+				 { "value": "onload", "label": "On Load" },
+				 { "value": "onunload", "label": "On Unload" },
+				 { "value": "onbeforeunload", "label": "On Before Unload" }, 
+			 ] ,
+			 socket:[ 
+				 { "value": "connect", "label": "Connect" },
+				 { "value": "disconnect", "label": "Disconnect" },
+				 { "value": "error", "label": "Error" },
+				 { "value": "timeout", "label": "Timeout" },
+				 { "value": "message", "label": "Message" },
+				 { "value": "data", "label": "Data" },
+			 ]
+		     }, 
 		 setter: (subform , inputElement) => 
 		 {
+		     return;
 		     var opts = {
 			 button:[ 
 				 { "label": "Click", "value": "click" },
@@ -164,7 +194,14 @@ const UI = [
 		        });
 		     }
 		 }
-	     } ,
+	     } , 	 
+		{
+		  "label": "Previous Process",
+		  "type": "checkbox",
+		  "name": "pre", 
+		  "required": true ,
+		   options: []
+		},
 	]
     },
     {
