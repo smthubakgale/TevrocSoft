@@ -1237,25 +1237,19 @@ class FormGenerator {
 	      /*
 	      if(field.inheritor_name && field.inheritor_type){ 
 	         ts.checkInitialized(subFormElement , ()=>{
-		    ts.createInherits(subFormElement , inputElement  , field , parentName);   
+		     
 	         }); 
 	      }
 	     */
-		const observer = new MutationObserver((mutations) => {
-		if (document.body.contains(subFormElement)) {
-		    console.log('subFormElement has been appended to the DOM.');
-		    observer.disconnect(); // Stop observing
-		
-		    if (field.inheritor_name && field.inheritor_type) {
-		       ts.createInherits(subFormElement, inputElement, field, parentName); 
-		    }
-		  }
-		});
-		
-		observer.observe(document.body, {
-		  childList: true,
-		  subtree: true
-		});
+
+	     var cts = setInterval(()=>{
+		     try{
+                        ts.createInherits(subFormElement , inputElement  , field , parentName); 
+			clearInterval(cts);
+			console.log("done");
+		     }
+		     catch{}
+	     } ,100);
 
 	      inputElement.prepend(textElement);
 	      break; 
