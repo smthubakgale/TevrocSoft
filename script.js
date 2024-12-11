@@ -386,10 +386,8 @@ class FormGenerator {
   createInherits(subform , inputElement  , field , parentName)
   { 
 
-	 // Sibling Elements  
-	  console.log(subform.outerHTML);
-	 console.log(parentName , field.inheritor_name);
-	 var parentElement = subform.querySelector(`[for="${parentName}_${field.inheritor_name}"]`).parentNode.querySelector('div:last-child');  console.log(parentElement.outerHTML);
+	 // Sibling Elements    
+	 var parentElement = subform.querySelector(`[for="${parentName}_${field.inheritor_name}"]`).parentNode.querySelector('div:last-child');  
 	 var inherits = [];
 	
 	 function getNextInheritsId() {
@@ -421,15 +419,17 @@ class FormGenerator {
 	     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 	     subformSiblings.forEach(sibling => {
 		  existInherit(sibling , (n) => {
-			console.log(field.inheritor_types);
-		    linkSibling(sibling , n.replace("inherits-" , ""));   
+			console.log(field.inheritor_type);
+		     if(field.inheritor_type == "checkbox"){
+		        linkSibling(sibling , n.replace("inherits-" , "")); 
+		     }
 		  }); 
 	     });
 	 }
 	
 	  var id = getNextInheritsId();
 	 subform.setAttribute("inheritor" , id); 
-	 inputElement.value = id.replace("inherits-" , (field.pre + " " || "Item ")); console.log(field.pre);
+	 inputElement.value = id.replace("inherits-" , (field.pre + " " || "Item ")); 
 	
 	 appendInherit();
 	 const observer = new MutationObserver(() => { appendInherit() }); 
@@ -437,7 +437,7 @@ class FormGenerator {
 	
 	function linkSibling(sibling , index)
 	{ 
-	    var tx = (field.pre + " " || "Item ") + index;  console.log(field.pre);
+	    var tx = (field.pre + " " || "Item ") + index; 
 	
 	    let inputElement = document.createElement("input");
 	    inputElement.type = "checkbox";
@@ -467,7 +467,7 @@ class FormGenerator {
 	 
 	   parentElement.appendChild(dv); 
 	
-	   const tag = sibling.querySelectorAll(`[name="${parentName}_${field.name}"]`)[0]; console.log(parentName , field.name);
+	   const tag = sibling.querySelectorAll(`[name="${parentName}_${field.name}"]`)[0]; 
 	
 	   if(tag.value){ 
 		//dv2.innerHTML = tag.value;
@@ -507,7 +507,7 @@ class FormGenerator {
 			tx = (field.pre) ? field.pre + tx : tx;
 			tx = (field.post) ? tx + field.post : tx;
 			optionElement.innerHTML = tx; 
-
+s
 			inputElement.appendChild(optionElement);
  
 		        selectRefs.push({ id : selectId , node: node  , ref : optionElement });
