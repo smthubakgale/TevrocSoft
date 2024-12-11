@@ -385,9 +385,12 @@ class FormGenerator {
   }
   createInherits(subform , inputElement  , field , parentName)
   { 
+	  console.log("create inherits");
 	 // Sibling Elements  
 	 var parentElement = subform.querySelector('[for="${parentName}_${field.inheritor_name}"]');  // label 
 	 var inherits = [];
+
+	  console.log(parentElement):
 	
 	 function getNextInheritsId() {
 	    window.inheritsIds = window.inheritsIds || [];
@@ -418,8 +421,10 @@ class FormGenerator {
 	     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 	     subformSiblings.forEach(sibling => {
 		  existInherit(sibling , (n) => {
+		        console.log("A");
 			if(field.inheritor_type == "checkbox")
 			{
+				console.log("B");
 		           linkSibling(sibling , n.replace("inherits-" , ""));
 			}   
 		  }); 
@@ -436,7 +441,7 @@ class FormGenerator {
 	
 	function linkSibling(sibling , index)
 	{ 
-	    var tx = "User " + index;
+	    var tx = (field.pre || "Item") + index;
 	
 	    let inputElement = document.createElement("input");
 	    inputElement.type = "checkbox";
@@ -471,6 +476,8 @@ class FormGenerator {
 	   if(tag.value){ 
 		dv2.innerHTML = tag.value;
 	   }
+
+	   console.log("C");
 	
 	   tag.addEventListener('change', function() {
 		 if(tag.value){
