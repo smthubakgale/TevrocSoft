@@ -386,7 +386,7 @@ class FormGenerator {
   createInherits(subform , inputElement  , field , parentName)
   { 
 	 // Sibling Elements  
-	 var parentElement = subform.querySelector('[for="${parentName}_${}"]');  
+	 var parentElement = subform.querySelector('[for="${parentName}_${field.inheritor_name}"]');  // label 
 	 var inherits = [];
 	
 	 function getNextInheritsId() {
@@ -418,14 +418,17 @@ class FormGenerator {
 	     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
 	     subformSiblings.forEach(sibling => {
 		  existInherit(sibling , (n) => {
-		    linkSibling(sibling , n.replace("inherits-" , ""));   
+			if(field.inheritor_type == "checkbox")
+			{
+		           linkSibling(sibling , n.replace("inherits-" , ""));
+			}   
 		  }); 
 	     });
 	 }
 	
 	  var id = getNextInheritsId();
 	 subform.setAttribute("inheritor" , id); 
-	 inputElement.value = id.replace("inherits-" , "User ");
+	 inputElement.value = id.replace("inherits-" , field.pre ? field.pre : "Item ");
 	
 	 appendInherit();
 	 const observer = new MutationObserver(() => { appendInherit() }); 
@@ -437,7 +440,7 @@ class FormGenerator {
 	
 	    let inputElement = document.createElement("input");
 	    inputElement.type = "checkbox";
-	    inputElement.name = `spec_users_inherits_inherit`;
+	    inputElement.name = `${parentName}_${field.inheritor_name}`;
 	    inputElement.value = tx; 
 	    inputElement.style.marginRight = '5px';
 	    inputElement.style.width = '15px';  
@@ -463,10 +466,10 @@ class FormGenerator {
 	 
 	   parentElement.appendChild(dv); 
 	
-	   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; 
+	   const tag = sibling.querySelectorAll('[name="${parentName}_${field.name}"]')[0]; 
 	
 	   if(tag.value){ 
-		//dv2.innerHTML = tag.value;
+		dv2.innerHTML = tag.value;
 	   }
 	
 	   tag.addEventListener('change', function() {
@@ -783,6 +786,9 @@ class FormGenerator {
 	      if(field.setter){
 		 ts.createSetter(textElement , field.setter); 
 	      }
+	      if(field.inheritor_name && field.inheritor_type){
+		      ts.createInherits(parentElement , inputElement  , field , parentName);
+	      }
 
 	      inputElement.prepend(textElement); 
 	      break;
@@ -945,6 +951,10 @@ class FormGenerator {
 			  
 	      if(field.setter){
 		 ts.createSetter(textElement , field.setter); 
+	      }
+	      
+	      if(field.inheritor_name && field.inheritor_type){
+		      ts.createInherits(parentElement , inputElement  , field , parentName);
 	      }
 
 	      inputElement.prepend(textElement);
@@ -1194,6 +1204,10 @@ class FormGenerator {
 			  
 	      if(field.setter){
 		 ts.createSetter(textElement , field.setter); 
+	      }
+	      
+	      if(field.inheritor_name && field.inheritor_type){
+		      ts.createInherits(subFormElement , inputElement  , field , parentName);
 	      }
 
 	      inputElement.prepend(textElement);
