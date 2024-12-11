@@ -23,6 +23,7 @@ const UI = [
 	label : "Usecase Descriptions" ,
 	type : "subform" ,
 	multiple: true , 
+	button : "Description" , 
 	name : "us" , 
 	description : "" ,
 	fields : [
@@ -32,6 +33,11 @@ const UI = [
 		readonly : true ,
 		autoincrement:true , 
 		name : "id" , 
+		 
+		pre : "User" , 
+		inheritor_name: "pre" ,
+		inheritor_type: "checkbox" ,
+
 		description : "it will auto generate thus readonly"
 	    },
 	    {
@@ -120,11 +126,6 @@ const UI = [
 		 name : "tr" , 
 		 description : "" ,
 		 options: [],
-		 
-		 pre : "User" , 
-		 inheritor_name: "pre" ,
-		 inheritor_type: "checkbox" ,
-
 		 prev_name : "em" ,
 		 prev_options : {
 			 button:[ 
