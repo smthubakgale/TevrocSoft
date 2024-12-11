@@ -383,6 +383,28 @@ class FormGenerator {
 	}
      }
   }
+  createPrevSecs(subform , inputElement  , field , parentName){
+     var opts = field.prev_options;
+
+     var selectElement = subform.querySelector(`[name="${parentName}_${field.name}"]`);
+     selectElement.name = "spec_files_us_em"; 
+     var v = subform.querySelector(`[name="${parentName}_${field.prev_name}"]`);
+    
+     init();
+     v.addEventListener("change" , ()=>{ init(); });
+	 
+     function init()
+     {
+	selectElement.innerHTML = ""; 
+	opts[v.value].forEach((option)=>{
+	    var optionElement = document.createElement("option");
+	    optionElement.value = option.value;
+	    optionElement.innerHTML = option.label;  
+
+	    selectElement.appendChild(optionElement);
+	});
+     }
+  }
   createInherits(subform , inputElement  , field , parentName)
   { 
 
@@ -740,6 +762,16 @@ class FormGenerator {
 	      if(field.setter){
 		 ts.createSetter(inputElement , field.setter); 
 	      }
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }
+	      if(field.prev_name && field.prev_options){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
+	         }); 
+	      }
               break;
             case "datetime-local":
               inputElement = document.createElement("input");
@@ -907,6 +939,16 @@ class FormGenerator {
 			  
 	      if(field.setter){
 		 ts.createSetter(inputElement , field.setter); 
+	      }
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }
+	      if(field.prev_name && field.prev_options){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
+	         }); 
 	      }
               break;
             case "datetime-local":
@@ -1164,6 +1206,16 @@ class FormGenerator {
          if(field.setter){
 	    ts.createSetter(inputElement , field.setter); 
          }
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }
+	      if(field.prev_name && field.prev_options){
+	         ts.createSetter(textElement , (subform , inputElement) =>{
+		     ts.createPrevSecs(subform , inputElement  , field , parentName);  
+	         }); 
+	      }
           break;
             case "datetime-local":
               inputElement = document.createElement("input");
