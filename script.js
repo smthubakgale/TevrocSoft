@@ -1164,7 +1164,7 @@ class FormGenerator {
   }
 
   renderSubForm(parentElement, fields, parentName) {
-    const subFormElement = document.createElement("div");
+    let subFormElement = document.createElement("div");
     subFormElement.classList.add("subform"); 
     var ts = this; 
 
