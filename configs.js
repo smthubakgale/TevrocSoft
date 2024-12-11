@@ -1674,6 +1674,7 @@ const create =
 			  "name": "user",
 			  "required": true ,
 			   description: "" ,
+			   pre : "User" , 
 			   inheritor_name: "inherits" ,
 			   inheritor_type: "checkbox" , 
 			   setter: (subform , inputElement) => { 
