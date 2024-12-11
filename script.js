@@ -840,7 +840,12 @@ class FormGenerator {
 			  
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
-			  
+			
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(parentElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }  
               break;
             case "checkbox":
               inputElement = document.createElement("div");
@@ -1019,7 +1024,12 @@ class FormGenerator {
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
-			  
+		
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(parentElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }	  
               break;
             case "checkbox":
               inputElement = document.createElement("div");
@@ -1284,7 +1294,12 @@ class FormGenerator {
 	      
 	      if(field.readonly){ inputElement.style.outline = 'none'; }
 	      if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
-			  
+		
+	      if(field.inheritor_name && field.inheritor_type){
+	         ts.createSetter(parentElement , (subform , inputElement) =>{
+		     ts.createInherits(subform , inputElement  , field , parentName);  
+	         }); 
+	      }	  
               break;
         case "checkbox":
           inputElement = document.createElement("div");
