@@ -389,7 +389,7 @@ class FormGenerator {
 	 // Sibling Elements  
 	  console.log(subform.outerHTML);
 	 console.log(parentName , field.inheritor_name);
-	 var parentElement = subform.querySelector('[for="spec_users_inherits"]').parentNode;  console.log(parentElement.outerHTML);
+	 var parentElement = subform.querySelector('[for="${parentName}_${field.inheritor_name}"]').parentNode.querySelector('div:last-child');  console.log(parentElement.outerHTML);
 	 var inherits = [];
 	
 	 function getNextInheritsId() {
@@ -429,7 +429,7 @@ class FormGenerator {
 	
 	  var id = getNextInheritsId();
 	 subform.setAttribute("inheritor" , id); 
-	 inputElement.value = id.replace("inherits-" , "User "); console.log(field.pre);
+	 inputElement.value = id.replace("inherits-" , (field.pre + " " || "Item ")); console.log(field.pre);
 	
 	 appendInherit();
 	 const observer = new MutationObserver(() => { appendInherit() }); 
@@ -437,7 +437,7 @@ class FormGenerator {
 	
 	function linkSibling(sibling , index)
 	{ 
-	    var tx = "User " + index;  console.log(pre);
+	    var tx = (field.pre + " " || "Item ") + index;  console.log(field.pre);
 	
 	    let inputElement = document.createElement("input");
 	    inputElement.type = "checkbox";
@@ -467,7 +467,7 @@ class FormGenerator {
 	 
 	   parentElement.appendChild(dv); 
 	
-	   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; console.log(parentName , field.name);
+	   const tag = sibling.querySelectorAll('[name="${parentName}_${field.name}"]')[0]; console.log(parentName , field.name);
 	
 	   if(tag.value){ 
 		//dv2.innerHTML = tag.value;
