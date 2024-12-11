@@ -1675,7 +1675,7 @@ const create =
 			  "required": true ,
 			   description: "" ,
 			   inheritor_name: "inherits" ,
-			   inheritor_type: "checkbox"
+			   inheritor_type: "checkbox" , 
 			   setter: (subform , inputElement) => { 
 				 return;
 				 // Sibling Elements  
