@@ -1674,105 +1674,10 @@ const create =
 			  "name": "user",
 			  "required": true ,
 			   description: "" ,
+				
 			   pre : "User" , 
 			   inheritor_name: "inherits" ,
-			   inheritor_type: "checkbox" , 
-			   setter: (subform , inputElement) => { 
-				 return;
-				 // Sibling Elements  
-				 var parentElement = subform.querySelector('[for="spec_users_inherits"]');  
-				 var inherits = [];
-
-				 function getNextInheritsId() {
-				    window.inheritsIds = window.inheritsIds || [];
-				    const nextId = window.inheritsIds.length + 1;
-				    window.inheritsIds.push(nextId);
-				    return `inherits-${nextId}`;
-			         } 
-
-				function existInherit(sibling , cb) {
-				    var n = sibling.getAttribute("inheritor");
-				    var k = 0;
-				    var c = setInterval(function()
-				    {
-					 if(k == 300){ clearInterval(c); }
-					 else if(n){
-					   clearInterval(c); 
-					   const exists = inherits.some(s => s === sibling.getAttribute("inheritor"));
-					   if(!exists){
-						inherits.push(sibling.getAttribute("inheritor"));  
-					        cb(n);   
-					   }
-				           
-					 }
-					 k++;
-				   },100);  
-				 }
-				 function appendInherit(){
-                                     const subformSiblings = Array.from(subform.parentNode.children).filter(sibling => sibling.classList.contains('subform') && sibling !== subform);
-                                     subformSiblings.forEach(sibling => {
-				          existInherit(sibling , (n) => {
-					    linkSibling(sibling , n.replace("inherits-" , ""));   
-					  }); 
-				     });
-				 }
-
-				  var id = getNextInheritsId();
-				 subform.setAttribute("inheritor" , id); 
-				 inputElement.value = id.replace("inherits-" , "User ");
-
-                                 appendInherit();
-				 const observer = new MutationObserver(() => { appendInherit() }); 
-				 observer.observe(subform.parentNode, { childList: true, subtree: true });
-
-				function linkSibling(sibling , index)
-				{ 
-				    var tx = "User " + index;
-
-				    let inputElement = document.createElement("input");
-				    inputElement.type = "checkbox";
-				    inputElement.name = `spec_users_inherits_inherit`;
-				    inputElement.value = tx; 
-				    inputElement.style.marginRight = '5px';
-				    inputElement.style.width = '15px';  
-					
-				    const dv = document.createElement("div");
-				    dv.style.display = 'flex';
-				   const dv1 = document.createElement("div");
-				   dv1.append(inputElement);
-				   const dv2 = document.createElement("div"); 
-				   dv.style.flex = 1;
-			
-				   dv2.innerHTML = tx;
-				   dv2.style.paddingLeft = "10px";
-				   dv2.style.paddingTop = "7px";
-			
-				   dv.appendChild(dv1);
-				   dv.appendChild(dv2);
-			
-				   const lastChild = parentElement.children.length > 0 ? parentElement.children[parentElement.children.length - 1] : null;
-				   if(lastChild){
-				     lastChild.style.marginBottom = "-25px"; 
-				   }
-				 
-				   parentElement.appendChild(dv); 
- 
-				   const tag = sibling.querySelectorAll('[name="spec_users_user"]')[0]; 
-
-				   if(tag.value){ 
-					//dv2.innerHTML = tag.value;
-				   }
- 
-				   tag.addEventListener('change', function() {
-				         if(tag.value){
-					    dv2.innerHTML = tag.value;
-					 }
-					 else{
-					    dv2.innerHTML = tx; 
-					 }
-				   }); 
-				}
-			    }
+			   inheritor_type: "checkbox"   
 			}, 
 			{
 			  "label": "Inherits",
