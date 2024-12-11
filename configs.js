@@ -1674,7 +1674,10 @@ const create =
 			  "name": "user",
 			  "required": true ,
 			   description: "" ,
+			   inheritor_name: "inherits" ,
+			   inheritor_type: "checkbox"
 			   setter: (subform , inputElement) => { 
+				 return;
 				 // Sibling Elements  
 				 var parentElement = subform.querySelector('[for="spec_users_inherits"]');  
 				 var inherits = [];
