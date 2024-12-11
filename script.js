@@ -387,6 +387,7 @@ class FormGenerator {
   { 
 
 	 // Sibling Elements  
+	  console.log(subform.outerHTML);
 	 console.log(parentName , field.inheritor_name);
 	 var parentElement = subform.querySelector('[for="spec_users_inherits"]');  
 	 var inherits = [];
