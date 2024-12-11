@@ -671,7 +671,7 @@ class FormGenerator {
       }
 
   }
-  createSetter(inputElement , setter)
+  createSetter(inputElement , setter  , field , parentName)
   { 
         function getEventSetterId() {
 	  window.eventSetterIds = window.eventSetterIds || [];
@@ -696,7 +696,7 @@ class FormGenerator {
 		      if (descendant.hasAttribute(setterId) && proc) {  
 			 proc = false;
 		         try{
-		             setter(subform , inputElement);  
+		             setter(subform , inputElement , field , parentName);  
 			 }
 		         catch(e){
 			      console.error(e);
@@ -760,7 +760,7 @@ class FormGenerator {
 	      inputElement.prepend(selectElement);
  
 	      if(field.setter){
-		 ts.createSetter(inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter  , field , parentName); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
 	         ts.createSetter(inputElement , (subform , inputElement) =>{
@@ -780,7 +780,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 ts.createSetter(inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter  , field , parentName); 
 	      }
               break;
             case "textarea":
@@ -815,7 +815,7 @@ class FormGenerator {
 	      }
 			  
 	      if(field.setter){
-		 ts.createSetter(parentElement , field.setter); 
+		 ts.createSetter(parentElement , field.setter  , field , parentName); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
 	         ts.createSetter(parentElement , (subform , inputElement) =>{
@@ -938,7 +938,7 @@ class FormGenerator {
 	      inputElement.prepend(selectElement);
 			  
 	      if(field.setter){
-		 ts.createSetter(inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter  , field , parentName); 
 	      }
 	      if(field.inheritor_name && field.inheritor_type){
 	         ts.createSetter(inputElement , (subform , inputElement) =>{
@@ -958,7 +958,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){
-		 ts.createSetter(inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter  , field , parentName); 
 	      }
               break;
             case "textarea":
@@ -993,7 +993,7 @@ class FormGenerator {
 	      }
 			  
 	      if(field.setter){
-		 ts.createSetter(textElement , field.setter); 
+		 ts.createSetter(textElement , field.setter  , field , parentName); 
 	      }
 	      
 	      if(field.inheritor_name && field.inheritor_type){ 
@@ -1204,7 +1204,7 @@ class FormGenerator {
           inputElement.prepend(selectElement);
 		      
          if(field.setter){
-	    ts.createSetter(subFormElement , field.setter); 
+	    ts.createSetter(subFormElement , field.setter  , field , parentName); 
          }
 	      if(field.inheritor_name && field.inheritor_type){
 	         ts.createSetter(subFormElement , (subform , inputElement) =>{
@@ -1224,7 +1224,7 @@ class FormGenerator {
               inputElement.required = field.required;
               
 	      if(field.setter){ 
-		 ts.createSetter(inputElement , field.setter); 
+		 ts.createSetter(inputElement , field.setter  , field , parentName); 
 	      }
               break;
             case "textarea":
@@ -1258,7 +1258,7 @@ class FormGenerator {
 	      }
 			  
 	      if(field.setter){
-		 ts.createSetter(textElement , field.setter); 
+		 ts.createSetter(textElement , field.setter  , field , parentName); 
 	      }
 	      
 	      if(field.inheritor_name && field.inheritor_type){ 
