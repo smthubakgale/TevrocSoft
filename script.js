@@ -1207,7 +1207,7 @@ class FormGenerator {
 	      }
 	      
 	      if(field.inheritor_name && field.inheritor_type){
-		      ts.createInherits(subFormElement , inputElement  , field , parentName);
+		      ts.createInherits(parentElement , inputElement  , field , parentName);
 	      }
 
 	      inputElement.prepend(textElement);
