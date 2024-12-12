@@ -2069,10 +2069,10 @@ window.updateQuoteResult = function(){
 	  });
 	});
 	// Payment Plan 
-	const phaseTable = document.createElement('table');
-	phaseTable.style.width = '100%';
-	paymentPhasesList.innerHTML = '';
-	paymentPhasesList.appendChild(phaseTable);
+	const paymentTable = document.createElement('table');
+	paymentTable.style.width = '100%';
+	paymentPlansList.innerHTML = '';
+	paymentPlansList.appendChild(paymentTable);
 	
 	phases.forEach((phase, index) => {
 	  const phaseRow = document.createElement('tr');
@@ -2091,7 +2091,7 @@ window.updateQuoteResult = function(){
 	    paymentAmountHeader.textContent = 'Payment Amount';
 	    tableHeaderRow.appendChild(paymentAmountHeader);
 	
-	    phaseTable.appendChild(tableHeaderRow);
+	    paymentTable.appendChild(tableHeaderRow);
 	
 	    // Add an empty row after the header
 	    const emptyRow = document.createElement('tr');
@@ -2108,7 +2108,7 @@ window.updateQuoteResult = function(){
 	    emptyCell3.textContent = (10/100)*adjustedPrice;
 	    emptyRow.appendChild(emptyCell3);
 	
-	    phaseTable.appendChild(emptyRow);
+	    paymentTable.appendChild(emptyRow);
 	  }
 	
 	  const phaseNameCell = document.createElement('td');
@@ -2129,7 +2129,7 @@ window.updateQuoteResult = function(){
 	  paymentAmountCell.textContent = phase.price;
 	  phaseRow.appendChild(paymentAmountCell);
 	
-	  phaseTable.appendChild(phaseRow);
+	  paymentTable.appendChild(phaseRow);
 
 	  if(index == phases.length - 1){
 	   // Add total row
@@ -2143,7 +2143,7 @@ window.updateQuoteResult = function(){
 		totalCell2.textContent = `R ${adjustedPrice}`;
 		totalRow.appendChild(totalCell2);
 		
-		phaseTable.appendChild(totalRow);
+		paymentTable.appendChild(totalRow);
 	  }
 	});	
 	// 
