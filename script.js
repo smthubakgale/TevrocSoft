@@ -2100,7 +2100,6 @@ window.updateQuoteResult = function(){
 	    emptyRow.appendChild(emptyCell1);
 	
 	    const emptyCell2 = document.createElement('td'); 
-	    const startDate = new Date(start_date); 
 	    emptyCell2.textContent = startDate.toISOString().split('T')[0];
 	    emptyRow.appendChild(emptyCell2);
 	
