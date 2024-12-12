@@ -2104,7 +2104,7 @@ window.updateQuoteResult = function(){
 	    emptyRow.appendChild(emptyCell2);
 	
 	    const emptyCell3 = document.createElement('td');
-	    emptyCell3.textContent = ((10/100)*adjustedPrice).toFixed(2);
+	    emptyCell3.textContent = `R ${((10/100)*adjustedPrice).toFixed(2)}`;
 	    emptyRow.appendChild(emptyCell3);
 	
 	    paymentTable.appendChild(emptyRow);
@@ -2124,7 +2124,7 @@ window.updateQuoteResult = function(){
 	  phaseRow.appendChild(paymentDateCell);
 	
 	  const paymentAmountCell = document.createElement('td');
-	  paymentAmountCell.textContent = phase.price.toFixed(2);
+	  paymentAmountCell.textContent = `R ${phase.price.toFixed(2)}`;
 	  phaseRow.appendChild(paymentAmountCell);
 	
 	  paymentTable.appendChild(phaseRow);
