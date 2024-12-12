@@ -2129,7 +2129,7 @@ window.updateQuoteResult = function(){
 	
 	  paymentTable.appendChild(phaseRow);
 
-	  if(index == phases.length - 1){
+	  if(index == phases.length - 2){
 	   // Add total row
 		const totalRow = document.createElement('tr');
 		const totalCell1 = document.createElement('td');
@@ -2138,7 +2138,7 @@ window.updateQuoteResult = function(){
 		totalRow.appendChild(totalCell1);
 		
 		const totalCell2 = document.createElement('td');
-		totalCell2.textContent = `R ${adjustedPrice}`;
+		totalCell2.textContent = `R ${adjustedPrice.toFixed(2)}`;
 		totalRow.appendChild(totalCell2);
 		
 		paymentTable.appendChild(totalRow);
