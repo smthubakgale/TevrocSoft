@@ -13,7 +13,7 @@ function sendEmail(name , message , email , formStatus , form)
 {
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
     from_name: name ,
-    html_message: message ,
+    message: message ,
     from_email: email ,
     reply_to: email,
     }).then(() => {
