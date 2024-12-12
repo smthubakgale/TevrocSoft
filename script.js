@@ -9,40 +9,34 @@ import {
     emailjs.init('OiMEAcHFuztUoVBi0');
   })();
 
-import { Brevvo } from 'https://cdn.jsdelivr.net/npm/@brevvo/sdk@1.0.0/dist/brevvo.min.js';
-
 function sendEmail(name , message , email , formStatus , form)
 {
-    const brevvo = new Brevo({
-    apiKey: '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'
-  });
-
-  const data = {
-    from: email,
-    to: 'your-email@example.com',
-    subject: 'Hello from my website!',
-    html: `
-      <html>
-        <body>
-          <h1>Hello!</h1>
-          <p>Name: ${name}</p>
-          <p>Email: ${email}</p>
-          <p>Message: ${message}</p>
-        </body>
-      </html>
-    `
-  };
-
-  brevvo.sendEmail(data)
-    .then((response) => {
-      console.log('SUCCESS!');
-      formStatus.innerHTML = 'Message sent successfully!';
-      form.reset();
-    })
-    .catch((error) => {
-        console.log('FAILED...', error);
-        formStatus.innerHTML = 'Error sending message. Please try again.';
-    });
+    const brevvo_Key = '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';
+   fetch('https://api.brevo.com/v3/smtp/email', {
+  method: 'POST',
+  headers: {
+    'accept': 'application/json',
+    'api-key': brevvo_Key ,
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify({
+    "sender": {
+      "name": "Sender Alex",
+      "email": "senderalex@example.com"
+    },
+    "to": [
+      {
+        "email": "testmail@example.com",
+        "name": "John Doe"
+      }
+    ],
+    "subject": "Hello world",
+    "htmlContent": "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>"
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
 	
    return;
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
