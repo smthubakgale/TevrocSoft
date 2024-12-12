@@ -782,6 +782,31 @@ th {
   margin-right: 10px;
 }
 
+#portfolio .screenshot{
+  width:80%;
+  max-width:80%;
+}
+#portfolio screenshots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#portfolio screenshots img {
+  width: 45%; /* Reduced width */
+  max-width:45% ;
+  margin: 5px; /* Reduced margin */
+  border-radius: 5px; /* Reduced border radius */
+  box-shadow: none; /* Removed box shadow */
+  opacity: 0.8; /* Added opacity for subtle appearance */
+}
+
+#portfolio screenshots img:hover {
+  opacity: 1; /* Increased opacity on hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added subtle box shadow */
+}
+
 /* Pricing */
 #pricing {
   background-color: #f9f9f9;
