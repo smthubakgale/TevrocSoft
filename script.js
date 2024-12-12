@@ -2119,7 +2119,7 @@ window.updateQuoteResult = function(){
 	    startDate.setDate(startDate.getDate() + phase.req_end);
 	    paymentDateCell.textContent = startDate.toISOString().split('T')[0];
 	  } else {
-	    paymentDateCell.textContent = end_date;
+	    paymentDateCell.textContent = endDate.toISOString().split('T')[0];
 	  }
 	  phaseRow.appendChild(paymentDateCell);
 	
