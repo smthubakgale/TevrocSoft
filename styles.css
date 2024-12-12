@@ -628,7 +628,7 @@ th {
   text-align: center;
   margin-bottom: 30px;
   font-size: 18px;
-  color: #666;
+  color: #999; /* added grayish color */
 }
 
 #home .what-we-do .services {
@@ -659,7 +659,7 @@ th {
 #home .what-we-do .service p {
   margin-bottom: 20px;
   font-size: 16px;
-  color: #666;
+  color: #999; /* added grayish color */
 }
 
 #home .what-we-do .service ul {
