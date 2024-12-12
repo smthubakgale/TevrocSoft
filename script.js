@@ -2115,8 +2115,7 @@ window.updateQuoteResult = function(){
 	  phaseRow.appendChild(phaseNameCell);
 	
 	  const paymentDateCell = document.createElement('td');
-	  if (typeof phase.req_end === 'number') {
-	    const startDate = new Date(start_date);
+	  if (typeof phase.req_end === 'number') { 
 	    startDate.setDate(startDate.getDate() + phase.req_end);
 	    paymentDateCell.textContent = startDate.toISOString().split('T')[0];
 	  } else {
