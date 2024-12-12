@@ -5,6 +5,39 @@ import {
 
 //------------------------------------: Shop 
  // Initialize EmailJS 
+(function() {
+    emailjs.init('OiMEAcHFuztUoVBi0');
+  })();
+
+function sendEmail(name , message , email , formStatus , form)
+{
+    emailjs.send("service_44zo6pj","template_m3vjj5x",{
+    from_name: name ,
+    message: message ,
+    from_email: email ,
+    reply_to: email,
+    }).then(() => {
+                console.log('SUCCESS!');
+                formStatus.innerHTML = 'Message sent successfully!';
+                form.reset();
+            }, (error) => {
+                console.log('FAILED...', error);
+                formStatus.innerHTML = 'Error sending message. Please try again.';
+            });
+}
+
+document.getElementById("send-email-1").parentNode.addEventListener('submit', (e) => 
+{  
+     var formStatus = document.getElementById("form-status-1");
+     var name = this.querySelect('#name').value;
+     var message = ` <h2> Project Type : ${ this.querySelect('#project-type2').value} </h2> 
+`;       message += `Project Description :
+`;       message += ` ${this.querySelect('#editor').value} `;
+     
+     var email = this.querySelect("#email").value;
+
+      sendEmail(name , message , email , formStatus , this);
+});
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
