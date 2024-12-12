@@ -13,7 +13,7 @@ function sendEmail(name , message , email , formStatus , form)
 {
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
     from_name: name ,
-    message: message ,
+    tml_message: message ,
     from_email: email ,
     reply_to: email,
     }).then(() => {
@@ -34,7 +34,7 @@ fm1.addEventListener('submit', (e) =>
      var name = fm1.querySelector('#name').value;
      var message = ` <h2> Project Type : ${ fm1.querySelector('#project-type2').value} </h2> 
 `;       message += `Project Description :
-`;       message += ` ${fm1.querySelector('#editor').value} `;
+`;       message += ` ${fm1.querySelector('editor').value} `;
      
      var email = fm1.querySelector("#email").value;
 
