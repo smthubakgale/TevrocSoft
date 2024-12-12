@@ -9,7 +9,7 @@ import {
     emailjs.init('OiMEAcHFuztUoVBi0');
   })();
 
-function sendEmail(name , message , email , formStatus , form , subject)
+function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 {
 
     const brevvo_Key = "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"; 
@@ -31,7 +31,7 @@ function sendEmail(name , message , email , formStatus , form , subject)
         "name": "Mabalane Thubakgale"
       }
     ],
-    "subject": "Hello world",
+    "subject": subject,
     "htmlContent": `<html><head></head><body${message}</body></html>`
   })
 })
