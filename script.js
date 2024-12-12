@@ -14,6 +14,7 @@ import {
   const discountAmountInput = document.getElementById('discount-request-amount');
   const quoteAmountValue = document.getElementById('quote-amount-value');
   const projectPhasesList = document.getElementById('project-phases');
+  const paymentPlansList = document.getElementById('payment-plans');
   
   // Template  header toggle
 	document.querySelectorAll('#shop .template-group-header').forEach(header => {
@@ -1748,7 +1749,7 @@ document.addEventListener("DOMContentLoaded", function() {
    return adjustedPrice;
 }
 
-function estimatePhases(complexity, projectType, platform, projectDurationDays) {
+function estimatePhases(complexity, projectType, platform, projectDurationDays  , startDate , adjustedPrice) {
 
  let proposedDuration = 1;
  let start = 0;
@@ -1773,6 +1774,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
   let proj2 = Math.floor(projectDurationDays/7);
 
   console.log( proj2 , proposedDuration );
+  let price2 = (90/100)*adjustedPrice;
  	
   const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
@@ -1790,12 +1792,15 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays) 
       ? Math.floor((start + estimatedDuration) * (proj2/proposedDuration) )
       : "Ongoing";
 
+    const price3 = estimatedDuration ? price2*(estimatedDuration/proposedDuration) :(10/100)*adjustedPrice;
     const ret = {
       name: phase.charAt(0).toUpperCase() + phase.slice(1),
       req_start: reqStart,
       req_end: reqEnd,
+      price : price3 , 
       prop_start: start,
       prop_end: estimatedDuration ? start + estimatedDuration : "Ongoing",
+	    
       estimatedDuration: estimatedDuration ? `${estimatedDuration} days` : "Ongoing",
       activities: projectPhases[phase],
     };
@@ -2027,7 +2032,7 @@ window.updateQuoteResult = function(){
 	  const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
 	  document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
 	// Determine project phases
-	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays);
+	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays , startDate , adjustedPrice);
 	
 	projectPhasesList.innerHTML = "";
 	
@@ -2063,6 +2068,84 @@ window.updateQuoteResult = function(){
 	    activitiesUl.appendChild(activityLi);
 	  });
 	});
+	// Payment Plan 
+	const phaseTable = document.createElement('table');
+	phaseTable.style.width = '100%';
+	paymentPhasesList.innerHTML = '';
+	paymentPhasesList.appendChild(phaseTable);
+	
+	phases.forEach((phase, index) => {
+	  const phaseRow = document.createElement('tr');
+	
+	  if (index === 0) {
+	    const tableHeaderRow = document.createElement('tr');
+	    const phaseHeader = document.createElement('th');
+	    phaseHeader.textContent = 'Phase';
+	    tableHeaderRow.appendChild(phaseHeader);
+	
+	    const paymentDateHeader = document.createElement('th');
+	    paymentDateHeader.textContent = 'Payment Date';
+	    tableHeaderRow.appendChild(paymentDateHeader);
+	
+	    const paymentAmountHeader = document.createElement('th');
+	    paymentAmountHeader.textContent = 'Payment Amount';
+	    tableHeaderRow.appendChild(paymentAmountHeader);
+	
+	    phaseTable.appendChild(tableHeaderRow);
+	
+	    // Add an empty row after the header
+	    const emptyRow = document.createElement('tr');
+	    const emptyCell1 = document.createElement('td');
+	    emptyCell1.textContent = phase.name;
+	    emptyRow.appendChild(emptyCell1);
+	
+	    const emptyCell2 = document.createElement('td'); 
+	    const startDate = new Date(start_date); 
+	    emptyCell2.textContent = startDate.toISOString().split('T')[0];
+	    emptyRow.appendChild(emptyCell2);
+	
+	    const emptyCell3 = document.createElement('td');
+	    emptyCell3.textContent = (10/100)*adjustedPrice;
+	    emptyRow.appendChild(emptyCell3);
+	
+	    phaseTable.appendChild(emptyRow);
+	  }
+	
+	  const phaseNameCell = document.createElement('td');
+	  phaseNameCell.textContent = phase.name;
+	  phaseRow.appendChild(phaseNameCell);
+	
+	  const paymentDateCell = document.createElement('td');
+	  if (typeof phase.req_end === 'number') {
+	    const startDate = new Date(start_date);
+	    startDate.setDate(startDate.getDate() + phase.req_end);
+	    paymentDateCell.textContent = startDate.toISOString().split('T')[0];
+	  } else {
+	    paymentDateCell.textContent = end_date;
+	  }
+	  phaseRow.appendChild(paymentDateCell);
+	
+	  const paymentAmountCell = document.createElement('td');
+	  paymentAmountCell.textContent = phase.price;
+	  phaseRow.appendChild(paymentAmountCell);
+	
+	  phaseTable.appendChild(phaseRow);
+
+	  if(index == phases.length - 1){
+	   // Add total row
+		const totalRow = document.createElement('tr');
+		const totalCell1 = document.createElement('td');
+		totalCell1.colSpan = 2;
+		totalCell1.textContent = 'Total';
+		totalRow.appendChild(totalCell1);
+		
+		const totalCell2 = document.createElement('td');
+		totalCell2.textContent = `R ${adjustedPrice}`;
+		totalRow.appendChild(totalCell2);
+		
+		phaseTable.appendChild(totalRow);
+	  }
+	});	
 	// 
 	
   }
