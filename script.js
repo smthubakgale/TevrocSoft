@@ -19,7 +19,7 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	 };
 
 	fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email`, {
-	    method: 'GET',
+	    method: 'POST',
 	    headers: {
 	        'Content-Type': 'application/json'
 	    },
