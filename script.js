@@ -26,16 +26,17 @@ function sendEmail(name , message , email , formStatus , form)
             });
 }
 
-document.getElementById("send-email-1").parentNode.addEventListener('submit', (e) => 
+var fm1 = document.getElementById("send-email-1").parentNode;
+fm1.addEventListener('submit', (e) => 
 {  
      e.preventDefault();
      var formStatus = document.getElementById("form-status-1");
-     var name = this.querySelector('#name').value;
-     var message = ` <h2> Project Type : ${ this.querySelector('#project-type2').value} </h2> 
+     var name = fm1.querySelector('#name').value;
+     var message = ` <h2> Project Type : ${ fm1.querySelector('#project-type2').value} </h2> 
 `;       message += `Project Description :
-`;       message += ` ${this.querySelector('#editor').value} `;
+`;       message += ` ${fm1.querySelector('#editor').value} `;
      
-     var email = this.querySelector("#email").value;
+     var email = fm1.querySelector("#email").value;
 
      console.log(name , email , message , this , formStatus);
 
