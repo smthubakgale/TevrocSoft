@@ -11,6 +11,38 @@ import {
 
 function sendEmail(name , message , email , formStatus , form)
 {
+    const brevvo = new Brevvo({
+    apiKey: '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'
+  });
+
+  const data = {
+    from: email,
+    to: 'your-email@example.com',
+    subject: 'Hello from my website!',
+    html: `
+      <html>
+        <body>
+          <h1>Hello!</h1>
+          <p>Name: ${name}</p>
+          <p>Email: ${email}</p>
+          <p>Message: ${message}</p>
+        </body>
+      </html>
+    `
+  };
+
+  brevvo.sendEmail(data)
+    .then((response) => {
+      console.log('SUCCESS!');
+      formStatus.innerHTML = 'Message sent successfully!';
+      form.reset();
+    })
+    .catch((error) => {
+        console.log('FAILED...', error);
+        formStatus.innerHTML = 'Error sending message. Please try again.';
+    });
+	
+   return;
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
     from_name: name ,
     message: message ,
