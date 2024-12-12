@@ -440,7 +440,13 @@ th {
 }
 
 .side-nav .docs-nav li {
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
+}
+.side-nav .docs-nav ul li { 
+  font-weight:700;
+}
+.side-nav .docs-nav ul ul li { 
+  font-weight:500;
 }
 
 .side-nav .docs-nav a {
