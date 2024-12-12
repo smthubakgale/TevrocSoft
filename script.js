@@ -11,7 +11,8 @@ import {
 
 function sendEmail(name , message , email , formStatus , form)
 {
-    const brevvo_Key = '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';
+
+    const brevvo_Key = "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"; 
    fetch('https://api.brevo.com/v3/smtp/email', {
   method: 'POST',
   headers: {
@@ -21,27 +22,27 @@ function sendEmail(name , message , email , formStatus , form)
   },
   body: JSON.stringify({
     "sender": {
-      "name": "Sender Alex",
-      "email": "senderalex@example.com"
+      "name": name ,
+      "email": email
     },
     "to": [
       {
-        "email": "testmail@example.com",
-        "name": "John Doe"
+        "email": "smthubakgale@gmail.com",
+        "name": "Mabalane Thubakgale"
       }
     ],
     "subject": "Hello world",
-    "htmlContent": "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>"
+    "htmlContent": `<html><head></head><body${message}</body></html>`
   })
 })
 .then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.error(error));
 	
-   return;
+	 
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
     from_name: name ,
-    message: message ,
+    message: `<html><head></head><body>${message}</body></html>` ,
     from_email: email ,
     reply_to: email,
     }).then(() => {
