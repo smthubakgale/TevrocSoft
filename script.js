@@ -26,7 +26,7 @@ function sendEmail(name , message , email , formStatus , form)
             });
 }
 
-document.getElementById("#send-email-1").parentNode.addEventListener('submit', (e) => 
+document.getElementById("send-email-1").parentNode.addEventListener('submit', (e) => 
 {  
      var formStatus = document.getElementById("form-status-1");
      var name = this.querySelect('#name').value;
