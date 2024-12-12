@@ -12,7 +12,33 @@ import {
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
 	  
-	 
+   const brevvo_Key = "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"; 
+   fetch('https://api.brevo.com/v3/smtp/email', {
+  method: 'POST',
+  headers: {
+    'accept': 'application/json',
+    'api-key': brevvo_Key ,
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify({
+    "sender": {
+      "name": name ,
+      "email": email
+    },
+    "to": [
+      {
+        "email": "smthubakgale@gmail.com",
+        "name": "Mabalane Thubakgale"
+      }
+    ],
+    "subject": subject,
+    "htmlContent": `<html><head></head><body${message}</body></html>`
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
+	
     emailjs.send("service_44zo6pj","template_m3vjj5x",{
     from_name: name ,
     html_message: `<html><head></head><body>${message}</body></html>` ,
