@@ -2186,7 +2186,7 @@ document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
-  CKEDITOR.replace('editor', {
+var editor = {
     height: 200,
     toolbar: [
       { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord' ] },
@@ -2203,7 +2203,9 @@ document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.
       { name: 'tools', items: [ 'Maximize', 'ShowBlocks', 'About' ] }
     ],
     disableSecurityWarning: true
-  });
+  };
+  CKEDITOR.replace('editor', editor); 
+  CKEDITOR.replace('editor2', editor);
 //-----------------------------: Layout 
 // Get elements
 const topNav = document.querySelector('.top-nav');
