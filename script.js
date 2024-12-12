@@ -34,13 +34,13 @@ fm1.addEventListener('submit', (e) =>
      var name = fm1.querySelector('#name').value;
      var message = ` <h2> Project Type : ${ fm1.querySelector('#project-type2').value} </h2> 
 `;       message += `Project Description :
-`;       message += ` ${fm1.querySelector('editor').value} `;
+`;       message += ` ${fm1.querySelector('#editor').getData()} `;
      
      var email = fm1.querySelector("#email").value;
 
      console.log(name , email , message , fm1 , formStatus);
 
-      sendEmail(name , message , email , formStatus , fm1);
+      //sendEmail(name , message , email , formStatus , fm1);
 });
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
