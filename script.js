@@ -9,9 +9,11 @@ import {
     emailjs.init('OiMEAcHFuztUoVBi0');
   })();
 
+import { Brevvo } from 'https://cdn.jsdelivr.net/npm/@brevvo/sdk@1.0.0/dist/brevvo.min.js';
+
 function sendEmail(name , message , email , formStatus , form)
 {
-    const brevvo = new Brevvo({
+    const brevvo = new Brevo({
     apiKey: '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'
   });
 
