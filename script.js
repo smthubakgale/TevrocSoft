@@ -34,7 +34,7 @@ fm1.addEventListener('submit', (e) =>
      var name = fm1.querySelector('#name').value;
      var message = ` <h2> Project Type : ${ fm1.querySelector('#project-type2').value} </h2> 
 `;       message += `Project Description :
-`;       message += ` ${fm1.querySelector('#editor').getData()} `;
+`;       message += ` ${ CKEDITOR.instances.editor.getData() } `;
      
      var email = fm1.querySelector("#email").value;
 
