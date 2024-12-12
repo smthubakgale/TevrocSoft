@@ -18,7 +18,7 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	    message: `<html><head></head><body${message}</body></html>`
 	 };
 
-	fetch(`https://tevrocsoftapi.netlify.app/send-email`, {
+	fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email`, {
 	    method: 'GET',
 	    headers: {
 	        'Content-Type': 'application/json'
