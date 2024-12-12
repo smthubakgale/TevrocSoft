@@ -28,6 +28,7 @@ function sendEmail(name , message , email , formStatus , form)
 
 document.getElementById("send-email-1").parentNode.addEventListener('submit', (e) => 
 {  
+     e.preventDefault();
      var formStatus = document.getElementById("form-status-1");
      var name = this.querySelect('#name').value;
      var message = ` <h2> Project Type : ${ this.querySelect('#project-type2').value} </h2> 
