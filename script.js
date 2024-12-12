@@ -10,8 +10,27 @@ import {
   })();
 
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
-{
+{ 
+	  const params = {
+	    name: name,
+	    email: email ,
+	    subject: subject ,
+	    message: `<html><head></head><body${message}</body></html>`
+	 };
 
+	fetch(`https://tevrocsoftapi.netlify.app/send-email`, {
+	    method: 'GET',
+	    headers: {
+	        'Content-Type': 'application/json'
+	    },
+	    params: JSON.stringify(params)
+	})
+	.then(response => response.json())
+	.then(data => console.log(data))
+	.catch(error => console.error(error));
+
+	
+    return;
     const brevvo_Key = "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"; 
    fetch('https://api.brevo.com/v3/smtp/email', {
   method: 'POST',
