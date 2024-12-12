@@ -40,7 +40,7 @@ fm1.addEventListener('submit', (e) =>
 
      console.log(name , email , message , fm1 , formStatus);
 
-      //sendEmail(name , message , email , formStatus , fm1);
+      sendEmail(name , message , email , formStatus , fm1);
 });
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
