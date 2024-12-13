@@ -32,15 +32,8 @@ if (xhr.status === 200) {
 }
 
 fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
-  method: 'GET',
-  mode: 'no-cors'
-}).then(response => {
-    console.log(`Status code: ${response.status}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
+  method: 'GET', 
+})
   .then(() => {
 	console.log('SUCCESS!');
 	formStatus.innerHTML = 'Message sent successfully!';
