@@ -11,7 +11,17 @@ import {
 
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
-	fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
+	const params = {
+	  name: name ,
+	  email: email ,
+	  message: message ,
+	  subject: subject 
+	};
+
+const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
+
+fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
+  method: 'GET',
   mode: 'no-cors'
 })
   .then(() => {
