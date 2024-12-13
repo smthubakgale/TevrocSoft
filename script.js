@@ -21,7 +21,7 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}', false);
+	xhr.open('GET', `https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, false);
 	xhr.send();
 	
 	if (xhr.status === 200) {
