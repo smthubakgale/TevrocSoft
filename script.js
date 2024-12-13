@@ -20,6 +20,17 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 
 const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
+	var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', false);
+xhr.send();
+
+if (xhr.status === 200) {
+  console.log('Response received successfully!');
+  console.log(xhr.responseText);
+} else {
+  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
+}
+
 fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
   method: 'GET',
   mode: 'no-cors'
