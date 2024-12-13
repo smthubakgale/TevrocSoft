@@ -12,7 +12,7 @@ import {
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
 	fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
-  method: 'POST',
+  method: 'GET',
   headers: {
     'Content-Type': 'application/json'
   },
