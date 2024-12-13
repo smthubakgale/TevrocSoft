@@ -10,21 +10,20 @@ import {
   })();
 
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
-{ 
+{
 	const params = {
-	  name: name,
-	  email: email,
-	  message: message,
-	  subject: subject
+	  name: "name",
+	  email: "email",
+	  message: "message",
+	  subject: "subject"
 	};
 
 	console.log(params);
 	
-	const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', `https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, false);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send();
+	xhr.open('POST', 'https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', false);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.send(JSON.stringify(params));
 	
 	if (xhr.status === 200) {
 	  console.log('Response received successfully!');
@@ -32,6 +31,8 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	} else {
 	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
 	}
+
+const queryString = new URLSearchParams(params).toString();
 
 fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
   method: 'POST',
@@ -44,8 +45,6 @@ fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${qu
 .catch((error) => {
   console.log('FAILED...', error);
 });
-
-
 
 	return;
 	
