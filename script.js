@@ -20,19 +20,32 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 
 	console.log(params);
 	
-	const queryString = new URLSearchParams(params).toString();
+	const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 	
-	fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
-	  method: 'POST',
-	  headers: {
-	    'Content-Type': 'application/json'
-	  }
-	})
-	.then(response => response.text())
-	.then(data => console.log(data))
-	.catch((error) => {
-	  console.log('FAILED...', error);
-	});
+	xhr.open('POST', `https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, false);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send();
+	
+	if (xhr.status === 200) {
+	  console.log('Response received successfully!');
+	  console.log(xhr.responseText);
+	} else {
+	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
+	}
+
+fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => response.text())
+.then(data => console.log(data))
+.catch((error) => {
+  console.log('FAILED...', error);
+});
+
+
 
 	return;
 	
