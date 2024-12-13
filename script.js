@@ -19,7 +19,7 @@ function sendEmail(_name , _message , _email , formStatus , form , _subject = "M
 	};
 
 	console.log(params);
-	
+	/*
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', false);
 	xhr.setRequestHeader('Content-Type', 'application/json');
@@ -31,6 +31,7 @@ function sendEmail(_name , _message , _email , formStatus , form , _subject = "M
 	} else {
 	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
 	}
+	*/
 
 const queryString = new URLSearchParams(params).toString();
 
