@@ -12,11 +12,13 @@ import {
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
 	const params = {
-	  name: name,
-	  email: email,
-	  message: message,
-	  subject: subject
+	  name: "name",
+	  email: "email",
+	  message: "message",
+	  subject: "subject"
 	};
+
+	console.log(params);
 	
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', false);
@@ -30,23 +32,25 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
 	}
 
-	fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
-	  method: 'POST',
-	  headers: {
-	    'Content-Type': 'application/json'
-	  },
-	  body: JSON.stringify(params)
-	})
-	.then((r) => {
-	  console.log(r.text());
-	  console.log('SUCCESS!');
-	  formStatus.innerHTML = 'Message sent successfully!';
-	  form.reset();
-	})
-	.catch((error) => {
-	  console.log('FAILED...', error);
-	  formStatus.innerHTML = 'Error sending message. Please try again.';
-	});
+	const params = {
+  name: name,
+  email: email,
+  message: message,
+  subject: subject
+};
+
+fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(params)
+})
+.then(response => response.text())
+.then(data => console.log(data))
+.catch((error) => {
+  console.log('FAILED...', error);
+});
 
 	return;
 	
