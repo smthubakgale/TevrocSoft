@@ -37,7 +37,8 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	  },
 	  body: JSON.stringify(params)
 	})
-	.then(() => {
+	.then((r) => {
+	  console.log(r.text());
 	  console.log('SUCCESS!');
 	  formStatus.innerHTML = 'Message sent successfully!';
 	  form.reset();
