@@ -12,7 +12,7 @@ import {
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 {
 	const params = {
-	  name: "name",
+	  name: name,
 	  email: "email",
 	  message: "message",
 	  subject: "subject"
