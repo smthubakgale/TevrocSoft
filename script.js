@@ -14,9 +14,14 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
   mode: 'no-cors'
 })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+  .then(() => {
+	console.log('SUCCESS!');
+	formStatus.innerHTML = 'Message sent successfully!';
+	form.reset();
+    }, (error) => {
+	console.log('FAILED...', error);
+	formStatus.innerHTML = 'Error sending message. Please try again.';
+    });
 
 	return;
 	
