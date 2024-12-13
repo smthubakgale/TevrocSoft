@@ -11,7 +11,7 @@ import {
 
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
-	fetch("https://tevrocsoftapi.netlify.app/.netlify/functions/api")  
+	fetch("https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2")  
 	.then(response => response.json())
 	.then(data => console.log(data))
 	.catch(error => console.error(error));
