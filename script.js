@@ -9,11 +9,11 @@ import {
     emailjs.init('OiMEAcHFuztUoVBi0');
   })();
 
-function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
+function sendEmail(_name , _message , _email , formStatus , form , _subject = "Missing Subject")
 {
 	const params = {
-	  name: name,
-	  email: email,
+	  name: _name,
+	  email: _email,
 	  message: "message",
 	  subject: "subject"
 	};
