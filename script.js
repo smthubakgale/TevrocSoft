@@ -32,13 +32,6 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
 	}
 
-	const params = {
-  name: name,
-  email: email,
-  message: message,
-  subject: subject
-};
-
 fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
   method: 'POST',
   headers: {
