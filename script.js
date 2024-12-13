@@ -32,12 +32,13 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 	  console.log(`Error: ${xhr.status} ${xhr.statusText}`);
 	}
 
-fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
+const queryString = new URLSearchParams(params).toString();
+
+fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(params)
+  }
 })
 .then(response => response.text())
 .then(data => console.log(data))
