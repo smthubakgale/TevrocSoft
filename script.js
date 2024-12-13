@@ -14,8 +14,8 @@ function sendEmail(_name , _message , _email , formStatus , form , _subject = "M
 	const params = {
 	  name: _name,
 	  email: _email,
-	  message: "message",
-	  subject: "subject"
+	  message: _message,
+	  subject: _subject
 	};
 
 	console.log(params);
