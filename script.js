@@ -2,7 +2,7 @@ import {
   formConfig , formConfig2 , projectTypes , templates , complexityMultipliers , 
   projectTypeMultipliers , projectPhases ,projectPhaseMultipliers , projectDurationMultipliers 
   } from './configs.js';
-
+import { google } from 'googleapis';
 //------------------------------------: Shop 
  // Initialize EmailJS 
 (function() {
