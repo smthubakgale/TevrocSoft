@@ -11,10 +11,20 @@ import {
 
 function sendEmail(name , message , email , formStatus , form , subject = "Missing Subject")
 { 
-	fetch("https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2")  
-	.then(response => response.json())
-	.then(data => console.log(data))
-	.catch(error => console.error(error));
+	fetch('https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Your Name',
+    email: 'your-email@example.com',
+    message: 'Hello, this is a test email!'
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
 
 	return;
 	
