@@ -13,7 +13,7 @@ function sendEmail(name , message , email , formStatus , form , subject = "Missi
 {
 	const params = {
 	  name: name,
-	  email: "email",
+	  email: email,
 	  message: "message",
 	  subject: "subject"
 	};
