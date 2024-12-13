@@ -35,6 +35,8 @@ function sendEmail(_name , _message , _email , formStatus , form , _subject = "M
 
 const queryString = new URLSearchParams(params).toString();
 
+	console.log(queryString);
+
 fetch(`https://tevrocsoftapi.netlify.app/.netlify/functions/api/send-email2?${queryString}`, {
   method: 'POST',
   headers: {
