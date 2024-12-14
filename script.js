@@ -93,11 +93,12 @@ fm2.addEventListener('submit', (e) =>
 `;       message += `<h4><i> Project Description : </i></h4>
 `;       message += ` ${ CKEDITOR.instances.editor2.getData() } 
 `;       message += '<h4><i> Quote Result : </i></h4>
-`;       message += ` ${ quote.innerHTML } `
+`;       message += ` ${ quote.innerHTML } 
 `;       message += `<h4><i> Project Phases : </i></h4>
-`;       message += ` ${ phase.innerHTML } `
+`;       message += ` ${ phase.innerHTML } 
 `;       message += `<h4><i> Payment Plans : </i></h4>
-`;       message += ` ${ plans.innerHTML } `;
+`;       message += ` ${ plans.innerHTML }
+`;
      
      var email = fm1.querySelector("#email2").value;
 
