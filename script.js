@@ -69,6 +69,42 @@ fm1.addEventListener('submit', (e) =>
 
       sendEmail(name , message , email , formStatus , fm1 , "Custome Quote Request");
 });
+
+var fm2 = document.getElementById("send-email-2").parentNode;
+fm2.addEventListener('submit', (e) => 
+{  
+     e.preventDefault();
+     var formStatus = document.getElementById("form-status-2");
+     var quote = document.getElementById("quote-amount-value").parentNode;
+     var phase = document.getElementById("project-phases");
+     var plans = document.getElementById("payment-plans"); 
+     var type = document.getElementById("project-type"); 
+     var plan = document.getElementById("plan-select");  
+     var comp = document.getElementById("complexity"); 
+	
+     var name = fm1.querySelector('#name2').value;
+     var message = ` <h2> Advanced Project Quote : </h2> 
+`;       message += `<h4><i> Project Type : </i></h4>
+`;       message += ` ${ type.value } 
+`;       message += `<h4><i> Project Plan : </i></h4>
+`;       message += ` ${ plan.value } 
+`;       message += `<h4><i> Project Complexity : </i></h4>
+`;       message += ` ${ comp.value } 
+`;       message += `<h4><i> Project Description : </i></h4>
+`;       message += ` ${ CKEDITOR.instances.editor2.getData() } `
+`;       message += `<h4><i> Quote Result : </i></h4>
+`;       message += ` ${ quote.innerHTML } `
+`;       message += `<h4><i> Project Phases : </i></h4>
+`;       message += ` ${ phase.innerHTML } `
+`;       message += `<h4><i> Payment Plans : </i></h4>
+`;       message += ` ${ plans.innerHTML } `;
+     
+     var email = fm1.querySelector("#email2").value;
+
+     console.log(name , email , message , fm1 , formStatus);
+
+      sendEmail(name , message , email , formStatus , fm1 , "Custome Quote Request");
+});
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
