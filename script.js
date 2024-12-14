@@ -82,7 +82,7 @@ fm2.addEventListener('submit', (e) =>
      var plan = document.getElementById("plan-select");  
      var comp = document.getElementById("complexity"); 
 	
-     var name = fm1.querySelector('#name2').value;
+     var name = fm2.querySelector('#name2').value;
      var message = ` <h2> Advanced Project Quote : </h2> 
 `;       message += `<h4><i> Project Type : </i></h4>
 `;       message += ` ${ type.value } 
