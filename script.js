@@ -2327,6 +2327,13 @@ document.addEventListener("DOMContentLoaded", function() {
        xhr.send();
        return xhr.responseText;
     })() ;
+	
+  document.getElementById('payment').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/payment-terms.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
