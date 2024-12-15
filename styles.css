@@ -536,11 +536,11 @@ th {
 }
 
 @media (max-width: 768px) { #home .hero .overlay2 {
-  heght:unset;
+  heght:180vh;
 }}
 
 @media (max-width: 480px) { #home .hero .overlay2 {
-  height:unset;
+  height:180vh;
 }}
 
 #home .hero-features{
