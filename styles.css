@@ -592,11 +592,13 @@ th {
 }
 
 @media (max-width: 768px) { #home .project-card {
-  width: calc(100% - 20px);
+  width: calc(70% - 20px);
+  margin:auto;
 }}
 
 @media (max-width: 480px) { #home .project-card {
-  width: calc(100% - 20px);
+  width: calc(70% - 20px);
+  margin:auto;
 }}
 
 #home .project-card img {
