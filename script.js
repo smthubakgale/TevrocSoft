@@ -2297,7 +2297,8 @@ function formatDate(date, format) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.value = 5;
+document.addEventListener("DOMContentLoaded", function() {  
+  discountAmountInput.value = 5;
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
@@ -2305,7 +2306,13 @@ document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.
   startDateInput.addEventListener('change', updateQuoteResult);
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
-  
+
+  document.getElementById('policy').innerHTML = (function() {
+		       var xhr = new XMLHttpRequest();
+		       xhr.open('GET', 'blogs/apis.html', false); 
+		       xhr.send();
+		       return xhr.responseText;
+		    })() ;
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
