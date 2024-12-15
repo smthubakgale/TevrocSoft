@@ -2364,7 +2364,7 @@ window.onload = function() {
 function handleNavLinkClick(event) {
   event.preventDefault();
   
-  const targetSection = document.querySelector(`#${event.target.getAttribute('href').substring(1)}`);
+  const targetSection = document.querySelector(`${event.target.getAttribute('href').substring(1)}`);
   sections.forEach(section => section.classList.remove('active'));
   targetSection.classList.add('active');
   sideNav.classList.remove('mob-nav');
