@@ -517,23 +517,27 @@ th {
   color: #fff;
   padding: 100px;
   text-align: center;
+  background-image: url('assets/img/hero-bg.jpg'); 
+  background-size: cover;
+  background-position: center; 
+  height: 100vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  position: relative;
 }
-
+#home .hero .overlay2{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.5);
+}
 #home .hero-content {
   z-index: 1;
 }
-
-#home .hero-background img {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  opacity: 0.5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
+ 
 #home .featured {
   background-color: #F7F7F7; /* Secondary background color */
   padding: 50px;
