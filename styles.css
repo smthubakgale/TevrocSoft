@@ -544,11 +544,12 @@ th {
 
 @media (max-width: 480px) { #home .hero {
   heght:180vh;
-  width: calc(100vw - 100px - 2em);
+  width: calc(100vw - 0px);
 }}
 @media (max-width: 768px) { #home .hero {
   height:270vh; 
-  width:calc(100vw - 100px - 2em);
+  width:calc(100vw);
+  margin-left:-20px;
 }}
 
 #home .hero .overlay2{
