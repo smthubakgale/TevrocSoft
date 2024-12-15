@@ -2309,7 +2309,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   document.getElementById('policy').innerHTML = (function() {
 		       var xhr = new XMLHttpRequest();
-		       xhr.open('GET', 'blogs/apis.html', false); 
+		       xhr.open('GET', 'sections/policy.html', false); 
 		       xhr.send();
 		       return xhr.responseText;
 		    })() ;
