@@ -1206,6 +1206,19 @@ th {
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+@media only screen and (max-width: 480px) and (orientation: portrait) { #shop .calculator-container {
+    padding:10px; 
+    width:calc(100vw - 2*10px); 
+    overflow-x:scroll; 
+    margin-top:-20px
+}}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) { #shop .calculator-container {
+    padding:10px; 
+    width:calc(100vw - 2*10px); 
+    overflow-x:scroll; 
+    margin-top:-20px
+}}
 
 #shop .calculator-container h3 {
   margin-top: 0;
