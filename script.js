@@ -2308,17 +2308,25 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
 
   document.getElementById('policy').innerHTML = (function() {
-		       var xhr = new XMLHttpRequest();
-		       xhr.open('GET', 'sections/policy.html', false); 
-		       xhr.send();
-		       return xhr.responseText;
-		    })() ;
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/policy.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
+	
   document.getElementById('terms').innerHTML = (function() {
-		       var xhr = new XMLHttpRequest();
-		       xhr.open('GET', 'sections/terms-of-service.html', false); 
-		       xhr.send();
-		       return xhr.responseText;
-		    })() ;
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/terms-of-service.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
+	
+  document.getElementById('refund').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/refund-policy.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
