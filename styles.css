@@ -526,6 +526,15 @@ th {
   align-items: center; 
   position: relative;
 }
+
+@media (max-width: 768px) { #home .hero {
+  heght:180vh;
+}}
+
+@media (max-width: 480px) { #home .hero {
+  height:180vh;
+}}
+
 #home .hero .overlay2{
   position: absolute; 
   top: 0; 
@@ -534,14 +543,6 @@ th {
   height: 100%; 
   background-color: rgba(0,0,0,0.5);
 }
-
-@media (max-width: 768px) { #home .hero .overlay2 {
-  heght:180vh;
-}}
-
-@media (max-width: 480px) { #home .hero .overlay2 {
-  height:180vh;
-}}
 
 #home .hero-features{
   display: flex; 
