@@ -431,7 +431,8 @@ th {
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.side-nav .contact-link2 , .side-nav .about-link2{
+.side-nav .contact-link2 , .side-nav .about-link2 ,
+.side-nav .pricing-link2 , .side-nav .shop-link2{
   display:none;
 }
 
@@ -2502,7 +2503,8 @@ th {
       overflow-y: auto;
       box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
     }
-    .side-nav .contact-link2 , .side-nav .about-link2{
+    .side-nav .contact-link2 , .side-nav .about-link2 ,
+   .side-nav .pricing-link2 , .side-nav .shop-link2{
       display:block;
     }
     .side-nav .docs-nav{
