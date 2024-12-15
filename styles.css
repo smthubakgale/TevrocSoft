@@ -626,6 +626,11 @@ th {
   margin:auto;
 }}
 
+@media only screen and (max-width: 480px) and (orientation: landscape)  { #home .project-card {
+  width: calc(40vw - 20px - 2em);
+  margin:auto;
+}}
+
 #home .project-card img {
   width: 100%;
   height: 150px;
