@@ -721,7 +721,7 @@ th {
 
 @media only screen and (max-width: 480px) and (orientation: portrait)  { #home .what-we-do .services {
   flex-direction:column;
-}}
+}} 
 
 #home .what-we-do .service {
   background-color: #fff;
@@ -741,6 +741,9 @@ th {
   width: calc(80vw - 20px - 2em);
   margin:auto;
   margin-bottom:15px;
+}}
+@media only screen and (max-width: 480px) and (orientation: landscape)  { #home .what-we-do .service {
+  width: calc(40vw - 20px - 2em); 
 }}
 
 #home .what-we-do .service i {
@@ -813,6 +816,10 @@ th {
   width: calc(80vw - 20px - 2em);
   margin:auto;
   margin-bottom:15px;
+}}
+
+@media only screen and (max-width: 480px) and (orientation: landscape)  { #home .reason {
+  width: calc(40vw - 20px - 2em); 
 }}
 
 #home .reason i {
