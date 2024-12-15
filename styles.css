@@ -2452,8 +2452,12 @@ th {
     .side-nav .docs-nav{
       padding:15px;
     }
-   .side-nav .docs-nav a  , .side-nav .docs-nav label  {
+   .side-nav .docs-nav a  {
       color: #FFFFFF; /* White */ 
+    }
+  
+    .side-nav label{
+      color:#1A1D23;
     }
     
     .side-nav .docs-nav a:hover {
@@ -2514,8 +2518,8 @@ th {
       color: #FFFFFF; /* White */ 
     }
 
-    .side-nav  label{
-      color:white;
+    .side-nav label{
+      color:#1A1D23;
     }
     
     .side-nav .docs-nav a:hover {
