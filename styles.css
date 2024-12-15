@@ -529,10 +529,12 @@ th {
 
 @media (max-width: 768px) { #home .hero {
   heght:180vh;
+  width:90vw;
 }}
 
 @media (max-width: 480px) { #home .hero {
   height:180vh;
+  width:90vw;
 }}
 
 #home .hero .overlay2{
