@@ -2264,15 +2264,15 @@ export const projectTypes = [
       ],
       "plans": [
         {
-          "name": "Basic",
+          "name": "Standard",
           "price": 5000
         },
         {
-          "name": "Pro",
+          "name": "Enterprice",
           "price": 10000
         },
         {
-          "name": "Enterprise",
+          "name": "Premium",
           "price": 15000
         }
       ]
@@ -2301,15 +2301,15 @@ export const projectTypes = [
       ],
       "plans": [
         {
-          "name": "Starter",
+          "name": "Standard",
           "price": 3000
         },
         {
-          "name": "Business",
+          "name": "Enterprice",
           "price": 6000
         },
         {
-          "name": "Enterprise",
+          "name": "Premium",
           "price": 10000
         }
       ]
