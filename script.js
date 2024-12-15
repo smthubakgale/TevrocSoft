@@ -83,8 +83,10 @@ fm2.addEventListener('submit', (e) =>
      var comp = document.getElementById("complexity"); 
 	
      var name = fm2.querySelector('#name2').value;
+     var email = fm2.querySelector("#email2").value;
+
      var message = ` <h2> Advanced Project Quote : </h2> 
-`;       message += `<h4><i> Client DEtails : </i></h4>
+`;       message += `<h4><i> Client Details : </i></h4>
 `;       message += ` Name : ${ name } <br/>
 `;       message += ` Email Address : ${ email } <br/>
 `;       message += `<h4><i> Project Type : </i></h4>
@@ -103,8 +105,6 @@ fm2.addEventListener('submit', (e) =>
 `;       message += ` ${ plans.innerHTML }
 `;
      
-     var email = fm2.querySelector("#email2").value;
-
      console.log(name , email , message , fm1 , formStatus);
 
       sendEmail(name , message , email , formStatus , fm1 , "Custome Quote Request");
