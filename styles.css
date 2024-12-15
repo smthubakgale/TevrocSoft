@@ -541,10 +541,18 @@ th {
   heght:180vh;
   width:90vw;
 }}
+@media only screen and (max-width: 768px) and (orientation: landscape) { #home .hero {
+  heght:180vw;
+  width:90vh;
+}}
 
 @media (max-width: 480px) { #home .hero {
   height:180vh;
   width:90vw;
+}}
+@media only screen and (max-width: 768px) and (orientation: landscape) { #home .hero {
+  heght:180vw;
+  width:90vh;
 }}
 
 #home .hero .overlay2{
