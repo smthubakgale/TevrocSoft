@@ -1121,6 +1121,10 @@ th {
   margin-bottom: auto;
 }
 
+#shop .template-group-content li{
+  display:flex;
+}
+
 #shop #features {
   margin-top: 20px;
 }
