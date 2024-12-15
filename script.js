@@ -2419,18 +2419,18 @@ window.addEventListener('resize', () => {
 asideToggle.addEventListener('click', () => { 
    if(sideNav.classList.contains('mob-nav')){
       sideNav.classList.remove('mob-nav');
-      document.body.style.overflowY = 'scroll';
+      document.body.classList.remove('mobs-nav');
    }
    else{
       sideNav.classList.add('mob-nav');
-      document.body.style.overflowY = 'none';
+      document.body.classList.add('mobs-nav');
    }
 });
 
 document.addEventListener('click', (event) => { 
   if (!docsNav.contains(event.target) && sideNav.contains(event.target)) { 
     sideNav.classList.remove('mob-nav');
-    document.body.style.overflowY = 'scroll';
+    document.body.classList.remove('mobs-nav');
   }
 });
 
