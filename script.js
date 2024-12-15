@@ -2279,7 +2279,7 @@ function formatDate(date, format) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.value = 30;
+document.addEventListener("DOMContentLoaded", function() {  discountAmountInput.value = 5;
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
