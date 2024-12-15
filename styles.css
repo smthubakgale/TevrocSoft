@@ -594,12 +594,12 @@ th {
 }
 
 @media (max-width: 768px) { #home .project-card {
-  width: calc(70% - 20px);
+  width: calc(80vw - 20px);
   margin:auto;
 }}
 
 @media (max-width: 480px) { #home .project-card {
-  width: calc(70% - 20px);
+  width: calc(80vw - 20px);
   margin:auto;
 }}
 
@@ -715,7 +715,7 @@ th {
 }}
 
 @media (max-width: 480px) { #home .what-we-do .service {
-  width: calc(70% - 20px);
+  width: calc(80vw - 20px);
   margin:auto;
   margin-bottom:15px;
 }}
@@ -778,13 +778,13 @@ th {
 }
 
 @media (max-width: 768px) { #home .reason {
-  width: calc(70% - 20px);
+  width: calc(80vw - 20px);
   margin:auto;
   margin-bottom:15px;
 }}
 
 @media (max-width: 480px) { #home .reason {
-  width: calc(70% - 20px);
+  width: calc(80vw - 20px);
   margin:auto;
   margin-bottom:15px;
 }}
