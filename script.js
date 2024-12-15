@@ -105,10 +105,25 @@ fm2.addEventListener('submit', (e) =>
 `;       message += ` ${ plans.innerHTML }
 `;
      
-     console.log(name , email , message , fm1 , formStatus);
+     console.log(name , email , message , fm2 , formStatus);
 
       sendEmail(name , message , email , formStatus , fm1 , "Custome Quote Request");
 });
+
+var fm3 = document.getElementById("send-email-1").parentNode;
+fm3.addEventListener('submit', (e) => 
+{  
+     e.preventDefault();
+     var formStatus = document.getElementById("form-status-3");
+     var name = fm3.querySelector('#name3').value;
+     var message = fm3.querySelector("#text3").value; 
+     var email = fm3.querySelector("#email3").value;
+
+     console.log(name , email , message , fm3 , formStatus);
+
+      sendEmail(name , message , email , formStatus , fm1 , "Custome Quote Request");
+});
+
  // load project types dynamically from the JSON array
   var projectTypeSelect = document.getElementById('project-type');
   const templateGroupsContainer = document.querySelector('.template-groups');
