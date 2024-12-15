@@ -84,6 +84,9 @@ fm2.addEventListener('submit', (e) =>
 	
      var name = fm2.querySelector('#name2').value;
      var message = ` <h2> Advanced Project Quote : </h2> 
+`;       message += `<h4><i> Client DEtails : </i></h4>
+`;       message += ` Name : ${ name } <br/>
+`;       message += ` Email Address : ${ email } <br/>
 `;       message += `<h4><i> Project Type : </i></h4>
 `;       message += ` ${ type.options[type.selectedIndex].innerHTML } 
 `;       message += `<h4><i> Project Plan : </i></h4>
