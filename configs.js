@@ -2268,7 +2268,7 @@ export const projectTypes = [
           "price": 5000
         },
         {
-          "name": "Enterprice",
+          "name": "Enterprise",
           "price": 10000
         },
         {
@@ -2305,7 +2305,7 @@ export const projectTypes = [
           "price": 3000
         },
         {
-          "name": "Enterprice",
+          "name": "Enterprise",
           "price": 6000
         },
         {
