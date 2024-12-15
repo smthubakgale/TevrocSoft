@@ -1108,6 +1108,10 @@ th {
   margin-top: 0;
 }
 
+#shop .template-group-header h4 i {
+  float:right;
+}
+
 #shop .template-group-content {
   padding: 20px;
   border-bottom: 1px solid #ccc;
@@ -1123,6 +1127,7 @@ th {
 
 #shop .template-group-content li{
   display:flex;
+  margin-bottom:10px;
 }
 
 #shop #features {
