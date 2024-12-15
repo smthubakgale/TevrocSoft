@@ -2477,7 +2477,8 @@ th {
 /* Mobile Portrait */
 @media only screen and (max-width: 480px) {
   .top-nav .home-link , 
-  .top-nav .pricing-link , 
+  .top-nav .pricing-link ,  
+  .top-nav .shop-link , 
   .top-nav .about-link , 
   .top-nav .contact-link{
     display:none;
