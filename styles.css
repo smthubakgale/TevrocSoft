@@ -12,7 +12,10 @@ body {
   line-height: 1.6;
   color: #1A1D23; /* Main Navy */
   background-color: #FFFFFF; /* Main Background */
+  width:100vw;
+  overflow-x:hidden;
 }
+
 /* Links */
 
 a {
