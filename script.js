@@ -2419,15 +2419,18 @@ window.addEventListener('resize', () => {
 asideToggle.addEventListener('click', () => { 
    if(sideNav.classList.contains('mob-nav')){
       sideNav.classList.remove('mob-nav');
+      document.body.style.overflowY = 'scroll';
    }
    else{
       sideNav.classList.add('mob-nav');
+      document.body.style.overflowY = 'none';
    }
 });
 
 document.addEventListener('click', (event) => { 
   if (!docsNav.contains(event.target) && sideNav.contains(event.target)) { 
     sideNav.classList.remove('mob-nav');
+    document.body.style.overflowY = 'scroll';
   }
 });
 
