@@ -546,7 +546,7 @@ th {
   heght:180vh;
   width: calc(100vw - 0px);
 }}
-@media (max-width: 768px) { #home .hero {
+@media only screen and (max-width: 768px) and (orientation: landscape){ #home .hero {
   height:270vh; 
   width:calc(100vw);
   margin-left:-20px;
