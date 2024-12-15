@@ -75,7 +75,7 @@ fm2.addEventListener('submit', (e) =>
 {  
      e.preventDefault();
      var formStatus = document.getElementById("form-status-2");
-     var quote = document.getElementById("quote-amount-value").parentNode;
+     var quote = document.getElementById("quote-amount-value").parentNode.parentNode;
      var phase = document.getElementById("project-phases");
      var plans = document.getElementById("payment-plans"); 
      var type = document.getElementById("project-type"); 
@@ -85,7 +85,7 @@ fm2.addEventListener('submit', (e) =>
      var name = fm2.querySelector('#name2').value;
      var message = ` <h2> Advanced Project Quote : </h2> 
 `;       message += `<h4><i> Project Type : </i></h4>
-`;       message += ` ${ type.value } 
+`;       message += ` ${ type..options[type.selectedIndex].innerHTML } 
 `;       message += `<h4><i> Project Plan : </i></h4>
 `;       message += ` ${ plan.value } 
 `;       message += `<h4><i> Project Complexity : </i></h4>
