@@ -690,6 +690,14 @@ th {
   justify-content: center;
 }
 
+@media (max-width: 768px) { #home .what-we-do .services {
+  flex-direction:column;
+}}
+
+@media (max-width: 480px) { #home .what-we-do .services {
+  flex-direction:column;
+}}
+
 #home .what-we-do .service {
   background-color: #fff;
   padding: 20px;
@@ -697,6 +705,16 @@ th {
   margin: 20px;
   width: calc(33.33% - 20px);
 }
+
+@media (max-width: 768px) { #home .what-we-do .service {
+  width: calc(70% - 20px);
+  margin:auto;
+}}
+
+@media (max-width: 480px) { #home .what-we-do .service {
+  width: calc(70% - 20px);
+  margin:auto;
+}}
 
 #home .what-we-do .service i {
   font-size: 36px;
