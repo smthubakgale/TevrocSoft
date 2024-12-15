@@ -534,6 +534,30 @@ th {
   height: 100%; 
   background-color: rgba(0,0,0,0.5);
 }
+
+@media (max-width: 768px) { #home .hero .overlay2 {
+  heght:unset;
+}}
+
+@media (max-width: 480px) { #home .hero .overlay2 {
+  height:unset;
+}}
+
+#home .hero-features{
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) { #home .hero-features {
+  flex-direction:column;
+}}
+
+@media (max-width: 480px) { #home .hero-features {
+  flex-direction:column;
+}}
+
 #home .hero-content {
   z-index: 1;
 }
@@ -733,6 +757,15 @@ th {
 
 #home .cta-btn:hover {
   background-color: #444; /* Button hover background color */
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+ 
+}
+
+@media (max-width: 480px) {
 }
 
 /* Portfolio Section */
