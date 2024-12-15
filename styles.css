@@ -573,6 +573,14 @@ th {
   justify-content: center;
 }
 
+@media (max-width: 768px) { #home .project-cards {
+  flex-direction:column;
+}}
+
+@media (max-width: 480px) { #home .project-cards {
+  flex-direction:column;
+}}
+
 #home .project-card {
   background-color: #fff;
   border: 1px solid #E5E5E5; /* Border color */
@@ -581,6 +589,14 @@ th {
   padding: 20px;
   width: calc(33.33% - 20px);
 }
+
+@media (max-width: 768px) { #home .project-card {
+  width: calc(100% - 20px);
+}}
+
+@media (max-width: 480px) { #home .project-card {
+  width: calc(100% - 20px);
+}}
 
 #home .project-card img {
   width: 100%;
