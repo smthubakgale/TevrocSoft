@@ -599,11 +599,11 @@ th {
   justify-content: center;
 }
 
-@media (max-width: 768px) { #home .project-cards {
+@media only screen and (max-width: 768px) and (orientation: portrait)  { #home .project-cards {
   flex-direction:column;
 }}
 
-@media (max-width: 480px) { #home .project-cards {
+@media only screen and (max-width: 480px) and (orientation: portrait) { #home .project-cards {
   flex-direction:column;
 }}
 
@@ -616,12 +616,12 @@ th {
   width: calc(33.33% - 20px);
 }
 
-@media (max-width: 768px) { #home .project-card {
+@media only screen and (max-width: 768px) and (orientation: portrait) { #home .project-card {
   width: calc(80vw - 20px - 2em);
   margin:auto;
 }}
 
-@media (max-width: 480px) { #home .project-card {
+@media only screen and (max-width: 480px) and (orientation: portrait)  { #home .project-card {
   width: calc(80vw - 20px - 2em);
   margin:auto;
 }}
@@ -715,11 +715,11 @@ th {
   justify-content: center;
 }
 
-@media (max-width: 768px) { #home .what-we-do .services {
+@media only screen and (max-width: 768px) and (orientation: portrait)  { #home .what-we-do .services {
   flex-direction:column;
 }}
 
-@media (max-width: 480px) { #home .what-we-do .services {
+@media only screen and (max-width: 480px) and (orientation: portrait)  { #home .what-we-do .services {
   flex-direction:column;
 }}
 
