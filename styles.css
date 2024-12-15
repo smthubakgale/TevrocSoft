@@ -539,7 +539,7 @@ th {
 
 @media (max-width: 768px) { #home .hero {
   heght:180vh;
-  width:90vw;
+  width: calc(100vw - 100px);
 }}
 @media only screen and (max-width: 768px) and (orientation: landscape) { #home .hero {
   height:270vh; 
@@ -548,7 +548,7 @@ th {
 
 @media (max-width: 480px) { #home .hero {
   height:180vh;
-  width:90vw;
+  width: calc(100vw - 100px);
 }}
 @media only screen and (max-width: 768px) and (orientation: landscape) { #home .hero {
   height:270vh; 
