@@ -542,14 +542,13 @@ th {
   position: relative;
 }
 
-@media (max-width: 480px) { #home .hero {
-  heght:180vh;
+@media only screen and (max-width: 480px) and (orientation: portrait) { #home .hero {
+  height:180vh;
   width: calc(100vw - 0px);
 }}
-@media only screen and (max-width: 768px) and (orientation: landscape){ #home .hero {
-  height:270vh; 
-  width:calc(100vw);
-  margin-left:-20px;
+@media only screen and (max-width: 768px) and (orientation: portrait){ #home .hero {
+  height:180vh;
+  width: calc(100vw - 0px);
 }}
 
 #home .hero .overlay2{
