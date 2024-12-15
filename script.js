@@ -2313,6 +2313,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		       xhr.send();
 		       return xhr.responseText;
 		    })() ;
+  document.getElementById('terms').innerHTML = (function() {
+		       var xhr = new XMLHttpRequest();
+		       xhr.open('GET', 'sections/terms-of-service.html', false); 
+		       xhr.send();
+		       return xhr.responseText;
+		    })() ;
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
