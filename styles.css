@@ -2448,11 +2448,7 @@ th {
       height: 100%;
       overflow-y: auto;
       box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-    }
-    .side-nav .contact-link2 , .side-nav .about-link2 ,
-   .side-nav .pricing-link2 , .side-nav .shop-link2{
-      display:block;
-    }
+    } 
     .side-nav .docs-nav{
       padding:15px;
     }
@@ -2514,8 +2510,12 @@ th {
     .side-nav .docs-nav{
       padding:15px;
     }
-   .side-nav .docs-nav a , .side-nav .docs-nav label {
+   .side-nav .docs-nav a {
       color: #FFFFFF; /* White */ 
+    }
+
+    .side-nav  label{
+      color:white;
     }
     
     .side-nav .docs-nav a:hover {
