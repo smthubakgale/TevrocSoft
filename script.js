@@ -100,7 +100,7 @@ fm2.addEventListener('submit', (e) =>
 `;       message += ` ${ plans.innerHTML }
 `;
      
-     var email = fm1.querySelector("#email2").value;
+     var email = fm2.querySelector("#email2").value;
 
      console.log(name , email , message , fm1 , formStatus);
 
