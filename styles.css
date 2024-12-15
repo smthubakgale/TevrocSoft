@@ -18,10 +18,7 @@ body .containers{
   /*width:100vw;*/
   overflow-x:hidden;
 }
-@media only screen and (max-width: 480px) and (orientation: portrait) { section {
-  width: 100%;
-  overflow-x:wcroll
-}}
+
 /* Links */
 
 a {
@@ -863,8 +860,6 @@ th {
 }
 
 /* Portfolio Section */
-
-
 #portfolio {
   background-color: #f4f4f4;
   padding: 50px;
@@ -949,6 +944,13 @@ th {
   background-color: #f9f9f9;
   padding: 50px;
 }
+
+@media only screen and (max-width: 480px) and (orientation: portrait) { #pricing .container {
+    padding:10px; 
+    width:calc(100vw - 2*10px); 
+    overflow-x:scroll; 
+    margin-top:-20px
+}}
 
 #pricing h2 {
   color: #333;
