@@ -2119,10 +2119,14 @@ window.updateQuoteResult = function(){
     // Update quote result HTML
 	  quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
 	  discountAmountInput.value = discountRequestAmount.value;
-	  
+	   
+	  document.getElementById('discount').innerHTML = discountRequestCheckbox.checked ? discountRequestAmount.value : 0.0; 
+	  document.getElementById('discount-amount').innerHTML = discountRequestCheckbox.checked ? discountAmount.toFixed(2) : 0.0; 
+	  document.getElementById('principal-amount').innerHTML = (quoteAmount + pagePrices + featurePrices).toFixed(2); 
 	  document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
 	  document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
 	  document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2); 
+	
 	// Price Adjustments 
 	  const basePrice = totalAmount;
 	  const complexity = document.getElementById('complexity').value.toLowerCase();
