@@ -709,11 +709,13 @@ th {
 @media (max-width: 768px) { #home .what-we-do .service {
   width: calc(70% - 20px);
   margin:auto;
+  margin-bottom:15px;
 }}
 
 @media (max-width: 480px) { #home .what-we-do .service {
   width: calc(70% - 20px);
   margin:auto;
+  margin-bottom:15px;
 }}
 
 #home .what-we-do .service i {
@@ -760,6 +762,10 @@ th {
   justify-content: center;
 }
 
+@media (max-width: 768px) { #home .reasons {
+  flex-direction: column;
+}}
+
 #home .reason {
   background-color: #fff;
   border: 1px solid #E5E5E5; /* Border color */
@@ -768,6 +774,18 @@ th {
   padding: 20px;
   width: calc(33.33% - 20px);
 }
+
+@media (max-width: 768px) { #home .reason {
+  width: calc(70% - 20px);
+  margin:auto;
+  margin-bottom:15px;
+}}
+
+@media (max-width: 480px) { #home .reason {
+  width: calc(70% - 20px);
+  margin:auto;
+  margin-bottom:15px;
+}}
 
 #home .reason i {
   font-size: 24px;
