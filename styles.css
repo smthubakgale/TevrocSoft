@@ -545,19 +545,23 @@ th {
 @media only screen and (max-width: 480px) and (orientation: portrait) { #home .hero {
   height:180vh;
   width: calc(100vw - 0px);
+  margin-top:-40px
 }}
 @media only screen and (max-width: 480px) and (orientation: landscape){ #home .hero {
   height:120vw;
   width: calc(100vw - 0px);
+  margin-top:-40px
 }}
 @media only screen and (max-width: 768px) and (orientation: portrait){ #home .hero {
   height:180vh;
   width: calc(100vw - 0px);
+  margin-top:-40px
 }}
 @media only screen and (max-width: 768px) and (orientation: landscape){ #home .hero {
   height:120vw;
   width: calc(100vw - 0px);
   margin-left:-40px;
+  margin-top:-40px
 }}
 
 #home .hero .overlay2{
