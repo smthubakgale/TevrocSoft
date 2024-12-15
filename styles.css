@@ -19,6 +19,10 @@ body .containers{
   overflow-x:hidden;
 }
 
+.mobs-nav{
+  height:100vh;
+  overflow-y:hidden;
+}
 /* Links */
 
 a {
