@@ -631,7 +631,7 @@ th {
 }}
 
 @media only screen and (max-width: 480px) and (orientation: landscape)  { #home .project-card {
-  width: calc(40vw - 20px - 2em);
+  width: calc(50vw - 20px - 2em);
   margin:auto;
 }}
 
@@ -752,7 +752,7 @@ th {
   margin-bottom:15px;
 }}
 @media only screen and (max-width: 480px) and (orientation: landscape)  { #home .what-we-do .service {
-  width: calc(40vw - 20px - 2em); 
+  width: calc(50vw - 20px - 2em); 
 }}
 
 #home .what-we-do .service i {
@@ -828,7 +828,7 @@ th {
 }}
 
 @media only screen and (max-width: 480px) and (orientation: landscape)  { #home .reason {
-  width: calc(40vw - 20px - 2em); 
+  width: calc(50vw - 20px - 2em); 
 }}
 
 #home .reason i {
