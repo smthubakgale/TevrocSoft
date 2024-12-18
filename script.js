@@ -2349,6 +2349,14 @@ document.addEventListener("DOMContentLoaded", function() {
        xhr.send();
        return xhr.responseText;
     })() ;
+
+	
+  document.getElementById('intellectual-property').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/intellectual-property.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
 	
   document.getElementById('payment').innerHTML = (function() {
        var xhr = new XMLHttpRequest();
