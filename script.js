@@ -2321,6 +2321,13 @@ document.addEventListener("DOMContentLoaded", function() {
        return xhr.responseText;
     })() ;
 	
+  document.getElementById('disclaimer').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/disclaimer.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
+	
   document.getElementById('refund').innerHTML = (function() {
        var xhr = new XMLHttpRequest();
        xhr.open('GET', 'sections/refund-policy.html', false); 
