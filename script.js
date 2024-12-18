@@ -2358,6 +2358,13 @@ document.addEventListener("DOMContentLoaded", function() {
        return xhr.responseText;
     })() ;
 	
+  document.getElementById('security').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/security.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
+	
   document.getElementById('payment').innerHTML = (function() {
        var xhr = new XMLHttpRequest();
        xhr.open('GET', 'sections/payment-terms.html', false); 
