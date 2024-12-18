@@ -2388,7 +2388,8 @@ alertCloseButtons.forEach(button => button.addEventListener('click', handleAlert
 // Functions
 window.onload = function() {
   const urlHash = window.location.hash.substring(1);
-  const targetSection = document.querySelector(`#${urlHash}`);
+  let targetSection;
+  try{ targetSection = document.querySelector(`#${urlHash}`); }catch{}
   
   if (targetSection) {
     sections.forEach(section => section.classList.remove('active'));
