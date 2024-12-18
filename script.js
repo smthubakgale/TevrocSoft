@@ -2343,6 +2343,13 @@ document.addEventListener("DOMContentLoaded", function() {
        return xhr.responseText;
     })() ;
 	
+  document.getElementById('acceptable-use').innerHTML = (function() {
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', 'sections/acceptable-use-policy.html', false); 
+       xhr.send();
+       return xhr.responseText;
+    })() ;
+	
   document.getElementById('payment').innerHTML = (function() {
        var xhr = new XMLHttpRequest();
        xhr.open('GET', 'sections/payment-terms.html', false); 
