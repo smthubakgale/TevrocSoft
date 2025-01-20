@@ -641,7 +641,7 @@ const create =
 		 };
 		 xhr.onerror = function() { reject(xhr.statusText); };
 		 xhr.send(); 
-	 } , 
+	 }) , 
 	 fields: schedule2b
      },	 	 
  ];
