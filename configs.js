@@ -615,16 +615,13 @@ const create =
 	 name : "apis" ,    
 	 seemore : true , 
 	 title : " Application Programming Interface ... " ,
-	 description :  new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/apis.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 }),
+	 description : (function() {
+			       var xhr = new XMLHttpRequest();
+			       xhr.open('GET', 'blogs/apis.html', false); 
+			       xhr.send();
+			       return xhr.responseText;
+			    })() 
+	 ,
 	 fields: schedule2a
      },	
      {
@@ -635,16 +632,12 @@ const create =
 	 name : "apis" ,       
 	 seemore : true , 
 	 title : " Pre-written code collections ... " ,
-	 description : new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/libraries.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 }) , 
+	 description : (function() {
+			       var xhr = new XMLHttpRequest();
+			       xhr.open('GET', 'blogs/libraries.html', false); 
+			       xhr.send();
+			       return xhr.responseText;
+			    })() , 
 	 fields: schedule2b
      },	 	 
  ];
@@ -1323,16 +1316,13 @@ const create =
 					 name : "apis" ,    
 					 seemore : true , 
 					 title : " Hosting PLatforms ... " ,
-					 description :  new Promise((resolve , reject) => {
-						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/hosting.html', false); 
-						 xhr.onload = function() {
-						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-						      else { reject(xhr.statusText); }
-						 };
-						 xhr.onerror = function() { reject(xhr.statusText); };
-						 xhr.send(); 
-					 }),
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/hosting.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() 
+					 ,
 					 fields: schedulea
 				     },	
 				    {
@@ -1342,16 +1332,13 @@ const create =
 					 name : "apis" ,    
 					 seemore : true , 
 					 title : " Application Programming Interface ... " ,
-					 description :  new Promise((resolve , reject) => {
-						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/apis.html', false); 
-						 xhr.onload = function() {
-						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-						      else { reject(xhr.statusText); }
-						 };
-						 xhr.onerror = function() { reject(xhr.statusText); };
-						 xhr.send(); 
-					 }),
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/apis.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() 
+					 ,
 					 fields: scheduleb
 				     },	
 				     {
@@ -1361,16 +1348,12 @@ const create =
 					 name : "apis" ,       
 					 seemore : true , 
 					 title : " Pre-written code collections ... " ,
-					 description :  new Promise((resolve , reject) => {
-						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/libraries.html', false); 
-						 xhr.onload = function() {
-						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-						      else { reject(xhr.statusText); }
-						 };
-						 xhr.onerror = function() { reject(xhr.statusText); };
-						 xhr.send(); 
-					 }), 
+					 description : (function() {
+							       var xhr = new XMLHttpRequest();
+							       xhr.open('GET', 'blogs/libraries.html', false); 
+							       xhr.send();
+							       return xhr.responseText;
+							    })() , 
 					 fields: schedulec
 				     },	 						 
 				 ]
@@ -1956,16 +1939,12 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select  one the development licenses ... " ,
-      description:  new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/github-licenses.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 })
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/github-licenses.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })()
 ,
       options: [
 	        {
@@ -2023,16 +2002,12 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select  one the platform specific frameworks ... " ,
-      description:  new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/development-frameworks.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 }) 
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/development-frameworks.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })() 
 	,
     	"optgroups": [ 
 	    {
@@ -2092,16 +2067,12 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select  one the ui layouts ... " ,
-      description:  new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/ui-layouts.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 }) 
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/ui-layouts.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })()
     ,
    options : [
     { value: "empty", label: "Empty" },
@@ -2143,16 +2114,12 @@ export const formConfig2 = {
       type: "select",
       seemore : true , 
       title : "Select one of the recommended templates ... " ,
-      description:  new Promise((resolve , reject) => {
-		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/templates.html', false); 
-		 xhr.onload = function() {
-		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
-		      else { reject(xhr.statusText); }
-		 };
-		 xhr.onerror = function() { reject(xhr.statusText); };
-		 xhr.send(); 
-	 }) 
+      description: (function() {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', 'blogs/templates.html', false); // synchronous request
+	    xhr.send();
+	    return xhr.responseText;
+	  })()
      ,
       optgroups:[
         {
@@ -2297,15 +2264,15 @@ export const projectTypes = [
       ],
       "plans": [
         {
-          "name": "Standard",
+          "name": "Basic",
           "price": 5000
         },
         {
-          "name": "Enterprise",
+          "name": "Pro",
           "price": 10000
         },
         {
-          "name": "Premium",
+          "name": "Enterprise",
           "price": 15000
         }
       ]
@@ -2334,15 +2301,15 @@ export const projectTypes = [
       ],
       "plans": [
         {
-          "name": "Standard",
+          "name": "Starter",
           "price": 3000
         },
         {
-          "name": "Enterprise",
+          "name": "Business",
           "price": 6000
         },
         {
-          "name": "Premium",
+          "name": "Enterprise",
           "price": 10000
         }
       ]
