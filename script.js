@@ -171,14 +171,23 @@ class FormGenerator {
 	span1.textContent = 'more';
 	span1.style.color = '#007bff'; // blueish color
 	span1.style.cursor = 'pointer' 
-	div2.style.display = 'none'; 
-        //div2.innerHTML = field.description;
+	div2.style.display = 'none';  
 	
 	span1.addEventListener('click', () => {
 	  if (div2.style.display === 'none') {
 	    div2.style.display = 'block';
 	    span1.textContent = 'less';
-	    div2.innerHTML = field.description;
+	    
+	      if(field.description instanceof Promise)
+	      {
+		  field.description.then((html) => 
+		  {
+			  div2.innerHTML = html;
+		  });
+	      }
+	      else {
+		   div2.innerHTML = field.description;   
+	      }
 	  } else {
 	    div2.style.display = 'none'; 
 	    span1.textContent = 'more';
