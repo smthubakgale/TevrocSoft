@@ -632,7 +632,7 @@ const create =
 	 name : "apis" ,       
 	 seemore : true , 
 	 title : " Pre-written code collections ... " ,
-	 description : (function() { return new Promise((resolve , reject) => {
+	 description : new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
 		 xhr.open('GET', 'blogs/libraries.html', false); 
 		 xhr.onload = function() {
@@ -641,7 +641,7 @@ const create =
 		 };
 		 xhr.onerror = function() { reject(xhr.statusText); };
 		 xhr.send(); 
-	 }})() , 
+	 } , 
 	 fields: schedule2b
      },	 	 
  ];
