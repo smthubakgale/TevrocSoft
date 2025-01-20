@@ -632,12 +632,16 @@ const create =
 	 name : "apis" ,       
 	 seemore : true , 
 	 title : " Pre-written code collections ... " ,
-	 description : (function() {
-			       var xhr = new XMLHttpRequest();
-			       xhr.open('GET', 'blogs/libraries.html', false); 
-			       xhr.send();
-			       return xhr.responseText;
-			    })() , 
+	 description : (function() { return new Promise((resolve , reject) => {
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('GET', 'blogs/libraries.html', false); 
+		 xhr.onload = function() {
+		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
+		      else { reject(xhr.statusText); }
+		 };
+		 xhr.onerror = function() { reject(xhr.statusText); };
+		 xhr.send(); 
+	 }})() , 
 	 fields: schedule2b
      },	 	 
  ];
