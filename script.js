@@ -2401,8 +2401,11 @@ var editor = {
     ],
     disableSecurityWarning: true
   };
+
+document.addEventListener("DOMContentLoaded", function() {
   CKEDITOR.replace('editor', editor); 
   CKEDITOR.replace('editor2', editor);
+});
 //-----------------------------: Layout 
 // Get elements
 const topNav = document.querySelector('.top-nav');
