@@ -2371,6 +2371,26 @@ export const templates = [
       ]
     },
     {
+        "name" : "Retail Business Template" ,
+	"pages" : [
+	    {
+	       "name" : "Home" ,
+		"price" : 800 ,
+		"link" : "https://www.wayfair.com/"
+	    } , 
+	    {
+		"name" : "About Us" ,
+		"price" : 500 ,
+		"link" : "https://www.aboutwayfair.com/who-we-are"
+	    } ,
+	   {
+		"name" : "Contact Us" ,
+		"price" : 300 ,
+		"link" : "https://www.walmart.com/help"
+	   }
+	] 
+    },
+    {
       "name": "E-commerce Website Template",
       "pages": [
         {
