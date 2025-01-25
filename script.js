@@ -1881,6 +1881,10 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
 
  let proposedDuration = 1;
  let start = 0;
+
+  console.log(projectType);
+  console.log(projectPhaseMultipliers);
+
   Object.keys(projectPhaseMultipliers[projectType]).forEach((phase) => {
     const projectPhaseMultiplier = projectPhaseMultipliers[projectType][phase];
     const complexityMultiplier = complexityMultipliers[platform][complexity];
