@@ -2517,7 +2517,7 @@ export const projectPhaseMultipliers = {
     deployment: 10,
     maintenance: 'Ongoing'
   },
-  custom: {
+  premium: {
     initiation: 15,
     planning: 30,
     design: 45,
