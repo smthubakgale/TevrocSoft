@@ -2408,7 +2408,7 @@ export const templates = [
 	   {
 		   "category" : "product-related" ,
 		   "name" : "Products" ,
-		   "price" 1200 ,
+		   "price" : 1200 ,
 		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
 		   "external" : true 
 	   }
