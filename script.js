@@ -1989,7 +1989,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
       <li>
 		<input  onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
 		<label for="template-contact"> ${page.name} - R${page.price} </label>
-		<button class="preview-button" data-link="${page.link}">Preview</button>
+		<button class="preview-button" external="${page.external}" data-link="${page.link}">Preview</button>
 	  </li>   
     </div>
   `).join('')}
@@ -2015,32 +2015,42 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 	  popupElement.remove();
 	}
 	const url = button.getAttribute('data-link');
-    const popup = document.createElement('div');
-    popup.classList.add('popup');
-    popup.style.position = 'fixed';
-    popup.style.top = '0';
-    popup.style.left = '0';
-    popup.style.width = '100%';
-    popup.style.height = '100%';
-    popup.style.background = 'rgba(0, 0, 0, 0.5)';
-    popup.style.display = 'flex';
-    popup.style.justifyContent = 'center';
-    popup.style.alignItems = 'center';
-    popup.style.zIndex = '1000'; 
-    popup.innerHTML = `
-	  <div class="popup-content" style="width:100%;  height:100%" >
-		<iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
-		<button class="close-button" style="left:calc(100% - 80px); top:calc(100% - 46px); position:absolute;" >Close</button>
-	  </div> 
-    `;
-	
-    document.body.style.overflow = 'hidden';
-    document.body.appendChild(popup);
+	const ext = button.getAttribute('external');
 
-    document.querySelector('.close-button').addEventListener('click', () => {
-      popup.remove();
-	  document.body.style.overflow = 'auto';
-    });
+	if(ext == "true") 
+	{
+	    window.open(url , '_blank');
+	}
+        else 
+	{
+	    const popup = document.createElement('div');
+	    popup.classList.add('popup');
+	    popup.style.position = 'fixed';
+	    popup.style.top = '0';
+	    popup.style.left = '0';
+	    popup.style.width = '100%';
+	    popup.style.height = '100%';
+	    popup.style.background = 'rgba(0, 0, 0, 0.5)';
+	    popup.style.display = 'flex';
+	    popup.style.justifyContent = 'center';
+	    popup.style.alignItems = 'center';
+	    popup.style.zIndex = '1000'; 
+	    popup.innerHTML = `
+		  <div class="popup-content" style="width:100%;  height:100%" >
+			<iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
+			<button class="close-button" style="left:calc(100% - 80px); top:calc(100% - 46px); position:absolute;" >Close</button>
+		  </div> 
+	    `;
+		
+	    document.body.style.overflow = 'hidden';
+	    document.body.appendChild(popup);
+	
+	    document.querySelector('.close-button').addEventListener('click', () => {
+	      popup.remove();
+		  document.body.style.overflow = 'auto';
+	    });	  
+        }
+
   });
 });
 
