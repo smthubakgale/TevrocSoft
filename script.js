@@ -1845,6 +1845,7 @@ class FormGenerator {
 } 
 	//
 document.addEventListener("DOMContentLoaded", function() {
+     setTimeout(function(){
 	const form = document.getElementById("myForm");
 	const importButton = document.getElementById("import-button");
 	const fileInput = document.getElementById("file-input"); 
@@ -1853,9 +1854,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		console.log(formData);
 	  });
        //
+     },300);
 })
 
 document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function(){
+		
 	const formGenerator = new FormGenerator(
 	  document.getElementById("myForm2"),
 	  document.getElementById("import-button2"),
@@ -1866,6 +1870,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	    console.log(formData);
 	  }
 	);
+       
+     },300);
+	
 })
   //
  function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
@@ -2321,7 +2328,8 @@ function formatDate(date, format) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {  
-  discountAmountInput.value = 5;
+ setTimeout(function(){
+	  discountAmountInput.value = 5;
   updateQuoteResult();
   
   planSelect.addEventListener('change', updateQuoteResult);
@@ -2393,7 +2401,9 @@ document.addEventListener("DOMContentLoaded", function() {
        xhr.open('GET', 'sections/payment-terms.html', false); 
        xhr.send();
        return xhr.responseText;
-    })() ;
+    })() ;	       
+ },400);
+
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
@@ -2416,9 +2426,13 @@ var editor = {
     disableSecurityWarning: true
   };
 
-document.addEventListener("DOMContentLoaded", function() {
-  CKEDITOR.replace('editor', editor); 
-  CKEDITOR.replace('editor2', editor);
+document.addEventListener("DOMContentLoaded", function()
+{
+      setTimeout(function()
+      {
+	  CKEDITOR.replace('editor', editor); 
+	  CKEDITOR.replace('editor2', editor);
+      },300);
 });
 //-----------------------------: Layout 
 // Get elements
