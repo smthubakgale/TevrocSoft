@@ -2372,21 +2372,45 @@ export const templates = [
     },
     {
         "name" : "Retail Business Template" ,
-	"pages" : [
+	    "pages" : [
 	    {
+		   "category" : "core" ,
 	       "name" : "Home" ,
-		"price" : 800 ,
-		"link" : "https://www.wayfair.com/"
+		   "price" : 800 ,
+		   "link" : "https://www.wayfair.com/" ,
+		   "external" : true
 	    } , 
 	    {
-		"name" : "About Us" ,
-		"price" : 500 ,
-		"link" : "https://www.aboutwayfair.com/who-we-are"
+		   "category" : "core" ,
+		   "name" : "About Us" ,
+		   "price" : 500 ,
+		   "link" : "https://www.aboutwayfair.com/who-we-are"
 	    } ,
+	    {
+		   "category" : "core" ,
+		   "name" : "Contact Us" ,
+		   "price" : 300 ,
+		   "link" : "https://www.walmart.com/help" ,
+		   "external" : true
+	   },
 	   {
-		"name" : "Contact Us" ,
-		"price" : 300 ,
-		"link" : "https://www.walmart.com/help"
+		   "category" : "core" ,
+		   "name" : "Terms and Conditions" ,
+		   "price" : 150 ,
+		   "link" : "https://www.asos.com/terms-and-conditions/"
+	   } ,
+	   {
+		   "category" : "core" ,
+		   "name" : "Privacy Policy" ,
+		   "price" : 150 ,
+		   "link" : "https://www.ikea.com/us/en/customer-service/privacy-policy/"
+	   } ,
+	   {
+		   "category" : "product-related" ,
+		   "name" : "Products" ,
+		   "price" 1200 ,
+		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
+		   "external" : true 
 	   }
 	] 
     },
