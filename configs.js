@@ -2378,7 +2378,13 @@ export const templates = [
 	       "name" : "Home" ,
 		   "price" : 800 ,
 		   "link" : "https://www.wayfair.com/" ,
-		   "external" : true
+		   "external" : true, 
+		   "options" : [
+		     {
+				 "name" : "" ,
+				 "link" : ""
+			 }
+		   ]
 	    } , 
 	    {
 		   "category" : "core" ,
@@ -2406,8 +2412,35 @@ export const templates = [
 		   "link" : "https://www.ikea.com/us/en/customer-service/privacy-policy/"
 	   } ,
 	   {
+		   "category" : "core" ,
+		   "name" : "Disclaimer" ,
+		   "price" : 120 ,
+		   "link" : ""
+	   } ,
+	   {
 		   "category" : "product-related" ,
 		   "name" : "Products" ,
+		   "price" : 1200 ,
+		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
+		   "external" : true 
+	   },
+	   {
+		   "category" : "product-related" ,
+		   "name" : "Product Details" ,
+		   "price" : 800 ,
+		   "link" : "https://www.wayfair.com/furniture/pdp/ivy-bronx-nathasa-2-piece-no-assembly-required-upholstery-sofa-free-combination-sofa-w111681030.html?piid=1216171221&auctionId=cdf393d6-4628-40ff-8cd6-381543567868&adTypeId=1" ,
+		   "external" : true 
+	   },
+	   {
+		   "category" : "product-related" ,
+		   "name" : "Categories" ,
+		   "price" : 1200 ,
+		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
+		   "external" : true 
+	   },
+	   {
+		   "category" : "product-related" ,
+		   "name" : "Categories" ,
 		   "price" : 1200 ,
 		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
 		   "external" : true 
