@@ -2440,7 +2440,7 @@ export const templates = [
 	   },
 	   {
 		   "category" : "product-related" ,
-		   "name" : "Categories" ,
+		   "name" : "Sub-Categories" ,
 		   "price" : 1200 ,
 		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
 		   "external" : true 
