@@ -2351,6 +2351,17 @@ export const projectTypes = [
 
 export const templates = [
     {
+	"name" : "Layout Designs" ,
+	"pages" : [
+	   {
+		"name" : "UX 1" ,
+		"price" : 1200 ,
+		"link" : "https://smthubakgale.github.io/Layouts/UX1/"
+	   }
+	]
+	
+    },
+    {
       "name": "Basic Website Template",
       "pages": [
         {
