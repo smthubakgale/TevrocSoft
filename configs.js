@@ -2355,7 +2355,7 @@ export const templates = [
 	"pages" : [
 	   {
 		"name" : "UX 1" ,
-		"price" : 1200 ,
+		"price" : 1500 ,
 		"link" : "https://smthubakgale.github.io/Layouts/UX1/"
 	   }
 	]
