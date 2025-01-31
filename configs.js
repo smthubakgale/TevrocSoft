@@ -2361,7 +2361,8 @@ export const templates = [
 	   {
 		"name" : "UX1 - Query" ,
 		"price" : 1600 ,
-		"link" : "https://smthubakgale.github.io/Layouts/UX1-Query"
+		"link" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
+		"external" : true 
 	   }
 	]
 	
