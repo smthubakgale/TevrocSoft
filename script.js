@@ -2338,70 +2338,31 @@ document.addEventListener("DOMContentLoaded", function() {
   endDateInput.addEventListener('change', updateQuoteResult);
   document.getElementById('complexity').addEventListener('change', updateQuoteResult);
 
-  document.getElementById('policy').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/policy.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('terms').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/terms-of-service.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('disclaimer').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/disclaimer.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('refund').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/refund-policy.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
+  // Function to load HTML content asynchronously
+function loadHtml(elementId, url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      document.getElementById(elementId).innerHTML = xhr.responseText;
+    } else {
+      console.error('Error loading ' + url + ': ' + xhr.statusText);
+    }
+  };
+  xhr.send();
+}
 
-
-  document.getElementById('cookie').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/cookie-policy.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('acceptable-use').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/acceptable-use-policy.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-
-	
-  document.getElementById('intellectual-property').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/intellectual-property.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('security').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/security.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;
-	
-  document.getElementById('payment').innerHTML = (function() {
-       var xhr = new XMLHttpRequest();
-       xhr.open('GET', 'sections/payment-terms.html', false); 
-       xhr.send();
-       return xhr.responseText;
-    })() ;	       
+// Load HTML content for each section
+loadHtml('policy', 'sections/policy.html');
+loadHtml('terms', 'sections/terms-of-service.html');
+loadHtml('disclaimer', 'sections/disclaimer.html');
+loadHtml('refund', 'sections/refund-policy.html');
+loadHtml('cookie', 'sections/cookie-policy.html');
+loadHtml('acceptable-use', 'sections/acceptable-use-policy.html');
+loadHtml('intellectual-property', 'sections/intellectual-property.html');
+loadHtml('security', 'sections/security.html');
+loadHtml('payment', 'sections/payment-terms.html');
+	 
  },400);
 
 });
