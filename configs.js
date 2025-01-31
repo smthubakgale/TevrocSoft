@@ -2354,9 +2354,14 @@ export const templates = [
 	"name" : "Layout Designs" ,
 	"pages" : [
 	   {
-		"name" : "UX 1" ,
-		"price" : 1500 ,
-		"link" : "https://smthubakgale.github.io/Layouts/UX1/"
+		"name" : "UX1 - Script" ,
+		"price" : 1100 ,
+		"link" : "https://smthubakgale.github.io/Layouts/UX1-Script"
+	   } , 
+	   {
+		"name" : "UX1 - Query" ,
+		"price" : 1600 ,
+		"link" : "https://smthubakgale.github.io/Layouts/UX1-Query"
 	   }
 	]
 	
