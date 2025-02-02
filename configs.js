@@ -2356,7 +2356,7 @@ export const templates = [
 	   {
 		"name" : "UX1" ,
 		"price" : 1600 ,
-		"web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" 
+		"web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
 		"web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query"  
 	   }
 	]
