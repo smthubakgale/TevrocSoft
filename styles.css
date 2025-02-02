@@ -1160,7 +1160,12 @@ th {
   margin-right: 10px;
 }
 
-#shop .preview-button {
+#shop .preview-button ,
+#shop .web_script-button ,
+#shop .web_query-button ,
+#shop .mobile_app-button ,
+#shop .mobile_web-button  ,
+#shop .desktop_app-button  {
   background-color: #4CAF50;
   color: #fff;
   padding: 10px 20px;
