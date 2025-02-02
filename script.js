@@ -1996,8 +1996,14 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
       <li>
 		<input  onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
 		<label for="template-contact"> ${page.name} - R${page.price} </label>
-		<button class="preview-button" external="${page.external}" data-link="${page.link}">Preview</button>
-	  </li>   
+	        `
+	  + (page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> PreView </button> ` || '') 
+	  + (page.web_script ? `<button class="web_script-button" external="${page.external}" data-link="${page.web_script}"> Web Script View </button> ` || '') 
+	  + (page.web_query ? `<button class="web_query-button" external="${page.external}" data-link="${page.web_query}"> Web Query View </button> ` || '') 
+	  + (page.mobile ? `<button class="mobile-button" external="${page.external}" data-link="${page.mobile}"> Mobile View </button> ` || '') 
+	  + (page.desktop ? `<button class="desktop-button" external="${page.external}" data-link="${page.desktop}"> Desktop View </button> ` || '') 
+	  + `
+      </li>   
     </div>
   `).join('')}
   </ul>
@@ -2014,15 +2020,21 @@ templateGroupsContainer.querySelectorAll('.template-group-header').forEach(heade
 });
 
 // Add event listener to the dynamically created buttons
-templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
+function preview(button , type){
   button.addEventListener('click', (event) => { 
     event.preventDefault();
 	const popupElement = document.querySelector('.popup');
+	  
 	if (popupElement) {
 	  popupElement.remove();
 	}
-	const url = button.getAttribute('data-link');
+	  
+	let url = button.getAttribute('data-link');
 	const ext = button.getAttribute('external');
+	url = (type == "mobile") ? "https://smthubakgale.github.io/Resposinator/?" +
+		                   (ext == "true" ? "" : "tevroc=true&") + "url=" + url 
+		                 : url;
+	
 
 	if(ext == "true") 
 	{
@@ -2057,8 +2069,27 @@ templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
 		  document.body.style.overflow = 'auto';
 	    });	  
         }
+  });	
+}
 
-  });
+templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
+    preview(button);
+});
+
+templateGroupsContainer.querySelectorAll('.web_script-button').forEach(button => {
+    preview(button);
+});
+
+templateGroupsContainer.querySelectorAll('.web_query-button').forEach(button => {
+    preview(button);
+});
+
+templateGroupsContainer.querySelectorAll('.mobile-button').forEach(button => {
+    preview(button , "mobile");
+});
+
+templateGroupsContainer.querySelectorAll('.desktop-button').forEach(button => {
+    preview(button);
 });
 
   projectTypeSelect.parentNode.innerHTML += projectTypeHtml;
