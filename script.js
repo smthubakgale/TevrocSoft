@@ -2000,8 +2000,9 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
 	  + (page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> PreView </button> ` || '') 
 	  + (page.web_script ? `<button class="web_script-button" external="${page.external}" data-link="${page.web_script}"> Web Script View </button> ` || '') 
 	  + (page.web_query ? `<button class="web_query-button" external="${page.external}" data-link="${page.web_query}"> Web Query View </button> ` || '') 
-	  + (page.mobile ? `<button class="mobile-button" external="${page.external}" data-link="${page.mobile}"> Mobile View </button> ` || '') 
-	  + (page.desktop ? `<button class="desktop-button" external="${page.external}" data-link="${page.desktop}"> Desktop View </button> ` || '') 
+	  + (page.mobile_app ? `<button class="mobile_app-button" external="${page.external}" data-link="${page.mobile_app}"> Mobile App View </button> ` || '') 
+	  + (page.mobile_web ? `<button class="mobile_web-button" external="${page.external}" data-link="${page.web_mobile}"> Mobile Web View </button> ` || '') 
+	  + (page.desktop_app ? `<button class="desktop_app-button" external="${page.external}" data-link="${page.desktop_app}"> Desktop App View </button> ` || '') 
 	  + `
       </li>   
     </div>
@@ -2084,11 +2085,14 @@ templateGroupsContainer.querySelectorAll('.web_query-button').forEach(button => 
     preview(button);
 });
 
-templateGroupsContainer.querySelectorAll('.mobile-button').forEach(button => {
+templateGroupsContainer.querySelectorAll('.mobile_app-button').forEach(button => {
+    preview(button , "mobile");
+});
+templateGroupsContainer.querySelectorAll('.mobile_web-button').forEach(button => {
     preview(button , "mobile");
 });
 
-templateGroupsContainer.querySelectorAll('.desktop-button').forEach(button => {
+templateGroupsContainer.querySelectorAll('.desktop_app-button').forEach(button => {
     preview(button);
 });
 
