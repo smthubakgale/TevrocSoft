@@ -2357,7 +2357,16 @@ export const templates = [
 		"name" : "UX1" ,
 		"price" : 1600 ,
 		"web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
-		"web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query"  
+		"web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
+		"mobile_app" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
+		"mobile_web" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
+		"features" : [
+		   { "all" : "Header Menu" } ,
+		   { "all" : "Aside Menu" } , 
+		   { "all" : "Pop-up Menu" } ,
+		   { "all" : "Expand Menu" } ,
+		   { "mobile_app" : "Bottom Menu"} , 
+		]
 	   }
 	]
 	
