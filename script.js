@@ -1991,22 +1991,18 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
       <h4> ${template.name} <i class="fas fa-caret-down"></i></h4>
   </div>
   <ul class="template-group-content" style="display: none;">
-  ${template.pages.map(page => `
-  
-      <li>
-		<input  onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
-		<label for="template-contact"> ${page.name} - R${page.price} </label>
-	        `
-	  + (page.link ? `<button class="preview-button" data-link="${page.link}"> PreView </button> ` || '') 
-	  + (page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button> ` || '') 
-	  + (page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button> ` || '') 
-	  + (page.mobile_app ? `<button class="mobile_app-button" data-link="${page.mobile_app}"> Mobile App View </button> ` || '') 
-	  + (page.mobile_web ? `<button class="mobile_web-button" data-link="${page.web_mobile}"> Mobile Web View </button> ` || '') 
-	  + (page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button> ` || '') 
-	  + `
-      </li>   
-    </div>
-  `).join('')}
+${template.pages.map(page => `
+  <li>
+    <input onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
+    <label for="template-contact"> ${page.name} - R${page.price} </label>
+    ${(page.link ? `<button class="preview-button" data-link="${page.link}"> Preview </button>` : '')}
+    ${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
+    ${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
+    ${(page.mobile_app ? `<button class="mobile_app-button" data-link="${page.mobile_app}"> Mobile App View </button>` : '')}
+    ${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
+    ${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
+  </li>
+`).join('')}
   </ul>
 `).join('');
  
