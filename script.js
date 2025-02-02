@@ -2029,7 +2029,7 @@ function preview(button , type){
 	let url = button.getAttribute('data-link');
 	
 	url = (type == "mobile") ? "https://smthubakgale.github.io/Resposinator/?" +
-		                   (ext == "true" ? "" : "tevroc=true&") + "url=" + url 
+		                   "tevroc=true&url=" + url 
 		                 : url;
 	
 
