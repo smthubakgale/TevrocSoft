@@ -1160,6 +1160,10 @@ th {
   margin-right: 10px;
 }
 
+#shop .pst{
+  display: flex;
+  flex-wrap: wrap;
+}
 #shop .preview-button ,
 #shop .web_script-button ,
 #shop .web_query-button ,
@@ -1173,6 +1177,7 @@ th {
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 #shop .popup {
