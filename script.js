@@ -1992,7 +1992,7 @@ function estimatePhases(complexity, projectType, platform, projectDurationDays  
   </div>
   <ul class="template-group-content" style="display: none;">
 ${template.pages.map(page => `
-  <li>
+  <li class="pst">
     <input onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
     <label for="template-contact"> ${page.name} - R${page.price} </label>
     ${(page.link ? `<button class="preview-button" data-link="${page.link}"> Preview </button>` : '')}
