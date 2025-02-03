@@ -2358,7 +2358,7 @@ export const templates = [
 		"price" : 1600 ,
 		"web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
 		"web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
-		"mobile_app" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
+		"mobile_app" : "https://smthubakgale.github.io/Layouts/UX1-Mobile" ,
 		"mobile_web" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
 		"features" : [
 		   { "all" : "Header Menu" } ,
