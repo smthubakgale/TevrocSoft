@@ -1998,7 +1998,8 @@ ${template.pages.map(page => `
     ${(page.link ? `<button class="preview-button" data-link="${page.link}"> Preview </button>` : '')}
     ${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
     ${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
-    ${(page.mobile_app ? `<button class="mobile_app-button" data-link="${page.mobile_app}"> Mobile App View </button>` : '')}
+    ${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
+    ${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
     ${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
     ${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
   </li>
@@ -2081,9 +2082,14 @@ templateGroupsContainer.querySelectorAll('.web_query-button').forEach(button => 
     preview(button , "web_query");
 });
 
-templateGroupsContainer.querySelectorAll('.mobile_app-button').forEach(button => {
+templateGroupsContainer.querySelectorAll('.mobile_app_script-button').forEach(button => {
     preview(button , "mobile");
 });
+
+templateGroupsContainer.querySelectorAll('.mobile_app_query-button').forEach(button => {
+    preview(button , "mobile");
+});
+
 templateGroupsContainer.querySelectorAll('.mobile_web-button').forEach(button => {
     preview(button , "mobile");
 });
