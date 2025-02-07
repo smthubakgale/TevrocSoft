@@ -2358,14 +2358,16 @@ export const templates = [
 		"price" : 1600 ,
 		"web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
 		"web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query" ,
-		"mobile_app" : "https://smthubakgale.github.io/Layouts/UX1-Mobile" ,
-		"mobile_web" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
+		"mobile_app_script" : "https://smthubakgale.github.io/Layouts/UX1-Mobile-Script" ,
+		"mobile_app_query" : "https://smthubakgale.github.io/Layouts/UX1-Mobile-Query" ,
+		"mobile_web_script" : "https://smthubakgale.github.io/Layouts/UX1-Script" , 
+		"mobile_web_query" : "https://smthubakgale.github.io/Layouts/UX1-Query" , 
 		"features" : [
 		   { "all" : "Header Menu" } ,
 		   { "all" : "Aside Menu" } , 
 		   { "all" : "Pop-up Menu" } ,
 		   { "all" : "Expand Menu" } ,
-		   { "mobile_app" : "Bottom Menu"} , 
+		   { "mobile_app_script" : "Bottom Menu"} , 
 		]
 	   }
 	]
