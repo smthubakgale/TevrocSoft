@@ -2369,6 +2369,23 @@ export const templates = [
 		   { "all" : "Expand Menu" } ,
 		   { "mobile_app_script" : "Bottom Menu"} , 
 		]
+	   } ,
+	   {
+		"name" : "UX2" ,
+		"price" : 2100 , 
+		"web_script" : "https://smthubakgale.github.io/Layouts/UX2-Script" , 
+		"web_query" : "https://smthubakgale.github.io/Layouts/UX2-Query" ,
+		"mobile_app_script" : "https://smthubakgale.github.io/Layouts/UX2-Mobile-Script" ,
+		"mobile_app_query" : "https://smthubakgale.github.io/Layouts/UX2-Mobile-Query" ,
+		"mobile_web_script" : "https://smthubakgale.github.io/Layouts/UX2-Script" , 
+		"mobile_web_query" : "https://smthubakgale.github.io/Layouts/UX2-Query" ,  
+		"features" : [
+		   { "all" : "Header Menu" } ,
+		   { "all" : "Aside Menu" } , 
+		   { "all" : "Pop-up Menu" } ,
+		   { "all" : "Expand Menu" } ,
+		   { "mobile_app_script" : "Bottom Menu"} , 
+		]
 	   }
 	]
 	
