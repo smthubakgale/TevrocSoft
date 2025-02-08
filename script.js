@@ -1995,7 +1995,7 @@ ${template.pages.map(page => `
   <li class="pst">
     <input onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
     <label for="template-contact"> ${page.name} - R${page.price} </label>
-    ${(page.link ? `<button class="preview-button" external="${data.external}" data-link="${page.link}"> Preview </button>` : '')}
+    ${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
     ${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
     ${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
     ${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
