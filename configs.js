@@ -617,7 +617,7 @@ const create =
 	 title : " Application Programming Interface ... " ,
 	 description :  new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/apis.html', false); 
+		 xhr.open('GET', 'blogs/apis.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
@@ -637,7 +637,7 @@ const create =
 	 title : " Pre-written code collections ... " ,
 	 description : new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/libraries.html', false); 
+		 xhr.open('GET', 'blogs/libraries.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
@@ -1325,7 +1325,7 @@ const create =
 					 title : " Hosting PLatforms ... " ,
 					 description :  new Promise((resolve , reject) => {
 						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/hosting.html', false); 
+						 xhr.open('GET', 'blogs/hosting.html', true); 
 						 xhr.onload = function() {
 						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 						      else { reject(xhr.statusText); }
@@ -1344,7 +1344,7 @@ const create =
 					 title : " Application Programming Interface ... " ,
 					 description :  new Promise((resolve , reject) => {
 						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/apis.html', false); 
+						 xhr.open('GET', 'blogs/apis.html', true); 
 						 xhr.onload = function() {
 						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 						      else { reject(xhr.statusText); }
@@ -1363,7 +1363,7 @@ const create =
 					 title : " Pre-written code collections ... " ,
 					 description :  new Promise((resolve , reject) => {
 						 var xhr = new XMLHttpRequest();
-						 xhr.open('GET', 'blogs/libraries.html', false); 
+						 xhr.open('GET', 'blogs/libraries.html', true); 
 						 xhr.onload = function() {
 						      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 						      else { reject(xhr.statusText); }
@@ -1958,7 +1958,7 @@ export const formConfig2 = {
       title : "Select  one the development licenses ... " ,
       description:  new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/github-licenses.html', false); 
+		 xhr.open('GET', 'blogs/github-licenses.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
@@ -2025,7 +2025,7 @@ export const formConfig2 = {
       title : "Select  one the platform specific frameworks ... " ,
       description:  new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/development-frameworks.html', false); 
+		 xhr.open('GET', 'blogs/development-frameworks.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
@@ -2094,7 +2094,7 @@ export const formConfig2 = {
       title : "Select  one the ui layouts ... " ,
       description:  new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/ui-layouts.html', false); 
+		 xhr.open('GET', 'blogs/ui-layouts.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
@@ -2145,7 +2145,7 @@ export const formConfig2 = {
       title : "Select one of the recommended templates ... " ,
       description:  new Promise((resolve , reject) => {
 		 var xhr = new XMLHttpRequest();
-		 xhr.open('GET', 'blogs/templates.html', false); 
+		 xhr.open('GET', 'blogs/templates.html', true); 
 		 xhr.onload = function() {
 		      if (xhr.status === 200) {  resolve(xhr.responseText); } 
 		      else { reject(xhr.statusText); }
