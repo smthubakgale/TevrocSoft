@@ -2510,6 +2510,12 @@ function loadHtml(elementId, url) {
 function loadScriptSequentially(script) {
     return new Promise((resolve, reject) => {
         try {
+            if (script.src && loadedScripts.some(s => s.url === script.src)) {
+                console.log(`Script already loaded: ${script.src}`);
+                resolve();
+                return;
+            }
+
             let newScript = document.createElement('script');
 
             if (script.src) {
@@ -2517,13 +2523,13 @@ function loadScriptSequentially(script) {
                 newScript.async = false;
                 newScript.onload = () => resolve();
                 newScript.onerror = (e) => reject(e);
+                loadedScripts.push({ url: script.src, element: newScript });
             } else {
                 newScript.textContent = script.textContent;
-                resolve(); // Inline script executes immediately
+                resolve(); // inline scripts execute immediately
             }
 
             document.body.appendChild(newScript);
-            loadedScripts.push(newScript);
         } catch (err) {
             reject(err);
         }
@@ -2545,8 +2551,32 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         console.log('No hash in URL');
 		loadHtml('home', `sections/home.html`);
-    } 
+    }
+ 
+
 });
+
+document.addEventListener("DOMContentLoaded", function() {  
+    // Parse query parameters
+    const params = new URLSearchParams(window.location.search);
+    let page = params.get('page');   // e.g., "shop"
+    let path = params.get('path');   // e.g., "sections/shop.html"
+    let fill = params.get('fill');   // optional parameter
+
+    if (page) {
+        
+		if (fill) console.log('Fill:', fill);
+
+		page = page ? decodeURIComponent(page) : page;
+		path = path ? decodeURIComponent(path) : path;
+
+        loadHtml(path ? 'main' : page, `${path || sections}/${page}.html`);
+    } else {
+        console.log('No query parameters found, loading default home');
+        loadHtml('home', 'sections/home.html');
+    }
+});
+
 //------------------------------: Pricing
 // Replace textarea with CKEditor
 var editor = {
@@ -2603,17 +2633,20 @@ window.onload = function() {
     targetSection.classList.add('active');
     sideNav.classList.remove('mob-nav');
   }
-}
-function handleNavLinkClick(event) {
-  event.preventDefault();
-  
-  let hashValue = event.target.getAttribute('href').substring(1);
-  let preValue = event.target.getAttribute('path');
+} 
 
-  loadHtml(preValue ? 'main' : hashValue, `${preValue || 'sections'}/${hashValue}.html`);
+function handleNavLinkClick(event) {
+    event.preventDefault();
  
-  
+    let page = encodeURIComponent(event.target.getAttribute('href').substring(1));
+    let path = encodeURIComponent(event.target.getAttribute('path') || `sections`);
+ 
+    let fill = 'none'; 
+
+    let url = `${window.location.pathname}?page=${encodeURIComponent(page)}&path=${encodeURIComponent(path)}&fill=${encodeURIComponent(fill)}`;
+    window.location.href = url;
 }
+
 
 function handleSubNavTrigger(event) {
 const subNav = event.target.querySelector('.sub-nav');
