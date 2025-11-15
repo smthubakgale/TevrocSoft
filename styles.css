@@ -2744,9 +2744,11 @@ section li{
 @media (max-width: 768px) { section{
   max-height: calc(100vh - 80px);
   overflow-y: scroll;
+  margin-top:-30px; 
 }}
 
 @media (max-width: 480px) {section{
   max-height: calc(100vh - 80px);
   overflow-y: scroll;
+  margin-top:-30px; 
 }}
