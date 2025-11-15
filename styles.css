@@ -2739,3 +2739,8 @@ section li{
 .docs-nav ul li ul li ul li ul li > .submenu-label {
     color: #c0c0c0;
 }
+
+html, body {
+    overflow-y: auto; /* allow vertical scrolling */
+    height: auto;
+}
