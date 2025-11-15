@@ -1,0 +1,154 @@
+<h1>Advanced Project Quote </h1>
+<div class="calculator-container">
+<form id="custom-quote-form">
+    <!-- Project Type -->
+  <div class="form-group">
+    <label for="project-type">Select Project Type:</label>
+    <select id="project-type" name="project-type" required></select>
+  </div>
+
+<!-- Project Plans --> 
+  <div class="form-group">
+  <label for="plan-select"> Plans :</label>
+    <select id="plan-select" class="form-control"></select>
+  </div>
+
+  <!-- Template Groups -->
+  <div class="form-group">
+    <label for="template-groups">Template Groups:</label>
+    <div class="template-groups"></div>
+  </div>
+
+<!-- Features -->
+<div class="form-group">
+    <label for="features-container"> Features :</label>
+    <div id="features-container"></div>
+  </div>
+
+<!-- Complexity -->
+  <div class="form-group">
+  <label for="complexity">Complexity:</label>
+  <select id="complexity" name="complexity" required> 
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+  </div>
+
+  <!-- Project Timeline -->
+  <div class="form-group">
+  <label for="project-timeline">Project Timeline:</label>
+  <div class="timeline">
+    <div>
+      <label for="start-date">Start Date:</label>
+      <input type="datetime-local" id="start-date" name="start-date" required>
+    </div>
+    <div class="gap"></div>
+    <div>
+      <label for="end-date">End Date:</label>
+      <input type="datetime-local" id="end-date" name="end-date" required>
+    </div>
+  </div> 
+  </div>
+  
+  <!-- Discount Request -->
+  <div class="form-group">
+    <div class="discounts">
+    <input onchange="updateQuoteResult()" type="checkbox" id="discount-request-checkbox" name="discount-request-checkbox" checked="checked">
+    <label for="discount-request-checkbox">Request Discount</label>
+    <input type="number" min="0" max="100" id="discount-request-amount" name="discount-request-amount" placeholder="Discount (%)">
+
+  </div>
+  </div>
+    
+  
+</form>
+
+<!-- Quote Report -->
+<div class="form-group">
+<label for="template-groups"> Quote Report :</label>
+<ul id="template-groups">
+  <li>
+  <div class="template-group-header">
+    <h4> Quote Result <i class="fas fa-caret-down"></i></h4>
+  </div>
+  <div class="template-group-content" style="display: none;">
+      <div class="quote-result">
+    <p> Quote Amount: <b>R</b> <span id="quote-amount-value">0.00</span></p>
+    <p> Page Prices: <b>R</b> <span id="page-prices">0.00</span></p>
+    <p> Feature Prices: <b>R</b> <span id="feature-prices">0.00</span></p>
+    <p> Discount Rate : <span id="discount">0</span> <b>%</b></p>
+    <p> Principal Amount: <b>R</b> <span id="principal-amount">0.00</span></p>
+    <p> Discount Amount: <b>R</b> - <span id="discount-amount">0.00</span></p>
+    <p> Total Amount: <b>R</b> <span id="total-amount">0.00</span></p>
+    <p> Adjusted Amount: <b>R</b> <span id="adjusted-price">0.00</span></p>
+    </div>
+  </div>
+  </li>
+  <li>
+  <div class="template-group-header">
+    <h4> Project Phase <i class="fas fa-caret-down"></i></h4>
+  </div>
+  <div class="template-group-content" style="display: none;">
+      <ul id="project-phases"></ul>
+  </div>
+  </li>
+  <li>
+  <div class="template-group-header">
+    <h4> Payment Plans <i class="fas fa-caret-down"></i></h4>
+  </div>
+  <div class="template-group-content" style="display: none;">
+      <ul id="payment-plans"></ul>
+  </div>
+  </li>
+</ul> 
+</div>
+
+<!-- Specifications and Requirements -->
+<div class="form-group">
+<label for="template-groups"> Specifications and Requirements :</label>
+<ul id="template-groups">
+  <li>
+  <div class="template-group-header">
+    <h4> Specifications (under Development) <i class="fas fa-caret-down"></i></h4>
+  </div>
+  <div class="template-group-content" style="display: none;">
+      <div id="form-container"> 
+        <button id="import-button">Import from file</button>
+        <input type="file" id="file-input" style="display: none;">
+      <form id="myForm"></form>
+    </div>
+  </div>
+  </li>
+  <li>
+  <div class="template-group-header">
+    <h4> Requirements  (under Development) <i class="fas fa-caret-down"></i></h4>
+  </div>
+  <div class="template-group-content" style="display: none;">
+      <div id="form-container"> 
+        <button id="import-button2">Import from file</button>
+        <input type="file" id="file-input2" style="display: none;">
+      <form id="myForm2"></form>
+    </div>
+  </div>
+  </li>  
+</ul> 
+
+<!-- Submit Quote --> 
+<form id="quote-form2">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name2" name="name" placeholder="Your Name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email2" name="email" placeholder="your@email.com" required>
+  </div>
+  <div class="form-group">
+    <label for="message"> Project Description :</label>
+    <div id="editor2" name="message"></div>
+  </div> 
+  <button id="send-email-2" type="submit">Submit Quote</button>
+</form>
+  <div id="form-status-2"></div>
+</div>
