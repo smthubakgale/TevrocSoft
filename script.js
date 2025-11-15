@@ -2473,35 +2473,58 @@ function loadHtml(elementId, url) {
         if (script.parentNode) script.parentNode.removeChild(script);
     });
     loadedScripts = [];
+    
+	let payment = '';
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onload = async function() {  // async function for sequential script loading
-        if (xhr.status === 200) {
-            let tempDiv = document.createElement('div');
-            tempDiv.innerHTML = xhr.responseText;
+	if(url.indexOf("blogs/") != -1){
+        var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'payments/yoco.html', true);
+		xhr.onload = async function() {  // async function for sequential script loading
+			if (xhr.status === 200) {
+				 payment = xhr.responseText;
+				 nex();
 
-            // Extract and remove script tags from HTML
-            let scripts = Array.from(tempDiv.querySelectorAll('script'));
-            scripts.forEach(script => script.remove());
+			} else {
+				console.error('Error loading ' + url + ': ' + xhr.statusText);
+			}
+		};
+		xhr.send();
+	}
+	else {
+		nex();
+	}
 
-            // Insert HTML without scripts
-            targetSection.innerHTML = tempDiv.innerHTML;
+	function nex(){
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', url, true);
+		xhr.onload = async function() {  // async function for sequential script loading
+			if (xhr.status === 200) {
+				let tempDiv = document.createElement('div');
+				tempDiv.innerHTML = xhr.responseText + '\n' + payment;
 
-            // Dynamically load and execute scripts sequentially
-            for (let script of scripts) {
-                try {
-                    await loadScriptSequentially(script);
-                } catch (err) {
-                    console.error('Error executing script:', err);
-                }
-            }
+				// Extract and remove script tags from HTML
+				let scripts = Array.from(tempDiv.querySelectorAll('script'));
+				scripts.forEach(script => script.remove());
 
-        } else {
-            console.error('Error loading ' + url + ': ' + xhr.statusText);
-        }
-    };
-    xhr.send();
+				// Insert HTML without scripts
+				targetSection.innerHTML = tempDiv.innerHTML;
+
+				// Dynamically load and execute scripts sequentially
+				for (let script of scripts) {
+					try {
+						await loadScriptSequentially(script);
+					} catch (err) {
+						console.error('Error executing script:', err);
+					}
+				}
+
+			} else {
+				console.error('Error loading ' + url + ': ' + xhr.statusText);
+			}
+		};
+		xhr.send();
+	}
 
     sideNav.classList.remove('mob-nav');
 }
