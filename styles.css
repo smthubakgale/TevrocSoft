@@ -2740,7 +2740,13 @@ section li{
     color: #c0c0c0;
 }
 
-section{
-  height: calc(100vh - 80px);
+
+@media (max-width: 768px) { section{
+  max-height: calc(100vh - 80px);
   overflow-y: scroll;
-}
+}}
+
+@media (max-width: 480px) {section{
+  max-height: calc(100vh - 80px);
+  overflow-y: scroll;
+}}
