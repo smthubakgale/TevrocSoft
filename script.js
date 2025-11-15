@@ -2454,24 +2454,82 @@ onLoad("#plan-select" , ()=>
 
 });
 
+// Keep track of dynamically added scripts
+let loadedScripts = [];
+
 function loadHtml(elementId, url) {
-	let targetSection = document.getElementById(elementId);
+    let targetSection = document.getElementById(elementId);
+    console.log(elementId, url);
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', url, true);
-	xhr.onload = function() {
-	if (xhr.status === 200) {
-	targetSection.innerHTML = xhr.responseText;
-	} else {
-	console.error('Error loading ' + url + ': ' + xhr.statusText);
-	}
-	};
-	xhr.send();
-
-	sections.forEach(section => section.classList.remove('active'));
+    // Clear other sections
+    sections.forEach(section => {
+        section.classList.remove('active');
+        section.innerHTML = '';
+    });
     targetSection.classList.add('active');
-	sideNav.classList.remove('mob-nav');
+
+    // Remove previously loaded scripts
+    loadedScripts.forEach(script => {
+        if (script.parentNode) script.parentNode.removeChild(script);
+    });
+    loadedScripts = [];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = async function() {  // async function for sequential script loading
+        if (xhr.status === 200) {
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = xhr.responseText;
+
+            // Extract and remove script tags from HTML
+            let scripts = Array.from(tempDiv.querySelectorAll('script'));
+            scripts.forEach(script => script.remove());
+
+            // Insert HTML without scripts
+            targetSection.innerHTML = tempDiv.innerHTML;
+
+            // Dynamically load and execute scripts sequentially
+            for (let script of scripts) {
+                try {
+                    await loadScriptSequentially(script);
+                } catch (err) {
+                    console.error('Error executing script:', err);
+                }
+            }
+
+        } else {
+            console.error('Error loading ' + url + ': ' + xhr.statusText);
+        }
+    };
+    xhr.send();
+
+    sideNav.classList.remove('mob-nav');
 }
+
+// Helper function to load one script and wait until it's loaded
+function loadScriptSequentially(script) {
+    return new Promise((resolve, reject) => {
+        try {
+            let newScript = document.createElement('script');
+
+            if (script.src) {
+                newScript.src = script.src;
+                newScript.async = false;
+                newScript.onload = () => resolve();
+                newScript.onerror = (e) => reject(e);
+            } else {
+                newScript.textContent = script.textContent;
+                resolve(); // Inline script executes immediately
+            }
+
+            document.body.appendChild(newScript);
+            loadedScripts.push(newScript);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {  
     const hash = window.location.hash; // e.g., "#shop"
@@ -2487,37 +2545,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         console.log('No hash in URL');
 		loadHtml('home', `sections/home.html`);
-    }
-
-	
-	setTimeout(function(){
-     return;
-
-
-	// Load HTML content for each section
-
-	loadHtml('tutorial-1', 'sections/tutorial-1.html');
-	loadHtml('tutorial-2', 'sections/tutorial-2.html');
-	loadHtml('tutorial-3', 'sections/tutorial-3.html'); 
-
-	loadHtml('about', 'sections/about.html');
-	loadHtml('contact', 'sections/contact.html');
-	loadHtml('configuration', 'sections/configuration.html');
-	loadHtml('create-quote', 'create-quote/contact.html');
-	loadHtml('request-quote', 'sections/request-quote.html');
-
-	loadHtml('policy', 'sections/policy.html');
-	loadHtml('terms', 'sections/terms-of-service.html');
-	loadHtml('disclaimer', 'sections/disclaimer.html');
-	loadHtml('refund', 'sections/refund-policy.html');
-	loadHtml('cookie', 'sections/cookie-policy.html');
-	loadHtml('acceptable-use', 'sections/acceptable-use-policy.html');
-	loadHtml('intellectual-property', 'sections/intellectual-property.html');
-	loadHtml('security', 'sections/security.html');
-	loadHtml('payment', 'sections/payment-terms.html');
-		
-  },400);
-
+    } 
 });
 //------------------------------: Pricing
 // Replace textarea with CKEditor
@@ -2580,7 +2608,9 @@ function handleNavLinkClick(event) {
   event.preventDefault();
   
   let hashValue = event.target.getAttribute('href').substring(1);
-  loadHtml(hashValue, `sections/${hashValue}.html`);
+  let preValue = event.target.getAttribute('path');
+
+  loadHtml(preValue ? 'main' : hashValue, `${preValue || 'sections'}/${hashValue}.html`);
  
   
 }

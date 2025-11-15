@@ -223,6 +223,29 @@ th {
   color: #4C9DFE; /* Accent Blue */
 }
 
+/* Submenu label styling */
+.submenu-label {
+  display: flex;                /* enable flex layout */
+  justify-content: space-between; /* space between text and chevron */
+  align-items: center;          /* vertically center */
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color:white;
+}
+
+/* Chevron icon styling */
+.submenu-chevron {
+  margin-left: auto;           /* push icon to far right if needed */
+  transition: transform 0.3s ease;
+  color:white;
+}
+
+/* Rotate chevron when submenu is open */
+li input[type="checkbox"]:checked + .submenu-label .submenu-chevron {
+  transform: rotate(90deg);
+}
+
 /* Overlay */
 
 .overlay {
@@ -433,14 +456,18 @@ th {
 .aside-toggle {
     display: none;
     transform: scaleX(-1); 
+    margin-right:-25px;
   }
 .side-nav {
-  flex-basis: 250px;
+  flex-basis: 290px;
   flex-shrink: 0;
-  background-color: #F7F7F7; /* Light Gray */
-  padding: 1em;
-  overflow-y: auto;
+  background-color: #181818; /* Light Gray */
+  padding: 1em; 
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-left:10px;
+  border-radius:10px;
+  height:unset;
+   max-height:unset;
 }
 
 .side-nav .contact-link2 , .side-nav .about-link2 ,
@@ -470,7 +497,7 @@ th {
 }
 
 .side-nav .docs-nav a {
-  color: #1A1D23; /* Main Navy */
+  color: #CCCCCC; /* Main Navy */
   text-decoration: none;
 }
 
@@ -558,7 +585,7 @@ th {
 }
 
 @media only screen and (max-width: 480px) and (orientation: portrait) { #home .hero {
-  height:210vh;
+  height:1400px;
   width: calc(100vw - 0px);
   margin-top:-40px
 }}
@@ -568,7 +595,7 @@ th {
   margin-top:-40px
 }}
 @media only screen and (max-width: 768px) and (orientation: portrait){ #home .hero {
-  height:210vh;
+  height:1400px;
   width: calc(100vw - 0px);
   margin-top:-40px
 }}
@@ -647,7 +674,7 @@ th {
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
-  width: calc(33.33% - 20px);
+  width: calc(40% - 20px);
 }
 
 @media only screen and (max-width: 768px) and (orientation: portrait) { #home .project-card {
@@ -720,7 +747,7 @@ th {
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
-  width: calc(33.33% - 20px);
+  width: calc(40% - 20px);
 }
 
 #home .service-icon i {
@@ -772,7 +799,7 @@ th {
   padding: 20px;
   border: 1px solid #ddd;
   margin: 20px;
-  width: calc(33.33% - 20px);
+  width: calc(40% - 20px);
 }
 
 @media only screen and (max-width: 768px) and (orientation: portrait)  { #home .what-we-do .service {
@@ -847,7 +874,11 @@ th {
   border-radius: 10px;
   margin: 20px;
   padding: 20px;
-  width: calc(33.33% - 20px);
+  width: calc(40% - 20px);
+}
+
+#home .reason i{
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) and (orientation: portrait)  { #home .reason {
@@ -2473,7 +2504,7 @@ th {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
 /* Responsive Design */
@@ -2604,15 +2635,30 @@ th {
 @media (min-width: 769px) {
   .side-nav {
     position: sticky;
-    top: 60px; /* Adjust based on top nav height */
-    max-height: calc(100vh - 50px);
-    overflow-y: auto;
+    top: 30px; /* Adjust based on top nav height */ 
   }
 }
 
 
 .mob-nav{
-  display:block;
+  display:block; 
+  border-radius:0px;
+}
+
+@media only screen and (max-width: 480px) {
+  .mob-nav{ 
+  height:100vh;
+  padding:0px; 
+  overflow-y: auto;
+  margin-left:-10px;
+}
+
+.mob-nav .docs-nav{
+  margin-left:0px;
+  margin-top:0px;
+  height:100%;
+
+}
 }
 
 /* Typography */
@@ -2638,3 +2684,56 @@ section li{
   margin-left:16px;
 }
 
+/* Top-level: no bullets */
+.docs-nav > ul > li {
+    list-style: none;
+}
+
+.docs-nav > ul > li > ul > li {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #1f78b4;
+}
+
+.docs-nav > ul > li > ul > li > ul > li {
+    list-style-type: circle;
+    margin-left: 20px;
+    color: #1f78b4;
+}
+
+.docs-nav > ul > li > ul > li > ul > li > ul > li {
+    list-style-type: square;
+    margin-left: 20px;
+    color: #1f78b4;
+}
+ 
+.docs-nav li a {
+    text-decoration: none;
+    color: #1f78b4;
+}
+
+.docs-nav li a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Odd-level submenus: level 1, 3, 5... */
+.docs-nav ul li > .submenu-label {
+    color: #4da6ff; /* light blue for primary highlight */
+}
+
+/* Even-level submenus: level 2, 4, 6... */
+.docs-nav ul li ul li > .submenu-label {
+    color: #c0c0c0; /* silver/light gray for contrast */
+}
+
+/* Level 3 (nested deeper): odd again */
+.docs-nav ul li ul li ul li > .submenu-label {
+    color: #4da6ff;
+}
+
+/* Level 4 (nested deeper): even again */
+.docs-nav ul li ul li ul li ul li > .submenu-label {
+    color: #c0c0c0;
+}
