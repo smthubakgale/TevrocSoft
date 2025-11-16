@@ -386,107 +386,113 @@ onReady('#contact-form','submit', (e) =>
 
      sendEmail(name , message , email , formStatus , fm3 , "Custome Quote Request");
 }); 
-// Keep track of dynamically added scripts
-let loadedScripts = [];
+// 
+async function loadHtml(elementId, url) {
+    const targetSection = document.getElementById(elementId);
+    console.log('Loading:', elementId, url);
 
-function loadHtml(elementId, url) {
-    let targetSection = document.getElementById(elementId);
-    console.log(elementId, url);
-
-    // Clear other sections
+    // Clear all other sections except target
     sections.forEach(section => {
         section.classList.remove('active');
-        section.innerHTML = '';
+        if (section !== targetSection) section.innerHTML = '';
     });
     targetSection.classList.add('active');
 
-    // Remove previously loaded scripts
-    loadedScripts.forEach(script => {
-        if (script.parentNode) script.parentNode.removeChild(script);
-    });
-    loadedScripts = [];
-    
     let payment = '';
 
-    if (url.indexOf("blogs/") !== -1) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'payments/yoco.html', true);
-        xhr.onload = async function() {
-            if (xhr.status === 200) {
-                payment = xhr.responseText;
-                nex();
-            } else {
-                console.error('Error loading ' + url + ': ' + xhr.statusText);
-            }
-        };
-        xhr.send();
-    } else {
-        nex();
+    // Load payment snippet if needed
+    if (url.includes("blogs/")) {
+        try {
+            payment = await fetchHtml('payments/yoco.html');
+        } catch (err) {
+            console.error('Error loading payment snippet:', err);
+        }
     }
 
-    function nex() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onload = async function() {
-            if (xhr.status === 200) {
-                let tempDiv = document.createElement('div');
-                tempDiv.innerHTML = xhr.responseText + '\n' + payment;
-
-                // Extract and remove script tags from HTML
-                let scripts = Array.from(tempDiv.querySelectorAll('script'));
-                scripts.forEach(script => script.remove());
-
-                // Insert HTML without scripts
-                targetSection.innerHTML = tempDiv.innerHTML;
-
-                // Dynamically load and execute scripts sequentially
-                for (let script of scripts) {
-                    try {
-                        await loadScriptSequentially(script);
-                    } catch (err) {
-                        console.error('Error executing script:', err);
-                    }
-                }
-
-            } else {
-                console.error('Error loading ' + url + ': ' + xhr.statusText);
-            }
-        };
-        xhr.send();
+    // Load main HTML
+    let mainHtml = '';
+    try {
+        mainHtml = await fetchHtml(url);
+    } catch (err) {
+        console.error('Error loading main HTML:', err);
+        return;
     }
 
-    sideNav.classList.remove('mob-nav');
+    // --- Insert main HTML into target section (without scripts) ---
+    const mainDiv = document.createElement('div');
+    mainDiv.innerHTML = mainHtml;
+    const mainScripts = extractScripts(mainDiv);
+    mainScripts.forEach(s => s.remove()); // remove scripts from HTML
+    targetSection.innerHTML = mainDiv.innerHTML;
+
+    // --- Append payment HTML to target section (without scripts) ---
+    let paymentScripts = [];
+    if (payment) {
+        const paymentDiv = document.createElement('div');
+        paymentDiv.innerHTML = payment;
+        paymentScripts = extractScripts(paymentDiv);
+		paymentScripts.forEach(s => s.remove());
+        targetSection.insertAdjacentHTML('beforeend', paymentDiv.innerHTML);
+    }
+
+    for (const script of paymentScripts) {
+        await loadScriptSequentially(script);
+    }
+
+    for (const script of mainScripts) {
+        await loadScriptSequentially(script);
+    }
+
+    // Close mobile nav if open
+    if (sideNav) sideNav.classList.remove('mob-nav');
 }
 
-// Helper function to load a script sequentially while respecting existing attributes
+// --- Helper: fetch HTML ---
+function fetchHtml(url) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = () => xhr.status === 200 ? resolve(xhr.responseText) : reject(new Error(`${xhr.status} ${xhr.statusText}`));
+        xhr.onerror = () => reject(new Error('Network error'));
+        xhr.send();
+    });
+}
+
+// --- Helper: extract all scripts recursively ---
+function extractScripts(container) {
+    const scripts = [];
+    const nodes = Array.from(container.querySelectorAll('script'));
+    nodes.forEach(node => scripts.push(node));
+    return scripts;
+}
+
+// --- Helper: clone & append script sequentially ---
 function loadScriptSequentially(script) {
     return new Promise((resolve, reject) => {
         const newScript = document.createElement('script');
 
-        // Copy src or inline content
-        if (script.src) {
-            newScript.src = script.src;
-        } else {
-            newScript.textContent = script.textContent;
-        }
+        if (script.src) { newScript.src = script.src;
+			console.log(script.src);
+		}
+        else{
+			 newScript.textContent = script.textContent;
+			 console.log(script.textContent);
+			}
 
-        // Preserve existing attributes
-        if (script.type) newScript.type = script.type;
-        else newScript.type = 'module'; // default to module if not specified
-
-        if (script.nomodule) newScript.nomodule = true;
         if (script.id) newScript.id = script.id;
         if (script.className) newScript.className = script.className;
         if (script.async) newScript.async = script.async;
         if (script.defer) newScript.defer = script.defer;
+        if (script.type) newScript.type = script.type;
+        if (script.nomodule) newScript.nomodule = true;
 
         newScript.onload = () => resolve();
-        newScript.onerror = (err) => reject(err);
+        newScript.onerror = err => reject(err);
 
         document.body.appendChild(newScript);
-        loadedScripts.push(newScript);
     });
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {  
     // Parse query parameters

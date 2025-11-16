@@ -1,72 +1,78 @@
-<!-- Bootstrap CSS -->
+<!-- ===== BOOTSTRAP CSS ===== -->
 <link href="assets/libs/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap JS -->
-<script src="assets/libs/bootstrap.bundle.min.js"></script>
-
 <style>
-/* === CHECKOUT BUTTON FIXED === */
+/* --- FIXED CHECKOUT BUTTON --- */
 .btn-checkout {
-  padding: 6px 10px;
+  padding: 8px 12px;
   background: #1e88e5;
   color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
   position: fixed;
   bottom: 20px;
-  right: 10px;
+  right: 15px;
   z-index: 99999;
   font-weight: 600;
   transition: 0.3s;
 }
 
-@media (max-width: 768px) { .btn-checkout span { display:none; }}
-@media (max-width: 480px) { .btn-checkout span { display:none; }}
+.btn-checkout span { margin-left: 5px; }
 
-.btn-checkout:hover {
-  background: #1565c0;
-}
+.btn-checkout:hover { background: #1565c0; }
 
-/* === OVERLAY === */
+@media (max-width: 768px) { .btn-checkout span { display:none; } }
+
+/* --- OVERLAY --- */
 .checkout-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.6);
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
   z-index: 999;
 }
 
-/* === MODAL === */
+/* SHOW OVERLAY */
+.checkout-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- MODAL BASE --- */
 .checkout-modal {
   position: fixed;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
-  width: 380px;
+  width: 90%;
+  max-width: 400px;
   background: #1f1f2e;
   color: #fff;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 5px 30px rgba(0,0,0,0.6);
-  display: none;
+  opacity: 0;
+  pointer-events: none;
   z-index: 1000;
   transition: transform 0.25s ease, opacity 0.25s ease;
-  opacity: 0;
 }
 
+/* SHOW MODAL */
 .checkout-modal.show {
-  display: block;
-  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* === HEADER === */
+/* --- HEADER --- */
 .checkout-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top:-10px;
+  margin-top: -10px;
 }
 
 .checkout-header h3 {
@@ -79,7 +85,7 @@
   cursor: pointer;
 }
 
-/* === BODY === */
+/* --- BODY --- */
 .checkout-body {
   margin-top: 15px;
   display: flex;
@@ -112,14 +118,9 @@
   transition: 0.3s;
 }
 
-.btn-submit:hover {
-  background: #115293;
-}
+.btn-submit:hover { background: #115293; }
 
-/* Show overlay */
-.checkout-overlay.show { display: block; }
-
-/* === IFRAME MODAL === */
+/* --- IFRAME MODAL --- */
 #iframeModal {
   width: 90%;
   max-width: 600px;
@@ -133,23 +134,17 @@
   border: none;
   border-radius: 0 0 12px 12px;
 }
-
-#iframeModal.show {
-  display: block;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-}
 </style>
 
-<!-- Checkout Button (Fixed) -->
+<!-- ===== CHECKOUT BUTTON ===== -->
 <button id="checkoutBtn" class="btn-checkout">
-    💳 <span> Buy Me Coffe</span> 
+    💳 <span>Buy Me Coffee</span>
 </button>
 
-<!-- Overlay -->
+<!-- ===== OVERLAY ===== -->
 <div id="checkoutOverlay" class="checkout-overlay"></div>
 
-<!-- Amount Selection Modal -->
+<!-- ===== DONATION MODAL ===== -->
 <div id="checkoutModal" class="checkout-modal">
   <div class="checkout-header">
     <h3>Donate</h3>
@@ -173,7 +168,7 @@
   </div>
 </div>
 
-<!-- IFRAME CHECKOUT MODAL -->
+<!-- ===== IFRAME PAYMENT MODAL ===== -->
 <div id="iframeModal" class="checkout-modal">
   <div class="checkout-header" style="padding:10px;">
     <h3>Secure Payment</h3>
@@ -183,87 +178,85 @@
   <iframe id="checkoutFrame"></iframe>
 </div>
 
+<!-- ===== SCRIPT ===== -->
+<script src="assets/libs/bootstrap.bundle.min.js"></script>
+
 <script>
-const modal = document.getElementById("checkoutModal");
-const overlay = document.getElementById("checkoutOverlay");
-const openBtn = document.getElementById("checkoutBtn");
-const closeBtn = document.getElementById("closeModal");
 
-const iframeModal = document.getElementById("iframeModal");
-const closeIframeBtn = document.getElementById("closeIframeModal");
-const checkoutFrame = document.getElementById("checkoutFrame");
+  const modal = document.getElementById("checkoutModal");
+  const overlay = document.getElementById("checkoutOverlay");
+  const openBtn = document.getElementById("checkoutBtn");
+  const closeBtn = document.getElementById("closeModal");
 
-const amountSelect = document.getElementById("amountSelect");
-const customAmountInput = document.getElementById("customAmount");
-const payBtn = document.getElementById("payBtn");
+  const iframeModal = document.getElementById("iframeModal");
+  const closeIframeBtn = document.getElementById("closeIframeModal");
+  const checkoutFrame = document.getElementById("checkoutFrame");
 
-/* ---- OPEN / CLOSE MAIN MODAL ---- */
-openBtn.onclick = () => {
-  modal.classList.add("show");
-  overlay.classList.add("show");
-};
+  const amountSelect = document.getElementById("amountSelect");
+  const customAmountInput = document.getElementById("customAmount");
+  const payBtn = document.getElementById("payBtn");
 
-closeBtn.onclick = closeModal;
-overlay.onclick = () => { closeModal(); closeIframe(); };
+  /* --- OPEN/CLOSE MODAL --- */
+  openBtn.addEventListener("click", () => {
+    modal.classList.add("show");
+    overlay.classList.add("show");
+  });
 
-function closeModal() {
-  modal.classList.remove("show");
-}
+  closeBtn.addEventListener("click", closeModal);
+  closeIframeBtn.addEventListener("click", closeIframe);
+  overlay.addEventListener("click", () => { closeModal(); closeIframe(); });
 
-function closeIframe() {
-  iframeModal.classList.remove("show");
-  checkoutFrame.src = ""; // clear iframe
-  overlay.classList.remove("show");
-}
-
-/* ---- SHOW CUSTOM AMOUNT ---- */
-amountSelect.addEventListener("change", function () {
-  customAmountInput.style.display = this.value === "other" ? "block" : "none";
-});
-
-/* ---- CREATE YOCO CHECKOUT ---- */
-payBtn.addEventListener('click', async () => {
-  let amount = amountSelect.value === "other"
-    ? parseFloat(customAmountInput.value)
-    : parseFloat(amountSelect.value);
-
-  if (isNaN(amount) || amount <= 0) {
-    alert('Please enter a valid donation amount.');
-    return;
+  function closeModal() {
+    modal.classList.remove("show");
+    overlay.classList.remove("show");
   }
 
-  try {
-    const val = Math.round(amount * 100);
-    console.log("Amount in cents:", val);
+  function closeIframe() {
+    iframeModal.classList.remove("show");
+    checkoutFrame.src = "";
+    overlay.classList.remove("show");
+  }
 
-    //let url = 'http://localhost:3008';
-    let url = 'https://tevrocsoft-api.vercel.app';
+  /* --- SHOW CUSTOM AMOUNT INPUT --- */
+  amountSelect.addEventListener("change", () => {
+    customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
+  });
 
-    const response = await fetch(`${url}/create-checkout?amount=${val}`, {
-      method: 'POST'
-    });
+  /* --- PAY BUTTON (YOCO CHECKOUT) --- */
+  payBtn.addEventListener("click", async () => {
+    let amount = amountSelect.value === "other"
+      ? parseFloat(customAmountInput.value)
+      : parseFloat(amountSelect.value);
 
-    const data = await response.json();
-
-    if (data.redirectUrl) {
-      // Load inside iframe instead of redirect
-      checkoutFrame.src = data.redirectUrl;
-
-      // Close amount modal
-      closeModal();
-
-      // Open iframe modal
-      iframeModal.classList.add("show");
-      overlay.classList.add("show");
-    } else {
-      alert('Failed to create checkout.');
-      console.error(data);
+    if (isNaN(amount) || amount <= 0) {
+      alert('Please enter a valid donation amount.');
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert('Error creating checkout. See console for details.');
-  }
-});
 
-closeIframeBtn.onclick = closeIframe;
+    try {
+      const val = Math.round(amount * 100); // in cents
+      console.log("Amount in cents:", val);
+
+      let url = 'https://tevrocsoft-api.vercel.app';
+
+      const response = await fetch(`${url}/create-checkout?amount=${val}`, {
+        method: 'POST'
+      });
+
+      const data = await response.json();
+
+      if (data.redirectUrl) {
+        checkoutFrame.src = data.redirectUrl;
+        closeModal();
+        iframeModal.classList.add("show");
+        overlay.classList.add("show");
+      } else {
+        alert('Failed to create checkout.');
+        console.error(data);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error creating checkout. See console.');
+    }
+  });
 </script>
