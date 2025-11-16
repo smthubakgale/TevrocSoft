@@ -418,10 +418,17 @@ async function loadHtml(elementId, url) {
         return;
     }
 
+	let scripts = [];
+
     // --- Insert main HTML into target section (without scripts) ---
     const mainDiv = document.createElement('div');
     mainDiv.innerHTML = mainHtml;
     const mainScripts = extractScripts(mainDiv);
+	
+    for (const script of mainScripts) {
+        scripts.push(script.cloneNode(true));
+    }
+
     mainScripts.forEach(s => s.remove()); // remove scripts from HTML
     targetSection.innerHTML = mainDiv.innerHTML;
 
@@ -431,16 +438,29 @@ async function loadHtml(elementId, url) {
         const paymentDiv = document.createElement('div');
         paymentDiv.innerHTML = payment;
         paymentScripts = extractScripts(paymentDiv);
+		
+		for (const script of paymentScripts) {
+			scripts.push(script.cloneNode(true));
+		}
+
 		paymentScripts.forEach(s => s.remove());
         targetSection.insertAdjacentHTML('beforeend', paymentDiv.innerHTML);
     }
 
-    for (const script of paymentScripts) {
-        await loadScriptSequentially(script);
-    }
-
-    for (const script of mainScripts) {
-        await loadScriptSequentially(script);
+    for (const script of scripts) {
+		try
+		{
+			if(script.src){
+               await loadScriptSequentially(script);
+			}
+			else{
+			  loadScriptSequentially(script);
+			}
+			//
+		} 
+		catch(es) {
+		   console.error(es)
+		}
     }
 
     // Close mobile nav if open
