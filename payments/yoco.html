@@ -189,12 +189,13 @@ payBtn.addEventListener("click", async () => {
     if (data.redirectUrl && data.id) {
   // Preserve existing query parameters
   const currentParams = new URLSearchParams(window.location.search);
-  currentParams.set("checkoutId", data.id);
-  currentParams.set("redirectUrl", data.redirectUrl);
+  currentParams.set("checkoutId", encodeURIComponent(data.id));
+  currentParams.set("redirectUrl", encodeURIComponent(data.redirectUrl));
 
   // Update the URL with all parameters
   window.location.href = `${window.location.pathname}?${currentParams.toString()}`;
 }
+
  else {
       console.error(data);
       alert("Failed to create checkout.");
