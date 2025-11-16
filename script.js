@@ -491,13 +491,14 @@ function loadScriptSequentially(script) {
     return new Promise((resolve, reject) => {
         const newScript = document.createElement('script');
 
-        if (script.src) { newScript.src = script.src;
-			console.log(script.src);
+        if (script.src)
+	    { 
+			newScript.src = script.src; 
 		}
-        else{
-			 newScript.textContent = script.textContent;
-			 console.log(script.textContent);
-			}
+        else
+		{
+		   newScript.textContent = script.textContent;
+		}
 
         if (script.id) newScript.id = script.id;
         if (script.className) newScript.className = script.className;
