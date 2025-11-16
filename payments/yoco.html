@@ -187,10 +187,15 @@ payBtn.addEventListener("click", async () => {
     const data = await response.json();
 
     if (data.redirectUrl && data.id) {
-      // Reload page with query params
-      const params = new URLSearchParams({ checkoutId: data.id, redirectUrl: data.redirectUrl });
-      window.location.href = `${window.location.pathname}?${params.toString()}`;
-    } else {
+  // Preserve existing query parameters
+  const currentParams = new URLSearchParams(window.location.search);
+  currentParams.set("checkoutId", data.id);
+  currentParams.set("redirectUrl", data.redirectUrl);
+
+  // Update the URL with all parameters
+  window.location.href = `${window.location.pathname}?${currentParams.toString()}`;
+}
+ else {
       console.error(data);
       alert("Failed to create checkout.");
     }
