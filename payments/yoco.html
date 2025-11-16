@@ -166,7 +166,7 @@ function getQueryParam(name) {
 
   if (checkoutId && redirectUrl) {
     // Open popup automatically
-    const popup = window.open(redirectUrl, "_blank", "width=500,height=700");
+    const popup = window.open(decodeURIComponent(redirectUrl), "_blank", "width=500,height=700");
     
     // Optionally remove query params from URL
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -189,7 +189,7 @@ payBtn.addEventListener("click", async () => {
     if (data.redirectUrl && data.id) {
   // Preserve existing query parameters
   const currentParams = new URLSearchParams(window.location.search);
-  currentParams.set("checkoutId", encodeURIComponent(data.id));
+  currentParams.set("checkoutId", data.id);
   currentParams.set("redirectUrl", encodeURIComponent(data.redirectUrl));
 
   // Update the URL with all parameters
