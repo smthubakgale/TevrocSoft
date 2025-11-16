@@ -1,0 +1,466 @@
+  <style>
+    
+#main {
+  background-color: #f7f7f7;
+  padding: 50px 0;
+}
+
+#main h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#main .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#main .service-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main .service-item i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#main .service-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#main .service-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+#main .service-item:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+#main .service-item:hover i {
+  color: #337ab7;
+}
+
+#main .service-item:hover h4 {
+  color: #337ab7;
+}
+
+@media only screen and (max-width: 768px) {
+  #main .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#main .welcome {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#main .welcome h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#main .welcome p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#main .mission {
+  margin-bottom: 50px;
+}
+
+#main .mission h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#main .mission p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#main .expertise {
+  margin-bottom: 50px;
+}
+
+#main .expertise h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#main .expertise p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#main .what-sets-us-apart {
+  margin-bottom: 50px;
+}
+
+#main .what-sets-us-apart h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#main .what-sets-us-apart p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#main .our-values {
+  margin-bottom: 50px;
+}
+
+#main .our-values h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#main .our-values p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#main .our-values ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#main .our-values li {
+  margin-bottom: 10px;
+}
+
+#main .our-values li i {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+#main .what-sets-us-apart-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+#main .what-sets-us-apart-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main .what-sets-us-apart-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .what-sets-us-apart-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #main .what-sets-us-apart-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .what-sets-us-apart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#main .expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+#main .expertise-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main .expertise-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .expertise-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #main .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#main .our-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+#main .our-values-item {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#main .our-values-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .our-values-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #main .our-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .our-values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#main .what-sets-us-apart-item {
+  margin-bottom: 20px;
+}
+
+#main .what-sets-us-apart-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .what-sets-us-apart-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+#main .our-values-item {
+  margin-bottom: 20px;
+}
+
+#main .our-values-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .our-values-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+#main .expertise-item {
+  margin-bottom: 20px;
+}
+
+#main .expertise-item h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#main .expertise-item p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  #main .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #main .what-sets-us-apart-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .what-sets-us-apart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #main .expertise-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #main .our-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main .our-values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+#main .service-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#main .service-item:hover i {
+  color: #337ab7;
+}
+
+#main .service-item:hover h4 {
+  color: #337ab7;
+}
+
+#main .what-sets-us-apart-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#main .what-sets-us-apart-item:hover i {
+  color: #337ab7;
+}
+
+#main .what-sets-us-apart-item:hover h4 {
+  color: #337ab7;
+}
+
+#main .expertise-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#main .expertise-item:hover i {
+  color: #337ab7;
+}
+
+#main .expertise-item:hover h4 {
+  color: #337ab7;
+}
+
+#main .our-values-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#main .our-values-item:hover i {
+  color: #337ab7;
+}
+
+#main .our-values-item:hover h4 {
+  color: #337ab7;
+}
+
+
+  </style>
+  
+  <div class="container">
+              <div class="section-title">
+                <h2>Our Services</h2>
+                <p class="text-muted">At Tevroc Soft, we offer a range of services designed to help businesses and individuals achieve their goals.</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Software Development</h5>
+                      <p class="card-text">Custom software development for businesses and individuals. Mobile app development for Android and iOS. Web application development using modern technologies. Maintenance and support for existing software applications.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Data Science and Analytics</h5>
+                      <p class="card-text">Data analysis and visualization for businesses and individuals. Machine learning model development and deployment. Predictive analytics for forecasting and decision-making. Data mining and business intelligence solutions.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">IT Consulting</h5>
+                      <p class="card-text">IT strategy and planning for businesses. Technology implementation and integration. Cybersecurity solutions for businesses and individuals. IT project management and support.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Digital Health Solutions</h5>
+                      <p class="card-text">Digital health record system development. Telemedicine platform development. Health data analytics and visualization. Custom digital health solutions for businesses and individuals.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="section-title">
+                <h2>What We Offer</h2>
+                <p class="text-muted">We offer personalized service and support, expertise in latest technologies and trends, cost-effective solutions for businesses and individuals, and fast turnaround times and quick response to inquiries.</p>
+              </div>
+              <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p class="text-muted">Ready to learn more about our services? Contact us today to schedule a consultation and take the first step towards achieving your goals.</p>
+                <ul>
+                  <li><i class="bi bi-envelope"></i> <a href="mailto:[your email]">[your email]</a></li>
+                  <li><i class="bi bi-phone"></i> [your phone number]</li>
+                  <li><i class="bi bi-geo-alt"></i> [your address]</li>
+                </ul>
+              </div>
+            </div>

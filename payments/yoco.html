@@ -21,13 +21,8 @@
   transition: 0.3s;
 }
 
-@media (max-width: 768px) { .btn-checkout  span {
-  display:none;
-}}
-
-@media (max-width: 480px) { .btn-checkout  span {
-  display:none;
-}}
+@media (max-width: 768px) { .btn-checkout span { display:none; }}
+@media (max-width: 480px) { .btn-checkout span { display:none; }}
 
 .btn-checkout:hover {
   background: #1565c0;
@@ -49,7 +44,7 @@
   top: 50%; left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
   width: 380px;
-  background: #1f1f2e; /* dark modal background */
+  background: #1f1f2e;
   color: #fff;
   padding: 20px;
   border-radius: 12px;
@@ -98,20 +93,18 @@
   width: 100%;
   border: 1px solid #444;
   border-radius: 6px;
-  background: #2a2a3d; /* dark input background */
+  background: #2a2a3d;
   color: #fff;
   outline: none;
   text-align: center;
 }
 
-#customAmount {
-  display: none;
-}
+#customAmount { display: none; }
 
 .btn-submit {
   width: 100%;
   padding: 12px;
-  background: #1976d2; /* blueish button */
+  background: #1976d2;
   color: #fff;
   border: none; 
   cursor: pointer;
@@ -124,10 +117,28 @@
 }
 
 /* Show overlay */
-.checkout-overlay.show {
-  display: block;
+.checkout-overlay.show { display: block; }
+
+/* === IFRAME MODAL === */
+#iframeModal {
+  width: 90%;
+  max-width: 600px;
+  height: 80%;
+  padding: 0;
 }
 
+#iframeModal iframe {
+  width: 100%;
+  height: calc(100% - 50px);
+  border: none;
+  border-radius: 0 0 12px 12px;
+}
+
+#iframeModal.show {
+  display: block;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
 </style>
 
 <!-- Checkout Button (Fixed) -->
@@ -138,7 +149,7 @@
 <!-- Overlay -->
 <div id="checkoutOverlay" class="checkout-overlay"></div>
 
-<!-- Modal -->
+<!-- Amount Selection Modal -->
 <div id="checkoutModal" class="checkout-modal">
   <div class="checkout-header">
     <h3>Donate</h3>
@@ -146,7 +157,6 @@
   </div>
 
   <div class="checkout-body">
-    <!-- Amount Selection -->
     <label>Donation Amount</label>
     <select id="amountSelect" class="form-select">
       <option value="10">R 10</option>
@@ -157,53 +167,103 @@
       <option value="other">Other Amount</option>
     </select>
 
-    <!-- Custom Amount Input -->
     <input type="number" id="customAmount" placeholder="Enter custom amount" min="1">
-
-    <!-- Card Details -->
-    <div id="card-frame" class="mt-2"></div>
 
     <button class="btn-submit" id="payBtn">Pay Now</button>
   </div>
 </div>
 
-<script>
-const payBtn = document.getElementById('payBtn');
-const amountSelect = document.getElementById('amountSelect');
-const customAmountInput = document.getElementById('customAmount');
+<!-- IFRAME CHECKOUT MODAL -->
+<div id="iframeModal" class="checkout-modal">
+  <div class="checkout-header" style="padding:10px;">
+    <h3>Secure Payment</h3>
+    <span id="closeIframeModal" class="close-btn">&times;</span>
+  </div>
 
+  <iframe id="checkoutFrame"></iframe>
+</div>
+
+<script>
+const modal = document.getElementById("checkoutModal");
+const overlay = document.getElementById("checkoutOverlay");
+const openBtn = document.getElementById("checkoutBtn");
+const closeBtn = document.getElementById("closeModal");
+
+const iframeModal = document.getElementById("iframeModal");
+const closeIframeBtn = document.getElementById("closeIframeModal");
+const checkoutFrame = document.getElementById("checkoutFrame");
+
+const amountSelect = document.getElementById("amountSelect");
+const customAmountInput = document.getElementById("customAmount");
+const payBtn = document.getElementById("payBtn");
+
+/* ---- OPEN / CLOSE MAIN MODAL ---- */
+openBtn.onclick = () => {
+  modal.classList.add("show");
+  overlay.classList.add("show");
+};
+
+closeBtn.onclick = closeModal;
+overlay.onclick = () => { closeModal(); closeIframe(); };
+
+function closeModal() {
+  modal.classList.remove("show");
+}
+
+function closeIframe() {
+  iframeModal.classList.remove("show");
+  checkoutFrame.src = ""; // clear iframe
+  overlay.classList.remove("show");
+}
+
+/* ---- SHOW CUSTOM AMOUNT ---- */
+amountSelect.addEventListener("change", function () {
+  customAmountInput.style.display = this.value === "other" ? "block" : "none";
+});
+
+/* ---- CREATE YOCO CHECKOUT ---- */
 payBtn.addEventListener('click', async () => {
-  let amount = amountSelect.value === "other" 
-                ? parseFloat(customAmountInput.value) 
-                : parseFloat(amountSelect.value);
+  let amount = amountSelect.value === "other"
+    ? parseFloat(customAmountInput.value)
+    : parseFloat(amountSelect.value);
 
   if (isNaN(amount) || amount <= 0) {
-    alert('Enter a valid donation amount.');
+    alert('Please enter a valid donation amount.');
     return;
   }
 
-  const amountInCents = Math.round(amount * 100);
-
   try {
-    const response = await fetch('http://localhost:3008/create-checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: amountInCents })
+    const val = Math.round(amount * 100);
+    console.log("Amount in cents:", val);
+
+    //let url = 'http://localhost:3008';
+    let url = 'https://tevrocsoft-api.vercel.app';
+
+    const response = await fetch(`${url}/create-checkout?amount=${val}`, {
+      method: 'POST'
     });
 
     const data = await response.json();
 
     if (data.redirectUrl) {
-      window.location.href = data.redirectUrl; // Redirect to Yoco checkout
+      // Load inside iframe instead of redirect
+      checkoutFrame.src = data.redirectUrl;
+
+      // Close amount modal
+      closeModal();
+
+      // Open iframe modal
+      iframeModal.classList.add("show");
+      overlay.classList.add("show");
     } else {
       alert('Failed to create checkout.');
       console.error(data);
     }
   } catch (error) {
-    console.error('Error creating checkout:', error);
+    console.error(error);
     alert('Error creating checkout. See console for details.');
   }
 });
+
+closeIframeBtn.onclick = closeIframe;
 </script>
-
-

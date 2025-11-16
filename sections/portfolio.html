@@ -1,0 +1,133 @@
+ <div class="container">
+
+    <style>
+        #main {
+        background-color: #f4f4f4;
+        padding: 50px;
+        }
+
+        #main h2 {
+        margin-top: 0;
+        color: #2f4f7f;
+        text-align: center;
+        }
+
+        /* Project Styles */
+
+
+        #main .project {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 20px;
+        width: calc(100% - 20px);
+        }
+
+        #main .project:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #main .project h3 {
+        color: #333;
+        margin-top: 0;
+        }
+
+        #main .project p {
+        color: #666;
+        margin-bottom: 20px;
+        }
+
+        #main .project ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        }
+
+        #main .project li {
+        margin-bottom: 10px;
+        }
+
+        #main .project li:before {
+        content: "\2022";
+        font-size: 1.5em;
+        margin-right: 10px;
+        }
+
+        #main .screenshot{
+        width:80%;
+        max-width:80%;
+        }
+        #main screenshots {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+        }
+
+        #main screenshots img {
+        width: 45%; /* Reduced width */
+        max-width:45% ;
+        margin: 5px; /* Reduced margin */
+        border-radius: 5px; /* Reduced border radius */
+        box-shadow: none; /* Removed box shadow */
+        opacity: 0.8; /* Added opacity for subtle appearance */
+        }
+
+        #main screenshots img:hover {
+        opacity: 1; /* Increased opacity on hover */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added subtle box shadow */
+        }
+    </style>
+    <h2>Our Portfolio</h2>
+    <div class="portfolio-container">
+
+    <!-- Project 1: Pycon Desktop App -->
+    <div class="project">
+        <img class="screenshot" src="portfolio/pycon/pycon-screenshot.png" alt="Pycon Screenshot">
+        <h3>Pycon</h3>
+        <p>Pycon is a Node.js desktop application built with Electron, enabling efficient conference management. It utilizes Express for robust routing and SQLite for reliable data storage.</p>
+        <ul class="tags">
+        <li>Node.js</li>
+        <li>Electron</li>
+        <li>Express</li>
+        <li>SQLite</li>
+        <li>Desktop Application</li> 
+        </ul>
+        <h4>Features</h4>
+        <ul>
+        <li>Keep track of reference projects</li>
+        <li>Create reference project categories</li>
+        <li>Upload icon collections for those categories</li>
+        <li>Convert individual SVG icons into a sprite or a single SVG collection file</li>
+        <li>Rename or remove collection icons</li>
+        <li>Create your own icon project</li>
+        <li>Search for icons from reference projects</li>
+        <li>Add icons to your own projects</li>
+        <li>Keep track of these actions</li>
+        <li>Generate a single CSS file containing the SVG icon collection</li>
+        </ul>
+        <h4>Technology Stack</h4>
+        <ul>
+        <li>Node.js (runtime environment)</li>
+        <li>Electron (desktop framework)</li>
+        <li>Express (web framework)</li>
+        <li>SQLite (database management)</li>
+        <li>HTML/CSS/JavaScript (frontend)</li>
+        <li>SVG (icon graphics)</li>
+        </ul>
+        <h4>Screenshots</h4>
+        <screenshots>
+        <img src="portfolio/pycon/pycon-screenshot-1.png" alt="Pycon Screenshot 1">
+        <img src="portfolio/pycon/pycon-screenshot-2.png" alt="Pycon Screenshot 2">
+        <img src="portfolio/pycon/pycon-screenshot-3.png" alt="Pycon Screenshot 3">
+        </screenshots>
+        <h4>Demo</h4>
+        <a href="https://pycon-demo.herokuapp.com/" target="_blank">Live Demo</a>
+        <a href="https://github.com/smthubakgale/Pycon/releases/tag/v2.0" target="_blank">View Release Notes</a>
+        <a href="https://github.com/smthubakgale/Pycon" target="_blank">GitHub Repository</a>
+    </div>
+
+    </div>
+</div>
