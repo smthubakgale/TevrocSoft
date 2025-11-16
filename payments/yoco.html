@@ -224,39 +224,48 @@
 
   /* --- PAY BUTTON (YOCO CHECKOUT) --- */
   payBtn.addEventListener("click", async () => {
-    let amount = amountSelect.value === "other"
-      ? parseFloat(customAmountInput.value)
-      : parseFloat(amountSelect.value);
+  let amount = amountSelect.value === "other"
+    ? parseFloat(customAmountInput.value)
+    : parseFloat(amountSelect.value);
 
-    if (isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid donation amount.');
-      return;
+  if (isNaN(amount) || amount <= 0) {
+    alert('Please enter a valid donation amount.');
+    return;
+  }
+
+  try {
+    const val = Math.round(amount * 100); // cents
+    console.log("Amount in cents:", val);
+
+    let api = "https://tevrocsoft-api.vercel.app";
+
+    // --- IMPORTANT ---
+    // Pre-open the tab to avoid popup blockers
+    const newTab = window.open("", "_blank");
+
+    const response = await fetch(`${api}/create-checkout?amount=${val}`, {
+      method: "POST"
+    });
+
+    const data = await response.json();
+
+    if (data.redirectUrl) {
+      // Redirect the pre-opened tab to Yoco
+      newTab.location.href = data.redirectUrl;
+
+      // Close modal
+      closeModal();
+
+    } else {
+      newTab.close(); // close empty tab if failed
+      alert("Failed to create checkout.");
+      console.error(data);
     }
 
-    try {
-      const val = Math.round(amount * 100); // in cents
-      console.log("Amount in cents:", val);
+  } catch (error) {
+    console.error(error);
+    alert("Error creating checkout. Check console.");
+  }
+});
 
-      let url = 'https://tevrocsoft-api.vercel.app';
-
-      const response = await fetch(`${url}/create-checkout?amount=${val}`, {
-        method: 'POST'
-      });
-
-      const data = await response.json();
-
-      if (data.redirectUrl) {
-        checkoutFrame.src = data.redirectUrl;
-        closeModal();
-        iframeModal.classList.add("show");
-        overlay.classList.add("show");
-      } else {
-        alert('Failed to create checkout.');
-        console.error(data);
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error creating checkout. See console.');
-    }
-  });
 </script>
