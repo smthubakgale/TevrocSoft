@@ -487,10 +487,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		page = page ? decodeURIComponent(page) : page;
 		path = path ? decodeURIComponent(path) : path;
 
-        loadHtml(path ? 'main' : page, `${path || sections}/${page}.html`);
+        loadHtml('main', `${path || sections}/${page}.html`);
     } else {
         console.log('No query parameters found, loading default home');
-        loadHtml('home', 'sections/home.html');
+        loadHtml('main', 'sections/home.html');
     }
 });
 
