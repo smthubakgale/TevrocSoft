@@ -119,21 +119,6 @@
 }
 
 .btn-submit:hover { background: #115293; }
-
-/* --- IFRAME MODAL --- */
-#iframeModal {
-  width: 90%;
-  max-width: 600px;
-  height: 80%;
-  padding: 0;
-}
-
-#iframeModal iframe {
-  width: 100%;
-  height: calc(100% - 50px);
-  border: none;
-  border-radius: 0 0 12px 12px;
-}
 </style>
 
 <!-- ===== CHECKOUT BUTTON ===== -->
@@ -168,29 +153,14 @@
   </div>
 </div>
 
-<!-- ===== IFRAME PAYMENT MODAL ===== -->
-<div id="iframeModal" class="checkout-modal">
-  <div class="checkout-header" style="padding:10px;">
-    <h3>Secure Payment</h3>
-    <span id="closeIframeModal" class="close-btn">&times;</span>
-  </div>
-
-  <iframe id="checkoutFrame"></iframe>
-</div>
-
 <!-- ===== SCRIPT ===== -->
 <script src="assets/libs/bootstrap.bundle.min.js"></script>
 
 <script>
-
   const modal = document.getElementById("checkoutModal");
   const overlay = document.getElementById("checkoutOverlay");
   const openBtn = document.getElementById("checkoutBtn");
   const closeBtn = document.getElementById("closeModal");
-
-  const iframeModal = document.getElementById("iframeModal");
-  const closeIframeBtn = document.getElementById("closeIframeModal");
-  const checkoutFrame = document.getElementById("checkoutFrame");
 
   const amountSelect = document.getElementById("amountSelect");
   const customAmountInput = document.getElementById("customAmount");
@@ -203,69 +173,66 @@
   });
 
   closeBtn.addEventListener("click", closeModal);
-  closeIframeBtn.addEventListener("click", closeIframe);
-  overlay.addEventListener("click", () => { closeModal(); closeIframe(); });
+  overlay.addEventListener("click", closeModal);
 
   function closeModal() {
     modal.classList.remove("show");
     overlay.classList.remove("show");
   }
 
-  function closeIframe() {
-    iframeModal.classList.remove("show");
-    checkoutFrame.src = "";
-    overlay.classList.remove("show");
-  }
-
-  /* --- SHOW CUSTOM AMOUNT INPUT --- */
+  /* --- CUSTOM AMOUNT --- */
   amountSelect.addEventListener("change", () => {
     customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
   });
 
-  /* --- PAY BUTTON (YOCO CHECKOUT) --- */
+  /* --- PAY BUTTON (POPUP WINDOW VERSION) --- */
   payBtn.addEventListener("click", async () => {
-  let amount = amountSelect.value === "other"
-    ? parseFloat(customAmountInput.value)
-    : parseFloat(amountSelect.value);
 
-  if (isNaN(amount) || amount <= 0) {
-    alert('Please enter a valid donation amount.');
-    return;
-  }
+    let amount = amountSelect.value === "other"
+      ? parseFloat(customAmountInput.value)
+      : parseFloat(amountSelect.value);
 
-  try {
-    const val = Math.round(amount * 100); // cents
-    console.log("Amount in cents:", val);
-
-    let api = "https://tevrocsoft-api.vercel.app";
-
-    // --- IMPORTANT ---
-    // Pre-open the tab to avoid popup blockers
-    const newTab = window.open("", "_blank");
-
-    const response = await fetch(`${api}/create-checkout?amount=${val}`, {
-      method: "POST"
-    });
-
-    const data = await response.json();
-
-    if (data.redirectUrl) {
-      // Redirect the pre-opened tab to Yoco
-      newTab.location.href = data.redirectUrl;
-
-      // Close modal
-      closeModal();
-
-    } else {
-      newTab.close(); // close empty tab if failed
-      alert("Failed to create checkout.");
-      console.error(data);
+    if (isNaN(amount) || amount <= 0) {
+      alert('Please enter a valid donation amount.');
+      return;
     }
 
-  } catch (error) {
-    console.error(error);
-    alert("Error creating checkout. Check console.");
-  }
-});
+    try {
+      const val = Math.round(amount * 100);
+
+      const api = "https://tevrocsoft-api.vercel.app";
+
+      /* ===== PRE-OPEN POPUP WINDOW BEFORE AWAIT (IMPORTANT) ===== */
+      const popup = window.open(
+        "",
+        "yoco_checkout",
+        "width=480,height=720,menubar=no,toolbar=no,location=no,status=no,resizable=yes"
+      );
+
+      if (!popup) {
+        alert("Please enable popups to continue with payment.");
+        return;
+      }
+
+      popup.document.write("<p style='font-family:sans-serif;padding:20px;'>Loading secure payment...</p>");
+
+      const response = await fetch(`${api}/create-checkout?amount=${val}`, {
+        method: "POST"
+      });
+
+      const data = await response.json();
+
+      if (data.redirectUrl) {
+        popup.location.href = data.redirectUrl;
+        closeModal();
+      } else {
+        popup.document.body.innerHTML = "<h3>Failed to create checkout.</h3>";
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Error creating checkout. Check console.");
+    }
+  });
 
 </script>
