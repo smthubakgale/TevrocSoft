@@ -160,7 +160,7 @@ function getQueryParam(name) {
 }
 
 // --- Check on page load if checkout info exists
-window.addEventListener("DOMContentLoaded", () => {
+(() => {
   const checkoutId = getQueryParam("checkoutId");
   const redirectUrl = getQueryParam("redirectUrl");
 
@@ -171,7 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Optionally remove query params from URL
     window.history.replaceState({}, document.title, window.location.pathname);
   }
-});
+})();
 
 // --- Pay button
 payBtn.addEventListener("click", async () => {
