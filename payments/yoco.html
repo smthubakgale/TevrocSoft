@@ -19,9 +19,7 @@
 }
 
 .btn-checkout span { margin-left: 5px; }
-
 .btn-checkout:hover { background: #1565c0; }
-
 @media (max-width: 768px) { .btn-checkout span { display:none; } }
 
 /* --- OVERLAY --- */
@@ -35,7 +33,6 @@
   transition: opacity 0.25s ease;
   z-index: 999;
 }
-
 .checkout-overlay.show {
   opacity: 1;
   pointer-events: auto;
@@ -58,30 +55,17 @@
   z-index: 1000;
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
-
 .checkout-modal.show {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
 
-.checkout-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: -10px;
-}
-
+.checkout-header { display: flex; justify-content: space-between; align-items: center; margin-top: -10px; }
 .checkout-header h3 { margin: 0; font-size: 16px; }
 .close-btn { font-size: 22px; cursor: pointer; }
 
-.checkout-body {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+.checkout-body { margin-top: 15px; display: flex; flex-direction: column; gap: 12px; }
 .checkout-body input,
 .checkout-body select {
   padding: 10px;
@@ -93,7 +77,6 @@
   outline: none;
   text-align: center;
 }
-
 #customAmount { display: none; }
 
 .btn-submit {
@@ -106,7 +89,6 @@
   font-weight: 600;
   transition: 0.3s;
 }
-
 .btn-submit:hover { background: #115293; }
 </style>
 
@@ -142,7 +124,6 @@
 </div>
 
 <script src="assets/libs/bootstrap.bundle.min.js"></script>
-
 <script>
 const modal = document.getElementById("checkoutModal");
 const overlay = document.getElementById("checkoutOverlay");
@@ -153,77 +134,64 @@ const amountSelect = document.getElementById("amountSelect");
 const customAmountInput = document.getElementById("customAmount");
 const payBtn = document.getElementById("payBtn");
 
-openBtn.addEventListener("click", () => {
-  modal.classList.add("show");
-  overlay.classList.add("show");
-});
-
+/* --- OPEN/CLOSE MODAL --- */
+openBtn.addEventListener("click", () => { modal.classList.add("show"); overlay.classList.add("show"); });
 closeBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
-function closeModal() {
-  modal.classList.remove("show");
-  overlay.classList.remove("show");
-}
+function closeModal() { modal.classList.remove("show"); overlay.classList.remove("show"); }
 
+/* --- SHOW CUSTOM AMOUNT INPUT --- */
 amountSelect.addEventListener("change", () => {
   customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
 });
 
-/* --- PAY BUTTON (POPUP + POLLING) --- */
+/* --- PAY BUTTON --- */
 payBtn.addEventListener("click", async () => {
-  let amount = amountSelect.value === "other" 
-    ? parseFloat(customAmountInput.value) 
+  let amount = amountSelect.value === "other"
+    ? parseFloat(customAmountInput.value)
     : parseFloat(amountSelect.value);
 
   if (isNaN(amount) || amount <= 0) {
-    alert("Please enter a valid donation amount.");
+    alert('Please enter a valid donation amount.');
     return;
   }
 
-  const val = Math.round(amount * 100); // in cents
-  const api = "https://tevrocsoft-api.vercel.app";
-
   try {
-    // 1. Create checkout on backend
-    const res = await fetch(`${api}/create-checkout?amount=${val}`, { method: "POST" });
-    const data = await res.json();
+    const val = Math.round(amount * 100); // cents
+    const api = "https://tevrocsoft-api.vercel.app";
 
-    if (!data.checkoutId || !data.redirectUrl) {
+    const response = await fetch(`${api}/create-checkout?amount=${val}`, { method: "POST" });
+    const data = await response.json();
+
+    if (data.checkoutId && data.redirectUrl) {
+      // Reload page with query params
+      const newUrl = `${window.location.origin}${window.location.pathname}?checkoutId=${data.checkoutId}&redirectUrl=${encodeURIComponent(data.redirectUrl)}`;
+      window.location.href = newUrl;
+    } else {
       alert("Failed to create checkout.");
       console.error(data);
-      return;
     }
-
-    // 2. Open popup
-    const popup = window.open(data.redirectUrl, "_blank", "width=500,height=700");
-
-    closeModal();
-
-    // 3. Poll backend for payment status
-    const interval = setInterval(async () => {
-      try {
-        const statusRes = await fetch(`${api}/checkout-status?checkoutId=${data.checkoutId}`);
-        const statusData = await statusRes.json();
-
-        if (statusData.status === "paid") {
-          clearInterval(interval);
-          alert("Payment Successful! Thank you.");
-          popup.close();
-        } else if (statusData.status === "failed") {
-          clearInterval(interval);
-          alert("Payment Failed or Canceled.");
-          popup.close();
-        }
-        // otherwise keep polling
-      } catch (err) {
-        console.error("Polling error:", err);
-      }
-    }, 3000); // every 3 seconds
 
   } catch (err) {
     console.error(err);
-    alert("Error creating checkout. See console.");
+    alert("Error creating checkout. Check console.");
+  }
+});
+
+/* --- OPEN POPUP ON PAGE LOAD IF QUERY PARAMS EXIST --- */
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const checkoutId = params.get("checkoutId");
+  const redirectUrl = params.get("redirectUrl");
+
+  if (checkoutId && redirectUrl) {
+    // Open Yoco popup
+    window.open(redirectUrl, "_blank", "width=500,height=700");
+
+    // Optional: remove query params so refresh doesn't reopen
+    const cleanUrl = `${window.location.origin}${window.location.pathname}`;
+    window.history.replaceState({}, document.title, cleanUrl);
   }
 });
 </script>
