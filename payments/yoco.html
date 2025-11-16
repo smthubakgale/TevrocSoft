@@ -36,7 +36,6 @@
   z-index: 999;
 }
 
-/* SHOW OVERLAY */
 .checkout-overlay.show {
   opacity: 1;
   pointer-events: auto;
@@ -60,14 +59,12 @@
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* SHOW MODAL */
 .checkout-modal.show {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* --- HEADER --- */
 .checkout-header {
   display: flex;
   justify-content: space-between;
@@ -75,17 +72,9 @@
   margin-top: -10px;
 }
 
-.checkout-header h3 {
-  margin: 0;
-  font-size: 16px;
-}
+.checkout-header h3 { margin: 0; font-size: 16px; }
+.close-btn { font-size: 22px; cursor: pointer; }
 
-.close-btn {
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* --- BODY --- */
 .checkout-body {
   margin-top: 15px;
   display: flex;
@@ -148,91 +137,93 @@
     </select>
 
     <input type="number" id="customAmount" placeholder="Enter custom amount" min="1">
-
     <button class="btn-submit" id="payBtn">Pay Now</button>
   </div>
 </div>
 
-<!-- ===== SCRIPT ===== -->
 <script src="assets/libs/bootstrap.bundle.min.js"></script>
 
 <script>
-  const modal = document.getElementById("checkoutModal");
-  const overlay = document.getElementById("checkoutOverlay");
-  const openBtn = document.getElementById("checkoutBtn");
-  const closeBtn = document.getElementById("closeModal");
+const modal = document.getElementById("checkoutModal");
+const overlay = document.getElementById("checkoutOverlay");
+const openBtn = document.getElementById("checkoutBtn");
+const closeBtn = document.getElementById("closeModal");
 
-  const amountSelect = document.getElementById("amountSelect");
-  const customAmountInput = document.getElementById("customAmount");
-  const payBtn = document.getElementById("payBtn");
+const amountSelect = document.getElementById("amountSelect");
+const customAmountInput = document.getElementById("customAmount");
+const payBtn = document.getElementById("payBtn");
 
-  /* --- OPEN/CLOSE MODAL --- */
-  openBtn.addEventListener("click", () => {
-    modal.classList.add("show");
-    overlay.classList.add("show");
-  });
+openBtn.addEventListener("click", () => {
+  modal.classList.add("show");
+  overlay.classList.add("show");
+});
 
-  closeBtn.addEventListener("click", closeModal);
-  overlay.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
 
-  function closeModal() {
-    modal.classList.remove("show");
-    overlay.classList.remove("show");
+function closeModal() {
+  modal.classList.remove("show");
+  overlay.classList.remove("show");
+}
+
+amountSelect.addEventListener("change", () => {
+  customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
+});
+
+/* --- PAY BUTTON (POPUP + POLLING) --- */
+payBtn.addEventListener("click", async () => {
+  let amount = amountSelect.value === "other" 
+    ? parseFloat(customAmountInput.value) 
+    : parseFloat(amountSelect.value);
+
+  if (isNaN(amount) || amount <= 0) {
+    alert("Please enter a valid donation amount.");
+    return;
   }
 
-  /* --- CUSTOM AMOUNT --- */
-  amountSelect.addEventListener("change", () => {
-    customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
-  });
+  const val = Math.round(amount * 100); // in cents
+  const api = "https://tevrocsoft-api.vercel.app";
 
-  /* --- PAY BUTTON (POPUP WINDOW VERSION) --- */
-  payBtn.addEventListener("click", async () => {
+  try {
+    // 1. Create checkout on backend
+    const res = await fetch(`${api}/create-checkout?amount=${val}`, { method: "POST" });
+    const data = await res.json();
 
-    let amount = amountSelect.value === "other"
-      ? parseFloat(customAmountInput.value)
-      : parseFloat(amountSelect.value);
-
-    if (isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid donation amount.');
+    if (!data.checkoutId || !data.redirectUrl) {
+      alert("Failed to create checkout.");
+      console.error(data);
       return;
     }
 
-    try {
-      const val = Math.round(amount * 100);
+    // 2. Open popup
+    const popup = window.open(data.redirectUrl, "_blank", "width=500,height=700");
 
-      const api = "https://tevrocsoft-api.vercel.app";
+    closeModal();
 
-      /* ===== PRE-OPEN POPUP WINDOW BEFORE AWAIT (IMPORTANT) ===== */
-      const popup = window.open(
-        "",
-        "yoco_checkout",
-        "width=480,height=720,menubar=no,toolbar=no,location=no,status=no,resizable=yes"
-      );
+    // 3. Poll backend for payment status
+    const interval = setInterval(async () => {
+      try {
+        const statusRes = await fetch(`${api}/checkout-status?checkoutId=${data.checkoutId}`);
+        const statusData = await statusRes.json();
 
-      if (!popup) {
-        alert("Please enable popups to continue with payment.");
-        return;
+        if (statusData.status === "paid") {
+          clearInterval(interval);
+          alert("Payment Successful! Thank you.");
+          popup.close();
+        } else if (statusData.status === "failed") {
+          clearInterval(interval);
+          alert("Payment Failed or Canceled.");
+          popup.close();
+        }
+        // otherwise keep polling
+      } catch (err) {
+        console.error("Polling error:", err);
       }
+    }, 3000); // every 3 seconds
 
-      popup.document.write("<p style='font-family:sans-serif;padding:20px;'>Loading secure payment...</p>");
-
-      const response = await fetch(`${api}/create-checkout?amount=${val}`, {
-        method: "POST"
-      });
-
-      const data = await response.json();
-
-      if (data.redirectUrl) {
-        popup.location.href = data.redirectUrl;
-        closeModal();
-      } else {
-        popup.document.body.innerHTML = "<h3>Failed to create checkout.</h3>";
-      }
-
-    } catch (error) {
-      console.error(error);
-      alert("Error creating checkout. Check console.");
-    }
-  });
-
+  } catch (err) {
+    console.error(err);
+    alert("Error creating checkout. See console.");
+  }
+});
 </script>
