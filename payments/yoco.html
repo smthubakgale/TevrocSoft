@@ -61,10 +61,17 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-.checkout-header { display: flex; justify-content: space-between; align-items: center; margin-top: -10px; }
+/* --- HEADER --- */
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -10px;
+}
 .checkout-header h3 { margin: 0; font-size: 16px; }
 .close-btn { font-size: 22px; cursor: pointer; }
 
+/* --- BODY --- */
 .checkout-body { margin-top: 15px; display: flex; flex-direction: column; gap: 12px; }
 .checkout-body input,
 .checkout-body select {
@@ -78,7 +85,6 @@
   text-align: center;
 }
 #customAmount { display: none; }
-
 .btn-submit {
   width: 100%;
   padding: 12px;
@@ -129,69 +135,68 @@ const modal = document.getElementById("checkoutModal");
 const overlay = document.getElementById("checkoutOverlay");
 const openBtn = document.getElementById("checkoutBtn");
 const closeBtn = document.getElementById("closeModal");
-
 const amountSelect = document.getElementById("amountSelect");
 const customAmountInput = document.getElementById("customAmount");
 const payBtn = document.getElementById("payBtn");
 
-/* --- OPEN/CLOSE MODAL --- */
-openBtn.addEventListener("click", () => { modal.classList.add("show"); overlay.classList.add("show"); });
+// --- Open/Close Modal
+openBtn.addEventListener("click", () => {
+  modal.classList.add("show");
+  overlay.classList.add("show");
+});
 closeBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
-
 function closeModal() { modal.classList.remove("show"); overlay.classList.remove("show"); }
 
-/* --- SHOW CUSTOM AMOUNT INPUT --- */
+// --- Show custom input
 amountSelect.addEventListener("change", () => {
   customAmountInput.style.display = amountSelect.value === "other" ? "block" : "none";
 });
 
-/* --- PAY BUTTON --- */
-payBtn.addEventListener("click", async () => {
-  let amount = amountSelect.value === "other"
-    ? parseFloat(customAmountInput.value)
-    : parseFloat(amountSelect.value);
+// --- Utility to get query params
+function getQueryParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
 
-  if (isNaN(amount) || amount <= 0) {
-    alert('Please enter a valid donation amount.');
-    return;
-  }
+// --- Check on page load if checkout info exists
+window.addEventListener("DOMContentLoaded", () => {
+  const checkoutId = getQueryParam("checkoutId");
+  const redirectUrl = getQueryParam("redirectUrl");
 
-  try {
-    const val = Math.round(amount * 100); // cents
-    const api = "https://tevrocsoft-api.vercel.app";
-
-    const response = await fetch(`${api}/create-checkout?amount=${val}`, { method: "POST" });
-    const data = await response.json();
-
-    if (data.checkoutId && data.redirectUrl) {
-      // Reload page with query params
-      const newUrl = `${window.location.origin}${window.location.pathname}?checkoutId=${data.checkoutId}&redirectUrl=${encodeURIComponent(data.redirectUrl)}`;
-      window.location.href = newUrl;
-    } else {
-      alert("Failed to create checkout.");
-      console.error(data);
-    }
-
-  } catch (err) {
-    console.error(err);
-    alert("Error creating checkout. Check console.");
+  if (checkoutId && redirectUrl) {
+    // Open popup automatically
+    const popup = window.open(redirectUrl, "_blank", "width=500,height=700");
+    
+    // Optionally remove query params from URL
+    window.history.replaceState({}, document.title, window.location.pathname);
   }
 });
 
-/* --- OPEN POPUP ON PAGE LOAD IF QUERY PARAMS EXIST --- */
-window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const checkoutId = params.get("checkoutId");
-  const redirectUrl = params.get("redirectUrl");
+// --- Pay button
+payBtn.addEventListener("click", async () => {
+  let amount = amountSelect.value === "other" ? parseFloat(customAmountInput.value) : parseFloat(amountSelect.value);
+  if (isNaN(amount) || amount <= 0) { alert("Enter a valid amount."); return; }
 
-  if (checkoutId && redirectUrl) {
-    // Open Yoco popup
-    window.open(redirectUrl, "_blank", "width=500,height=700");
+  try {
+    const cents = Math.round(amount * 100);
+    const api = "https://tevrocsoft-api.vercel.app";
 
-    // Optional: remove query params so refresh doesn't reopen
-    const cleanUrl = `${window.location.origin}${window.location.pathname}`;
-    window.history.replaceState({}, document.title, cleanUrl);
+    // Call your server to create checkout
+    const response = await fetch(`${api}/create-checkout?amount=${cents}`, { method: "POST" });
+    const data = await response.json();
+
+    if (data.redirectUrl && data.id) {
+      // Reload page with query params
+      const params = new URLSearchParams({ checkoutId: data.id, redirectUrl: data.redirectUrl });
+      window.location.href = `${window.location.pathname}?${params.toString()}`;
+    } else {
+      console.error(data);
+      alert("Failed to create checkout.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error creating checkout. Check console.");
   }
 });
 </script>
