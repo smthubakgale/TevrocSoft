@@ -341,19 +341,34 @@ onReady('#get-quote', 'click', async (e) => {
     </body>
     </html>`;
 
-    // --- Print and close ---
-    const printWindow = window.open('', '_blank');
-    printWindow.document.open();
-    printWindow.document.write(html);
-    printWindow.document.close();
+    printHtml(html);
 
-	setTimeout(()=>{
+	function printHtml(html) {
+		const iframe = document.createElement('iframe');
+		iframe.style.position = 'fixed';
+		iframe.style.right = '0';
+		iframe.style.bottom = '0';
+		iframe.style.width = '0';
+		iframe.style.height = '0';
+		iframe.style.border = '0';
+		document.body.appendChild(iframe);
 
-		printWindow.focus();
-		printWindow.print();
-		printWindow.close();
+		const doc = iframe.contentWindow.document;
+		doc.open();
+		doc.write(html);
+		doc.close();
 
-	},400)
+		setTimeout(()=>{
+	        iframe.contentWindow.focus();
+			iframe.contentWindow.print();
+
+			// Remove iframe after printing
+			setTimeout(() => document.body.removeChild(iframe), 1000);
+		
+		},300)
+			
+	}
+
 });
 
 onReady('#contact-form','submit', (e) => 
