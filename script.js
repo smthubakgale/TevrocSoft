@@ -193,8 +193,8 @@ onReady('#get-quote', 'click', async (e) => {
     const discountAmount = parseFloat(document.getElementById('discount-amount').innerText.replace(/,/g, '')) || 0;
     const totalAmount = parseFloat(document.getElementById('total-amount').innerText.replace(/,/g, '')) || 0;
     const adjustedAmount = parseFloat(document.getElementById('adjusted-price').innerText.replace(/,/g, '')) || 0;
-    const vatRate = 0.05;
-    const vatAmount = totalAmount * vatRate;
+    const vatRate = 15;
+    const vatAmount = totalAmount * vatRate/115;
 
     // --- Logo as Base64 ---
     const logoBase64 = await fetch('/logo.png')
@@ -255,8 +255,8 @@ onReady('#get-quote', 'click', async (e) => {
     <div class="total-section" style="text-align:right; margin-top:20px; font-weight:bold;">
         <p>Sub Total: R ${principalAmount.toFixed(2)}</p>
         <p>Discount (${discountRate}%): R ${discountAmount.toFixed(2)}</p>
-        <p>VAT (${vatRate*100}%): R ${vatAmount.toFixed(2)}</p>
-        <p><strong>Total Amount:</strong> R ${(totalAmount + vatAmount).toFixed(2)}</p>
+        <p>VAT (${vatRate}%): R ${vatAmount.toFixed(2)}</p>
+        <p><strong>Total Amount:</strong> R ${(totalAmount).toFixed(2)}</p>
     </div>`;
 
     // --- Construct HTML ---
@@ -320,6 +320,11 @@ onReady('#get-quote', 'click', async (e) => {
                 </tr>
             </tbody>
         </table>
+
+        <h3>Project Description</h3>
+        <div>
+           ${projectDesc}
+		</div>
 
         <h3>Project Phases</h3>
         <table>

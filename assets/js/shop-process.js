@@ -2116,7 +2116,7 @@ function updateQuoteResult(){
 	li.appendChild(h4);
 	
 	const p1 = document.createElement('p');
-	p1.textContent = `Duration: Days ${phase.req_start} - ${phase.req_end}`;
+	p1.textContent = `-Duration: Days ${phase.req_start} - ${phase.req_end}`;
 	li.appendChild(p1);
 	
 	const p2 = document.createElement('p');
