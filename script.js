@@ -402,6 +402,7 @@ async function loadHtml(elementId, url) {
         if (section !== targetSection) section.innerHTML = '';
     });
     targetSection.classList.add('active');
+    targetSection.setAttribute("page" , url)
 
     let payment = '';
 

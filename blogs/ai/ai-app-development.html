@@ -1,96 +1,203 @@
+<!-- Highlight.js Dark Theme -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+
 <style>
 /* --- Base Styles --- */
-#main {
+.main {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.8;
     background-color: #ffffff;
-    color: #2c2c2c; 
-    padding: 30px;
-    padding-top:0px; 
+    color: #2c2c2c;
+    padding: 20px;
+    padding-top: 0;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Code blocks with Highlight.js */
+.main pre {
+    background: #2d2d2d; /* match atom-one-dark background */
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+    border: 1px solid #444;
 }
 
 /* --- Headings --- */
-#main h1 { 
-    color: #333333; 
-    font-size: 2.6em; 
-    margin-bottom: 0.5em; 
+.main h1 {
+    color: #333;
+    font-size: 2.2em;
+    margin-bottom: 0.5em;
 }
-#main h2 { 
-    color: #555555; 
-    font-size: 1.9em; 
-    margin-top: 2em; 
-    margin-bottom: 0.6em; 
-    border-bottom: 2px solid #e0e0e0; 
-    padding-bottom: 6px; 
+
+.main h2 {
+    color: #555;
+    font-size: 1.7em;
+    margin-top: 2em;
+    margin-bottom: 0.6em;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 6px;
 }
-#main h3 { 
-    color: #666666; 
-    font-size: 1.5em; 
-    margin-top: 1.2em; 
-    margin-bottom: 0.5em; 
+
+.main h3 {
+    color: #666;
+    font-size: 1.3em;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.main h4 {
+    font-size: 1.15em;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+    color: #444;
 }
 
 /* --- Paragraphs and Lists --- */
-#main p { 
-    font-size: 1em; 
-    margin-bottom: 1em; 
-    line-height: 1.75; 
-    color: #333333;
+.main p {
+    font-size: 1em;
+    margin-bottom: 1em;
+    line-height: 1.75;
+    color: #333;
 }
-#main ul { 
-    margin-left: 25px; 
-    margin-bottom: 1em; 
+
+.main ul {
+    margin-left: 20px;
+    margin-bottom: 1em;
 }
-#main li { 
-    margin-bottom: 0.6em; 
+
+.main li {
+    margin-bottom: 0.6em;
 }
 
 /* --- Links --- */
-#main a { 
-    color: #666666; 
-    text-decoration: none; 
-    transition: color 0.3s; 
-}
-#main a:hover { 
-    color: #333333; 
-    text-decoration: underline; 
+.main a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-/* --- Code Snippets --- */
-#main code { 
-    background-color: #f4f4f4; 
-    color: #d32f2f; 
-    padding: 3px 6px; 
-    border-radius: 5px; 
-    font-family: 'Courier New', Courier, monospace; 
-    font-size: 0.95em; 
+.main a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* --- Code Blocks (Highlight.js compatible) --- */
+.main pre {
+    width: 100%;
+    overflow-x: auto;
+    padding: 14px;
+    background: #f7f7f7;
+    border-radius: 7px;
+    font-size: 0.95em;
+    border: 1px solid #e0e0e0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.main code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    background: none !important; /* highlight.js handles coloring */
+    color: inherit;
+}
+
+/* Force highlight.js to fit inside container */
+.hljs {
+    padding: 0 !important;
+    background: transparent !important;
 }
 
 /* --- Star Ratings --- */
-.star-rating { 
-    color: #bfa800; 
-    font-size: 1.3em; 
+.star-rating {
+    color: #bfa800;
+    font-size: 1.3em;
 }
 
 /* --- Charts --- */
-.chart-container { 
-    width: 100%; 
-    max-width: 500px; 
-    margin: 25px 0; 
+.chart-container {
+    width: 100%;
+    margin: 25px 0;
 }
 
-/* --- Illustrations --- */
-.illustration { 
-    width: 100%; 
-    max-width: 650px; 
-    display: block; 
-    margin: 25px auto; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+.chart-container canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* --- Images / Illustrations --- */
+.illustration {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 25px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .main {
+        padding: 15px;
+        width:550px
+    }
+
+    .main h1 {
+        font-size: 1.9em;
+        line-height: 1.3;
+    }
+
+    .main h2 {
+        font-size: 1.5em;
+    }
+
+    .main h3 {
+        font-size: 1.2em;
+    }
+
+    .main h4 {
+        font-size: 1.05em;
+    }
+
+    .star-rating {
+        font-size: 1.1em;
+    }
+
+    /* Ensure code fits well on small screens */
+    .main pre {
+        font-size: 0.85em;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 12px;
+        width:300px
+    }
+
+    .main h1 {
+        font-size: 1.6em;
+    }
+
+    .main h2 {
+        font-size: 1.35em;
+    }
+
+    .illustration {
+        border-radius: 6px;
+    }
+
+    .main pre {
+        font-size: 0.8em;
+        padding: 10px;
+        border-radius: 6px;
+    }
 }
 </style>
 
-<div id="main">
+
+<div class="main">
     <h1>AI in App Development: Revolutionizing the Way We Build and Use Apps</h1>
     
     <p>Artificial Intelligence (AI) is no longer just a futuristic concept—it's actively transforming the app development landscape. From automating code generation to delivering hyper-personalized user experiences, AI empowers developers to create smarter, faster, and more intuitive applications. In this article, we explore how AI is shaping modern apps, with real-world examples, code snippets, charts, and practical illustrations.</p>
@@ -118,7 +225,7 @@
     <pre><code>const userHistory = ['item1', 'item3', 'item4'];
 const recommendations = ['item2', 'item4', 'item5'];
 
-const personalized = recommendations.filter(item =&gt; !userHistory.includes(item));
+const personalized = recommendations.filter(item => !userHistory.includes(item));
 console.log(personalized); // Output: ['item2', 'item5']</code></pre>
 
     <h2>2. Accelerating Development with AI</h2>
@@ -164,7 +271,7 @@ console.log(personalized); // Output: ['item2', 'item5']</code></pre>
 
     <h4> Detecting Suspicious Logins</h4>
     <pre><code>function detectSuspiciousLogin(loginData) {
-    return loginData.some(entry =&gt; entry.location !== 'expected_location');
+    return loginData.some(entry => entry.location !== 'expected_location');
 }
 console.log(detectSuspiciousLogin([{location:'US'}, {location:'NG'}]));</code></pre>
 
@@ -222,16 +329,21 @@ console.log(detectSuspiciousLogin([{location:'US'}, {location:'NG'}]));</code></
     <p>AI is fundamentally reshaping the app development ecosystem. By integrating AI across UX, coding, analytics, QA, marketing, and security, developers can deliver smarter, adaptive, and highly personalized applications that meet the dynamic needs of modern users.</p>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 <!-- Chart.js -->
 <script src="assets/libs/chart.js"></script>
 <script>
-// --- Gradient helper ---
+/* --- Gradient helper --- */
 const createGradient = (ctx, colorStart, colorEnd) => {
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, colorStart);
     gradient.addColorStop(1, colorEnd);
     return gradient;
 };
+
+/* --- Charts (all responsive) --- */
 
 // AI Development Chart
 const aiDevCtx = document.getElementById('aiDevChart').getContext('2d');
@@ -252,7 +364,10 @@ new Chart(aiDevCtx, {
     options: {
         responsive: true,
         plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
-        scales: { y: { beginAtZero: true, grid: { color: '#e0e0e0' } }, x: { grid: { display: false } } }
+        scales: {
+            y: { beginAtZero: true, grid: { color: '#e0e0e0' } },
+            x: { grid: { display: false } }
+        }
     }
 });
 
@@ -276,7 +391,14 @@ new Chart(userEngagementCtx, {
             pointHoverRadius: 7
         }]
     },
-    options: { responsive: true, plugins: { legend: { display: true }, tooltip: { mode: 'nearest' } }, scales: { y: { beginAtZero: true, max: 100, grid: { color: '#e0e0e0' } }, x: { grid: { display: false } } } }
+    options: {
+        responsive: true,
+        plugins: { legend: { display: true }, tooltip: { mode: 'nearest' } },
+        scales: {
+            y: { beginAtZero: true, max: 100, grid: { color: '#e0e0e0' } },
+            x: { grid: { display: false } }
+        }
+    }
 });
 
 // Feature Adoption Chart
@@ -295,7 +417,10 @@ new Chart(featureAdoptionCtx, {
             ]
         }]
     },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'index' } } }
+    options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'index' } }
+    }
 });
 
 // Security Pie Chart
@@ -312,6 +437,9 @@ new Chart(aiSecurityCtx, {
             ]
         }]
     },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'nearest' } } }
+    options: {
+        responsive: true,
+        plugins: { legend: { position: 'bottom' }, tooltip: { mode: 'nearest' } }
+    }
 });
 </script>
