@@ -1,0 +1,424 @@
+<style>
+--root {
+  --bg: #0f1720;
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #4f46e5;
+  --glass: rgba(255,255,255,0.03);
+}
+#main .wrap {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 28px;
+}
+#main header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+#main h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+#main .meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+#main .card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 18px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+#main nav.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+#main nav.toc a {
+  background: var(--glass);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #d9e6ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+#main nav.toc a:hover {
+  background: var(--accent);
+  color: white;
+}
+#main .grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  margin-top: 18px;
+}
+@media (max-width: 980px) {
+  #main .grid {
+    grid-template-columns: 1fr;
+  }
+  #main .right {
+    order: -1;
+  }
+}
+#main article h2 { margin-top: 24px; }
+#main article h3 { margin-top: 18px; }
+#main article h4 { margin-top: 14px; }
+#main .lead {
+  color: var(--muted);
+  line-height: 1.6;
+}
+#main pre {
+  background: #071021;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+#main .chart-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (max-width: 900px) {
+  #main .chart-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+#main .small {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+#main .controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+#main button.btn {
+  background: linear-gradient(90deg,var(--accent),#7c3aed);
+  border: 0;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+#main button.btn:hover { opacity: 0.85; }
+#main footer {
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+#main .codebox {
+  background: #071525;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+}
+#main .right .card {
+  position: sticky;
+  top: 24px;
+}
+#main .stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+#main .download {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#main .download:hover { background: var(--glass); }
+#main article ul, #main article ol { margin-left: 20px; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+
+<div class="wrap">
+<header>
+<div>
+<h1>Predictive Analytics Tutorial</h1>
+<div class="meta">A complete beginner's guide with interactive charts — demo data included</div>
+</div>
+<div class="meta small">Generated: <span id="gen-date"></span></div>
+</header>
+
+
+<div class="card">
+<nav class="toc" aria-label="Table of contents">
+<a href="#what">What is Predictive Analytics</a>
+<a href="#why">Why it Matters</a>
+<a href="#steps">How it Works</a>
+<a href="#techniques">Techniques</a>
+<a href="#examples">Real-world Examples</a>
+<a href="#model">Build a Model</a>
+<a href="#tools">Popular Tools</a>
+<a href="#challenges">Challenges</a>
+<a href="#bestpractices">Best Practices</a>
+<a href="#conclusion">Conclusion</a>
+<a href="#charts">Interactive Charts</a>
+</nav>
+
+
+<div class="grid">
+<main>
+<article>
+<section id="what">
+<h2>What Is Predictive Analytics?</h2>
+<p class="lead">Predictive analytics is the practice of using historical data, statistical algorithms, and machine learning techniques to identify the likelihood of future outcomes. Unlike traditional analytics that answers <em>“What happened?”</em>, predictive analytics answers:</p>
+<ul>
+<li><strong>“What will happen next?”</strong></li>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Predictive Analytics Tutorial</h1>
+      <div class="meta">A complete beginner's guide with interactive charts — demo data included</div>
+    </div>
+    <div class="meta small">Generated: <span id="gen-date"></span></div>
+  </header>
+
+  <div class="card">
+    <nav class="toc" aria-label="Table of contents">
+      <a href="#what">What is Predictive Analytics</a>
+      <a href="#steps">How it Works</a>
+      <a href="#techniques">Techniques</a>
+      <a href="#examples">Real-world Examples</a>
+      <a href="#build">Build a Model</a>
+      <a href="#charts">Interactive Charts</a>
+    </nav>
+
+    <div class="grid">
+      <main>
+        <article>
+          <section id="what">
+            <h2>What Is Predictive Analytics?</h2>
+            <p class="lead">Predictive analytics uses historical data, statistics and machine learning to forecast future outcomes. It answers <strong>what will happen</strong> and <strong>why</strong>, enabling data-driven decisions.</p>
+          </section>
+
+          <section id="steps">
+            <h2>How Predictive Analytics Works (6 Steps)</h2>
+            <ol>
+              <li><strong>Data collection</strong> — gather data from systems, sensors, logs, API feeds.</li>
+              <li><strong>Cleaning & preparation</strong> — missing values, normalization, feature engineering.</li>
+              <li><strong>Exploratory Data Analysis</strong> — visualize patterns and correlations.</li>
+              <li><strong>Model selection</strong> — choose regression, classification, time-series, etc.</li>
+              <li><strong>Training & evaluation</strong> — metrics: RMSE, F1, ROC-AUC, precision/recall.</li>
+              <li><strong>Deployment & monitoring</strong> — serve the model and retrain as data drifts.</li>
+            </ol>
+          </section>
+
+          <section id="techniques">
+            <h2>Core Techniques</h2>
+            <ul>
+              <li><strong>Regression</strong> — numeric prediction (house prices, sales).</li>
+              <li><strong>Classification</strong> — categorical outcomes (fraud detection).</li>
+              <li><strong>Clustering</strong> — group similar records (customer segments).</li>
+              <li><strong>Time-series forecasting</strong> — ARIMA, Prophet, LSTM for sequences.</li>
+              <li><strong>Ensemble methods</strong> — RandomForest, Gradient Boosting.</li>
+            </ul>
+          </section>
+
+          <section id="examples">
+            <h2>Real-World Examples</h2>
+            <p>Use cases across industries: retail demand forecasting, finance fraud detection, healthcare risk prediction, manufacturing predictive maintenance, and targeted marketing.</p>
+          </section>
+
+          <section id="build">
+            <h2>Build a Simple Predictive Model (Conceptual)</h2>
+            <p class="small">Example: a linear regression predicting monthly sales from advertising spend and promotions.</p>
+            <div class="codebox">
+<pre><code>// Pseudocode
+// 1. load data
+// 2. clean & feature engineer
+// 3. split train/test
+// 4. train linear regression
+// 5. evaluate (RMSE, R^2)
+// 6. deploy
+</code></pre>
+            </div>
+
+            <h3>Best Practices</h3>
+            <ul>
+              <li>Define a clear business question</li>
+              <li>Ensure data quality before modeling</li>
+              <li>Prefer interpretable models when required</li>
+              <li>Monitor and retrain models periodically</li>
+            </ul>
+          </section>
+
+          <section id="charts">
+            <h2>Interactive Charts (Demo Data)</h2>
+            <p class="small">The charts below demonstrate typical visualizations used during predictive analytics: a sales forecast (line), model comparison (bar), and use-case distribution (pie). You can tweak sample inputs to see updates in real time.</p>
+
+            <div class="controls">
+              <button class="btn" id="regen">Regenerate Sample Data</button>
+              <button class="btn" id="expand">Show Forecast Scenario</button>
+              <button class="download" id="downloadHtml">Download HTML</button>
+            </div>
+
+            <div class="chart-wrap" style="margin-top:12px">
+              <div class="card">
+                <h4>Sales Forecast — Line Chart</h4>
+                <canvas id="lineChart" height="220"></canvas>
+              </div>
+
+              <div class="card">
+                <h4>Model Comparison — Bar Chart</h4>
+                <canvas id="barChart" height="220"></canvas>
+              </div>
+
+              <div class="card" style="grid-column:1/-1">
+                <h4>Use Cases Distribution — Pie Chart</h4>
+                <canvas id="pieChart" height="160"></canvas>
+              </div>
+            </div>
+
+          </section>
+
+        </article>
+
+        <footer>
+          <div>Want the code examples exported as Python or a slide deck? Click one of the buttons above or ask me to export.</div>
+        </footer>
+      </main>
+
+      <aside class="right">
+        <div class="card">
+          <h3>Quick Stats</h3>
+          <div class="stat"><div>Demo dataset size</div><div id="stat-size">120 rows</div></div>
+          <div class="stat"><div>Models compared</div><div id="stat-models">3</div></div>
+          <div class="stat"><div>Forecast months</div><div id="stat-months">12</div></div>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:12px 0">
+          <h4>How to run</h4>
+          <ol class="small">
+            <li>Include this snippet in your page</li>
+            <li>Include Chart.js library for interactive charts</li>
+            <li>Use the controls to regenerate data or download snapshot</li>
+          </ol>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.04);margin:12px 0">
+          <h4>Notes</h4>
+          <p class="small">All charts use synthetic demo data. Replace the sample data generator with real data-loading code (CSV, JSON, API) for real projects.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+// Fill generated date
+document.getElementById('gen-date').textContent = new Date().toLocaleString();
+
+// Utility: random demo data generator
+function generateDemoData(months=24){
+  const labels = [];
+  const sales = [];
+  let base = 4000;
+  for(let i=0;i<months;i++){
+    const m = new Date(); m.setMonth(m.getMonth()+i);
+    labels.push(m.toLocaleString(undefined,{month:'short',year:'numeric'}));
+    const seasonal = 400*Math.sin(i/3);
+    const trend = base + i*120;
+    const noise = (Math.random()-0.5)*800;
+    sales.push(Math.round(trend + seasonal + noise));
+  }
+  return {labels,sales};
+}
+
+let demo = generateDemoData(24);
+
+const lineCtx = document.getElementById('lineChart');
+const lineChart = new Chart(lineCtx, {
+  type: 'line',
+  data: {
+    labels: demo.labels,
+    datasets: [{
+      label: 'Actual Sales',
+      data: demo.sales.slice(0,18),
+      tension: 0.3,
+      fill:false,
+      pointRadius:3
+    },{
+      label: 'Forecast (model)',
+      data: (()=>{
+        const past = demo.sales.slice(12,18);
+        const avgInc = (past[past.length-1]-past[0])/(past.length-1)||50;
+        const arr = [];
+        for(let i=0;i<demo.sales.length;i++){
+          if(i<18) arr.push(null); else arr.push(Math.round(demo.sales[17] + avgInc*(i-17)));
+        }
+        return arr;
+      })(),
+      borderDash:[6,4],
+      tension:0.2
+    }]
+  },
+  options: {responsive:true,plugins:{legend:{position:'top'},tooltip:{mode:'index',intersect:false}},scales:{x:{display:true},y:{beginAtZero:false}}}
+});
+
+const barCtx = document.getElementById('barChart');
+const barChart = new Chart(barCtx,{type:'bar',data:{labels:['LinearReg','RandomForest','XGBoost'],datasets:[{label:'RMSE (lower better)',data:[420,320,280]}]},options:{responsive:true,plugins:{legend:{display:false}}}});
+
+const pieCtx = document.getElementById('pieChart');
+const pieChart = new Chart(pieCtx,{type:'pie',data:{labels:['Retail','Finance','Healthcare','Manufacturing','Marketing'],datasets:[{data:[22,18,16,14,30]}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
+
+document.getElementById('stat-size').textContent = demo.sales.length + ' rows';
+document.getElementById('stat-models').textContent = '3';
+document.getElementById('stat-months').textContent = '12 + 12 forecast';
+
+document.getElementById('regen').addEventListener('click',()=>{
+  demo = generateDemoData(24);
+  lineChart.data.labels = demo.labels;
+  lineChart.data.datasets[0].data = demo.sales.slice(0,18);
+  const past = demo.sales.slice(12,18);
+  const avgInc = (past[past.length-1]-past[0])/(past.length-1)||50;
+  lineChart.data.datasets[1].data = demo.labels.map((_,i)=> i<18? null: Math.round(demo.sales[17] + avgInc*(i-17)));
+  lineChart.update();
+  pieChart.data.datasets[0].data = pieChart.data.datasets[0].data.map(v => Math.max(6, Math.round(v + (Math.random()-0.5)*6)));
+  pieChart.update();
+  document.getElementById('stat-size').textContent = demo.sales.length + ' rows';
+});
+
+document.getElementById('expand').addEventListener('click',()=>{
+  const win = window.open('','_blank');
+  const labels = lineChart.data.labels;
+  const actual = lineChart.data.datasets[0].data;
+  const forecast = lineChart.data.datasets[1].data;
+  const rows = labels.map((lab,i)=>`<tr><td>${lab}</td><td>${actual[i]===null?'-':actual[i]}</td><td>${forecast[i]===null?'-':forecast[i]}</td></tr>`).join('');
+  win.document.write(`<html><head><title>Forecast scenario</title><meta charset=\"utf-8\"></head><body style=\"font-family:system-ui;padding:18px\"><h2>Forecast Scenario</h2><table border=\"1\" cellpadding=8><thead><tr><th>Month</th><th>Actual</th><th>Forecast</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);
+  win.document.close();
+});
+
+document.getElementById('downloadHtml').addEventListener('click',()=>{
+  const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html],{type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'predictive-analytics-tutorial.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+});
+
+window.addEventListener('keydown',(e)=>{
+  if(e.key.toLowerCase()==='r') document.getElementById('regen').click();
+  if(e.key.toLowerCase()==='e') document.getElementById('expand').click();
+});
+</script>
