@@ -98,7 +98,7 @@
 
             try {
                 // 1️⃣ Request signature & SDK Key from backend
-                const res = await fetch('/generate-signature', {
+                const res = await fetch('https://tevrocsoft-api.netlify.app/.netlify/functions/zoom-signature', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ meetingNumber, role: 0 }) // 0 = attendee
