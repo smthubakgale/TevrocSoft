@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic JSON Form Builder</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #f9f9f9;
+  }
+  h2, h3 {
+    margin: 0 0 10px 0;
+  }
+  .subform-section {
+    border: 1px solid #aaa;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 6px;
+  }
+  .subform-entry {
+    border: 1px dashed #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #f4f4f4;
+    border-radius: 4px;
+  }
+  input {
+    padding: 6px;
+    margin-bottom: 5px;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+  }
+  button {
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #337ab7;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #286090;
+  }
+  #json-output {
+    white-space: pre-wrap;
+    background: #222;
+    color: #0f0;
+    padding: 10px;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow: auto;
+  }
+</style>
+</head>
+<body>
+
+<h2>Dynamic JSON Form Builder</h2>
+
+<div id="form-container"></div>
+
+<button id="export-json">Export JSON</button>
+<input type="file" id="import-json" accept=".json">
+<h3>Live JSON Output:</h3>
+<pre id="json-output"></pre>
+
+<script>
+const formConfig = {
+  name: { type: "text" },
+  email: { type: "email" },
+  age: { type: "number" },
+  addresses: { 
+    type: "subform", 
+    fields: {
+      street: { type: "text" },
+      city: { type: "text" },
+      country: { type: "text" },
+      contacts: { 
+        type: "subform",
+        fields: {
+          phone: { type: "text" },
+          label: { type: "text" }
+        }
+      }
+    }
+  }
+};
+
+let formData = {};
+
+function initForm(config) {
+  formData = generateEmptyData(config);
+  renderForm(config, formData, document.getElementById("form-container"));
+  updateJSONOutput();
+}
+
+function generateEmptyData(config) {
+  const data = {};
+  for (const key in config) {
+    if (config[key].type === "subform") {
+      data[key] = [];
+    } else {
+      data[key] = "";
+    }
+  }
+  return data;
+}
+
+function renderForm(config, data, container) {
+  container.innerHTML = "";
+
+  for (const key in config) {
+    const field = config[key];
+
+    if (field.type === "subform") {
+      const section = document.createElement("div");
+      section.className = "subform-section";
+      section.innerHTML = `<h3>${key}</h3>`;
+
+      data[key].forEach((entry, idx) => {
+        const entryDiv = document.createElement("div");
+        entryDiv.className = "subform-entry";
+
+        renderForm(field.fields, entry, entryDiv);
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+          data[key].splice(idx, 1);
+          renderForm(config, data, container);
+          updateJSONOutput();
+        });
+        entryDiv.appendChild(removeBtn);
+
+        section.appendChild(entryDiv);
+      });
+
+      const addBtn = document.createElement("button");
+      addBtn.textContent = "Add " + key.slice(0, -1);
+      addBtn.addEventListener("click", () => {
+        const newEntry = generateEmptyData(field.fields);
+        data[key].push(newEntry);
+        renderForm(config, data, container);
+        updateJSONOutput();
+      });
+
+      section.appendChild(addBtn);
+      container.appendChild(section);
+
+    } else {
+      const input = document.createElement("input");
+      input.placeholder = key;
+      input.value = data[key] || "";
+      input.type = field.type || "text";
+      input.addEventListener("input", (e) => {
+        data[key] = e.target.value;
+        updateJSONOutput();
+      });
+      container.appendChild(input);
+      container.appendChild(document.createElement("br"));
+    }
+  }
+}
+
+function updateJSONOutput() {
+  document.getElementById("json-output").textContent = JSON.stringify(formData, null, 2);
+}
+
+// Export JSON
+document.getElementById("export-json").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "formData.json";
+  a.click();
+});
+
+// Import JSON
+document.getElementById("import-json").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    formData = JSON.parse(reader.result);
+    renderForm(formConfig, formData, document.getElementById("form-container"));
+    updateJSONOutput();
+  };
+  reader.readAsText(file);
+});
+
+initForm(formConfig);
+</script>
+
+</body>
+</html>

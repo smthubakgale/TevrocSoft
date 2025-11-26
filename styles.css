@@ -989,3 +989,18 @@ section li{
     margin-top: -30px;;
   }
 }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .main {
+        padding: 15px;
+        width:90vw
+    } 
+}
+
+@media (max-width: 480px) {
+    .main {
+        padding: 12px;
+        width:95vw
+    }
+  }
