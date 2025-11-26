@@ -4,15 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dynamic JSON Form Builder</title>
+
+<!-- Highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
 <style>
   body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background: #f9f9f9;
+    background: #f7f7f7;
   }
-  h2, h3 {
-    margin: 0 0 10px 0;
+
+  h2 { margin-bottom: 20px; }
+
+  .form-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
   }
+
+  .form-wrapper,
+  .json-wrapper {
+    flex: 1 1 350px; 
+  }
+
+  .form-wrapper {
+    padding: 15px;
+    border: 2px solid #444;
+    background: #fff;
+    border-radius: 8px; 
+    max-width: 100%;
+    overflow-x: auto; 
+    box-sizing: border-box;
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .json-wrapper {
+    border: 2px solid #222;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    overflow: auto; 
+    max-height: 500px;
+  }
+
   .subform-section {
     border: 1px solid #aaa;
     padding: 10px;
@@ -20,6 +59,7 @@
     background: #fff;
     border-radius: 6px;
   }
+
   .subform-entry {
     border: 1px dashed #ccc;
     padding: 10px;
@@ -27,174 +67,387 @@
     background: #f4f4f4;
     border-radius: 4px;
   }
-  input {
-    padding: 6px;
-    margin-bottom: 5px;
+
+  input, select {
+    padding: 7px;
+    margin-bottom: 8px;
     width: 100%;
-    max-width: 400px;
     box-sizing: border-box;
   }
+
   button {
     margin-top: 5px;
     margin-right: 5px;
-    padding: 6px 12px;
+    padding: 7px 12px;
     border: none;
-    border-radius: 4px;
     background: #337ab7;
     color: #fff;
+    border-radius: 4px;
     cursor: pointer;
   }
-  button:hover {
-    background: #286090;
+
+  button:hover { background: #286090; }
+
+  pre code {
+    font-size: 14px;
+    white-space: pre;
   }
-  #json-output {
-    white-space: pre-wrap;
-    background: #222;
-    color: #0f0;
-    padding: 10px;
-    border-radius: 6px;
-    max-height: 400px;
-    overflow: auto;
+
+  pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
   }
+
+  pre code {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
+    display: block;
+    width: 100%;
+  }
+
+  /* Label Styling */
+label {
+  display: block;           /* Ensures label is on its own line */
+  font-weight: bold;        /* Makes label text bold */
+  margin-bottom: 5px;       /* Small space between label and input/select */
+  color: #333;              /* Dark text color for readability */
+  font-size: 14px;          /* Slightly smaller font for neatness */
+}
+
+.field-wrapper input,
+.field-wrapper select {
+  width: 100%;              /* Make inputs/selects full width */
+  padding: 7px;             /* Matches your existing input padding */
+  box-sizing: border-box;   /* Ensures padding doesn't break layout */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.field-wrapper {
+  margin-bottom: 12px;      /* Spacing between fields */
+}
+
+.subform-section h4 {
+  font-size: 16px;           /* Slightly smaller than main headings */
+  font-weight: bold;          /* Make it stand out */
+  margin-bottom: 4px;         /* Space below the heading */
+  color: #444;                /* Dark grey color for readability */
+  border-bottom: 1px dashed #ccc; /* Optional: underline for separation */
+  padding-bottom: 4px;        /* Space between text and underline */
+  margin-top:-5px;
+}
+
 </style>
 </head>
 <body>
 
 <h2>Dynamic JSON Form Builder</h2>
 
-<div id="form-container"></div>
-
-<button id="export-json">Export JSON</button>
-<input type="file" id="import-json" accept=".json">
-<h3>Live JSON Output:</h3>
-<pre id="json-output"></pre>
+<div id="forms-root"></div>
 
 <script>
-const formConfig = {
-  name: { type: "text" },
-  email: { type: "email" },
-  age: { type: "number" },
-  addresses: { 
-    type: "subform", 
-    fields: {
-      street: { type: "text" },
-      city: { type: "text" },
-      country: { type: "text" },
-      contacts: { 
-        type: "subform",
-        fields: {
-          phone: { type: "text" },
-          label: { type: "text" }
-        }
-      }
-    }
+function createDynamicForm(formId , formConfig) {
+  let formData = generateEmptyData(formConfig);
+
+  const root = document.getElementById("forms-root");
+  const section = document.createElement("div");
+  section.className = "form-section";
+
+  section.innerHTML = `
+    <div class="form-wrapper">
+      <h3>${formId}</h3>
+      <div id="${formId}-container"></div>
+      <button id="${formId}-export">Export JSON</button>
+      <input type="file" id="${formId}-import" accept=".json">
+    </div>
+
+    <div class="json-wrapper">
+      <h3 style="color:white;">Live JSON (${formId})</h3>
+      <pre><code id="${formId}-json" class="json"></code></pre>
+    </div>
+  `;
+
+  root.appendChild(section);
+
+  const container = document.getElementById(`${formId}-container`);
+  const jsonBox = document.getElementById(`${formId}-json`);
+
+  function render() {
+    container.innerHTML = "";
+    renderForm(formConfig, formData, container, updatePreview);
+    updatePreview();
   }
-};
 
-let formData = {};
+  function updatePreview() {
+    const jsonStr = JSON.stringify(formData, null, 2);
+    try {
+      const highlighted = hljs.highlight(jsonStr, { language: 'json' });
+      jsonBox.innerHTML = highlighted.value;
+      jsonBox.classList.add('hljs');
+    } catch (err) {
+      jsonBox.textContent = jsonStr;
+      try { hljs.highlightElement(jsonBox); } catch(e){ }
+    }
+  } 
 
-function initForm(config) {
-  formData = generateEmptyData(config);
-  renderForm(config, formData, document.getElementById("form-container"));
-  updateJSONOutput();
+  document.getElementById(`${formId}-export`).onclick = () => {
+    const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${formId}.json`;
+    a.click();
+  };
+
+  document.getElementById(`${formId}-import`).onchange = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      formData = JSON.parse(reader.result);
+      render();
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+
+  render();
 }
 
+/* FORM ENGINE */
 function generateEmptyData(config) {
-  const data = {};
-  for (const key in config) {
-    if (config[key].type === "subform") {
-      data[key] = [];
-    } else {
-      data[key] = "";
-    }
+  const obj = {};
+  for (let key in config) {
+    obj[key] = config[key].type === "subform" ? [] : "";
   }
-  return data;
+  return obj;
 }
 
-function renderForm(config, data, container) {
-  container.innerHTML = "";
-
+function renderForm(config, data, container, updateFn) {
   for (const key in config) {
     const field = config[key];
 
     if (field.type === "subform") {
       const section = document.createElement("div");
       section.className = "subform-section";
-      section.innerHTML = `<h3>${key}</h3>`;
+      section.innerHTML = `<h4>${key}</h4>`;
 
-      data[key].forEach((entry, idx) => {
+      data[key].forEach((entry, index) => {
         const entryDiv = document.createElement("div");
         entryDiv.className = "subform-entry";
-
-        renderForm(field.fields, entry, entryDiv);
+        renderForm(field.fields, entry, entryDiv, updateFn);
 
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
-        removeBtn.addEventListener("click", () => {
-          data[key].splice(idx, 1);
-          renderForm(config, data, container);
-          updateJSONOutput();
-        });
-        entryDiv.appendChild(removeBtn);
+        removeBtn.onclick = () => {
+          data[key].splice(index, 1);
+          container.innerHTML = "";
+          renderForm(config, data, container, updateFn);
+          updateFn();
+        };
 
+        entryDiv.appendChild(removeBtn);
         section.appendChild(entryDiv);
       });
 
       const addBtn = document.createElement("button");
       addBtn.textContent = "Add " + key.slice(0, -1);
-      addBtn.addEventListener("click", () => {
-        const newEntry = generateEmptyData(field.fields);
-        data[key].push(newEntry);
-        renderForm(config, data, container);
-        updateJSONOutput();
-      });
+      addBtn.onclick = () => {
+        data[key].push(generateEmptyData(field.fields));
+        container.innerHTML = "";
+        renderForm(config, data, container, updateFn);
+        updateFn();
+      };
 
       section.appendChild(addBtn);
       container.appendChild(section);
 
     } else {
-      const input = document.createElement("input");
-      input.placeholder = key;
-      input.value = data[key] || "";
-      input.type = field.type || "text";
-      input.addEventListener("input", (e) => {
-        data[key] = e.target.value;
-        updateJSONOutput();
-      });
-      container.appendChild(input);
-      container.appendChild(document.createElement("br"));
+      // Create a wrapper div for label + input/select
+      const fieldWrapper = document.createElement("div");
+      fieldWrapper.style.marginBottom = "10px";
+
+      const label = document.createElement("label");
+      label.textContent = key.charAt(0).toUpperCase() + key.slice(1) + ":";
+      label.style.display = "block";
+      label.style.fontWeight = "bold";
+      label.style.marginBottom = "4px";
+
+      fieldWrapper.appendChild(label);
+
+      if(field.type === "select") {
+        const select = document.createElement("select");
+        (field.options || []).forEach(opt => {
+          const option = document.createElement("option");
+          option.value = opt;
+          option.textContent = opt;
+          select.appendChild(option);
+        });
+        select.value = data[key] || field.default || "";
+        select.onchange = e => {
+          data[key] = e.target.value;
+          updateFn();
+        };
+        fieldWrapper.appendChild(select);
+
+      } else {
+        const input = document.createElement("input");
+        input.type = field.type || "text";
+        input.value = data[key];
+        input.oninput = (e) => {
+          data[key] = e.target.value;
+          updateFn();
+        };
+        fieldWrapper.appendChild(input);
+      }
+
+      container.appendChild(fieldWrapper);
     }
   }
 }
 
-function updateJSONOutput() {
-  document.getElementById("json-output").textContent = JSON.stringify(formData, null, 2);
-}
+/* EXAMPLE FORMS */ 
 
-// Export JSON
-document.getElementById("export-json").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(formData, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "formData.json";
-  a.click();
-});
+const formConfigA = {
+  name: { type: "text" },
+  email: { type: "email" },
+  addresses: {
+    type: "subform",
+    fields: {
+      city: { type: "text" },
+      country: { type: "text" }
+    }
+  }
+};
 
-// Import JSON
-document.getElementById("import-json").addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  const reader = new FileReader();
-  reader.onload = () => {
-    formData = JSON.parse(reader.result);
-    renderForm(formConfig, formData, document.getElementById("form-container"));
-    updateJSONOutput();
-  };
-  reader.readAsText(file);
-});
+const formConfigB = {
+  title: { type: "text" },
+  description: { type: "text" },
+  items: {
+    type: "subform",
+    fields: {
+      label: { type: "text" },
+      value: { type: "number" }
+    }
+  }
+};
 
-initForm(formConfig);
+const formConfigC = {
+  user_inherits: { // top-level array
+    type: "subform",
+    fields: {
+      user: { type: "text" },
+      inherits: {
+        type: "subform", // nested array
+        fields: {
+          role: { type: "text" }
+        }
+      }
+    }
+  }
+};
+
+const formConfigD = {
+  menuItems: { // top-level array of menu objects
+    type: "subform",
+    fields: {
+      group: { type: "text" },
+      title: { type: "text" },
+      icon: { type: "text" } // optional field, user can leave blank
+    }
+  }
+};
+
+const formConfigE = {
+  tables: {
+    type: "subform", // top-level array of tables
+    fields: {
+      tableName: { type: "text" },
+      system: { type: "select", options: [true, false], default: true },
+      group: { type: "text" },
+      icon: { type: "text" },
+      auth: { type: "select", options: [true, false] , default:false},
+      auth_col: { type: "text" },
+      image: { type: "select", options: [true, false] },
+      gallery: { type: "select", options: [true, false] },
+
+      crud: { 
+        type: "subform", 
+        fields: {
+          create: { type: "array" },
+          read: { type: "array" },
+          update: { type: "array" },
+          delete: { type: "array" },
+          own: { type: "select", options: [true,false] },
+          ownField: { type: "text" },
+          excepts: { type: "array" }
+        }
+      },
+
+      columns: {
+        type: "subform", // nested array of columns
+        fields: {
+          name: { type: "text" },
+          type: { type: "text" },
+          nullable: { type: "select", options: [true, false] },
+          primaryKey: { type: "select", options: [true,false] },
+          identity: {
+            type: "subform",
+            fields: {
+              seed: { type: "number" },
+              increment: { type: "number" }
+            }
+          },
+          default: { type: "text" },
+          form: { type: "text" },
+          readonly: { type: "select", options: [true,false] },
+          raw: { type: "text" },
+          check: { type: "select", options: [true,false] },
+        }
+      },
+
+      constraints: {
+        type: "subform", // nested array of constraints
+        fields: {
+          type: { type: "text" },
+          expression: { type: "text" },
+          columns: { type: "array" },
+          options: { type: "array" },
+          column: { type: "text" },
+          referencedTable: { type: "text" },
+          referencedColumns: { type: "array" },
+          OnDeleteAction: { type: "text" },
+          OnUpdateAction: { type: "text" }
+        }
+      },
+
+      apps: {
+        type: "subform",
+        fields: {
+          name: { type: "text" },
+          type: { type: "text" },
+          actions: { type: "subform", fields: { create: { type: "array" }, read: { type: "array" }, update: { type: "array" }, delete: { type: "array" } } },
+          services: { type: "subform", fields: { stun: { type: "array" }, turn: { type: "array" }, post: { type: "array" } } },
+          article: { type: "text" }
+        }
+      },
+
+      reports: {
+        type: "subform",
+        fields: {
+          name: { type: "text" },
+          type: { type: "text" },
+          actions: { type: "subform", fields: { create: { type: "array" }, read: { type: "array" }, update: { type: "array" }, delete: { type: "array" } } }
+        }
+      }
+    }
+  }
+};
+
+/* CREATE FORMS */
+createDynamicForm("form A", formConfigA);
+createDynamicForm("form B", formConfigB);
+createDynamicForm("form D", formConfigD);
+createDynamicForm("form E", formConfigE);
 </script>
-
 </body>
 </html>
