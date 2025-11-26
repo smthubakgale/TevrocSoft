@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="icon" href="../../logo.ico" type="image/x-icon">
+<link rel="shortcut icon" href="../../logo.ico" type="image/x-icon">
+
+<title>Firebase JSON Editor with Profile Picture + Rename</title>
+
+<!-- ACE EDITOR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/ace.js"></script>
+<!-- JSON5 -->
+<script src="https://cdn.jsdelivr.net/npm/json5@2.2.3/dist/index.min.js"></script>
+
+<style>
+  /* ---------- Global Styles ---------- */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #f4f6f8;
+    color: #333;
+  }
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  /* ---------- Left Panel ---------- */
+  #left-panel {
+    flex: 0 0 300px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: fit-content;
+  }
+
+  #left-panel button, #left-panel input[type="file"] {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  #left-panel button:hover {
+    background-color: #337ab7;
+    color: #fff;
+    border-color: #337ab7;
+  }
+
+  #file-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  #file-list li {
+    list-style: none;
+    padding: 8px;
+    margin-bottom: 6px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+
+  #file-list li:hover {
+    background-color: #e0e7ff;
+  }
+
+  #file-list li button {
+    width: auto;
+    margin-left: 5px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #337ab7;
+    color: white;
+    cursor: pointer;
+  }
+
+  #file-list li button:hover {
+    background-color: #235a9c;
+  }
+
+  #filename-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    display: none;
+  }
+
+  /* ---------- Editor Panel ---------- */
+  #editor-panel {
+    flex: 1;
+    min-width: 320px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #editor {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  #editor-panel button {
+    margin: 10px 0 0 0;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.2s;
+  }
+
+  #editor-panel button:hover {
+    background-color: #45a049;
+  }
+
+  /* ---------- Toolbar ---------- */
+  #toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  #toolbar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  #toolbar span {
+    font-weight: bold;
+  }
+
+  #toolbar button {
+    width: auto;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background-color: #337ab7;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #toolbar button:hover {
+    background-color: #235a9c;
+  }
+
+  /* ---------- Popup ---------- */
+  #popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 6px;
+    display: none;
+    opacity: 0.9;
+    z-index: 1000;
+    min-width: 200px;
+  }
+
+  #popup.success { background-color: #4CAF50; }
+  #popup.error { background-color: #f44336; }
+
+  /* ---------- Responsive ---------- */
+  @media(max-width: 900px) {
+    body {
+      flex-direction: column;
+      padding: 10px;
+    }
+    #left-panel, #editor-panel {
+      width: 100%;
+    }
+    #editor {
+      height: 400px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="left-panel">
+  <h2>JSON Files</h2>
+  
+  <div id="toolbar">
+    <button id="login-btn">Login with Google</button>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <div id="user-info"></div>
+  </div>
+
+  <div id="json-section" style="display:none;">
+    <button id="new-json-btn">New JSON File</button>
+
+    <h3>Upload JSON</h3>
+    <input type="file" id="file-input" accept=".json" />
+    <button id="upload-btn">Upload File</button>
+
+    <h3>Your Files</h3>
+    <ul id="file-list"></ul>
+  </div>
+</div>
+
+<div id="editor-panel">
+  <h3 id="editor-title">JSON Editor</h3>
+  <input type="text" id="filename-input" placeholder="Enter filename (no extension)" />
+  <div id="editor"></div>
+
+  <button id="save-new-btn" style="display:none;">Save New File</button>
+  <button id="save-edit-btn" style="display:none;">Save Changes</button>
+</div>
+
+<!-- Popup -->
+<div id="popup"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBomP4F2uKpaD0ZKFMYbAkgRsFXzoRT2lM",
+  authDomain: "tevrocsoft.firebaseapp.com",
+  projectId: "tevrocsoft",
+  databaseURL: "https://tevrocsoft-default-rtdb.firebaseio.com",
+  storageBucket: "tevrocsoft.firebasestorage.app",
+  messagingSenderId: "239731786950",
+  appId: "1:239731786950:web:e271a0b9e0782fed9d43c7"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+// UI
+const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const userInfo = document.getElementById("user-info");
+const jsonSection = document.getElementById("json-section");
+
+const fileInput = document.getElementById("file-input");
+const uploadBtn = document.getElementById("upload-btn");
+const fileList = document.getElementById("file-list");
+
+const newJsonBtn = document.getElementById("new-json-btn");
+const saveNewBtn = document.getElementById("save-new-btn");
+const saveEditBtn = document.getElementById("save-edit-btn");
+const editorTitle = document.getElementById("editor-title");
+const filenameInput = document.getElementById("filename-input");
+
+const popup = document.getElementById("popup");
+
+let currentUser = null;
+let currentFilePath = null;
+let originalFilename = null;
+let mode = "none";
+
+// ACE Editor
+const editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.session.setMode("ace/mode/json");
+editor.setOption("fontSize", "14px");
+editor.setOption("tabSize", 2);
+editor.setOption("useSoftTabs", true);
+
+// Popup function
+function showPopup(message, type="success") {
+  popup.innerText = message;
+  popup.className = type;
+  popup.style.display = "block";
+  setTimeout(() => popup.style.display = "none", 3000);
+}
+
+// Auth
+loginBtn.onclick = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(err => showPopup(err.message,"error"));
+};
+logoutBtn.onclick = () => auth.signOut();
+
+// Auth state with profile picture
+auth.onAuthStateChanged(user => {
+  if (user) {
+    currentUser = user;
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+    jsonSection.style.display = "block";
+
+    userInfo.innerHTML = `
+      <img src="${user.photoURL}" alt="Profile">
+      <span>${user.displayName}</span>
+    `;
+
+    loadFileList();
+  } else {
+    currentUser = null;
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+    jsonSection.style.display = "none";
+    userInfo.innerText = "";
+  }
+});
+
+// Load File List
+function loadFileList() {
+  fileList.innerHTML = "";
+  db.ref("files/" + currentUser.uid).once("value", snap => {
+    const data = snap.val();
+    if (!data) return;
+    Object.keys(data).forEach(filename => {
+      const li = document.createElement("li");
+      li.innerHTML = `<b>${filename}.json</b>
+        <button onclick="editFile('${filename}')">Edit</button>
+        <button onclick="deleteFile('${filename}')">Delete</button>`;
+      fileList.appendChild(li);
+    });
+  });
+}
+
+// New File
+newJsonBtn.onclick = () => {
+  mode = "new";
+  editor.setValue("{\n\n}", -1);
+  filenameInput.value = "";
+  filenameInput.style.display = "block";
+  saveNewBtn.style.display = "block";
+  saveEditBtn.style.display = "none";
+  editorTitle.innerText = "Create New JSON File";
+  currentFilePath = null;
+  originalFilename = null;
+};
+
+// Save New File
+saveNewBtn.onclick = () => {
+  const filename = filenameInput.value.trim();
+  if (!filename) return showPopup("Please enter a filename","error");
+  try {
+    const jsonData = JSON5.parse(editor.getValue());
+    db.ref(`files/${currentUser.uid}/${filename}`).set(jsonData)
+      .then(() => {
+        showPopup("File created successfully");
+        editor.setValue("{\n\n}",-1);
+        filenameInput.value = "";
+        filenameInput.style.display = "none";
+        loadFileList();
+      });
+  } catch (err) {
+    showPopup("Invalid JSON: "+err.message,"error");
+  }
+};
+
+// Edit File
+window.editFile = (filename) => {
+  mode = "edit";
+  currentFilePath = `files/${currentUser.uid}/${filename}`;
+  originalFilename = filename;
+
+  db.ref(currentFilePath).once("value", snap => {
+    editor.setValue(JSON5.stringify(snap.val(), null, 2), -1);
+    editorTitle.innerText = "Editing: " + filename + ".json";
+    filenameInput.value = filename;
+    filenameInput.style.display = "block";
+    saveNewBtn.style.display = "none";
+    saveEditBtn.style.display = "block";
+  });
+};
+
+// Save Edit / Rename
+saveEditBtn.onclick = () => {
+  const newFilename = filenameInput.value.trim();
+  if (!newFilename) return showPopup("Please enter a filename","error");
+  try {
+    const jsonData = JSON5.parse(editor.getValue());
+    const userRef = db.ref(`files/${currentUser.uid}`);
+
+    if(newFilename !== originalFilename){
+      userRef.child(newFilename).set(jsonData)
+        .then(()=>userRef.child(originalFilename).remove())
+        .then(()=>{
+          showPopup("File saved and renamed");
+          editor.setValue("{\n\n}",-1);
+          filenameInput.value="";
+          filenameInput.style.display="none";
+          loadFileList();
+        });
+    } else {
+      userRef.child(originalFilename).set(jsonData)
+        .then(()=>{
+          showPopup("File saved successfully");
+          editor.setValue("{\n\n}",-1);
+          filenameInput.value="";
+          filenameInput.style.display="none";
+          loadFileList();
+        });
+    }
+  } catch(err){
+    showPopup("Invalid JSON: "+err.message,"error");
+  }
+};
+
+// Upload JSON
+uploadBtn.onclick = () => {
+  const file = fileInput.files[0];
+  if (!file) return showPopup("Select file first","error");
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const jsonData = JSON5.parse(e.target.result);
+      const filename = file.name.replace(".json","");
+      db.ref(`files/${currentUser.uid}/${filename}`).set(jsonData)
+        .then(()=>{
+          showPopup("File uploaded successfully");
+          fileInput.value="";
+          loadFileList();
+        });
+    } catch(err){
+      showPopup("Invalid JSON: "+err.message,"error");
+    }
+  };
+  reader.readAsText(file);
+};
+
+// Delete File
+window.deleteFile = (filename) => {
+  if(!confirm(`Delete ${filename}.json?`)) return;
+  db.ref(`files/${currentUser.uid}/${filename}`).remove()
+    .then(()=>showPopup("File deleted successfully"))
+    .then(()=>loadFileList());
+};
+</script>
+</body>
+</html>
