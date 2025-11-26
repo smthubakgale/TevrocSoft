@@ -407,7 +407,7 @@ async function loadHtml(elementId, url) {
     let payment = '';
 
     // Load payment snippet if needed
-    if (url || url.includes("blogs/").includes("demo/")) {
+    if (url.includes("blogs/") || url.includes("demo/")) {
         try {
             payment = await fetchHtml('payments/yoco.html');
         } catch (err) {
