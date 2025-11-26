@@ -1,466 +1,211 @@
-  <style>
-    
-#main {
-  background-color: #f7f7f7;
-  padding: 50px 0;
-}
+<!-- Include Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-#main h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+<style>
+  /* VARIABLES */
+  #main {
+    --primary-color: #337ab7;
+    --bg-color: #f7f7f7;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --text-color: #333;
+    --subtext-color: #666;
+    --transition-speed: 0.3s;
 
-#main .services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-#main .service-item {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#main .service-item i {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-#main .service-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-#main .service-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #666;
-}
-
-#main .service-item:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
-}
-
-#main .service-item:hover i {
-  color: #337ab7;
-}
-
-#main .service-item:hover h4 {
-  color: #337ab7;
-}
-
-@media only screen and (max-width: 768px) {
-  #main .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--bg-color);
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .services-grid {
-    grid-template-columns: 1fr;
+  #main h2, #main h3 {
+    text-align: center;
+    margin-bottom: 20px;
   }
-}
 
-#main .welcome {
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-#main .welcome h2 {
-  font-size: 30px;
-  margin-bottom: 20px;
-}
-
-#main .welcome p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#main .mission {
-  margin-bottom: 50px;
-}
-
-#main .mission h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#main .mission p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#main .expertise {
-  margin-bottom: 50px;
-}
-
-#main .expertise h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#main .expertise p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#main .what-sets-us-apart {
-  margin-bottom: 50px;
-}
-
-#main .what-sets-us-apart h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#main .what-sets-us-apart p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#main .our-values {
-  margin-bottom: 50px;
-}
-
-#main .our-values h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#main .our-values p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-#main .our-values ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#main .our-values li {
-  margin-bottom: 10px;
-}
-
-#main .our-values li i {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-#main .what-sets-us-apart-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
-
-#main .what-sets-us-apart-item {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#main .what-sets-us-apart-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .what-sets-us-apart-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 768px) {
-  #main .what-sets-us-apart-grid {
-    grid-template-columns: repeat(2, 1fr);
+  #main p {
+    color: var(--subtext-color);
+    line-height: 1.6;
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .what-sets-us-apart-grid {
-    grid-template-columns: 1fr;
+  /* GRID SYSTEM */
+  #main .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; 
+    margin: 0 auto 50px;
   }
-}
 
-#main .expertise-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
-
-#main .expertise-item {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#main .expertise-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .expertise-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 768px) {
-  #main .expertise-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* CARDS */
+  #main .card {
+    background: var(--card-bg);
+    padding: 30px 25px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 20px var(--card-shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .expertise-grid {
-    grid-template-columns: 1fr;
+  /* ICONS / ILLUSTRATIONS */
+  #main .card i {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
   }
-}
 
-#main .our-values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-}
-
-#main .our-values-item {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#main .our-values-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .our-values-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 768px) {
-  #main .our-values-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* CARD TITLE & TEXT */
+  #main .card h5 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-color);
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .our-values-grid {
-    grid-template-columns: 1fr;
+  #main .card p, 
+  #main .card ul {
+    font-size: 15px;
+    margin-bottom: 15px;
   }
-}
 
-#main .what-sets-us-apart-item {
-  margin-bottom: 20px;
-}
-
-#main .what-sets-us-apart-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .what-sets-us-apart-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-#main .our-values-item {
-  margin-bottom: 20px;
-}
-
-#main .our-values-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .our-values-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-#main .expertise-item {
-  margin-bottom: 20px;
-}
-
-#main .expertise-item h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#main .expertise-item p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-@media only screen and (max-width: 768px) {
-  #main .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+  #main .card ul {
+    padding-left: 0;
+    list-style: none;
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .services-grid {
-    grid-template-columns: 1fr;
+  #main .card ul li {
+    margin-bottom: 8px;
   }
-}
 
-@media only screen and (max-width: 768px) {
-  #main .what-sets-us-apart-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* HOVER EFFECTS */
+  #main .card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .what-sets-us-apart-grid {
-    grid-template-columns: 1fr;
+  #main .card:hover i {
+    transform: rotate(10deg) scale(1.2);
+    color: #ff7a59; /* subtle hover color change */
   }
-}
 
-@media only screen and (max-width: 768px) {
-  #main .expertise-grid {
-    grid-template-columns: repeat(2, 1fr);
+  #main .card:hover h5 {
+    color: var(--primary-color);
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .expertise-grid {
-    grid-template-columns: 1fr;
+  /* SECTION TITLES */
+  #main .section-title {
+    margin-bottom: 40px;
+    text-align: center;
   }
-}
 
-@media only screen and (max-width: 768px) {
-  #main .our-values-grid {
-    grid-template-columns: repeat(2, 1fr);
+  #main .section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
   }
-}
 
-@media only screen and (max-width: 480px) {
-  #main .our-values-grid {
-    grid-template-columns: 1fr;
+  #main .section-title p {
+    font-size: 17px;
+    max-width: 700px;
+    margin: 0 auto;
   }
-}
 
-#main .service-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+  /* RESPONSIVE TYPOGRAPHY */
+  @media (max-width: 768px) {
+    #main h2 {
+      font-size: 28px;
+    }
 
-#main .service-item:hover i {
-  color: #337ab7;
-}
+    #main h5 {
+      font-size: 18px;
+    }
 
-#main .service-item:hover h4 {
-  color: #337ab7;
-}
+    #main .card i {
+      font-size: 30px;
+    }
+  }
 
-#main .what-sets-us-apart-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+  @media (max-width: 480px) {
+    #main {
+      padding: 40px 15px;
+    }
 
-#main .what-sets-us-apart-item:hover i {
-  color: #337ab7;
-}
+    #main h2 {
+      font-size: 24px;
+    }
 
-#main .what-sets-us-apart-item:hover h4 {
-  color: #337ab7;
-}
+    #main h5 {
+      font-size: 17px;
+    }
 
-#main .expertise-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+    #main p {
+      font-size: 14px;
+    }
 
-#main .expertise-item:hover i {
-  color: #337ab7;
-}
+    #main .card i {
+      font-size: 28px;
+    }
+  }
+</style>
 
-#main .expertise-item:hover h4 {
-  color: #337ab7;
-}
+<div id="main">
 
-#main .our-values-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+  <!-- OUR SERVICES -->
+  <div class="section-title">
+    <h2>Our Services</h2>
+    <p>At Tevroc Soft, we provide a full spectrum of technology solutions for businesses and individuals to achieve their goals efficiently and effectively.</p>
+  </div>
 
-#main .our-values-item:hover i {
-  color: #337ab7;
-}
+  <div class="card-grid">
+    <div class="card">
+      <i class="fas fa-code"></i>
+      <h5>Software Development</h5>
+      <p>Custom software solutions tailored to your business needs, including mobile apps and web applications.</p>
+    </div>
 
-#main .our-values-item:hover h4 {
-  color: #337ab7;
-}
+    <div class="card">
+      <i class="fas fa-chart-line"></i>
+      <h5>Data Science & Analytics</h5>
+      <p>Analyze your business data for actionable insights with predictive models and dashboards.</p>
+    </div>
 
+    <div class="card">
+      <i class="fas fa-headset"></i>
+      <h5>IT Consulting</h5>
+      <p>Strategic IT planning, technology adoption, cybersecurity solutions, and project management.</p>
+    </div>
 
-  </style>
-  
-  <div class="container">
-              <div class="section-title">
-                <h2>Our Services</h2>
-                <p class="text-muted">At Tevroc Soft, we offer a range of services designed to help businesses and individuals achieve their goals.</p>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Software Development</h5>
-                      <p class="card-text">Custom software development for businesses and individuals. Mobile app development for Android and iOS. Web application development using modern technologies. Maintenance and support for existing software applications.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Data Science and Analytics</h5>
-                      <p class="card-text">Data analysis and visualization for businesses and individuals. Machine learning model development and deployment. Predictive analytics for forecasting and decision-making. Data mining and business intelligence solutions.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">IT Consulting</h5>
-                      <p class="card-text">IT strategy and planning for businesses. Technology implementation and integration. Cybersecurity solutions for businesses and individuals. IT project management and support.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Digital Health Solutions</h5>
-                      <p class="card-text">Digital health record system development. Telemedicine platform development. Health data analytics and visualization. Custom digital health solutions for businesses and individuals.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="section-title">
-                <h2>What We Offer</h2>
-                <p class="text-muted">We offer personalized service and support, expertise in latest technologies and trends, cost-effective solutions for businesses and individuals, and fast turnaround times and quick response to inquiries.</p>
-              </div>
-              <div class="section-title">
-                <h2>Get in Touch</h2>
-                <p class="text-muted">Ready to learn more about our services? Contact us today to schedule a consultation and take the first step towards achieving your goals.</p>
-                <ul>
-                  <li><i class="bi bi-envelope"></i> <a href="mailto:[your email]">[your email]</a></li>
-                  <li><i class="bi bi-phone"></i> [your phone number]</li>
-                  <li><i class="bi bi-geo-alt"></i> [your address]</li>
-                </ul>
-              </div>
-            </div>
+    <div class="card">
+      <i class="fas fa-stethoscope"></i>
+      <h5>Digital Health Solutions</h5>
+      <p>Telemedicine platforms, digital health records, and analytics solutions for healthcare.</p>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-cloud"></i>
+      <h5>Cloud Solutions</h5>
+      <p>Cloud strategy, migration, and management for AWS, Azure, and Google Cloud.</p>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-robot"></i>
+      <h5>AI & Machine Learning</h5>
+      <p>AI/ML solutions that enhance business operations and customer experiences.</p>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-shield-alt"></i>
+      <h5>Cybersecurity Services</h5>
+      <p>Protect your data with advanced cybersecurity solutions and threat monitoring.</p>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-pencil-ruler"></i>
+      <h5>UX/UI Design</h5>
+      <p>Intuitive and engaging user experiences for web and mobile applications.</p>
+    </div>
+  </div>
+
+</div>
