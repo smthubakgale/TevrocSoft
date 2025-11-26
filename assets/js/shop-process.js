@@ -1723,33 +1723,33 @@ downloadFormData() {
 	a.click();
 }
 } 
-	//
-	
-	setTimeout(function(){
-	const form = document.getElementById("myForm");
-	const importButton = document.getElementById("import-button");
-	const fileInput = document.getElementById("file-input"); 
-		new FormGenerator(form, importButton, fileInput , formConfig , "spec" ,
-	(formData) => {
-		console.log(formData);
-	});
-	//
-	},300);
-//
-setTimeout(function()
-{  
-	const formGenerator = new FormGenerator(
-	document.getElementById("myForm2"),
-	document.getElementById("import-button2"),
-	document.getElementById("file-input2"),
-	formConfig2,
-	"spec" ,
-	(formData) => {
-		console.log(formData);
+
+//	
+(()=>
+{ 
+	// Function to initialize a form when all required elements exist
+	function initForm(formId, importButtonId, fileInputId, config) {
+		const form = document.getElementById(formId);
+		const importButton = document.getElementById(importButtonId);
+		const fileInput = document.getElementById(fileInputId);
+
+		console.log(form , importButton , fileInput);
+
+		if (form && importButton && fileInput) {
+			new FormGenerator(form, importButton, fileInput, config, "spec", (formData) => {
+				console.log(formData);
+			});
+			return true; // Initialized successfully
+		}
+		return false; // Not ready yet
 	}
-	); 
-	
-},300); 
+ 
+	setTimeout(()=>{
+		initForm("myForm", "import-button", "file-input", formConfig);
+	    initForm("myForm2", "import-button2", "file-input2", formConfig2);
+
+	},400)
+})();
 //
 function adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays) {
 const complexityMultiplier = complexityMultipliers[platform][complexity];
