@@ -236,10 +236,6 @@
 
 
   <!-- Get a Quote -->
-  
-  
-  <h2> <u>Hosting Plans</u> </h2>
-  
   <h2> <u> Enterprise </u> </h2>
 
   
@@ -277,4 +273,165 @@
     <button id="send-email-1" type="submit">Submit Request</button>
   </form>
   <div id="form-status-1"></div>
+
+
+<h1><u>Hosting Comparison: Self-Hosting vs Cloud Hosting</u></h1>
+
+<h2>Self-Hosting Providers / Methods</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Provider / Method</th>
+      <th>Price (ZAR)</th>
+      <th>Hardware Required (You Own)</th>
+      <th>Features</th>
+      <th>Pros</th>
+      <th>Cons</th>
+      <th>Protocol Support (TCP/UDP)</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Home Server + Port Forwarding</td>
+      <td>~R0</td>
+      <td>PC / Mini-PC / NAS / Raspberry Pi</td>
+      <td>Direct hosting, full control</td>
+      <td>No monthly fee, full control</td>
+      <td>Requires public IP, ISP restrictions, security risk</td>
+      <td>Yes</td>
+      <td>Works well if ISP allows open ports</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.cloudflare.com/products/tunnel/" target="_blank">Cloudflare Tunnel</a></td>
+      <td>Free</td>
+      <td>You own hardware</td>
+      <td>Secure tunnel to expose local server</td>
+      <td>No port forwarding needed</td>
+      <td>No raw UDP (HTTP-only)</td>
+      <td>TCP (HTTP/HTTPS only)</td>
+      <td>Great for exposing web apps</td>
+    </tr>
+    <tr>
+      <td><a href="https://ngrok.com/" target="_blank">Ngrok</a></td>
+      <td>Free / Paid ~R150/mo</td>
+      <td>You own hardware</td>
+      <td>Public URLs to local services</td>
+      <td>Easy setup</td>
+      <td>Free version rotates URLs</td>
+      <td>TCP (paid)</td>
+      <td>Great for dev + demos</td>
+    </tr>
+    <tr>
+      <td><a href="https://tailscale.com/" target="_blank">Tailscale</a></td>
+      <td>Free / Paid ~R80/mo</td>
+      <td>You own hardware</td>
+      <td>Zero-config VPN</td>
+      <td>Secure + private</td>
+      <td>Not public by default</td>
+      <td>TCP/UDP</td>
+      <td>Good for secure internal access</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.zerotier.com/" target="_blank">ZeroTier</a></td>
+      <td>Free / Paid</td>
+      <td>You own hardware</td>
+      <td>Virtual LAN over internet</td>
+      <td>Secure + flexible</td>
+      <td>Public exposure needs extra setup</td>
+      <td>TCP/UDP</td>
+      <td>Good for private network hosting</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Cloud Hosting Providers (Hardware Provided by Provider)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Price (ZAR / mo)</th>
+      <th>Hardware Provided (Included)</th>
+      <th>Features</th>
+      <th>Pros</th>
+      <th>Cons</th>
+      <th>Protocol Support</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://truehost.co.za/vps-hosting/" target="_blank">Truehost SA VPS</a></td>
+      <td>R120 – R900</td>
+      <td>vCPU, RAM, SSD (varies)</td>
+      <td>Local SA VPS, root access</td>
+      <td>Low latency in SA</td>
+      <td>Lower bandwidth than global clouds</td>
+      <td>TCP/UDP</td>
+      <td>Affordable SA-local hosting</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.digitalocean.com/products/droplets/" target="_blank">DigitalOcean Droplet</a></td>
+      <td>R90 – R410</td>
+      <td>vCPU, 1–4GB RAM, SSD</td>
+      <td>Global scalable VPS</td>
+      <td>Easy to use, reliable</td>
+      <td>USD billing</td>
+      <td>TCP/UDP</td>
+      <td>Ideal for web apps & APIs</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.linode.com/products/compute/" target="_blank">Linode VPS</a></td>
+      <td>R90 – R410</td>
+      <td>vCPU, 1–4GB RAM, SSD</td>
+      <td>Strong performance</td>
+      <td>Good uptime</td>
+      <td>USD billing</td>
+      <td>TCP/UDP</td>
+      <td>Great mid-tier cloud</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.vultr.com/products/cloud-compute/" target="_blank">Vultr VPS</a></td>
+      <td>R80 – R450</td>
+      <td>vCPU, RAM, NVMe</td>
+      <td>Fast NVMe storage</td>
+      <td>Many data centers</td>
+      <td>No SA region</td>
+      <td>TCP/UDP</td>
+      <td>Good for cheap global hosting</td>
+    </tr>
+    <tr>
+      <td><a href="https://aws.amazon.com/lightsail/" target="_blank">AWS Lightsail</a></td>
+      <td>R120 – R850</td>
+      <td>vCPU, 1–8GB RAM, SSD</td>
+      <td>Easy AWS cloud server</td>
+      <td>Very reliable</td>
+      <td>Expensive bandwidth</td>
+      <td>TCP/UDP</td>
+      <td>Simple alternative to EC2</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.hetzner.com/cloud" target="_blank">Hetzner Cloud</a></td>
+      <td>R90 – R500</td>
+      <td>vCPU, RAM, SSD</td>
+      <td>Very cheap + powerful</td>
+      <td>High performance for price</td>
+      <td>No SA region</td>
+      <td>TCP/UDP</td>
+      <td>Best price/performance globally</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.ovhcloud.com/en/vps/" target="_blank">OVHCloud</a></td>
+      <td>R100 – R600</td>
+      <td>vCPU, RAM, SSD</td>
+      <td>Large global network</td>
+      <td>Many options</td>
+      <td>UI not friendly</td>
+      <td>TCP/UDP</td>
+      <td>Affordable EU hosting</td>
+    </tr>
+  </tbody>
+</table>
+
+
 </div>
