@@ -61,6 +61,7 @@
   padding: 20px;
   background-color: #fff;
   border: 1px solid #ddd;
+  word-break: break-all;
 }
 
 #main input[type="text"], #main input[type="email"], #main textarea {
@@ -151,7 +152,7 @@
   const defaultMessage = `Hello, I want to activate my app.\nMy Machine ID is: ${machineId}\nStatus: ${reason}`;
 
   // Show machine ID and license reason
-  document.getElementById('license-message').textContent = defaultMessage;
+  document.getElementById('license-message').textContent = `Machine ID: ${machineId}`;
 
   // Prefill textarea
   document.getElementById('message').value = defaultMessage;
