@@ -180,7 +180,7 @@ payBtn.addEventListener("click", async () => {
 
   try {
     const cents = Math.round(amount * 100);
-    const api = "https://tevrocsoft-api.vercel.app";
+    const api = "https://tevrocsoftapi.netlify.app/.netlify/functions/api";
 
     // Call your server to create checkout
     const response = await fetch(`${api}/create-checkout?amount=${cents}`, { method: "POST" });
