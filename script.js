@@ -380,7 +380,7 @@ onReady('#contact-form','submit', (e) =>
 {  
      e.preventDefault();
 	 
-	  var fm3 = document.getElementById("send-email-3").parentNode;
+	  var fm3 = document.getElementById("contact-form").parentNode;
  
      var formStatus = document.getElementById("form-status-3");
      var name = fm3.querySelector('#name3').value;
@@ -390,6 +390,22 @@ onReady('#contact-form','submit', (e) =>
      console.log(name , email , message , fm3 , formStatus);
 
      sendEmail(name , message , email , formStatus , fm3 , "Custome Quote Request");
+}); 
+
+onReady('#license-contact-form','submit', (e) => 
+{  
+     e.preventDefault();
+	 
+	  var fm3 = document.getElementById("license-contact-form").parentNode;
+ 
+     var formStatus = document.getElementById("form-status-4");
+     var name = fm3.querySelector('#name4').value;
+     var message = fm3.querySelector("#text4").value; 
+     var email = fm3.querySelector("#email4").value;
+
+     console.log(name , email , message , fm3 , formStatus);
+
+     sendEmail(name , message , email , formStatus , fm3 , "License Request");
 }); 
 // 
 async function loadHtml(elementId, url) {
