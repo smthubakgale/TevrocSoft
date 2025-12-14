@@ -380,7 +380,7 @@ onReady('#contact-form','submit', (e) =>
 {  
      e.preventDefault();
 	 
-	  var fm3 = document.getElementById("contact-form").parentNode;
+	  var fm3 = document.getElementById("contact-form");
  
      var formStatus = document.getElementById("form-status-3");
      var name = fm3.querySelector('#name3').value;
@@ -389,14 +389,14 @@ onReady('#contact-form','submit', (e) =>
 
      console.log(name , email , message , fm3 , formStatus);
 
-     sendEmail(name , message , email , formStatus , fm3 , "Custome Quote Request");
+     sendEmail(name , message , email , formStatus , fm3 , "Contact");
 }); 
 
 onReady('#license-contact-form','submit', (e) => 
 {  
      e.preventDefault();
 	 
-	  var fm3 = document.getElementById("license-contact-form").parentNode;
+	  var fm3 = document.getElementById("license-contact-form");
  
      var formStatus = document.getElementById("form-status-4");
      var name = fm3.querySelector('#name4').value;
