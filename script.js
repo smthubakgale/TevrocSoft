@@ -72,7 +72,7 @@ function onLoad(selector, callback) {
  // Initialize EmailJS  
 
 function sendEmail(_name, _message, _email, formStatus, form, _subject = "Missing Subject") {
-  const url = 'https://tevrocsoftapi.netlify.app/.netlify/functions/send-email2';
+  const url = 'https://tevrocsoft-api.vercel.app/send-email';
 
   // Prepare the JSON payload
   const payload = {
