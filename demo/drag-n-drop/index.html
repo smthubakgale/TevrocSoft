@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Diagram Editor — Zoom / Undo / Multi-select / Export PNG</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--accent:#337ab7;--grid:#e9edf2}
+body{font-family:Inter,Segoe UI,system-ui,Arial;margin:0;background:var(--bg);color:#111}
+.app{display:flex;gap:18px;padding:18px}
+.panel{background:var(--card);border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.left{width:320px;flex-shrink:0}
+.canvas-wrap{flex:1;min-height:640px;position:relative}
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+#stage{
+  border-radius:8px;
+  height:640px;
+  position:relative;
+  overflow:hidden;
+  background-size:20px 20px;
+  background-image:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-color:#fff;
+}
+
+/* viewport holds content for zoom/pan */
+#viewport{position:absolute;left:0;top:0;transform-origin:0 0;}
+
+/* Nodes */
+.node{position:absolute;border-radius:6px;background:white;box-shadow:0 4px 10px rgba(0,0,0,.06);cursor:grab;user-select:none;touch-action:none}
+.node.rect{border:1px solid #dbe7f6;width:140px;height:60px}
+.node.circle{border-radius:100%;border:1px solid #dbe7f6;width:80px;height:80px}
+.node.text{border:1px dashed #dbe7f6;padding:6px 10px;background:#fff}
+.node.selected{outline:2px solid rgba(51,122,183,0.25)}
+
+/* Resize handle */
+.resize{
+  position:absolute;
+  right:-6px;bottom:-6px;
+  width:12px;height:12px;
+  background:var(--accent);
+  border-radius:50%;
+  cursor:se-resize;
+  z-index:20;
+}
+
+/* Ports */
+.port{
+  width:10px;height:10px;
+  background:var(--accent);border:2px solid #fff;
+  border-radius:50%;
+  position:absolute;
+  display:none;
+  z-index:15;
+}
+.node:hover .port,.node.selected .port{display:block}
+.port.top{top:-6px;left:50%;transform:translateX(-50%)}
+.port.right{right:-6px;top:50%;transform:translateY(-50%)}
+.port.bottom{bottom:-6px;left:50%;transform:translateX(-50%)}
+.port.left{left:-6px;top:50%;transform:translateY(-50%)}
+
+/* selection box */
+.selection-rect{
+  position:absolute;border:1px dashed #337ab766;background:rgba(51,122,183,0.06);pointer-events:none;z-index:50;
+}
+
+/* simple UI */
+button, .small-btn{
+  background:var(--accent);color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;
+}
+.small-btn{background:transparent;color:var(--accent);border:1px solid rgba(0,0,0,0.06);padding:6px 8px;border-radius:6px}
+.icon{width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:6px}
+.muted{color:#666;font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="panel left">
+    <header><h2 style="margin:0">Diagram Studio</h2><div class="muted">Zoom / Undo / Multi-select / Export PNG</div></header>
+    <div style="height:12px"></div>
+
+    <div class="toolbar">
+      <button id="rectBtn">Rectangle</button>
+      <button id="circleBtn">Circle</button>
+      <button id="textBtn">Text</button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button id="connectBtn" class="small-btn">Connect: OFF</button>
+      <button id="deleteBtn" class="small-btn">Delete</button>
+    </div>
+
+    <hr />
+
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button id="undoBtn" class="small-btn">Undo</button>
+      <button id="redoBtn" class="small-btn">Redo</button>
+      <button id="selectAllBtn" class="small-btn">Select All</button>
+      <button id="clearSelBtn" class="small-btn">Clear Sel</button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button id="zoomIn" class="small-btn">Zoom +</button>
+      <button id="zoomOut" class="small-btn">Zoom -</button>
+      <button id="zoomReset" class="small-btn">Reset</button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <input id="diagramName" placeholder="diagram name" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd" />
+      <button id="saveJson" class="small-btn">Save JSON</button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button id="loadJson" class="small-btn">Load JSON</button>
+      <button id="exportPng" class="small-btn">Export PNG</button>
+    </div>
+
+    <div style="margin-top:10px">
+      <div class="muted">Tips:</div>
+      <ul style="padding-left:18px;margin:6px 0">
+        <li>Shift+click to multi-select (toggle)</li>
+        <li>Drag nodes: moves all selected</li>
+        <li>Use ports to connect edges</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="panel canvas-wrap" style="flex:1">
+    <div class="toolbar muted">Canvas</div>
+    <div id="stage">
+      <!-- viewport that we transform for zoom/pan -->
+      <div id="viewport"></div>
+      <svg id="svg" style="position:absolute;left:0;top:0;pointer-events:none"></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+/* -----------------------
+   App state & utilities
+   ----------------------- */
+const stage = document.getElementById('stage')
+const viewport = document.getElementById('viewport')   // contains nodes
+const svg = document.getElementById('svg')             // connectors drawn in absolute coordinates
+const grid = 20
+
+let model = { nodes: [], links: [] }
+let nodeIdCounter = 1, linkIdCounter = 1
+
+let connectMode = false
+let connectFrom = null
+let tempPath = null
+
+let zoom = 1
+const ZOOM_STEP = 0.1
+function setZoom(z){
+  zoom = Math.max(0.2, Math.min(3, z))
+  viewport.style.transform = `scale(${zoom})`
+  // keep svg size consistent with stage
+  syncSvgSize()
+}
+
+function syncSvgSize(){
+  const r = stage.getBoundingClientRect()
+  svg.setAttribute('width', r.width)
+  svg.setAttribute('height', r.height)
+  svg.style.width = r.width + 'px'
+  svg.style.height = r.height + 'px'
+}
+
+/* snap-to-grid */
+function snap(v){ return Math.round(v / grid) * grid }
+
+/* selection */
+let selectedIds = new Set()
+
+function selectNodeId(id, add=false){
+  if(!add) selectedIds.clear()
+  selectedIds.add(id)
+  refreshSelectionUI()
+}
+function toggleSelectId(id){
+  if(selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id)
+  refreshSelectionUI()
+}
+function clearSelection(){
+  selectedIds.clear(); refreshSelectionUI()
+}
+function refreshSelectionUI(){
+  document.querySelectorAll('.node').forEach(el=>{
+    el.classList.toggle('selected', selectedIds.has(el.dataset.id))
+  })
+}
+
+/* -----------------------
+   History (undo/redo)
+   ----------------------- */
+const history = { stack: [], index: -1, max: 50 }
+
+function pushHistory(label){
+  // deep clone model
+  const snapshot = JSON.parse(JSON.stringify(model))
+  // discard redo states
+  history.stack = history.stack.slice(0, history.index+1)
+  history.stack.push({ snapshot, label })
+  if(history.stack.length > history.max) history.stack.shift()
+  history.index = history.stack.length - 1
+  updateUndoRedoButtons()
+}
+function undo(){
+  if(history.index <= 0) return
+  history.index--
+  model = JSON.parse(JSON.stringify(history.stack[history.index].snapshot))
+  rebuildFromModel()
+  updateUndoRedoButtons()
+}
+function redo(){
+  if(history.index >= history.stack.length - 1) return
+  history.index++
+  model = JSON.parse(JSON.stringify(history.stack[history.index].snapshot))
+  rebuildFromModel()
+  updateUndoRedoButtons()
+}
+function updateUndoRedoButtons(){
+  document.getElementById('undoBtn').disabled = history.index <= 0
+  document.getElementById('redoBtn').disabled = history.index >= history.stack.length - 1
+}
+
+/* -----------------------
+   Node creation / render
+   ----------------------- */
+function createNode(type, x=100, y=100, text=''){
+  const id = 'n' + (nodeIdCounter++)
+  const node = { id, type, x: snap(x), y: snap(y), w: type==='circle'?80:140, h: type==='circle'?80:60, text: text || (type==='text'?'Text':'Box') }
+  model.nodes.push(node)
+  drawNode(node)
+  pushHistory('create node')
+}
+
+function drawNode(node){
+  const el = document.createElement('div')
+  el.className = 'node ' + (node.type==='rect'?'rect': node.type==='circle'?'circle':'text')
+  el.dataset.id = node.id
+  el.style.left = node.x + 'px'
+  el.style.top = node.y + 'px'
+  el.style.width = node.w + 'px'
+  el.style.height = node.h + 'px'
+  el.innerHTML = `
+    <div class="label" contenteditable="${node.type==='text'}" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:6px;box-sizing:border-box">${escapeHtml(node.text)}</div>
+    <div class="resize" title="resize"></div>
+    <div class="port top" data-p="top"></div>
+    <div class="port right" data-p="right"></div>
+    <div class="port bottom" data-p="bottom"></div>
+    <div class="port left" data-p="left"></div>
+  `
+  viewport.appendChild(el)
+
+  // contenteditable update
+  if(node.type === 'text'){
+    el.querySelector('.label').addEventListener('input', e=>{
+      node.text = el.querySelector('.label').innerText
+      pushHistory('edit text')
+      drawLinks()
+    })
+  } else {
+    // dblclick to set label
+    el.addEventListener('dblclick', ()=>{
+      const newLabel = prompt('Label', node.text || '')
+      if(newLabel !== null){ node.text = newLabel; el.querySelector('.label').innerText = newLabel; pushHistory('label edit'); drawLinks() }
+    })
+  }
+
+  // pointerdown for selection & dragging
+  el.addEventListener('pointerdown', e=>{
+    e.stopPropagation()
+    const id = node.id
+    const shift = e.shiftKey || e.ctrlKey || e.metaKey
+
+    // multi-select toggle
+    if(shift){
+      toggleSelectId(id)
+    } else {
+      // if not already selected, make it the only selected
+      if(!selectedIds.has(id)){
+        selectNodeId(id, false)
+      }
+    }
+
+    // if connecting mode & clicked on port handled separately below
+    if(connectMode && e.target.classList.contains('port')) return
+
+    // start dragging (drag all selected nodes)
+    const startX = e.clientX, startY = e.clientY
+    const starts = Array.from(selectedIds).map(sid=>{
+      const nd = model.nodes.find(n=>n.id===sid)
+      return { id: sid, x: nd.x, y: nd.y }
+    })
+
+    el.setPointerCapture(e.pointerId)
+    function onMove(ev){
+      const dx = (ev.clientX - startX) / zoom
+      const dy = (ev.clientY - startY) / zoom
+      starts.forEach(s=>{
+        const nd = model.nodes.find(n=>n.id===s.id)
+        nd.x = snap(s.x + dx)
+        nd.y = snap(s.y + dy)
+        const nodeEl = viewport.querySelector(`[data-id="${nd.id}"]`)
+        if(nodeEl){ nodeEl.style.left = nd.x + 'px'; nodeEl.style.top = nd.y + 'px' }
+      })
+      drawLinks()
+    }
+    function onUp(){
+      el.releasePointerCapture(e.pointerId)
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      pushHistory('move node(s)')
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  })
+
+  // Resize handle
+  const resizeHandle = el.querySelector('.resize')
+  resizeHandle.addEventListener('pointerdown', e=>{
+    e.stopPropagation()
+    const startX = e.clientX, startY = e.clientY
+    const origW = node.w, origH = node.h
+    resizeHandle.setPointerCapture(e.pointerId)
+    function onMove(ev){
+      const dx = (ev.clientX - startX) / zoom
+      const dy = (ev.clientY - startY) / zoom
+      node.w = Math.max(20, snap(origW + dx))
+      node.h = Math.max(16, snap(origH + dy))
+      el.style.width = node.w + 'px'
+      el.style.height = node.h + 'px'
+      drawLinks()
+    }
+    function onUp(){
+      resizeHandle.releasePointerCapture(e.pointerId)
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      pushHistory('resize')
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  })
+
+  // Ports: create connections
+  el.querySelectorAll('.port').forEach(portEl=>{
+    portEl.addEventListener('pointerdown', e=>{
+      e.stopPropagation()
+      if(!connectMode) return
+      const port = portEl.dataset.p
+      if(!connectFrom){
+        connectFrom = { nodeId: node.id, port }
+        // create temporary path
+        tempPath = document.createElementNS('http://www.w3.org/2000/svg','path')
+        tempPath.setAttribute('stroke', 'rgba(51,122,183,0.9)')
+        tempPath.setAttribute('fill','none')
+        tempPath.setAttribute('stroke-dasharray','4 2')
+        svg.appendChild(tempPath)
+        // follow pointer
+        window.addEventListener('pointermove', followPointer)
+      } else {
+        // if click same node/port ignore
+        if(connectFrom.nodeId === node.id && connectFrom.port === port) { cleanupTemp(); return }
+        // push link
+        model.links.push({ id: 'l' + (linkIdCounter++), from: connectFrom.nodeId, fromPort: connectFrom.port, to: node.id, toPort: port })
+        pushHistory('create link')
+        cleanupTemp()
+        drawLinks()
+      }
+    })
+  })
+}
+
+/* follow pointer for temp line */
+function followPointer(ev){
+  const fromNode = model.nodes.find(n=>n.id === connectFrom.nodeId)
+  if(!fromNode) return
+  const a = portPosition(fromNode, connectFrom.port)
+  // pointer coords relative to stage/viewport (account for zoom & stage offset)
+  const rect = stage.getBoundingClientRect()
+  const x = (ev.clientX - rect.left) / 1 /* we draw in stage coords (viewport scaled) */
+  const y = (ev.clientY - rect.top) / 1
+  tempPath.setAttribute('d', orthoPath(a, {x,y}))
+}
+
+/* cleanup temp */
+function cleanupTemp(){
+  if(tempPath){ tempPath.remove(); tempPath = null }
+  connectFrom = null
+  window.removeEventListener('pointermove', followPointer)
+}
+
+/* port position (returns coords in stage space) */
+function portPosition(node, port){
+  return {
+    x: node.x + (port === 'left' ? 0 : port === 'right' ? node.w : node.w/2),
+    y: node.y + (port === 'top' ? 0 : port === 'bottom' ? node.h : node.h/2)
+  }
+}
+
+/* draw orthogonal path */
+function orthoPath(a,b){
+  const midX = (a.x + b.x) / 2
+  return `M ${a.x} ${a.y} L ${midX} ${a.y} L ${midX} ${b.y} L ${b.x} ${b.y}`
+}
+
+/* draw all links */
+function drawLinks(){
+  // clear svg
+  while(svg.firstChild) svg.removeChild(svg.firstChild)
+  // draw saved links
+  model.links.forEach(link=>{
+    const from = model.nodes.find(n=>n.id === link.from)
+    const to = model.nodes.find(n=>n.id === link.to)
+    if(!from || !to) return
+    const a = portPosition(from, link.fromPort)
+    const b = portPosition(to, link.toPort)
+    const p = document.createElementNS('http://www.w3.org/2000/svg','path')
+    p.setAttribute('d', orthoPath(a,b))
+    p.setAttribute('stroke', '#235a9c')
+    p.setAttribute('stroke-width', 2)
+    p.setAttribute('fill', 'none')
+    p.setAttribute('marker-end', 'url(#arrow)')
+    svg.appendChild(p)
+  })
+  // append arrow marker defs once
+  addArrowDef()
+}
+
+/* add arrow def if not present */
+function addArrowDef(){
+  if(svg.querySelector('defs')) return
+  const defs = document.createElementNS('http://www.w3.org/2000/svg','defs')
+  const marker = document.createElementNS('http://www.w3.org/2000/svg','marker')
+  marker.setAttribute('id','arrow')
+  marker.setAttribute('markerWidth','10')
+  marker.setAttribute('markerHeight','10')
+  marker.setAttribute('refX','10')
+  marker.setAttribute('refY','5')
+  marker.setAttribute('orient','auto')
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path')
+  path.setAttribute('d','M0,0 L10,5 L0,10 z')
+  path.setAttribute('fill','#235a9c')
+  marker.appendChild(path)
+  defs.appendChild(marker)
+  svg.appendChild(defs)
+}
+
+/* rebuild UI from model */
+function rebuildFromModel(){
+  // clear viewport
+  while(viewport.firstChild) viewport.removeChild(viewport.firstChild)
+  // re-render nodes
+  model.nodes.forEach(n=> drawNode(n))
+  drawLinks()
+  refreshSelectionUI()
+  syncSvgSize()
+}
+
+/* delete selected */
+function deleteSelected(){
+  if(selectedIds.size === 0) return alert('No selection')
+  const ids = Array.from(selectedIds)
+  model.nodes = model.nodes.filter(n => !ids.includes(n.id))
+  model.links = model.links.filter(l => !ids.includes(l.from) && !ids.includes(l.to))
+  clearSelection()
+  rebuildFromModel()
+  pushHistory('delete nodes')
+}
+
+/* helper: escape html */
+function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;') }
+
+/* -----------------------
+   UI wiring
+   ----------------------- */
+document.getElementById('rectBtn').onclick = ()=> createNode('rect', 60, 60, 'Box')
+document.getElementById('circleBtn').onclick = ()=> createNode('circle', 140, 140, '')
+document.getElementById('textBtn').onclick = ()=> createNode('text', 220, 220, 'Text')
+
+document.getElementById('connectBtn').onclick = function(){
+  connectMode = !connectMode
+  this.innerText = 'Connect: ' + (connectMode ? 'ON' : 'OFF')
+  if(!connectMode) cleanupTemp()
+}
+
+document.getElementById('deleteBtn').onclick = deleteSelected
+
+document.getElementById('undoBtn').onclick = undo
+document.getElementById('redoBtn').onclick = redo
+document.getElementById('selectAllBtn').onclick = ()=>{
+  selectedIds = new Set(model.nodes.map(n => n.id))
+  refreshSelectionUI()
+}
+document.getElementById('clearSelBtn').onclick = clearSelection
+
+document.getElementById('zoomIn').onclick = ()=> setZoom(zoom + ZOOM_STEP)
+document.getElementById('zoomOut').onclick = ()=> setZoom(zoom - ZOOM_STEP)
+document.getElementById('zoomReset').onclick = ()=> setZoom(1)
+
+/* save / load JSON (local download/upload) */
+document.getElementById('saveJson').onclick = ()=>{
+  const name = (document.getElementById('diagramName').value || 'diagram').trim()
+  const dataStr = JSON.stringify(model, null, 2)
+  const blob = new Blob([dataStr], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url; a.download = name + '.json'; a.click(); URL.revokeObjectURL(url)
+}
+
+document.getElementById('loadJson').onclick = ()=>{
+  const input = document.createElement('input')
+  input.type = 'file'; input.accept = '.json,application/json'
+  input.onchange = e=>{
+    const f = input.files[0]; if(!f) return
+    const reader = new FileReader()
+    reader.onload = ev=>{
+      try{
+        model = JSON.parse(ev.target.result)
+        // ensure counters are safe
+        nodeIdCounter = (model.nodes.reduce((mx,n)=>Math.max(mx, parseInt(n.id.replace(/\D/g,'')), 0), 0) + 1) || nodeIdCounter
+        linkIdCounter = (model.links.reduce((mx,l)=>Math.max(mx, parseInt(l.id ? l.id.replace(/\D/g,'') : 0)), 0) + 1) || linkIdCounter
+        rebuildFromModel()
+        pushHistory('load model')
+      } catch(err){
+        alert('Invalid JSON')
+      }
+    }
+    reader.readAsText(f)
+  }
+  input.click()
+}
+
+/* Export PNG: produce an SVG snapshot with a foreignObject of the viewport HTML and render to canvas */
+document.getElementById('exportPng').onclick = async ()=>{
+  try{
+    // compute size
+    const rect = stage.getBoundingClientRect()
+    const width = Math.round(rect.width)
+    const height = Math.round(rect.height)
+
+    // clone nodes and inline required styles into a wrapper element for serialization
+    const wrapper = document.createElement('div')
+    wrapper.setAttribute('xmlns','http://www.w3.org/1999/xhtml')
+    wrapper.style.width = width + 'px'
+    wrapper.style.height = height + 'px'
+    wrapper.style.position = 'relative'
+    wrapper.style.boxSizing = 'border-box'
+    wrapper.style.background = window.getComputedStyle(stage).backgroundColor || '#fff'
+    wrapper.style.backgroundImage = window.getComputedStyle(stage).backgroundImage
+
+    // create clones of nodes positioned absolutely
+    model.nodes.forEach(n=>{
+      const el = document.createElement('div')
+      el.style.position = 'absolute'
+      el.style.left = n.x + 'px'
+      el.style.top = n.y + 'px'
+      el.style.width = n.w + 'px'
+      el.style.height = n.h + 'px'
+      el.style.display = 'flex'
+      el.style.alignItems = 'center'
+      el.style.justifyContent = 'center'
+      el.style.boxSizing = 'border-box'
+      el.style.borderRadius = '6px'
+      el.style.background = '#fff'
+      el.style.boxShadow = '0 4px 10px rgba(0,0,0,0.06)'
+      el.style.border = n.type === 'rect' ? '1px solid #dbe7f6' : '1px solid #dbe7f6'
+      if(n.type === 'circle'){ el.style.borderRadius = '50%' }
+      el.textContent = n.text || ''
+      wrapper.appendChild(el)
+    })
+
+    // build SVG that includes our wrapper using foreignObject + the lines drawn as paths
+    const svgNS = 'http://www.w3.org/2000/svg'
+    const outerSvg = document.createElementNS(svgNS, 'svg')
+    outerSvg.setAttribute('xmlns', svgNS)
+    outerSvg.setAttribute('width', width)
+    outerSvg.setAttribute('height', height)
+
+    // append cloned lines
+    // draw links first so nodes overlay them
+    model.links.forEach(link=>{
+      const from = model.nodes.find(n=>n.id===link.from)
+      const to = model.nodes.find(n=>n.id===link.to)
+      if(!from || !to) return
+      const a = portPosition(from, link.fromPort)
+      const b = portPosition(to, link.toPort)
+      const path = document.createElementNS(svgNS, 'path')
+      path.setAttribute('d', orthoPath(a,b))
+      path.setAttribute('stroke', '#235a9c')
+      path.setAttribute('stroke-width', 2)
+      path.setAttribute('fill', 'none')
+      outerSvg.appendChild(path)
+    })
+
+    // foreignObject containing HTML nodes
+    const fo = document.createElementNS(svgNS, 'foreignObject')
+    fo.setAttribute('x', 0)
+    fo.setAttribute('y', 0)
+    fo.setAttribute('width', width)
+    fo.setAttribute('height', height)
+    fo.appendChild(wrapper)
+    outerSvg.appendChild(fo)
+
+    const svgData = new XMLSerializer().serializeToString(outerSvg)
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' })
+    const url = URL.createObjectURL(svgBlob)
+    const img = new Image()
+    img.onload = ()=>{
+      const canvas = document.createElement('canvas')
+      canvas.width = width
+      canvas.height = height
+      const ctx = canvas.getContext('2d')
+      // white background
+      ctx.fillStyle = '#ffffff'
+      ctx.fillRect(0,0,width,height)
+      ctx.drawImage(img, 0, 0)
+      URL.revokeObjectURL(url)
+      // download
+      canvas.toBlob((blob)=>{
+        const a = document.createElement('a')
+        a.href = URL.createObjectURL(blob)
+        a.download = (document.getElementById('diagramName').value || 'diagram') + '.png'
+        a.click()
+        URL.revokeObjectURL(a.href)
+      }, 'image/png')
+    }
+    img.onerror = (err)=>{
+      URL.revokeObjectURL(url)
+      alert('Export failed — your browser may restrict foreignObject rendering. Try a modern browser (Chrome/Firefox).')
+      console.error(err)
+    }
+    img.src = url
+
+  } catch(err){
+    console.error(err)
+    alert('Export failed: ' + (err && err.message))
+  }
+}
+
+/* -----------------------
+   Stage interactions
+   ----------------------- */
+// clicking empty stage clears selection and cancels connectors
+stage.addEventListener('pointerdown', e=>{
+  // if clicked on stage (not viewport children)
+  if(e.target === stage || e.target === viewport || e.target === svg){
+    // start selection rectangle (for multi-drag select)
+    if(e.shiftKey){
+      // draw selection rect
+      startSelectionRect(e)
+    } else {
+      clearSelection()
+    }
+    cleanupTemp()
+  }
+})
+
+// selection rectangle
+let selRectEl = null, selStart = null
+function startSelectionRect(e){
+  selStart = {x: e.clientX, y: e.clientY}
+  selRectEl = document.createElement('div')
+  selRectEl.className = 'selection-rect'
+  document.body.appendChild(selRectEl)
+
+  function onMove(ev){
+    const x = Math.min(selStart.x, ev.clientX)
+    const y = Math.min(selStart.y, ev.clientY)
+    const w = Math.abs(ev.clientX - selStart.x)
+    const h = Math.abs(ev.clientY - selStart.y)
+    selRectEl.style.left = x + 'px'
+    selRectEl.style.top = y + 'px'
+    selRectEl.style.width = w + 'px'
+    selRectEl.style.height = h + 'px'
+  }
+  function onUp(ev){
+    // compute selected nodes
+    const rect = selRectEl.getBoundingClientRect()
+    const nodes = Array.from(viewport.querySelectorAll('.node'))
+    nodes.forEach(nEl=>{
+      const nRect = nEl.getBoundingClientRect()
+      // check intersection (in screen coordinates)
+      if(nRect.left < rect.left + rect.width &&
+         nRect.left + nRect.width > rect.left &&
+         nRect.top < rect.top + rect.height &&
+         nRect.top + nRect.height > rect.top){
+           selectedIds.add(nEl.dataset.id)
+         }
+    })
+    refreshSelectionUI()
+    selRectEl.remove(); selRectEl = null; selStart = null
+    window.removeEventListener('pointermove', onMove)
+    window.removeEventListener('pointerup', onUp)
+  }
+  window.addEventListener('pointermove', onMove)
+  window.addEventListener('pointerup', onUp)
+}
+
+/* Resize svg and viewport on window resize */
+window.addEventListener('resize', ()=>{ syncSvgSize(); })
+setTimeout(()=>{ syncSvgSize(); setZoom(1) }, 100)
+
+/* -----------------------
+   utilities & startup
+   ----------------------- */
+function rebuildAndPush(){
+  rebuildFromModel()
+  pushHistory('state')
+}
+
+/* initial demo nodes */
+(function seedDemo(){
+  createNode('rect', 60, 70, 'Start')
+  createNode('rect', 320, 200, 'End')
+  // connect first and second
+  if(model.nodes.length >= 2){
+    model.links.push({ id: 'l' + (linkIdCounter++), from: model.nodes[0].id, fromPort: 'right', to: model.nodes[1].id, toPort: 'left' })
+  }
+  rebuildFromModel()
+  pushHistory('seed')
+})()
+
+/* keyboard shortcuts */
+window.addEventListener('keydown', (e)=>{
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z'){ undo(); e.preventDefault() }
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y'){ redo(); e.preventDefault() }
+  if(e.key === 'Delete'){ deleteSelected() }
+})
+
+/* helper: push initial state if none */
+if(history.index === -1) pushHistory('initial')
+
+</script>
+</body>
+</html>

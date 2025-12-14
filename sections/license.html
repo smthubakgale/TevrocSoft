@@ -1,0 +1,164 @@
+<style>
+#main {
+  background-color: #f9f9f9;
+  padding: 50px;
+}
+
+#main h2 {
+  color: #333;
+}
+
+#main p {
+  color: #666;
+  font-size: 18px;
+}
+
+#main .container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#main .contact-info {
+  float: left;
+  width: 40%;
+}
+
+#main .contact-info h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+#main .contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#main .contact-info li {
+  margin-bottom: 10px;
+}
+
+#main .contact-info a {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+#main .contact-info a:hover {
+  color: #23527c;
+}
+
+#main .contact-form {
+  float: right;
+  width: 60%;
+}
+
+#main .contact-form h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+#main form, #main .license-message {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+#main input[type="text"], #main input[type="email"], #main textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+#main button[type="submit"] {
+  background-color: #337ab7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#main button[type="submit"]:hover {
+  background-color: #23527c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #main .contact-info {
+    float: none;
+    width: 100%;
+  }
+  #main .contact-form {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #main input[type="text"], #main input[type="email"], #main textarea {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  #main button[type="submit"] {
+    padding: 5px 10px;
+  }
+}
+</style>
+
+  <div class="container">
+    <h2>License Portal</h2>
+    <p>Check your license status and contact support if needed.</p>
+    
+    <div class="contact-info">
+      <h3>Support Information</h3>
+      <ul>
+        <li>Email: <a href="mailto:support@tevrocsoft.net">support@tevrocsoft.net</a></li>
+        <li>Phone: +27 66 253 1653</li>
+        <li>Address: Mankweng, South Africa</li>
+        <li>
+          <a id="whatsapp-link" href="#" target="_blank">Chat with us on WhatsApp</a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="contact-form">
+      <h3>License Status</h3>
+      <div class="license-message" id="license-message">
+        Loading license status...
+      </div>
+      <form id="license-contact-form">
+        <input id="name" type="text" placeholder="Name" name="name">
+        <input id="email" type="email" placeholder="Email" name="email">
+        <textarea id="message" placeholder="Message" name="message"></textarea>
+        <button id="send-email" type="submit">Send</button>
+      </form>
+      <div id="form-status"></div>
+    </div>
+  </div>
+
+<script>
+  // Read query parameters
+  function getQueryParam(param) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(param);
+  }
+
+  const machineId = getQueryParam('machineId') || 'UNKNOWN';
+  const reason = getQueryParam('reason') || 'No active license found.';
+
+  // Create default message
+  const defaultMessage = `Hello, I want to activate my app.\nMy Machine ID is: ${machineId}\nStatus: ${reason}`;
+
+  // Show machine ID and license reason
+  document.getElementById('license-message').textContent = defaultMessage;
+
+  // Prefill textarea
+  document.getElementById('message').value = defaultMessage;
+
+  // Update WhatsApp link dynamically
+  const whatsappMessage = encodeURIComponent(defaultMessage);
+  const whatsappNumber = '27662531653'; // Support WhatsApp number
+  document.getElementById('whatsapp-link').href =
+    `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+</script>
