@@ -400,7 +400,7 @@ onReady('#license-contact-form','submit', (e) =>
  
      var formStatus = document.getElementById("form-status-4");
      var name = fm3.querySelector('#name4').value;
-     var message = fm3.querySelector("#text4").value; 
+     var message = fm3.querySelector("#message4").value; 
      var email = fm3.querySelector("#email4").value;
 
      console.log(name , email , message , fm3 , formStatus);
