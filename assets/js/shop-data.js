@@ -2236,118 +2236,72 @@ export const formConfig2 = {
 };
 //: Quotes 
 export const projectTypes = [
-    {
-      "id": 1,
-      "name": "Web Development",
-	  "type": "web" ,
-      "description": "Web development projects",
-      "features": [
-        {
-          "id": 1,
-          "name": "Responsive design",
-          "price": 1000
-        },
-        {
-          "id": 2,
-          "name": "Customizable layout",
-          "price": 1500
-        },
-        {
-          "id": 3,
-          "name": "Interactive elements",
-          "price": 2000
-        }
-      ],
-      "plans": [
-        {
-          "name": "Standard",
-          "price": 2000
-        },
-        {
-          "name": "Enterprise",
-          "price": 5000
-        },
-        {
-          "name": "Premium",
-          "price": 8000
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Mobile App Development",
-	  "type": "mobile" ,
-      "description": "Mobile app development projects",
-      "features": [
-        {
-          "id": 4,
-          "name": "Native app development",
-          "price": 3000
-        },
-        {
-          "id": 5,
-          "name": "Cross-platform development",
-          "price": 4000
-        },
-        {
-          "id": 6,
-          "name": "App store optimization",
-          "price": 2000
-        }
-      ],
-      "plans": [
-        {
-          "name": "Standard",
-          "price": 5000
-        },
-        {
-          "name": "Enterprise",
-          "price": 10000
-        },
-        {
-          "name": "Premium",
-          "price": 15000
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "name": "E-commerce Development",
-	  "type": "desktop" ,
-      "description": "E-commerce development projects",
-      "features": [
-        {
-          "id": 7,
-          "name": "Customizable storefront",
-          "price": 2500
-        },
-        {
-          "id": 8,
-          "name": "Payment gateway integration",
-          "price": 2000
-        },
-        {
-          "id": 9,
-          "name": "Inventory management",
-          "price": 1500
-        }
-      ],
-      "plans": [
-        {
-          "name": "Standard",
-          "price": 3000
-        },
-        {
-          "name": "Enterprise",
-          "price": 6000
-        },
-        {
-          "name": "Premium",
-          "price": 10000
-        }
-      ]
-    }
-  ];
+  {
+    id: 1,
+    name: "Web Development",
+    type: "web",
+    description: "Modern web applications and websites",
+    features: [
+      { id: 1, name: "HTML5 website development", price: 1500 },
+      { id: 2, name: "PHP backend integration", price: 2500 },
+      { id: 3, name: "Responsive & interactive UI", price: 2000 }
+    ],
+    plans: [
+      { name: "Standard", price: 3000 },
+      { name: "Enterprise", price: 6000 },
+      { name: "Premium", price: 9000 }
+    ]
+  },
+  {
+    id: 2,
+    name: "Mobile App Development",
+    type: "mobile",
+    description: "Mobile applications for Android and iOS",
+    features: [
+      { id: 4, name: "Android app development", price: 4000 },
+      { id: 5, name: "iOS app development", price: 4500 },
+      { id: 6, name: "Cross-platform (Android & iOS)", price: 6000 }
+    ],
+    plans: [
+      { name: "Standard", price: 6000 },
+      { name: "Enterprise", price: 12000 },
+      { name: "Premium", price: 18000 }
+    ]
+  },
+  {
+    id: 3,
+    name: "Desktop App Development",
+    type: "desktop",
+    description: "Desktop software for major operating systems",
+    features: [
+      { id: 7, name: "Windows desktop application", price: 4000 },
+      { id: 8, name: "macOS desktop application", price: 4500 },
+      { id: 9, name: "Cross-platform (Windows & macOS)", price: 6000 }
+    ],
+    plans: [
+      { name: "Standard", price: 6000 },
+      { name: "Enterprise", price: 12000 },
+      { name: "Premium", price: 18000 }
+    ]
+  },
+  {
+    id: 4,
+    name: "API Development",
+    type: "api",
+    description: "APIs for web, mobile, and desktop integrations",
+    features: [
+      { id: 10, name: "Node.js Web API (REST / JSON)", price: 3000 },
+      { id: 11, name: "Node.js self-hosted desktop API", price: 3500 },
+      { id: 12, name: "Authentication & security (JWT / OAuth)", price: 2000 }
+    ],
+    plans: [
+      { name: "Standard", price: 5000 },
+      { name: "Enterprise", price: 9000 },
+      { name: "Premium", price: 14000 }
+    ]
+  }
+];
+
 
 export const templates = [
     {

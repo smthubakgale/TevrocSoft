@@ -259,6 +259,8 @@ onReady('#get-quote', 'click', async (e) => {
         <p><strong>Total Amount:</strong> R ${(totalAmount).toFixed(2)}</p>
     </div>`;
 
+    // Generate unique invoice ID
+    const invoiceId = `INV-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
     // --- Construct HTML ---
     const html = `
     <html>
@@ -280,9 +282,9 @@ onReady('#get-quote', 'click', async (e) => {
                 <p>${companyAddress}</p>
             </div>
             <div style="text-align:right;">
-                <h5>Invoice #INV${Math.floor(Math.random()*10000)}</h5>
+                <h5>Invoice #${invoiceId}</h5>
                 <p>Created: ${new Date().toLocaleDateString()}</p>
-                <p>Due: ${new Date(Date.now() + 15*24*60*60*1000).toLocaleDateString()}</p>
+                <p>Due: ${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
             </div>
         </div>
 
@@ -343,6 +345,37 @@ onReady('#get-quote', 'click', async (e) => {
         </table>
 
         ${totalsHtml}
+
+        <h3>Banking Details</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <th style="width:30%">Bank</th>
+                    <td>FNB / RMB</td>
+                </tr>
+                <tr>
+                    <th>Account Holder</th>
+                    <td>Tevrocsoft</td>
+                </tr>
+                <tr>
+                    <th>Account Type</th>
+                    <td>First Business Zero Account</td>
+                </tr>
+                <tr>
+                    <th>Account Number</th>
+                    <td>63174915670</td>
+                </tr>
+                <tr>
+                    <th>Branch Code</th>
+                    <td>250655</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="margin-top:10px; font-size:12px; color:#777;">
+            Please use the invoice number as payment reference.
+        </p>
+
     </body>
     </html>`;
 
