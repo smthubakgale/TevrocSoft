@@ -2459,22 +2459,279 @@ export const templates = [
 	] 
     },
     {
-      "name": "Restaurant App",
-      "pages": [
-        {
-          "name": "Product Page",
-          "price": 2000
-        },
-        {
-          "name": "Shopping Cart Page",
-          "price": 1500,
-        },
-        {
-          "name": "Checkout Page",
-          "price": 1000, 
-        }
-      ]
+  "name": "Retail & Multi-Store App",
+  "pages": [
+    {
+      "name": "Layout Page",
+      "price": 1500,
+      "category": "system"
     },
+    {
+      "name": "Home Page",
+      "price": 1000,
+      "category": "system"
+    },
+    {
+      "name": "Database Page",
+      "price": 1100,
+      "category": "system"
+    },
+    {
+      "name": "404 Page",
+      "price": 200,
+      "category": "authentication"
+    },
+    {
+      "name": "serverDown Page",
+      "price": 200,
+      "category": "authentication"
+    },
+    {
+      "name": "notAuthorized Page",
+      "price": 200,
+      "category": "authentication"
+    },
+
+    /* AUTHENTICATION */
+
+    {
+      "name": "Register Page",
+      "price": 500,
+      "category": "authentication"
+    },
+    {
+      "name": "Email Auth Page",
+      "price": 500,
+      "category": "authentication"
+    },
+    {
+      "name": "Two Factor Auth Page",
+      "price": 500,
+      "category": "authentication"
+    },
+    {
+      "name": "Login Page",
+      "price": 500,
+      "category": "authentication"
+    },
+    {
+      "name": "Logout Page",
+      "price": 500,
+      "category": "authentication"
+    },
+
+    /* PROFILES */
+
+    {
+      "name": "Customer Profile Page",
+      "price": 500,
+      "category": "profile"
+    },
+    {
+      "name": "Store Owner Profile Page",
+      "price": 500,
+      "category": "profile"
+    },
+    {
+      "name": "Store Manager Profile Page",
+      "price": 500,
+      "category": "profile"
+    },
+    {
+      "name": "Courier Profile Page",
+      "price": 500,
+      "category": "profile"
+    },
+    {
+      "name": "Admin Profile Page",
+      "price": 500,
+      "category": "profile"
+    },
+
+    /* DASHBOARDS */
+
+    {
+      "name": "Customer Dashboard Page",
+      "price": 500,
+      "category": "analytics"
+    },
+    {
+      "name": "Store Owner Dashboard Page",
+      "price": 500,
+      "category": "analytics"
+    },
+    {
+      "name": "Store Manager Dashboard Page",
+      "price": 500,
+      "category": "analytics"
+    },
+    {
+      "name": "Courier Dashboard Page",
+      "price": 500,
+      "category": "analytics"
+    },
+    {
+      "name": "Admin Dashboard Page",
+      "price": 500,
+      "category": "analytics"
+    },
+
+    /* STORES & PRODUCTS */
+
+    {
+      "name": "Store Listing Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Store Details Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Product Listing Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Product Details Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Service Listing Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Service Details Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Add / Edit Store Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Add / Edit Product Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Add / Edit Service Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+
+    /* ORDERS & PAYMENTS */
+
+    {
+      "name": "Cart Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Checkout Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Payment Status Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Payment History Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Payment Details Page",
+      "price": 500,
+      "category": "ecommerce"
+    },
+    {
+      "name": "Order Tracking Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Courier Assignment Page",
+      "price": 500,
+      "category": "additional features"
+    },
+
+    /* COMMUNICATION */
+
+    {
+      "name": "Store / Customer Chats Page",
+      "price": 500,
+      "category": "communication features"
+    },
+    {
+      "name": "Chat Messages Page",
+      "price": 500,
+      "category": "communication features"
+    },
+    {
+      "name": "Courier / Customer Call Page",
+      "price": 1500,
+      "category": "communication features"
+    },
+
+    /* REVIEWS & RATINGS */
+
+    {
+      "name": "Product & Service Reviews Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Store Reviews Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Report Issue Page",
+      "price": 500,
+      "category": "additional features"
+    },
+
+    /* ADDITIONAL FEATURES */
+
+    {
+      "name": "Map Locations & Nearby Stores Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Notifications",
+      "price": 500,
+      "category": "native features"
+    },
+    {
+      "name": "Persistance Storage",
+      "price": 500,
+      "category": "native features"
+    },
+    {
+      "name": "Delivery Schedule Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Promotions & Discounts Page",
+      "price": 500,
+      "category": "additional features"
+    },
+    {
+      "name": "Favorites / Wishlist Page",
+      "price": 500,
+      "category": "additional features"
+    }
+  ]
+},
 	
     {
       "name": "Salon & Accessory App",
@@ -2882,39 +3139,827 @@ export const templates = [
       ]
     },
     {
-      "name": "Clinic App",
-      "pages": [
-        {
-          "name": "Home Page",
-          "price": 1000,
-        },
-        {
-          "name": "About Page",
-          "price": 500,
-        },
-		        {
-          "name": "Contact Page",
-          "price": 500,
-        }
-      ]
-    },
+		"name": "Clinic App",
+		"pages": [
+			{
+			"name": "Layout Page",
+			"price": 1500,
+			"category": "system"
+			},
+			{
+			"name": "Home Page",
+			"price": 1000,
+			"category": "system"
+			},
+			{
+			"name": "Database Page",
+			"price": 1100,
+			"category": "system"
+			},
+			{
+			"name": "404 Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "serverDown Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "notAuthorized Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "Register Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Email Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Two Factor Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Login Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Logout Page",
+			"price": 500,
+			"category": "authentication"
+			},
+
+			/* PROFILES */
+
+			{
+			"name": "Patient Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Doctor Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Nurse Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Pharmacist Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Admin Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+
+			/* DASHBOARDS */
+
+			{
+			"name": "Patient Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Doctor Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Nurse Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Pharmacist Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Admin Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+
+			/* APPOINTMENTS */
+
+			{
+			"name": "Book Appointment Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Appointment Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Reschedule Appointment Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Cancel Appointment Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Doctor Availability Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* PAYMENTS */
+
+			{
+			"name": "Consultation Checkout Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Status Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment History Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* MEDICATION */
+
+			{
+			"name": "Prescriptions Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Medication Collection Schedule Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Medication Reminder Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Refill Request Page",
+			"price": 500,
+			"category": "additional features"
+			},
+
+			/* COMMUNICATION */
+
+			{
+			"name": "Doctor Chats Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Chat Messages Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Doctor Video Session Page",
+			"price": 2200,
+			"category": "communication features"
+			},
+			{
+			"name": "Voice Call Page",
+			"price": 1500,
+			"category": "communication features"
+			},
+
+			/* HEALTH RECORDS */
+
+			{
+			"name": "Medical Records Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Lab Results Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Symptoms Tracker Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Progress Tracking Page",
+			"price": 500,
+			"category": "additional features"
+			},
+
+			/* EXTRA */
+
+			{
+			"name": "Clinic Locations Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Emergency Contact Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Calendar Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Notifications",
+			"price": 500,
+			"category": "native features"
+			},
+			{
+			"name": "Persistance Storage",
+			"price": 500,
+			"category": "native features"
+			}
+		]
+	},
+	{
+		"name": "Logistics & Delivery App",
+		"pages": [
+			{
+			"name": "Layout Page",
+			"price": 1500,
+			"category": "system"
+			},
+			{
+			"name": "Home Page",
+			"price": 1000,
+			"category": "system"
+			},
+			{
+			"name": "Database Page",
+			"price": 1100,
+			"category": "system"
+			},
+			{
+			"name": "404 Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "serverDown Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "notAuthorized Page",
+			"price": 200,
+			"category": "authentication"
+			},
+
+			/* AUTHENTICATION */
+
+			{
+			"name": "Register Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Email Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Two Factor Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Login Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Logout Page",
+			"price": 500,
+			"category": "authentication"
+			},
+
+			/* PROFILES */
+
+			{
+			"name": "Customer Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Driver Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Fleet Owner Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Admin Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+
+			/* DASHBOARDS */
+
+			{
+			"name": "Customer Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Driver Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Fleet Owner Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Admin Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+
+			/* DELIVERY REQUEST FLOW */
+
+			{
+			"name": "Request Delivery Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Pickup & Dropoff Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Vehicle Type Selection Page (Van, Truck, Flatbed)",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Load Description Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Price Estimate Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Delivery Confirmation Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* DRIVER MATCHING & TRACKING */
+
+			{
+			"name": "Driver Matching Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Live Tracking Page",
+			"price": 1500,
+			"category": "additional features"
+			},
+			{
+			"name": "Trip Details Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Proof of Delivery Page (Photo & Signature)",
+			"price": 500,
+			"category": "additional features"
+			},
+
+			/* PAYMENTS */
+
+			{
+			"name": "Checkout Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Status Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment History Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Driver Earnings Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Withdrawal Request Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* COMMUNICATION */
+
+			{
+			"name": "Driver Chats Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Chat Messages Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Driver Call Page",
+			"price": 1500,
+			"category": "communication features"
+			},
+
+			/* RATINGS & SAFETY */
+
+			{
+			"name": "Ratings & Reviews Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Report Issue Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Insurance & Claims Page",
+			"price": 500,
+			"category": "additional features"
+			},
+
+			/* DRIVER OPERATIONS */
+
+			{
+			"name": "Driver Availability Toggle Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Route Optimization Page",
+			"price": 1500,
+			"category": "additional features"
+			},
+			{
+			"name": "Delivery History Page",
+			"price": 500,
+			"category": "analytics"
+			},
+
+			/* ADDITIONAL */
+
+			{
+			"name": "Scheduled Delivery Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Bulk Moving Services Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Corporate Account Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Map Locations Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Notifications",
+			"price": 500,
+			"category": "native features"
+			},
+			{
+			"name": "Persistance Storage",
+			"price": 500,
+			"category": "native features"
+			},
+			{
+			"name": "Background Location Tracking",
+			"price": 1500,
+			"category": "native features"
+			}
+		]
+	},
     {
-      "name": "Accomodation App",
-      "pages": [
-        {
-          "name": "Home Page",
-          "price": 1000,
-        },
-        {
-          "name": "About Page",
-          "price": 500,
-        },
-		        {
-          "name": "Contact Page",
-          "price": 500,
-        }
-      ]
-    },
+		"name": "Accommodation Booking App",
+		"pages": [
+			{
+			"name": "Layout Page",
+			"price": 1500,
+			"category": "system"
+			},
+			{
+			"name": "Home Page",
+			"price": 1000,
+			"category": "system"
+			},
+			{
+			"name": "Database Page",
+			"price": 1100,
+			"category": "system"
+			},
+			{
+			"name": "404 Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "serverDown Page",
+			"price": 200,
+			"category": "authentication"
+			},
+			{
+			"name": "notAuthorized Page",
+			"price": 200,
+			"category": "authentication"
+			},
+
+			/* AUTHENTICATION */
+
+			{
+			"name": "Register Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Email Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Two Factor Auth Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Login Page",
+			"price": 500,
+			"category": "authentication"
+			},
+			{
+			"name": "Logout Page",
+			"price": 500,
+			"category": "authentication"
+			},
+
+			/* PROFILES */
+
+			{
+			"name": "Customer Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Property Owner Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Hotel Manager Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+			{
+			"name": "Admin Profile Page",
+			"price": 500,
+			"category": "profile"
+			},
+
+			/* DASHBOARDS */
+
+			{
+			"name": "Customer Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Property Owner Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Hotel Manager Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Admin Dashboard Page",
+			"price": 500,
+			"category": "analytics"
+			},
+
+			/* PROPERTY LISTINGS */
+
+			{
+			"name": "Browse Properties Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Property Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Property Photos & Gallery Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Search & Filter Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Featured Listings Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Add Property Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Edit Property Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* BOOKINGS */
+
+			{
+			"name": "Book Property Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Booking Confirmation Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Booking History Page",
+			"price": 500,
+			"category": "analytics"
+			},
+			{
+			"name": "Booking Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Cancel / Modify Booking Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* PAYMENTS */
+
+			{
+			"name": "Checkout Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Status Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment History Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+			{
+			"name": "Payment Details Page",
+			"price": 500,
+			"category": "ecommerce"
+			},
+
+			/* COMMUNICATION */
+
+			{
+			"name": "Owner / Customer Chats Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Chat Messages Page",
+			"price": 500,
+			"category": "communication features"
+			},
+			{
+			"name": "Owner / Customer Video Call Page",
+			"price": 2200,
+			"category": "communication features"
+			},
+
+			/* REVIEWS & RATINGS */
+
+			{
+			"name": "Property Reviews & Ratings Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Report Issue / Complaint Page",
+			"price": 500,
+			"category": "additional features"
+			},
+
+			/* ADDITIONAL FEATURES */
+
+			{
+			"name": "Property Map & Location Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Favorites / Wishlist Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Notifications",
+			"price": 500,
+			"category": "native features"
+			},
+			{
+			"name": "Persistance Storage",
+			"price": 500,
+			"category": "native features"
+			},
+			{
+			"name": "Search History & Recommendations Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Promotions / Discounts Page",
+			"price": 500,
+			"category": "additional features"
+			},
+			{
+			"name": "Calendar / Availability Page",
+			"price": 500,
+			"category": "additional features"
+			}
+		]
+		},
+
   ];
 
   // Price Adjustments
