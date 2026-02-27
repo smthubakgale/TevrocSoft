@@ -186,6 +186,9 @@ onReady('#get-quote', 'click', async (e) => {
 
     // --- Extract totals ---
     const quoteAmount = parseFloat(document.getElementById('quote-amount-value').innerText.replace(/,/g, '')) || 0;
+    const pagesAmount = parseFloat(document.getElementById('page-prices').innerText.replace(/,/g, '')) || 0;
+    const featuresAmount = parseFloat(document.getElementById('feature-prices').innerText.replace(/,/g, '')) || 0;
+    
     const pagePrices = parseFloat(document.getElementById('page-prices').innerText.replace(/,/g, '')) || 0;
     const featurePrices = parseFloat(document.getElementById('feature-prices').innerText.replace(/,/g, '')) || 0;
     const discountRate = parseFloat(document.getElementById('discount').innerText) || 0;
@@ -261,6 +264,234 @@ onReady('#get-quote', 'click', async (e) => {
 
     // Generate unique invoice ID
     const invoiceId = `INV-${Date.now()}-${Math.floor(1000 + Math.random() * 9000)}`;
+    // Project Feasibility
+    
+    const templateGroupsContainer = document.querySelector('.template-groups');
+    const sPages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => { 
+        let page = templatePage.getAttribute("name");
+        let days = parseInt(templatePage.getAttribute("days")|| '2')||2;
+        let price = templatePage.value;
+
+		return {page , days , price};
+	});
+
+    const featuresContainer = document.getElementById('features-container');
+    const sFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templateFeature => 
+     {
+        let feature = templateFeature.getAttribute("name");
+        let days = parseInt(templateFeature.getAttribute("days") || '2')||2;
+        let price = templateFeature.value;
+
+		return {feature , days , price};
+     });
+	
+
+    let pre ;
+    let feas = [];
+    let dbd = false;
+    rows.slice(1).forEach(row => { 
+        const cells = row.querySelectorAll('td');
+        if (cells.length === 3) 
+        {
+            let phase = cells[0].innerText.trim();
+
+            if(phase == "Planning"){
+               pre = new Date(cells[1].innerText);
+            }
+            if(phase == "Design" && sPages.length > 0){
+                let finish = new Date(cells[1].innerText);
+                let difference = finish.getTime() - pre.getTime();
+                let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+                let tdays = 0;
+                sPages.map(p =>{
+                    tdays += p.days;
+                });
+
+                let arr = []; 
+                sPages.map(p =>{
+                    let d = parseInt(((p.days/tdays)*days).toString().split(".")[0]);
+                    let r = d < p.days ? "Yes" : "No";
+                    let ed = r == "No" ? d - p.days : "";
+                    let df = d; 
+
+                    let start = new Date(pre.toString()); 
+                    let pre2 = new Date(pre.toString());  
+                    let end = new Date(pre2.setDate(pre2.getDate() + df)); 
+
+                    function formatDate(date) {
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const day = String(date.getDate()).padStart(2, '0');
+                        return `${year}-${month}-${day}`;
+                    }
+
+                    if(end > finish){
+                        r = "Yes";
+                        let difference = finish.getTime() - end.getTime();
+                        ed = Math.floor(difference / (1000 * 60 * 60 * 24)); 
+                    }
+
+                    arr.push({ 
+                        item : p.page , 
+                        start: formatDate(start) ,
+                        end: formatDate(end) , 
+                        duration: d ,
+                        risk : r ,
+                        extradays: ed 
+                    });
+
+                    pre = end;
+                });
+
+                feas.push({
+                    phase : phase ,
+                    rowspan: arr.length ,
+                    items: arr
+                })
+
+            }
+            if(phase == "Design" && sPages.length == 0){
+                pre = new Date(cells[1].innerText);
+            }
+
+            
+            if(phase == "Implementation" && (sPages.length > 0 || sFeatures.lenth > 0)){
+                
+                let finish = new Date(cells[1].innerText);
+                let difference = finish.getTime() - pre.getTime();
+                let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+                let arr = []; 
+
+                if(!dbd){ 
+                    let r = days < 3 ? "Yes" : "No"; 
+                    let ed = 0;
+
+                    let start = new Date(pre.toString()); 
+                    let pre2 = new Date(pre.toString());  
+                    let end = new Date(pre2.setDate(pre2.getDate() + 3)); 
+
+                    function formatDate(date) {
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const day = String(date.getDate()).padStart(2, '0');
+                        return `${year}-${month}-${day}`;
+                    }
+
+                    if(end > finish){
+                        r = "Yes"; 
+                        let difference = finish.getTime() - end.getTime();
+                        ed = Math.floor(difference / (1000 * 60 * 60 * 24)); 
+                    }
+
+                    arr.push({ 
+                        item : "Database Design" , 
+                        start: formatDate(start) ,
+                        end: formatDate(end) , 
+                        duration: 3 ,
+                        risk : r ,
+                        extradays: ed 
+                    });
+
+                    pre = end;
+                }
+
+                difference = finish.getTime() - pre.getTime();
+                days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+                let tdays = 0;
+                sPages.map(p =>{
+                    tdays += p.days;
+                });
+
+                let fdays = 0;
+                sFeatures.map(p =>{
+                    fdays += p.days;
+                });
+
+                sPages.map(p =>{
+                    let d = parseInt(((p.days/(tdays + fdays + 3))*days).toString().split(".")[0]);
+                    let r = d < p.days ? "Yes" : "No";
+                    let ed = r == "No" ? d - p.days : "";
+                    let df = d; 
+
+                    let start = new Date(pre.toString()); 
+                    let pre2 = new Date(pre.toString());  
+                    let end = new Date(pre2.setDate(pre2.getDate() + df)); 
+
+                    function formatDate(date) {
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const day = String(date.getDate()).padStart(2, '0');
+                        return `${year}-${month}-${day}`;
+                    }
+
+                    if(end > finish){
+                        r = "Yes"; 
+                        let difference = finish.getTime() - end.getTime();
+                        ed = Math.floor(difference / (1000 * 60 * 60 * 24)); 
+                    }
+
+                    arr.push({ 
+                        item : p.page , 
+                        start: formatDate(start) ,
+                        end: formatDate(end) , 
+                        duration: d ,
+                        risk : r ,
+                        extradays: ed 
+                    });
+
+                    pre = end;
+                });
+
+                sFeatures.map(f =>{
+                    let d = parseInt(((f.days/(tdays + fdays + 3))*days).toString().split(".")[0]);
+                    let r = d < f.days ? "Yes" : "No";
+                    let ed = r == "No" ? d - f.days : "";
+                    let df = d; 
+
+                    let start = new Date(pre.toString()); 
+                    let pre2 = new Date(pre.toString());   
+                    let end = new Date(pre2.setDate(pre2.getDate() + df));
+
+                    function formatDate(date) {
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                        const day = String(date.getDate()).padStart(2, '0');
+                        return `${year}-${month}-${day}`;
+                    } 
+
+                    if(end > finish){
+                        r = "Yes"; 
+                        let difference = finish.getTime() - end.getTime();
+                        ed = Math.floor(difference / (1000 * 60 * 60 * 24)); 
+                    }
+
+                    arr.push({ 
+                        item : f.feature , 
+                        start: formatDate(start) ,
+                        end: formatDate(end) , 
+                        duration: d ,
+                        risk : r ,
+                        extradays: ed 
+                    });
+
+                    pre = end;
+                });
+
+                feas.push({
+                    phase : phase ,
+                    rowspan: arr.length ,
+                    items: arr
+                })
+
+            }
+
+        } 
+    });
+
+    console.log(feas);
     // --- Construct HTML ---
     const html = `
     <html>
@@ -307,18 +538,39 @@ onReady('#get-quote', 'click', async (e) => {
             </div>
         </div>
 
+        <p><strong>Project Complexity:</strong> <span style="color:#405189; font-weight:600"> ${comp.toUpperCase()} </span></p>
         <p><strong>Invoice For:</strong> ${type} – ${plan}</p>
         <table>
             <thead>
-                <tr><th>Job Description</th><th>Qty</th><th>Cost (R)</th><th>Discount (R)</th><th>Total (R)</th></tr>
+                <tr>
+                    <th>Job Description</th>
+                    <th>Qty</th>
+                    <th>Cost (R)</th>
+                    <th>Discount (R)</th><th>Total (R)</th></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>${type} – ${plan}</td>
-                    <td>1</td>
+                    <td> ${type} – ${plan} </td>
+                    <td style="text-align:center"> x1 </td>
                     <td>${quoteAmount.toFixed(2)}</td>
-                    <td>${discountAmount.toFixed(2)}</td>
-                    <td>${totalAmount.toFixed(2)}</td>
+                    <td rowspan="3" style="text-align:center"></td>
+                    <td rowspan="3" style="text-align:center"></td>
+                </tr>
+                <tr>
+                    <td> App Features </td> 
+                    <td style="text-align:center"> x${sPages.length} </td>
+                    <td>${pagesAmount.toFixed(2)}</td> 
+                </tr>
+                <tr>
+                    <td> Platform Features </td> 
+                    <td style="text-align:center"> x${sFeatures.length} </td>
+                    <td>${featuresAmount.toFixed(2)}</td> 
+                </tr>
+                <tr>
+                    <td colspan="2" style="font-weight:600; background:#F0F0F0;"> Total </td>
+                    <td> ${(quoteAmount + pagesAmount + featuresAmount).toFixed(2)}</td>
+                    <td> ${discountAmount.toFixed(2)} </td>
+                    <td style="font-weight:600"> ${totalAmount.toFixed(2)} </td>
                 </tr>
             </tbody>
         </table>
@@ -376,6 +628,66 @@ onReady('#get-quote', 'click', async (e) => {
             Please use the invoice number as payment reference.
         </p>
 
+        
+        <h3 style=""> Project Feasibility </h3>
+
+        
+        <table>
+            <thead>
+                <tr>
+                    <th> Phase </th>
+                    <th> Item </th>
+                    <th> Start </th>
+                    <th> End </th>
+                    <th> Duration </th>
+                    <th> Risk </th> 
+                    <th> Extra Days </th>
+                </tr>
+            </thead>
+            <tbody>
+               ${feas.map(f =>
+                {
+                    if(f.rowspan == 0)
+                    {
+                        return `
+                 <tr> 
+                      <td rowspan="${f.rowspan}">  ${f.phase} </td> 
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                 </tr>`;
+                    } 
+                    else if(f.rowspan > 0)
+                    {
+                        return `
+                 <tr> 
+                      <td rowspan="${f.rowspan}">  ${f.phase} </td>
+                      <td> ${f.items[0].item} </td>
+                      <td> ${f.items[0].start.toString()} </td>
+                      <td> ${f.items[0].end.toString()} </td>
+                      <td> ${f.items[0].duration} </td>
+                      <td ${f.items[0].risk == "Yes" ? `style="color:white; background:#F5625D"` : 'style="color:#405189"'}> ${f.items[0].risk} </td>
+                      <td ${f.items[0].risk == "Yes" ? `style="color:#F5625D"` : ''}> ${f.items[0].extradays} </td>
+                 </tr>
+                 ${ f.rowspan > 1 ? 
+                    `
+                     ${f.items.slice(1).map(item => `
+                 <tr>
+                      <td> ${item.item} </td>
+                      <td> ${item.start.toString()} </td>
+                      <td> ${item.end.toString()} </td>
+                      <td> ${item.duration} </td>
+                      <td ${item.risk == "Yes" ? `style="color:white; background:#F5625D"` : 'style="color:#405189"'}> ${item.risk} </td>
+                      <td ${item.risk == "Yes" ? `style="color:#F5625D"` : ''}> ${item.extradays} </td>
+                 </tr>
+                     `).join('')}
+                    ` 
+                 : ''}
+                 `;
+                    }  
+                }).join('')}
+            </tbody>
     </body>
     </html>`;
 

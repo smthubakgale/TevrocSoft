@@ -1004,3 +1004,7 @@ section li{
         width:95vw
     }
   }
+
+  .mst li:nth-child(2n) label{
+    background-color: lightgrey;
+  }

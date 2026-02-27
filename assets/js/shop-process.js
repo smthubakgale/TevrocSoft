@@ -1851,7 +1851,7 @@ const featuresHtml = firstProjectType.features.map(feature => `
 	<div class="form-group">
 	<div class="checkbox">
 		<label>
-		<input onchange="updateQuoteResult()" type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+		<input onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
 		</label>
 	</div>
 	</div>
@@ -1866,10 +1866,13 @@ const templateGroupsHtml = templates.map(template => `
 <div class="template-group-header">
 	<h4> ${template.name} <i class="fas fa-caret-down"></i></h4>
 </div>
+${  
+     [...new Set(template.pages.map(p => p.category))].length == 0 ?
+`
 <ul class="template-group-content" style="display: none;">
 ${template.pages.map(page => `
 <li class="pst">
-	<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" name="${page.name}" value="${page.price}">
+	<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${feature.days || 2}" name="${page.name}" value="${page.price}">
 	<label for="template-contact"> ${page.name} - R${page.price} </label>
 	${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
 	${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
@@ -1881,6 +1884,40 @@ ${template.pages.map(page => `
 </li>
 `).join('')}
 </ul>
+` :
+
+`
+<ul class="template-group-content" style="display: none;">
+${
+     [...new Set(template.pages.map(p => p.category))].map(categ => 
+`
+  <li style="display:block;">
+    <label style="color:#2F8DED; font-weight:600;"> ${ (categ || "Other").split("-").map(c => c.substring(0 ,1).toUpperCase() + c.slice(1)).join(" ")} </label>
+	<ul class="mst">
+	${template.pages.filter(page => page.category == categ).map(page => `
+		<li class="pst">
+			<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${page.days || 2}" name="${page.name}" value="${page.price}">
+			<label for="template-contact" style="display:flex;"> 
+			  <div> ${page.name} </div><div style="flex:1; text-align:right;"> R${page.price} </div>
+			</label>
+			${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
+			${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
+			${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
+			${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
+			${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
+			${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
+			${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
+		</li>
+	`).join('')}
+	</ul>
+ </li>
+`
+	 ).join('') 
+	}
+	
+</ul>`	
+
+ }
 `).join('');
 
 
@@ -2003,7 +2040,7 @@ projectTypeSelect.addEventListener('change', (event) => {
 		<div class="form-group">
 		<div class="checkbox">
 			<label>
-			<input  onchange="updateQuoteResult()" type="checkbox" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+			<input  onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
 			</label>
 		</div>
 		</div>
@@ -2047,7 +2084,7 @@ document.querySelectorAll('.preview-button').forEach(button => {
 	};
 }
 
-function updateQuoteResult(){
+window.updateQuoteResult = function(){
 	
 	// Time  
 	const startDate = new Date(document.getElementById('start-date').value);
@@ -2056,7 +2093,11 @@ function updateQuoteResult(){
 	const estimatedDays = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24)); 
 	// Amount
 	const selectedProjectType = projectTypes.find(projectType => projectType.id == projectTypeSelect.value);
-	const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => templatePage.value);
+	const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => { 
+		console.log(templatePage);
+
+		return templatePage.value;
+	});
 	const selectedFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(feature => feature.value);
 	const selectedPlan = planSelect.value;
 	

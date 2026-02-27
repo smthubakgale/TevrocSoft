@@ -2299,13 +2299,69 @@ export const projectTypes = [
       { name: "Enterprise", price: 9000 },
       { name: "Premium", price: 14000 }
     ]
+  },
+  {
+    id: 5,
+    name: "Server Development",
+    type: "server",
+    description: "APIs for web, mobile, and desktop integrations",
+    features: [
+      { id: 13, name: "Express API", price: 3000 },
+      { id: 14, name: "Electron Desktop", price: 3500 },
+      { id: 15, name: "Cloudflared Tunneling", price: 2000 },
+      { id: 16, name: "Port Fowarding Protocols", price: 2000 },
+      { id: 17, name: "Database Design", price: 2000 },
+      { id: 18, name: "Documentation Automation", price: 2000 },
+      { id: 19, name: "Real-Time Data Transmission", price: 2000 }, 
+      { id: 20, name: "Forms.JS Automation", price: 2000 },
+      { id: 21, name: "WebRTC Protocols", price: 2000 },
+      { id: 22, name: "Email Protocols", price: 2000 },
+    ],
+    plans: [
+      { name: "Standard", price: 5000 },
+      { name: "Enterprise", price: 9000 },
+      { name: "Premium", price: 14000 }
+    ]
+  },
+  {
+    id: 6,
+    name: "Flutter Development",
+    type: "crossplatform",
+    description: "web, mobile, and desktop crossplatform development",
+    features: [
+      { id: 23, name: "Android", price: 3000 },
+      { id: 24, name: "iOS", price: 3500 },
+      { id: 25, name: "Windows", price: 2000 },
+      { id: 26, name: "macOS", price: 2000 },
+      { id: 27, name: "Web", price: 2000 },
+    ],
+    plans: [
+      { name: "Standard", price: 5000 },
+      { name: "Enterprise", price: 9000 },
+      { name: "Premium", price: 14000 }
+    ]
+  },
+  {
+    id: 7,
+    name: "Xamarian Development",
+    type: "crossplatform",
+    description: "crossplatform app development",
+    features: [
+      { id: 28, name: "Android", price: 6000 },
+      { id: 29, name: "iOS", price: 7000 },
+    ],
+    plans: [
+      { name: "Standard", price: 5000 },
+      { name: "Enterprise", price: 9000 },
+      { name: "Premium", price: 14000 }
+    ]
   }
 ];
 
 
 export const templates = [
     {
-	"name" : "Layout Designs" ,
+	"name" : "HTML5 UI Architectures" ,
 	"pages" : [
 	   {
 		"name" : "UX1" ,
@@ -2345,65 +2401,33 @@ export const templates = [
 	
     },
     {
-      "name": "Basic Website Template",
-      "pages": [
-        {
-          "name": "Home Page",
-          "price": 1000,
-          "link": "https://example.com/home-page-template"
-        },
-        {
-          "name": "About Page",
-          "price": 500,
-          "link": "https://example.com/about-page-template"
-        },
-		        {
-          "name": "Contact Page",
-          "price": 500,
-          "link": "https://example.com/contact-page-template"
-        }
-      ]
-    },
-    {
-        "name" : "Retail Business Template" ,
+        "name" : "Retail App" ,
 	    "pages" : [
+		// system
 	    {
 		   "category" : "core" ,
 	       "name" : "Home" ,
-		   "price" : 800 ,
-		   "link" : "https://www.wayfair.com/" ,
-		   "external" : true, 
-		   "options" : [
-		     {
-				 "name" : "" ,
-				 "link" : ""
-			 }
-		   ]
+		   "price" : 800  
 	    } , 
 	    {
 		   "category" : "core" ,
 		   "name" : "About Us" ,
-		   "price" : 500 ,
-		   "link" : "https://www.aboutwayfair.com/who-we-are"
+		   "price" : 500  
 	    } ,
 	    {
 		   "category" : "core" ,
 		   "name" : "Contact Us" ,
-		   "price" : 300 ,
-		   "link" : "https://www.walmart.com/help" ,
-		   "external" : true
+		   "price" : 300  
 	   },
 	   {
 		   "category" : "core" ,
 		   "name" : "Terms and Conditions" ,
-		   "price" : 150 ,
-		   "link" : "https://www.asos.com/terms-and-conditions/"
+		   "price" : 150  
 	   } ,
 	   {
 		   "category" : "core" ,
 		   "name" : "Privacy Policy" ,
-		   "price" : 150 ,
-		   "link" : "https://www.ikea.com/us/en/customer-service/privacy-policy/"
+		   "price" : 150  
 	   } ,
 	   {
 		   "category" : "core" ,
@@ -2411,56 +2435,486 @@ export const templates = [
 		   "price" : 120 ,
 		   "link" : ""
 	   } ,
+	   // authentication 
 	   {
 		   "category" : "product-related" ,
 		   "name" : "Products" ,
-		   "price" : 1200 ,
-		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
-		   "external" : true 
+		   "price" : 1200  
 	   },
 	   {
 		   "category" : "product-related" ,
 		   "name" : "Product Details" ,
-		   "price" : 800 ,
-		   "link" : "https://www.wayfair.com/furniture/pdp/ivy-bronx-nathasa-2-piece-no-assembly-required-upholstery-sofa-free-combination-sofa-w111681030.html?piid=1216171221&auctionId=cdf393d6-4628-40ff-8cd6-381543567868&adTypeId=1" ,
-		   "external" : true 
+		   "price" : 800  
 	   },
 	   {
 		   "category" : "product-related" ,
 		   "name" : "Categories" ,
-		   "price" : 1200 ,
-		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
-		   "external" : true 
+		   "price" : 1200   
 	   },
 	   {
 		   "category" : "product-related" ,
 		   "name" : "Sub-Categories" ,
-		   "price" : 1200 ,
-		   "link" : "https://www.wayfair.com/furniture/cat/furniture-c45974.html" ,
-		   "external" : true 
+		   "price" : 1200  
 	   }
 	] 
     },
     {
-      "name": "E-commerce Website Template",
+      "name": "Restaurant App",
       "pages": [
         {
           "name": "Product Page",
-          "price": 2000,
-          "link": "https://example.com/product-page-template"
+          "price": 2000
         },
         {
           "name": "Shopping Cart Page",
           "price": 1500,
-          "link": "https://example.com/shopping-cart-page-template"
         },
         {
           "name": "Checkout Page",
-          "price": 1000,
-          "link": "https://example.com/checkout-page-template"
+          "price": 1000, 
         }
       ]
-    }
+    },
+	
+    {
+      "name": "Salon & Accessory App",
+      "pages": [
+        {
+          "name": "Layout Page",
+          "price": 1500,
+		  "category": "system"
+        },
+        {
+          "name": "Home Page",
+          "price": 1000,
+		  "category": "system"
+        },
+        {
+          "name": "Database Page",
+          "price": 1100,
+		  "category": "system"
+        },
+        {
+          "name": "404 Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+        {
+          "name": "serverDown Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+        {
+          "name": "notAuthorized Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Register Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Email Auth Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Two Factor Auth Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Login Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Logout Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		{
+          "name": "Kid Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Parent Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Adult Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Shop Owner Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "App Manager Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Kid Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Parent Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Adult Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Shop Owner Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "App Manager Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Shop Listing Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Shop Details Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Shop Services Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Services Cart Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Services Checkout Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment Status Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment History Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment Details Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Shop Owner Chats Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Chat Messages Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Calendar Page",
+          "price": 500,
+		  "category": "additional features"
+        },
+		{
+          "name": "Map Locations Page",
+          "price": 500,
+		  "category": "additional features"
+        },
+		{
+          "name": "Notifications",
+          "price": 500,
+		  "category": "native features"
+        },
+		{
+          "name": "Persistance Storage",
+          "price": 500,
+		  "category": "native features"
+        }
+      ]
+    },
+    {
+      "name": "Health & Fitness App",
+      "pages": [
+        {
+          "name": "Layout Page",
+          "price": 1500,
+		  "category": "system"
+        },
+        {
+          "name": "Home Page",
+          "price": 1000,
+		  "category": "system"
+        },
+        {
+          "name": "Database Page",
+          "price": 1100,
+		  "category": "system"
+        },
+        {
+          "name": "404 Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+        {
+          "name": "serverDown Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+        {
+          "name": "notAuthorized Page",
+          "price": 200,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Register Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Email Auth Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Two Factor Auth Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Login Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		        {
+          "name": "Logout Page",
+          "price": 500,
+		  "category": "authentication"
+        },
+		{
+          "name": "Kid Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Parent Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Customer Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Trainer Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Psychologist Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "HR Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Manager Profile Page",
+          "price": 500,
+		  "category": "profile"
+        },
+		{
+          "name": "Kid Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Parent Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Customer Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Trainer Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Psychologist Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "HR Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Manager Dashboard Page",
+          "price": 500,
+		  "category": "analytics"
+        },
+		{
+          "name": "Events Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Event Details Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Products Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Product Details Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Cart Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Checkout Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment Status Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment History Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Payment Details Page",
+          "price": 500,
+		  "category": "ecommerce"
+        },
+		{
+          "name": "Psychiatrist Chats Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Psychiatrist Video Session Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Trainer Video Session Page",
+          "price": 2200,
+		  "category": "communication features"
+        },
+		{
+          "name": "Customer Chats Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Chat Messages Page",
+          "price": 500,
+		  "category": "communication features"
+        },
+		{
+          "name": "Calendar Page",
+          "price": 500,
+		  "category": "additional features"
+        }, 
+		{
+          "name": "Notifications",
+          "price": 500,
+		  "category": "native features"
+        },
+		{
+          "name": "Persistance Storage",
+          "price": 500,
+		  "category": "native features"
+        },
+		{
+          "name": "Now Playing",
+          "price": 500,
+		  "category": "native features"
+        },
+		{
+          "name": "Fitness Data Extraction",
+          "price": 500,
+		  "category": "native features"
+        }
+      ]
+    },
+    {
+      "name": "Clinic App",
+      "pages": [
+        {
+          "name": "Home Page",
+          "price": 1000,
+        },
+        {
+          "name": "About Page",
+          "price": 500,
+        },
+		        {
+          "name": "Contact Page",
+          "price": 500,
+        }
+      ]
+    },
+    {
+      "name": "Accomodation App",
+      "pages": [
+        {
+          "name": "Home Page",
+          "price": 1000,
+        },
+        {
+          "name": "About Page",
+          "price": 500,
+        },
+		        {
+          "name": "Contact Page",
+          "price": 500,
+        }
+      ]
+    },
   ];
 
   // Price Adjustments
@@ -2553,17 +3007,17 @@ export const projectPhaseMultipliers = {
   standard: {
     initiation: 5,
     planning: 10,
-    design: 15,
-    implementation: 30,
-    testing: 15,
+    design: 25,
+    implementation: 40,
+    testing: 20,
     deployment: 5,
     maintenance: 'Ongoing'
   },
   enterprise: {
     initiation: 10,
     planning: 20,
-    design: 30,
-    implementation: 60,
+    design: 40,
+    implementation: 80,
     testing: 30,
     deployment: 10,
     maintenance: 'Ongoing'
@@ -2571,8 +3025,8 @@ export const projectPhaseMultipliers = {
   premium: {
     initiation: 15,
     planning: 30,
-    design: 45,
-    implementation: 90,
+    design: 65,
+    implementation: 130,
     testing: 45,
     deployment: 15,
     maintenance: 'Ongoing'
