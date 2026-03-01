@@ -2330,6 +2330,7 @@ export const projectTypes = [
     description: "web, mobile, and desktop crossplatform development",
     features: [
       { id: 23, name: "Android", price: 3000 },
+      { id: 23, name: "Kotlin", price: 3000 },
       { id: 24, name: "iOS", price: 3500 },
       { id: 25, name: "Windows", price: 2000 },
       { id: 26, name: "macOS", price: 2000 },
