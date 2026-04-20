@@ -7,6 +7,7 @@
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top:10px;
 }
 
 #main .template-group-header {
@@ -530,10 +531,133 @@
   display:inline-block; 
   margin-top:5px
 }
+.side-nav{
+  margin-top:20px;
+}
 </style>
 
+<style>
+  /* Outer container (flex justify-end mb-4) */
+.header-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+/* Inner auth container (flex items-center gap-3) */
+.auth-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Logout button */
+.logout-btn , .login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 8px 16px;
+  height: 36px;
+
+  background-color: #0ea5e9; /* sky-500 */
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover , .login-btn:hover {
+  background-color: #0284c7; /* sky-600 */
+}
+
+.logout-btn:disabled , .login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Avatar circle */
+.avatar {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  background-color: #e2e8f0; /* slate-200 */
+  border: 1px solid #cbd5e1; /* slate-300 */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Initials text */
+.initials {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569; /* slate-600 */
+}
+
+/* Username text */
+.username {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b; /* slate-800 */
+}
+
+.auth-out .logout-btn , .auth-out .avatar , .auth-out .username{
+  display:none; 
+}
+.auth-in .login-btn{
+  display:none;
+}
+  /* ---------- Popup ---------- */
+  #popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 6px;
+    display: none;
+    opacity: 0.9;
+    z-index: 1000;
+    min-width: 200px;
+  }
+
+  #popup.success { background-color: #4CAF50; }
+  #popup.error { background-color: #f44336; }
+
+</style>
+<div class="header-bar">
+  <h3 style="flex:1;"> Doc App </h3>
+  <div id="auth-badge"; class="auth-badge auth-out" > 
+    <button class="logout-btn" id="logout-btn">
+      Logout
+    </button>
+    <button class="login-btn" id="login-btn">
+      Login
+    </button>
+
+    <div id="avatar" class="avatar">
+      <span class="initials">MT</span>
+    </div>
+
+    <span id="username" class="username">Mabalane Thubakgale</span>
+
+  </div>
+</div>
 <div>
-    <h2> Doc App </h2>
+   
   <!-- Specifications and Requirements -->
 <div class="form-group">
 <label for="template-groups"> Specifications and Requirements :</label>
@@ -566,6 +690,76 @@
 
 </div>
 
+<!-- Popup -->
+<div id="popup"></div>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+  apiKey: "AIzaSyBomP4F2uKpaD0ZKFMYbAkgRsFXzoRT2lM",
+  authDomain: "tevrocsoft.firebaseapp.com",
+  projectId: "tevrocsoft",
+  databaseURL: "https://tevrocsoft-default-rtdb.firebaseio.com",
+  storageBucket: "tevrocsoft.firebasestorage.app",
+  messagingSenderId: "239731786950",
+  appId: "1:239731786950:web:e271a0b9e0782fed9d43c7"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+// UI
+const authView = document.getElementById("auth-badge");
+const loginBtn = document.getElementById("login-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const avatarView = document.getElementById("avatar");
+const usernameView = document.getElementById("username");
+
+const popup = document.getElementById("popup");
+
+let currentUser = null;
+
+// Popup function
+function showPopup(message, type="success") {
+  popup.innerText = message;
+  popup.className = type;
+  popup.style.display = "block";
+  setTimeout(() => popup.style.display = "none", 3000);
+}
+
+// Auth
+loginBtn.onclick = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(err => showPopup(err.message,"error"));
+};
+logoutBtn.onclick = () => auth.signOut();
+
+// Auth state with profile picture
+auth.onAuthStateChanged(user => {
+  if (user) {
+    currentUser = user;
+    authView.classList.remove("auth-out");
+    authView.classList.add("auth-in");
+
+    avatarView.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
+    usernameView.innerHTML = `${user.displayName}`;
+
+    
+  } else {
+    currentUser = null;
+    authView.classList.remove("auth-in");
+    authView.classList.add("auth-out");
+    
+    avatarView.innerText = "";
+    usernameView.innerText = "";
+  }
+});
+//
+
+</script>
 <script type="module" src="assets/js/shop-data.js"></script>
 <script type="module" src="assets/js/shop-process.js"></script>
