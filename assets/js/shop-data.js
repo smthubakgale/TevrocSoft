@@ -528,8 +528,8 @@ const schedule2 = [
                 label : "Programming Languages" ,
 		 type : "checkbox" ,
 		 name : "lang" ,  
-		 route: "spec_dev_lang_id" ,
-		 routeref: "spec_dev_lang_name" ,
+		 route: "spec_dev_langid" ,
+		 routeref: "spec_dev_langname" ,
 		 observe:"subform" ,
 		 pre : " Language ",  
 		 description : "Select required languages"

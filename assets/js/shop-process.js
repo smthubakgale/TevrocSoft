@@ -24,12 +24,13 @@ const paymentPlansList = document.getElementById('payment-plans');
 	});
 //
 class FormGenerator {
-constructor(form, importButton, fileInput, formConfig, fname , callback) {
+constructor(form, importButton, fileInput, formConfig, fname , callback = ()=>{} , actions = []) {
 	this.form = form;
 	this.importButton = importButton;
 	this.fileInput = fileInput;
 	this.formConfig = formConfig;
 	this.callback = callback;
+	this.actions = actions;
 
 	this.renderForm(fname);
 	this.addEventListeners();
@@ -726,7 +727,8 @@ createSetter(inputElement , setter  , field , parentName)
 	subtree: true
 	});
 }
-renderForm(fname = "myForm") {
+renderForm(fname = "myForm") { 
+
 	const fields = this.formConfig.fields;
 	const parentElement = this.form;
 	const parentName = fname;
@@ -1119,41 +1121,39 @@ renderForm(fname = "myForm") {
 	buttonContainer.classList.add("button-container");
 	parentElement.appendChild(buttonContainer);
 
+	//
 	const jsonButton = document.createElement("button");
 	jsonButton.textContent = "Convert to JSON";
 	jsonButton.classList.add("json-button");
 
 	buttonContainer.appendChild(jsonButton);
 
-	jsonButton.addEventListener("click", () => {
-	const formData = {};
-	const formElements = this.form.elements;
-
-	for (let i = 0; i < formElements.length; i++) {
-		const element = formElements[i];
-		const name = element.name;
-		const value = element.value;
-
-		if (name.includes("_")) {
-		const parentName = name.split("_")[0];
-		const childName = name.split("_")[1];
-
-		if (parentName === "myForm") {
-			formData[childName] = value;
-		} else {
-			if (!formData[parentName]) {
-			formData[parentName] = {};
-			}
-
-			formData[parentName][childName] = value;
-		}
-		} else {
-		formData[name] = value;
-		}
-	}
-
-	this.callback(formData);
+	jsonButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const formData = ts.buildFormData(this.form.elements);
+		
+		this.callback(formData);
 	});
+	//
+    this.actions.forEach((act)=> {
+		const actButton = document.createElement("button");
+		actButton.textContent = act.title;
+		actButton.classList.add("json-button");
+
+		buttonContainer.appendChild(jsonButton);
+
+		actButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			const formData = ts.buildFormData(this.form.elements)
+
+            if(act.callback && typeof(act.callback) == 'function'){
+                act.callback(formData);
+			}
+		    
+		});
+	})
+
+	//
 
 	const downloadButton = document.createElement("button");
 	downloadButton.textContent = "Download";
@@ -1161,224 +1161,231 @@ renderForm(fname = "myForm") {
 
 	buttonContainer.appendChild(downloadButton);
 
-	downloadButton.addEventListener("click", () => {
-	const formData = {};
-	const formElements = this.form.elements;
+	downloadButton.addEventListener("click", (e) => {
+		e.preventDefault();
+		const formData = ts.buildFormData(this.form.elements)
 
-	for (let i = 0; i < formElements.length; i++) {
-		const element = formElements[i];
-		const name = element.name;
-		const value = element.value;
-
-		if (name.includes("_")) {
-		const parentName = name.split("_")[0];
-		const childName = name.split("_")[1];
-
-		if (parentName === "myForm") {
-			formData[childName] = value;
-		} else {
-			if (!formData[parentName]) {
-			formData[parentName] = {};
-			}
-
-			formData[parentName][childName] = value;
-		}
-		} else {
-		formData[name] = value;
-		}
-	}
-
-	const json = JSON.stringify(formData, null, 2);
-	const blob = new Blob([json], { type: "application/json" });
-	const url = URL.createObjectURL(blob);
-	const a = document.createElement("a");
-	a.href = url;
-	a.download = "form_data.json";
-	a.click();
+		const json = JSON.stringify(formData, null, 2);
+		const blob = new Blob([json], { type: "application/json" });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = "form_data.json";
+		a.click();
 	});
 }
 
 renderSubForm(parentElement, fields, parentName) {
 	let subFormElement = document.createElement("div");
 	subFormElement.classList.add("subform"); 
-	var ts = this; 
+
+	const index = parentElement.querySelectorAll('.subform').length;
+	subFormElement.setAttribute("data-index", index);
+
+	var ts = this;
 
 	fields.forEach((field) => {
-	const label = document.createElement("label");
-	label.textContent = field.label;
-	label.htmlFor = `${parentName}_${field.name}`;
+		const label = document.createElement("label");
+		label.textContent = field.label;
+		label.htmlFor = `${parentName}_${field.name}`;
 
-	const description = this.createDescription(field);
-	
-	let inputElement;
+		const description = this.createDescription(field);
+		let inputElement;
 
-	switch (field.type) {
-		case "select":
-		inputElement = document.createElement("div");
-		let selectElement = document.createElement("select");
-		selectElement.name = `${parentName}_${field.name}`;
-		selectElement.required = field.required;
+		switch (field.type) {
 
-		this.createSelect(field , selectElement , false , inputElement);
-		inputElement.prepend(selectElement);
-			
-		if(field.setter){
-		ts.createSetter(inputElement , field.setter  , field , parentName); 
-		}
-		if(field.inheritor_name && field.inheritor_type){
-			ts.createSetter(inputElement , (subform , inputElement) =>{
-			ts.createInherits(subform , inputElement  , field , parentName);  
-			}); 
-		}
-		if(field.prev_name && field.prev_options){
-			ts.createSetter(inputElement , (subform , inputElement) =>{
-			ts.createPrevSecs(subform , inputElement  , field , parentName);  
-			}); 
-		}
-		break;
+			case "select":
+				inputElement = document.createElement("div");
+
+				let selectElement = document.createElement("select");
+				selectElement.name = `${parentName}_${field.name}`;
+				selectElement.required = field.required;
+
+				this.createSelect(field, selectElement, false, inputElement);
+				inputElement.prepend(selectElement);
+
+				queueMicrotask(() => {
+					if (field.setter) {
+						ts.createSetter(selectElement, field.setter, field, parentName);
+					}
+
+					if (field.inheritor_name && field.inheritor_type) {
+						ts.createInherits(parentElement, selectElement, field, parentName);
+					}
+
+					if (field.prev_name && field.prev_options) {
+						ts.createPrevSecs(parentElement, selectElement, field, parentName);
+					}
+				});
+				break;
+
 			case "datetime-local":
-			inputElement = document.createElement("input");
-			inputElement.type = "datetime-local";
-			inputElement.name = `${parentName}_${field.name}`;
-			inputElement.required = field.required;
-			
-		if(field.setter){ 
-		ts.createSetter(inputElement , field.setter  , field , parentName); 
-		}
-			break;
+				inputElement = document.createElement("input");
+				inputElement.type = "datetime-local";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+
+				queueMicrotask(() => {
+					if (field.setter) {
+						ts.createSetter(inputElement, field.setter, field, parentName);
+					}
+				});
+				break;
+
 			case "textarea":
-			inputElement = document.createElement("textarea"); 
-			inputElement.name = `${parentName}_${field.name}`;
-			inputElement.required = field.required; 
-			break;
+				inputElement = document.createElement("textarea");
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+				break;
+
 			case "file":
-			inputElement = document.createElement("input");
-			inputElement.type = "file";
-			inputElement.name = `${parentName}_${field.name}`;
-			inputElement.required = field.required;
-			break;
+				inputElement = document.createElement("input");
+				inputElement.type = "file";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+				break;
+
 			case "email":
-			inputElement = document.createElement("input");
-			inputElement.type = "email";
-			inputElement.name = `${parentName}_${field.name}`; 
-			inputElement.required = field.required;
-			break;
-		case "text":
-			inputElement = document.createElement("div");
-			
-			let textElement = document.createElement("input");
-			textElement.name = `${parentName}_${field.name}`;
-			textElement.type = "text";
-			textElement.required = field.required;
+				inputElement = document.createElement("input");
+				inputElement.type = "email";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+				break;
 
-		if(field.autocomplete && Array.isArray(field.suggestions))
-		{
-		ts.createAutoComplete(inputElement , textElement , field.suggestions)
-		}
-			
-		if(field.setter){
-		ts.createSetter(textElement , field.setter  , field , parentName); 
-		}
-		
-		if(field.inheritor_name && field.inheritor_type){ 
-			ts.createSetter(textElement , (subform , inputElement) =>{
-			ts.createInherits(subform , inputElement  , field , parentName);  
-			}); 
-		} 
+			case "text":
+				inputElement = document.createElement("div");
 
-		inputElement.prepend(textElement);
-		break; 
+				let textElement = document.createElement("input");
+				textElement.name = `${parentName}_${field.name}`;
+				textElement.type = "text";
+				textElement.required = field.required;
+
+				inputElement.prepend(textElement);
+
+				queueMicrotask(() => {
+					if (field.autocomplete && Array.isArray(field.suggestions)) {
+						ts.createAutoComplete(inputElement, textElement, field.suggestions);
+					}
+
+					if (field.setter) {
+						ts.createSetter(textElement, field.setter, field, parentName);
+					}
+
+					if (field.inheritor_name && field.inheritor_type) {
+						ts.createInherits(parentElement, textElement, field, parentName);
+					}
+				});
+				break;
+
 			case "number":
-			inputElement = document.createElement("input");
-			inputElement.type = "number";
-			inputElement.name = `${parentName}_${field.name}`; 
-			inputElement.required = field.required; 
-			inputElement.min = field.min; 
-			inputElement.max = field.max; 
-			inputElement.readOnly = field.readonly;
-			inputElement.setAttribute('autoincrement', field.autoincrement); 
-			inputElement.step = field.step; 
-			inputElement.value = 1; 
-			inputElement.setAttribute('value', 1); 
-		
-		if(field.readonly){ inputElement.style.outline = 'none'; }
-		if(field.readonly && field.autoincrement) { inputElement.value = field.start ? field.start : 1; }
-		
-		if(field.inheritor_name && field.inheritor_type){
-			ts.createSetter(parentElement , (subform , inputElement) =>{
-			ts.createInherits(subform , inputElement  , field , parentName);  
-			}); 
-		}	  
-			break;
-		case "checkbox":
-		inputElement = document.createElement("div");
-			ts.createCheckboxButtons(field, inputElement , parentName);  
-			break;
-		case "radio":
-		inputElement = document.createElement("div");
-		ts.createRadioButtons(field, inputElement , parentName);  
-		break;
+				inputElement = document.createElement("input");
+				inputElement.type = "number";
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
+				inputElement.min = field.min;
+				inputElement.max = field.max;
+				inputElement.readOnly = field.readonly;
+				inputElement.setAttribute('autoincrement', field.autoincrement);
+				inputElement.step = field.step;
+				inputElement.value = 1;
+				inputElement.setAttribute('value', 1);
+
+				if (field.readonly) inputElement.style.outline = 'none';
+				if (field.readonly && field.autoincrement) {
+					inputElement.value = field.start ? field.start : 1;
+				}
+
+				queueMicrotask(() => {
+					if (field.setter) {
+						ts.createSetter(inputElement, field.setter, field, parentName);
+					}
+
+					if (field.inheritor_name && field.inheritor_type) {
+						ts.createInherits(parentElement, inputElement, field, parentName);
+					}
+				});
+				break;
+
+			case "checkbox":
+				inputElement = document.createElement("div");
+				ts.createCheckboxButtons(field, inputElement, parentName);
+				break;
+
+			case "radio":
+				inputElement = document.createElement("div");
+				ts.createRadioButtons(field, inputElement, parentName);
+				break;
+
 			case "subform":
-			const fieldSet = document.createElement("fieldset");
-		const legend = document.createElement("legend");
-		legend.textContent = field.label;
-		fieldSet.appendChild(legend);
-			
-			fieldSet.style.border = "1px solid #ccc";
-			fieldSet.style.padding = "10px";
-			fieldSet.style.marginBottom = "20px";
+				const fieldSet = document.createElement("fieldset");
+				const legend = document.createElement("legend");
+				legend.textContent = field.label;
+				fieldSet.appendChild(legend);
 
-		let subFormElement;
-			if(field.multiple)
-		{  
-		// Create a new div
-		const viewNavDiv = document.createElement('div');
-		viewNavDiv.className = 'viewnav';
-		// Create a view button
-		const viewButton = document.createElement('button');
-		viewButton.textContent = 'View';
-		viewButton.className = 'view-button';
-		viewButton.style.display = "none";
-		// Create an add button    
-				const addButton = document.createElement("button");
-				addButton.type = "button";
-				addButton.textContent = "Add new " + (field.button ? field.button : field.label);
-				addButton.classList.add("add-button");
-		// Append the view and add buttons to the div
-		viewNavDiv.appendChild(viewButton);
-		viewNavDiv.appendChild(addButton);
-		//
-				fieldSet.appendChild(viewNavDiv);
-			
-			addButton.addEventListener("click", () => {
-		let subFormElement2 = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);  
-				subFormElement2.setAttribute("name" , `${parentName}_${field.name}`); 
-		ts.addButtonEvent(fieldSet, subFormElement2);
-			});
+				fieldSet.style.border = "1px solid #ccc";
+				fieldSet.style.padding = "10px";
+				fieldSet.style.marginBottom = "20px";
+
+				let subFormElementInner;
+
+				if (field.multiple) {
+					const viewNavDiv = document.createElement('div');
+					viewNavDiv.className = 'viewnav';
+
+					const viewButton = document.createElement('button');
+					viewButton.textContent = 'View';
+					viewButton.className = 'view-button';
+					viewButton.style.display = "none";
+
+					const addButton = document.createElement("button");
+					addButton.type = "button";
+					addButton.textContent = "Add new " + (field.button ? field.button : field.label);
+					addButton.classList.add("add-button");
+
+					viewNavDiv.appendChild(viewButton);
+					viewNavDiv.appendChild(addButton);
+					fieldSet.appendChild(viewNavDiv);
+
+					addButton.addEventListener("click", () => {
+						let subFormElement2 = this.renderSubForm(
+							fieldSet,
+							field.fields,
+							parentName + "_" + field.name
+						);
+
+						subFormElement2.setAttribute("name", `${parentName}_${field.name}`);
+						ts.addButtonEvent(fieldSet, subFormElement2);
+					});
+				}
+
+				if (field.empty != true) {
+					subFormElementInner = this.renderSubForm(
+						fieldSet,
+						field.fields,
+						parentName + "_" + field.name
+					);
+
+					subFormElementInner.setAttribute("name", `${parentName}_${field.name}`);
+					fieldSet.appendChild(subFormElementInner);
+				}
+
+				inputElement = document.createElement("div");
+				inputElement.appendChild(fieldSet);
+				break;
+
+			default:
+				inputElement = document.createElement("input");
+				inputElement.type = field.type;
+				inputElement.name = `${parentName}_${field.name}`;
+				inputElement.required = field.required;
 		}
-			
-			if(field.empty != true){
-		subFormElement = this.renderSubForm(fieldSet, field.fields, parentName + "_" + field.name);
-				subFormElement.setAttribute("name" , `${parentName}_${field.name}`); 
-				fieldSet.appendChild(subFormElement);   
-		}
-			
-			inputElement = document.createElement("div"); 
-		inputElement.appendChild(fieldSet);
-			break;
-		default:
-		inputElement = document.createElement("input");
-		inputElement.type = field.type;
-		inputElement.name = `${parentName}_${field.name}`;
-		inputElement.required = field.required;
-	}
 
-	const fieldSetElement = document.createElement("div");
-	fieldSetElement.appendChild(label);
-	fieldSetElement.appendChild(description);
-	fieldSetElement.appendChild(inputElement);
+		const fieldSetElement = document.createElement("div");
+		fieldSetElement.appendChild(label);
+		fieldSetElement.appendChild(description);
+		fieldSetElement.appendChild(inputElement);
 
-	subFormElement.appendChild(fieldSetElement);
+		subFormElement.appendChild(fieldSetElement);
 	});
 
 	return subFormElement;
@@ -1635,46 +1642,195 @@ addEventListeners() {
 }
 
 fillFormFields(data) {
+
+	console.log(data);
+
 	const formElements = this.form.elements;
 
-	for (let i = 0; i < formElements.length; i++) {
-	const element = formElements[i];
-	const name = element.name;
-	const value = data[name];
+	const resolveValue = (obj, path, field) => {
 
-	if (value) {
-		element.value = value;
-	}
+		let current = obj;
+
+		for (let i = 0; i < path.length; i++) {
+
+			if (current == null) return undefined;
+
+			current = current[path[i]];
+
+			// 🔥 HANDLE ARRAY
+			if (Array.isArray(current)) {
+
+				// collect values from all items
+				let results = [];
+
+				for (let j = 0; j < current.length; j++) {
+					let item = current[j];
+
+					if (item && field in item) {
+						results.push(item[field]);
+					}
+				}
+
+				return results.length ? results : undefined;
+			}
+		}
+
+		if (current == null) return undefined;
+
+		return current[field];
+	};
+
+	const setValue = (element, value) => {
+
+		if (!element) return;
+
+		try {
+
+			// =========================
+			// ARRAY HANDLING (SUBFORMS)
+			// =========================
+			if (Array.isArray(value)) {
+
+				let parentSubforms = [];
+				let subformContainer = element.closest("fieldset, .subform, form");
+
+				if (subformContainer) {
+					parentSubforms = subformContainer.querySelectorAll(
+						`.subform[name="${element.name.substring(0, element.name.lastIndexOf("_"))}"]`
+					);
+				}
+
+				// fallback if above fails
+				if (!parentSubforms.length) {
+					parentSubforms = document.querySelectorAll(
+						`.subform[name="${element.name.substring(0, element.name.lastIndexOf("_"))}"]`
+					);
+				}
+
+				let existingCount = parentSubforms.length;
+				let requiredCount = value.length;
+
+				let fieldSet = element.closest("fieldset");
+
+				// =========================
+				// CLONE MISSING SUBFORMS
+				// =========================
+				if (existingCount < requiredCount && parentSubforms[0]) {
+
+					let template = parentSubforms[0];
+
+					for (let i = existingCount; i < requiredCount; i++) {
+
+						let clone = template.cloneNode(true);
+
+						// reset values
+						clone.querySelectorAll("input, select, textarea").forEach(inp => {
+							inp.value = "";
+							if (inp.type === "checkbox" || inp.type === "radio") {
+								inp.checked = false;
+							}
+						});
+
+						clone.setAttribute("data-index", i);
+
+						template.parentNode.appendChild(clone);
+						if (fieldSet && this.addButtonEvent) {
+							this.addButtonEvent(fieldSet, clone);
+						}
+						
+					}
+				}
+
+				// =========================
+				// APPLY VALUES PER INDEX
+				// =========================
+				let updatedSubforms = element.closest("form").querySelectorAll(
+					`.subform[name="${element.name.substring(0, element.name.lastIndexOf("_"))}"]`
+				);
+
+				updatedSubforms.forEach((subform, i) => {
+
+					let target = subform.querySelector(`[name="${element.name}"]`);
+
+					if (!target) return;
+
+					let v = value[i];
+
+					if (target.type === "checkbox") {
+						target.checked = Array.isArray(v)
+							? v.includes(target.value)
+							: target.value == v;
+					}
+					else if (target.type === "radio") {
+						target.checked = target.value == v;
+					}
+					else {
+						target.value = v ?? "";
+					}
+				});
+
+				return;
+			}
+
+			// =========================
+			// NORMAL VALUES
+			// =========================
+			if (element.type === "checkbox") {
+				element.checked = element.value == value;
+			}
+			else if (element.type === "radio") {
+				element.checked = element.value == value;
+			}
+			else {
+				element.value = value ?? "";
+			}
+
+		} catch (er) {
+			console.error("Set value error:", er, element);
+		}
+	};
+
+	for (let i = 0; i < formElements.length; i++) {
+
+		const element = formElements[i];
+		const name = element.name;
+
+		if (!name) continue;
+
+		const parts = name.split("_");
+
+		let parent = parts.length > 1
+			? parts.slice(0, -1)
+			: null;
+
+		let field = parts.length > 1
+			? parts[parts.length - 1]
+			: parts[0];
+
+		let pEl = parent ? element.closest(`[name="${parent.join("_")}"]`) : null;
+		let index = pEl ? pEl.getAttribute("data-index") : null;
+
+		let value;
+
+		if (parent) {
+			value = resolveValue(data, parent, field, index);
+		} else {
+			value = data[field];
+		}
+
+		//console.log(name , value);
+ 
+		if (value !== undefined && (typeof value !== "object" || Array.isArray(value))) {
+			setValue(element, value);
+			continue;
+		}
+ 
 	}
 }
 
 saveFormDataToLocalStorage() {
-	const formData = {};
-	const formElements = this.form.elements;
-
-	for (let i = 0; i < formElements.length; i++) {
-	const element = formElements[i];
-	const name = element.name;
-	const value = element.value;
-
-	if (name.includes("_")) {
-		const parentName = name.split("_")[0];
-		const childName = name.split("_")[1];
-
-		if (parentName === "myForm") {
-		formData[childName] = value;
-		} else {
-		if (!formData[parentName]) {
-			formData[parentName] = {};
-		}
-
-		formData[parentName][childName] = value;
-		}
-	} else {
-		formData[name] = value;
-	}
-	}
-
+	const formData = this.buildFormData(this.form.elements)
+    return;
 	localStorage.setItem("form_data", JSON.stringify(formData));
 }
 
@@ -1686,34 +1842,99 @@ loadFormDataFromLocalStorage() {
 	this.fillFormFields(formData);
 	}
 }
+buildFormData(formElements) {
+	 
+    const formData = {};
+ 
+    for (let i = 0; i < formElements.length; i++) {
+        const el = formElements[i];
+        if (!el.name) continue;
 
+        const parts = el.name.split("_");
+
+		let parent = parts.length > 1 ? el.name.substring(0 , el.name.lastIndexOf("_")) : null;
+		let field = parts.length > 1 ? el.name.slice(el.name.lastIndexOf("_") + 1) : el.name;
+        let value = el.value;
+		let index = null;
+
+		let pEl = el.closest(`[name="${parent}"]`);
+
+		if(pEl){
+            index = pEl.getAttribute("data-index");
+		}
+ 
+		if(parent){ 
+			if(index){
+				const path = parent.split("_");
+
+				let current = formData;
+
+				for (let i = 0; i < path.length; i++) {
+					const key = path[i];
+
+					if (i === path.length - 1) {
+						if (!current[key]) current[key] = [];
+					} else {
+						if (!current[key]) current[key] = {};
+						current = current[key];
+					}
+				}
+ 
+                const lastKey = path[path.length - 1];
+
+                if (!current[lastKey][index]) {
+                    current[lastKey][index] = {};
+                }
+
+                if (current[lastKey][index][field] !== undefined) {
+                    if (!Array.isArray(current[lastKey][index][field])) {
+                        current[lastKey][index][field] = [current[lastKey][index][field]];
+                    }
+                    current[lastKey][index][field].push(value);
+                } else {
+                    current[lastKey][index][field] = value;
+                }
+			}
+             
+			else {
+
+				const path = parent.split("_");
+
+				let current = formData;
+
+				for (let i = 0; i < path.length; i++) {
+					const key = path[i];
+
+					if (i === path.length - 1) {
+						if (!current[key]) current[key] = {};
+					} else {
+						if (!current[key]) current[key] = {};
+						current = current[key];
+					}
+				}
+
+				if (current[field] !== undefined) {
+					if (!Array.isArray(current[field])) {
+						current[field] = [current[field]];
+					}
+					current[field].push(value);
+				} else {
+					current[field] = value;
+				}
+			}
+		}
+		
+		else {
+			formData[field] = value;
+		}
+ 
+    }
+ 
+    return formData;
+}
 downloadFormData() {
-	const formData = {};
-	const formElements = this.form.elements;
-
-	for (let i = 0; i < formElements.length; i++) {
-	const element = formElements[i];
-	const name = element.name;
-	const value = element.value;
-
-	if (name.includes("_")) {
-		const parentName = name.split("_")[0];
-		const childName = name.split("_")[1];
-
-		if (parentName === "myForm") {
-		formData[childName] = value;
-		} else {
-		if (!formData[parentName]) {
-			formData[parentName] = {};
-		}
-
-		formData[parentName][childName] = value;
-		}
-	} else {
-		formData[name] = value;
-	}
-	}
-
+	const formData = this.buildFormData(this.form.elements);
+	
 	const json = JSON.stringify(formData, null, 2);
 	const blob = new Blob([json], { type: "application/json" });
 	const url = URL.createObjectURL(blob);
@@ -1827,463 +2048,470 @@ const estimatedPhases = Object.keys(projectPhaseMultipliers[projectType]).map((p
 
 return estimatedPhases;
 } //
-projectTypes.forEach(projectType => {
-	const projectTypeOption = document.createElement('option');
-	projectTypeOption.value = projectType.id;
-	projectTypeOption.textContent = projectType.name;
-	projectTypeSelect.appendChild(projectTypeOption);
-});
 
-// select the first project type by default
-projectTypeSelect.selectedIndex = 0;
-
-// load the first project type's features and plans
-const firstProjectType = projectTypes[0];
-
-const projectTypeHtml = `
-	<div class="form-group">
-	<h4 class="pname">${firstProjectType.name}</h4>
-	<p class="pdesc">${firstProjectType.description}</p>
-	</div>
-`;
-
-const featuresHtml = firstProjectType.features.map(feature => `
-	<div class="form-group">
-	<div class="checkbox">
-		<label>
-		<input onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
-		</label>
-	</div>
-	</div>
-`).join('');
-
-const plansHtml = firstProjectType.plans.map(plan => `
-	<option value="${plan.name}">${plan.name} - R${plan.price}</option>
-`).join('');
-
-const templateGroupsHtml = templates.map(template => `
-
-<div class="template-group-header">
-	<h4> ${template.name} <i class="fas fa-caret-down"></i></h4>
-</div>
-${  
-     [...new Set(template.pages.map(p => p.category))].length == 0 ?
-`
-<ul class="template-group-content" style="display: none;">
-${template.pages.map(page => `
-<li class="pst">
-	<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${feature.days || 2}" name="${page.name}" value="${page.price}">
-	<label for="template-contact"> ${page.name} - R${page.price} </label>
-	${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
-	${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
-	${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
-	${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
-	${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
-	${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
-	${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
-</li>
-`).join('')}
-</ul>
-` :
-
-`
-<ul class="template-group-content" style="display: none;">
-${
-     [...new Set(template.pages.map(p => p.category))].map(categ => 
-`
-  <li style="display:block;">
-    <label style="color:#2F8DED; font-weight:600;"> ${ (categ || "Other").split("-").map(c => c.substring(0 ,1).toUpperCase() + c.slice(1)).join(" ")} </label>
-	<ul class="mst">
-	${template.pages.filter(page => page.category == categ).map(page => `
-		<li class="pst">
-			<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${page.days || 2}" name="${page.name}" value="${page.price}">
-			<label for="template-contact" style="display:flex;"> 
-			  <div> ${page.name} </div><div style="flex:1; text-align:right;"> R${page.price} </div>
-			</label>
-			${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
-			${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
-			${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
-			${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
-			${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
-			${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
-			${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
-		</li>
-	`).join('')}
-	</ul>
- </li>
-`
-	 ).join('') 
+setTimeout(()=>{
+	if(!projectTypeSelect){
+		return;
 	}
-	
-</ul>`	
+	projectTypes.forEach(projectType => {
+		const projectTypeOption = document.createElement('option');
+		projectTypeOption.value = projectType.id;
+		projectTypeOption.textContent = projectType.name; 
+		projectTypeSelect.appendChild(projectTypeOption);
+	});
 
- }
-`).join('');
+	// select the first project type by default
+	projectTypeSelect.selectedIndex = 0;
 
 
-templateGroupsContainer.innerHTML = templateGroupsHtml;
-// Add event listener for Template group header toggle
-templateGroupsContainer.querySelectorAll('.template-group-header').forEach(header => {
-header.addEventListener('click', () => {
-	const content = header.nextElementSibling;
-	content.style.display = content.style.display === 'none' ? 'block' : 'none';
-});
-});
+	// load the first project type's features and plans
+	const firstProjectType = projectTypes[0];
 
-// Add event listener to the dynamically created buttons
-function preview(button , type){
-button.addEventListener('click', (event) => { 
-	event.preventDefault();
-	const popupElement = document.querySelector('.popup');
-	
-	if (popupElement) {
-	popupElement.remove();
-	}
-	
-	let url = button.getAttribute('data-link');
-	let ext = button.getAttribute('external');
-	
-	url = (type == "mobile") ? "https://smthubakgale.github.io/Resposinator/?" +
-						"tevroc=true&url=" + url 
-						: url;
-	
-
-	if(type == "web_query" || ext == "true") 
-	{
-		window.open(url , '_blank');
-	}
-		else 
-	{
-		const popup = document.createElement('div');
-		popup.classList.add('popup');
-		popup.style.position = 'fixed';
-		popup.style.top = '0';
-		popup.style.left = '0';
-		popup.style.width = '100%';
-		popup.style.height = '100%';
-		popup.style.background = 'rgba(0, 0, 0, 0.5)';
-		popup.style.display = 'flex';
-		popup.style.justifyContent = 'center';
-		popup.style.alignItems = 'center';
-		popup.style.zIndex = '1000'; 
-		popup.innerHTML = `
-		<div class="popup-content" style="width:100%;  height:100%" >
-			<iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
-			<button class="close-button" style="left:calc(100% - 80px); top:calc(100% - 46px); position:absolute;" >Close</button>
-		</div> 
-		`;
-		
-		document.body.style.overflow = 'hidden';
-		document.body.appendChild(popup);
-	
-		document.querySelector('.close-button').addEventListener('click', () => {
-		popup.remove();
-		document.body.style.overflow = 'auto';
-		});	  
-		}
-});	
-}
-
-templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
-	preview(button);
-});
-
-templateGroupsContainer.querySelectorAll('.web_script-button').forEach(button => {
-	preview(button);
-});
-
-templateGroupsContainer.querySelectorAll('.web_query-button').forEach(button => {
-	preview(button , "web_query");
-});
-
-templateGroupsContainer.querySelectorAll('.mobile_app_script-button').forEach(button => {
-	preview(button , "mobile");
-});
-
-templateGroupsContainer.querySelectorAll('.mobile_app_query-button').forEach(button => {
-	preview(button , "mobile");
-});
-
-templateGroupsContainer.querySelectorAll('.mobile_web-button').forEach(button => {
-	preview(button , "mobile");
-});
-
-templateGroupsContainer.querySelectorAll('.desktop_app-button').forEach(button => {
-	preview(button);
-});
-
-projectTypeSelect.parentNode.innerHTML += projectTypeHtml;
-projectTypeSelect = document.getElementById('project-type');
-featuresContainer.innerHTML = featuresHtml;
-planSelect.innerHTML = plansHtml;
-
-projectTypeSelect.addEventListener('change', (event) => {
-	const selectedProjectTypeId = event.target.value;
-	const selectedProjectType = projectTypes.find(projectType => projectType.id == selectedProjectTypeId);
-	
-	if (selectedProjectType) {
-		
-	const pname = document.querySelector('.pname');
-	const pdesc = document.querySelector('.pdesc');
-	
-	pname.innerHTML = selectedProjectType.name;
-	pdesc.innerHTML = selectedProjectType.description; 
-	
 	const projectTypeHtml = `
 		<div class="form-group">
-		<h4>${selectedProjectType.name}</h4>
-		<p>${selectedProjectType.description}</p>
+		<h4 class="pname">${firstProjectType.name}</h4>
+		<p class="pdesc">${firstProjectType.description}</p>
 		</div>
 	`;
 
-	const featuresHtml = selectedProjectType.features.map(feature => `
+	const featuresHtml = firstProjectType.features.map(feature => `
 		<div class="form-group">
 		<div class="checkbox">
 			<label>
-			<input  onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+			<input onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
 			</label>
 		</div>
 		</div>
 	`).join('');
 
-	const plansHtml = selectedProjectType.plans.map(plan => `
+	const plansHtml = firstProjectType.plans.map(plan => `
 		<option value="${plan.name}">${plan.name} - R${plan.price}</option>
 	`).join('');
 
+	const templateGroupsHtml = templates.map(template => `
+
+	<div class="template-group-header">
+		<h4> ${template.name} <i class="fas fa-caret-down"></i></h4>
+	</div>
+	${  
+		[...new Set(template.pages.map(p => p.category))].length == 0 ?
+	`
+	<ul class="template-group-content" style="display: none;">
+	${template.pages.map(page => `
+	<li class="pst">
+		<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${feature.days || 2}" name="${page.name}" value="${page.price}">
+		<label for="template-contact"> ${page.name} - R${page.price} </label>
+		${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
+		${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
+		${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
+		${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
+		${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
+		${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
+		${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
+	</li>
+	`).join('')}
+	</ul>
+	` :
+
+	`
+	<ul class="template-group-content" style="display: none;">
+	${
+		[...new Set(template.pages.map(p => p.category))].map(categ => 
+	`
+	<li style="display:block;">
+		<label style="color:#2F8DED; font-weight:600;"> ${ (categ || "Other").split("-").map(c => c.substring(0 ,1).toUpperCase() + c.slice(1)).join(" ")} </label>
+		<ul class="mst">
+		${template.pages.filter(page => page.category == categ).map(page => `
+			<li class="pst">
+				<input onchange="updateQuoteResult()" type="checkbox" id="template-contact" days="${page.days || 2}" name="${page.name}" value="${page.price}">
+				<label for="template-contact" style="display:flex;"> 
+				<div> ${page.name} </div><div style="flex:1; text-align:right;"> R${page.price} </div>
+				</label>
+				${(page.link ? `<button class="preview-button" external="${page.external}" data-link="${page.link}"> Preview </button>` : '')}
+				${(page.web_script ? `<button class="web_script-button" data-link="${page.web_script}"> Web Script View </button>` : '')}
+				${(page.web_query ? `<button class="web_query-button" data-link="${page.web_query}"> Web Query View </button>` : '')}
+				${(page.mobile_app_script ? `<button class="mobile_app_script-button" data-link="${page.mobile_app_script}"> Mobile Script View </button>` : '')}
+				${(page.mobile_app_query ? `<button class="mobile_app_query-button" data-link="${page.mobile_app_query}"> Mobile Query View </button>` : '')}
+				${(page.mobile_web ? `<button class="mobile_web-button" data-link="${page.mobile_web}"> Mobile Web View </button>` : '')}
+				${(page.desktop_app ? `<button class="desktop_app-button" data-link="${page.desktop_app}"> Desktop App View </button>` : '')}
+			</li>
+		`).join('')}
+		</ul>
+	</li>
+	`
+		).join('') 
+		}
+		
+	</ul>`	
+
+	}
+	`).join('');
+
+
+	templateGroupsContainer.innerHTML = templateGroupsHtml;
+	// Add event listener for Template group header toggle
+	templateGroupsContainer.querySelectorAll('.template-group-header').forEach(header => {
+	header.addEventListener('click', () => {
+		const content = header.nextElementSibling;
+		content.style.display = content.style.display === 'none' ? 'block' : 'none';
+	});
+	});	
+
+	
+	// Add event listener to the dynamically created buttons
+	function preview(button , type){
+	button.addEventListener('click', (event) => { 
+		event.preventDefault();
+		const popupElement = document.querySelector('.popup');
+		
+		if (popupElement) {
+		popupElement.remove();
+		}
+		
+		let url = button.getAttribute('data-link');
+		let ext = button.getAttribute('external');
+		
+		url = (type == "mobile") ? "https://smthubakgale.github.io/Resposinator/?" +
+							"tevroc=true&url=" + url 
+							: url;
+		
+
+		if(type == "web_query" || ext == "true") 
+		{
+			window.open(url , '_blank');
+		}
+			else 
+		{
+			const popup = document.createElement('div');
+			popup.classList.add('popup');
+			popup.style.position = 'fixed';
+			popup.style.top = '0';
+			popup.style.left = '0';
+			popup.style.width = '100%';
+			popup.style.height = '100%';
+			popup.style.background = 'rgba(0, 0, 0, 0.5)';
+			popup.style.display = 'flex';
+			popup.style.justifyContent = 'center';
+			popup.style.alignItems = 'center';
+			popup.style.zIndex = '1000'; 
+			popup.innerHTML = `
+			<div class="popup-content" style="width:100%;  height:100%" >
+				<iframe src="${url}" frameborder="0" width="100%" height="100%"></iframe>
+				<button class="close-button" style="left:calc(100% - 80px); top:calc(100% - 46px); position:absolute;" >Close</button>
+			</div> 
+			`;
+			
+			document.body.style.overflow = 'hidden';
+			document.body.appendChild(popup);
+		
+			document.querySelector('.close-button').addEventListener('click', () => {
+			popup.remove();
+			document.body.style.overflow = 'auto';
+			});	  
+			}
+	});	
+	}
+
+	templateGroupsContainer.querySelectorAll('.preview-button').forEach(button => {
+		preview(button);
+	});
+
+	templateGroupsContainer.querySelectorAll('.web_script-button').forEach(button => {
+		preview(button);
+	});
+
+	templateGroupsContainer.querySelectorAll('.web_query-button').forEach(button => {
+		preview(button , "web_query");
+	});
+
+	templateGroupsContainer.querySelectorAll('.mobile_app_script-button').forEach(button => {
+		preview(button , "mobile");
+	});
+
+	templateGroupsContainer.querySelectorAll('.mobile_app_query-button').forEach(button => {
+		preview(button , "mobile");
+	});
+
+	templateGroupsContainer.querySelectorAll('.mobile_web-button').forEach(button => {
+		preview(button , "mobile");
+	});
+
+	templateGroupsContainer.querySelectorAll('.desktop_app-button').forEach(button => {
+		preview(button);
+	});
+
+	projectTypeSelect.parentNode.innerHTML += projectTypeHtml;
+	projectTypeSelect = document.getElementById('project-type');
 	featuresContainer.innerHTML = featuresHtml;
 	planSelect.innerHTML = plansHtml;
-	
-	updateQuoteResult()
-	}
-});
 
-document.querySelectorAll('.preview-button').forEach(button => {
-	button.addEventListener('click', (event) => {
-	const link = button.getAttribute('data-link');
-	templatePageIframe.src = link;
-	popup.style.display = 'block';
-	});
-});
-// Calculate project timeline phases
-	function calculateProjectTimelinePhases(startDate, endDate) {
-	const projectDuration = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24));
-
-	// Estimated phase durations (in days)
-	const discoveryPhase = Math.ceil(projectDuration / 20);
-	const designPhase = Math.ceil(projectDuration / 15);
-	const developmentPhase = Math.ceil(projectDuration / 10);
-	const testingPhase = Math.ceil(projectDuration / 15);
-	const launchPhase = Math.ceil(projectDuration / 20);
-
-	return {
-		discoveryPhase,
-		designPhase,
-		developmentPhase,
-		testingPhase,
-		launchPhase,
-	};
-}
-
-window.updateQuoteResult = function(){
-	
-	// Time  
-	const startDate = new Date(document.getElementById('start-date').value);
-	const endDate = new Date(document.getElementById('end-date').value);
-
-	const estimatedDays = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24)); 
-	// Amount
-	const selectedProjectType = projectTypes.find(projectType => projectType.id == projectTypeSelect.value);
-	const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => { 
-		console.log(templatePage);
-
-		return templatePage.value;
-	});
-	const selectedFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(feature => feature.value);
-	const selectedPlan = planSelect.value;
-	
-	var discountAmount = 0;
-	var totalAmount = 0; 
-
-	// Calculate quote amount based on plan and project estimation
-	var quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
-	var pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
-	var featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
-	
-	// Apply discount if requested
-	const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
-	const discountRequestAmount = discountAmountInput;
-	if (discountRequestCheckbox.checked) {
-		discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
-		totalAmount = quoteAmount - discountAmount + pagePrices + featurePrices;
-	} else {
-		totalAmount = quoteAmount + pagePrices + featurePrices;
-	} 
-	
-	// Update quote result HTML
-	quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
-	discountAmountInput.value = discountRequestAmount.value;
-	
-	document.getElementById('discount').innerHTML = discountRequestCheckbox.checked ? discountRequestAmount.value : 0.0; 
-	document.getElementById('discount-amount').innerHTML = discountRequestCheckbox.checked ? discountAmount.toFixed(2) : 0.0; 
-	document.getElementById('principal-amount').innerHTML = (quoteAmount + pagePrices + featurePrices).toFixed(2); 
-	document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
-	document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
-	document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2); 
-	
-	// Price Adjustments 
-	const basePrice = totalAmount;
-	const complexity = document.getElementById('complexity').value.toLowerCase();
-	const projectType = selectedPlan.toLowerCase();
-	const platform = 'web';
-	const projectDurationDays = estimatedDays;
-
-	const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
-	document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
-	// Determine project phases
-	const phases = estimatePhases(complexity, projectType, platform, projectDurationDays , startDate , adjustedPrice);
-	
-	projectPhasesList.innerHTML = "";
-	
-	const ul = document.createElement('ul');
-	ul.style.listStyleType = 'circle';
-	projectPhasesList.appendChild(ul);
-	
-	phases.forEach((phase) => {
-	const li = document.createElement('li');
-	ul.appendChild(li);
-	
-	const h4 = document.createElement('h4');
-	h4.textContent = phase.name;
-	li.appendChild(h4);
-	
-	const p1 = document.createElement('p');
-	p1.textContent = `-Duration: Days ${phase.req_start} - ${phase.req_end}`;
-	li.appendChild(p1);
-	
-	const p2 = document.createElement('p');
-	p2.textContent = `Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}`;
-	//li.appendChild(p2);
-	
-	const activitiesUl = document.createElement('ul');
-	activitiesUl.style.listStyleType = 'disc';
-	activitiesUl.style.marginLeft = '15px';
-	activitiesUl.style.marginBottom = '10px';
-	li.appendChild(activitiesUl);
-	
-	phase.activities.forEach((activity) => {
-		const activityLi = document.createElement('li');
-		activityLi.textContent = activity;
-		activitiesUl.appendChild(activityLi);
-	});
-	});
-	// Payment Plan 
-	const paymentTable = document.createElement('table');
-	paymentTable.style.width = '100%';
-	paymentPlansList.innerHTML = '';
-	paymentPlansList.appendChild(paymentTable);
-	
-	phases.forEach((phase, index) => {
-	const phaseRow = document.createElement('tr');
-	
-	if (index === 0) {
-		const tableHeaderRow = document.createElement('tr');
-		const phaseHeader = document.createElement('th');
-		phaseHeader.textContent = 'Phase';
-		tableHeaderRow.appendChild(phaseHeader);
-	
-		const paymentDateHeader = document.createElement('th');
-		paymentDateHeader.textContent = 'Payment Date';
-		tableHeaderRow.appendChild(paymentDateHeader);
-	
-		const paymentAmountHeader = document.createElement('th');
-		paymentAmountHeader.textContent = 'Payment Amount';
-		tableHeaderRow.appendChild(paymentAmountHeader);
-	
-		paymentTable.appendChild(tableHeaderRow);
-	
-		// Add an empty row after the header
-		const emptyRow = document.createElement('tr');
-		const emptyCell1 = document.createElement('td');
-		emptyCell1.textContent = "Proposal Approval";
-		emptyRow.appendChild(emptyCell1);
-	
-		const emptyCell2 = document.createElement('td'); 
-		emptyCell2.textContent = startDate.toISOString().split('T')[0];
-		emptyRow.appendChild(emptyCell2);
-	
-		const emptyCell3 = document.createElement('td');
-		emptyCell3.textContent = `R ${((10/100)*adjustedPrice).toFixed(2)}`;
-		emptyRow.appendChild(emptyCell3);
-	
-		paymentTable.appendChild(emptyRow);
-	}
-	
-	const phaseNameCell = document.createElement('td');
-	phaseNameCell.textContent = phase.name;
-	phaseRow.appendChild(phaseNameCell);
-	
-	const paymentDateCell = document.createElement('td');
-	if (typeof phase.req_end === 'number') { 
-		startDate.setDate(startDate.getDate() + phase.req_end);
-		paymentDateCell.textContent = startDate.toISOString().split('T')[0];
-	} else {
-		paymentDateCell.textContent = endDate.toISOString().split('T')[0];
-	}
-	phaseRow.appendChild(paymentDateCell);
-	
-	const paymentAmountCell = document.createElement('td');
-	paymentAmountCell.textContent = `R ${phase.price.toFixed(2)}`;
-	phaseRow.appendChild(paymentAmountCell);
-	
-	paymentTable.appendChild(phaseRow);
-
-	if(index == phases.length - 2){
-	// Add total row
-		const totalRow = document.createElement('tr');
-		const totalCell1 = document.createElement('td');
-		totalCell1.colSpan = 2;
-		totalCell1.textContent = 'Total';
-		totalRow.appendChild(totalCell1);
+	projectTypeSelect.addEventListener('change', (event) => {
+		const selectedProjectTypeId = event.target.value;
+		const selectedProjectType = projectTypes.find(projectType => projectType.id == selectedProjectTypeId);
 		
-		const totalCell2 = document.createElement('td');
-		totalCell2.textContent = `R ${adjustedPrice.toFixed(2)}`;
-		totalRow.appendChild(totalCell2);
+		if (selectedProjectType) {
+			
+		const pname = document.querySelector('.pname');
+		const pdesc = document.querySelector('.pdesc');
 		
-		paymentTable.appendChild(totalRow);
+		pname.innerHTML = selectedProjectType.name;
+		pdesc.innerHTML = selectedProjectType.description; 
+		
+		const projectTypeHtml = `
+			<div class="form-group">
+			<h4>${selectedProjectType.name}</h4>
+			<p>${selectedProjectType.description}</p>
+			</div>
+		`;
+
+		const featuresHtml = selectedProjectType.features.map(feature => `
+			<div class="form-group">
+			<div class="checkbox">
+				<label>
+				<input  onchange="updateQuoteResult()" type="checkbox" days="${feature.days || 2}" name="${feature.name}" value="${feature.price}"> ${feature.name} - R${feature.price}
+				</label>
+			</div>
+			</div>
+		`).join('');
+
+		const plansHtml = selectedProjectType.plans.map(plan => `
+			<option value="${plan.name}">${plan.name} - R${plan.price}</option>
+		`).join('');
+
+		featuresContainer.innerHTML = featuresHtml;
+		planSelect.innerHTML = plansHtml;
+		
+		updateQuoteResult()
+		}
+	});
+
+	document.querySelectorAll('.preview-button').forEach(button => {
+		button.addEventListener('click', (event) => {
+		const link = button.getAttribute('data-link');
+		templatePageIframe.src = link;
+		popup.style.display = 'block';
+		});
+	});
+	// Calculate project timeline phases
+		function calculateProjectTimelinePhases(startDate, endDate) {
+		const projectDuration = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24));
+
+		// Estimated phase durations (in days)
+		const discoveryPhase = Math.ceil(projectDuration / 20);
+		const designPhase = Math.ceil(projectDuration / 15);
+		const developmentPhase = Math.ceil(projectDuration / 10);
+		const testingPhase = Math.ceil(projectDuration / 15);
+		const launchPhase = Math.ceil(projectDuration / 20);
+
+		return {
+			discoveryPhase,
+			designPhase,
+			developmentPhase,
+			testingPhase,
+			launchPhase,
+		};
 	}
-	});	
-	// 
-	
-}
 
-const startDateInput = document.getElementById('start-date');
-const endDateInput = document.getElementById('end-date');
+  
+	window.updateQuoteResult = function(){
+		
+		// Time  
+		const startDate = new Date(document.getElementById('start-date').value);
+		const endDate = new Date(document.getElementById('end-date').value);
 
-const today = new Date();
-const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+		const estimatedDays = Math.round(7*(endDate - startDate) / (1000 * 3600 * 24)); 
+		// Amount
+		const selectedProjectType = projectTypes.find(projectType => projectType.id == projectTypeSelect.value);
+		const selectedTemplatePages = Array.from(templateGroupsContainer.querySelectorAll('input[type="checkbox"]:checked')).map(templatePage => { 
+			console.log(templatePage);
 
-startDateInput.value = formatDate(today, 'yyyy-mm-ddTHH:mm:ss');
-endDateInput.value = formatDate(endDate, 'yyyy-mm-ddTHH:mm:ss');
+			return templatePage.value;
+		});
+		const selectedFeatures = Array.from(featuresContainer.querySelectorAll('input[type="checkbox"]:checked')).map(feature => feature.value);
+		const selectedPlan = planSelect.value;
+		
+		var discountAmount = 0;
+		var totalAmount = 0; 
 
-function formatDate(date, format) {
-	const year = date.getFullYear();
-	const month = (date.getMonth() + 1).toString().padStart(2, '0');
-	const day = date.getDate().toString().padStart(2, '0');
-	const hours = date.getHours().toString().padStart(2, '0');
-	const minutes = date.getMinutes().toString().padStart(2, '0');
-	const seconds = date.getSeconds().toString().padStart(2, '0');
-	
-	if (format === 'dd-mm-yyyy') {
-		return `${day}-${month}-${year}`;
-	} else if (format === 'yyyy-mm-dd') {
-		return `${year}-${month}-${day}`;
-	} else if (format === 'yyyy-mm-ddTHH:mm:ss') {
-		return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+		// Calculate quote amount based on plan and project estimation
+		var quoteAmount = selectedProjectType.plans.find(plan => plan.name == selectedPlan).price;
+		var pagePrices = selectedTemplatePages.reduce((acc, price) => acc + parseInt(price), 0);
+		var featurePrices = selectedFeatures.reduce((acc, price) => acc + parseInt(price), 0) ;
+		
+		// Apply discount if requested
+		const discountRequestCheckbox = document.getElementById('discount-request-checkbox');
+		const discountRequestAmount = discountAmountInput;
+		if (discountRequestCheckbox.checked) {
+			discountAmount = (quoteAmount * discountRequestAmount.value) / 100;
+			totalAmount = quoteAmount - discountAmount + pagePrices + featurePrices;
+		} else {
+			totalAmount = quoteAmount + pagePrices + featurePrices;
+		} 
+		
+		// Update quote result HTML
+		quoteAmountValue.innerHTML = quoteAmount.toFixed(2);
+		discountAmountInput.value = discountRequestAmount.value;
+		
+		document.getElementById('discount').innerHTML = discountRequestCheckbox.checked ? discountRequestAmount.value : 0.0; 
+		document.getElementById('discount-amount').innerHTML = discountRequestCheckbox.checked ? discountAmount.toFixed(2) : 0.0; 
+		document.getElementById('principal-amount').innerHTML = (quoteAmount + pagePrices + featurePrices).toFixed(2); 
+		document.getElementById('total-amount').innerHTML = totalAmount.toFixed(2); 
+		document.getElementById('page-prices').innerHTML = pagePrices.toFixed(2);
+		document.getElementById('feature-prices').innerHTML = featurePrices.toFixed(2); 
+		
+		// Price Adjustments 
+		const basePrice = totalAmount;
+		const complexity = document.getElementById('complexity').value.toLowerCase();
+		const projectType = selectedPlan.toLowerCase();
+		const platform = 'web';
+		const projectDurationDays = estimatedDays;
+
+		const adjustedPrice = adjustPrice(basePrice, complexity, projectType, platform, projectDurationDays); // estimatePhases
+		document.getElementById('adjusted-price').innerHTML = adjustedPrice.toFixed(2); 
+		// Determine project phases
+		const phases = estimatePhases(complexity, projectType, platform, projectDurationDays , startDate , adjustedPrice);
+		
+		projectPhasesList.innerHTML = "";
+		
+		const ul = document.createElement('ul');
+		ul.style.listStyleType = 'circle';
+		projectPhasesList.appendChild(ul);
+		
+		phases.forEach((phase) => {
+		const li = document.createElement('li');
+		ul.appendChild(li);
+		
+		const h4 = document.createElement('h4');
+		h4.textContent = phase.name;
+		li.appendChild(h4);
+		
+		const p1 = document.createElement('p');
+		p1.textContent = `-Duration: Days ${phase.req_start} - ${phase.req_end}`;
+		li.appendChild(p1);
+		
+		const p2 = document.createElement('p');
+		p2.textContent = `Proposed Duration: Days ${phase.prop_start} - ${phase.prop_end}`;
+		//li.appendChild(p2);
+		
+		const activitiesUl = document.createElement('ul');
+		activitiesUl.style.listStyleType = 'disc';
+		activitiesUl.style.marginLeft = '15px';
+		activitiesUl.style.marginBottom = '10px';
+		li.appendChild(activitiesUl);
+		
+		phase.activities.forEach((activity) => {
+			const activityLi = document.createElement('li');
+			activityLi.textContent = activity;
+			activitiesUl.appendChild(activityLi);
+		});
+		});
+		// Payment Plan 
+		const paymentTable = document.createElement('table');
+		paymentTable.style.width = '100%';
+		paymentPlansList.innerHTML = '';
+		paymentPlansList.appendChild(paymentTable);
+		
+		phases.forEach((phase, index) => {
+		const phaseRow = document.createElement('tr');
+		
+		if (index === 0) {
+			const tableHeaderRow = document.createElement('tr');
+			const phaseHeader = document.createElement('th');
+			phaseHeader.textContent = 'Phase';
+			tableHeaderRow.appendChild(phaseHeader);
+		
+			const paymentDateHeader = document.createElement('th');
+			paymentDateHeader.textContent = 'Payment Date';
+			tableHeaderRow.appendChild(paymentDateHeader);
+		
+			const paymentAmountHeader = document.createElement('th');
+			paymentAmountHeader.textContent = 'Payment Amount';
+			tableHeaderRow.appendChild(paymentAmountHeader);
+		
+			paymentTable.appendChild(tableHeaderRow);
+		
+			// Add an empty row after the header
+			const emptyRow = document.createElement('tr');
+			const emptyCell1 = document.createElement('td');
+			emptyCell1.textContent = "Proposal Approval";
+			emptyRow.appendChild(emptyCell1);
+		
+			const emptyCell2 = document.createElement('td'); 
+			emptyCell2.textContent = startDate.toISOString().split('T')[0];
+			emptyRow.appendChild(emptyCell2);
+		
+			const emptyCell3 = document.createElement('td');
+			emptyCell3.textContent = `R ${((10/100)*adjustedPrice).toFixed(2)}`;
+			emptyRow.appendChild(emptyCell3);
+		
+			paymentTable.appendChild(emptyRow);
+		}
+		
+		const phaseNameCell = document.createElement('td');
+		phaseNameCell.textContent = phase.name;
+		phaseRow.appendChild(phaseNameCell);
+		
+		const paymentDateCell = document.createElement('td');
+		if (typeof phase.req_end === 'number') { 
+			startDate.setDate(startDate.getDate() + phase.req_end);
+			paymentDateCell.textContent = startDate.toISOString().split('T')[0];
+		} else {
+			paymentDateCell.textContent = endDate.toISOString().split('T')[0];
+		}
+		phaseRow.appendChild(paymentDateCell);
+		
+		const paymentAmountCell = document.createElement('td');
+		paymentAmountCell.textContent = `R ${phase.price.toFixed(2)}`;
+		phaseRow.appendChild(paymentAmountCell);
+		
+		paymentTable.appendChild(phaseRow);
+
+		if(index == phases.length - 2){
+		// Add total row
+			const totalRow = document.createElement('tr');
+			const totalCell1 = document.createElement('td');
+			totalCell1.colSpan = 2;
+			totalCell1.textContent = 'Total';
+			totalRow.appendChild(totalCell1);
+			
+			const totalCell2 = document.createElement('td');
+			totalCell2.textContent = `R ${adjustedPrice.toFixed(2)}`;
+			totalRow.appendChild(totalCell2);
+			
+			paymentTable.appendChild(totalRow);
+		}
+		});	
+		// 
+		
 	}
-}
 
-setTimeout(function()
-{
+	const startDateInput = document.getElementById('start-date');
+	const endDateInput = document.getElementById('end-date');
+
+	const today = new Date();
+	const endDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+
+	startDateInput.value = formatDate(today, 'yyyy-mm-ddTHH:mm:ss');
+	endDateInput.value = formatDate(endDate, 'yyyy-mm-ddTHH:mm:ss');
+
+	function formatDate(date, format) {
+		const year = date.getFullYear();
+		const month = (date.getMonth() + 1).toString().padStart(2, '0');
+		const day = date.getDate().toString().padStart(2, '0');
+		const hours = date.getHours().toString().padStart(2, '0');
+		const minutes = date.getMinutes().toString().padStart(2, '0');
+		const seconds = date.getSeconds().toString().padStart(2, '0');
+		
+		if (format === 'dd-mm-yyyy') {
+			return `${day}-${month}-${year}`;
+		} else if (format === 'yyyy-mm-dd') {
+			return `${year}-${month}-${day}`;
+		} else if (format === 'yyyy-mm-ddTHH:mm:ss') {
+			return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+		}
+	}
+
+ 
 	discountAmountInput.value = 5;
 	updateQuoteResult();
 	
