@@ -461,7 +461,7 @@ li input[type="checkbox"]:checked + .submenu-label .submenu-chevron {
     margin-right:-25px;
   }
 .side-nav {
-  flex-basis: 290px;
+  flex-basis: 260px;
   flex-shrink: 0;
   background-color: #181818; /* Light Gray */
   padding: 1em; 

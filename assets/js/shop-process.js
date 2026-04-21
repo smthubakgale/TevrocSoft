@@ -35,6 +35,155 @@ constructor(form, importButton, fileInput, formConfig, fname , callback = ()=>{}
 	this.renderForm(fname);
 	this.addEventListeners();
 	this.loadFormDataFromLocalStorage();
+	this.initTreeFormNavigation()
+}
+initTreeFormNavigation() {
+
+    const rootForm = this.form;
+    const fieldsets = Array.from(rootForm.querySelectorAll("fieldset"));
+
+	if(fieldsets.length == 0) return;
+
+    // =========================
+    // CREATE NAV CONTAINER
+    // =========================
+    const nav = document.createElement("div");
+    nav.classList.add("tree-nav");
+
+    nav.style.width = "260px"; 
+    nav.style.padding = "10px";
+    nav.style.marginBottom = "10px";
+ 
+    const getLevel = (fs) => {
+        let level = 0;
+        let p = fs.parentElement;
+
+        while (p && p !== rootForm) {
+            if (p.tagName === "FIELDSET") level++;
+            p = p.parentElement;
+        }
+
+        return level;
+    };
+
+    const hideSiblings = (fs) => {
+        const parent = fs.parentElement;
+        if (!parent) return;
+
+        Array.from(parent.children)
+            .filter(el => el.tagName === "FIELDSET")
+            .forEach(sib => {
+                if (sib !== fs) sib.style.display = "none";
+            });
+    };
+
+    const showFirstChildOnly = (fs) => {
+        const children = Array.from(fs.querySelectorAll(":scope > fieldset"));
+        children.forEach((c, i) => {
+            c.style.display = i === 0 ? "block" : "none";
+        });
+    };
+
+    const collapseDescendants = (fs) => {
+        fs.querySelectorAll("fieldset").forEach(child => {
+            child.style.display = "none";
+        });
+    };
+
+    const activate = (fs) => {
+
+        fs.style.display = "block";
+
+        hideSiblings(fs);
+        showFirstChildOnly(fs);
+        collapseDescendants(fs);
+    };
+ 
+    fieldsets.forEach((fs, i) => {
+        fs.style.display = i === 0 ? "block" : "none";
+        let sm = ( fs.parentElement.parentElement.querySelector("small"));
+        let lb = ( fs.parentElement.parentElement.querySelector("label"));
+		 
+		if(sm) sm.style.display = i === 0 ? "block" : "none";
+		if(lb) lb.style.display = i === 0 ? "block" : "none";
+    });
+
+	let first = true;
+    fieldsets.forEach((fs, i) => {
+        let hasChild = fs.querySelectorAll("fieldset").length > 0;
+
+        const legend = fs.querySelector("legend");
+        const title = legend ? legend.textContent : `Section ${i + 1}`;
+        const level = getLevel(fs);
+
+        const node = document.createElement("div");
+
+        node.textContent = "▸ " + title;
+        node.style.cursor = "pointer";
+        node.style.padding = "6px";
+        node.style.paddingLeft = `${level * 14}px`; 
+        node.style.userSelect = "none";
+
+		if(hasChild){ node.style.color = "#0EA5E9"; }
+
+		if(first & !hasChild){
+			fs.style.display = "block";
+		}
+
+        node.addEventListener("click", () => {
+ 
+			if(hasChild){ return; }
+
+			rootForm.querySelectorAll("fieldset").forEach((f)=>{ f.style.display = "none"})
+			opens(fs);
+
+			function opens(fs){
+				if(fs != rootForm && fs != document.body){
+					const parent = fs.parentElement;
+
+					if (parent) {
+						Array.from(parent.children)
+							.filter(el => el.tagName === "FIELDSET")
+							.forEach(sib => sib.style.display = "none");
+
+						if(fs.tagName === "FIELDSET"){
+							fs.style.display = "block"
+						}
+					    opens(parent);
+					}
+					
+				}
+			}
+
+
+            activate(fs);
+        });
+
+        nav.appendChild(node);
+    });
+
+    // =========================
+    // 🔥 INSERT NAV BEFORE FORM
+    // =========================
+    if (rootForm.parentNode) {
+        rootForm.parentNode.insertBefore(nav, rootForm);
+    }
+
+    // =========================
+    // CONTROLLER API
+    // =========================
+    this.treeController = {
+
+        reset: () => {
+            fieldsets.forEach((fs, i) => {
+                fs.style.display = i === 0 ? "block" : "none";
+            });
+        },
+
+        openAllRoots: () => {
+            fieldsets.forEach(fs => fs.style.display = "block");
+        }
+    };
 }
 createDescription(field){
 	let description;

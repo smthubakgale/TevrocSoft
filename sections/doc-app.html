@@ -25,11 +25,19 @@
   float:right;
 }
 
-#main .template-group-content {
-  padding: 20px;
-  border-bottom: 1px solid #ccc;
-  background-color: #f7f7f7;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#main .template-group-content {  
+}
+
+#main #import-button{
+  margin-left:calc(100%);
+  width: 150px;
+  transform: translateX(calc(-1*(100% + 50px))) translateY(20px);
+  border-radius: 4px;
+  background: #0EA5E9;
+}
+
+#main #myForm{
+  margin-top:-50px
 }
 
 #main .template-group-content input[type="checkbox"] {
@@ -281,7 +289,7 @@
 }
 
 #main #form-container form {
-  margin-top: 20px;
+  flex:1;
 }
 
 #main #form-container fieldset {
@@ -468,6 +476,26 @@
   background-color: #3e8e41;
 }
 
+#main #template-groups li{
+  list-style: none;
+}
+
+#main .form-content{
+  display:flex;
+  gap: 20px; 
+  margin-top: 20px;
+  flex-direction: row-reverse;
+}
+
+#main .tree-nav{
+  background: #0E1018;
+  color:#fff;
+  border-radius: 4px;
+  margin-top:20px;
+  max-height: 80vh;
+  overflow-y:scroll;
+}
+
 #main .nested-dropdown { 
   margin: 20px;
   padding: 20px;
@@ -533,6 +561,28 @@
 }
 .side-nav{
   margin-top:20px;
+}
+.side-nav {
+  flex-basis: 230px;
+  }
+  .main-content{
+    flex:1; 
+    padding-left:0px;
+    padding-rght:0px;
+  }
+  #main { 
+    width:100%;
+    max-width:100%
+  }
+
+  
+@media only screen and (max-width: 768px) {
+  #main .form-content{
+    flex-direction: column;
+  }
+  #main #myForm{
+  margin-top:10px
+}
 }
 </style>
 
@@ -759,7 +809,9 @@
       <div id="form-container"> 
         <button id="import-button">Import from file</button>
         <input type="file" id="file-input" style="display: none;">
-      <form id="myForm"></form>
+         <div class="form-content">
+             <form id="myForm"></form>
+         </div>
     </div>
   </div>
   </li>
@@ -771,7 +823,9 @@
       <div id="form-container"> 
         <button id="import-button2">Import from file</button>
         <input type="file" id="file-input2" style="display: none;">
-      <form id="myForm2"></form>
+         <div class="form-content">
+             <form id="myForm2"></form>
+         </div>
     </div>
   </div>
   </li>  
@@ -782,73 +836,81 @@
 <!-- Popup -->
 <div id="popup"></div>
 
+<!-- Forms.js -->
+<script type="module" src="assets/js/shop-data.js"></script>
+<script type="module" src="assets/js/shop-process.js"></script>
+
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
-  const firebaseConfig = {
-  apiKey: "AIzaSyBomP4F2uKpaD0ZKFMYbAkgRsFXzoRT2lM",
-  authDomain: "tevrocsoft.firebaseapp.com",
-  projectId: "tevrocsoft",
-  databaseURL: "https://tevrocsoft-default-rtdb.firebaseio.com",
-  storageBucket: "tevrocsoft.firebasestorage.app",
-  messagingSenderId: "239731786950",
-  appId: "1:239731786950:web:e271a0b9e0782fed9d43c7"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.database();
+  try{
+    const firebaseConfig = {
+    apiKey: "AIzaSyBomP4F2uKpaD0ZKFMYbAkgRsFXzoRT2lM",
+    authDomain: "tevrocsoft.firebaseapp.com",
+    projectId: "tevrocsoft",
+    databaseURL: "https://tevrocsoft-default-rtdb.firebaseio.com",
+    storageBucket: "tevrocsoft.firebasestorage.app",
+    messagingSenderId: "239731786950",
+    appId: "1:239731786950:web:e271a0b9e0782fed9d43c7"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.database();
 
-// UI
-const authView = document.getElementById("auth-badge");
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const avatarView = document.getElementById("avatar");
-const usernameView = document.getElementById("username");
+  // UI
+  const authView = document.getElementById("auth-badge");
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const avatarView = document.getElementById("avatar");
+  const usernameView = document.getElementById("username");
 
-const popup = document.getElementById("popup");
+  const popup = document.getElementById("popup");
 
-let currentUser = null;
+  let currentUser = null;
 
-// Popup function
-function showPopup(message, type="success") {
-  popup.innerText = message;
-  popup.className = type;
-  popup.style.display = "block";
-  setTimeout(() => popup.style.display = "none", 3000);
-}
-
-// Auth
-loginBtn.onclick = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(err => showPopup(err.message,"error"));
-};
-logoutBtn.onclick = () => auth.signOut();
-
-// Auth state with profile picture
-auth.onAuthStateChanged(user => {
-  if (user) {
-    currentUser = user;
-    authView.classList.remove("auth-out");
-    authView.classList.add("auth-in");
-
-    avatarView.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
-    usernameView.innerHTML = `${user.displayName}`;
-
-    
-  } else {
-    currentUser = null;
-    authView.classList.remove("auth-in");
-    authView.classList.add("auth-out");
-    
-    avatarView.innerText = "";
-    usernameView.innerText = "";
+  // Popup function
+  function showPopup(message, type="success") {
+    popup.innerText = message;
+    popup.className = type;
+    popup.style.display = "block";
+    setTimeout(() => popup.style.display = "none", 3000);
   }
-});
-//
+
+  // Auth
+  loginBtn.onclick = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(err => showPopup(err.message,"error"));
+  };
+  logoutBtn.onclick = () => auth.signOut();
+
+  // Auth state with profile picture
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      currentUser = user;
+      authView.classList.remove("auth-out");
+      authView.classList.add("auth-in");
+
+      avatarView.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
+      usernameView.innerHTML = `${user.displayName}`;
+
+      
+    } else {
+      currentUser = null;
+      authView.classList.remove("auth-in");
+      authView.classList.add("auth-out");
+      
+      avatarView.innerText = "";
+      usernameView.innerText = "";
+    }
+  });
+  //
+
+  }
+  catch(er){
+    console.error(er);
+  }
 
 </script>
-<script type="module" src="assets/js/shop-data.js"></script>
-<script type="module" src="assets/js/shop-process.js"></script>
