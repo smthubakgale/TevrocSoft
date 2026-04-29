@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CodeCrate Collab Editor</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.0/ace.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/json5@2.2.3/dist/index.min.js"></script>
+
+<style>
+body { font-family: Arial; display: flex; gap: 20px; padding: 20px; }
+#left { width: 300px; }
+#editor { height: 500px; border: 1px solid #ccc; }
+button { margin: 5px 0; padding: 8px; width: 100%; }
+input, select { width: 100%; padding: 6px; margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<div id="left">
+  <button id="login">Login</button>
+  <button id="logout" style="display:none;">Logout</button>
+  <div id="user"></div>
+
+  <hr>
+
+  <button id="newFile">New File</button>
+  <ul id="files"></ul>
+
+  <hr>
+
+  <h3>Share File</h3>
+  <input id="email" placeholder="User email"/>
+  <select id="role">
+    <option value="viewer">Viewer</option>
+    <option value="editor">Editor</option>
+    <option value="admin">Admin</option>
+  </select>
+  <button id="shareBtn">Invite</button>
+
+  <h3>Collaborators</h3>
+  <ul id="collabs"></ul>
+</div>
+
+<div style="flex:1;">
+  <h3 id="title">No file</h3>
+  <div id="editor"></div>
+  <button id="save">Save</button>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBomP4F2uKpaD0ZKFMYbAkgRsFXzoRT2lM",
+  authDomain: "tevrocsoft.firebaseapp.com",
+  projectId: "tevrocsoft",
+  databaseURL: "https://tevrocsoft-default-rtdb.firebaseio.com",
+  storageBucket: "tevrocsoft.firebasestorage.app",
+  messagingSenderId: "239731786950",
+  appId: "1:239731786950:web:e271a0b9e0782fed9d43c7"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+const editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.session.setMode("ace/mode/json");
+
+let user = null;
+let currentFile = null;
+
+// LOGIN
+login.onclick = () => {
+  auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+};
+
+logout.onclick = () => auth.signOut();
+
+auth.onAuthStateChanged(u => {
+  if(u){
+    user = u;
+    login.style.display="none";
+    logout.style.display="block";
+    userDiv.innerText = u.email;
+
+    // SAVE USER (for email lookup)
+    db.ref("users/"+u.uid).set({
+      email: u.email,
+      name: u.displayName
+    });
+
+    loadFiles();
+  }
+});
+
+// LOAD FILES
+function loadFiles(){
+  files.innerHTML = "";
+
+  db.ref("userFiles/"+user.uid).on("value", snap=>{
+    const data = snap.val();
+    if(!data) return;
+
+    Object.keys(data).forEach(fid=>{
+      db.ref("files/"+fid).once("value", f=>{
+        const file = f.val();
+        const li = document.createElement("li");
+        li.innerHTML = file.name;
+        li.onclick = ()=>openFile(fid);
+        files.appendChild(li);
+      });
+    });
+  });
+}
+
+// CREATE FILE
+newFile.onclick = ()=>{
+  const name = prompt("File name?");
+  if(!name) return;
+
+  const id = db.ref("files").push().key;
+
+  db.ref("files/"+id).set({
+    name,
+    owner: user.uid,
+    content: {},
+    collaborators: {
+      [user.uid]: "owner"
+    }
+  });
+
+  db.ref("userFiles/"+user.uid+"/"+id).set(true);
+};
+
+// OPEN FILE
+function openFile(fid){
+  currentFile = fid;
+
+  db.ref("files/"+fid).on("value", snap=>{
+    const f = snap.val();
+    title.innerText = f.name;
+
+    editor.setValue(JSON.stringify(f.content,null,2), -1);
+
+    renderCollabs(f.collaborators);
+  });
+}
+
+// SAVE
+save.onclick = ()=>{
+  db.ref("files/"+currentFile).once("value", snap=>{
+    const role = snap.val().collaborators[user.uid];
+
+    if(role==="viewer") return alert("Read only");
+
+    const json = JSON5.parse(editor.getValue());
+
+    db.ref("files/"+currentFile+"/content").set(json);
+  });
+};
+
+// SHARE (INVITE)
+shareBtn.onclick = ()=>{
+  const email = emailInput.value;
+
+  db.ref("users").once("value", snap=>{
+    let targetUid = null;
+
+    snap.forEach(child=>{
+      if(child.val().email === email){
+        targetUid = child.key;
+      }
+    });
+
+    if(!targetUid) return alert("User not found");
+
+    db.ref("files/"+currentFile+"/collaborators/"+targetUid)
+      .set(roleSelect.value);
+
+    db.ref("userFiles/"+targetUid+"/"+currentFile).set(true);
+  });
+};
+
+// RENDER COLLABS
+function renderCollabs(collabs){
+  collabsList.innerHTML = "";
+
+  Object.keys(collabs).forEach(uid=>{
+    db.ref("users/"+uid).once("value", snap=>{
+      const u = snap.val();
+
+      const li = document.createElement("li");
+      li.innerHTML = `${u.email} (${collabs[uid]})
+        <button onclick="removeUser('${uid}')">Remove</button>`;
+
+      collabsList.appendChild(li);
+    });
+  });
+}
+
+// REMOVE USER
+function removeUser(uid){
+  db.ref("files/"+currentFile+"/collaborators/"+uid).remove();
+  db.ref("userFiles/"+uid+"/"+currentFile).remove();
+}
+</script>
+</body>
+</html>
