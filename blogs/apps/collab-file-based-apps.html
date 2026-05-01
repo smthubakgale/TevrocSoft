@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deep Dive: Building a Real-Time Firebase JSON Editor with Collaboration, Presence, and File Management</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    color: #222;
+    line-height: 1.7;
+  }
+
+  header {
+    background: #111827;
+    color: white;
+    padding: 30px;
+    text-align: center;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+  }
+
+  h1, h2, h3 {
+    color: #111827;
+  }
+
+  pre {
+    background: #0b1220;
+    color: #e5e7eb;
+    padding: 15px;
+    overflow-x: auto;
+    border-radius: 8px;
+  }
+
+  code {
+    font-family: monospace;
+  }
+
+  .box {
+    background: #e0f2fe;
+    border-left: 5px solid #0284c7;
+    padding: 12px;
+    margin: 15px 0;
+  }
+
+  .warning {
+    background: #fee2e2;
+    border-left: 5px solid #ef4444;
+    padding: 12px;
+    margin: 15px 0;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Building a Full Firebase JSON Editor System</h1>
+  <p>Real-time collaboration, file management, authentication, live sync, presence tracking, and role-based access control</p>
+</header>
+
+<main>
+
+<h2>1. Introduction</h2>
+<p>
+This project is a fully functional <b>cloud-based JSON editor system</b> built using Firebase and vanilla JavaScript.
+It behaves like a simplified version of Google Docs but specifically designed for structured JSON data.
+</p>
+
+<p>
+The system includes:
+</p>
+
+<ul>
+  <li>Google authentication login system</li>
+  <li>Real-time database sync using Firebase Realtime Database</li>
+  <li>ACE code editor for JSON editing</li>
+  <li>File creation, renaming, deletion</li>
+  <li>Multi-user collaboration system</li>
+  <li>Live presence tracking</li>
+  <li>Role-based access (admin, editor, viewer)</li>
+</ul>
+
+<div class="box">
+This system is designed for developers building SaaS tools, admin dashboards, or collaborative document systems.
+</div>
+
+<hr>
+
+<h2>2. System Architecture Overview</h2>
+
+<p>
+The system is structured around Firebase as the backend:
+</p>
+
+<pre><code>
+Frontend (HTML + JS + ACE Editor)
+        |
+        v
+Firebase Authentication
+        |
+        v
+Firebase Realtime Database
+        |
+        v
+Live Sync + Collaboration + File Storage
+</code></pre>
+
+<p>
+There is no traditional backend server. Firebase handles everything.
+</p>
+
+<hr>
+
+<h2>3. Firebase Setup Explained</h2>
+
+<p>
+We initialize Firebase like this:
+</p>
+
+<pre><code>
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "app.firebaseapp.com",
+  databaseURL: "https://app.firebaseio.com",
+  projectId: "app-id"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.database();
+</code></pre>
+
+<p>
+This connects:
+</p>
+<ul>
+  <li>Authentication service</li>
+  <li>Realtime database</li>
+</ul>
+
+<hr>
+
+<h2>4. Authentication Flow (Google Login)</h2>
+
+<p>
+Users log in using Google OAuth popup:
+</p>
+
+<pre><code>
+loginBtn.onclick = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
+};
+</code></pre>
+
+<p>
+We listen for login state changes:
+</p>
+
+<pre><code>
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log("Logged in:", user.displayName);
+  }
+});
+</code></pre>
+
+<h3>What happens after login?</h3>
+
+<ul>
+  <li>User profile is stored in Firebase</li>
+  <li>Profile picture is displayed</li>
+  <li>User is mapped to UID</li>
+  <li>File access is loaded</li>
+</ul>
+
+<hr>
+
+<h2>5. User Profile System</h2>
+
+<p>
+We store user metadata like this:
+</p>
+
+<pre><code>
+db.ref("users/" + user.uid).set({
+  email: user.email,
+  displayName: user.displayName,
+  photoURL: user.photoURL
+});
+</code></pre>
+
+<p>
+This allows:
+</p>
+
+<ul>
+  <li>Displaying profile pictures in UI</li>
+  <li>Mapping emails to user IDs</li>
+  <li>Collaboration identification</li>
+</ul>
+
+<hr>
+
+<h2>6. File System Structure</h2>
+
+<p>
+Files are structured like this in Firebase:
+</p>
+
+<pre><code>
+files/
+  userUID/
+    filename/
+      owner: userUID
+      content: {...JSON...}
+      collaborators: {...}
+</code></pre>
+
+<p>
+This structure ensures:
+</p>
+
+<ul>
+  <li>Each user owns their files</li>
+  <li>Files can be shared across users</li>
+  <li>Permissions are stored per file</li>
+</ul>
+
+<hr>
+
+<h2>7. Creating a New File</h2>
+
+<pre><code>
+db.ref(`files/${currentUser.uid}/${filename}`).set({
+  owner: currentUser.uid,
+  content: jsonData,
+  collaborators: {
+    [currentUser.uid]: "admin"
+  }
+});
+</code></pre>
+
+<div class="box">
+Every new file automatically assigns the creator as "admin".
+</div>
+
+<hr>
+
+<h2>8. ACE Editor Integration</h2>
+
+<p>
+The ACE editor provides syntax highlighting and JSON formatting:
+</p>
+
+<pre><code>
+const editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.session.setMode("ace/mode/json");
+editor.setOption("fontSize", "14px");
+</code></pre>
+
+<p>
+Why ACE editor?
+</p>
+
+<ul>
+  <li>Lightweight and fast</li>
+  <li>Supports syntax highlighting</li>
+  <li>Great for structured data</li>
+</ul>
+
+<hr>
+
+<h2>9. Real-Time Sync Engine (Core Feature)</h2>
+
+<p>
+This is the most important part of the system.</p>
+
+<pre><code>
+liveSyncRef = db.ref(`${currentFilePath}/content`);
+
+liveSyncRef.on("value", snap => {
+  const data = snap.val();
+  editor.setValue(JSON.stringify(data, null, 2));
+});
+</code></pre>
+
+<h3>How it works:</h3>
+
+<ul>
+  <li>Any change in Firebase triggers update</li>
+  <li>All users viewing file see changes instantly</li>
+  <li>No manual refresh required</li>
+</ul>
+
+<div class="warning">
+If not handled carefully, this can cause infinite update loops. Cursor preservation logic is needed.
+</div>
+
+<hr>
+
+<h2>10. Presence System (Online Users)</h2>
+
+<p>
+We track who is currently viewing a file:
+</p>
+
+<pre><code>
+const presenceRef = db.ref(`presence/${fileRoomId}/${currentUser.uid}`);
+
+presenceRef.set({
+  uid: currentUser.uid,
+  displayName: currentUser.displayName,
+  photoURL: currentUser.photoURL
+});
+
+presenceRef.onDisconnect().remove();
+</code></pre>
+
+<p>
+This enables:
+</p>
+
+<ul>
+  <li>Live user list</li>
+  <li>“Online users” indicator</li>
+  <li>Collaboration awareness</li>
+</ul>
+
+<hr>
+
+<h2>11. Collaboration System</h2>
+
+<p>
+Each file contains collaborators with roles:
+</p>
+
+<pre><code>
+collaborators: {
+  uid1: "admin",
+  uid2: "editor",
+  uid3: "viewer"
+}
+</code></pre>
+
+<p>
+Roles control permissions:
+</p>
+
+<ul>
+  <li><b>Admin</b> – full control (edit, delete, invite)</li>
+  <li><b>Editor</b> – can modify content</li>
+  <li><b>Viewer</b> – read-only access</li>
+</ul>
+
+<hr>
+
+<h2>12. Invitation System</h2>
+
+<p>
+Users can invite others by email:
+</p>
+
+<pre><code>
+inviteBtn.onclick = () => {
+  const emailKey = email.replace(/\./g, "_");
+
+  db.ref("usersByEmail/" + emailKey).once("value", snap => {
+    let uid = snap.val();
+
+    if (!uid) {
+      uid = db.ref("users").push().key;
+      db.ref("users/" + uid).set({ email });
+      db.ref("usersByEmail/" + emailKey).set(uid);
+    }
+
+    db.ref(currentFilePath + "/collaborators/" + uid)
+      .set(role);
+  });
+};
+</code></pre>
+
+<p>
+This allows collaboration even for users not yet registered.
+</p>
+
+<hr>
+
+<h2>13. File Renaming System</h2>
+
+<pre><code>
+if (newFilename !== originalFilename) {
+  userRef.child(newFilename).set(data);
+  userRef.child(originalFilename).remove();
+}
+</code></pre>
+
+<p>
+Renaming is implemented as:
+</p>
+
+<ul>
+  <li>Create new node</li>
+  <li>Copy data</li>
+  <li>Delete old node</li>
+</ul>
+
+<hr>
+
+<h2>14. File Deletion Strategy</h2>
+
+<p>
+Instead of immediate deletion:</p>
+
+<pre><code>
+fileRef.child("meta").set({
+  deleted: true
+});
+</code></pre>
+
+<p>
+Then after delay:</p>
+
+<pre><code>
+fileRef.remove();
+</code></pre>
+
+<p>
+Why?
+</p>
+
+<ul>
+  <li>Prevents sync crashes</li>
+  <li>Lets collaborators receive update</li>
+  <li>Ensures UI cleanup</li>
+</ul>
+
+<hr>
+
+<h2>15. Uploading JSON Files</h2>
+
+<pre><code>
+reader.onload = e => {
+  const jsonData = JSON5.parse(e.target.result);
+
+  db.ref(`files/${uid}/${filename}`).set({
+    owner: uid,
+    content: jsonData
+  });
+};
+</code></pre>
+
+<p>
+Supports importing external JSON files directly.
+</p>
+
+<hr>
+
+<h2>16. Email-to-UID Mapping</h2>
+
+<p>
+We map emails to Firebase IDs:
+</p>
+
+<pre><code>
+function encodeEmail(email){
+  return email.replace(/\./g,"_");
+}
+</code></pre>
+
+<p>
+This allows:
+</p>
+
+<ul>
+  <li>Fast lookup</li>
+  <li>Invitation system</li>
+  <li>User resolution without login</li>
+</ul>
+
+<hr>
+
+<h2>17. Performance Considerations</h2>
+
+<ul>
+  <li>Use <b>on() carefully</b> to avoid memory leaks</li>
+  <li>Detach listeners when switching files</li>
+  <li>Limit Firebase writes per second</li>
+  <li>Debounce editor changes (recommended upgrade)</li>
+</ul>
+
+<hr>
+
+<h2>18. Security Considerations</h2>
+
+<div class="warning">
+Firebase rules are essential. Without them, anyone can access or modify data.
+</div>
+
+<p>Recommended rules concept:</p>
+
+<pre><code>
+{
+  "rules": {
+    "files": {
+      "$uid": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    }
+  }
+}
+</code></pre>
+
+<hr>
+
+<h2>19. Possible Improvements</h2>
+
+<ul>
+  <li>Operational Transform (OT) or CRDT for conflict-free editing</li>
+  <li>Version history system</li>
+  <li>Undo/redo support</li>
+  <li>File folders system</li>
+  <li>Chat per file</li>
+</ul>
+
+<hr>
+
+<h2>20. Conclusion</h2>
+
+<p>
+This Firebase JSON editor demonstrates how powerful modern frontend + backend-as-a-service systems can be.
+With just JavaScript and Firebase, you can build:
+</p>
+
+<ul>
+  <li>Real-time collaborative tools</li>
+  <li>Cloud file systems</li>
+  <li>SaaS productivity apps</li>
+</ul>
+
+<div class="box">
+This architecture is scalable enough to evolve into a full startup-grade collaboration platform.
+</div>
+
+</main>
+
+</body>
+</html>
