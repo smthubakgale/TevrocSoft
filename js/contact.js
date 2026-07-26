@@ -1,4 +1,11 @@
 // Contact Page Specific JavaScript
+function pageToast(message, type = 'info') {
+    if (window.showToast) {
+        window.showToast(message, type);
+    } else {
+        console.warn(message);
+    }
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Form validation
     const contactForm = document.querySelector('#contact form');
@@ -12,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = this.querySelector('textarea').value;
             
             if (!name || !email || !message) {
-                alert('Please fill in all required fields');
+                pageToast('Please fill in all required fields', 'error');
                 return;
             }
             
             // Show success message
-            alert('Thank you for your message. We will get back to you shortly.');
+            pageToast('Thank you for your message. We will get back to you shortly.', 'success');
             this.reset();
         });
     }

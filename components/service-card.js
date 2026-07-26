@@ -3,6 +3,7 @@ class CustomServiceCard extends HTMLElement {
     const icon = this.getAttribute('icon') || 'activity';
     const title = this.getAttribute('title') || 'Service';
     const description = this.getAttribute('description') || 'Service description';
+    const link = this.getAttribute('link') || '#appointment';
 
     this.attachShadow({ mode: 'open' });
 
@@ -101,7 +102,7 @@ class CustomServiceCard extends HTMLElement {
         </div>
         <h3>${title}</h3>
         <p>${description}</p>
-        <a href="#appointment" class="learn-more">
+        <a href="${link}" class="learn-more">
           Learn more <i class="bi bi-arrow-right"></i>
         </a>
       </div>

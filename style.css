@@ -45,6 +45,97 @@ background-size: cover;
     .animate-spin {
         animation: spin 1s linear infinite;
     }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(18px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroPulse {
+        0%, 100% { transform: scale(1); filter: brightness(0.95); }
+        50% { transform: scale(1.02); filter: brightness(1.08); }
+    }
+
+    .animate-fade-up {
+        animation: fadeUp 0.9s ease-out both;
+    }
+
+    .animate-hero {
+        animation: heroPulse 6s ease-in-out infinite;
+    }
+
+    .animate-zoom-hover {
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .animate-zoom-hover:hover {
+        transform: scale(1.03);
+        filter: brightness(1.04);
+    }
+
+    .toast-container {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-width: 360px;
+        pointer-events: none;
+    }
+
+    .toast {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1rem 1rem 1.2rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.95);
+        color: #f8fafc;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.25);
+        opacity: 0;
+        transform: translateY(-10px);
+        animation: toastIn 0.25s ease forwards;
+        pointer-events: auto;
+    }
+
+    .toast.success {
+        background: linear-gradient(135deg, #0d9488, #22c55e);
+    }
+
+    .toast.error {
+        background: linear-gradient(135deg, #dc2626, #f97316);
+    }
+
+    .toast.info {
+        background: linear-gradient(135deg, #2563eb, #38bdf8);
+    }
+
+    .toast-close {
+        background: transparent;
+        border: none;
+        color: rgba(248, 250, 252, 0.95);
+        cursor: pointer;
+        font-size: 1rem;
+        opacity: 0.85;
+    }
+
+    .toast-close:hover {
+        opacity: 1;
+    }
+
+    @keyframes toastIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .toast.toast-hide {
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
 /* Custom scrollbar */
     ::-webkit-scrollbar {
         @apply w-2;

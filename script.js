@@ -1,4 +1,41 @@
 // Main script file for functionality
+function getToastContainer() {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    return container;
+}
+
+function showToast(message, type = 'info', duration = 4500) {
+    const container = getToastContainer();
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <span class="toast-message">${message}</span>
+        <button type="button" class="toast-close" aria-label="Dismiss toast">×</button>
+    `;
+
+    const closeButton = toast.querySelector('.toast-close');
+    const removeToast = () => toast.remove();
+    closeButton.addEventListener('click', removeToast);
+
+    container.appendChild(toast);
+    const timeoutId = setTimeout(() => {
+        toast.classList.add('toast-hide');
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-10px)';
+        setTimeout(removeToast, 250);
+    }, duration);
+
+    toast.addEventListener('mouseenter', () => clearTimeout(timeoutId));
+    toast.addEventListener('mouseleave', () => setTimeout(removeToast, duration));
+}
+
+window.showToast = showToast;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Smooth page transitions
     document.querySelectorAll('a').forEach(anchor => {
@@ -27,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your message. We will get back to you shortly.');
+            showToast('Thank you for your message. We will get back to you shortly.', 'success');
             this.reset();
         });
     }
@@ -45,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Simulate API call
             setTimeout(() => {
-                alert('Thank you for your message. We will get back to you shortly.');
+                showToast('Thank you for your message. We will get back to you shortly.', 'success');
                 this.reset();
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;

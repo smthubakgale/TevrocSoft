@@ -38,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: title,
                 url: url
             }).catch(() => {
-                alert('Web Share API not supported in your browser');
+                if (window.showToast) {
+                    window.showToast('Web Share API not supported in your browser', 'info');
+                }
             });
         });
     });

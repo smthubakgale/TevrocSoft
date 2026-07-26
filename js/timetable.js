@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         filterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             // In a real implementation, this would filter the timetable
-            alert('Filtering timetable...');
+            if (window.showToast) {
+                window.showToast('Filtering timetable...', 'info');
+            }
         });
     }
 });

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Layouts That Work | TevrocSoft Blog</title>
+    <meta name="description" content="How to design UI layouts that improve clarity, usability, and conversion." />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/ui-layouts.html">
+    <base href="../">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    <main class="container mx-auto px-4 py-20">
+        <article class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="relative">
+                <img src="../img/blogs/ui-layouts-hero.png" alt="UI layouts" class="w-full h-96 object-cover animate-hero">
+                <div class="absolute inset-0 bg-black bg-opacity-35 flex items-end p-8">
+                    <div class="text-white">
+                        <p class="uppercase tracking-[0.24em] text-sm text-cyan-200 mb-2">Insight</p>
+                        <h1 class="text-4xl md:text-5xl font-bold leading-tight">UI Layouts That Work</h1>
+                    </div>
+                </div>
+            </div>
+            <section class="p-8 md:p-12 space-y-8">
+                <div class="text-sm text-gray-500 uppercase tracking-[0.24em]">Blog · 5 min read</div>
+                <p class="text-lg text-slate-700 leading-relaxed">A strong UI layout turns complexity into clarity. The right structure helps users understand what to do, where to click, and how the experience flows.</p>
+                <h2 class="text-3xl font-semibold">Layout clarity matters</h2>
+                <p class="text-slate-700 leading-relaxed">Simple layouts guide users through tasks with clear hierarchy, whitespace, and visual cues. They reduce cognitive load and help customers move confidently.</p>
+                <img src="../img/blogs/ui-layouts-examples.png" alt="UI layout examples" class="w-full rounded-3xl shadow-sm animate-fade-up">
+                <ul class="list-disc list-inside text-slate-700 space-y-3">
+                    <li><strong>Prioritize primary actions.</strong> Make the most important task the easiest to find.</li>
+                    <li><strong>Group related content.</strong> Logical sections help users digest information quickly.</li>
+                    <li><strong>Use whitespace intentionally.</strong> Enough breathing room improves readability and focus.</li>
+                </ul>
+                <div class="rounded-3xl border border-slate-200 p-6 bg-slate-50">
+                    <h3 class="text-2xl font-semibold">Takeaway</h3>
+                    <p class="text-slate-700 mt-3">Great UI layouts make products feel easy. They help customers get things done and give teams a stable base for future growth.</p>
+                </div>
+                <div class="mt-8 text-center">
+                    <a href="../contact.html" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-white font-semibold hover:bg-sky-700 transition">Improve your UI layout today</a>
+                </div>
+            </section>
+        </article>
+    </main>
+    <custom-footer></custom-footer>
+    <script>
+        feather.replace();
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>

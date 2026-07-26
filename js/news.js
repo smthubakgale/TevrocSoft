@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = e.target.querySelector('input[type="email"]').value;
             
             if (!email.includes('@')) {
-                alert('Please enter a valid email address');
+                window.showToast('Please enter a valid email address', 'error');
                 return;
             }
             
-            alert('Thank you for subscribing to our newsletter!');
+            window.showToast('Thank you for subscribing to our newsletter!', 'success');
             e.target.reset();
         });
     }

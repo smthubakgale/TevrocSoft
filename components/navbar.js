@@ -2,6 +2,8 @@ class CustomNavbar extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: "open" });
 
+    this.ensureHeadMeta();
+
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
       <style>
@@ -62,6 +64,9 @@ class CustomNavbar extends HTMLElement {
 
         .nav-link,
         .dropdown-trigger {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
           border: 0;
           background: transparent;
           color: var(--primary);
@@ -71,6 +76,13 @@ class CustomNavbar extends HTMLElement {
           text-decoration: none;
           cursor: pointer;
           transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-link .lucide,
+        .dropdown-trigger .lucide {
+          width: 1rem;
+          height: 1rem;
+          min-width: 1rem;
         }
 
         .nav-link:hover,
@@ -410,29 +422,15 @@ class CustomNavbar extends HTMLElement {
           </a>
 
           <nav class="desktop-nav" aria-label="Primary navigation">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.html"><i data-lucide="home"></i>Home</a>
+            <a class="nav-link" href="services.html"><i data-lucide="server"></i>Services</a>
+            <a class="nav-link" href="pricing.html"><i data-lucide="badge-dollar-sign"></i>Pricing</a>
+            <a class="nav-link" href="portfolios.html"><i data-lucide="smartphone"></i>Apps</a>
+            <a class="nav-link" href="about.html"><i data-lucide="info"></i>About</a>
+            <a class="nav-link" href="blogs.html"><i data-lucide="book-open"></i>Blogs</a>
+            <a class="nav-link" href="contact.html"><i data-lucide="mail"></i>Contact</a>
             <div class="dropdown-shell">
-              <button class="dropdown-trigger" type="button">Services</button>
-              <div class="dropdown-panel">
-                <a href="services.html">Web Development</a>
-                <a href="services.html">Mobile Apps</a>
-                <a href="services.html">Automation</a>
-                <a href="services.html">API & Integrations</a>
-              </div>
-            </div>
-            <div class="dropdown-shell">
-              <button class="dropdown-trigger" type="button">Pricing</button>
-              <div class="dropdown-panel">
-                <a href="pricing.html">Full Pricing</a>
-                <a href="pricing.html#quote-generator">Quotation Generator</a>
-                <a href="contact.html">Book a Discovery Call</a>
-              </div>
-            </div>
-            <a class="nav-link" href="portfolios.html">Portfolio</a>
-            <a class="nav-link" href="about.html">About</a>
-            <a class="nav-link" href="contact.html">Contact</a>
-            <div class="dropdown-shell">
-              <button class="dropdown-trigger" type="button">Resources</button>
+              <button class="dropdown-trigger" type="button"><i data-lucide="archive"></i>Resources</button>
               <div class="dropdown-panel">
                 <div class="dropdown-section">
                   <button class="submenu-toggle" type="button" data-target="policies-submenu">
@@ -492,12 +490,13 @@ class CustomNavbar extends HTMLElement {
         <div class="drawer-body">
           <div class="drawer-group">
             <div class="drawer-group-title">Main</div>
-            <a class="drawer-link" href="index.html">Home</a>
-            <a class="drawer-link" href="services.html">Services</a>
-            <a class="drawer-link" href="pricing.html">Pricing</a>
-            <a class="drawer-link" href="portfolios.html">Portfolio</a>
-            <a class="drawer-link" href="about.html">About</a>
-            <a class="drawer-link" href="contact.html">Contact</a>
+            <a class="drawer-link" href="index.html"><i data-lucide="home"></i>Home</a>
+            <a class="drawer-link" href="services.html"><i data-lucide="server"></i>Services</a>
+            <a class="drawer-link" href="pricing.html"><i data-lucide="badge-dollar-sign"></i>Pricing</a>
+            <a class="drawer-link" href="portfolios.html"><i data-lucide="smartphone"></i>Apps</a>
+            <a class="drawer-link" href="about.html"><i data-lucide="info"></i>About</a>
+            <a class="drawer-link" href="blogs.html"><i data-lucide="book-open"></i>Blogs</a>
+            <a class="drawer-link" href="contact.html"><i data-lucide="mail"></i>Contact</a>
           </div>
 
           <div class="drawer-group">
@@ -617,6 +616,30 @@ class CustomNavbar extends HTMLElement {
     };
 
     document.head.appendChild(script);
+  }
+
+  ensureHeadMeta() {
+    if (!document.head) return;
+
+    let title = document.head.querySelector('title');
+    if (!title) {
+      title = document.createElement('title');
+      title.textContent = 'TevrocSoft | Custom Software, Web and App Development';
+      document.head.appendChild(title);
+    }
+
+    const addLink = (rel, href, type) => {
+      if (!document.head.querySelector(`link[rel="${rel}"][href="${href}"]`)) {
+        const link = document.createElement('link');
+        link.rel = rel;
+        link.href = href;
+        if (type) link.type = type;
+        document.head.appendChild(link);
+      }
+    };
+
+    addLink('icon', 'img/favicon.png', 'image/x-icon');
+    addLink('shortcut icon', 'img/favicon.png', 'image/x-icon');
   }
 
   setupInteractions() {
