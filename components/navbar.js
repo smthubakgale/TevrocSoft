@@ -552,8 +552,37 @@ class CustomNavbar extends HTMLElement {
       </nav>
     `;
 
+    this.loadGoogleAnalytics(); 
     this.loadLucide();
     this.setupInteractions();
+  }
+
+  loadGoogleAnalytics(measurementId = "G-JVTS4SVGNY") {
+      // Prevent loading more than once
+      if (window.gtag) return;
+
+      window.dataLayer = window.dataLayer || [];
+
+      window.gtag = function () {
+          window.dataLayer.push(arguments);
+      };
+
+      window.gtag('js', new Date());
+
+      const script = document.createElement('script');
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      script.async = true;
+
+      script.onload = () => {
+          window.gtag('config', measurementId);
+          console.log("Google Analytics initialized");
+      };
+
+      script.onerror = () => {
+          console.warn("Failed to load Google Analytics.");
+      };
+
+      document.head.appendChild(script);
   }
 
   loadLucide() {
