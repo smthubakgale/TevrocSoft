@@ -229,6 +229,8 @@
 
       let currentUser = null;
       let googleSubscription = null;
+      const workerUrl = 'https://tevroc-worker.smthubakgale2290.workers.dev';
+      const netlifyUrl = 'https://tevrocsoftapi.netlify.app';
       
       const isMobile = () => window.innerWidth < 1024;
 
@@ -290,14 +292,14 @@
             appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
           }
         } else {
-          chatStatus.textContent = 'Sign in with Google to open the AI assistant.';
-          chatAssistantBtn.textContent = 'Sign in with Google';
+          chatStatus.textContent = 'AI assistant ready.';
+          chatAssistantBtn.textContent = 'Open AI chat';
           chatSignOutBtn.classList.add('hidden');
-          chatInput.disabled = true;
-          chatSubmitBtn.disabled = true;
-          chatPanel.classList.add('hidden');
-          chatOverlay.classList.add('hidden');
-          chatBox.innerHTML = '';
+          chatInput.disabled = false;
+          chatSubmitBtn.disabled = false;
+          if (!chatBox.hasChildNodes()) {
+            appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
+          }
         }
       };
 
@@ -307,22 +309,41 @@
           chatStatus.textContent = 'Restoring your chat session...';
         }
         updateChatState(stored);
+        if (stored) {
+          openChatIfPending();
+        }
       };
 
-      const createTevrocClient = () => {
+      const createTevrocClient = (baseUrl, serviceUrl = baseUrl) => {
         if (!window.Tevroc || typeof window.Tevroc.createClient !== 'function') {
           console.warn('Tevroc SDK not loaded.');
           return null;
         }
         return window.Tevroc.createClient({
-          baseUrl: 'https://tevrocsoftapi.netlify.app',
-          serviceUrl: 'https://tevrocsoftapi.netlify.app',
+          baseUrl,
+          serviceUrl,
           appId: 'tevrocsoft',
           appName: 'TevrocSoft'
         });
       };
 
-      const client = createTevrocClient();
+      const authClient = createTevrocClient(netlifyUrl, netlifyUrl);
+      const aiClient = createTevrocClient(workerUrl, netlifyUrl);
+
+      const setPendingChatOpen = (value) => {
+        if (value) {
+          localStorage.setItem('pendingChatOpen', '1');
+        } else {
+          localStorage.removeItem('pendingChatOpen');
+        }
+      };
+
+      const openChatIfPending = () => {
+        if (localStorage.getItem('pendingChatOpen') === '1') {
+          setPendingChatOpen(false);
+          openChatDialog();
+        }
+      };
 
       const signOut = () => {
         localStorage.removeItem('user');
@@ -335,31 +356,8 @@
       };
 
       const handleAssistantClick = async () => {
-        if (!client || !client.auth) {
+        if (!aiClient || !aiClient.integrations?.Core?.InvokeLLM) {
           chatStatus.textContent = 'Chat integration unavailable.';
-          return;
-        }
-
-        if (!getStoredUser()) {
-          googleSubscription = client.auth.onGoogleLogin((user, err) => {
-            if (err) {
-              console.error(err);
-              chatStatus.textContent = 'Google sign in failed. Please try again.';
-              return;
-            }
-            if (user) {
-              localStorage.setItem('user', JSON.stringify(user));
-              localStorage.setItem('idToken', user.accessToken || '');
-              updateChatState(user);
-              openChatDialog();
-            }
-          });
-
-          client.auth.googleLogin({
-            serviceUrl: 'https://tevrocsoftapi.netlify.app',
-            appId: 'tevrocsoft',
-            appName: 'TevrocSoft'
-          });
           return;
         }
 
@@ -368,16 +366,35 @@
           return;
         }
 
+        const storedUser = getStoredUser();
+        if (!storedUser && !currentUser) {
+          try {
+            setPendingChatOpen(true);
+            chatStatus.textContent = 'Signing in with Google...';
+            if (authClient?.auth?.loginWithProvider) {
+              await authClient.auth.loginWithProvider('google', window.location.href);
+            } else {
+              throw new Error('Google login is unavailable.');
+            }
+          } catch (err) {
+            console.error(err);
+            setPendingChatOpen(false);
+            chatStatus.textContent = 'Google sign-in was cancelled or failed.';
+          }
+          return;
+        }
+
         openChatDialog();
       };
 
       const askChatbot = async (message) => {
-        if (!client || !client.integrations || typeof client.integrations.InvokeLLM !== 'function') {
+        if (!aiClient?.integrations?.Core?.InvokeLLM) {
           throw new Error('Chatbot service unavailable.');
         }
 
         const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional. User: ${message}`;
-        return await client.integrations.InvokeLLM({ prompt });
+        const result = await aiClient.integrations.Core.InvokeLLM({ prompt });
+        return result?.text || result?.data?.text || result?.response || '';
       };
 
       chatAssistantBtn.addEventListener('click', handleAssistantClick);
