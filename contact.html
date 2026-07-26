@@ -31,60 +31,385 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="components/navbar.js"></script>
+    <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
+    <script src="https://unpkg.com/tevrocsdk@latest/tevroc-sdk.min.js"></script>
+    <style>
+      #chatBox {
+        scrollbar-width: thin;
+        scrollbar-color: #3b82f6 #e0f2fe;
+      }
+      #chatBox::-webkit-scrollbar {
+        width: 8px;
+      }
+      #chatBox::-webkit-scrollbar-track {
+        background: #e0f2fe;
+        border-radius: 9999px;
+      }
+      #chatBox::-webkit-scrollbar-thumb {
+        background: #3b82f6;
+        border-radius: 9999px;
+      }
+    </style>
 </head>
 <body class="bg-gray-50">
     <custom-navbar></custom-navbar>
 
-    <main class="container mx-auto px-4 py-20">
-        <section class="mb-16 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Let’s build something valuable</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tell us about your idea, product, and goals. We’ll help shape the right solution for your team.</p>
-        </section>
-
-        <section class="mb-16">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="space-y-6">
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4"><i data-feather="map-pin" class="text-blue-600 w-6 h-6"></i></div>
-                            <div><h3 class="text-xl font-bold mb-2">Location</h3><p class="text-gray-600">Johannesburg, South Africa</p></div>
+    <main class="container mx-auto px-4 py-16">
+        <section class="mb-12">
+            <div class="mx-auto max-w-6xl">
+                <div class="rounded-[2.5rem] bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 p-8 sm:p-10 text-white shadow-[0_30px_90px_-40px_rgba(15,23,42,0.9)] ring-1 ring-white/10">
+                    <div class="space-y-6 md:space-y-8">
+                        <div class="space-y-4 max-w-3xl">
+                            <p class="text-sm uppercase tracking-[0.35em] text-cyan-300">Contact & proposal</p>
+                            <h1 class="text-4xl md:text-5xl font-semibold leading-tight">Work with the team behind ClientFlow and custom business apps.</h1>
+                            <p class="text-base text-slate-300 leading-8">From web platforms to mobile solutions, TevrocSoft builds polished software that improves team productivity and unlocks new revenue.</p>
+                        </div>
+                        <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+                            <div class="flex flex-wrap gap-3">
+                                <span class="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200 ring-1 ring-white/10">Custom software</span>
+                                <span class="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200 ring-1 ring-white/10">Mobile & web apps</span>
+                                <span class="inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm text-slate-200 ring-1 ring-white/10">Product strategy</span>
+                            </div>
+                            <a href="#contact-form" class="inline-flex items-center justify-center rounded-full bg-sky-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:bg-sky-400">Talk to us</a>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-3">
+                            <div class="rounded-[1.75rem] bg-slate-900/80 p-5 ring-1 ring-white/10">
+                                <p class="text-3xl font-semibold">10+</p>
+                                <p class="mt-2 text-sm text-slate-400">Years experience</p>
+                            </div>
+                            <div class="rounded-[1.75rem] bg-slate-900/80 p-5 ring-1 ring-white/10">
+                                <p class="text-3xl font-semibold">50+</p>
+                                <p class="mt-2 text-sm text-slate-400">Projects delivered</p>
+                            </div>
+                            <div class="rounded-[1.75rem] bg-slate-900/80 p-5 ring-1 ring-white/10">
+                                <p class="text-3xl font-semibold">24/7</p>
+                                <p class="mt-2 text-sm text-slate-400">Ongoing support</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4"><i data-feather="mail" class="text-blue-600 w-6 h-6"></i></div>
-                            <div><h3 class="text-xl font-bold mb-2">Email</h3><p class="text-gray-600">info@tevrocsoft.co.za</p></div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4"><i data-feather="phone" class="text-blue-600 w-6 h-6"></i></div>
-                            <div><h3 class="text-xl font-bold mb-2">Call</h3><p class="text-gray-600">066 2531653</p></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-8">
-                    <h3 class="text-2xl font-bold mb-6">Start your project</h3>
-                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-1"><label class="block text-gray-700 font-medium">Your Name <span class="text-red-500">*</span></label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required></div>
-                        <div class="space-y-1"><label class="block text-gray-700 font-medium">Your Email <span class="text-red-500">*</span></label><input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required></div>
-                        <div class="space-y-1"><label class="block text-gray-700 font-medium">Project Type</label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></div>
-                        <div class="space-y-1"><label class="block text-gray-700 font-medium">Timeline</label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></div>
-                        <div class="md:col-span-2 space-y-1"><label class="block text-gray-700 font-medium">Project Details <span class="text-red-500">*</span></label><textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required></textarea></div>
-                        <div class="md:col-span-2"><button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Send Project Brief</button></div>
-                    </form>
                 </div>
             </div>
         </section>
-    </main>
 
+        <section class="grid gap-8">
+            <div class="space-y-8 min-w-0">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 min-w-0">
+                    <div class="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-200/70 transition hover:-translate-y-1 min-w-0">
+                        <div class="flex items-center gap-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">Location</h3>
+                                <p class="mt-1 text-sm text-slate-600">Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-200/70 transition hover:-translate-y-1">
+                        <div class="flex items-center gap-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="mail" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">Email</h3>
+                                <p class="mt-1 text-sm text-slate-600">info@tevrocsoft.co.za</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-200/70 transition hover:-translate-y-1">
+                        <div class="flex items-center gap-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="phone" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">Call</h3>
+                                <p class="mt-1 text-sm text-slate-600">066 253 1653</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-200/70 transition hover:-translate-y-1">
+                        <div class="flex items-center gap-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="cpu" class="w-6 h-6"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold">AI Chat Assistant</h3>
+                                <p class="mt-1 text-sm text-slate-600">Sign in with Google to open the right-side chat pane.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex flex-col gap-3 rounded-[1.75rem] border border-slate-200 bg-slate-50 p-4">
+                            <p class="text-sm text-slate-600">Chat status</p>
+                            <p id="chatStatus" class="text-sm font-semibold text-slate-800">Checking login state…</p>
+                            <button id="chatAssistantBtn" type="button" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">Sign in with Google</button>
+                            <button id="chatSignOutBtn" type="button" class="hidden rounded-full bg-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-300">Sign out</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-[2rem] bg-white p-8 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70">
+                    <div class="mb-6">
+                        <p class="text-sm uppercase tracking-[0.24em] text-blue-600">Project enquiry</p>
+                        <h3 class="mt-3 text-3xl font-semibold text-slate-900">Start your project</h3>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">Share a few details and we’ll reach out with a tailored plan, estimate, and next steps.</p>
+                    </div>
+                    <form class="grid grid-cols-1 gap-5">
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <label class="block text-sm font-medium text-slate-700">Your Name <span class="text-red-500">*</span>
+                                <input type="text" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+                            </label>
+                            <label class="block text-sm font-medium text-slate-700">Your Email <span class="text-red-500">*</span>
+                                <input type="email" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required>
+                            </label>
+                        </div>
+                        <label class="block text-sm font-medium text-slate-700">Project Type
+                            <input type="text" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                        </label>
+                        <label class="block text-sm font-medium text-slate-700">Timeline
+                            <input type="text" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                        </label>
+                        <label class="block text-sm font-medium text-slate-700">Project Details <span class="text-red-500">*</span>
+                            <textarea rows="5" class="mt-2 w-full rounded-[1.5rem] border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200" required></textarea>
+                        </label>
+                        <button type="submit" class="inline-flex items-center justify-center rounded-[1.5rem] bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">Send Project Brief</button>
+                    </form>
+                </div>
+            </div>
+
+                <aside id="chatPanel" class="hidden fixed inset-0 z-50 mx-2 flex min-h-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-4 text-sm shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-2rem)] lg:inset-auto lg:mx-0 lg:right-6 lg:top-24 lg:bottom-6 lg:w-[420px] lg:max-w-[420px] lg:rounded-[2rem] lg:p-6 lg:shadow-2xl lg:ring-slate-200/70" style="z-index:99999">
+                    <div class="flex items-center gap-3 mb-6">
+                        <button id="chatBackBtn" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 shadow-sm transition hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white lg:hidden">
+                            <span class="sr-only">Back</span>
+                            <i data-feather="arrow-left" class="h-5 w-5"></i>
+                        </button>
+                        <div class="min-w-0">
+                            <p class="text-sm uppercase tracking-[0.3em] text-blue-600">AI Assistant</p> 
+                        </div>
+                        <div class="ml-auto inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700">
+                            <i data-feather="message-circle" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div class="lg:mt-0 flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.75rem] bg-white p-1 shadow-inner ring-1 ring-slate-100" id="chatWindow">
+                        <div id="chatBox" class="chat-scroll min-h-0 flex-1 h-full space-y-3 overflow-y-auto break-words whitespace-pre-wrap pb-3 text-sm leading-6"></div>
+                    </div>
+                    <form id="chatForm" class="sticky bottom-0 mt-0 grid gap-3 bg-white pt-4 lg:mt-6" style="z-index:1;">
+                        <label for="chatInput" class="sr-only">Ask the assistant</label>
+                        <div class="flex gap-3">
+                            <input id="chatInput" type="text" placeholder="Ask about our apps, services or pricing" class="flex-1 min-w-0 rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" disabled>
+                            <button id="chatSubmitBtn" type="submit" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition hover:bg-blue-700" disabled>
+                                <span class="sr-only">Send</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                                  <path d="M22 2 11 13"></path>
+                                  <path d="m22 2-7 20-4-9-9-4 20-7z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </aside>
+            </section>
+        </main>
+
+    <div id="chatOverlay" class="hidden fixed inset-0 z-40 bg-slate-950/50 lg:hidden"></div>
     <custom-footer></custom-footer>
 
     <script>
         feather.replace();
+    </script>
+    <script>
+      const chatAssistantBtn = document.getElementById('chatAssistantBtn');
+      const chatSignOutBtn = document.getElementById('chatSignOutBtn');
+      const chatStatus = document.getElementById('chatStatus');
+      const chatInput = document.getElementById('chatInput');
+      const chatSubmitBtn = document.getElementById('chatSubmitBtn');
+      const chatForm = document.getElementById('chatForm');
+      const chatBox = document.getElementById('chatBox');
+      const chatPanel = document.getElementById('chatPanel');
+      const chatOverlay = document.getElementById('chatOverlay');
+      const chatBackBtn = document.getElementById('chatBackBtn');
+
+      let currentUser = null;
+      let googleSubscription = null;
+      
+      const isMobile = () => window.innerWidth < 1024;
+
+      const appendMessage = (text, role = 'bot') => {
+        const wrapper = document.createElement('div');
+        wrapper.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
+        wrapper.innerHTML = `<div class="max-w-[88%] ${role === 'user' ? 'rounded-3xl bg-blue-600 text-white' : 'rounded-3xl bg-slate-100 text-slate-900'} p-4 text-sm leading-6 shadow-sm">${text}</div>`;
+        chatBox.appendChild(wrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      };
+
+      const getStoredUser = () => {
+        try {
+          const value = localStorage.getItem('user');
+          return value ? JSON.parse(value) : null;
+        } catch (err) {
+          localStorage.removeItem('user');
+          localStorage.removeItem('idToken');
+          return null;
+        }
+      };
+
+      const openChatDialog = () => {
+        chatPanel.classList.remove('hidden');
+        if (isMobile()) {
+          chatPanel.classList.add('top-4', 'bottom-4');
+          chatOverlay.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          chatOverlay.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      };
+
+      const closeChatDialog = () => {
+        chatPanel.classList.add('hidden');
+        chatOverlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      };
+
+      window.addEventListener('resize', () => {
+        if (!isMobile()) {
+          chatOverlay.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      });
+
+      const updateChatState = (user) => {
+        currentUser = user;
+
+        if (user) {
+          chatStatus.textContent = `Signed in as ${user.firstName || user.email}`;
+          chatAssistantBtn.textContent = 'Open AI chat';
+          chatSignOutBtn.textContent = 'Sign out';
+          chatSignOutBtn.classList.remove('hidden');
+          chatInput.disabled = false;
+          chatSubmitBtn.disabled = false;
+          if (!chatBox.hasChildNodes()) {
+            appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
+          }
+        } else {
+          chatStatus.textContent = 'Sign in with Google to open the AI assistant.';
+          chatAssistantBtn.textContent = 'Sign in with Google';
+          chatSignOutBtn.classList.add('hidden');
+          chatInput.disabled = true;
+          chatSubmitBtn.disabled = true;
+          chatPanel.classList.add('hidden');
+          chatOverlay.classList.add('hidden');
+          chatBox.innerHTML = '';
+        }
+      };
+
+      const loadUser = () => {
+        const stored = getStoredUser();
+        if (stored) {
+          chatStatus.textContent = 'Restoring your chat session...';
+        }
+        updateChatState(stored);
+      };
+
+      const createTevrocClient = () => {
+        if (!window.Tevroc || typeof window.Tevroc.createClient !== 'function') {
+          console.warn('Tevroc SDK not loaded.');
+          return null;
+        }
+        return window.Tevroc.createClient({
+          baseUrl: 'https://tevrocsoftapi.netlify.app',
+          serviceUrl: 'https://tevrocsoftapi.netlify.app',
+          appId: 'tevrocsoft',
+          appName: 'TevrocSoft'
+        });
+      };
+
+      const client = createTevrocClient();
+
+      const signOut = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('idToken');
+        if (googleSubscription) {
+          googleSubscription();
+          googleSubscription = null;
+        }
+        updateChatState(null);
+      };
+
+      const handleAssistantClick = async () => {
+        if (!client || !client.auth) {
+          chatStatus.textContent = 'Chat integration unavailable.';
+          return;
+        }
+
+        if (!getStoredUser()) {
+          googleSubscription = client.auth.onGoogleLogin((user, err) => {
+            if (err) {
+              console.error(err);
+              chatStatus.textContent = 'Google sign in failed. Please try again.';
+              return;
+            }
+            if (user) {
+              localStorage.setItem('user', JSON.stringify(user));
+              localStorage.setItem('idToken', user.accessToken || '');
+              updateChatState(user);
+              openChatDialog();
+            }
+          });
+
+          client.auth.googleLogin({
+            serviceUrl: 'https://tevrocsoftapi.netlify.app',
+            appId: 'tevrocsoft',
+            appName: 'TevrocSoft'
+          });
+          return;
+        }
+
+        if (!chatPanel.classList.contains('hidden')) {
+          closeChatDialog();
+          return;
+        }
+
+        openChatDialog();
+      };
+
+      const askChatbot = async (message) => {
+        if (!client || !client.integrations || typeof client.integrations.InvokeLLM !== 'function') {
+          throw new Error('Chatbot service unavailable.');
+        }
+
+        const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional. User: ${message}`;
+        return await client.integrations.InvokeLLM({ prompt });
+      };
+
+      chatAssistantBtn.addEventListener('click', handleAssistantClick);
+      chatSignOutBtn.addEventListener('click', signOut);
+      chatOverlay.addEventListener('click', closeChatDialog);
+      chatBackBtn.addEventListener('click', closeChatDialog);
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!isMobile() && !chatPanel.classList.contains('hidden') && !chatPanel.contains(target) && !chatAssistantBtn.contains(target)) {
+          closeChatDialog();
+        }
+      });
+
+      chatForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const message = chatInput.value.trim();
+        if (!message) return;
+        appendMessage(message, 'user');
+        chatInput.value = '';
+        chatStatus.textContent = 'Thinking...';
+        try {
+          const reply = await askChatbot(message);
+          appendMessage(reply || 'Sorry, I could not answer that right now.', 'bot');
+          updateChatState(currentUser);
+        } catch (err) {
+          console.error(err);
+          appendMessage('The assistant is unavailable. Please try again later.', 'bot');
+          chatStatus.textContent = 'Chatbot unavailable.';
+        }
+      });
+
+      window.addEventListener('load', loadUser);
     </script>
     <script src="script.js"></script>
 </body>

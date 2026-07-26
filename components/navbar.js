@@ -282,7 +282,7 @@ class CustomNavbar extends HTMLElement {
         .drawer-link {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap:10px;
           width: 100%;
           padding: 0.75rem 0.85rem;
           border-radius: 0.75rem;
