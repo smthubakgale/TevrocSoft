@@ -1,208 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TevrocSoft</title>
 
-  <!-- Title -->
-  <title>Tevroc Soft</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
 
-  <!-- SEO -->
-  <meta name="description" content="Tevroc Soft - Software solutions, web development, and digital services.">
-  <meta name="keywords" content="Tevroc Soft, software development, web apps, IT solutions">
-  <meta name="author" content="Tevroc Soft">
-  <link rel="canonical" href="https://tevrocsoft.co.za/">
+    <!-- Optional Meta -->
+    <meta name="description" content="TevrocSoft builds software, web platforms, and digital experiences for modern businesses.">
+    <meta name="author" content="Tevrocsoft">
+    <meta name="developer" content="Tevrocsoft - https://tevrocsoft.netlify.app">
 
-  <!-- Favicon (CRITICAL for Google) -->
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/favicon.png">
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="TevrocSoft">
+    <meta property="og:description" content="Software, web platforms, and digital experiences for modern businesses.">
+    <meta property="og:image" content="img/logo.svg">
+    <meta property="og:type" content="website">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Tevroc Soft">
-  <meta property="og:description" content="Software solutions and digital services.">
-  <meta property="og:image" content="https://tevrocsoft.co.za/favicon.png">
-  <meta property="og:url" content="https://tevrocsoft.co.za/">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Tevroc Soft">
-  <meta name="twitter:description" content="Software solutions and digital services.">
-  <meta name="twitter:image" content="https://tevrocsoft.co.za/favicon.png">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="assets/libs/css/all.min.css">
-  <link rel="stylesheet" href="assets/libs/css/remixicon.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+ 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/service-card.js"></script>
+    <script src="components/doctor-card.js"></script> 
 </head>
-<body>
-  <header class="top-nav">
-    <nav>
-      <ul>
-        <li class="logo">
-          <a href="#">
-            <img src="favicon.png" loading="lazy" alt="Tevroc Soft Logo" />
-          </a>
-        </li>
-        <li class="home-link" >
-          <a href="#home" class="nav-link" style="color:#3198FF" > TevrocSoft </a>
-        </li>
-        <li class="home-link2">
-          <a href="#home" class="nav-link"> Tevroc </a>
-        </li>
-        <li class="pricing-link">
-          <a href="#pricing" class="nav-link">Pricing</a>
-        </li>
-        <li class="shop-link">
-          <a href="#shop" class="nav-link"> Shop </a>
-        </li>
-        
-        <li class="home-link" >
-          <a href="#doc-app" class="nav-link" style="color:#3198FF" > Doc App </a>
-        </li>
-        <li class="about-link">
-          <a href="#about" class="nav-link">About</a>
-        </li>
-        <li class="privacy-link">
-          <a href="#policy" class="nav-link">Policy</a>
-        </li>
-        <li class="contact-link">
-          <a href="#contact" class="nav-link">Contact</a>
-        </li>
-        <li>
-          <button class="aside-toggle"> <i class="ri-bar-chart-horizontal-line"></i></button>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <div class="containers">
-    <div class="flex-container">
-     <aside class="side-nav">
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
 
-      <nav class="docs-nav">
-  <ul>
-    <!-- Top Level Links -->
-    <li><a href="#services" class="nav-link"> Services </a></li>
-    <li><a href="#portfolio" class="nav-link"> Portfolio</a></li>
-    <li><a href="#pricing" class="nav-link"> Pricing</a></li>
-    <li><a href="#shop" class="nav-link"> Shop</a></li>
-    <li><a href="#about" class="nav-link">About Us</a></li>
-    <li><a href="#contact" class="nav-link">Contact</a></li>
+    <main class="container mx-auto px-4 py-8">
+        <section class="hero relative bg-cover bg-center bg-no-repeat rounded-2xl mb-12" style="background-image: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1400&q=80');">
+            <div class="hero-overlay"></div>
+            <div class="hero-text relative max-w-4xl mx-auto px-6 py-20 text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">TevrocSoft</h1>
+                <h2 class="text-2xl md:text-3xl mb-6">Software, web and digital solutions for growing businesses</h2>
+                <p class="text-lg md:text-xl mb-8">We design and build custom web platforms, mobile apps, automation workflows, and SEO-driven experiences that help teams move faster and serve customers better.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="services.html" class="hero-btn">
+                        <i data-feather="layers" class="inline mr-2"></i>
+                        Explore Services
+                    </a>
+                    <a href="contact.html" class="hero-btn">
+                        <i data-feather="send" class="inline mr-2"></i>
+                        Start a Project
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <!-- User Guide -->
-    <li>
-      <input type="checkbox" id="menu-1">
-      <label for="menu-1" class="submenu-label">
-        User Guide
-        <i class="fas fa-chevron-right submenu-chevron"></i>
-      </label>
-      <ul>
-        <li><a href="#request-quote" class="nav-link">Request Custom Quote</a></li>
-        <li><a href="#create-quote" class="nav-link">Create Advanced Quote</a></li>
-        <li><a href="#specifications" class="nav-link">Create Specifications</a></li>
-        <li><a href="#requirements" class="nav-link">Create Requirements</a></li>
-      </ul>
-    </li>
+        <section id="services" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">What we build</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <custom-service-card class="block" icon="window-stack" title="Custom Web Apps" description="Fast, scalable platforms for operations, client portals, e-commerce, and internal tools."></custom-service-card>
+                <custom-service-card class="block" icon="phone" title="Mobile Apps" description="Engaging mobile experiences designed to support your customers and streamline work."></custom-service-card>
+                <custom-service-card class="block" icon="cpu" title="Automation & AI" description="Workflow automation, integrations, and AI features that reduce repetitive work and improve speed."></custom-service-card>
+            </div>
+            <div class="text-center mt-8">
+                <a href="services.html" class="btn-secondary">View More Services</a>
+            </div>
+        </section>
 
-    <!-- Tutorials & Blogs -->
-    <li>
-      <input type="checkbox" id="menu-2">
-      <label for="menu-2" class="submenu-label">
-        Tutorials & Blogs
-        <i class="fas fa-chevron-right submenu-chevron"></i>
-      </label>
-      <ul>
-        <!-- AI & Machine Learning -->
-        <li>
-          <input type="checkbox" id="submenu-2-1">
-          <label for="submenu-2-1" class="submenu-label">
-            AI & Machine Learning
-            <i class="fas fa-chevron-right submenu-chevron"></i>
-          </label>
-          <ul>
-            <li><a path="blogs/ai" href="#ai-app-development" class="nav-link">AI in App Development</a></li>
-            <li><a href="#" class="nav-link">Machine Learning for Businesses</a></li>
-            <li><a href="#" class="nav-link">AI Chatbots Integration</a></li>
-            <li><a href="#" class="nav-link">Data Analytics & Visualization</a></li>
-            <li><a path="blogs/ai" href="#predictive-analysis-tutorial" class="nav-link">Predictive Analytics Tutorial</a></li>
-          </ul>
-        </li>
+        <section id="doctors" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Selected delivery highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <custom-doctor-card name="Client Portal" specialty="Web Platform" detail="Secure, branded dashboards for service teams" image="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
+                <custom-doctor-card name="Operations Suite" specialty="Automation" detail="Automated workflows and business integrations" image="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
+                <custom-doctor-card name="Growth Launch" specialty="Mobile & SEO" detail="Product launch support with measurable growth" image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
+            </div>
+            <div class="text-center mt-8">
+                <a href="portfolios.html" class="btn btn-secondary">See Our Portfolio</a>
+            </div>
+        </section>
 
-        <!-- App & Web Development -->
-        <li>
-          <input type="checkbox" id="submenu-2-2">
-          <label for="submenu-2-2" class="submenu-label">
-            App & Web Development
-            <i class="fas fa-chevron-right submenu-chevron"></i>
-          </label>
-          <ul>
-            <li><a path="blogs/apps"href="#file-based-apps" class="nav-link"> File-based applications </a></li>
-            
-            <li><a path="blogs/apps"href="#collab-file-based-apps" class="nav-link"> Collab File-based applications </a></li>
-            
-            <li><a path="blogs/apps"href="#form-gen" class="nav-link"> Dynamic JSON Form Builder </a></li>
-            <li><a href="#" class="nav-link">Mobile App Development Best Practices</a></li>
-            <li><a href="#" class="nav-link">Web App Security Tips</a></li>
-            <li><a href="#" class="nav-link">Progressive Web Apps (PWAs)</a></li>
-            <li><a href="#" class="nav-link">E-commerce App Development</a></li>
-            <li><a href="#" class="nav-link">Performance Optimization</a></li>
-          </ul>
-        </li>
+        <section class="py-16 bg-gradient-to-r from-blue-700 to-sky-500 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to build your next digital experience?</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">We partner with founders and teams who need thoughtful software, fast delivery, and dependable support.</p>
+                <a href="contact.html" class="inline-block bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-medium text-center transition duration-300">Book a Discovery Call</a>
+            </div>
+        </section>
 
-        <!-- Emerging Tech -->
-        <li>
-          <input type="checkbox" id="submenu-2-3">
-          <label for="submenu-2-3" class="submenu-label">
-            Emerging Tech
-            <i class="fas fa-chevron-right submenu-chevron"></i>
-          </label>
-          <ul>
-            <li><a href="#" class="nav-link">Blockchain App Development</a></li>
-            <li><a href="#" class="nav-link">AR/VR in Apps</a></li>
-            <li><a href="#" class="nav-link">IoT Applications & Tutorials</a></li>
-            <li><a href="#" class="nav-link">Cloud Services Integration</a></li>
-            <li><a href="#" class="nav-link">Containerization & DevOps</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+        <section class="bg-gray-100 py-16">
+            <div class="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <h3 class="text-2xl font-bold mb-4">Built for modern delivery</h3>
+                    <p class="text-gray-700 mb-4">From concept to launch, TevrocSoft helps businesses translate ideas into polished digital products that are secure, scalable, and easy to maintain.</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>• Custom web applications</li>
+                        <li>• Mobile app development</li>
+                        <li>• SEO and performance optimization</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <h3 class="text-2xl font-bold mb-4">Based in Johannesburg</h3>
+                    <p class="text-gray-700">We work with clients across South Africa and internationally, providing remote collaboration and hands-on delivery.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Policies -->
-    <li>
-      <input type="checkbox" id="menu-3">
-      <label for="menu-3" class="submenu-label">
-        Policies
-        <i class="fas fa-chevron-right submenu-chevron"></i>
-      </label>
-      <ul>
-        <li><a href="#policy" class="nav-link">Privacy Policy</a></li>
-        <li><a href="#terms-of-service" class="nav-link">Terms of Service</a></li>
-        <li><a href="#refund-policy" class="nav-link">Refund Policy</a></li>
-        <li><a href="#cookie-policy" class="nav-link">Cookie Policy</a></li>
-        <li><a href="#acceptable-use-policy" class="nav-link">Acceptable Use</a></li>
-        <li><a href="#intellectual-property" class="nav-link">Intellectual Property</a></li>
-        <li><a href="#disclaimer" class="nav-link">Disclaimer</a></li>
-        <li><a href="#security" class="nav-link">Security</a></li>
-        <li><a href="#payment-terms" class="nav-link">Payment Terms</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+        <section class="mb-16 mt-8">
+            <h2 class="text-3xl font-bold mb-8 text-center">Client feedback</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-gray-700">“TevrocSoft delivered a polished web platform that made our team more efficient from day one.”</p>
+                    <div class="mt-4 font-semibold">A. Mokoena</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-gray-700">“Their approach to automation helped us cut repetitive admin work significantly.”</p>
+                    <div class="mt-4 font-semibold">S. Pillay</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-gray-700">“The launch was smooth, the product was clear, and the support has been excellent.”</p>
+                    <div class="mt-4 font-semibold">T. Ndlovu</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <custom-footer></custom-footer>
 
-</aside>
-      <div class="main-content"> 
-        <section id="main" class="section hidden">  
-        </section> 
-      </div>
-    </div>
-  </div>
-  
-  <script src="assets/libs/ckeditor/ckeditor.js"></script> 
-
-  <script type="module" src="script.js"></script>
-  
+    <script>
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+    <script src="js/index.js"></script> 
 </body>
 </html>

@@ -1,0 +1,141 @@
+
+/* Custom styles that extend Tailwind */
+@layer components {
+    .hero {
+        background-image: url('http://static.photos/medical/1200x630/10');
+background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+    }
+
+    /* Contact section styles */
+    iframe {
+        min-height: 450px;
+    }
+
+    .contact-info-card {
+        transition: all 0.3s ease;
+    }
+
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .contact-info-card i {
+        transition: all 0.3s ease;
+    }
+
+    .contact-info-card:hover i {
+        background-color: #3b82f6 !important;
+        color: white !important;
+    }
+    /* Page transition animations */
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.3s;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+
+    /* Loading spinner */
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+/* Custom scrollbar */
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-blue-500 rounded-md;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-blue-600;
+    }
+/* Fix for shadow DOM components */
+    :host {
+    display: block;
+}
+
+custom-navbar,
+custom-footer,
+custom-service-card,
+custom-doctor-card,
+contact-buttons {
+@apply block;
+}
+
+/* Navbar styles */
+custom-navbar {
+    --navbar-bg: white;
+    --navbar-text: #374151;
+    --navbar-hover: #3b82f6;
+    --navbar-shadow: rgba(0, 0, 0, 0.1);
+}
+
+custom-navbar .navbar {
+    background-color: var(--navbar-bg);
+    box-shadow: 0 2px 4px -1px var(--navbar-shadow);
+}
+
+custom-navbar .nav-link {
+    color: var(--navbar-text);
+    transition: color 0.2s ease;
+}
+
+custom-navbar .nav-link:hover {
+    color: var(--navbar-hover);
+}
+
+custom-navbar .mobile-menu {
+    background-color: var(--navbar-bg);
+}
+
+/* Footer styles */
+custom-footer {
+    --footer-bg: #1f2937;
+    --footer-text: #9ca3af;
+    --footer-link-hover: #3b82f6;
+    --footer-heading: white;
+}
+
+custom-footer footer {
+    background-color: var(--footer-bg);
+}
+
+custom-footer h3, 
+custom-footer h4 {
+    color: var(--footer-heading);
+}
+
+custom-footer .footer-link {
+    color: var(--footer-text);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+custom-footer .footer-link:hover {
+    color: var(--footer-link-hover);
+}
+/* Responsive tweaks */
+    @media (max-width: 768px) {
+        .hero {
+            @apply p-6;
+        }
+    }
+}
+
+/* Print styles */
+@media print {
+    .hero, custom-navbar, custom-footer {
+        @apply hidden;
+    }
+}

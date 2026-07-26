@@ -1,0 +1,27 @@
+/* FAQs Page Specific Styles */
+.faqs-hero {
+    background-image: url('http://static.photos/medical/1200x630/27');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.faq-toggle {
+    transition: background-color 0.2s ease;
+}
+
+.faq-toggle:hover {
+    background-color: #f8fafc;
+}
+
+.faq-content {
+    transition: all 0.3s ease;
+}

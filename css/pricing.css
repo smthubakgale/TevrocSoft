@@ -1,0 +1,46 @@
+/* Pricing Page Specific Styles */
+.pricing-hero {
+    background-image: url('http://static.photos/medical/1200x630/26');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.pricing-plan {
+    transition: all 0.3s ease;
+}
+
+.pricing-plan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.popular-plan {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.popular-plan:hover {
+    transform: scale(1.1);
+}
+
+.plan-feature-icon {
+    transition: all 0.3s ease;
+}
+
+.pricing-plan:hover .plan-feature-icon {
+    transform: scale(1.1);
+    background-color: #3b82f6;
+    color: white;
+}
+
+.insurance-logos {
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.insurance-logos:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}

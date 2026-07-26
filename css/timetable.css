@@ -1,0 +1,42 @@
+/* Timetable Page Specific Styles */
+.timetable-hero {
+    background-image: url('http://static.photos/medical/1200x630/25');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.timetable-filter {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.timetable-table {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.timetable-table th, 
+.timetable-table td {
+    padding: 1rem;
+    vertical-align: top;
+}
+
+.timetable-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+}
+
+.time-slot {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.time-slot:hover {
+    transform: scale(1.02);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.bg-blue-100 { background-color: #dbeafe; border-color: #93c5fd; }
+.bg-red-100 { background-color: #fee2e2; border-color: #fca5a5; }
+.bg-blue-100 { background-color: #dbeafe; border-color: #93c5fd; }
+.bg-yellow-100 { background-color: #fef9c3; border-color: #fde047; }
+.bg-purple-100 { background-color: #f3e8ff; border-color: #d8b4fe; }

@@ -1,0 +1,26 @@
+/* Contact Page Specific Styles */
+.contact-hero {
+    background-image: url('http://static.photos/medical/1200x630/23');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.contact-info-card {
+    transition: all 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+    background: linear-gradient(to right, #f7fafc, #edf2f7);
+}
+
+.map-container {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

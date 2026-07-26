@@ -1,0 +1,26 @@
+/* Services Page Specific Styles */
+.services-hero {
+    background-image: url('http://static.photos/medical/1200x630/21');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.specialized-services {
+    background: linear-gradient(to right, #f7fafc, #edf2f7);
+}
+
+.service-card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    transition: all 0.3s ease;
+}
+
+.service-card-hover:hover .service-icon {
+    transform: scale(1.2);
+    background-color: #3b82f6;
+    color: white;
+}

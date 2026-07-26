@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TevrocSoft - Services</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../img/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon">
+
+    <!-- Optional Meta -->
+    <meta name="description" content="Explore the software, web, and digital services offered by TevrocSoft.">
+    <meta name="author" content="Tevrocsoft">
+    <meta name="developer" content="Tevrocsoft - https://tevrocsoft.netlify.app">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="TevrocSoft - Services">
+    <meta property="og:description" content="Explore the software, web, and digital services offered by TevrocSoft.">
+    <meta property="og:image" content="../img/logo.svg">
+    <meta property="og:type" content="website">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <script src="../components/service-card.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-20">
+        <section class="mb-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Digital services for modern brands</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">From idea to launch, we create reliable software and digital experiences that drive growth and simplify operations.</p>
+        </section>
+
+        <section class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <custom-service-card icon="window-stack" title="Custom Web Apps" description="Bespoke platforms for client portals, dashboards, commerce, booking systems, and internal operations."></custom-service-card>
+                <custom-service-card icon="phone" title="Mobile Apps" description="Native and cross-platform apps for customer engagement, field operations, and service delivery."></custom-service-card>
+                <custom-service-card icon="brush" title="UI/UX Design" description="Thoughtful interfaces and user journeys aligned to your audience and business goals."></custom-service-card>
+                <custom-service-card icon="cpu" title="Automation & AI" description="Workflow automation, integrations, and AI features that reduce repetitive work and improve response times."></custom-service-card>
+                <custom-service-card icon="globe" title="SEO & Performance" description="Search optimisation, site health, and page speed improvements to grow visibility and conversions."></custom-service-card>
+                <custom-service-card icon="cloud" title="Cloud & Support" description="Reliable hosting, maintenance, and technical support so your product stays smooth and secure."></custom-service-card>
+            </div>
+        </section>
+
+        <section class="mb-16 bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-3xl font-bold mb-8 text-center">How we work</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i data-feather="compass" class="text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Discovery</h3>
+                        <p class="text-gray-600">We clarify your goals, audience, and priorities before we write a line of code.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i data-feather="pen-tool" class="text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Design & Build</h3>
+                        <p class="text-gray-600">We shape the product experience, then build the systems that support it.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i data-feather="zap" class="text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Launch</h3>
+                        <p class="text-gray-600">We release the product with performance checks and support from day one.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i data-feather="refresh-cw" class="text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Grow</h3>
+                        <p class="text-gray-600">We continue improving with iterative updates, analytics, and continuous support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        
+    window.feather.replace({ element: this.shadowRoot });
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>

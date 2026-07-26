@@ -1,0 +1,29 @@
+/* Doctors Page Specific Styles */
+.doctors-hero {
+    background-image: url('http://static.photos/medical/1200x630/22');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.doctor-card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-image {
+    transition: all 0.3s ease;
+}
+
+.doctor-card-hover:hover .doctor-image {
+    transform: scale(1.05);
+}
+
+.social-icons {
+    transition: all 0.3s ease;
+}
+
+.doctor-card-hover:hover .social-icons {
+    opacity: 1;
+    transform: translateY(-10px);
+}

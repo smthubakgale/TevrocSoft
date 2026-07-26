@@ -1,0 +1,120 @@
+/* Home Page Specific Styles */
+.hero-section {
+    background-image: url('http://static.photos/medical/1200x630/24');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+
+/* Liquid glass / frosted hero buttons */
+.hero-btn {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.hero-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Enhanced overlay and text readability */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(27, 77, 255, 0.85), rgba(57, 198, 244, 0.7));
+    border-radius: 1rem;
+}
+
+.hero-text h1,
+.hero-text h2,
+.hero-text p {
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.contact-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.map-section iframe {
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+/* Home Page Buttons - Override Bootstrap/Tailwind */
+.hero-section a,
+#services a,
+#doctors a,
+.contact-cta a,
+button {
+    background-color: #2563EB !important;
+    color: #ffffff !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    display: inline-block !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.hero-section a:hover,
+#services a:hover,
+#doctors a:hover,
+.contact-cta a:hover,
+button:hover {
+    background-color: #39C6F4 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+#services .btn-secondary {
+    margin-top: 40px !important;
+}
+
+#doctors .btn-secondary { 
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 0.75rem !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+    border: 2px solid rgba(37, 99, 235, 0.5) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #2563EB !important;
+    backdrop-filter: blur(10px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(180%) !important;
+    transition: all 0.3s ease !important;
+}
+
+#doctors .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #1D4ED8 !important;
+    border-color: rgba(29, 78, 216, 0.7) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+ 

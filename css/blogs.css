@@ -1,0 +1,34 @@
+/* Blogs Page Specific Styles */
+.blogs-hero {
+    background-image: url('http://static.photos/medical/1200x630/28');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+}
+
+.featured-post {
+    transition: all 0.3s ease;
+}
+
+.featured-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-category {
+    transition: all 0.3s ease;
+}
+
+.blog-category:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.blog-article {
+    transition: all 0.3s ease;
+}
+
+.blog-article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

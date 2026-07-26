@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TevrocSoft - Delivery Timeline</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-20">
+        <!-- Timetable Hero -->
+        <section class="mb-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Delivery Roadmap</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">View a typical project journey and discuss the next steps for your build.</p>
+        </section>
+
+        <!-- Timetable Filter -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                <div class="flex-1">
+                    <label class="block text-gray-700 font-medium mb-1">Select Service</label>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Services</option>
+                        <option value="discovery">Discovery</option>
+                        <option value="design">Design</option>
+                        <option value="build">Build</option>
+                        <option value="growth">Growth</option>
+                        <option value="support">Support</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label class="block text-gray-700 font-medium mb-1">Select Team</label>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Teams</option>
+                        <option value="strategy">Strategy</option>
+                        <option value="design">Design</option>
+                        <option value="development">Development</option>
+                        <option value="growth">Growth</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label class="block text-gray-700 font-medium mb-1">Select Date</label>
+                    <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="flex items-end">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition duration-300 h-10">
+                        Filter
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timetable -->
+        <section class="mb-16">
+            <div class="overflow-x-auto bg-white rounded-xl shadow-md">
+                <table class="min-w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Time</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Monday</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Tuesday</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Wednesday</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Thursday</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Friday</th>
+                            <th class="px-6 py-4 text-left text-gray-700 font-bold">Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Morning Sessions -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">08:00 - 09:00</td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Rodriguez</div>
+                                    <div class="text-sm text-gray-600">Pediatrics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-purple-100 border border-purple-300 rounded-lg p-2 cursor-pointer hover:bg-purple-200 transition">
+                                    <div class="font-medium">Dr. Wilson</div>
+                                    <div class="text-sm text-gray-600">Orthopedics</div>
+                                    <button class="mt-1 text-sm text-purple-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">09:00 - 10:00</td>
+                            <td class="px-6 py-4">
+                                <div class="bg-red-100 border border-red-300 rounded-lg p-2 cursor-pointer hover:bg-red-200 transition">
+                                    <div class="font-medium">Dr. Chen</div>
+                                    <div class="text-sm text-gray-600">Neurology</div>
+                                    <button class="mt-1 text-sm text-red-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-2 cursor-pointer hover:bg-yellow-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-yellow-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Rodriguez</div>
+                                    <div class="text-sm text-gray-600">Pediatrics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">10:00 - 11:00</td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Wilson</div>
+                                    <div class="text-sm text-gray-600">Orthopedics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="bg-purple-100 border border-purple-300 rounded-lg p-2 cursor-pointer hover:bg-purple-200 transition">
+                                    <div class="font-medium">Dr. Chen</div>
+                                    <div class="text-sm text-gray-600">Neurology</div>
+                                    <button class="mt-1 text-sm text-purple-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">11:00 - 12:00</td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Rodriguez</div>
+                                    <div class="text-sm text-gray-600">Pediatrics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-red-100 border border-red-300 rounded-lg p-2 cursor-pointer hover:bg-red-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-red-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-2 cursor-pointer hover:bg-yellow-200 transition">
+                                    <div class="font-medium">Dr. Chen</div>
+                                    <div class="text-sm text-gray-600">Neurology</div>
+                                    <button class="mt-1 text-sm text-yellow-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+
+                        <!-- Afternoon Sessions -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">13:00 - 14:00</td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-purple-100 border border-purple-300 rounded-lg p-2 cursor-pointer hover:bg-purple-200 transition">
+                                    <div class="font-medium">Dr. Wilson</div>
+                                    <div class="text-sm text-gray-600">Orthopedics</div>
+                                    <button class="mt-1 text-sm text-purple-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">14:00 - 15:00</td>
+                            <td class="px-6 py-4">
+                                <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-2 cursor-pointer hover:bg-yellow-200 transition">
+                                    <div class="font-medium">Dr. Chen</div>
+                                    <div class="text-sm text-gray-600">Neurology</div>
+                                    <button class="mt-1 text-sm text-yellow-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Rodriguez</div>
+                                    <div class="text-sm text-gray-600">Pediatrics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">15:00 - 16:00</td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="bg-red-100 border border-red-300 rounded-lg p-2 cursor-pointer hover:bg-red-200 transition">
+                                    <div class="font-medium">Dr. Chen</div>
+                                    <div class="text-sm text-gray-600">Neurology</div>
+                                    <button class="mt-1 text-sm text-red-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-purple-100 border border-purple-300 rounded-lg p-2 cursor-pointer hover:bg-purple-200 transition">
+                                    <div class="font-medium">Dr. Wilson</div>
+                                    <div class="text-sm text-gray-600">Orthopedics</div>
+                                    <button class="mt-1 text-sm text-purple-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">16:00 - 17:00</td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4">
+                                <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-2 cursor-pointer hover:bg-yellow-200 transition">
+                                    <div class="font-medium">Dr. Johnson</div>
+                                    <div class="text-sm text-gray-600">Cardiology</div>
+                                    <button class="mt-1 text-sm text-yellow-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 cursor-pointer hover:bg-blue-200 transition">
+                                    <div class="font-medium">Dr. Rodriguez</div>
+                                    <div class="text-sm text-gray-600">Pediatrics</div>
+                                    <button class="mt-1 text-sm text-blue-600 font-medium">Book Now</button>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Consultation CTA -->
+        <section class="bg-gradient-to-r from-blue-700 to-sky-500 text-white rounded-xl p-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Need a Different Time?</h2>
+            <p class="text-xl mb-6 max-w-2xl mx-auto">Contact us to discuss a different timeline or a custom delivery plan.</p>
+            <a href="appointment.html" class="inline-block bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-medium text-center transition duration-300">Request a Consultation</a>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        feather.replace();
+        
+        // Discuss button functionality
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.trim() !== 'Discuss') return;
+            button.addEventListener('click', function() {
+                const phase = this.parentElement.querySelector('.font-medium').textContent;
+                const specialty = this.parentElement.querySelector('.text-sm').textContent;
+                const time = this.closest('tr').querySelector('td:first-child').textContent;
+                
+                // In a real implementation, this would redirect to the inquiry page with these parameters
+                window.location.href = `appointment.html?phase=${encodeURIComponent(phase)}&service=${encodeURIComponent(specialty)}&time=${encodeURIComponent(time)}`;
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
