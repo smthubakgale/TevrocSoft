@@ -387,13 +387,74 @@
         openChatDialog();
       };
 
+      const getChatbotContext = async () => {
+        try {
+          const client = window.Tevroc?.createClient?.({
+            baseUrl: workerUrl,
+            serviceUrl: netlifyUrl,
+            appId: 'tevrocsoft',
+            appName: 'TevrocSoft',
+            userId: 'default',
+          });
+          if (!client?.entities?.ChatbotContent) return '';
+          const records = await client.entities.ChatbotContent.query({
+            filter: { appId: 'tevrocsoft', userId: 'default' },
+            limit: 1,
+          });
+          const item = Array.isArray(records?.data) ? records.data[0] : Array.isArray(records) ? records[0] : null;
+          return item?.content || '';
+        } catch (err) {
+          console.warn('Could not load chatbot context', err);
+          return '';
+        }
+      };
+
+      const handleAgentHandoff = async (message) => {
+        if (!aiClient?.agents?.Support?.createConversation || !aiClient?.agents?.Support?.addMessage) {
+          return false;
+        }
+
+        const shouldHandoff = ['agent', 'support', 'human', 'live agent', 'talk to someone', 'speak to someone', 'contact support', 'help me please']
+          .some((keyword) => message.toLowerCase().includes(keyword));
+
+        if (!shouldHandoff) return false;
+
+        try {
+          const conversation = await aiClient.agents.Support.createConversation({
+            title: 'Support handoff from website chatbot',
+            metadata: { appId: 'tevrocsoft', userId: 'default' },
+          });
+          const conversationId = conversation?.data?.id || conversation?.id;
+          if (conversationId) {
+            await aiClient.agents.Support.addMessage(conversationId, {
+              role: 'user',
+              content: message,
+              metadata: { appId: 'tevrocsoft', userId: 'default' },
+            });
+          }
+          return true;
+        } catch (err) {
+          console.warn('Agent handoff failed', err);
+          return false;
+        }
+      };
+
       const askChatbot = async (message) => {
         if (!aiClient?.integrations?.Core?.InvokeLLM) {
           throw new Error('Chatbot service unavailable.');
         }
 
-        const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional. User: ${message}`;
-        const result = await aiClient.integrations.Core.InvokeLLM({ prompt });
+        if (await handleAgentHandoff(message)) {
+          return 'I can connect you with an agent. I will hand this over so a support person can assist you directly.';
+        }
+
+        const ownerContent = await getChatbotContext();
+        const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional.${ownerContent ? `\n\nOWNER PROVIDED CHATBOT CONTENT:\n${ownerContent}` : ''}\n\nUser: ${message}`;
+        const result = await aiClient.integrations.Core.InvokeLLM({
+          appId: 'tevrocsoft',
+          userId: 'default',
+          prompt,
+        });
         return result?.text || result?.data?.text || result?.response || '';
       };
 
