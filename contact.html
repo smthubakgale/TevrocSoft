@@ -322,8 +322,8 @@
         return window.Tevroc.createClient({
           baseUrl,
           serviceUrl,
-          appId: 'tevrocsoft',
-          appName: 'TevrocSoft'
+          appId: 'tevrocdev',
+          appName: 'TevrocDev'
         });
       };
 
@@ -392,13 +392,13 @@
           const client = window.Tevroc?.createClient?.({
             baseUrl: workerUrl,
             serviceUrl: netlifyUrl,
-            appId: 'tevrocsoft',
-            appName: 'TevrocSoft',
+            appId: 'tevrocdev',
+            appName: 'TevrocDev',
             userId: 'default',
           });
           if (!client?.entities?.ChatbotContent) return '';
           const records = await client.entities.ChatbotContent.query({
-            filter: { appId: 'tevrocsoft', userId: 'default' },
+            filter: { appId: 'tevrocdev', userId: 'default' },
             limit: 1,
           });
           const item = Array.isArray(records?.data) ? records.data[0] : Array.isArray(records) ? records[0] : null;
@@ -422,14 +422,14 @@
         try {
           const conversation = await aiClient.agents.Support.createConversation({
             title: 'Support handoff from website chatbot',
-            metadata: { appId: 'tevrocsoft', userId: 'default' },
+            metadata: { appId: 'tevrocdev', userId: 'default' },
           });
           const conversationId = conversation?.data?.id || conversation?.id;
           if (conversationId) {
             await aiClient.agents.Support.addMessage(conversationId, {
               role: 'user',
               content: message,
-              metadata: { appId: 'tevrocsoft', userId: 'default' },
+              metadata: { appId: 'tevrocdev', userId: 'default' },
             });
           }
           return true;
@@ -451,7 +451,7 @@
         const ownerContent = await getChatbotContext();
         const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional.${ownerContent ? `\n\nOWNER PROVIDED CHATBOT CONTENT:\n${ownerContent}` : ''}\n\nUser: ${message}`;
         const result = await aiClient.integrations.Core.InvokeLLM({
-          appId: 'tevrocsoft',
+          appId: 'tevrocdev',
           userId: 'default',
           prompt,
         });
