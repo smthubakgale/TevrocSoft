@@ -229,8 +229,11 @@
 
       let currentUser = null;
       let googleSubscription = null;
+      let liveChatRoom = null;
+      let liveChatSessionId = null;
       const workerUrl = 'https://tevroc-worker.smthubakgale2290.workers.dev';
       const netlifyUrl = 'https://tevrocsoftapi.netlify.app';
+      const appConfig = { appId: 'tevrocdev', appName: 'TevrocDev' };
       
       const isMobile = () => window.innerWidth < 1024;
 
@@ -322,13 +325,39 @@
         return window.Tevroc.createClient({
           baseUrl,
           serviceUrl,
-          appId: 'tevrocdev',
-          appName: 'TevrocDev'
+          appId: appConfig.appId,
+          appName: appConfig.appName
         });
       };
 
-      const authClient = createTevrocClient(netlifyUrl, netlifyUrl);
+      const authClient = createTevrocClient(workerUrl, netlifyUrl);
       const aiClient = createTevrocClient(workerUrl, netlifyUrl);
+
+      const connectLiveAgentRoom = () => {
+        if (!aiClient?.realtime?.room) return;
+        if (liveChatRoom) {
+          liveChatRoom.close();
+        }
+        const roomId = liveChatSessionId || `chat:${Date.now()}`;
+        liveChatSessionId = roomId;
+        liveChatRoom = aiClient.realtime.room(`chat:${roomId}`, {
+          message: (payload) => {
+            let parsed = payload;
+            if (typeof parsed === 'string') {
+              try { parsed = JSON.parse(parsed); } catch { parsed = null; }
+            }
+            const messagePayload = parsed?.message || parsed?.payload || null;
+            if (!messagePayload?.id) return;
+            const role = messagePayload.role === 'agent' ? 'bot' : 'user';
+            appendMessage(messagePayload.content || '', role);
+          },
+        });
+      };
+
+      const publishLiveMessage = (message) => {
+        if (!liveChatRoom) return;
+        liveChatRoom.publish({ type: 'chat_message', room: `chat:${liveChatSessionId}`, sessionId: liveChatSessionId, message });
+      };
 
       const setPendingChatOpen = (value) => {
         if (value) {
@@ -356,32 +385,22 @@
       };
 
       const handleAssistantClick = async () => {
-        if (!aiClient || !aiClient.integrations?.Core?.InvokeLLM) {
-          chatStatus.textContent = 'Chat integration unavailable.';
-          return;
-        }
-
         if (!chatPanel.classList.contains('hidden')) {
           closeChatDialog();
           return;
         }
 
+        if (!aiClient?.integrations?.Core?.InvokeLLM) {
+          chatStatus.textContent = 'Chat integration unavailable.';
+          appendMessage('The assistant is unavailable right now. Please try again shortly.', 'bot');
+          openChatDialog();
+          return;
+        }
+
         const storedUser = getStoredUser();
         if (!storedUser && !currentUser) {
-          try {
-            setPendingChatOpen(true);
-            chatStatus.textContent = 'Signing in with Google...';
-            if (authClient?.auth?.loginWithProvider) {
-              await authClient.auth.loginWithProvider('google', window.location.href);
-            } else {
-              throw new Error('Google login is unavailable.');
-            }
-          } catch (err) {
-            console.error(err);
-            setPendingChatOpen(false);
-            chatStatus.textContent = 'Google sign-in was cancelled or failed.';
-          }
-          return;
+          setPendingChatOpen(true);
+          chatStatus.textContent = 'Opening chat…';
         }
 
         openChatDialog();
@@ -420,16 +439,19 @@
         if (!shouldHandoff) return false;
 
         try {
+          const sessionKey = `site:${Date.now()}`;
+          liveChatSessionId = sessionKey;
+          connectLiveAgentRoom();
           const conversation = await aiClient.agents.Support.createConversation({
             title: 'Support handoff from website chatbot',
-            metadata: { appId: 'tevrocdev', userId: 'default' },
+            metadata: { appId: 'tevrocdev', userId: 'default', sessionId: sessionKey },
           });
           const conversationId = conversation?.data?.id || conversation?.id;
           if (conversationId) {
             await aiClient.agents.Support.addMessage(conversationId, {
               role: 'user',
               content: message,
-              metadata: { appId: 'tevrocdev', userId: 'default' },
+              metadata: { appId: 'tevrocdev', userId: 'default', sessionId: sessionKey },
             });
           }
           return true;
@@ -440,22 +462,26 @@
       };
 
       const askChatbot = async (message) => {
-        if (!aiClient?.integrations?.Core?.InvokeLLM) {
-          throw new Error('Chatbot service unavailable.');
-        }
-
         if (await handleAgentHandoff(message)) {
           return 'I can connect you with an agent. I will hand this over so a support person can assist you directly.';
+        }
+
+        if (!aiClient?.integrations?.Core?.InvokeLLM) {
+          throw new Error('Chatbot service unavailable.');
         }
 
         const ownerContent = await getChatbotContext();
         const prompt = `You are TevrocSoft's chatbot assistant. Answer questions only about TevrocSoft services, apps, pricing, or support. Keep responses concise, friendly, and professional.${ownerContent ? `\n\nOWNER PROVIDED CHATBOT CONTENT:\n${ownerContent}` : ''}\n\nUser: ${message}`;
         const result = await aiClient.integrations.Core.InvokeLLM({
-          appId: 'tevrocdev',
+          appId: appConfig.appId,
           userId: 'default',
           prompt,
         });
-        return result?.text || result?.data?.text || result?.response || '';
+        const responseText = result?.text || result?.data?.text || result?.response || '';
+        if (responseText) {
+          return responseText;
+        }
+        return 'I can help with TevrocSoft services, apps, pricing and support. Ask me anything about our team or products.';
       };
 
       chatAssistantBtn.addEventListener('click', handleAssistantClick);
@@ -474,11 +500,14 @@
         const message = chatInput.value.trim();
         if (!message) return;
         appendMessage(message, 'user');
+        publishLiveMessage({ id: `msg_${Date.now()}`, session_id: liveChatSessionId || `site:${Date.now()}`, role: 'visitor', content: message, createdAt: Date.now() });
         chatInput.value = '';
         chatStatus.textContent = 'Thinking...';
         try {
           const reply = await askChatbot(message);
-          appendMessage(reply || 'Sorry, I could not answer that right now.', 'bot');
+          const botMessage = { id: `msg_${Date.now()}`, session_id: liveChatSessionId || `site:${Date.now()}`, role: 'bot', content: reply || 'Sorry, I could not answer that right now.', createdAt: Date.now() };
+          appendMessage(botMessage.content, 'bot');
+          publishLiveMessage(botMessage);
           updateChatState(currentUser);
         } catch (err) {
           console.error(err);
