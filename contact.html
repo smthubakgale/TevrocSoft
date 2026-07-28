@@ -34,6 +34,7 @@
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <script src="https://unpkg.com/tevrocsdk@latest/tevroc-sdk.min.js"></script>
+    <script src="js/base44Client.js"></script>
     <style>
       #chatBox {
         scrollbar-width: thin;
@@ -185,8 +186,23 @@
                         <div class="min-w-0">
                             <p class="text-sm uppercase tracking-[0.3em] text-blue-600">AI Assistant</p> 
                         </div>
-                        <div class="ml-auto inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700">
-                            <i data-feather="message-circle" class="w-5 h-5"></i>
+                        <div class="inline-flex items-center gap-2 ml-auto">
+                            <button id="chatAgentBtn" type="button" title="Request Agent" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                              <i data-feather="headphones" class="w-4 h-4"></i>
+                              <span class="hidden sm:inline">Request Agent</span>
+                            </button>
+                            <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700">
+                                <i data-feather="message-circle" class="w-5 h-5"></i>
+                            </div>
+                            <div class="relative">
+                              <button id="chatMenuBtn" type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-white/0 text-slate-700 hover:bg-slate-50 focus:outline-none" title="Menu">
+                                <i data-feather="more-vertical" class="w-5 h-5"></i>
+                              </button>
+                              <div id="chatMenu" class="hidden absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-md shadow-lg z-50 py-1">
+                                <button id="menuRequestAgent" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Request Agent</button>
+                                <button id="menuClearChat" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Clear Chat</button>
+                              </div>
+                            </div>
                         </div>
                     </div>
                     <div class="lg:mt-0 flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.75rem] bg-white p-1 shadow-inner ring-1 ring-slate-100" id="chatWindow">
@@ -218,6 +234,7 @@
     <script>
       const chatAssistantBtn = document.getElementById('chatAssistantBtn');
       const chatSignOutBtn = document.getElementById('chatSignOutBtn');
+      const chatAgentBtn = document.getElementById('chatAgentBtn');
       const chatStatus = document.getElementById('chatStatus');
       const chatInput = document.getElementById('chatInput');
       const chatSubmitBtn = document.getElementById('chatSubmitBtn');
@@ -245,15 +262,31 @@
         chatBox.scrollTop = chatBox.scrollHeight;
       };
 
+      const getStoredToken = () => {
+        return localStorage.getItem('tevroc_access_token')
+          || localStorage.getItem('token')
+          || localStorage.getItem('base44_access_token')
+          || null;
+      };
+
+      const syncAuthToken = () => {
+        window.base44Client.syncAuthToken();
+      };
+
+      const restoreTokenFromUrl = () => {
+        return window.base44Client.restoreTokenFromUrl();
+      };
+
+      const clearStoredAuth = () => {
+        window.base44Client.clearStoredAuth();
+      };
+
       const getStoredUser = () => {
-        try {
-          const value = localStorage.getItem('user');
-          return value ? JSON.parse(value) : null;
-        } catch (err) {
-          localStorage.removeItem('user');
-          localStorage.removeItem('idToken');
-          return null;
-        }
+        return window.base44Client.getStoredUser();
+      };
+
+      const loadCurrentUser = async () => {
+        return window.base44Client.loadCurrentUser();
       };
 
       const openChatDialog = () => {
@@ -306,57 +339,284 @@
         }
       };
 
-      const loadUser = () => {
+      const loadUser = async () => {
+        restoreTokenFromUrl();
+        syncAuthToken();
+
         const stored = getStoredUser();
         if (stored) {
           chatStatus.textContent = 'Restoring your chat session...';
         }
-        updateChatState(stored);
-        if (stored) {
+
+        const current = await loadCurrentUser();
+        if (current) {
+          updateChatState(current);
+          await restoreChatSession();
           openChatIfPending();
+          return;
         }
+
+        if (stored) {
+          updateChatState(stored);
+          await restoreChatSession();
+          openChatIfPending();
+          return;
+        }
+
+        await restoreChatSession();
+        updateChatState(null);
       };
 
-      const createTevrocClient = (baseUrl, serviceUrl = baseUrl) => {
-        if (!window.Tevroc || typeof window.Tevroc.createClient !== 'function') {
-          console.warn('Tevroc SDK not loaded.');
-          return null;
-        }
-        return window.Tevroc.createClient({
-          baseUrl,
-          serviceUrl,
-          appId: appConfig.appId,
-          appName: appConfig.appName
-        });
-      };
+      window.base44Client.init({
+        baseUrl: workerUrl,
+        serviceUrl: netlifyUrl,
+        appId: appConfig.appId,
+        appName: appConfig.appName,
+      });
 
-      const authClient = createTevrocClient(workerUrl, netlifyUrl);
-      const aiClient = createTevrocClient(workerUrl, netlifyUrl);
+      const authClient = window.base44Client.client;
+      const aiClient = window.base44Client.client;
 
       const connectLiveAgentRoom = () => {
         if (!aiClient?.realtime?.room) return;
-        if (liveChatRoom) {
+        if (!liveChatSessionId) return;
+        if (liveChatRoom?.close) {
           liveChatRoom.close();
         }
-        const roomId = liveChatSessionId || `chat:${Date.now()}`;
-        liveChatSessionId = roomId;
-        liveChatRoom = aiClient.realtime.room(`chat:${roomId}`, {
+        liveChatRoom = aiClient.realtime.room(`chat:${liveChatSessionId}`, {
           message: (payload) => {
             let parsed = payload;
             if (typeof parsed === 'string') {
               try { parsed = JSON.parse(parsed); } catch { parsed = null; }
             }
-            const messagePayload = parsed?.message || parsed?.payload || null;
-            if (!messagePayload?.id) return;
-            const role = messagePayload.role === 'agent' ? 'bot' : 'user';
-            appendMessage(messagePayload.content || '', role);
+
+            const messagePayload = parsed?.message || parsed?.payload || parsed;
+            if (!messagePayload) return;
+
+            const incomingSessionId = parsed?.sessionId || messagePayload?.sessionId || messagePayload?.session_id || parsed?.room?.replace(/^chat:/, '');
+            if (incomingSessionId && incomingSessionId !== liveChatSessionId) return;
+
+            const content = messagePayload.content || messagePayload.message || String(messagePayload || '');
+            const role = messagePayload.role === 'agent' || messagePayload.role === 'bot' ? 'bot' : 'user';
+            const messageId = messagePayload.id || messagePayload._id || `msg_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+            if (receivedMessageIds.has(messageId)) return;
+            receivedMessageIds.add(messageId);
+
+            const incomingMessage = {
+              ...messagePayload,
+              id: messageId,
+              sessionId: incomingSessionId || liveChatSessionId,
+              session_id: incomingSessionId || liveChatSessionId,
+              role: messagePayload.role || (role === 'bot' ? 'agent' : 'visitor'),
+              content,
+              createdAt: messagePayload.createdAt || Date.now(),
+            };
+
+            appendMessage(content, role);
+            persistIncomingChatMessage(incomingMessage);
           },
         });
+      };
+
+      const getStoredSessionId = () => localStorage.getItem('tevroc_live_chat_session');
+      const setStoredSessionId = (sessionId) => {
+        localStorage.setItem('tevroc_live_chat_session', sessionId);
+      };
+
+      const getAppContext = () => {
+        const user = currentUser || getStoredUser() || {};
+        return {
+          appId: appConfig.appId,
+          userId: user.email || user.id || 'default',
+        };
+      };
+
+      const receivedMessageIds = new Set();
+
+      const persistIncomingChatMessage = async (incoming) => {
+        if (!incoming || !incoming.id) return;
+        if (receivedMessageIds.has(incoming.id)) return;
+
+        const sessionId = incoming.sessionId || incoming.session_id || liveChatSessionId;
+        if (!sessionId) return;
+
+        const { appId, userId } = getAppContext();
+        const payload = {
+          appId,
+          userId: incoming.role === 'agent' ? 'agent' : userId,
+          ...incoming,
+          sessionId,
+          session_id: sessionId,
+        };
+
+        try {
+          await persistChatMessage(payload);
+          receivedMessageIds.add(incoming.id);
+        } catch (err) {
+          console.warn('Unable to persist incoming chat message', err);
+        }
+      };
+
+      const normalizeRecords = (records) => {
+        if (Array.isArray(records)) return records;
+        if (records && Array.isArray(records.data)) return records.data;
+        return [];
+      };
+
+      const findChatSessionRecord = async (sessionId) => {
+        if (!sessionId) return null;
+        try {
+          const resp = await authClient.entities.ChatSession.query({
+            filter: { appId: appConfig.appId, sessionId },
+            limit: 1,
+          });
+          const record = normalizeRecords(resp)[0];
+          if (record) return record;
+
+          const altResp = await authClient.entities.ChatSession.query({
+            filter: { appId: appConfig.appId, session_id: sessionId },
+            limit: 1,
+          });
+          return normalizeRecords(altResp)[0] || null;
+        } catch (err) {
+          console.warn('Unable to query chat session', err);
+          return null;
+        }
+      };
+
+      const updateChatSessionStatus = async (sessionId, patch) => {
+        if (!sessionId) return;
+        try {
+          const record = await findChatSessionRecord(sessionId);
+          if (!record?.id) return;
+          await authClient.entities.ChatSession.update(record.id, { ...record, ...patch });
+        } catch (err) {
+          console.warn('Unable to update chat session status', err);
+        }
+      };
+
+      const timestampOf = (v) => {
+        if (v == null) return 0;
+        if (typeof v === 'number') return v;
+        const asNumber = Number(v);
+        if (!Number.isNaN(asNumber)) return asNumber;
+        const parsed = Date.parse(String(v));
+        return Number.isNaN(parsed) ? 0 : parsed;
+      };
+
+      const loadChatHistory = async (sessionId) => {
+        if (!sessionId) return;
+        chatBox.innerHTML = '';
+        try {
+          const response = window.base44Client?.loadChatHistory
+            ? await window.base44Client.loadChatHistory(sessionId)
+            : await authClient.entities.ChatMessage.query({ filter: { appId: appConfig.appId, sessionId } });
+          const messages = normalizeRecords(response);
+          messages.sort((a, b) => timestampOf(a.createdAt) - timestampOf(b.createdAt));
+          messages.forEach((message) => {
+            appendMessage(message.content || '', message.role === 'agent' || message.role === 'bot' ? 'bot' : 'user');
+          });
+        } catch (err) {
+          console.warn('Unable to load chat history', err);
+        }
+      };
+
+      const restoreChatSession = async () => {
+        const storedSessionId = getStoredSessionId();
+        if (!storedSessionId) return;
+        liveChatSessionId = storedSessionId;
+        connectLiveAgentRoom();
+        await loadChatHistory(storedSessionId);
+      };
+
+      const createChatSession = async () => {
+        if (liveChatSessionId) return liveChatSessionId;
+        const user = currentUser || getStoredUser() || {};
+        const sessionId = user.email
+          ? `web_${user.email.replace(/[^a-zA-Z0-9]/g, '_')}_${Date.now()}`
+          : `web_${Date.now()}`;
+
+        liveChatSessionId = sessionId;
+        setStoredSessionId(sessionId);
+        connectLiveAgentRoom();
+
+        const payload = {
+          appId: appConfig.appId,
+          userId: user.email || 'default',
+          sessionId,
+          visitor_name: user.firstName || user.name || user.email || 'Visitor',
+          visitor_email: user.email || '',
+          status: 'ai_active',
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+          lastMessageAt: Date.now(),
+        };
+
+        try {
+          if (window.base44Client?.createChatSession) {
+            await window.base44Client.createChatSession(payload);
+          } else {
+            await authClient.entities.ChatSession.create(payload);
+          }
+        } catch (err) {
+          console.warn('Unable to create chat session', err);
+        }
+
+        return sessionId;
+      };
+
+      const persistChatMessage = async (message) => {
+        const { appId, userId } = getAppContext();
+        const payload = { appId, userId, ...message };
+        try {
+          if (window.base44Client?.persistChatMessage) {
+            await window.base44Client.persistChatMessage(payload);
+          } else {
+            await authClient.entities.ChatMessage.create(payload);
+          }
+        } catch (err) {
+          console.warn('Unable to persist chat message', err);
+        }
       };
 
       const publishLiveMessage = (message) => {
         if (!liveChatRoom) return;
         liveChatRoom.publish({ type: 'chat_message', room: `chat:${liveChatSessionId}`, sessionId: liveChatSessionId, message });
+      };
+
+      const clearChat = async () => {
+        try {
+          // Close realtime room
+          if (liveChatRoom?.close) {
+            try { liveChatRoom.close(); } catch (e) { /* ignore */ }
+            liveChatRoom = null;
+          }
+
+          // Clear UI and local session
+          chatBox.innerHTML = '';
+          localStorage.removeItem('tevroc_live_chat_session');
+          liveChatSessionId = null;
+
+          // Create a fresh session and send welcome message
+          const sessionKey = await createChatSession();
+          const welcome = 'Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.';
+          const botMessage = {
+            id: `msg_${Date.now()}`,
+            session_id: sessionKey,
+            sessionId: sessionKey,
+            role: 'bot',
+            content: welcome,
+            createdAt: Date.now(),
+          };
+
+          appendMessage(botMessage.content, 'bot');
+          publishLiveMessage(botMessage);
+          await persistChatMessage(botMessage);
+          updateChatState(currentUser);
+        } catch (err) {
+          console.warn('Unable to clear chat', err);
+        }
       };
 
       const setPendingChatOpen = (value) => {
@@ -375,11 +635,18 @@
       };
 
       const signOut = () => {
+        clearStoredAuth();
         localStorage.removeItem('user');
         localStorage.removeItem('idToken');
+        localStorage.removeItem('tevroc_live_chat_session');
+        liveChatSessionId = null;
         if (googleSubscription) {
           googleSubscription();
           googleSubscription = null;
+        }
+        if (liveChatRoom?.close) {
+          liveChatRoom.close();
+          liveChatRoom = null;
         }
         updateChatState(null);
       };
@@ -397,12 +664,26 @@
           return;
         }
 
-        const storedUser = getStoredUser();
-        if (!storedUser && !currentUser) {
+        const user = currentUser || await loadCurrentUser();
+        if (!user) {
           setPendingChatOpen(true);
-          chatStatus.textContent = 'Opening chat…';
+          chatStatus.textContent = 'Signing in with Google...';
+          await authClient.auth.loginWithProvider('google', window.location.href, async (token, profile) => {
+            if (token) {
+              authClient.setToken(token);
+              aiClient.setToken(token);
+              await loadCurrentUser();
+              setPendingChatOpen(false);
+              openChatDialog();
+            }
+            if (profile) {
+              updateChatState(profile);
+            }
+          });
+          return;
         }
 
+        updateChatState(user);
         openChatDialog();
       };
 
@@ -429,32 +710,44 @@
       };
 
       const handleAgentHandoff = async (message) => {
-        if (!aiClient?.agents?.Support?.createConversation || !aiClient?.agents?.Support?.addMessage) {
-          return false;
-        }
+        if (!message || typeof message !== 'string') return false;
 
+        const supportAgent = aiClient?.agents?.Support;
         const shouldHandoff = ['agent', 'support', 'human', 'live agent', 'talk to someone', 'speak to someone', 'contact support', 'help me please']
           .some((keyword) => message.toLowerCase().includes(keyword));
 
         if (!shouldHandoff) return false;
 
+        const sessionKey = liveChatSessionId || await createChatSession();
+        if (!sessionKey) return false;
+        liveChatSessionId = sessionKey;
+        connectLiveAgentRoom();
+        await updateChatSessionStatus(sessionKey, {
+          status: 'escalated',
+          updatedAt: Date.now(),
+          lastMessageAt: Date.now(),
+        });
+
+        if (!supportAgent?.createConversation || !supportAgent?.addMessage) {
+          console.warn('Support agent API is unavailable');
+          return false;
+        }
+
         try {
-          const sessionKey = `site:${Date.now()}`;
-          liveChatSessionId = sessionKey;
-          connectLiveAgentRoom();
-          const conversation = await aiClient.agents.Support.createConversation({
+          const conversation = await supportAgent.createConversation({
             title: 'Support handoff from website chatbot',
-            metadata: { appId: 'tevrocdev', userId: 'default', sessionId: sessionKey },
+            metadata: { appId: appConfig.appId, userId: getAppContext().userId, sessionId: sessionKey },
           });
           const conversationId = conversation?.data?.id || conversation?.id;
           if (conversationId) {
-            await aiClient.agents.Support.addMessage(conversationId, {
+            await supportAgent.addMessage(conversationId, {
               role: 'user',
               content: message,
-              metadata: { appId: 'tevrocdev', userId: 'default', sessionId: sessionKey },
+              metadata: { appId: appConfig.appId, userId: getAppContext().userId || 'default', sessionId: sessionKey },
             });
+            return true;
           }
-          return true;
+          return false;
         } catch (err) {
           console.warn('Agent handoff failed', err);
           return false;
@@ -463,7 +756,10 @@
 
       const askChatbot = async (message) => {
         if (await handleAgentHandoff(message)) {
-          return 'I can connect you with an agent. I will hand this over so a support person can assist you directly.';
+          return {
+            text: 'I can connect you with an agent. I will hand this over so a support person can assist you directly.',
+            raw: null,
+          };
         }
 
         if (!aiClient?.integrations?.Core?.InvokeLLM) {
@@ -477,15 +773,79 @@
           userId: 'default',
           prompt,
         });
+        console.log('Chatbot response payload:', result);
         const responseText = result?.text || result?.data?.text || result?.response || '';
         if (responseText) {
-          return responseText;
+          return { text: responseText, raw: result };
         }
-        return 'I can help with TevrocSoft services, apps, pricing and support. Ask me anything about our team or products.';
+        return {
+          text: 'I can help with TevrocSoft services, apps, pricing and support. Ask me anything about our team or products.',
+          raw: result,
+        };
+      };
+
+      const requestChatAgent = async () => {
+        const requestText = 'Please connect me with a human support agent.';
+        openChatDialog();
+        await createChatSession();
+        const requestMsg = {
+          id: `msg_${Date.now()}`,
+          sessionId: liveChatSessionId,
+          session_id: liveChatSessionId,
+          role: 'visitor',
+          content: requestText,
+          createdAt: Date.now(),
+        };
+
+        appendMessage(requestText, 'user');
+        publishLiveMessage(requestMsg);
+        await persistChatMessage(requestMsg);
+        chatStatus.textContent = 'Requesting a human agent...';
+
+        const handoffSuccess = await handleAgentHandoff(requestText);
+        if (handoffSuccess) {
+          appendMessage('I have requested a human agent. Someone will join shortly.', 'bot');
+          chatStatus.textContent = 'Human agent requested.';
+        } else {
+          appendMessage('Sorry, I could not request an agent right now. Please try again later.', 'bot');
+          chatStatus.textContent = 'Agent request failed.';
+        }
       };
 
       chatAssistantBtn.addEventListener('click', handleAssistantClick);
       chatSignOutBtn.addEventListener('click', signOut);
+      chatAgentBtn.addEventListener('click', requestChatAgent);
+      // Menu toggles and handlers
+      const chatMenuBtn = document.getElementById('chatMenuBtn');
+      const chatMenu = document.getElementById('chatMenu');
+      const menuRequestAgent = document.getElementById('menuRequestAgent');
+      const menuClearChat = document.getElementById('menuClearChat');
+
+      if (chatMenuBtn && chatMenu) {
+        chatMenuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isHidden = chatMenu.classList.contains('hidden');
+          if (isHidden) chatMenu.classList.remove('hidden'); else chatMenu.classList.add('hidden');
+        });
+        // close menu on outside click
+        document.addEventListener('click', () => chatMenu.classList.add('hidden'));
+      }
+
+      if (menuRequestAgent) {
+        menuRequestAgent.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          chatMenu.classList.add('hidden');
+          await requestChatAgent();
+        });
+      }
+
+      if (menuClearChat) {
+        menuClearChat.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          chatMenu.classList.add('hidden');
+          await clearChat();
+        });
+      }
       chatOverlay.addEventListener('click', closeChatDialog);
       chatBackBtn.addEventListener('click', closeChatDialog);
       document.addEventListener('click', (event) => {
@@ -499,15 +859,39 @@
         event.preventDefault();
         const message = chatInput.value.trim();
         if (!message) return;
+
+        await createChatSession();
+
+        const visitorMsg = {
+          id: `msg_${Date.now()}`,
+          session_id: liveChatSessionId,
+          sessionId: liveChatSessionId,
+          role: 'visitor',
+          content: message,
+          createdAt: Date.now(),
+        };
+
         appendMessage(message, 'user');
-        publishLiveMessage({ id: `msg_${Date.now()}`, session_id: liveChatSessionId || `site:${Date.now()}`, role: 'visitor', content: message, createdAt: Date.now() });
+        publishLiveMessage(visitorMsg);
+        await persistChatMessage(visitorMsg);
+
         chatInput.value = '';
         chatStatus.textContent = 'Thinking...';
         try {
           const reply = await askChatbot(message);
-          const botMessage = { id: `msg_${Date.now()}`, session_id: liveChatSessionId || `site:${Date.now()}`, role: 'bot', content: reply || 'Sorry, I could not answer that right now.', createdAt: Date.now() };
+          const responseText = reply?.text || 'Sorry, I could not answer that right now.';
+          const botMessage = {
+            id: `msg_${Date.now()}`,
+            session_id: liveChatSessionId,
+            sessionId: liveChatSessionId,
+            role: 'bot',
+            content: responseText,
+            rawResponse: reply?.raw ?? null,
+            createdAt: Date.now(),
+          };
           appendMessage(botMessage.content, 'bot');
           publishLiveMessage(botMessage);
+          await persistChatMessage(botMessage);
           updateChatState(currentUser);
         } catch (err) {
           console.error(err);
