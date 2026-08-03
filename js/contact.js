@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatSubmitBtn = document.getElementById('chatSubmitBtn');
     const chatForm = document.getElementById('chatForm');
     const chatBox = document.getElementById('chatBox');
+    const chatAttachBtn = document.getElementById('chatAttachBtn');
+    const chatFileInput = document.getElementById('chatFileInput');
+    const chatAttachmentPreview = document.getElementById('chatAttachmentPreview');
     const chatPanel = document.getElementById('chatPanel');
     const chatOverlay = document.getElementById('chatOverlay');
     const chatBackBtn = document.getElementById('chatBackBtn');
@@ -63,13 +66,146 @@ document.addEventListener('DOMContentLoaded', function() {
     let liveChatSessionId = null;
     let liveRoomConnected = false;
     let currentSessionStatus = null;
+    let pendingAttachments = [];
 
     const isMobile = () => window.innerWidth < 1024;
 
-    const appendMessage = (text, role = 'bot') => {
+    const escapeHtml = (value = '') => String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+
+    const inferAttachmentType = (file) => {
+        if (file?.type?.startsWith('image/')) return 'image';
+        if (file?.type?.startsWith('video/')) return 'video';
+        return 'document';
+    };
+
+    const readFileAsDataUrl = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Unable to read selected file'));
+        reader.readAsDataURL(file);
+    });
+
+    const openFullscreenMedia = (src, type) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 z-[999999] flex items-center justify-center bg-slate-950/90 p-4';
+        overlay.addEventListener('click', () => overlay.remove());
+
+        const panel = document.createElement('div');
+        panel.className = 'relative w-full max-w-4xl rounded-3xl bg-white p-3 shadow-2xl';
+        panel.addEventListener('click', (event) => event.stopPropagation());
+
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'absolute right-3 top-3 rounded-full bg-slate-900/80 px-3 py-1 text-sm text-white';
+        closeBtn.textContent = 'Close';
+        closeBtn.addEventListener('click', () => overlay.remove());
+        panel.appendChild(closeBtn);
+
+        if (type === 'image') {
+            const image = document.createElement('img');
+            image.src = src;
+            image.alt = 'Attachment preview';
+            image.className = 'max-h-[80vh] w-full rounded-2xl object-contain';
+            panel.appendChild(image);
+        } else if (type === 'video') {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.autoplay = true;
+            video.className = 'max-h-[80vh] w-full rounded-2xl bg-slate-950';
+            panel.appendChild(video);
+        }
+
+        overlay.appendChild(panel);
+        document.body.appendChild(overlay);
+    };
+
+    const updateAttachmentPreview = () => {
+        if (!chatAttachmentPreview) return;
+        if (!pendingAttachments.length) {
+            chatAttachmentPreview.innerHTML = '';
+            chatAttachmentPreview.classList.add('hidden');
+            return;
+        }
+
+        chatAttachmentPreview.innerHTML = '';
+        pendingAttachments.forEach((attachment, index) => {
+            const chip = document.createElement('div');
+            chip.className = 'inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700';
+            chip.innerHTML = `<span>${escapeHtml(attachment.name || `Attachment ${index + 1}`)}</span>`;
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'text-slate-500 hover:text-slate-800';
+            removeBtn.textContent = '×';
+            removeBtn.addEventListener('click', () => {
+                pendingAttachments.splice(index, 1);
+                updateAttachmentPreview();
+            });
+            chip.appendChild(removeBtn);
+            chatAttachmentPreview.appendChild(chip);
+        });
+        chatAttachmentPreview.classList.remove('hidden');
+    };
+
+    const clearPendingAttachments = () => {
+        pendingAttachments = [];
+        updateAttachmentPreview();
+    };
+
+    const appendMessage = (text, role = 'bot', options = {}) => {
         const wrapper = document.createElement('div');
         wrapper.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
-        wrapper.innerHTML = `<div class="max-w-[88%] ${role === 'user' ? 'rounded-3xl bg-blue-600 text-white' : 'rounded-3xl bg-slate-100 text-slate-900'} p-4 text-sm leading-6 shadow-sm">${text}</div>`;
+        const bubble = document.createElement('div');
+        bubble.className = `max-w-[88%] ${role === 'user' ? 'rounded-3xl bg-blue-600 text-white' : 'rounded-3xl bg-slate-100 text-slate-900'} p-4 text-sm leading-6 shadow-sm`;
+
+        if (text) {
+            const content = document.createElement('div');
+            content.className = 'whitespace-pre-wrap break-words';
+            content.textContent = text;
+            bubble.appendChild(content);
+        }
+
+        const attachments = Array.isArray(options.attachments) ? options.attachments : [];
+        if (attachments.length) {
+            const attachmentWrap = document.createElement('div');
+            attachmentWrap.className = 'mt-3 space-y-2';
+            attachments.forEach((attachment) => {
+                const item = document.createElement('div');
+                item.className = 'rounded-2xl border border-slate-300/70 bg-white/80 p-2';
+                if (attachment.type === 'image' && attachment.dataUrl) {
+                    const img = document.createElement('img');
+                    img.src = attachment.dataUrl;
+                    img.alt = attachment.name || 'Attachment';
+                    img.className = 'max-h-72 max-w-full cursor-zoom-in rounded-xl object-contain';
+                    img.addEventListener('click', () => openFullscreenMedia(attachment.dataUrl, 'image'));
+                    item.appendChild(img);
+                } else if (attachment.type === 'video' && attachment.dataUrl) {
+                    const video = document.createElement('video');
+                    video.src = attachment.dataUrl;
+                    video.controls = true;
+                    video.preload = 'metadata';
+                    video.className = 'max-h-72 w-full rounded-xl bg-slate-950';
+                    video.addEventListener('click', () => openFullscreenMedia(attachment.dataUrl, 'video'));
+                    item.appendChild(video);
+                } else {
+                    const link = document.createElement('a');
+                    link.href = attachment.dataUrl || '#';
+                    link.download = attachment.name || 'document';
+                    link.className = 'inline-flex items-center gap-2 rounded-xl bg-slate-900 px-3 py-2 text-sm font-medium text-white';
+                    link.textContent = `Download ${attachment.name || 'document'}`;
+                    item.appendChild(link);
+                }
+                attachmentWrap.appendChild(item);
+            });
+            bubble.appendChild(attachmentWrap);
+        }
+
+        wrapper.appendChild(bubble);
         chatBox.appendChild(wrapper);
         chatBox.scrollTop = chatBox.scrollHeight;
     };
@@ -156,6 +292,34 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.remove('overflow-hidden');
         }
     });
+
+    if (chatAttachBtn && chatFileInput) {
+        chatAttachBtn.addEventListener('click', () => chatFileInput.click());
+        chatFileInput.addEventListener('change', async (event) => {
+            const files = Array.from(event.target.files || []);
+            if (!files.length) return;
+            const prepared = await Promise.all(files.map(async (file) => ({
+                name: file.name,
+                type: inferAttachmentType(file),
+                mimeType: file.type || 'application/octet-stream',
+                size: file.size,
+                dataUrl: await readFileAsDataUrl(file),
+            })));
+            pendingAttachments = [...pendingAttachments, ...prepared];
+            updateAttachmentPreview();
+            event.target.value = '';
+        });
+    }
+
+    const syncAgentButtonVisibility = () => {
+        const isAgentMode = currentSessionStatus === 'agent_active' || currentSessionStatus === 'escalated';
+        if (chatAgentBtn) {
+            chatAgentBtn.classList.toggle('hidden', isAgentMode);
+        }
+        if (menuRequestAgent) {
+            menuRequestAgent.classList.toggle('hidden', isAgentMode);
+        }
+    };
 
     const updateChatState = (user) => {
         currentUser = user;
@@ -341,6 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (chatModeLabel) {
                                 chatModeLabel.textContent = (currentSessionStatus === 'agent_active' || currentSessionStatus === 'escalated') ? 'Agent Mode' : 'AI Assistant';
                             }
+                            syncAgentButtonVisibility();
                         }
 
                         chatStatus.textContent = 'Live chat connected';
@@ -460,11 +625,19 @@ document.addEventListener('DOMContentLoaded', function() {
     connectLiveAgentRoom();
     chatBox.innerHTML = '';
     try {
-        const response = await base44.entities.ChatMessage.query({ filter: { appId: window.appParams.appId, sessionId } });
-        const messages = normalizeRecords(response);
+        const [bySessionId, bySessionIdAlt] = await Promise.all([
+            base44.entities.ChatMessage.query({ filter: { appId: window.appParams.appId, sessionId } }),
+            base44.entities.ChatMessage.query({ filter: { appId: window.appParams.appId, session_id: sessionId } }),
+        ]);
+        const messages = normalizeRecords(bySessionId)
+            .concat(normalizeRecords(bySessionIdAlt))
+            .filter((message, index, array) => array.findIndex((candidate) => (candidate?.id || candidate?.entityId) === (message?.id || message?.entityId)) === index);
         messages.sort((a, b) => timestampOf(a.createdAt) - timestampOf(b.createdAt));
-        messages.forEach((message) => {
-        appendMessage(message.content || '', message.role === 'agent' || message.role === 'bot' ? 'bot' : 'user');
+        messages.filter(m => !(m.content == '' && (!m.attachments || m.attachments.length === 0))).forEach((message) => {
+            console.log(message); 
+            appendMessage(message.content || '', message.role === 'agent' || message.role === 'bot' ? 'bot' : 'user', {
+                attachments: Array.isArray(message.attachments) ? message.attachments : [],
+            });
         });
         try {
         const sessionRecord = await findChatSessionRecord(sessionId);
@@ -477,6 +650,7 @@ document.addEventListener('DOMContentLoaded', function() {
             chatModeLabel.textContent = 'AI Assistant';
             }
         }
+        syncAgentButtonVisibility();
         } catch (err) {
         /* ignore */
         }
@@ -529,18 +703,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const persistChatMessage = async (message) => {
     const { appId, userId } = getAppContext();
+    const sessionId = message.sessionId || message.session_id || liveChatSessionId;
     const payload = {
         appId,
         userId,
         ...message,
-        sessionId: message.sessionId || message.session_id || liveChatSessionId,
-        session_id: message.session_id || message.sessionId || liveChatSessionId,
-        room: message.room || (liveChatSessionId ? base44.realtime.encryptRoomName(liveChatSessionId) : ''),
+        id: message.id || `msg_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+        sessionId,
+        session_id: message.session_id || message.sessionId || sessionId,
+        room: message.room || (sessionId ? (base44?.realtime?.encryptRoomName?.(sessionId) || sessionId) : ''),
+        createdAt: message.createdAt || Date.now(),
+        content: message.content ?? '',
+        attachments: Array.isArray(message.attachments) ? message.attachments : [],
     };
     try {
-        await base44.entities.ChatMessage.create(payload); 
+        await base44.entities.ChatMessage.create(payload);
+        return payload;
     } catch (err) {
         console.warn('Unable to persist chat message', err);
+        return null;
     }
     };
 
@@ -588,6 +769,8 @@ document.addEventListener('DOMContentLoaded', function() {
         await publishLiveMessage(botMessage);
         await persistChatMessage(botMessage);
         if (chatModeLabel) chatModeLabel.textContent = 'AI Assistant';
+        currentSessionStatus = 'ai_active';
+        syncAgentButtonVisibility();
         updateChatState(currentUser);
     } catch (err) {
         console.warn('Unable to clear chat', err);
@@ -798,10 +981,12 @@ document.addEventListener('DOMContentLoaded', function() {
         chatStatus.textContent = 'Human agent requested.';
         currentSessionStatus = 'escalated';
         if (chatModeLabel) chatModeLabel.textContent = 'Agent Mode';
+        syncAgentButtonVisibility();
     } else {
         appendMessage('Sorry, I could not request an agent right now. Please try again later.', 'bot');
         chatStatus.textContent = 'Agent request failed.';
         if (chatModeLabel) chatModeLabel.textContent = 'AI Assistant';
+        syncAgentButtonVisibility();
     }
     };
 
@@ -851,9 +1036,14 @@ document.addEventListener('DOMContentLoaded', function() {
     chatForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const message = chatInput.value.trim();
-    if (!message) return;
+    if (!message && !pendingAttachments.length) return;
 
     await createChatSession();
+
+    const attachments = pendingAttachments.length ? await Promise.all(pendingAttachments.map(async (attachment) => ({
+        ...attachment,
+        dataUrl: attachment.dataUrl || await readFileAsDataUrl(new File([attachment.dataUrl || ''], attachment.name || 'attachment', { type: attachment.mimeType || 'application/octet-stream' }))
+    }))) : [];
 
     const visitorMsg = {
         id: `msg_${Date.now()}`,
@@ -861,14 +1051,16 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionId: liveChatSessionId,
         role: 'visitor',
         content: message,
+        attachments,
         createdAt: Date.now(),
     };
 
-    appendMessage(message, 'user');
+    appendMessage(message || 'Attachment sent', 'user', { attachments });
     await publishLiveMessage(visitorMsg);
     await persistChatMessage(visitorMsg);
 
     chatInput.value = '';
+    clearPendingAttachments();
     // If session is in agent mode, do not call the AI LLM — message should go to agent
     if (currentSessionStatus === 'agent_active' || currentSessionStatus === 'escalated') {
         chatStatus.textContent = 'Message sent to agent';
