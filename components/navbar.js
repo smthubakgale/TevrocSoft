@@ -460,6 +460,7 @@ class CustomNavbar extends HTMLElement {
                     <a href="../TevrocSoft/blogs/ui-layouts.html">UI Layouts</a>
                     <a href="../TevrocSoft/blogs/ai/ai-app-development.html">AI App Development</a>
                     <a href="../TevrocSoft/blogs/ai/predictive-analysis-tutorial.html">Predictive Analysis</a>
+                    <a href="../TevrocSoft/blogs/tevrocsdk.html">Tevroc SDK</a>
                   </div>
                 </div>
               </div>
@@ -523,16 +524,7 @@ class CustomNavbar extends HTMLElement {
                 <span class="chevron">▾</span>
               </button>
               <div class="drawer-submenu-links" id="drawer-blogs">
-                <a class="drawer-link" href="blogs.html">Insights Hub</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/apis.html">APIs Blog</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/development-frameworks.html">Development Frameworks</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/hosting.html">Hosting</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/html-elements.html">HTML Elements</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/libraries.html">Libraries</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/templates.html">Templates</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/ui-layouts.html">UI Layouts</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/ai/ai-app-development.html">AI App Development</a>
-                <a class="drawer-link" href="../TevrocSoft/blogs/ai/predictive-analysis-tutorial.html">Predictive Analysis</a>
+                <a class="drawer-link" href="blogs.html">Blogs</a>
               </div>
             </div>
           </div>

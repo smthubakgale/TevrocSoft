@@ -1,0 +1,54 @@
+
+%%{init: {
+  "flowchart": {
+    "curve": "linear"
+  }
+}}%%
+
+flowchart LR
+
+  subgraph APP["Application"]
+    A["Browser / Native App"]
+  end
+
+  subgraph SDK["Tevroc SDK"]
+    C["createClient()"]
+    Auth["Authentication"]
+    Entities["Entities"]
+    Payments["Payments"]
+    Files["Files"]
+    Integrations["Integrations"]
+    Offline["Offline Sync"]
+  end
+
+  subgraph PLATFORM["Tevroc Worker & Services"]
+    W["Tevroc Worker"]
+    S["External Services"]
+  end
+
+  A -->|initialize| C
+  C -->|API calls| W
+
+  W --> Auth
+  W --> Entities
+  W --> Payments
+  W --> Files
+  W --> Integrations
+
+  C -->|sync state| Offline
+  W -->|service bridge| S
+
+  style APP fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+  style SDK fill:#1e293b,stroke:#60a5fa,stroke-width:2px,color:#f8fafc
+  style PLATFORM fill:#111827,stroke:#93c5fd,stroke-width:2px,color:#f8fafc
+
+  style A fill:#0f172a,stroke:#38bdf8,color:#f8fafc
+  style C fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Auth fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Entities fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Payments fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Files fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Integrations fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style Offline fill:#1e293b,stroke:#60a5fa,color:#f8fafc
+  style W fill:#1e293b,stroke:#38bdf8,color:#f8fafc
+  style S fill:#0f172a,stroke:#38bdf8,color:#f8fafc

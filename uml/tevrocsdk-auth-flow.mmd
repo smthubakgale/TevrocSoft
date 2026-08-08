@@ -1,0 +1,17 @@
+
+sequenceDiagram
+    participant User as 👤 User
+    participant App as 💻 App
+    participant SDK as 📦 Tevroc SDK
+    participant Worker as ⚙️ Tevroc Worker
+
+    User->>App: Enter credentials
+    App->>SDK: tevroc.auth.login()
+    SDK->>Worker: POST /auth/login
+    Worker->>SDK: Token + user payload
+    SDK->>App: Authenticated session
+
+    App->>SDK: tevroc.auth.me()
+    SDK->>Worker: GET /auth/me
+    Worker->>SDK: User profile
+    SDK->>App: Current user data

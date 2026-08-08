@@ -1,0 +1,7 @@
+flowchart LR
+  A[App UI] -->|calls| B[Tevroc SDK]
+  B --> C[Core Integrations]
+  C --> D[AI / Email / File Storage]
+  B --> E[Auth & Entity APIs]
+  E --> F[User data / permissions]
+  D --> G[External providers]
