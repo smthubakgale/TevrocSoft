@@ -1,11 +1,10 @@
-%%{init: {"flowchart": {"curve": "linear"}}}%%
-flowchart TD
 
-    UI["UI / Dashboard / Form"]
-    SDK["Tevroc SDK Entities"]
-    Worker["Tevroc Worker"]
-    DB[("Data Store")]
-    Cache["Local Cache / Sync"]
+flowchart TD
+    UI[UI / Dashboard / Form]
+    SDK[Tevroc SDK Entities]
+    Worker[Tevroc Worker]
+    DB[(Data Store)]
+    Cache[Local Cache / Sync]
 
     UI -->|create / query / update| SDK
     SDK -->|entity request| Worker
@@ -13,8 +12,8 @@ flowchart TD
     SDK -->|cache operations| Cache
     Cache -->|sync| Worker
 
-    style UI fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
-    style SDK fill:#1e293b,stroke:#60a5fa,stroke-width:2px,color:#f8fafc
-    style Worker fill:#111827,stroke:#93c5fd,stroke-width:2px,color:#f8fafc
-    style DB fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
-    style Cache fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#f8fafc
+    style UI fill:#0f172a,color:#fff
+    style SDK fill:#1e293b,color:#fff
+    style Worker fill:#111827,color:#fff
+    style DB fill:#0f172a,color:#fff
+    style Cache fill:#1e293b,color:#fff

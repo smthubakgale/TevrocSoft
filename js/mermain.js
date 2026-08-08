@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     fontFamily: 'Inter, sans-serif',
   });
 
-  document.querySelectorAll('.mermaid[data-src]').forEach(async (container) => {
+  const mermaidContainers = Array.from(document.querySelectorAll('.mermaid[data-src]'));
+
+  async function renderMermaid(container) {
+    if (container.dataset.rendered === 'true') {
+      return;
+    }
+
     const src = container.dataset.src;
     try {
       const response = await fetch(src);
@@ -21,11 +27,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = await response.text();
       container.textContent = text;
       mermaid.init(undefined, container);
+      container.dataset.rendered = 'true';
     } catch (error) {
       container.textContent = `Mermaid diagram failed to load: ${error.message}`;
       container.style.color = '#dc2626';
       container.style.fontSize = '0.95rem';
       container.style.fontFamily = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
     }
-  });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          renderMermaid(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    mermaidContainers.forEach((container) => observer.observe(container));
+  } else {
+    mermaidContainers.forEach((container) => renderMermaid(container));
+  }
 });
