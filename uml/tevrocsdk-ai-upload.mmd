@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant UI as App UI
+  participant SDK as Tevroc SDK
+  participant LLM as AI service
+  participant Storage as File storage
+
+  UI->>SDK: InvokeLLM(prompt)
+  SDK->>LLM: Send prompt
+  LLM-->>SDK: Return result
+  SDK-->>UI: Show content
+
+  UI->>SDK: UploadFile(file)
+  SDK->>Storage: Store file
+  Storage-->>SDK: File ID
+  SDK-->>UI: Ready for later use

@@ -10,7 +10,7 @@
     <base href="../">
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/monokai-sublime.min.css">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -55,14 +55,18 @@
       .feature-image { width: 100%; max-height: 420px; aspect-ratio: 16 / 9; height: auto; display: block; object-fit: cover; }
       .doc-section { border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 2.5rem; margin-bottom: 2.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.26); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 18px 44px rgba(15,23,42,0.06); backdrop-filter: blur(12px); transition: transform .35s ease, opacity .35s ease, border-color .35s ease, box-shadow .35s ease; }
       section[data-section] { display: none; opacity: 0; transform: translateY(24px); max-height: 0; overflow: hidden; transition: opacity .45s ease, transform .45s ease, max-height .45s ease; }
-      section.active { display: block; opacity: 1; transform: translateY(0); max-height: 2200px; }
+      section.active { display: block; opacity: 1; transform: translateY(0); max-height: unset; }
       section{ padding-left:15px; width: calc(100% - 20px); padding-bottom:20px; }
       .liquid-card { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); box-shadow: 0 20px 38px rgba(15,23,42,0.08); backdrop-filter: blur(18px); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
       .liquid-card:hover { transform: translateY(-4px); box-shadow: 0 28px 60px rgba(15,23,42,0.12); }
-      .highlight-block { border-left: 4px solid rgba(14,165,233,0.75); padding-left: 1rem; background: rgba(14,165,233,0.04); }
+      .highlight-block { border-left: 4px solid rgba(14,165,233,0.75); padding-left: 1rem; background: linear-gradient(90deg, rgba(14,165,233,0.08), rgba(59,130,246,0.03)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7); }
+      .info-note { border: 1px solid rgba(59,130,246,0.18); background: linear-gradient(135deg, rgba(224,242,254,0.8), rgba(248,250,252,0.95)); border-left: 4px solid rgba(37,99,235,0.75); box-shadow: 0 12px 32px rgba(15,23,42,0.06); }
+      .diagram-caption { font-size: .9rem; color: #475569; margin-top: .75rem; line-height: 1.6; }
+      .soft-pill { background: rgba(59,130,246,0.1); color: #1d4ed8; border: 1px solid rgba(59,130,246,0.2); }
+      .hero-glow { animation: pulseGlow 3.5s ease-in-out infinite alternate; }
       .feature-image { width: 100%; border-radius: 1.75rem; border: 1px solid rgba(255,255,255,0.45); box-shadow: 0 30px 80px rgba(15,23,42,.12); object-fit: cover; }
-      .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; padding: 1.25rem 1rem; }
-      .toc-button:hover { background: rgba(14,165,233,0.08); transform: translateX(2px); }
+      .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; padding: 1.25rem 1rem; position: relative; }
+      .toc-button:hover { background: rgba(14,165,233,0.08); box-shadow: inset 0 0 0 1px rgba(14,165,233,0.12); }
       .toc-button.active, .toc-button[aria-current="page"] { background: rgba(14, 165, 233, 0.14); color: var(--doc-primary-dark); }
       .mobile-toc-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.38); backdrop-filter: blur(10px); z-index: 50; }
       #mobileToc { position: fixed; inset: 0; display: none; z-index: 60; }
@@ -74,12 +78,13 @@
       .mobile-toc-panel nav button:hover { background: rgba(255, 255, 255, 0.28); transform: translateX(3px); }
       .mobile-toc-panel nav button.active { background: rgba(14, 165, 233, 0.14); color: #0369a1; }
       footer, custom-footer { display: none !important; }
-      .sticky-sidebar { width: 280px; min-width: 280px; }
+      .sticky-sidebar { width: 280px; min-width: 280px; scrollbar-gutter: stable; overscroll-behavior: contain; }
       .sidebar-panel { padding-left: 0; padding-right: 0; }
       article{ padding-bottom:30vh; }
-      @keyframes glowPulse { from { text-shadow: 0 0 0 rgba(14,165,233,0); } to { text-shadow: 0 0 30px rgba(14,165,233,0.28); } }
+      @keyframes glowPulse { from { text-shadow: 0 0 0 rgba(14,165,233,0); } to { text-shadow: 0 0 30px rgba(59,130,246,0.35); } }
       @keyframes floatUp { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
       @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes pulseGlow { 0% { box-shadow: 0 0 0 rgba(59,130,246,0.12); } 100% { box-shadow: 0 0 24px rgba(59,130,246,0.22); } }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -95,6 +100,8 @@
                             <button type="button" data-section-button="overview" class="toc-button rounded-xl px-3 py-2">Overview</button>
                             <button type="button" data-section-button="getting-started" class="toc-button rounded-xl px-3 py-2">Getting started</button>
                             <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2">Installation</button>
+                            <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2">Native integration</button>
+                            <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2">Setup notes</button>
                             <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2">Create a client</button>
                             <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2">Authentication</button>
                             <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2">Entities</button>
@@ -103,6 +110,7 @@
                             <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2">Payments</button>
                             <button type="button" data-section-button="files" class="toc-button rounded-xl px-3 py-2">Files</button>
                             <button type="button" data-section-button="offline" class="toc-button rounded-xl px-3 py-2">Offline support</button>
+                            <button type="button" data-section-button="agents-connectors" class="toc-button rounded-xl px-3 py-2">Agents & connectors</button>
                             <button type="button" data-section-button="errors" class="toc-button rounded-xl px-3 py-2">Error handling</button>
                             <button type="button" data-section-button="next-steps" class="toc-button rounded-xl px-3 py-2">Next steps</button>
                         </nav>
@@ -134,18 +142,32 @@
                 </div>
 
                 <section id="overview" data-section="overview" class="space-y-4 doc-section liquid-card">
-                    <p class="text-slate-700 leading-relaxed text-lg">Welcome to the Tevroc SDK learning path. In this chapter, you will discover how a single JavaScript client can power auth, data, payments, files, integrations, and offline-first behavior across web and native apps. Think of this guide as a hands-on roadmap that builds your Tevroc app story step by step.</p>
+                    <p class="text-slate-700 leading-relaxed text-lg">Welcome to the <strong>Tevroc SDK</strong> learning path. In this chapter, you will discover how a single JavaScript client can power <em>authentication</em>, <u>data access</u>, <em>payments</em>, <u>files</u>, <em>integrations</em>, and <u>offline-first behavior</u> across web and native apps. Think of this guide as a hands-on roadmap that builds your Tevroc app story step by step.</p>
                     <p class="text-slate-700 leading-relaxed">By the end of this guide, you will understand the core SDK concepts and have practical examples you can copy into your own project. The focus is on real developer workflows: installing the SDK, wiring a client, authenticating users, working with entities, and extending functionality with integrations and offline sync.</p>
-                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                    <div class="highlight-block rounded-3xl p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-3">Why this matters</h3>
+                        <p class="text-slate-700 leading-relaxed">Instead of stitching together many separate APIs, you can use one consistent SDK object to handle the entire app experience. That makes your code easier to maintain, easier to test, and easier to scale as your product grows.</p>
+                    </div>
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Developer note</p>
+                        <p class="text-slate-700 leading-relaxed">Think of Tevroc SDK as a reliable bridge between your frontend and the services behind it. The more you reuse the same client object, the less duplicated logic you need in your UI.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card hero-glow">
                         <h3 class="text-xl font-semibold mb-3">Tevroc SDK architecture</h3>
                         <div class="mermaid" data-src="../uml/tevrocsdk-architecture.mmd">Loading architecture diagram...</div>
+                        <p class="diagram-caption">This view shows how the SDK acts as a single access layer for auth, entities, integrations, files, offline sync, and payments.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-3">End-to-end app flow</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-app-flow.mmd">Loading app flow diagram...</div>
+                        <p class="diagram-caption">A practical flow for turning a user action into a smooth app experience: client setup, auth, entity work, integrations, and sync.</p>
                     </div>
                 </section>
 
                 <section id="getting-started" data-section="getting-started" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Getting started</h2>
                     <p class="text-slate-700 leading-relaxed">The first chapter is about setting up your environment. Install the SDK, choose a runtime, and prepare the link between your app and the Tevroc worker. This is the foundation for every real-world feature you will build.</p>
-                    <p class="text-slate-700 leading-relaxed">Choose the installation path that matches your project: modern web apps should prefer npm/ESM, while quick prototypes or static pages can use the browser script bundle. Either approach delivers the same runtime API surface.</p>
+                    <p class="text-slate-700 leading-relaxed">Choose the installation path that matches your project: <strong>modern web apps</strong> should prefer npm/ESM, while <em>quick prototypes</em> or static pages can use the browser script bundle. Either approach delivers the same runtime API surface.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
                         <h3 class="text-2xl font-semibold mb-3">Install the SDK</h3>
                         <div class="grid gap-6 md:grid-cols-2">
@@ -161,6 +183,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-3">Setup decision map</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-setup-decision.mmd">Loading setup decision diagram...</div>
+                        <p class="diagram-caption">Use this decision map to choose between a bundled browser setup and a modern npm-based workflow depending on your project needs.</p>
+                    </div>
+
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Starter checklist</p>
+                        <p class="text-slate-700 leading-relaxed">A strong first pass usually means three things: install the SDK, connect it to your worker URL, and create a client once so the rest of your app can reuse that same configuration.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Your first Tevroc bootstrap</h3>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">import { createClient } from "tevrocsdk";
+
+const tevroc = createClient({
+  baseUrl: "https://your-worker.example.workers.dev",
+  appId: "tevroc-portal",
+  appName: "Tevroc Portal",
+});
+
+await tevroc.auth.me();</code></pre>
+                        <p class="text-slate-600 mt-3">This simple bootstrap gives you a reliable starting point for auth, entity access, and future integrations. Once it works, you can layer on login pages, dashboards, file uploads, and native experiences without changing your core setup.</p>
+                    </div>
                 </section>
 
                 <section id="installation" data-section="installation" class="space-y-6 doc-section liquid-card">
@@ -169,25 +215,215 @@
                     <p class="text-slate-700 leading-relaxed">If you are working on the Tevroc SDK repository itself, the local install path lets your application consume the SDK source directly while you iterate. For production apps, install the published npm package or deploy the compiled bundle from your build process.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
                         <h3 class="text-xl font-semibold mb-3">Example: local package install</h3>
-                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">npm install ../tevrocsdk
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npm install ../tevrocsdk
 cd ../tevrocsdk && npm run build</code></pre>
                         <p class="text-slate-600 mt-3">Use this flow when your app and SDK source are in the same workspace. After building, point your app import to the generated SDK files or publish the package to your private registry.</p>
                     </div>
                 </section>
 
+                <section id="native-integration" data-section="native-integration" class="space-y-8 doc-section liquid-card">
+                    <h2 class="text-3xl font-semibold">Native and desktop integration</h2>
+                    <p class="text-slate-700 leading-relaxed">Tevroc SDK works naturally in web apps, but it also fits mobile and desktop shells. When you need OAuth callbacks, native file access, or deep links, the host app usually provides the platform bridge while the SDK supplies the API client, auth helpers, storage wrappers, and integrations that stay consistent across environments.</p>
+                    <p class="text-slate-700 leading-relaxed">A good native integration strategy is usually simple: keep the core application logic in the web layer, then add the minimum platform-specific plumbing required for redirects, file handling, and OS-level events. That keeps your app portable while still feeling native where it matters most.</p>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Capacitor (mobile)</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Declare the app identity and a custom URL scheme in your Capacitor config so the app can receive OAuth redirects.</li>
+                            <li>Add the Capacitor app and browser plugins so the SDK can use native file save, toast, and browser flows when available.</li>
+                            <li>Add an Android intent filter so the platform can route callback URLs back into your app.</li>
+                            <li>Listen for the platform event and forward the URL into your auth callback flow.</li>
+                            <li>For offline support, Tevroc keeps using native storage when the Capacitor SQLite plugin is available and falls back to localStorage in unsupported environments.</li>
+                        </ul>
+                        <p class="font-semibold text-slate-900 mt-4">Typical file locations</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-text">project-root/
+├── capacitor.config.ts
+├── android/
+│   └── app/
+│       └── src/
+│           └── main/
+│               └── AndroidManifest.xml
+└── src/
+    └── app code that handles appUrlOpen events</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">capacitor.config.ts</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-ts">import type { CapacitorConfig } from "@capacitor/cli";
+
+const config: CapacitorConfig = {
+  appId: "com.example.app",
+  appName: "Example App",
+  webDir: "dist",
+  plugins: {
+    App: {
+      appUrlOpen: {
+        androidScheme: "myapp",
+        iosScheme: "myapp",
+      },
+    },
+  },
+};
+
+export default config;</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">AndroidManifest.xml</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-xml">&lt;manifest&gt;
+  &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+  &lt;application&gt;
+    &lt;intent-filter&gt;
+      &lt;action android:name="android.intent.action.VIEW" /&gt;
+      &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+      &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+      &lt;data android:scheme="myapp" /&gt;
+    &lt;/intent-filter&gt;
+  &lt;/application&gt;
+&lt;/manifest&gt;</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">src/main.ts</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-ts">import { App } from "@capacitor/app";
+
+App.addListener("appUrlOpen", ({ url }) => {
+  handleAuthCallback(url);
+});</code></pre>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Tauri (desktop)</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Register a custom protocol in your Tauri config so the desktop app can receive deep links.</li>
+                            <li>Add the relevant Rust plugins for deep-link handling and single-instance behavior.</li>
+                            <li>Emit a frontend event from the Rust side and listen for it in your app.</li>
+                        </ul>
+                        <p class="font-semibold text-slate-900 mt-4">Typical file locations</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-text">project-root/
+├── src-tauri/
+│   ├── tauri.conf.json
+│   ├── Cargo.toml
+│   └── src/
+│       └── lib.rs
+└── src/
+    └── frontend code that listens for deep-link events</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">src-tauri/tauri.conf.json</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-json">{
+  "identifier": "com.example.desktop",
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["myapp"]
+      }
+    }
+  }
+}</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">src-tauri/Cargo.toml</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-toml">[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-deep-link = "2"
+tauri-plugin-single-instance = "2"</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">src-tauri/src/lib.rs</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-rust">use tauri::{Manager, Emitter};
+use tauri_plugin_deep_link::DeepLinkExt;
+use serde_json::json;
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+    let builder = tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, argv, _cwd| {
+            if let Some(url) = argv.get(1) {
+                let _ = app.emit_to("main", "deep-link://open-url", json!(url));
+            }
+        }))
+        .plugin(tauri_plugin_deep_link::init())
+        .setup(|app| {
+            #[cfg(any(target_os = "linux", all(debug_assertions, windows)))]
+            app.deep_link().register_all()?;
+            Ok(())
+        });
+
+    builder.run(tauri::generate_context!()).expect("error while running app");
+}</code></pre>
+                        <p class="font-semibold text-slate-900 mt-4">src/main.ts</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-ts">import { listen } from "@tauri-apps/api/event";
+
+listen("deep-link://open-url", (event) => {
+  handleAuthCallback(event.payload as string);
+});</code></pre>
+                    </div>
+
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Choosing the right shell</p>
+                        <p class="text-slate-700 leading-relaxed">Choose Capacitor when your main goal is to ship a polished mobile app with web-first logic and native bridge features. Choose Tauri when you want a desktop-first experience with deeper OS integration and a Rust-powered backend layer. In many teams, the web app stays the same and only the host shell changes.</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2 mt-4">
+                            <li><strong>Capacitor</strong> is best for mobile-first teams that want familiar web development with native app wrappers.</li>
+                            <li><strong>Tauri</strong> is best for desktop teams that need tighter window, file, and OS integration.</li>
+                            <li><strong>Both</strong> work well when you keep the Tevroc client central and let the shell only handle platform-specific events.</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Practical rollout checklist</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Start with web auth and worker URLs before you add native callbacks.</li>
+                            <li>Make sure your custom URL scheme or deep-link protocol is registered first.</li>
+                            <li>Test the full login callback flow on the target device or desktop shell before shipping.</li>
+                            <li>Use the native file and storage helpers only when the platform really needs them.</li>
+                            <li>Keep the Tevroc client initialization identical across web, mobile, and desktop so your app behaves consistently.</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-3xl border border-blue-200 bg-blue-50/70 p-6">
+                        <h3 class="text-xl font-semibold mb-3">What this gives you in practice</h3>
+                        <p class="text-slate-700 leading-relaxed">Once the shell is wired correctly, your app can open auth flows, receive callbacks, save files, and keep state in a way that feels native without forcing you to rewrite the entire application. That is the real value of Tevroc’s platform-aware integration model.</p>
+                    </div>
+                </section>
+
+                <section id="setup-notes" data-section="setup-notes" class="space-y-6 doc-section liquid-card">
+                    <h2 class="text-3xl font-semibold">Setup notes for local apps and desktop shells</h2>
+                    <p class="text-slate-700 leading-relaxed">If you are consuming the SDK from a monorepo or local workspace, point your app dependency at the local package folder and rebuild the SDK output before launching the app.</p>
+                    <pre class="rounded-3xl bg-slate-950/95 p-6 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npm install ../tevrocsdk
+cd ../tevrocsdk && npm run build</code></pre>
+                    <p class="text-slate-700 leading-relaxed">For Tauri desktop apps, ensure the frontend can access the Tauri bridge and the Rust side exposes the PDF command. The recommended setup is to add the Tauri plugins for deep-link, dialog, fs, opener, and shell, expose a command such as <code>open_pdf_file</code> from the Rust integration layer, and keep the base64 dependency in your Tauri manifest.</p>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Added services and capabilities</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>PDF helpers: <code>tevroc.pdf.downloadPdf</code>, <code>tevroc.pdf.previewPdf</code>, and <code>tevroc.pdf.printPdf</code></li>
+                            <li>Desktop-friendly PDF handling for Tauri, where the SDK writes a temporary PDF and opens it with the host OS viewer</li>
+                            <li>Offline sync support with a safe fallback when Capacitor background-task support is unavailable</li>
+                            <li>Native store helpers for web/localStorage fallback and native persistence in Capacitor and Tauri contexts</li>
+                            <li>Auth, entity, integration, payments, and file helpers that work through the same unified client object</li>
+                        </ul>
+                    </div>
+                </section>
+
                 <section id="create-a-client" data-section="create-a-client" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Create a client</h2>
-                    <p class="text-slate-700 leading-relaxed">This is the moment your app becomes Tevroc-aware. The client wires your runtime to Tevroc services and shares app identity, base URLs, and environment details. Treat it as the central control plane for everything you build next.</p>
+                    <p class="text-slate-700 leading-relaxed">This is the moment your app becomes Tevroc-aware. The client wires your runtime to Tevroc services and shares app identity, base URLs, and environment details. Treat it as the <strong>central control plane</strong> for everything you build next.</p>
                     <p class="text-slate-700 leading-relaxed">The client configuration tells Tevroc where your APIs are hosted and how to label requests in logs and dashboards. That means authentication, entity access, file URLs, and integrations all use the same shared runtime context.</p>
                     <pre class="rounded-3xl bg-slate-950/95 p-6 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">import { createClient } from "tevrocsdk";
 
 const tevroc = createClient({
-  baseUrl: "https://your-worker.example.workers.dev", // worker entry point for Tevroc API calls
-  serviceUrl: "https://services.example.com",      // service host for integrations and app services
-  appId: "tevroc-portal",                         // your application identifier
-  appName: "Tevroc Portal",                       // human-friendly name for logs and UI
+  baseUrl: "https://your-worker.example.workers.dev",
+  serviceUrl: "https://services.example.com",
+  appId: "tevroc-portal",
+  appName: "Tevroc Portal",
 });</code></pre>
-                    <p class="text-slate-700 leading-relaxed">You can also reuse an existing token from storage to keep users signed in across refreshes. If your app supports multiple environments, switch these values based on development, staging, or production configuration.</p>
+                    <p class="text-slate-700 leading-relaxed">You can also reuse an existing access token to keep users signed in across refreshes:</p>
+                    <pre class="rounded-3xl bg-slate-950/95 p-6 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const tevroc = createClient({
+  baseUrl: "https://your-worker.example.workers.dev",
+  token: localStorage.getItem("tevroc_access_token"),
+  appId: "tevroc-portal",
+  appName: "Tevroc Portal",
+});</code></pre>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Environment-aware setup example</h3>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const isProd = window.location.hostname.includes("tevrocsoft.co.za");
+
+const tevroc = createClient({
+  baseUrl: isProd ? "https://prod-worker.example.workers.dev" : "https://dev-worker.example.workers.dev",
+  appId: "tevroc-portal",
+  appName: "Tevroc Portal",
+});</code></pre>
+                        <p class="text-slate-600 mt-3">Using environment-based values keeps local development separate from production, which is especially helpful when you are testing new features or staging migrations.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Client startup flow</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-client-startup.mmd">Loading client startup diagram...</div>
+                    </div>
                 </section>
 
                 <section id="authentication" data-section="authentication" class="space-y-6 doc-section liquid-card">
@@ -207,10 +443,8 @@ const tevroc = createClient({
 });
 
 const me = await tevroc.auth.me();
-
-// Save token in secure storage and use `me` to render the signed-in user.
 </code></pre>
-                            <p class="text-slate-600 mt-3">The login call returns both the current user and a fresh token. Use `tevroc.auth.me()` to validate the session and fetch profile details after page refresh.</p>
+                            <p class="text-slate-600 mt-3">The login call returns both the current user and a fresh token. Use <code>tevroc.auth.me()</code> to validate the session and fetch profile details after page refresh.</p>
                         </div>
                         <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                             <h3 class="text-xl font-semibold mb-3">Register, logout and reset</h3>
@@ -220,11 +454,11 @@ const me = await tevroc.auth.me();
 });
 
 await tevroc.auth.logout();
+await tevroc.auth.verifyOtp({ code: "123456" });
+await tevroc.auth.changePassword({ oldPassword: "old", newPassword: "new" });
 await tevroc.auth.resetPassword({ email: "ada@example.com" });
-
-// Handle responses and show helpful feedback for each auth step.
-</code></pre>
-                            <p class="text-slate-600 mt-3">Use registration to create new users, logout to clear the current session, and reset password for recovery flows. Provide clear success and error messages for each action.</p>
+await tevroc.auth.loginUrl("/dashboard");</code></pre>
+                            <p class="text-slate-600 mt-3">Use registration to create new users, logout to clear the current session, verify OTP codes, change a password, and reset a forgotten password as part of a recovery flow.</p>
                         </div>
                     </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
@@ -235,8 +469,20 @@ await tevroc.auth.resetPassword({ email: "ada@example.com" });
   serviceUrl: "https://services.example.com",
 });
 
-// OAuth providers can be added with minimal extra code.
-</code></pre>
+tevroc.auth.onGoogleLogin((user, error) => {
+  if (error) {
+    console.error("Google login failed", error);
+    return;
+  }
+
+  console.log("Google user", user);
+});
+
+await tevroc.auth.loginWithGoogle({
+  accessToken: googleAccessToken,
+});
+
+await tevroc.auth.loginWithProvider("google", "/dashboard");</code></pre>
                         <p class="text-slate-600 mt-3">Google login is a fast way to let users authenticate without managing passwords. Tevroc supports provider-based social auth alongside traditional email/password flows.</p>
                     </div>
                 </section>
@@ -265,6 +511,20 @@ await tevroc.entities.Project.update(created.data.id, { status: "done" });
 
 // Use entity results for tables, dashboards, or summary cards.
 </code></pre>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Query and sort example</h3>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const recentProjects = await tevroc.entities.Project.filter(
+  { status: "active" },
+  { sortBy: "createdAt", direction: "desc" },
+  10
+);</code></pre>
+                        <p class="text-slate-600 mt-3">Filtering and sorting let your UI render the most relevant records first, whether you are building a dashboard, a task board, or a customer view.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Entity lifecycle</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-entity-lifecycle.mmd">Loading entity lifecycle diagram...</div>
+                        <p class="diagram-caption">Entities move through create, read, update, and sync stages, making it easier to build consistent CRUD interfaces.</p>
+                    </div>
                     <p class="text-slate-700">The response objects are designed to include both record data and metadata, making pagination and filtering easier to implement in UI components.</p>
                     <div class="grid gap-4 md:grid-cols-2">
                         <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
@@ -307,7 +567,7 @@ await tevroc.functions.ping({ hello: "world" });</code></pre>
                 <section id="integrations" data-section="integrations" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Use core integrations</h2>
                     <p class="text-slate-700 leading-relaxed">This chapter shows how Tevroc connects your app to external services and smart features. Add AI generation, email, uploads, and signed URLs quickly while keeping your code concise and reusable.</p>
-                    <p class="text-slate-700 leading-relaxed">Core integrations let you build rich experiences without coupling each service directly into your frontend. Use Tevroc as the integration layer so your app stays light and the service configuration stays centralized.</p>
+                    <p class="text-slate-700 leading-relaxed">Core integrations let you build rich experiences without coupling each service directly into your frontend. Use Tevroc as the <em>integration layer</em> so your app stays light and the service configuration stays centralized.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
                         <h3 class="text-xl font-semibold mb-3">Integration flow</h3>
                         <div class="mermaid" data-src="../uml/tevrocsdk-integrations.mmd">Loading integration diagram...</div>
@@ -331,15 +591,33 @@ await tevroc.integrations.Core.SendEmail({
 await tevroc.integrations.Core.UploadFile(file, {
   filename: "report.pdf",
   contentType: "application/pdf",
+});
+
+await tevroc.integrations.Core.UploadPrivateFile(file, {
+  filename: "report.pdf",
+  contentType: "application/pdf",
+});
+
+await tevroc.integrations.Core.CreateFileSignedUrl({
+  key: "report.pdf",
+});
+
+await tevroc.integrations.Core.ExtractDataFromUploadedFile({
+  fileId: "123",
 });</code></pre>
-                        <p class="text-slate-600 mt-3">These integration methods let you request AI output, send email, or upload files with a single SDK call. The same pattern scales to additional connectors and custom integration adapters.</p>
+                        <p class="text-slate-600 mt-3">These integration methods let you request AI output, send email, upload public or private files, generate signed URLs, and extract structured data from uploads with a single SDK call. The same pattern scales to additional connectors and custom integration adapters.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">AI + upload workflow</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-ai-upload.mmd">Loading AI upload diagram...</div>
+                        <p class="diagram-caption">This workflow shows how a single UI interaction can combine AI generation and file storage in a clean and predictable way.</p>
                     </div>
                 </section>
 
                 <section id="payments" data-section="payments" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Accept payments</h2>
                     <p class="text-slate-700 leading-relaxed">Monetization is often the next step after core app features. This section teaches you to add checkout creation, status listeners, and payment lifecycle handling while preserving a clear user flow.</p>
-                    <p class="text-slate-700 leading-relaxed">Payment processing should be transparent to users: they need confirmation of success, a clear failure path, and a clean retry experience. Tevroc handles the checkout orchestration while your app focuses on the customer flow.</p>
+                    <p class="text-slate-700 leading-relaxed">Payment processing should be transparent to users: they need <strong>confirmation</strong> of success, a clear <em>failure path</em>, and a clean <u>retry experience</u>. Tevroc handles the checkout orchestration while your app focuses on the customer flow.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <h3 class="text-xl font-semibold mb-3">Create a checkout</h3>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">await tevroc.payments.create({
@@ -355,7 +633,12 @@ const unsubscribe = tevroc.payments.onstatus((status, error) => {
   }
   console.log("Payment status:", status);
 });</code></pre>
-                        <p class="text-slate-600 mt-3">Use `onstatus` to observe checkout progress and trigger UI updates. This keeps your payment flow responsive while the backend handles authorization, confirmation, and receipts.</p>
+                        <p class="text-slate-600 mt-3">Use <code>onstatus</code> to observe checkout progress and trigger UI updates. This keeps your payment flow responsive while the backend handles authorization, confirmation, and receipts.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Payment lifecycle</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-payment-flow.mmd">Loading payment lifecycle diagram...</div>
+                        <p class="diagram-caption">The checkout journey becomes easier to reason about when you map the status transitions from creation to confirmation or retry.</p>
                     </div>
                 </section>
 
@@ -367,9 +650,10 @@ const unsubscribe = tevroc.payments.onstatus((status, error) => {
                         <p class="font-semibold text-slate-900 mb-3">File helpers</p>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const fileUrl = tevroc.files.url("reports/summary.pdf");
 const privateFileUrl = tevroc.files.privateUrl("reports/private.pdf");
+
 await tevroc.files.get("reports/summary.pdf");
 await tevroc.files.getPrivate("reports/private.pdf");</code></pre>
-                        <p class="text-slate-600 mt-3">Use `url()` for public assets and `privateUrl()` for signed access. The SDK also supports secure fetches of protected content through `getPrivate()`.</p>
+                        <p class="text-slate-600 mt-3">Use <code>url()</code> for public assets and <code>privateUrl()</code> for signed access. The SDK also supports secure fetches of protected content through <code>getPrivate()</code>.</p>
                     </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <p class="font-semibold text-slate-900 mb-3">Native store helpers</p>
@@ -381,12 +665,28 @@ await store.get(ref);
 await store.remove(ref);</code></pre>
                         <p class="text-slate-600 mt-3">The native store lets you persist app state, preferences, and offline caches on the device. This works nicely with offline sync for a seamless native experience.</p>
                     </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <p class="font-semibold text-slate-900 mb-3">Google Drive and project helpers</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">await tevroc.native.files.saveJsonToDrive("project", { ok: true }, null, "user-1");
+await tevroc.native.files.readJsonFromDrive("file_123", "user-1");
+await tevroc.native.files.deleteFromDrive("file_123", "user-1");
+
+await tevroc.native.projects.upsertUser({
+  uid: "u1",
+  email: "ada@example.com",
+  displayName: "Ada",
+  photoURL: "",
+});
+
+await tevroc.native.projects.saveProjectMeta("u1", "p1", { title: "Launch" });</code></pre>
+                        <p class="text-slate-600 mt-3">These helpers make it easier to bridge app-specific metadata and file storage into the native project and drive layers without building separate adapters.</p>
+                    </div>
                 </section>
 
                 <section id="offline" data-section="offline" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Offline and sync support</h2>
                     <p class="text-slate-700 leading-relaxed">A great app stays useful when the network drops. In this section, you will see how Tevroc keeps data synchronized, caches updates locally, and recovers cleanly when connectivity returns.</p>
-                    <p class="text-slate-700 leading-relaxed">Offline support is critical for mobile and field-first applications. Tevroc’s sync layer helps you queue changes locally, detect conflicts, and replay updates as soon as the device regains connectivity.</p>
+                    <p class="text-slate-700 leading-relaxed">Offline support is critical for mobile and field-first applications. Tevroc’s sync layer helps you <strong>queue changes</strong> locally, <em>detect conflicts</em>, and <u>replay updates</u> as soon as the device regains connectivity.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <p class="font-semibold text-slate-900 mb-3">Sync example</p>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const client = createClient({ baseUrl: 'https://api.example', appId: 'myapp' });
@@ -397,12 +697,82 @@ client.offline.on('conflict', ({ conflictId }) => {
 });</code></pre>
                         <p class="text-slate-600 mt-3">Start auto-sync early so cached writes and read operations stay aligned with the latest remote state. Add conflict handlers to surface merge decisions or automatic reconciliation.</p>
                     </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <p class="font-semibold text-slate-900 mb-3">What the offline layer does</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Stores entities locally using platform-native SQLite when available, with localStorage fallback.</li>
+                            <li>Queues create, update, and delete operations while offline and applies them locally immediately so the UI remains responsive.</li>
+                            <li>Flushes queued writes periodically or on event-driven resume when connectivity returns.</li>
+                            <li>Exposes conflicts via <code>client.offline.listConflicts()</code> and <code>client.offline.resolveConflict(conflictId, resolution)</code>.</li>
+                        </ul>
+                        <p class="text-slate-600 mt-3">The SDK attempts to use Capacitor and background-task integrations when available; if those plugins are missing it falls back to foreground sync on resume or focus.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <h3 class="text-xl font-semibold mb-3">Sync lifecycle</h3>
+                        <div class="mermaid" data-src="../uml/tevrocsdk-sync-flow.mmd">Loading sync lifecycle diagram...</div>
+                        <p class="diagram-caption">This pattern helps you visualize the offline-first loop: write locally, queue changes, and replay them when connectivity returns.</p>
+                    </div>
+                </section>
+
+                <section id="agents-connectors" data-section="agents-connectors" class="space-y-6 doc-section liquid-card">
+                    <h2 class="text-3xl font-semibold">Agents, connectors, logs, and SSO</h2>
+                    <p class="text-slate-700 leading-relaxed">Tevroc also gives you a higher-level layer for assistants, connector management, logs, and SSO flows. These helpers are especially useful for support experiences, automation dashboards, and admin tooling.</p>
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Practical tip</p>
+                        <p class="text-slate-700 leading-relaxed">Use agent and connector helpers when you want to introduce guided support, automation, or admin workflows without building a lot of custom infrastructure.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <p class="font-semibold text-slate-900 mb-3">Create agent conversations</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const conversation = await tevroc.agents.Support.createConversation({
+  title: "Onboarding",
+});
+
+await tevroc.agents.Support.addMessage(conversation.data.id, {
+  role: "user",
+  content: "Help me configure my workspace",
+});
+
+const messages = await tevroc.agents.Support.listMessages(conversation.data.id);</code></pre>
+                        <p class="text-slate-600 mt-3">Use agent conversations when you want a multi-turn support or assistant experience that feels like a guided workflow rather than a one-off API call.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <p class="font-semibold text-slate-900 mb-3">Connectors, logs, custom integrations, and SSO</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">await tevroc.connectors.list();
+await tevroc.connectors.get("slack");
+await tevroc.connectors.connect("slack", { config: { teamId: "T123" } });
+await tevroc.connectors.disconnect("slack");
+await tevroc.connectors.status("slack");
+
+await tevroc.connectors.user.list();
+await tevroc.connectors.user.refresh("abc123");
+
+await tevroc.logs.list({ limit: 20 });
+await tevroc.logs.create({
+  level: "info",
+  message: "User opened dashboard",
+  context: { source: "web" },
+});
+
+await tevroc.customIntegrations.example.echo({ ok: true });
+await tevroc.sso.accessToken({ code: "provider-code" });
+await tevroc.sso.callback({ code: "provider-code" });</code></pre>
+                        <p class="text-slate-600 mt-3">These helpers let your application surface connector status, track operational logs, invoke custom integrations, and complete SSO handoffs with consistent SDK calls.</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                        <p class="font-semibold text-slate-900 mb-3">Make raw requests</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const health = await tevroc.request("/health", { auth: false });</code></pre>
+                        <p class="text-slate-600 mt-3">Use <code>request()</code> when you need to call a worker route that does not yet have a dedicated helper, while still benefiting from the same authenticated client.</p>
+                    </div>
                 </section>
 
                 <section id="errors" data-section="errors" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Handle errors</h2>
                     <p class="text-slate-700 leading-relaxed">Reliability is built by handling failure cases gracefully. This section shows how Tevroc surfaces structured errors so your app can recover from auth, network, and data issues cleanly.</p>
                     <p class="text-slate-700 leading-relaxed">Instead of letting exceptions break the UI, trap them and decide whether to retry, prompt for login, or show contextual help. Tevroc errors include status codes and structured payloads that make this straightforward.</p>
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Reliability tip</p>
+                        <p class="text-slate-700 leading-relaxed">Good apps recover gracefully from failures. Treat auth errors, network outages, and validation issues as expected edges of the experience and handle them with clear fallbacks.</p>
+                    </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <h3 class="text-xl font-semibold mb-3">Error handling example</h3>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">import { TevrocError } from "tevrocsdk";
@@ -442,6 +812,8 @@ try {
               <button type="button" data-section-button="overview" class="toc-button rounded-xl px-3 py-2 w-full text-left">Overview</button>
               <button type="button" data-section-button="getting-started" class="toc-button rounded-xl px-3 py-2 w-full text-left">Getting started</button>
               <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2 w-full text-left">Installation</button>
+              <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2 w-full text-left">Native integration</button>
+              <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes</button>
               <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2 w-full text-left">Create a client</button>
               <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2 w-full text-left">Authentication</button>
               <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2 w-full text-left">Entities</button>
@@ -450,6 +822,7 @@ try {
               <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2 w-full text-left">Payments</button>
               <button type="button" data-section-button="files" class="toc-button rounded-xl px-3 py-2 w-full text-left">Files</button>
               <button type="button" data-section-button="offline" class="toc-button rounded-xl px-3 py-2 w-full text-left">Offline support</button>
+              <button type="button" data-section-button="agents-connectors" class="toc-button rounded-xl px-3 py-2 w-full text-left">Agents & connectors</button>
               <button type="button" data-section-button="errors" class="toc-button rounded-xl px-3 py-2 w-full text-left">Error handling</button>
               <button type="button" data-section-button="next-steps" class="toc-button rounded-xl px-3 py-2 w-full text-left">Next steps</button>
             </nav>

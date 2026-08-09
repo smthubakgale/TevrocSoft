@@ -450,17 +450,8 @@ class CustomNavbar extends HTMLElement {
                     <span class="chevron">▾</span>
                   </button>
                   <div class="submenu-links" id="blogs-submenu">
-                    <a href="blogs.html">Insights Hub</a>
-                    <a href="../TevrocSoft/blogs/apis.html">APIs</a>
-                    <a href="../TevrocSoft/blogs/development-frameworks.html">Development Frameworks</a>
-                    <a href="../TevrocSoft/blogs/hosting.html">Hosting</a>
-                    <a href="../TevrocSoft/blogs/html-elements.html">HTML Elements</a>
-                    <a href="../TevrocSoft/blogs/libraries.html">Libraries</a>
-                    <a href="../TevrocSoft/blogs/templates.html">Templates</a>
-                    <a href="../TevrocSoft/blogs/ui-layouts.html">UI Layouts</a>
-                    <a href="../TevrocSoft/blogs/ai/ai-app-development.html">AI App Development</a>
-                    <a href="../TevrocSoft/blogs/ai/predictive-analysis-tutorial.html">Predictive Analysis</a>
-                    <a href="../TevrocSoft/blogs/tevrocsdk.html">Tevroc SDK</a>
+                    <a href="blogs.html">Insights Hub</a> 
+                    <a href="./blogs/tevrocsdk.html">Tevroc SDK</a>
                   </div>
                 </div>
               </div>

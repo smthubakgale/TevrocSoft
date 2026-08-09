@@ -1,0 +1,13 @@
+flowchart LR
+  A[Create client] --> B[Authenticate user]
+  B --> C[Read or write entities]
+  C --> D[Call integrations]
+  D --> E[Handle files and payments]
+  E --> F[Sync offline changes]
+
+  style A fill:#0f172a,stroke:#38bdf8,color:#ffffff
+  style B fill:#1e293b,stroke:#60a5fa,color:#ffffff
+  style C fill:#1e293b,stroke:#60a5fa,color:#ffffff
+  style D fill:#1e293b,stroke:#60a5fa,color:#ffffff
+  style E fill:#1e293b,stroke:#60a5fa,color:#ffffff
+  style F fill:#0f172a,stroke:#38bdf8,color:#ffffff
