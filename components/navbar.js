@@ -388,6 +388,8 @@ class CustomNavbar extends HTMLElement {
           font-size: 0.8rem;
           font-weight: 600;
           gap: 0.15rem;
+          max-width:100vw;
+          min-width:100vw;
         }
 
         .bottom-nav a .lucide {
@@ -530,7 +532,8 @@ class CustomNavbar extends HTMLElement {
       <nav class="bottom-nav" aria-label="Bottom navigation">
         <a href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a href="portfolios.html"><i data-lucide="smartphone"></i><span>Apps</span></a>
-        <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a> 
+        <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a>
+        <a href="pricing.html"><i data-lucide="list-checks"></i><span>Pricing</span></a>
       </nav>
     `;
 
