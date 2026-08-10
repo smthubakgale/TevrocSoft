@@ -10,11 +10,11 @@
     <base href="../">
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/monokai-sublime.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" >
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../components/navbar.js"></script>
     <script src="../components/footer.js"></script>
@@ -30,7 +30,7 @@
       html, body { min-height: 100%; margin: 0; }
       body { background: #f8fafc; color: #0f172a; overflow-x: hidden; }
       html { scroll-behavior: smooth; }
-      main { padding: 0; margin: 0; overflow-x: hidden; }
+      main { padding: 0; margin: 0;  }
       .sidebar-panel { border-radius: 0; border: none; background: var(--doc-surface); box-shadow: none; }
       .sidebar-panel, .doc-hero, .mobile-toc-panel, .toc-button, .doc-card, .rounded-[2rem], .rounded-3xl, .rounded-2xl, .rounded-full { border-radius: 0 !important; }
       .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease; padding: 1.25rem 1rem; }
@@ -90,6 +90,9 @@
       @keyframes floatUp { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
       @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes pulseGlow { 0% { box-shadow: 0 0 0 rgba(59,130,246,0.12); } 100% { box-shadow: 0 0 24px rgba(59,130,246,0.22); } }
+      pre{
+        background-color:#282C34!important;
+      }
     </style>
 </head>
 <body class="bg-gray-50">
