@@ -388,8 +388,6 @@ class CustomNavbar extends HTMLElement {
           font-size: 0.8rem;
           font-weight: 600;
           gap: 0.15rem;
-          max-width:100vw;
-          min-width:100vw;
         }
 
         .bottom-nav a .lucide {
