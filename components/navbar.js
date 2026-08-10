@@ -367,7 +367,7 @@ class CustomNavbar extends HTMLElement {
         .bottom-nav {
           position: fixed;
           left: 0;
-          width:calc(100vw - 0.7rem);
+          right: 0;
           bottom: 0;
           z-index: 1025;
           display: flex;
@@ -377,7 +377,6 @@ class CustomNavbar extends HTMLElement {
           backdrop-filter: blur(16px);
           border-top: 1px solid var(--border);
           box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.08);
-          overflow-x:scroll;
         }
 
         .bottom-nav a {
@@ -386,9 +385,9 @@ class CustomNavbar extends HTMLElement {
           align-items: center;
           color: var(--primary);
           text-decoration: none;
-          font-size: 0.6rem;
+          font-size: 0.8rem;
           font-weight: 600;
-          gap: 0.5rem;
+          gap: 0.15rem;
         }
 
         .bottom-nav a .lucide {
@@ -531,8 +530,7 @@ class CustomNavbar extends HTMLElement {
       <nav class="bottom-nav" aria-label="Bottom navigation">
         <a href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a href="portfolios.html"><i data-lucide="smartphone"></i><span>Apps</span></a>
-        <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a>
-        <a href="pricing.html"><i data-lucide="list-checks"></i><span>Pricing</span></a>
+        <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a> 
       </nav>
     `;
 
