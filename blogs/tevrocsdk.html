@@ -93,6 +93,39 @@
       pre{
         background-color:#282C34!important;
       }
+      code::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      code::-webkit-scrollbar-track {
+        background: rgba(20, 35, 60, 0.65);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.35);
+      }
+
+      code::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          180deg,
+          #d5dde5,
+          #71869b,
+          #b8c5d1
+        );
+        border-radius: 999px;
+        border: 2px solid rgba(20, 40, 65, 0.7);
+        box-shadow:
+          inset 1px 1px 2px rgba(255, 255, 255, 0.7),
+          inset -1px -1px 2px rgba(0, 0, 0, 0.4),
+          0 0 8px rgba(40, 140, 255, 0.2);
+      }
+
+      code::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          180deg,
+          #eef3f7,
+          #8fa9bf,
+          #d5e0e8
+        );
+      }
     </style>
 </head>
 <body class="bg-gray-50">
