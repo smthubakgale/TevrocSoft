@@ -20,7 +20,7 @@ class CustomNavbar extends HTMLElement {
           position: sticky;
           top: 0;
           z-index: 1030;
-          width: 100%;
+          width: 100vw;
         }
 
         .topbar {
