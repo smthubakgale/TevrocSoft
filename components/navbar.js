@@ -367,7 +367,7 @@ class CustomNavbar extends HTMLElement {
         .bottom-nav {
           position: fixed;
           left: 0;
-          width:calc(100vw - 2*0.7rem);
+          width:calc(100vw - 0.7rem);
           bottom: 0;
           z-index: 1025;
           display: flex;
