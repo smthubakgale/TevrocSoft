@@ -30,7 +30,10 @@
       html, body { min-height: 100%; margin: 0; }
       body { background: #f8fafc; color: #0f172a; overflow-x: hidden; }
       html { scroll-behavior: smooth; }
-      main { padding: 0; margin: 0;  }
+      main { padding: 0; margin: 0; }
+      @media (max-width: 767px) and (orientation: portrait) {
+        article { width:100vh; overflow-x: scroll; }
+      }
       .sidebar-panel { border-radius: 0; border: none; background: var(--doc-surface); box-shadow: none; }
       .sidebar-panel, .doc-hero, .mobile-toc-panel, .toc-button, .doc-card, .rounded-[2rem], .rounded-3xl, .rounded-2xl, .rounded-full { border-radius: 0 !important; }
       .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease; padding: 1.25rem 1rem; }
