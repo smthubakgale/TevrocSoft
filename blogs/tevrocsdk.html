@@ -28,9 +28,9 @@
         --doc-border: #e2e8f0;
       }
       html, body { min-height: 100%; margin: 0; }
-      body { background: #f8fafc; color: #0f172a; }
+      body { background: #f8fafc; color: #0f172a; overflow-x: hidden; }
       html { scroll-behavior: smooth; }
-      main { padding: 0; margin: 0; }
+      main { padding: 0; margin: 0; overflow-x: hidden; }
       .sidebar-panel { border-radius: 0; border: none; background: var(--doc-surface); box-shadow: none; }
       .sidebar-panel, .doc-hero, .mobile-toc-panel, .toc-button, .doc-card, .rounded-[2rem], .rounded-3xl, .rounded-2xl, .rounded-full { border-radius: 0 !important; }
       .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease; padding: 1.25rem 1rem; }
@@ -40,10 +40,11 @@
       .doc-section { border-bottom: 1px solid var(--doc-border); padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
       .doc-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
       section[data-section] { display: none; }
-      section{
-        padding-left:15px;
-        width: calc(100% - 20px);
-        padding-bottom:20px;
+      section {
+        box-sizing: border-box;
+        min-width: 0;
+        width: 100%;
+        padding: 0 15px 20px;
       }
       .doc-hero { background: linear-gradient(180deg, rgba(15,23,42,0.72), rgba(15,23,42,0.46)), url("../img/blogs/tevrocsdk-hero.png") center/cover no-repeat; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 32px 90px rgba(15,23,42,.08); backdrop-filter: blur(18px); animation: fadeInUp 0.9s ease both; color: #f8fafc; position: relative; overflow: hidden; }
       .doc-hero .doc-hero-pill { background: rgba(255,255,255,0.18); color: #f8fafc; border: 1px solid rgba(255,255,255,0.3); }
@@ -56,7 +57,11 @@
       .doc-section { border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 2.5rem; margin-bottom: 2.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.26); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 18px 44px rgba(15,23,42,0.06); backdrop-filter: blur(12px); transition: transform .35s ease, opacity .35s ease, border-color .35s ease, box-shadow .35s ease; }
       section[data-section] { display: none; opacity: 0; transform: translateY(24px); max-height: 0; overflow: hidden; transition: opacity .45s ease, transform .45s ease, max-height .45s ease; }
       section.active { display: block; opacity: 1; transform: translateY(0); max-height: unset; }
-      section{ padding-left:15px; width: calc(100% - 20px); padding-bottom:20px; }
+      section {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 15px 20px;
+      }
       .liquid-card { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); box-shadow: 0 20px 38px rgba(15,23,42,0.08); backdrop-filter: blur(18px); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
       .liquid-card:hover { transform: translateY(-4px); box-shadow: 0 28px 60px rgba(15,23,42,0.12); }
       .highlight-block { border-left: 4px solid rgba(14,165,233,0.75); padding-left: 1rem; background: linear-gradient(90deg, rgba(14,165,233,0.08), rgba(59,130,246,0.03)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7); }
@@ -200,12 +205,15 @@
 
 const tevroc = createClient({
   baseUrl: "https://your-worker.example.workers.dev",
+  serviceUrl: "https://services.example.com",
   appId: "tevroc-portal",
   appName: "Tevroc Portal",
+  debug: true,
 });
 
 await tevroc.auth.me();</code></pre>
                         <p class="text-slate-600 mt-3">This simple bootstrap gives you a reliable starting point for auth, entity access, and future integrations. Once it works, you can layer on login pages, dashboards, file uploads, and native experiences without changing your core setup.</p>
+                        <p class="text-slate-700 leading-relaxed">Enable `debug: true` during development to trace request execution, offline sync events, and native helper diagnostics across browser and native shells.</p>
                     </div>
                 </section>
 
@@ -689,20 +697,20 @@ await tevroc.native.projects.saveProjectMeta("u1", "p1", { title: "Launch" });</
                     <p class="text-slate-700 leading-relaxed">Offline support is critical for mobile and field-first applications. Tevroc’s sync layer helps you <strong>queue changes</strong> locally, <em>detect conflicts</em>, and <u>replay updates</u> as soon as the device regains connectivity.</p>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <p class="font-semibold text-slate-900 mb-3">Sync example</p>
-                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const client = createClient({ baseUrl: 'https://api.example', appId: 'myapp' });
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const client = createClient({ baseUrl: 'https://api.example', appId: 'myapp', debug: true });
 client.offline.startAutoSync();
 
 client.offline.on('conflict', ({ conflictId }) => {
   console.warn('Conflict detected:', conflictId);
 });</code></pre>
-                        <p class="text-slate-600 mt-3">Start auto-sync early so cached writes and read operations stay aligned with the latest remote state. Add conflict handlers to surface merge decisions or automatic reconciliation.</p>
+                        <p class="text-slate-600 mt-3">Start auto-sync early so cached writes and read operations stay aligned with the latest remote state. When debug mode is enabled, sync events and queue diagnostics are logged to help troubleshoot offline behavior.</p>
                     </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <p class="font-semibold text-slate-900 mb-3">What the offline layer does</p>
                         <ul class="list-disc list-inside text-slate-700 space-y-2">
-                            <li>Stores entities locally using platform-native SQLite when available, with localStorage fallback.</li>
-                            <li>Queues create, update, and delete operations while offline and applies them locally immediately so the UI remains responsive.</li>
-                            <li>Flushes queued writes periodically or on event-driven resume when connectivity returns.</li>
+                            <li>Stores entities and pending file uploads locally using platform-native SQLite when available, with localStorage fallback.</li>
+                            <li>Queues create, update, delete, and upload operations while offline and applies them locally immediately so the UI remains responsive.</li>
+                            <li>Flushes queued writes and pending uploads periodically or on event-driven resume when connectivity returns.</li>
                             <li>Exposes conflicts via <code>client.offline.listConflicts()</code> and <code>client.offline.resolveConflict(conflictId, resolution)</code>.</li>
                         </ul>
                         <p class="text-slate-600 mt-3">The SDK attempts to use Capacitor and background-task integrations when available; if those plugins are missing it falls back to foreground sync on resume or focus.</p>
