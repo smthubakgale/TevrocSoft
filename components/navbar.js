@@ -529,8 +529,9 @@ class CustomNavbar extends HTMLElement {
 
       <nav class="bottom-nav" aria-label="Bottom navigation">
         <a href="index.html"><i data-lucide="house"></i><span>Home</span></a>
-        <a href="pricing.html"><i data-lucide="badge-dollar-sign"></i><span>Pricing</span></a>
-        <a href="contact.html"><i data-lucide="mail"></i><span>Contact</span></a>
+        <a href="portfolios.html"><i data-lucide="smartphone"></i><span>Apps</span></a>
+        <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a>
+        <a href="pricing.html"><i data-lucide="list-checks"></i><span>Pricing</span></a>
       </nav>
     `;
 
