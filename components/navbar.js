@@ -15,6 +15,10 @@ class CustomNavbar extends HTMLElement {
           --accent-strong: #1d4ed8;
           --border: rgba(15, 23, 42, 0.08);
         }
+ 
+        @media (max-width: 767px) {
+          body { overflow-x:hidden !important; }  
+        }
 
         .nav-shell {
           position: sticky;
