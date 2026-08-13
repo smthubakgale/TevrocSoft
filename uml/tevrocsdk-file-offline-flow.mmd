@@ -1,0 +1,9 @@
+flowchart TD
+  A[Entity results with file URLs] --> B[SDK sync process]
+  B --> C{Native available?}
+  C -- Yes --> D[Fetch file bytes]
+  D --> E[Encode Base64]
+  E --> F[Store in native store as downloaded_files/<key>]
+  F --> G[Serve data:<contentType>;base64,... when offline]
+  C -- No --> H[No native caching; use network URLs]
+  H --> I[Browser behavior unchanged]

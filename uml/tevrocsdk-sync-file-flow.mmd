@@ -1,0 +1,12 @@
+sequenceDiagram
+  participant UI
+  participant SDK
+  participant Native
+  participant Server
+
+  UI->>SDK: Trigger entity fetch
+  SDK->>Server: GET /entities?include=files
+  Server-->>SDK: JSON with file URLs
+  SDK->>Native: walkAndPersistFiles -> download & store
+  SDK->>UI: return entities with file keys
+  Note over Native,SDK: On offline, SDK reads native cache and returns data URIs to UI

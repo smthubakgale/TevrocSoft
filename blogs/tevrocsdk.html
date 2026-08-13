@@ -705,6 +705,36 @@ await tevroc.files.get("reports/summary.pdf");
 await tevroc.files.getPrivate("reports/private.pdf");</code></pre>
                         <p class="text-slate-600 mt-3">Use <code>url()</code> for public assets and <code>privateUrl()</code> for signed access. The SDK also supports secure fetches of protected content through <code>getPrivate()</code>.</p>
                     </div>
+                      <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Under the hood: file caching and offline delivery</h3>
+                        <p class="text-slate-700 leading-relaxed">To make assets available during offline use, the SDK's sync layer can proactively download referenced files and store them in the native store. This happens only when the app runs in a native shell (Capacitor or Tauri) and a native store is available. The high-level flow is:</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2 mt-3">
+                          <li>Entity responses include file URLs or data-URIs.</li>
+                          <li>During sync, the SDK walks entity objects, detects file references, downloads the bytes, and encodes them as Base64.</li>
+                          <li>Encoded files are saved under keys like <code>downloaded_files/&lt;key&gt;</code> in the native store.</li>
+                          <li>When offline, `files.url(key)` resolves to a `data:` URI so the UI can render images without network access.</li>
+                        </ol>
+                        <div class="mermaid mt-4" data-src="../uml/tevrocsdk-file-offline-flow.mmd">Loading file-offline flow...</div>
+                        <p class="text-slate-700 leading-relaxed mt-4">Key implementation notes:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2 mt-3">
+                          <li>The feature is explicitly native-only; browser apps do not attempt file persistence.</li>
+                          <li>Debug traces use the console tag <strong>[tevrocsdk][fileoffline]</strong> to make it easy to filter download/persist/read events during development.</li>
+                          <li>The SDK performs iterative percent-decoding of file keys to handle double-encoded keys returned from some upload flows.</li>
+                        </ul>
+                      </div>
+
+                      <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-3">Sync + file flow (sequence)</h3>
+                        <p class="text-slate-700 leading-relaxed">This sequence diagram shows how the UI, SDK, native store, and server interact when files are involved in entity sync.</p>
+                        <div class="mermaid mt-4" data-src="../uml/tevrocsdk-sync-file-flow.mmd">Loading sync-file sequence...</div>
+                      </div>
+
+                      <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 mt-6">
+                        <h3 class="text-xl font-semibold mb-3">SDK architecture details</h3>
+                        <p class="text-slate-700 leading-relaxed">For clarity, here's an architecture diagram that highlights how the files API, offline sync, native store, and integrations relate to the central SDK client.</p>
+                        <div class="mermaid mt-4" data-src="../uml/tevrocsdk-architecture-details.mmd">Loading architecture details...</div>
+                        <p class="text-slate-700 leading-relaxed mt-3">This mapping helps when designing fallbacks (for example, using localStorage in web-only builds) and when deciding where to instrument additional metrics or persistence logic.</p>
+                      </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <p class="font-semibold text-slate-900 mb-3">Native store helpers</p>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">const store = tevroc.native.store;
@@ -731,6 +761,17 @@ await tevroc.native.projects.upsertUser({
 await tevroc.native.projects.saveProjectMeta("u1", "p1", { title: "Launch" });</code></pre>
                         <p class="text-slate-600 mt-3">These helpers make it easier to bridge app-specific metadata and file storage into the native project and drive layers without building separate adapters.</p>
                     </div>
+          <div class="info-note rounded-3xl p-6 mt-6">
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">New: File-offline caching (native only)</p>
+            <p class="text-slate-700 leading-relaxed">The SDK now persists downloaded file bytes into the native store (SQLite-backed) when running inside Capacitor or Tauri. This makes images and other assets available while offline by serving `data:` URIs from the native cache.</p>
+            <ul class="list-disc list-inside text-slate-700 space-y-2 mt-3">
+              <li>Only active on native shells — browser-only apps are unchanged.</li>
+              <li>Cached items are stored under keys like <code>downloaded_files/&lt;key&gt;</code> in the native store.</li>
+              <li>Logs use the console tag <strong>[tevrocsdk][fileoffline]</strong> for download/persist/read events.</li>
+              <li>The SDK performs iterative percent-decoding of file keys to avoid double-encoding issues when resolving URLs.</li>
+            </ul>
+            <p class="text-slate-700 leading-relaxed mt-3">Quick test: run your app in Capacitor/Tauri with <code>debug: true</code>, load entities that reference files, watch for <strong>[tevrocsdk][fileoffline]</strong> logs during sync, then go offline and reload — images should render from the native cache.</p>
+          </div>
                 </section>
 
                 <section id="offline" data-section="offline" class="space-y-6 doc-section liquid-card">

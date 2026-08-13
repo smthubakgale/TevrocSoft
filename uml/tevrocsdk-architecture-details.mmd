@@ -1,0 +1,11 @@
+graph LR
+  Client[Frontend App] -->|uses| SDK[Tevroc SDK]
+  SDK --> Auth[Auth API]
+  SDK --> Entities[Entities API]
+  SDK --> Files[Files API]
+  SDK --> Offline[Offline Sync]
+  Offline --> Native[Native Store (SQLite)]
+  Files --> Native
+  SDK --> Integrations[Integrations]
+  Integrations --> Services[External Services]
+  Services --> Server[Tevroc Worker]
