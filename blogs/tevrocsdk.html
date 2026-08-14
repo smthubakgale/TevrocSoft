@@ -149,6 +149,7 @@
                             <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2">Installation</button>
                             <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2">Native integration</button>
                             <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2">Setup notes</button>
+                            <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2">Tauri SQL setup</button>
                             <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2">Create a client</button>
                             <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2">Authentication</button>
                             <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2">Entities</button>
@@ -268,6 +269,272 @@ await tevroc.auth.me();</code></pre>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npm install ../tevrocsdk
 cd ../tevrocsdk && npm run build</code></pre>
                         <p class="text-slate-600 mt-3">Use this flow when your app and SDK source are in the same workspace. After building, point your app import to the generated SDK files or publish the package to your private registry.</p>
+                    </div>
+                </section>
+                <section id=\"setup-notes\" data-section=\"setup-notes\" class=\"space-y-8 doc-section liquid-card\">
+                    <h2 class=\"text-3xl font-semibold\">Setup notes: Capacitor SQLite</h2>
+                    <p class=\"text-slate-700 leading-relaxed\">This section documents the complete setup for Capacitor SQLite, which enables native database persistence in mobile apps using the Tevroc SDK.</p>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Why SQLite matters for Tevroc SDK</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-3\">The Tevroc SDK needs a storage backend for offline sync and entity caching. On mobile (Capacitor), it looks for the native SQLite plugin. If found, it uses native SQLite for fast, encrypted database access. If not found, it falls back gracefully to in-memory storage so your app still works, but without offline persistence.</p>
+                        <ul class=\"list-disc list-inside text-slate-700 space-y-2 mt-3\">
+                            <li><strong>With SQLite:</strong> Entity writes persist locally and sync when the network returns. Your app stays responsive even offline.</li>\n                            <li><strong>Without SQLite:</strong> The SDK provides in-memory caching for the current session. Refreshing the page loses data until the server syncs back.</li>
+                        </ul>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Installation steps</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-4\">Install the plugin in your app project (the Capacitor wrapper), not in the SDK itself:</p>
+                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">cd your-capacitor-app
+npm install @capacitor-community/sqlite jeep-sqlite sql.js --save
+npx cap sync</code></pre>
+                        <p class=\"text-slate-600 mt-3\"><strong>jeep-sqlite:</strong> Required for web platform IndexedDB support. The SDK automatically detects this and uses it for browser builds.</p>
+                        <p class=\"text-slate-600\"><strong>sql.js:</strong> WebAssembly SQLite for web. The WASM file must be copied to your public/assets folder (see Web setup below).</p>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Configure capacitor.config.ts</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-4\">Add the CapacitorSQLite plugin configuration to your main Capacitor config file:</p>
+                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-typescript\">import type { CapacitorConfig } from \"@capacitor/cli\";
+
+const config: CapacitorConfig = {
+  appId: \"com.example.app\",
+  appName: \"Example App\",
+  webDir: \"dist\",
+  plugins: {
+    App: {
+      appUrlOpen: {
+        androidScheme: \"myapp\",
+        iosScheme: \"myapp\",
+      },
+    },
+    CapacitorSQLite: {
+      iosDatabaseLocation: \"Library/CapacitorDatabase\",
+      iosIsEncryption: false,
+      iosKeychainPrefix: \"your-app-prefix\",
+      iosBiometric: {
+        biometricAuth: false,
+        biometricTitle: \"Biometric login for Capacitor SQLite\"
+      },
+      androidIsEncryption: false,
+      androidBiometric: {
+        biometricAuth: false,
+        biometricTitle: \"Biometric login for Capacitor SQLite\",
+        biometricSubTitle: \"Log in using your biometric\"
+      }
+    }
+  }
+};
+
+export default config;</code></pre>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Android setup (detailed)</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-4\">Android requires three changes to support SQLite safely:</p>
+                        <div class=\"space-y-4\">
+                            <div>
+                                <p class=\"font-semibold text-slate-900\">Step 1: Update AndroidManifest.xml</p>
+                                <p class=\"text-slate-600 mb-2\">File: <code class=\"text-sm bg-slate-200 px-2 py-1 rounded\">android/app/src/main/AndroidManifest.xml</code></p>
+                                <p class=\"text-slate-700 mb-2\">Change the application tag to disable backup and reference the data extraction rules:</p>
+                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-xml\">&lt;application
+  android:allowBackup=\"false\"
+  android:dataExtractionRules=\"@xml/data_extraction_rules\"
+  android:icon=\"@mipmap/ic_launcher\"
+  android:label=\"@string/app_name\"
+  android:supportsRtl=\"true\"
+  android:theme=\"@style/AppTheme\"&gt;
+  &lt;!-- activity definitions follow --&gt;
+&lt;/application&gt;</code></pre>
+                            </div>
+                            <div>
+                                <p class=\"font-semibold text-slate-900\">Step 2: Create data extraction rules XML</p>
+                                <p class=\"text-slate-600 mb-2\">File: <code class=\"text-sm bg-slate-200 px-2 py-1 rounded\">android/app/src/main/res/xml/data_extraction_rules.xml</code></p>
+                                <p class=\"text-slate-700 mb-2\">This protects your app's databases from cloud backup and device-to-device transfers during setup:</p>
+                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-xml\">&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;
+&lt;data-extraction-rules&gt;
+  &lt;cloud-backup&gt;
+    &lt;exclude domain=\"root\" /&gt;
+    &lt;exclude domain=\"database\" /&gt;
+    &lt;exclude domain=\"sharedpref\" /&gt;
+    &lt;exclude domain=\"external\" /&gt;
+  &lt;/cloud-backup&gt;
+  &lt;device-transfer&gt;
+    &lt;exclude domain=\"root\" /&gt;
+    &lt;exclude domain=\"database\" /&gt;
+    &lt;exclude domain=\"sharedpref\" /&gt;
+    &lt;exclude domain=\"external\" /&gt;
+  &lt;/device-transfer&gt;
+&lt;/data-extraction-rules&gt;</code></pre>
+                            </div>
+                            <div>
+                                <p class=\"font-semibold text-slate-900\">Step 3: Sync and build</p>
+                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">npx cap sync android
+npx cap open android</code></pre>
+                                <p class=\"text-slate-600 mt-2\">In Android Studio: <strong>Build &gt; Rebuild Project</strong> to compile the native plugin.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">iOS setup</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-3\">iOS setup is simpler and mostly automatic. After running <code class=\"bg-slate-200 px-2 py-1 rounded\">npx cap sync ios</code>, the Capacitor framework handles the plugin integration.</p>
+                        <p class=\"text-slate-700 leading-relaxed\">No additional manifest or config changes are needed on iOS—Xcode handles the plugin discovery automatically through Capacitor.</p>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Web platform setup</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-3\">On the web, the SDK uses IndexedDB-backed SQLite via the <code class=\"bg-slate-200 px-2 py-1 rounded\">jeep-sqlite</code> component. You must copy the WebAssembly module to your public assets folder:</p>
+                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">mkdir -p public/assets
+cp node_modules/sql.js/dist/sql-wasm.wasm public/assets/</code></pre>
+                        <p class=\"text-slate-600 mt-3\">The SDK will automatically locate this file at runtime. If the WASM file is missing, the SDK falls back to in-memory storage.</p>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Verify the setup</h3>
+                        <p class=\"text-slate-700 leading-relaxed mb-3\">After syncing, confirm that the plugin is properly registered:</p>
+                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">cat android/app/src/main/assets/capacitor.plugins.json | grep sqlite</code></pre>
+                        <p class=\"text-slate-600 mt-3\">You should see an entry for <code class=\"bg-slate-200 px-2 py-1 rounded\">@capacitor-community/sqlite</code> with the class path <code class=\"bg-slate-200 px-2 py-1 rounded\">com.getcapacitor.community.database.sqlite.CapacitorSQLitePlugin</code>.</p>
+                    </div>
+
+                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
+                        <h3 class=\"text-xl font-semibold mb-4\">Troubleshooting</h3>
+                        <ul class=\"list-disc list-inside text-slate-700 space-y-2\">
+                            <li><strong>\"SQLiteConnection is unavailable\" error:</strong> The native plugin is not compiled. Rebuild the Android project in Android Studio (Build &gt; Clean Project, then Build &gt; Rebuild Project).</li>
+                            <li><strong>\"Plugin CapacitorSQLite not found\" error:</strong> Run <code class=\"bg-slate-200 px-2 py-1 rounded\">npx cap sync</code> again and ensure capacitor.plugins.json includes the SQLite plugin.</li>
+                            <li><strong>IndexedDB errors on web:</strong> Ensure the WASM file is copied to public/assets and is accessible via DevTools (Network tab).</li>
+                            <li><strong>Permission errors on Android:</strong> Verify <code class=\"bg-slate-200 px-2 py-1 rounded\">allowBackup=\"false\"</code> and <code class=\"bg-slate-200 px-2 py-1 rounded\">dataExtractionRules</code> are set in AndroidManifest.xml.</li>
+                        </ul>
+                    </div>
+
+                    <div class=\"info-note rounded-3xl p-6\">
+                        <p class=\"text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2\">Next step</p>
+                        <p class=\"text-slate-700 leading-relaxed\">Once SQLite is set up, create your Tevroc client and enable offline sync with <code class=\"bg-slate-200 px-2 py-1 rounded\">client.offline.startAutoSync()</code>. The SDK will automatically use the native SQLite backend for persistence.</p>
+                    </div>
+                </section>
+
+                <section id="tauri-setup" data-section="tauri-setup" class="space-y-8 doc-section liquid-card">
+                    <h2 class="text-3xl font-semibold">Setup notes: Tauri SQL</h2>
+                    <p class="text-slate-700 leading-relaxed">This section documents the complete setup for Tauri SQL, which enables native database persistence in desktop apps using the Tevroc SDK.</p>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Why Tauri SQL plugin matters</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">On desktop (Tauri), the Tevroc SDK looks for the <code class="bg-slate-200 px-2 py-1 rounded">@tauri-apps/plugin-sql</code> module to provide persistent SQLite storage. If available, the SDK uses it for fast database access and offline sync. If not available, it falls back to in-memory storage, allowing your app to still function but without offline persistence.</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2 mt-3">
+                            <li><strong>With SQL plugin:</strong> Entity writes and files persist locally and sync when the network returns. Desktop users get a fully offline-first experience.</li>
+                            <li><strong>Without SQL plugin:</strong> The SDK provides in-memory caching for the current session. Refreshing or restarting the app loses unsaved data.</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Installation steps</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Install the SQL plugin in your Tauri app project:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">cd your-tauri-app
+npm install @tauri-apps/plugin-sql --save
+cargo add tauri-plugin-sql --build</code></pre>
+                        <p class="text-slate-600 mt-3"><strong>@tauri-apps/plugin-sql:</strong> TypeScript bindings for SQLite on desktop. The SDK automatically detects this module and uses it for persistent storage.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Configure tauri.conf.json</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Add the SQL plugin to your Tauri configuration:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-json">{
+  "build": {
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [{
+      "label": "main",
+      "title": "My App",
+      "width": 1200,
+      "height": 800
+    }],
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {
+    "sql": {
+      "allow": ["query", "execute", "select"]
+    }
+  }
+}</code></pre>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Rust setup (src-tauri/src/lib.rs)</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Initialize the SQL plugin in your Tauri app setup:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-rust">use tauri_plugin_sql::{Migration, MigrationBuilder};
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+pub fn run() {
+  let migrations = vec![
+    MigrationBuilder::new()
+      .version(1)
+      .description("create_kv_table")
+      .sql("CREATE TABLE IF NOT EXISTS kv (key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+      .build()
+      .unwrap(),
+  ];
+
+  tauri::Builder::default()
+    .plugin(tauri_plugin_sql::Builder::new().add_migrations("sqlite:tevroc.db", migrations).build())
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
+}</code></pre>
+                        <p class="text-slate-600 mt-3"><strong>Note:</strong> The SDK will create the key-value table automatically if it doesn't exist. This migration ensures compatibility across app versions.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Frontend usage</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Once the plugin is set up, create your Tevroc client and enable offline sync. The SDK will automatically detect the SQL plugin:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-typescript">import { createClient } from "tevrocsdk";
+
+const tevroc = createClient({
+  baseUrl: "https://api.example.com",
+  appId: "my-desktop-app",
+  appName: "My Desktop App",
+  debug: true,
+});
+
+// Enable offline sync
+if (tevroc.offline && typeof tevroc.offline.startAutoSync === "function") {
+  tevroc.offline.startAutoSync();
+}</code></pre>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Database location</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">The Tauri SQL plugin stores databases in platform-specific locations:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>Windows:</strong> <code class="bg-slate-200 px-2 py-1 rounded">%APPDATA%/com.example.app/tevroc.db</code></li>
+                            <li><strong>macOS:</strong> <code class="bg-slate-200 px-2 py-1 rounded">~/Library/Application Support/com.example.app/tevroc.db</code></li>
+                            <li><strong>Linux:</strong> <code class="bg-slate-200 px-2 py-1 rounded">~/.local/share/com.example.app/tevroc.db</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Verify the setup</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">To verify that SQLite is working correctly in your Tauri app:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npm run tauri dev</code></pre>
+                        <p class="text-slate-600 mt-3">With <code class="bg-slate-200 px-2 py-1 rounded">debug: true</code>, you should see log messages like <code class="bg-slate-200 px-2 py-1 rounded">[tevrocsdk][useEntities] desktop SQLite opened</code> in the dev console.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Troubleshooting</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>"Database.load() failed" error:</strong> Ensure the SQL plugin is properly initialized in src-tauri/src/lib.rs and the plugin is listed in tauri.conf.json.</li>
+                            <li><strong>"No such table: kv" error:</strong> The migration did not run. Verify the migration in lib.rs and clear the app's local data folder, then rebuild.</li>
+                            <li><strong>SQLite falls back to in-memory:</strong> Check that @tauri-apps/plugin-sql is installed and that <code class="bg-slate-200 px-2 py-1 rounded">debug: true</code> shows no import errors in the browser console.</li>
+                            <li><strong>Database locked error:</strong> Multiple app instances are trying to access the same database. Use the single-instance plugin to prevent this.</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Next step</p>
+                        <p class="text-slate-700 leading-relaxed">Once the SQL plugin is set up, test offline functionality by disabling network, making entity changes, then going back online. The SDK will automatically sync queued operations and resolve any conflicts.</p>
                     </div>
                 </section>
 
@@ -905,6 +1172,7 @@ try {
               <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2 w-full text-left">Installation</button>
               <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2 w-full text-left">Native integration</button>
               <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes</button>
+              <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2 w-full text-left">Tauri SQL setup</button>
               <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2 w-full text-left">Create a client</button>
               <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2 w-full text-left">Authentication</button>
               <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2 w-full text-left">Entities</button>
