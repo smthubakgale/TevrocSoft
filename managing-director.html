@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Managing Director | TevrocSoft</title>
 
-    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 
     <meta name="description" content="Meet the Managing Director at TevrocSoft and learn how we guide software strategy, AI delivery, and business growth across South Africa.">
     <meta name="keywords" content="Managing Director TevrocSoft, TevrocSoft leadership, software strategy, AI solutions, tech leadership">
@@ -31,14 +31,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../components/navbar.js"></script>
-    <script src="../components/footer.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
 
-    <script src="../lib/tevroc-sdk.min.js"></script>
-    <script src="../js/app-params.js"></script>
-    <script src="../js/base44Client.js"></script>
+    <script src="lib/tevroc-sdk.min.js"></script>
+    <script src="js/app-params.js"></script>
+    <script src="js/base44Client.js"></script>
     <style>
       body { background: #f8fafc; }
+      svg{ display:inline-block !important;}
       .teal-glow { box-shadow: 0 25px 60px rgba(14, 116, 144, 0.18); }
       .hero-grid {
         background:
@@ -54,8 +55,34 @@
       #chatBox::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 9999px; }
       .stat-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(148,163,184,0.18); }
       .quote-panel { background: rgba(15, 23, 42, 0.78); border: 1px solid rgba(148,163,184,0.2); }
+      #chatPanel button,
+      #chatPanel [type="button"],
+      #chatPanel [type="submit"],
+      #chatPanel .chat-action,
+      #chatAssistantBtn,
+      #chatSignOutBtn {
+        font-size: 0.75rem !important;
+        line-height: 1.2 !important;
+        padding: 0.55rem 0.9rem !important;
+      }
+      #chatPanel #chatAttachBtn,
+      #chatPanel #chatBackBtn,
+      #chatPanel #chatMenuBtn,
+      #chatPanel #chatSubmitBtn {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        padding: 0 !important;
+      }
+      #chatPanel #chatInput {
+        font-size: 0.75rem !important;
+        padding: 0.6rem 0.9rem !important;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/easyqrcodejs@4.6.2/dist/easy.qrcode.min.js"></script>
+    <script>
+        window.chatDisplayName = 'Thubakgale Mabalane Samuel';
+        window.chatDisplayTitle = 'Managing Director';
+    </script>
 </head>
 <body class="bg-slate-100 text-slate-900 antialiased">
     <custom-navbar></custom-navbar>
@@ -82,7 +109,7 @@
                     <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                         <button id="chatAgentBtn" type="button" data-agent-open class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full bg-sky-600 px-4 py-2.5 text-sm font-semibold leading-none text-white shadow-sm transition duration-200 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-300 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
                             <i data-feather="headphones" class="mr-2 h-4 w-4"></i>
-                            Talk to an agent
+                            Talk to Thubakgale
                         </button>
                         <button id="saveContactBtn" type="button" class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm font-semibold leading-none text-slate-800 shadow-sm transition duration-200 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
                             <i data-feather="download" class="mr-2 h-4 w-4"></i>
@@ -93,12 +120,21 @@
                             Generate QR Code
                         </button>
                     </div>
+
+                    <div class="mt-6 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-4">
+                        <p class="text-[10px] font-semibold uppercase tracking-[0.3em] text-sky-600">Chat status</p>
+                        <p id="chatStatus" class="mt-2 text-sm font-semibold text-slate-800">Checking login state…</p>
+                        <div class="mt-3 flex flex-wrap gap-3">
+                            <button id="chatAssistantBtn" type="button" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-sky-700">Open AI chat</button>
+                            <button id="chatSignOutBtn" type="button" class="hidden rounded-full bg-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-300">Sign out</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="relative flex items-center justify-center">
                     <div class="w-full max-w-md rounded-[2rem] border border-slate-200 bg-slate-900 p-5 text-white shadow-[0_30px_80px_-35px_rgba(15,23,42,0.8)]">
                         <div class="flex items-center gap-4">
-                            <img src="../img/sam.png" alt="TevrocSoft Managing Director" class="h-24 w-24 rounded-full border-4 border-sky-400/40 object-cover shadow-lg shadow-sky-500/10">
+                            <img src="img/sam.png" alt="TevrocSoft Managing Director" class="h-24 w-24 rounded-full border-4 border-sky-400/40 object-cover shadow-lg shadow-sky-500/10">
                             <div>
                                 <p class="text-[10px] font-semibold uppercase tracking-[0.32em] text-sky-200">TevrocSoft</p>
                                 <p class="mt-2 text-xl font-bold">Managing Director</p>
@@ -142,7 +178,7 @@
                 <div class="relative z-10 flex flex-col items-center gap-6 text-center">
                     <!-- Director Info -->
                     <div class="flex items-center gap-4">
-                        <img src="../img/sam.png" alt="Managing Director" class="h-16 w-16 rounded-full border-2 border-sky-400/50 object-cover shadow-lg">
+                        <img src="img/sam.png" alt="Managing Director" class="h-16 w-16 rounded-full border-2 border-sky-400/50 object-cover shadow-lg">
                         <div class="text-left">
                             <p class="text-xs font-semibold uppercase tracking-widest text-sky-300">TevrocSoft</p>
                             <p class="mt-1 text-lg font-bold text-white">Thubakgale M.</p>
@@ -202,7 +238,7 @@
                     </a>
                     <button type="button" data-agent-open class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full border border-sky-600 bg-sky-50 px-4 py-2.5 text-sm font-semibold leading-none text-sky-700 shadow-sm transition duration-200 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-sky-200 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
                         <i data-feather="headphones" class="mr-2 h-4 w-4"></i>
-                        Agent
+                        Thubakgale
                     </button>
                 </div>
             </div>
@@ -219,9 +255,9 @@
                 <p id="chatModeLabel" class="text-sm uppercase tracking-[0.3em] text-blue-600">AI Assistant</p>
             </div>
             <div class="ml-auto inline-flex items-center gap-2">
-                <button id="chatAgentBtnTop" type="button" title="Request Agent" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <button id="chatAgentBtnTop" type="button" title="Request Thubakgale" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-3 py-2 text-[0.75rem] font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
                     <i data-feather="headphones" class="h-4 w-4"></i>
-                    <span class="hidden sm:inline">Request Agent</span>
+                    <span class="hidden sm:inline">Request Thubakgale</span>
                 </button>
                 <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700">
                     <i data-feather="message-circle" class="h-5 w-5"></i>
@@ -231,8 +267,8 @@
                         <i data-feather="more-vertical" class="h-5 w-5"></i>
                     </button>
                     <div id="chatMenu" class="hidden absolute right-0 mt-2 w-44 rounded-md border border-slate-200 bg-white py-1 shadow-lg z-50">
-                        <button id="menuRequestAgent" class="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">Request Agent</button>
-                        <button id="menuClearChat" class="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">Clear Chat</button>
+                        <button id="menuRequestAgent" class="w-full px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100">Request Thubakgale</button>
+                        <button id="menuClearChat" class="w-full px-3 py-2 text-left text-xs text-slate-700 hover:bg-slate-100">Clear Chat</button>
                     </div>
                 </div>
             </div>
@@ -263,6 +299,7 @@
 
     <custom-footer></custom-footer>
 
+    <script src="../js/contact.js"></script>
     <script>
         const saveContactDetails = () => {
             const vCard = [
@@ -338,7 +375,7 @@
 
                     // Draw logo overlay
                     const logo = new Image();
-                    logo.src = '../img/logo.svg';
+                    logo.src = 'img/logo.svg';
                     logo.crossOrigin = 'anonymous';
                     
                     logo.onload = () => {
@@ -433,7 +470,7 @@
 
             const avatar = new Image();
             avatar.crossOrigin = 'anonymous';
-            avatar.src = '../img/sam.png';
+            avatar.src = 'img/sam.png';
             await new Promise((resolve) => {
                 avatar.onload = resolve;
                 avatar.onerror = resolve;
@@ -499,7 +536,7 @@
         
         feather.replace();
     </script>
-    <script src="../script.js"></script>
-    <script src="../js/contact.js"></script>
+    <script src="script.js"></script>
+    <script src="js/contact.js"></script>
 </body>
 </html>

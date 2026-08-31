@@ -324,27 +324,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateChatState = (user) => {
         currentUser = user;
 
-        //alert(user);
+        if (chatStatus) {
+            if (user) {
+                chatStatus.textContent = `Signed in as ${user.firstName || user.email}`;
+            } else {
+                chatStatus.textContent = 'AI assistant ready.';
+            }
+        }
 
-        if (user) {
-            chatStatus.textContent = `Signed in as ${user.firstName || user.email}`;
+        if (chatAssistantBtn) {
             chatAssistantBtn.textContent = 'Open AI chat';
-            chatSignOutBtn.textContent = 'Sign out';
-            chatSignOutBtn.classList.remove('hidden');
-            chatInput.disabled = false;
-            chatSubmitBtn.disabled = false;
-            if (!chatBox.hasChildNodes()) {
-                appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
+        }
+
+        if (chatSignOutBtn) {
+            if (user) {
+                chatSignOutBtn.textContent = 'Sign out';
+                chatSignOutBtn.classList.remove('hidden');
+            } else {
+                chatSignOutBtn.classList.add('hidden');
             }
-        } else {
-            chatStatus.textContent = 'AI assistant ready.';
-            chatAssistantBtn.textContent = 'Open AI chat';
-            chatSignOutBtn.classList.add('hidden');
-            chatInput.disabled = false;
-            chatSubmitBtn.disabled = false;
-            if (!chatBox.hasChildNodes()) {
-                appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
-            }
+        }
+
+        if (chatInput) chatInput.disabled = false;
+        if (chatSubmitBtn) chatSubmitBtn.disabled = false;
+        if (chatBox && !chatBox.hasChildNodes()) {
+            appendMessage('Welcome to TevrocSoft AI assistant. Ask me about our services, apps, pricing or support.', 'bot');
         }
     };
 
@@ -872,8 +876,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    if (chatStatus) {
+        chatStatus.textContent = 'Checking chat availability...';
+    }
+
     if (!base44?.integrations?.Core?.InvokeLLM) {
-        chatStatus.textContent = 'Chat integration unavailable.';
+        if (chatStatus) chatStatus.textContent = 'Chat integration unavailable.';
         appendMessage('The assistant is unavailable right now. Please try again shortly.', 'bot');
         openChatDialog();
         return;
@@ -1015,12 +1023,31 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const requestChatAgent = async () => {
-    const requestText = 'Please connect me with a human support agent.';
+    const displayName = window.chatDisplayName || 'TevrocSoft support';
+    const user = currentUser || await loadCurrentUser();
+    if (!user) {
+        setPendingChatOpen(true);
+        if (chatStatus) chatStatus.textContent = 'Signing in with Google...';
+        await base44.auth.loginWithProvider('google', window.location.href, async (token, profile) => {
+            if (token) {
+                base44.setToken(token);
+                await loadCurrentUser();
+                setPendingChatOpen(false);
+                openChatDialog();
+            }
+            if (profile) {
+                updateChatState(profile);
+            }
+        });
+        return;
+    }
+
+    const requestText = `Please connect me with ${displayName}.`;
     openChatDialog();
     const sessionKey = await createChatSession();
     liveChatSessionId = sessionKey;
     connectLiveAgentRoom();
-    console.log('[contact] requestChatAgent session ready', { sessionKey });
+    console.log('[contact] requestChatAgent session ready', { sessionKey, displayName });
     const requestMsg = {
         id: `msg_${Date.now()}`,
         sessionId: liveChatSessionId,
@@ -1033,17 +1060,17 @@ document.addEventListener('DOMContentLoaded', function() {
     appendMessage(requestText, 'user');
     await publishLiveMessage(requestMsg);
     await persistChatMessage(requestMsg);
-    chatStatus.textContent = 'Requesting a human agent...';
+    chatStatus.textContent = `Requesting ${displayName}...`;
 
     const handoffSuccess = await handleAgentHandoff(requestText);
     if (handoffSuccess) {
-        appendMessage('I have requested a human agent. Someone will join shortly.', 'bot');
-        chatStatus.textContent = 'Human agent requested.';
+        appendMessage(`I have requested ${displayName}. They will join shortly.`, 'bot');
+        chatStatus.textContent = `${displayName} requested.`;
         currentSessionStatus = 'escalated';
-        if (chatModeLabel) chatModeLabel.textContent = 'Agent Mode';
+        if (chatModeLabel) chatModeLabel.textContent = displayName;
         syncAgentButtonVisibility();
     } else {
-        appendMessage('Sorry, I could not request an agent right now. Please try again later.', 'bot');
+        appendMessage(`Sorry, I could not request ${displayName} right now. Please try again later.`, 'bot');
         chatStatus.textContent = 'Agent request failed.';
         if (chatModeLabel) chatModeLabel.textContent = 'AI Assistant';
         syncAgentButtonVisibility();

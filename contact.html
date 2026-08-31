@@ -56,6 +56,27 @@
         background: #3b82f6;
         border-radius: 9999px;
       }
+      #chatPanel button,
+      #chatPanel [type="button"],
+      #chatPanel [type="submit"],
+      #chatAssistantBtn,
+      #chatSignOutBtn {
+        font-size: 0.75rem !important;
+        line-height: 1.2 !important;
+        padding: 0.55rem 0.9rem !important;
+      }
+      #chatPanel #chatAttachBtn,
+      #chatPanel #chatBackBtn,
+      #chatPanel #chatMenuBtn,
+      #chatPanel #chatSubmitBtn {
+        width: 2.75rem !important;
+        height: 2.75rem !important;
+        padding: 0 !important;
+      }
+      #chatPanel #chatInput {
+        font-size: 0.75rem !important;
+        padding: 0.6rem 0.9rem !important;
+      }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -119,7 +140,25 @@
                             <div>
                                 <h3 class="text-lg font-semibold">Call</h3>
                                 <p class="mt-1 text-sm text-slate-600">066 253 1653</p>
+                            </div> 
+                        </div>
+                        <div class="flex items-center gap-4 mt-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="message-circle" class="w-6 h-6"></i>
                             </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">Whats App</h3>
+                                <p class="mt-1 text-sm text-slate-600">066 253 1653</p>
+                            </div> 
+                        </div>
+                        <div class="flex items-center gap-4 mt-4">
+                            <div class="flex h-14 w-14 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 ring-1 ring-blue-200">
+                                <i data-feather="message-square" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">SMS</h3>
+                                <p class="mt-1 text-sm text-slate-600">066 253 1653</p>
+                            </div> 
                         </div>
                     </div>
                     <div class="rounded-[2rem] bg-white p-6 shadow-xl ring-1 ring-slate-200/70 transition hover:-translate-y-1">
@@ -135,8 +174,8 @@
                         <div class="mt-6 flex flex-col gap-3 rounded-[1.75rem] border border-slate-200 bg-slate-50 p-4">
                             <p class="text-sm text-slate-600">Chat status</p>
                             <p id="chatStatus" class="text-sm font-semibold text-slate-800">Checking login state…</p>
-                            <button id="chatAssistantBtn" type="button" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">Sign in with Google</button>
-                            <button id="chatSignOutBtn" type="button" class="hidden rounded-full bg-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-300">Sign out</button>
+                            <button id="chatAssistantBtn" type="button" class="inline-flex items-center justify-center rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">Sign in with Google</button>
+                            <button id="chatSignOutBtn" type="button" class="hidden rounded-full bg-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-300">Sign out</button>
                         </div>
                     </div>
                 </div>
@@ -180,7 +219,7 @@
                           <p id="chatModeLabel" class="text-sm uppercase tracking-[0.3em] text-blue-600">AI Assistant</p>
                         </div>
                         <div class="inline-flex items-center gap-2 ml-auto">
-                            <button id="chatAgentBtn" type="button" title="Request Agent" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                            <button id="chatAgentBtn" type="button" title="Request Agent" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
                               <i data-feather="headphones" class="w-4 h-4"></i>
                               <span class="hidden sm:inline">Request Agent</span>
                             </button>
@@ -192,8 +231,8 @@
                                 <i data-feather="more-vertical" class="w-5 h-5"></i>
                               </button>
                               <div id="chatMenu" class="hidden absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-md shadow-lg z-50 py-1">
-                                <button id="menuRequestAgent" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Request Agent</button>
-                                <button id="menuClearChat" class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Clear Chat</button>
+                                <button id="menuRequestAgent" class="w-full text-left px-3 py-2 text-xs text-slate-700 hover:bg-slate-100">Request Agent</button>
+                                <button id="menuClearChat" class="w-full text-left px-3 py-2 text-xs text-slate-700 hover:bg-slate-100">Clear Chat</button>
                               </div>
                             </div>
                         </div>
@@ -209,7 +248,7 @@
                                 <i data-feather="paperclip" class="h-5 w-5"></i>
                             </button>
                             <input id="chatFileInput" type="file" class="hidden" multiple accept="image/*,video/*,.pdf,.doc,.docx,.txt,.xls,.xlsx,.ppt,.pptx">
-                            <input id="chatInput" type="text" placeholder="Ask about our apps, services or pricing" class="flex-1 min-w-0 rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" disabled>
+                            <input id="chatInput" type="text" placeholder="Ask about our apps, services or pricing" class="flex-1 min-w-0 rounded-3xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" disabled>
                             <button id="chatSubmitBtn" type="submit" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition hover:bg-blue-700" disabled>
                                 <span class="sr-only">Send</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
