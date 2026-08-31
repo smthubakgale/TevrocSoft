@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Contact page script loaded');
 
-    const chatAssistantBtn = document.getElementById('chatAssistantBtn');
+    const chatAssistantBtn = document.getElementById('chatAssistantBtn') || document.querySelector('[data-chat-open]');
     const chatSignOutBtn = document.getElementById('chatSignOutBtn');
-    const chatAgentBtn = document.getElementById('chatAgentBtn');
+    const chatAgentBtn = document.getElementById('chatAgentBtn') || document.querySelector('[data-agent-open]');
     const chatStatus = document.getElementById('chatStatus');
     const chatInput = document.getElementById('chatInput');
     const chatSubmitBtn = document.getElementById('chatSubmitBtn');
@@ -1050,9 +1050,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     };
 
-    chatAssistantBtn.addEventListener('click', handleAssistantClick);
-    chatSignOutBtn.addEventListener('click', signOut);
-    chatAgentBtn.addEventListener('click', requestChatAgent);
+    if (chatAssistantBtn) {
+        chatAssistantBtn.addEventListener('click', handleAssistantClick);
+    }
+    if (chatSignOutBtn) {
+        chatSignOutBtn.addEventListener('click', signOut);
+    }
+    if (chatAgentBtn) {
+        chatAgentBtn.addEventListener('click', requestChatAgent);
+    }
     // Menu toggles and handlers
     const chatMenuBtn = document.getElementById('chatMenuBtn');
     const chatMenu = document.getElementById('chatMenu');

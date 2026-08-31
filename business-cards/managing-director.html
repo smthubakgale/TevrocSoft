@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managing Director | TevrocSoft</title>
+
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+
+    <meta name="description" content="Meet the Managing Director at TevrocSoft and learn how we guide software strategy, AI delivery, and business growth across South Africa.">
+    <meta name="keywords" content="Managing Director TevrocSoft, TevrocSoft leadership, software strategy, AI solutions, tech leadership">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/managing-director.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Managing Director | TevrocSoft">
+    <meta property="og:description" content="Meet the Managing Director at TevrocSoft and learn how we guide software strategy, AI delivery, and business growth across South Africa.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/managing-director.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/logo.svg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Managing Director | TevrocSoft">
+    <meta name="twitter:description" content="Meet the Managing Director at TevrocSoft and learn how we guide software strategy, AI delivery, and business growth across South Africa.">
+    <meta name="twitter:image" content="https://tevrocsoft.co.za/img/logo.svg">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+
+    <script src="../lib/tevroc-sdk.min.js"></script>
+    <script src="../js/app-params.js"></script>
+    <script src="../js/base44Client.js"></script>
+    <style>
+      body { background: #f8fafc; }
+      .teal-glow { box-shadow: 0 25px 60px rgba(14, 116, 144, 0.18); }
+      .hero-grid {
+        background:
+          radial-gradient(circle at top left, rgba(34,211,238,0.26), transparent 30%),
+          linear-gradient(135deg, #020817 0%, #0f172a 35%, #0b1120 100%);
+      }
+      #chatBox {
+        scrollbar-width: thin;
+        scrollbar-color: #3b82f6 #e0f2fe;
+      }
+      #chatBox::-webkit-scrollbar { width: 8px; }
+      #chatBox::-webkit-scrollbar-track { background: #e0f2fe; border-radius: 9999px; }
+      #chatBox::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 9999px; }
+      .stat-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(148,163,184,0.18); }
+      .quote-panel { background: rgba(15, 23, 42, 0.78); border: 1px solid rgba(148,163,184,0.2); }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/easyqrcodejs@4.6.2/dist/easy.qrcode.min.js"></script>
+</head>
+<body class="bg-slate-100 text-slate-900 antialiased">
+    <custom-navbar></custom-navbar>
+
+    <main class="mx-auto max-w-5xl px-4 py-8 md:py-12">
+        <section class="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_80px_-40px_rgba(15,23,42,0.5)]">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_30%)]"></div>
+            <div class="relative grid gap-8 px-5 py-6 md:px-8 md:py-8 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-10">
+                <div class="flex flex-col justify-center">
+                    <p class="text-xs font-semibold uppercase tracking-[0.38em] text-sky-600">Virtual business card</p>
+                    <h1 class="mt-4 text-3xl font-black leading-tight text-slate-900 md:text-4xl lg:text-5xl">Thubakgale Mabalane Samuel</h1>
+                    <h2 class="mt-3 text-lg font-semibold text-sky-700 md:text-xl">Managing Director, TevrocSoft</h2>
+
+                    <p class="mt-5 max-w-xl text-base leading-8 text-slate-600 md:text-lg">
+                        Strategic technology leader helping businesses turn ideas into digital systems, AI automations, and scalable customer experiences.
+                    </p>
+
+                    <div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-600">
+                        <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-2">Software strategy</span>
+                        <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-2">AI systems</span>
+                        <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-2">Business automation</span>
+                    </div>
+
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        <button id="chatAgentBtn" type="button" data-agent-open class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full bg-sky-600 px-4 py-2.5 text-sm font-semibold leading-none text-white shadow-sm transition duration-200 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-300 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
+                            <i data-feather="headphones" class="mr-2 h-4 w-4"></i>
+                            Talk to an agent
+                        </button>
+                        <button id="saveContactBtn" type="button" class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm font-semibold leading-none text-slate-800 shadow-sm transition duration-200 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
+                            <i data-feather="download" class="mr-2 h-4 w-4"></i>
+                            Save Contact Details
+                        </button>
+                        <button id="qrCodeBtn" type="button" class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full border border-sky-200 bg-sky-50 px-4 py-2.5 text-sm font-semibold leading-none text-sky-700 shadow-sm transition duration-200 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-sky-200 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
+                            <i data-feather="square" class="mr-2 h-4 w-4"></i>
+                            Generate QR Code
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center justify-center">
+                    <div class="w-full max-w-md rounded-[2rem] border border-slate-200 bg-slate-900 p-5 text-white shadow-[0_30px_80px_-35px_rgba(15,23,42,0.8)]">
+                        <div class="flex items-center gap-4">
+                            <img src="../img/sam.png" alt="TevrocSoft Managing Director" class="h-24 w-24 rounded-full border-4 border-sky-400/40 object-cover shadow-lg shadow-sky-500/10">
+                            <div>
+                                <p class="text-[10px] font-semibold uppercase tracking-[0.32em] text-sky-200">TevrocSoft</p>
+                                <p class="mt-2 text-xl font-bold">Managing Director</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 space-y-3 text-sm text-slate-200">
+                            <div class="flex items-center gap-3 rounded-2xl border border-slate-700 bg-slate-800/80 px-3 py-3">
+                                <i data-feather="mail" class="h-4 w-4 text-sky-300"></i>
+                                <span>info@tevrocsoft.co.za</span>
+                            </div>
+                            <div class="flex items-center gap-3 rounded-2xl border border-slate-700 bg-slate-800/80 px-3 py-3">
+                                <i data-feather="phone" class="h-4 w-4 text-sky-300"></i>
+                                <span>066 253 1653</span>
+                            </div>
+                            <div class="flex items-center gap-3 rounded-2xl border border-slate-700 bg-slate-800/80 px-3 py-3">
+                                <i data-feather="map-pin" class="h-4 w-4 text-sky-300"></i>
+                                <span>Johannesburg, South Africa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Code Modal -->
+        <div id="qrCodeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+            <div id="qrCardExport" class="relative w-full max-w-md rounded-[2rem] border border-sky-200/50 bg-gradient-to-br from-slate-900 via-slate-800 to-sky-900 p-6 shadow-2xl md:p-8">
+                <!-- Decorative background elements -->
+                <div class="absolute inset-0 overflow-hidden rounded-[2rem]">
+                    <div class="absolute top-0 right-0 h-40 w-40 rounded-full bg-sky-500/10 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 h-40 w-40 rounded-full bg-sky-400/10 blur-3xl"></div>
+                </div>
+
+                <!-- Close button -->
+                <button id="qrCloseBtn" type="button" class="absolute top-4 right-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus:outline-none">
+                    <i data-feather="x" class="h-5 w-5"></i>
+                </button>
+
+                <!-- Content -->
+                <div class="relative z-10 flex flex-col items-center gap-6 text-center">
+                    <!-- Director Info -->
+                    <div class="flex items-center gap-4">
+                        <img src="../img/sam.png" alt="Managing Director" class="h-16 w-16 rounded-full border-2 border-sky-400/50 object-cover shadow-lg">
+                        <div class="text-left">
+                            <p class="text-xs font-semibold uppercase tracking-widest text-sky-300">TevrocSoft</p>
+                            <p class="mt-1 text-lg font-bold text-white">Thubakgale M.</p>
+                            <p class="text-sm text-sky-200">Managing Director</p>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="rounded-[1.5rem] border border-sky-300/30 bg-white p-4 shadow-xl">
+                        <div id="qrContainer" style="text-align: center;"></div>
+                        <canvas id="qrCanvas" width="220" height="220" aria-label="QR code for TevrocSoft director page" style="display: none;"></canvas>
+                    </div>
+
+                    <!-- Scan text -->
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-widest text-sky-300">Scan to connect</p>
+                        <p class="mt-2 text-sm text-slate-300">Share your contact info instantly</p>
+                    </div>
+
+                    <!-- Download button -->
+                    <button id="downloadQrBtn" type="button" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition duration-200 hover:from-sky-600 hover:to-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-300">
+                        <i data-feather="download" class="h-4 w-4"></i>
+                        Download QR Code
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-8 grid gap-4 md:grid-cols-3">
+            <div class="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+                <div class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-sky-100 text-sky-600"><i data-feather="lightning" class="h-5 w-5"></i></div>
+                <h3 class="text-lg font-semibold text-slate-900">AI + automation</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">Workflow automation, app integrations and smarter customer experiences.</p>
+            </div>
+            <div class="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+                <div class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-sky-100 text-sky-600"><i data-feather="layers" class="h-5 w-5"></i></div>
+                <h3 class="text-lg font-semibold text-slate-900">Custom software</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">Web platforms, mobile apps and internal systems built around real business needs.</p>
+            </div>
+            <div class="rounded-[1.5rem] border border-slate-200 bg-white p-5 shadow-sm">
+                <div class="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-sky-100 text-sky-600"><i data-feather="users" class="h-5 w-5"></i></div>
+                <h3 class="text-lg font-semibold text-slate-900">Business growth</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">Practical strategy that helps teams operate faster and serve clients better.</p>
+            </div>
+        </section>
+
+        <section class="mt-8 rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.25em] text-sky-600">Direct contact</p>
+                    <h3 class="mt-2 text-2xl font-bold text-slate-900">Ask a question, request support, or start a project.</h3>
+                </div>
+                <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <a href="mailto:info@tevrocsoft.co.za?subject=Business%20Inquiry" class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full bg-slate-900 px-4 py-2.5 text-sm font-semibold leading-none text-white shadow-sm transition duration-200 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-300 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
+                        <i data-feather="mail" class="mr-2 h-4 w-4"></i>
+                        Email
+                    </a>
+                    <button type="button" data-agent-open class="inline-flex w-full flex-row flex-nowrap items-center justify-start rounded-full border border-sky-600 bg-sky-50 px-4 py-2.5 text-sm font-semibold leading-none text-sky-700 shadow-sm transition duration-200 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-sky-200 sm:w-auto sm:px-5 sm:py-3 sm:text-[0.95rem]">
+                        <i data-feather="headphones" class="mr-2 h-4 w-4"></i>
+                        Agent
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside id="chatPanel" class="hidden fixed inset-0 z-50 mx-2 flex min-h-0 flex-col overflow-hidden rounded-[1.75rem] bg-white p-4 text-sm shadow-[0_25px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-2rem)] lg:inset-auto lg:mx-0 lg:right-6 lg:top-24 lg:bottom-6 lg:w-[420px] lg:max-w-[420px] lg:rounded-[2rem] lg:p-6 lg:shadow-2xl lg:ring-slate-200/70" style="z-index:99999">
+        <div class="mb-6 flex items-center gap-3">
+            <button id="chatBackBtn" type="button" class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700 shadow-sm transition hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white lg:hidden">
+                <span class="sr-only">Back</span>
+                <i data-feather="arrow-left" class="h-5 w-5"></i>
+            </button>
+            <div class="min-w-0">
+                <p id="chatModeLabel" class="text-sm uppercase tracking-[0.3em] text-blue-600">AI Assistant</p>
+            </div>
+            <div class="ml-auto inline-flex items-center gap-2">
+                <button id="chatAgentBtnTop" type="button" title="Request Agent" class="inline-flex items-center gap-2 rounded-3xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    <i data-feather="headphones" class="h-4 w-4"></i>
+                    <span class="hidden sm:inline">Request Agent</span>
+                </button>
+                <div class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-blue-50 text-blue-700">
+                    <i data-feather="message-circle" class="h-5 w-5"></i>
+                </div>
+                <div class="relative">
+                    <button id="chatMenuBtn" type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex h-12 w-12 items-center justify-center rounded-3xl bg-white/0 text-slate-700 hover:bg-slate-50 focus:outline-none" title="Menu">
+                        <i data-feather="more-vertical" class="h-5 w-5"></i>
+                    </button>
+                    <div id="chatMenu" class="hidden absolute right-0 mt-2 w-44 rounded-md border border-slate-200 bg-white py-1 shadow-lg z-50">
+                        <button id="menuRequestAgent" class="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">Request Agent</button>
+                        <button id="menuClearChat" class="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-100">Clear Chat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:mt-0 flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.75rem] bg-white p-1 shadow-inner ring-1 ring-slate-100" id="chatWindow">
+            <div id="chatBox" class="chat-scroll min-h-0 flex-1 h-full space-y-3 overflow-y-auto break-words whitespace-pre-wrap pb-3 text-sm leading-6"></div>
+        </div>
+
+        <form id="chatForm" class="sticky bottom-0 mt-0 grid gap-3 bg-white pt-4 lg:mt-6" style="z-index:1;">
+            <div id="chatAttachmentPreview" class="hidden flex flex-wrap gap-2"></div>
+            <label for="chatInput" class="sr-only">Ask the assistant</label>
+            <div class="flex gap-3">
+                <button id="chatAttachBtn" type="button" class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 text-slate-700 transition hover:bg-slate-100" title="Attach file">
+                    <i data-feather="paperclip" class="h-5 w-5"></i>
+                </button>
+                <input id="chatFileInput" type="file" class="hidden" multiple accept="image/*,video/*,.pdf,.doc,.docx,.txt,.xls,.xlsx,.ppt,.pptx">
+                <input id="chatInput" type="text" placeholder="Ask about our apps, services or pricing" class="flex-1 min-w-0 rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" disabled>
+                <button id="chatSubmitBtn" type="submit" class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white transition hover:bg-blue-700" disabled>
+                    <span class="sr-only">Send</span>
+                    <i data-feather="send" class="h-5 w-5"></i>
+                </button>
+            </div>
+        </form>
+    </aside>
+
+    <div id="chatOverlay" class="hidden fixed inset-0 z-40 bg-slate-950/50 lg:hidden"></div>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        const saveContactDetails = () => {
+            const vCard = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:Thubakgale Mabalane Samuel',
+                'N:Samuel;Thubakgale Mabalane;;;',
+                'ORG:TevrocSoft',
+                'TITLE:Managing Director',
+                'EMAIL;TYPE=INTERNET:info@tevrocsoft.co.za',
+                'TEL;TYPE=CELL:+27662531653',
+                'ADR;TYPE=WORK:;;Johannesburg;;South Africa',
+                'URL:https://tevrocsoft.co.za',
+                'END:VCARD'
+            ].join('\r\n');
+
+            const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Thubakgale-Mabalane-Samuel.vcf';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        };
+
+        const generateQrCode = () => {
+            console.log('Generate QR Code clicked');
+            const container = document.getElementById('qrContainer');
+            const canvas = document.getElementById('qrCanvas');
+            const modal = document.getElementById('qrCodeModal');
+            const pageUrl = 'https://tevrocsoft.co.za/managing-director.html';
+
+            if (!container || !modal) {
+                console.error('Container or modal element not found');
+                return;
+            }
+
+            console.log('Showing modal...');
+            modal.classList.remove('hidden');
+
+            console.log('Generating QR code with easy.qrcode...');
+            
+            // Clear previous QR code
+            container.innerHTML = '';
+
+            try {
+                // Generate QR code using easy.qrcode library
+                new QRCode(container, {
+                    text: pageUrl,
+                    width: 220,
+                    height: 220,
+                    colorDark: '#0f172a',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+                console.log('QR code generated successfully');
+
+                // Add logo overlay after QR code is rendered
+                setTimeout(() => {
+                    // Get the generated canvas from the container
+                    const generatedCanvas = container.querySelector('canvas');
+                    if (!generatedCanvas) {
+                        console.error('Generated canvas not found');
+                        return;
+                    }
+
+                    // Copy to our canvas for logo overlay
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(generatedCanvas, 0, 0);
+
+                    // Draw logo overlay
+                    const logo = new Image();
+                    logo.src = '../img/logo.svg';
+                    logo.crossOrigin = 'anonymous';
+                    
+                    logo.onload = () => {
+                        const centerSize = 42;
+                        const cx = canvas.width / 2;
+                        const cy = canvas.height / 2;
+                        
+                        // White background circle for logo
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, centerSize / 2 + 8, 0, Math.PI * 2);
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fill();
+                        ctx.restore();
+                        
+                        // Draw logo
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, centerSize / 2, 0, Math.PI * 2);
+                        ctx.clip();
+                        ctx.drawImage(logo, cx - centerSize / 2, cy - centerSize / 2, centerSize, centerSize);
+                        ctx.restore();
+                        
+                        // Show the canvas with logo and hide the generated QR
+                        canvas.style.display = 'block';
+                        generatedCanvas.style.display = 'none';
+                        console.log('Logo overlay added');
+                    };
+                    logo.onerror = () => {
+                        console.warn('Logo not found, showing QR without overlay');
+                        canvas.style.display = 'block';
+                        generatedCanvas.style.display = 'none';
+                    };
+                }, 100);
+            } catch (error) {
+                console.error('QR code generation failed:', error);
+                alert('Failed to generate QR code. Please try again.');
+            }
+        };
+
+        const closeQrModal = () => {
+            document.getElementById('qrCodeModal').classList.add('hidden');
+        };
+
+        const downloadQrCode = async () => {
+            const qrCanvas = document.getElementById('qrCanvas');
+            if (!qrCanvas) return;
+
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = 900;
+            exportCanvas.height = 1100;
+            const ctx = exportCanvas.getContext('2d');
+
+            const roundRect = (x, y, width, height, radius) => {
+                const r = Math.min(radius, width / 2, height / 2);
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.lineTo(x + width - r, y);
+                ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+                ctx.lineTo(x + width, y + height - r);
+                ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+                ctx.lineTo(x + r, y + height);
+                ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+                ctx.lineTo(x, y + r);
+                ctx.quadraticCurveTo(x, y, x + r, y);
+                ctx.closePath();
+            };
+
+            const gradient = ctx.createLinearGradient(0, 0, exportCanvas.width, exportCanvas.height);
+            gradient.addColorStop(0, '#020817');
+            gradient.addColorStop(0.45, '#0f172a');
+            gradient.addColorStop(1, '#082f49');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+            ctx.fillStyle = 'rgba(14, 165, 233, 0.09)';
+            ctx.beginPath();
+            ctx.arc(exportCanvas.width * 0.8, 120, 160, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.08)';
+            ctx.beginPath();
+            ctx.arc(exportCanvas.width * 0.18, exportCanvas.height * 0.88, 170, 0, Math.PI * 2);
+            ctx.fill();
+
+            roundRect(80, 100, exportCanvas.width - 160, exportCanvas.height - 200, 48);
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.55)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(125, 211, 252, 0.35)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            const avatar = new Image();
+            avatar.crossOrigin = 'anonymous';
+            avatar.src = '../img/sam.png';
+            await new Promise((resolve) => {
+                avatar.onload = resolve;
+                avatar.onerror = resolve;
+            });
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(180, 220, 62, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.clip();
+            ctx.drawImage(avatar, 118, 158, 124, 124);
+            ctx.restore();
+
+            ctx.fillStyle = '#7dd3fc';
+            ctx.font = '700 22px Arial';
+            ctx.fillText('TEVROCSOFT', 270, 188);
+
+            ctx.fillStyle = '#f8fafc';
+            ctx.font = '700 38px Arial';
+            ctx.fillText('Thubakgale M.', 270, 245);
+
+            ctx.fillStyle = '#bae6fd';
+            ctx.font = '500 26px Arial';
+            ctx.fillText('Managing Director', 270, 288);
+
+            const qrBoxX = 250;
+            const qrBoxY = 410;
+            const qrBoxSize = 400;
+
+            roundRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize, 30);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(14, 165, 233, 0.2)';
+            ctx.stroke();
+
+            ctx.drawImage(qrCanvas, qrBoxX + 30, qrBoxY + 30, qrBoxSize - 60, qrBoxSize - 60);
+
+            ctx.fillStyle = '#bae6fd';
+            ctx.font = '700 22px Arial';
+            ctx.fillText('SCAN TO CONNECT', 295, 865);
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '500 26px Arial';
+            ctx.fillText('Share your contact info instantly', 165, 915);
+
+            const link = document.createElement('a');
+            link.href = exportCanvas.toDataURL('image/png');
+            link.download = 'TevrocSoft-Director-QR-Card.png';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        };
+
+        document.getElementById('saveContactBtn')?.addEventListener('click', saveContactDetails);
+        document.getElementById('qrCloseBtn')?.addEventListener('click', closeQrModal);
+        document.getElementById('downloadQrBtn')?.addEventListener('click', downloadQrCode);
+        document.getElementById('qrCodeBtn')?.addEventListener('click', generateQrCode);
+        
+        // Close modal on background click
+        document.getElementById('qrCodeModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'qrCodeModal') closeQrModal();
+        });
+        
+        feather.replace();
+    </script>
+    <script src="../script.js"></script>
+    <script src="../js/contact.js"></script>
+</body>
+</html>
