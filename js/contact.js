@@ -157,20 +157,32 @@ document.addEventListener('DOMContentLoaded', function() {
         updateAttachmentPreview();
     };
 
+    const renderedMessageKeys = new Set();
+
     const appendMessage = (text, role = 'bot', options = {}) => {
+        const messageText = String(text ?? '');
+        const attachments = Array.isArray(options.attachments) ? options.attachments : [];
+        const messageKey = options.id
+            ? `id:${options.id}`
+            : `text:${role}:${messageText}:${attachments.length}:${JSON.stringify(attachments.map((attachment) => attachment.name || attachment.type || 'attachment'))}`;
+
+        if (renderedMessageKeys.has(messageKey)) {
+            return;
+        }
+        renderedMessageKeys.add(messageKey);
+
         const wrapper = document.createElement('div');
         wrapper.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
         const bubble = document.createElement('div');
         bubble.className = `max-w-[88%] ${role === 'user' ? 'rounded-3xl bg-blue-600 text-white' : 'rounded-3xl bg-slate-100 text-slate-900'} p-4 text-sm leading-6 shadow-sm`;
 
-        if (text) {
+        if (messageText) {
             const content = document.createElement('div');
             content.className = 'whitespace-pre-wrap break-words';
-            content.textContent = text;
+            content.textContent = messageText;
             bubble.appendChild(content);
         }
 
-        const attachments = Array.isArray(options.attachments) ? options.attachments : [];
         if (attachments.length) {
             const attachmentWrap = document.createElement('div');
             attachmentWrap.className = 'mt-3 space-y-2';
@@ -585,9 +597,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const receivedMessageIds = new Set();
+    const sentMessageIds = new Set();
 
     const persistIncomingChatMessage = async (incoming) => {
-    if (!incoming || !incoming.id || receivedMessageIds.has(incoming.id)) return;
+    if (!incoming || !incoming.id) return;
+    if (sentMessageIds.has(incoming.id) || receivedMessageIds.has(incoming.id)) return;
 
     const sessionId = incoming.sessionId || incoming.session_id || liveChatSessionId;
     if (!sessionId) return;
@@ -740,13 +754,18 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const persistChatMessage = async (message) => {
+    if (!message || !message.id) return null;
+    if (receivedMessageIds.has(message.id) || sentMessageIds.has(message.id)) {
+        return { ...message, persisted: true };
+    }
+
     const { appId, userId } = getAppContext();
     const sessionId = message.sessionId || message.session_id || liveChatSessionId;
     const payload = {
         appId,
         userId,
         ...message,
-        id: message.id || `msg_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+        id: message.id,
         sessionId,
         session_id: message.session_id || message.sessionId || sessionId,
         room: message.room || (sessionId ? (base44?.realtime?.encryptRoomName?.(sessionId) || sessionId) : ''),
@@ -755,6 +774,7 @@ document.addEventListener('DOMContentLoaded', function() {
         attachments: Array.isArray(message.attachments) ? message.attachments : [],
     };
     try {
+        sentMessageIds.add(message.id);
         await base44.entities.ChatMessage.create(payload);
         return payload;
     } catch (err) {
@@ -948,7 +968,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!message || typeof message !== 'string') return false;
 
     const supportAgent = base44?.agents?.Support;
-    const shouldHandoff = ['agent', 'support', 'human', 'live agent', 'talk to someone', 'speak to someone', 'contact support', 'help me please']
+    const directPersonRequest = /connect me with.*(thubakgale|mabalane|samuel)|request (thubakgale|mabalane|samuel)|talk to (thubakgale|mabalane|samuel)|talk to .*person/i.test(message);
+    const shouldHandoff = directPersonRequest || ['agent', 'support', 'human', 'live agent', 'talk to someone', 'speak to someone', 'contact support', 'help me please']
         .some((keyword) => message.toLowerCase().includes(keyword));
 
     if (!shouldHandoff) return false;
@@ -1022,23 +1043,32 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     };
 
+    let agentRequestPending = false;
+
     const requestChatAgent = async () => {
+    if (agentRequestPending) return;
+    agentRequestPending = true;
+
     const displayName = window.chatDisplayName || 'TevrocSoft support';
     const user = currentUser || await loadCurrentUser();
     if (!user) {
         setPendingChatOpen(true);
         if (chatStatus) chatStatus.textContent = 'Signing in with Google...';
-        await base44.auth.loginWithProvider('google', window.location.href, async (token, profile) => {
-            if (token) {
-                base44.setToken(token);
-                await loadCurrentUser();
-                setPendingChatOpen(false);
-                openChatDialog();
-            }
-            if (profile) {
-                updateChatState(profile);
-            }
-        });
+        try {
+            await base44.auth.loginWithProvider('google', window.location.href, async (token, profile) => {
+                if (token) {
+                    base44.setToken(token);
+                    await loadCurrentUser();
+                    setPendingChatOpen(false);
+                    openChatDialog();
+                }
+                if (profile) {
+                    updateChatState(profile);
+                }
+            });
+        } finally {
+            agentRequestPending = false;
+        }
         return;
     }
 
@@ -1049,7 +1079,7 @@ document.addEventListener('DOMContentLoaded', function() {
     connectLiveAgentRoom();
     console.log('[contact] requestChatAgent session ready', { sessionKey, displayName });
     const requestMsg = {
-        id: `msg_${Date.now()}`,
+        id: `req_${Date.now()}_${Math.random().toString(36).slice(2)}`,
         sessionId: liveChatSessionId,
         session_id: liveChatSessionId,
         role: 'visitor',
@@ -1057,24 +1087,42 @@ document.addEventListener('DOMContentLoaded', function() {
         createdAt: Date.now(),
     };
 
-    appendMessage(requestText, 'user');
+    sentMessageIds.add(requestMsg.id);
+    appendMessage(requestText, 'user', { id: requestMsg.id });
     await publishLiveMessage(requestMsg);
     await persistChatMessage(requestMsg);
     chatStatus.textContent = `Requesting ${displayName}...`;
 
-    const handoffSuccess = await handleAgentHandoff(requestText);
-    if (handoffSuccess) {
-        appendMessage(`I have requested ${displayName}. They will join shortly.`, 'bot');
-        chatStatus.textContent = `${displayName} requested.`;
-        currentSessionStatus = 'escalated';
-        if (chatModeLabel) chatModeLabel.textContent = displayName;
-        syncAgentButtonVisibility();
-    } else {
-        appendMessage(`Sorry, I could not request ${displayName} right now. Please try again later.`, 'bot');
-        chatStatus.textContent = 'Agent request failed.';
-        if (chatModeLabel) chatModeLabel.textContent = 'AI Assistant';
-        syncAgentButtonVisibility();
+    try {
+        const handoffSuccess = await handleAgentHandoff(requestText);
+        if (handoffSuccess) {
+            const responseId = `bot_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+            appendMessage(`I have requested ${displayName}. They will join shortly.`, 'bot', { id: responseId });
+            chatStatus.textContent = `${displayName} requested.`;
+            currentSessionStatus = 'escalated';
+            if (chatModeLabel) chatModeLabel.textContent = displayName;
+            syncAgentButtonVisibility();
+        } else {
+            const responseId = `bot_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+            appendMessage(`Sorry, I could not request ${displayName} right now. Please try again later.`, 'bot', { id: responseId });
+            chatStatus.textContent = 'Agent request failed.';
+            if (chatModeLabel) chatModeLabel.textContent = 'AI Assistant';
+            syncAgentButtonVisibility();
+        }
+    } finally {
+        agentRequestPending = false;
     }
+    };
+
+    const registeredAgentTriggers = new WeakSet();
+    const registerAgentTrigger = (button) => {
+        if (!button || registeredAgentTriggers.has(button)) return;
+        registeredAgentTriggers.add(button);
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            openChatDialog();
+            requestChatAgent();
+        });
     };
 
     if (chatAssistantBtn) {
@@ -1083,9 +1131,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (chatSignOutBtn) {
         chatSignOutBtn.addEventListener('click', signOut);
     }
-    if (chatAgentBtn) {
-        chatAgentBtn.addEventListener('click', requestChatAgent);
-    }
+    registerAgentTrigger(chatAgentBtn);
+    registerAgentTrigger(document.getElementById('chatAgentBtnTop'));
+    document.querySelectorAll('[data-agent-open]').forEach(registerAgentTrigger);
     // Menu toggles and handlers
     const chatMenuBtn = document.getElementById('chatMenuBtn');
     const chatMenu = document.getElementById('chatMenu');
@@ -1119,9 +1167,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     chatOverlay.addEventListener('click', closeChatDialog);
     chatBackBtn.addEventListener('click', closeChatDialog);
+    const openChatTriggerSelectors = ['#chatAssistantBtn', '#chatAgentBtn', '#chatAgentBtnTop', '[data-chat-open]', '[data-agent-open]'];
     document.addEventListener('click', (event) => {
     const target = event.target;
-    if (!isMobile() && !chatPanel.classList.contains('hidden') && !chatPanel.contains(target) && !chatAssistantBtn.contains(target)) {
+    const isChatTrigger = target && openChatTriggerSelectors.some((selector) => target.closest?.(selector));
+    if (!isMobile() && !chatPanel.classList.contains('hidden') && !chatPanel.contains(target) && !isChatTrigger) {
         closeChatDialog();
     }
     });
@@ -1139,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }))) : [];
 
     const visitorMsg = {
-        id: `msg_${Date.now()}`,
+        id: `msg_${Date.now()}_${Math.random().toString(36).slice(2)}`,
         session_id: liveChatSessionId,
         sessionId: liveChatSessionId,
         role: 'visitor',
@@ -1148,7 +1198,8 @@ document.addEventListener('DOMContentLoaded', function() {
         createdAt: Date.now(),
     };
 
-    appendMessage(message || 'Attachment sent', 'user', { attachments });
+    sentMessageIds.add(visitorMsg.id);
+    appendMessage(message || 'Attachment sent', 'user', { id: visitorMsg.id, attachments });
     await publishLiveMessage(visitorMsg);
     await persistChatMessage(visitorMsg);
 
@@ -1165,7 +1216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const reply = await askChatbot(message);
         const responseText = reply?.text || 'Sorry, I could not answer that right now.';
         const botMessage = {
-        id: `msg_${Date.now()}`,
+        id: `msg_${Date.now()}_${Math.random().toString(36).slice(2)}`,
         session_id: liveChatSessionId,
         sessionId: liveChatSessionId,
         role: 'bot',
@@ -1173,7 +1224,8 @@ document.addEventListener('DOMContentLoaded', function() {
         rawResponse: reply?.raw ?? null,
         createdAt: Date.now(),
         };
-        appendMessage(botMessage.content, 'bot');
+        sentMessageIds.add(botMessage.id);
+        appendMessage(botMessage.content, 'bot', { id: botMessage.id });
         await publishLiveMessage(botMessage);
         await persistChatMessage(botMessage);
         updateChatState(currentUser);

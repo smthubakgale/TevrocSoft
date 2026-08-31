@@ -70,9 +70,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Handle form submissions
     document.querySelectorAll('form').forEach(form => {
+        if (form.id === 'chatForm' || form.closest('#chatPanel')) {
+            return;
+        }
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = this.querySelector('button[type="submit"]');
+            if (!submitBtn) return;
+
             const originalText = submitBtn.textContent;
             
             // Show loading state
