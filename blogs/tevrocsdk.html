@@ -147,19 +147,19 @@
                             <button type="button" data-section-button="overview" class="toc-button rounded-xl px-3 py-2">Overview</button>
                             <button type="button" data-section-button="getting-started" class="toc-button rounded-xl px-3 py-2">Getting started</button>
                             <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2">Installation</button>
-                            <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2">Native integration</button>
-                            <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2">Setup notes</button>
-                            <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2">Tauri SQL setup</button>
+                            <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2">Setup notes: Capacitor SQLite</button>
+                            <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2">Setup notes: Tauri SQL</button>
                             <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2">Create a client</button>
                             <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2">Authentication</button>
                             <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2">Entities</button>
-                            <button type="button" data-section-button="custom-functions" class="toc-button rounded-xl px-3 py-2">Custom functions</button>
-                            <button type="button" data-section-button="integrations" class="toc-button rounded-xl px-3 py-2">Integrations</button>
-                            <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2">Payments</button>
                             <button type="button" data-section-button="files" class="toc-button rounded-xl px-3 py-2">Files</button>
                             <button type="button" data-section-button="offline" class="toc-button rounded-xl px-3 py-2">Offline support</button>
+                            <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2">Payments</button>
+                            <button type="button" data-section-button="custom-functions" class="toc-button rounded-xl px-3 py-2">Custom functions</button>
+                            <button type="button" data-section-button="integrations" class="toc-button rounded-xl px-3 py-2">Integrations</button>
                             <button type="button" data-section-button="agents-connectors" class="toc-button rounded-xl px-3 py-2">Agents & connectors</button>
                             <button type="button" data-section-button="errors" class="toc-button rounded-xl px-3 py-2">Error handling</button>
+                            <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2">Native integration</button>
                             <button type="button" data-section-button="next-steps" class="toc-button rounded-xl px-3 py-2">Next steps</button>
                         </nav>
                     </div> 
@@ -271,57 +271,57 @@ cd ../tevrocsdk && npm run build</code></pre>
                         <p class="text-slate-600 mt-3">Use this flow when your app and SDK source are in the same workspace. After building, point your app import to the generated SDK files or publish the package to your private registry.</p>
                     </div>
                 </section>
-                <section id=\"setup-notes\" data-section=\"setup-notes\" class=\"space-y-8 doc-section liquid-card\">
-                    <h2 class=\"text-3xl font-semibold\">Setup notes: Capacitor SQLite</h2>
-                    <p class=\"text-slate-700 leading-relaxed\">This section documents the complete setup for Capacitor SQLite, which enables native database persistence in mobile apps using the Tevroc SDK.</p>
+                <section id="setup-notes" data-section="setup-notes" class="space-y-8 doc-section liquid-card">
+                    <h2 class="text-3xl font-semibold">Setup notes: Capacitor SQLite</h2>
+                    <p class="text-slate-700 leading-relaxed">This section documents the complete setup for Capacitor SQLite, which enables native database persistence in mobile apps using the Tevroc SDK.</p>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Why SQLite matters for Tevroc SDK</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-3\">The Tevroc SDK needs a storage backend for offline sync and entity caching. On mobile (Capacitor), it looks for the native SQLite plugin. If found, it uses native SQLite for fast, encrypted database access. If not found, it falls back gracefully to in-memory storage so your app still works, but without offline persistence.</p>
-                        <ul class=\"list-disc list-inside text-slate-700 space-y-2 mt-3\">
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Why SQLite matters for Tevroc SDK</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">The Tevroc SDK needs a storage backend for offline sync and entity caching. On mobile (Capacitor), it looks for the native SQLite plugin. If found, it uses native SQLite for fast, encrypted database access. If not found, it falls back gracefully to in-memory storage so your app still works, but without offline persistence.</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2 mt-3">
                             <li><strong>With SQLite:</strong> Entity writes persist locally and sync when the network returns. Your app stays responsive even offline.</li>\n                            <li><strong>Without SQLite:</strong> The SDK provides in-memory caching for the current session. Refreshing the page loses data until the server syncs back.</li>
                         </ul>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Installation steps</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-4\">Install the plugin in your app project (the Capacitor wrapper), not in the SDK itself:</p>
-                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">cd your-capacitor-app
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Installation steps</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Install the plugin in your app project (the Capacitor wrapper), not in the SDK itself:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">cd your-capacitor-app
 npm install @capacitor-community/sqlite jeep-sqlite sql.js --save
 npx cap sync</code></pre>
-                        <p class=\"text-slate-600 mt-3\"><strong>jeep-sqlite:</strong> Required for web platform IndexedDB support. The SDK automatically detects this and uses it for browser builds.</p>
-                        <p class=\"text-slate-600\"><strong>sql.js:</strong> WebAssembly SQLite for web. The WASM file must be copied to your public/assets folder (see Web setup below).</p>
+                        <p class="text-slate-600 mt-3"><strong>jeep-sqlite:</strong> Required for web platform IndexedDB support. The SDK automatically detects this and uses it for browser builds.</p>
+                        <p class="text-slate-600"><strong>sql.js:</strong> WebAssembly SQLite for web. The WASM file must be copied to your public/assets folder (see Web setup below).</p>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Configure capacitor.config.ts</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-4\">Add the CapacitorSQLite plugin configuration to your main Capacitor config file:</p>
-                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-typescript\">import type { CapacitorConfig } from \"@capacitor/cli\";
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Configure capacitor.config.ts</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Add the CapacitorSQLite plugin configuration to your main Capacitor config file:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-typescript">import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: \"com.example.app\",
-  appName: \"Example App\",
-  webDir: \"dist\",
+  appId: "com.example.app",
+  appName: "Example App",
+  webDir: "dist",
   plugins: {
     App: {
       appUrlOpen: {
-        androidScheme: \"myapp\",
-        iosScheme: \"myapp\",
+        androidScheme: "myapp",
+        iosScheme: "myapp",
       },
     },
     CapacitorSQLite: {
-      iosDatabaseLocation: \"Library/CapacitorDatabase\",
+      iosDatabaseLocation: "Library/CapacitorDatabase",
       iosIsEncryption: false,
-      iosKeychainPrefix: \"your-app-prefix\",
+      iosKeychainPrefix: "your-app-prefix",
       iosBiometric: {
         biometricAuth: false,
-        biometricTitle: \"Biometric login for Capacitor SQLite\"
+        biometricTitle: "Biometric login for Capacitor SQLite"
       },
       androidIsEncryption: false,
       androidBiometric: {
         biometricAuth: false,
-        biometricTitle: \"Biometric login for Capacitor SQLite\",
-        biometricSubTitle: \"Log in using your biometric\"
+        biometricTitle: "Biometric login for Capacitor SQLite",
+        biometricSubTitle: "Log in using your biometric"
       }
     }
   }
@@ -330,87 +330,161 @@ const config: CapacitorConfig = {
 export default config;</code></pre>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Android setup (detailed)</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-4\">Android requires three changes to support SQLite safely:</p>
-                        <div class=\"space-y-4\">
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Android setup (detailed)</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Android requires three changes to support SQLite safely:</p>
+                        <div class="space-y-4">
                             <div>
-                                <p class=\"font-semibold text-slate-900\">Step 1: Update AndroidManifest.xml</p>
-                                <p class=\"text-slate-600 mb-2\">File: <code class=\"text-sm bg-slate-200 px-2 py-1 rounded\">android/app/src/main/AndroidManifest.xml</code></p>
-                                <p class=\"text-slate-700 mb-2\">Change the application tag to disable backup and reference the data extraction rules:</p>
-                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-xml\">&lt;application
-  android:allowBackup=\"false\"
-  android:dataExtractionRules=\"@xml/data_extraction_rules\"
-  android:icon=\"@mipmap/ic_launcher\"
-  android:label=\"@string/app_name\"
-  android:supportsRtl=\"true\"
-  android:theme=\"@style/AppTheme\"&gt;
+                                <p class="font-semibold text-slate-900">Step 1: Update AndroidManifest.xml</p>
+                                <p class="text-slate-600 mb-2">File: <code class="text-sm bg-slate-200 px-2 py-1 rounded">android/app/src/main/AndroidManifest.xml</code></p>
+                                <p class="text-slate-700 mb-2">Change the application tag to disable backup and reference the data extraction rules:</p>
+                                <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-xml">&lt;application
+  android:allowBackup="false"
+  android:dataExtractionRules="@xml/data_extraction_rules"
+  android:icon="@mipmap/ic_launcher"
+  android:label="@string/app_name"
+  android:supportsRtl="true"
+  android:theme="@style/AppTheme"&gt;
   &lt;!-- activity definitions follow --&gt;
 &lt;/application&gt;</code></pre>
                             </div>
                             <div>
-                                <p class=\"font-semibold text-slate-900\">Step 2: Create data extraction rules XML</p>
-                                <p class=\"text-slate-600 mb-2\">File: <code class=\"text-sm bg-slate-200 px-2 py-1 rounded\">android/app/src/main/res/xml/data_extraction_rules.xml</code></p>
-                                <p class=\"text-slate-700 mb-2\">This protects your app's databases from cloud backup and device-to-device transfers during setup:</p>
-                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-xml\">&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;
+                                <p class="font-semibold text-slate-900">Step 2: Create data extraction rules XML</p>
+                                <p class="text-slate-600 mb-2">File: <code class="text-sm bg-slate-200 px-2 py-1 rounded">android/app/src/main/res/xml/data_extraction_rules.xml</code></p>
+                                <p class="text-slate-700 mb-2">This protects your app's databases from cloud backup and device-to-device transfers during setup:</p>
+                                <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;data-extraction-rules&gt;
   &lt;cloud-backup&gt;
-    &lt;exclude domain=\"root\" /&gt;
-    &lt;exclude domain=\"database\" /&gt;
-    &lt;exclude domain=\"sharedpref\" /&gt;
-    &lt;exclude domain=\"external\" /&gt;
+    &lt;exclude domain="root" /&gt;
+    &lt;exclude domain="database" /&gt;
+    &lt;exclude domain="sharedpref" /&gt;
+    &lt;exclude domain="external" /&gt;
   &lt;/cloud-backup&gt;
   &lt;device-transfer&gt;
-    &lt;exclude domain=\"root\" /&gt;
-    &lt;exclude domain=\"database\" /&gt;
-    &lt;exclude domain=\"sharedpref\" /&gt;
-    &lt;exclude domain=\"external\" /&gt;
+    &lt;exclude domain="root" /&gt;
+    &lt;exclude domain="database" /&gt;
+    &lt;exclude domain="sharedpref" /&gt;
+    &lt;exclude domain="external" /&gt;
   &lt;/device-transfer&gt;
 &lt;/data-extraction-rules&gt;</code></pre>
                             </div>
                             <div>
-                                <p class=\"font-semibold text-slate-900\">Step 3: Sync and build</p>
-                                <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">npx cap sync android
+                                <p class="font-semibold text-slate-900">Step 3: Sync and build</p>
+                                <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npx cap sync android
 npx cap open android</code></pre>
-                                <p class=\"text-slate-600 mt-2\">In Android Studio: <strong>Build &gt; Rebuild Project</strong> to compile the native plugin.</p>
+                                <p class="text-slate-600 mt-2">In Android Studio: <strong>Build &gt; Rebuild Project</strong> to compile the native plugin.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">iOS setup</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-3\">iOS setup is simpler and mostly automatic. After running <code class=\"bg-slate-200 px-2 py-1 rounded\">npx cap sync ios</code>, the Capacitor framework handles the plugin integration.</p>
-                        <p class=\"text-slate-700 leading-relaxed\">No additional manifest or config changes are needed on iOS—Xcode handles the plugin discovery automatically through Capacitor.</p>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">iOS setup</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">iOS setup is simpler and mostly automatic. After running <code class="bg-slate-200 px-2 py-1 rounded">npx cap sync ios</code>, the Capacitor framework handles the plugin integration.</p>
+                        <p class="text-slate-700 leading-relaxed">No additional manifest or config changes are needed on iOS—Xcode handles the plugin discovery automatically through Capacitor.</p>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Web platform setup</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-3\">On the web, the SDK uses IndexedDB-backed SQLite via the <code class=\"bg-slate-200 px-2 py-1 rounded\">jeep-sqlite</code> component. You must copy the WebAssembly module to your public assets folder:</p>
-                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">mkdir -p public/assets
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Web platform setup</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">On the web, the SDK uses IndexedDB-backed SQLite via the <code class="bg-slate-200 px-2 py-1 rounded">jeep-sqlite</code> component. You must copy the WebAssembly module to your public assets folder:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">mkdir -p public/assets
 cp node_modules/sql.js/dist/sql-wasm.wasm public/assets/</code></pre>
-                        <p class=\"text-slate-600 mt-3\">The SDK will automatically locate this file at runtime. If the WASM file is missing, the SDK falls back to in-memory storage.</p>
+                        <p class="text-slate-600 mt-3">The SDK will automatically locate this file at runtime. If the WASM file is missing, the SDK falls back to in-memory storage.</p>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Verify the setup</h3>
-                        <p class=\"text-slate-700 leading-relaxed mb-3\">After syncing, confirm that the plugin is properly registered:</p>
-                        <pre class=\"rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto\"><code class=\"language-bash\">cat android/app/src/main/assets/capacitor.plugins.json | grep sqlite</code></pre>
-                        <p class=\"text-slate-600 mt-3\">You should see an entry for <code class=\"bg-slate-200 px-2 py-1 rounded\">@capacitor-community/sqlite</code> with the class path <code class=\"bg-slate-200 px-2 py-1 rounded\">com.getcapacitor.community.database.sqlite.CapacitorSQLitePlugin</code>.</p>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Verify the setup</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">After syncing, confirm that the plugin is properly registered:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">cat android/app/src/main/assets/capacitor.plugins.json | grep sqlite</code></pre>
+                        <p class="text-slate-600 mt-3">You should see an entry for <code class="bg-slate-200 px-2 py-1 rounded">@capacitor-community/sqlite</code> with the class path <code class="bg-slate-200 px-2 py-1 rounded">com.getcapacitor.community.database.sqlite.CapacitorSQLitePlugin</code>.</p>
                     </div>
 
-                    <div class=\"rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card\">
-                        <h3 class=\"text-xl font-semibold mb-4\">Troubleshooting</h3>
-                        <ul class=\"list-disc list-inside text-slate-700 space-y-2\">
-                            <li><strong>\"SQLiteConnection is unavailable\" error:</strong> The native plugin is not compiled. Rebuild the Android project in Android Studio (Build &gt; Clean Project, then Build &gt; Rebuild Project).</li>
-                            <li><strong>\"Plugin CapacitorSQLite not found\" error:</strong> Run <code class=\"bg-slate-200 px-2 py-1 rounded\">npx cap sync</code> again and ensure capacitor.plugins.json includes the SQLite plugin.</li>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Troubleshooting</h3>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>"SQLiteConnection is unavailable" error:</strong> The native plugin is not compiled. Rebuild the Android project in Android Studio (Build &gt; Clean Project, then Build &gt; Rebuild Project).</li>
+                            <li><strong>"Plugin CapacitorSQLite not found" error:</strong> Run <code class="bg-slate-200 px-2 py-1 rounded">npx cap sync</code> again and ensure capacitor.plugins.json includes the SQLite plugin.</li>
                             <li><strong>IndexedDB errors on web:</strong> Ensure the WASM file is copied to public/assets and is accessible via DevTools (Network tab).</li>
-                            <li><strong>Permission errors on Android:</strong> Verify <code class=\"bg-slate-200 px-2 py-1 rounded\">allowBackup=\"false\"</code> and <code class=\"bg-slate-200 px-2 py-1 rounded\">dataExtractionRules</code> are set in AndroidManifest.xml.</li>
+                            <li><strong>Permission errors on Android:</strong> Verify <code class="bg-slate-200 px-2 py-1 rounded">allowBackup="false"</code> and <code class="bg-slate-200 px-2 py-1 rounded">dataExtractionRules</code> are set in AndroidManifest.xml.</li>
                         </ul>
                     </div>
 
-                    <div class=\"info-note rounded-3xl p-6\">
-                        <p class=\"text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2\">Next step</p>
-                        <p class=\"text-slate-700 leading-relaxed\">Once SQLite is set up, create your Tevroc client and enable offline sync with <code class=\"bg-slate-200 px-2 py-1 rounded\">client.offline.startAutoSync()</code>. The SDK will automatically use the native SQLite backend for persistence.</p>
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">What npx cap sync does</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">The <code class="bg-slate-200 px-2 py-1 rounded">npx cap sync</code> command performs several automatic steps:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Copies your app's source code to native projects (android/, ios/)</li>
+                            <li>Syncs the plugin configuration from capacitor.config.ts to native manifests</li>
+                            <li>Registers plugins so the native runtime can discover and load them</li>
+                            <li>Generates capacitor.plugins.json with the full list of available plugins</li>
+                        </ul>
+                        <p class="text-slate-600 mt-3"><strong>Important:</strong> Always run <code class="bg-slate-200 px-2 py-1 rounded">npx cap sync</code> after installing new plugins or changing capacitor.config.ts, before building native apps.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Enable offline sync</h3>
+                        <p class="text-slate-700 leading-relaxed mb-4">Once SQLite is configured, enable offline sync in your Tevroc client. The SDK will automatically use the native SQLite backend to persist writes locally and replay them when the network returns:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-typescript">import { createClient } from "tevrocsdk";
+
+const tevroc = createClient({
+  baseUrl: "https://api.example.com",
+  appId: "my-mobile-app",
+  appName: "My Mobile App",
+  debug: true,  // Enable diagnostics
+});
+
+// Enable automatic offline sync
+tevroc.offline.startAutoSync();
+
+// Listen for conflicts if your app supports conflict resolution
+tevroc.offline.on("conflict", ({ conflictId }) => {
+  console.warn("Conflict detected:", conflictId);
+  // Handle conflict based on your app's business logic
+});</code></pre>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Offline sync behavior</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">With SQLite and <code class="bg-slate-200 px-2 py-1 rounded">startAutoSync()</code> enabled, the SDK provides:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>Local queueing:</strong> Write operations are saved to SQLite immediately so the UI stays responsive</li>
+                            <li><strong>Automatic replay:</strong> Queued operations are sent to the server when connectivity returns</li>
+                            <li><strong>Retry logic:</strong> The SDK automatically retries on reconnect, focus, and resume events</li>
+                            <li><strong>Conflict detection:</strong> If the server version changed, conflicts surface through <code class="bg-slate-200 px-2 py-1 rounded">client.offline.listConflicts()</code> and <code class="bg-slate-200 px-2 py-1 rounded">client.offline.resolveConflict()</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">File caching while offline</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">The SDK automatically caches files referenced in entity data so images and documents are available offline:</p>
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li><strong>Download on sync:</strong> When syncing entities, the SDK downloads files referenced in entity fields</li>
+                            <li><strong>Store locally:</strong> Files are encoded as Base64 and stored in the native SQLite database</li>
+                            <li><strong>Render offline:</strong> When offline, <code class="bg-slate-200 px-2 py-1 rounded">tevroc.files.url(key)</code> returns a <code class="bg-slate-200 px-2 py-1 rounded">data:</code> URI so images render from cache</li>
+                            <li><strong>Opt-in behavior:</strong> This feature only activates in native shells (Capacitor/Tauri); browser apps are unaffected</li>
+                        </ul>
+                        <p class="text-slate-600 mt-3">Enable <code class="bg-slate-200 px-2 py-1 rounded">debug: true</code> and watch for <code class="bg-slate-200 px-2 py-1 rounded">[tevrocsdk][fileoffline]</code> logs to see download and cache operations in action.</p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6 liquid-card">
+                        <h3 class="text-xl font-semibold mb-4">Debug diagnostics</h3>
+                        <p class="text-slate-700 leading-relaxed mb-3">Set <code class="bg-slate-200 px-2 py-1 rounded">debug: true</code> when creating your Tevroc client to enable comprehensive logging:</p>
+                        <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-typescript">const tevroc = createClient({
+  baseUrl: "https://api.example.com",
+  appId: "my-mobile-app",
+  debug: true,  // Logs request details, offline sync, native helpers, retries
+});</code></pre>
+                        <p class="text-slate-600 mt-3">Debug logs include:</p>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li><code class="bg-slate-200 px-2 py-1 rounded">[tevrocsdk][useEntities]</code> — SQLite initialization and database operations</li>
+                            <li><code class="bg-slate-200 px-2 py-1 rounded">[tevrocsdk][fileoffline]</code> — File download and caching operations</li>
+                            <li>Request/response details, sync events, retry attempts, native helper activity</li>
+                        </ul>
+                        <p class="text-slate-600 mt-2"><strong>Note:</strong> Omit debug mode in production to keep logs minimal and preserve battery life.</p>
+                    </div>
+
+                    <div class="info-note rounded-3xl p-6">
+                        <p class="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-2">Next step</p>
+                        <p class="text-slate-700 leading-relaxed">With offline sync enabled, test offline functionality: disable network, make entity changes, then go back online. The SDK will automatically sync queued operations. For validation, run with <code class="bg-slate-200 px-2 py-1 rounded">debug: true</code> and check console logs.</p>
                     </div>
                 </section>
 
@@ -779,7 +853,7 @@ await tevroc.auth.loginUrl("/dashboard");</code></pre>
                         </div>
                     </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                        <h3 class="text-xl font-semibold mb-3">Google sign-in</h3>
+                        <h3 class="text-xl font-semibold mb-3">Social sign-in</h3>
                         <pre class="rounded-2xl bg-slate-900/95 p-4 text-sm text-slate-100 overflow-x-auto"><code class="language-javascript">await tevroc.auth.googleLogin({
   appId: "tevroc-portal",
   appName: "Tevroc Portal",
@@ -799,8 +873,30 @@ await tevroc.auth.loginWithGoogle({
   accessToken: googleAccessToken,
 });
 
-await tevroc.auth.loginWithProvider("google", "/dashboard");</code></pre>
-                        <p class="text-slate-600 mt-3">Google login is a fast way to let users authenticate without managing passwords. Tevroc supports provider-based social auth alongside traditional email/password flows.</p>
+await tevroc.auth.loginWithProvider("google", "/dashboard");
+
+await tevroc.auth.facebookLogin({
+  appId: "tevroc-portal",
+  appName: "Tevroc Portal",
+  serviceUrl: "https://services.example.com",
+});
+tevroc.auth.onFacebookLogin((user, error) => {
+  if (error) console.error("Facebook login failed", error);
+});
+await tevroc.auth.loginWithFacebook({ accessToken: facebookAccessToken });
+await tevroc.auth.loginWithProvider("facebook", "/dashboard");
+
+await tevroc.auth.metaLogin({
+  appId: "tevroc-whatsapp",
+  appName: "Tevroc WhatsApp",
+  serviceUrl: "https://services.example.com",
+});
+tevroc.auth.onMetaLogin((user, error) => {
+  if (error) console.error("Meta login failed", error);
+});
+await tevroc.auth.loginWithMeta({ accessToken: metaAccessToken });
+await tevroc.auth.loginWithProvider("meta", "/dashboard");</code></pre>
+                        <p class="text-slate-600 mt-3">Tevroc supports Google, Facebook, and Meta social authentication alongside traditional email/password flows. Meta login is intended for Meta Business and WhatsApp onboarding.</p>
                     </div>
                 </section>
 
@@ -908,6 +1004,11 @@ await tevroc.integrations.Core.SendEmail({
 await tevroc.integrations.Core.UploadFile(file, {
   filename: "report.pdf",
   contentType: "application/pdf",
+  tableName: "Documents",
+  tableIdx: "123",
+  onProgress: ({ progress, uploaded, total }) => {
+    console.log(`Uploaded ${progress}% (${uploaded}/${total} bytes)`);
+  },
 });
 
 await tevroc.integrations.Core.UploadPrivateFile(file, {
@@ -922,7 +1023,8 @@ await tevroc.integrations.Core.CreateFileSignedUrl({
 await tevroc.integrations.Core.ExtractDataFromUploadedFile({
   fileId: "123",
 });</code></pre>
-                        <p class="text-slate-600 mt-3">These integration methods let you request AI output, send email, upload public or private files, generate signed URLs, and extract structured data from uploads with a single SDK call. The same pattern scales to additional connectors and custom integration adapters.</p>
+                        <p class="text-slate-600 mt-3">File uploads use the configured <code>serviceUrl</code>. The SDK first checks <code>GET /api/environment</code>. Electron uses the bridge.js <code>syncRequest</code> transport and the existing base64 packet flow into SQLite <code>_File</code>; browser and VPS runtimes upload 10 MB resumable chunks directly to Google Cloud Storage, retry failed chunks, finalize the object, and store its key in <code>_File</code>.</p>
+                        <p class="text-slate-600 mt-3">Configure <code>vpsUrl</code> when your application needs an explicit VPS address, but upload requests remain on <code>serviceUrl</code>. The VPS requires <code>GCS_BUCKET</code> and an attached Google service account with storage permissions.</p>
                     </div>
                     <div class="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                         <h3 class="text-xl font-semibold mb-3">AI + upload workflow</h3>
@@ -1170,19 +1272,19 @@ try {
               <button type="button" data-section-button="overview" class="toc-button rounded-xl px-3 py-2 w-full text-left">Overview</button>
               <button type="button" data-section-button="getting-started" class="toc-button rounded-xl px-3 py-2 w-full text-left">Getting started</button>
               <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2 w-full text-left">Installation</button>
-              <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2 w-full text-left">Native integration</button>
-              <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes</button>
-              <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2 w-full text-left">Tauri SQL setup</button>
+              <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes: Capacitor SQLite</button>
+              <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes: Tauri SQL</button>
               <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2 w-full text-left">Create a client</button>
               <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2 w-full text-left">Authentication</button>
               <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2 w-full text-left">Entities</button>
-              <button type="button" data-section-button="custom-functions" class="toc-button rounded-xl px-3 py-2 w-full text-left">Custom functions</button>
-              <button type="button" data-section-button="integrations" class="toc-button rounded-xl px-3 py-2 w-full text-left">Integrations</button>
-              <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2 w-full text-left">Payments</button>
               <button type="button" data-section-button="files" class="toc-button rounded-xl px-3 py-2 w-full text-left">Files</button>
               <button type="button" data-section-button="offline" class="toc-button rounded-xl px-3 py-2 w-full text-left">Offline support</button>
+              <button type="button" data-section-button="payments" class="toc-button rounded-xl px-3 py-2 w-full text-left">Payments</button>
+              <button type="button" data-section-button="custom-functions" class="toc-button rounded-xl px-3 py-2 w-full text-left">Custom functions</button>
+              <button type="button" data-section-button="integrations" class="toc-button rounded-xl px-3 py-2 w-full text-left">Integrations</button>
               <button type="button" data-section-button="agents-connectors" class="toc-button rounded-xl px-3 py-2 w-full text-left">Agents & connectors</button>
               <button type="button" data-section-button="errors" class="toc-button rounded-xl px-3 py-2 w-full text-left">Error handling</button>
+              <button type="button" data-section-button="native-integration" class="toc-button rounded-xl px-3 py-2 w-full text-left">Native integration</button>
               <button type="button" data-section-button="next-steps" class="toc-button rounded-xl px-3 py-2 w-full text-left">Next steps</button>
             </nav>
           </div>

@@ -430,6 +430,19 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     };
 
+    const showChatNotification = async ({ title, body, sessionId, kind = 'agent_message' }) => {
+        if (!document.hidden || !base44?.chatNotifications || !sessionId) return;
+        try {
+            if (kind === 'agent_status') {
+                await base44.chatNotifications.showStatus({ sessionId, title, body });
+            } else {
+                await base44.chatNotifications.showMessage({ sessionId, title, body });
+            }
+        } catch (error) {
+            console.info('[contact] native chat notification unavailable', error);
+        }
+    };
+
     const connectLiveAgentRoom = () => {
         const sessionKey = liveChatSessionId || getStoredSessionId();
         if (liveRoomConnected && sessionKey) {
@@ -469,13 +482,31 @@ document.addEventListener('DOMContentLoaded', function() {
                             return;
                         }
 
-                        const { messagePayload, incomingSessionId, incomingSessionIdLower, incomingRoom, incomingRoomLower, content, role, messageId } = normalized;
+                        const { parsed, messagePayload, incomingSessionId, incomingSessionIdLower, incomingRoom, incomingRoomLower, content, role, messageId } = normalized;
                         const expectedRawRoom = roomKey;
                         const expectedEncryptedRoom = encryptedRoomKey;
                         const roomMatches = incomingRoom && [expectedRawRoom, expectedEncryptedRoom].some((room) => room && incomingRoomLower === room.toLowerCase());
                         const sessionMatches = incomingSessionId && liveChatSessionId && (incomingSessionId === liveChatSessionId || incomingSessionIdLower === String(liveChatSessionId).toLowerCase());
                         if (!sessionMatches && !roomMatches) {
                             console.warn('[contact] realtime payload skipped - no session/room match', { incomingSessionId, incomingSessionIdLower, liveChatSessionId, incomingRoom, messageId });
+                            return;
+                        }
+
+                        if (parsed?.type === 'chat_status') {
+                            currentSessionStatus = parsed.status || currentSessionStatus;
+                            const isAgentMode = currentSessionStatus === 'agent_active' || currentSessionStatus === 'escalated';
+                            if (chatModeLabel) chatModeLabel.textContent = isAgentMode ? 'Agent Mode' : 'AI Assistant';
+                            syncAgentButtonVisibility();
+                            const statusText = currentSessionStatus === 'agent_active'
+                                ? 'A support agent accepted your request.'
+                                : currentSessionStatus === 'agent_rejected'
+                                    ? 'No support agent is available right now.'
+                                    : '';
+                            if (statusText) {
+                                appendMessage(statusText, 'bot');
+                                chatStatus.textContent = statusText;
+                                await showChatNotification({ title: 'TevrocSoft support', body: statusText, sessionId: liveChatSessionId, kind: 'agent_status' });
+                            }
                             return;
                         }
 
@@ -510,6 +541,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         chatStatus.textContent = 'Live chat connected';
                         appendMessage(content, role);
+                        if (role === 'bot' || messagePayload.role === 'agent') {
+                            await showChatNotification({ title: 'New support message', body: content || 'Your support agent sent an attachment.', sessionId: liveChatSessionId });
+                        }
                         await persistIncomingChatMessage(incomingMessage);
                     },
                     close: (event) => {
@@ -739,6 +773,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
     };
 
+    // Handle actions from Android/desktop notifications while this chat is open.
+    base44?.chatNotifications?.onEvent?.(({ action, sessionId, reply }) => {
+        if (!sessionId || sessionId !== liveChatSessionId) return;
+        if (action === 'open') {
+            openChatDialog();
+            return;
+        }
+        if (action === 'reply' && reply?.trim()) {
+            const visitorMsg = {
+                id: `msg_${Date.now()}`,
+                sessionId: liveChatSessionId,
+                session_id: liveChatSessionId,
+                role: 'visitor',
+                content: reply.trim(),
+                createdAt: Date.now(),
+            };
+            appendMessage(visitorMsg.content, 'user');
+            publishLiveMessage(visitorMsg).catch((error) => console.warn('[contact] notification reply failed', error));
+            persistChatMessage(visitorMsg).catch((error) => console.warn('[contact] notification reply persistence failed', error));
+        }
+    });
+
     const clearChat = async () => {
     try {
         // Close realtime rooms
@@ -899,9 +955,12 @@ document.addEventListener('DOMContentLoaded', function() {
         lastMessageAt: Date.now(),
     });
 
+    // ChatSession is the source of truth for the agent app. The legacy Support
+    // conversation is useful context when available, but must not prevent the
+    // mobile agent notification from being sent.
     if (!supportAgent?.createConversation || !supportAgent?.addMessage) {
-        console.warn('Support agent API is unavailable');
-        return false;
+        console.warn('Support agent conversation API is unavailable; using live chat session handoff.');
+        return true;
     }
 
     try {
@@ -918,10 +977,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         return true;
         }
-        return false;
+        return true;
     } catch (err) {
         console.warn('Agent handoff failed', err);
-        return false;
+        return true;
     }
     };
 
@@ -973,6 +1032,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     appendMessage(requestText, 'user');
     await publishLiveMessage(requestMsg);
+    await persistChatMessage(requestMsg);
     chatStatus.textContent = 'Requesting a human agent...';
 
     const handoffSuccess = await handleAgentHandoff(requestText);
