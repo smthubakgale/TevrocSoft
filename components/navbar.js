@@ -446,6 +446,7 @@ class CustomNavbar extends HTMLElement {
                     <a href="refund.html">Refund Policy</a>
                     <a href="terms.html">Terms & Conditions</a>
                     <a href="cookies.html">Cookie Policy</a>
+                    <a href="delivery.html">Delivery Policy</a>
                   </div>
                 </div>
                 <div class="dropdown-section">
@@ -510,6 +511,7 @@ class CustomNavbar extends HTMLElement {
                 <a class="drawer-link" href="refund.html">Refund Policy</a>
                 <a class="drawer-link" href="terms.html">Terms & Conditions</a>
                 <a class="drawer-link" href="cookies.html">Cookie Policy</a>
+                <a class="drawer-link" href="delivery.html">Delivery Policy</a>
               </div>
             </div>
 

@@ -23,89 +23,108 @@
 </head>
 <body class="bg-gray-50">
     <custom-navbar></custom-navbar>
-    
-    <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <div class="bg-white rounded-xl shadow-md p-8 md:p-12">
-            <div class="mb-8">
-                <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                    <i data-feather="dollar-sign" class="text-yellow-600 w-8 h-8"></i>
+
+    <main class="container mx-auto px-4 py-12 max-w-5xl">
+        <article class="legal-document bg-white rounded-2xl shadow-md p-8 md:p-12">
+            <header class="document-header mb-8 border-b border-slate-200 pb-6">
+                <div class="flex items-center gap-4 mb-5">
+                    <img src="img/logo.svg" alt="TevrocSoft logo" class="w-16 h-16 rounded-2xl bg-amber-50 p-2 shadow-sm" />
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-slate-500 mb-1">TevrocSoft</p>
+                        <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">Billing & Financial Policy</h1>
+                    </div>
                 </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Billing & Financial Policy</h1>
-<p class="text-gray-600">Last updated: <span class="font-medium">June 10, 2023</span></p>
-            </div>
+                <div class="flex flex-wrap justify-between gap-3 text-sm text-slate-600 border-t border-slate-200 pt-4">
+                    <span>Effective date: 01 September 2026</span>
+                    <span>Last updated: 01 September 2026</span>
+                </div>
+            </header>
+
+            <p class="text-lg leading-8 text-slate-700 mb-8">
+                This Billing and Financial Policy governs project fees, subscription charges, service deposits, and any request for refund or credit by clients of TevrocSoft.
+                All financial arrangements are subject to the terms of the relevant proposal, invoice, or written agreement.
+            </p>
 
             <div class="prose max-w-none">
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">1. Overview</h2>
-                    <p class="text-gray-700 mb-4">
-                    At TevrocSoft, we provide transparent billing and financial policies to ensure clarity about project scope, delivery, and payment responsibilities.
-</p>
-                    <p class="text-gray-700">This Refund Policy explains how refunds, returns, and exchanges are handled for purchases made through our website. Please read this policy carefully before making a purchase.</p>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">1. Overview</h2>
+                    <p class="text-slate-700 mb-4">At TevrocSoft, we provide transparent billing and financial policies to ensure clarity about project scope, delivery, and payment responsibilities.</p>
+                    <p class="text-slate-700">This policy explains how refunds, credit adjustments, and payment disputes are handled for purchases and services made through our website or agreed engagement channels.</p>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">2. Digital Products</h2>
-                    <p class="text-gray-700 mb-4">Due to the nature of digital products, we generally do not offer refunds once a purchase is completed. However, we understand that exceptional circumstances can take place regarding the character of the product we supply.</p>
-                    
-                    <h3 class="text-xl font-medium text-gray-800 mb-2 mt-6">Eligibility for Refund</h3>
-                    <p class="text-gray-700 mb-2">We will honor refund requests under the following circumstances:</p>
-                    <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-2">
-                        <li>Non-delivery of the product: Due to some mailing issues, you might not receive a delivery email from us.</li>
-                        <li>Major defects: Although all the products are thoroughly tested before release, unexpected errors may occur.</li>
-                        <li>Product not-as-described: A request based on this reason is addressed on a case-by-case basis and subject to our approval.</li>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">2. Digital Products and Services</h2>
+                    <p class="text-slate-700 mb-4">Due to the nature of digital products and custom project work, fees are generally non-refundable once service delivery has begun or when a digital product has been delivered to the client. However, TevrocSoft will consider exceptional circumstances on a case-by-case basis.</p>
+
+                    <h3 class="text-xl font-semibold text-slate-900 mt-6 mb-2">Eligibility for Refund or Credit</h3>
+                    <p class="text-slate-700 mb-2">We may consider a refund or credit where:</p>
+                    <ul class="list-disc pl-5 text-slate-700 mb-4 space-y-2">
+                        <li>The product or service was not delivered as agreed.</li>
+                        <li>There was a material defect or failure in service delivery.</li>
+                        <li>The service was misrepresented or not as described in the relevant agreement.</li>
+                        <li>A significant billing error or duplicate charge occurred.</li>
                     </ul>
 
-                    <h3 class="text-xl font-medium text-gray-800 mb-2 mt-6">Non-Refundable Situations</h3>
-                    <p class="text-gray-700">We do not grant refunds in the following situations:</p>
-                    <ul class="list-disc pl-5 text-gray-700 mt-2 space-y-2">
-                        <li>You changed your mind about the product.</li>
-                        <li>You bought a product by mistake.</li>
-                        <li>You do not have sufficient expertise to use the product.</li>
-                        <li>You can no longer access the product because it has been removed (we advise you to download items as soon as you have purchased them to avoid this situation).</li>
+                    <h3 class="text-xl font-semibold text-slate-900 mt-6 mb-2">Non-Refundable Situations</h3>
+                    <p class="text-slate-700">We do not normally grant refunds in the following situations:</p>
+                    <ul class="list-disc pl-5 text-slate-700 mt-2 space-y-2">
+                        <li>The client changed their mind after purchase or project work commenced.</li>
+                        <li>The client purchased the service by mistake.</li>
+                        <li>The client cannot effectively use the product or service due to lack of operational readiness or technical capability.</li>
+                        <li>The service has been used, accessed, or consumed in line with the agreed terms.</li>
                     </ul>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">3. Subscription Services</h2>
-                    <p class="text-gray-700 mb-4">For subscription-based services, you may cancel your subscription at any time. However, we do not provide refunds for any partial subscription periods.</p>
-                    <p class="text-gray-700">If you cancel your subscription, you will continue to have access to the service through the end of your current billing period.</p>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">3. Subscription Services</h2>
+                    <p class="text-slate-700 mb-4">For subscription-based services, clients may cancel at any time in accordance with the agreement. However, fees for the current billing period are generally not refundable.</p>
+                    <p class="text-slate-700">If a subscription is cancelled, access will continue through the end of the current billing period unless otherwise stated in the signed agreement.</p>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">4. How to Request a Refund</h2>
-                    <p class="text-gray-700 mb-4">To request a refund, please contact our customer support at info@tevrocsoft.co.za with the following information:</p>
-                    <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-2">
-                        <li>Your full name</li>
-                        <li>Order number</li>
-                        <li>Product name</li>
-                        <li>Reason for refund request</li>
-                        <li>Any supporting documentation</li>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">4. How to Request a Refund</h2>
+                    <p class="text-slate-700 mb-4">To request a refund or credit, please contact customer support at info@tevrocsoft.co.za with the following information:</p>
+                    <ul class="list-disc pl-5 text-slate-700 mb-4 space-y-2">
+                        <li>Your full name.</li>
+                        <li>Order number or invoice reference.</li>
+                        <li>Service or product name.</li>
+                        <li>The reason for the request.</li>
+                        <li>Any supporting documentation or evidence.</li>
                     </ul>
-                    <p class="text-gray-700">We will process your request within 5-7 business days and notify you of the outcome via email.</p>
+                    <p class="text-slate-700">We will review the request and respond within the time period stated in the applicable agreement or as otherwise reasonably necessary.</p>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">5. Processing Refunds</h2>
-                    <p class="text-gray-700 mb-4">If your refund request is approved, we will initiate a refund to your original method of payment. You will receive the credit within a certain amount of days, depending on your card issuer's policies.</p>
-                    <p class="text-gray-700">Please note that processing times may vary depending on your financial institution. We will not be responsible for any delays caused by your bank or payment processor.</p>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">5. Processing of Approved Requests</h2>
+                    <p class="text-slate-700 mb-4">If a refund request is approved, we will initiate a credit to the original method of payment or provide another agreed resolution. Settlement times may vary depending on the financial institution or payment processor.</p>
+                    <p class="text-slate-700">We are not responsible for delays caused by banking systems, card issuers, or third-party payment processors outside our direct control.</p>
                 </section>
 
                 <section class="mb-10">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">6. Chargebacks</h2>
-                    <p class="text-gray-700 mb-4">If you file a chargeback or dispute with your bank or credit card company, we reserve the right to terminate all services immediately and permanently. We also reserve the right to dispute any chargeback that we believe to be fraudulent or unwarranted.</p>
-                    <p class="text-gray-700">We strongly encourage you to contact us first to resolve any issues before initiating a chargeback.</p>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">6. Chargebacks and Disputes</h2>
+                    <p class="text-slate-700 mb-4">If a client files a chargeback or disputes a payment with a bank or card issuer, TevrocSoft reserves the right to suspend or terminate services immediately and to dispute any claim we believe to be unfounded or fraudulent.</p>
+                    <p class="text-slate-700">We strongly encourage clients to contact us first to resolve concerns before escalating to a financial dispute process.</p>
                 </section>
 
                 <section>
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">7. Contact Us</h2>
-                    <p class="text-gray-700 mb-4">If you have any questions about our Refund Policy, please contact us at info@tevrocsoft.co.za or by mail at:</p>
-                    <address class="text-gray-700 not-italic">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200">7. Contact Us</h2>
+                    <p class="text-slate-700">If you have any questions about this policy or any billing issue, please contact us at info@tevrocsoft.co.za or write to us at:</p>
+                    <address class="not-italic text-slate-700 mt-3 leading-7">
                         TevrocSoft<br>
                         Johannesburg, South Africa
                     </address>
                 </section>
             </div>
-        </div>
+
+            <div class="mt-12 pt-6 border-t border-slate-200">
+                <p class="font-semibold text-slate-900 mb-2">TevrocSoft</p>
+                <address class="not-italic text-slate-700 leading-7">
+                    Johannesburg, South Africa<br>
+                    info@tevrocsoft.co.za<br>
+                    www.tevrocsoft.co.za
+                </address>
+            </div>
+        </article>
     </main>
 
     <custom-footer></custom-footer>

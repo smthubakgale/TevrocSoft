@@ -221,6 +221,11 @@ custom-footer .footer-link:hover {
         .hero {
             @apply p-6;
         }
+
+        custom-footer {
+            display: block;
+            margin-bottom: 20vh;
+        }
     }
 }
 
