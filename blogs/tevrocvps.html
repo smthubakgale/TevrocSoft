@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tevroc VPS: Relational Database Hosting for App Builders | TevrocSoft</title>
+  <meta name="description" content="Meet Tevroc VPS, TevrocSoft's in-house relational database hosting platform for app development, web access, and free offline desktop workflows.">
+  <link rel="canonical" href="https://tevrocsoft.co.za/blogs/tevrocvps.html">
+  <base href="../">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="components/navbar.js"></script>
+  <script src="components/footer.js"></script>
+  <style>
+    body { background: #f8fafc; color: #0f172a; }
+    .vps-hero { background: radial-gradient(circle at 80% 10%, rgba(45,212,191,.28), transparent 28%), linear-gradient(135deg, #07111f, #123568 64%, #0891b2); }
+    .doc-section { border-bottom: 1px solid #e2e8f0; padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
+    .doc-section:last-child { border-bottom: 0; }
+  </style>
+</head>
+<body>
+  <custom-navbar></custom-navbar>
+  <main class="mx-auto max-w-6xl px-4 py-12 lg:py-20">
+    <article>
+      <header class="vps-hero rounded-3xl p-8 text-white shadow-2xl md:p-14">
+        <span class="inline-flex rounded-full border border-cyan-200/40 bg-white/10 px-4 py-2 text-sm font-semibold text-cyan-100">In-house platform guide</span>
+        <h1 class="mt-6 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">Tevroc VPS: relational database hosting for app builders</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-blue-100">Why we built a Tevroc-owned database platform for teams that need relational structure, developer control, web access, and a free offline desktop option.</p>
+        <div class="mt-8 grid gap-4 text-sm text-blue-100 sm:grid-cols-3"><span><strong class="text-white">Updated</strong> September 5, 2026</span><span><strong class="text-white">Read time</strong> 8 min</span><span><strong class="text-white">Audience</strong> App builders</span></div>
+      </header>
+
+      <section class="doc-section mt-12 rounded-2xl bg-white p-7 shadow-sm md:p-10">
+        <p class="text-xl leading-8 text-slate-700">Tevroc VPS is TevrocSoft's in-house application for hosting and working with relational databases during app development. It occupies a similar space to hosted application backends such as Firebase, but starts from a different design decision: relational data should remain relational.</p>
+        <p class="mt-5 leading-8 text-slate-600">That means teams can model users, orders, permissions, products, appointments, and business processes with tables and relationships that reflect how the work actually operates. Tevroc VPS gives that data a practical home without forcing every project into a document-only shape.</p>
+      </section>
+
+      <section class="doc-section rounded-2xl bg-white p-7 shadow-sm md:p-10">
+        <h2 class="text-3xl font-bold">Why relational hosting?</h2>
+        <p class="mt-4 leading-8 text-slate-600">Many business applications have connected data. A customer has orders, an order has items, a user has permissions, and a project has collaborators. Relational databases make those connections explicit and easier to query, validate, and evolve.</p>
+        <div class="mt-6 grid gap-4 md:grid-cols-3"><div class="rounded-xl bg-blue-50 p-5"><h3 class="font-bold text-blue-900">Clear relationships</h3><p class="mt-2 text-sm leading-6 text-slate-600">Model the links between records instead of duplicating them everywhere.</p></div><div class="rounded-xl bg-cyan-50 p-5"><h3 class="font-bold text-cyan-900">Predictable queries</h3><p class="mt-2 text-sm leading-6 text-slate-600">Use structured tables and SQL-style thinking for reporting and application logic.</p></div><div class="rounded-xl bg-emerald-50 p-5"><h3 class="font-bold text-emerald-900">Built for business apps</h3><p class="mt-2 text-sm leading-6 text-slate-600">Keep users, permissions, transactions, and workflows connected.</p></div></div>
+      </section>
+
+      <section class="doc-section rounded-2xl bg-white p-7 shadow-sm md:p-10">
+        <h2 class="text-3xl font-bold">Web access and offline desktop apps</h2>
+        <p class="mt-4 leading-8 text-slate-600">Use the web version when you need shared, connected access. When you are developing locally or working in a constrained environment, the Windows, macOS, and Linux desktop apps provide a free offline option. Android and iOS downloads are also available for mobile workflows.</p>
+        <div class="mt-6 flex flex-wrap gap-3"><a class="rounded-xl bg-blue-600 px-5 py-3 font-bold text-white" href="https://vps.tevrocsoft.co.za" target="_blank" rel="noopener">Open web version</a><a class="rounded-xl border border-slate-300 px-5 py-3 font-bold text-blue-700" href="app-tevrocvps.html">Download options</a></div>
+      </section>
+
+      <section class="doc-section rounded-2xl bg-white p-7 shadow-sm md:p-10">
+        <h2 class="text-3xl font-bold">A Tevroc foundation for Tevroc apps</h2>
+        <p class="mt-4 leading-8 text-slate-600">Tevroc VPS is designed to work alongside the rest of the Tevroc product family. Tevroc SDK supplies application-side patterns, while Tevroc VPS provides a relational data layer that can support web, mobile, and desktop experiences.</p>
+        <p class="mt-4 leading-8 text-slate-600">The result is a more coherent development path: define the data model, build the application workflows, test locally with the desktop app, and expose shared access through the web version when the product is ready.</p>
+      </section>
+
+      <section class="rounded-2xl bg-slate-950 p-7 text-white shadow-xl md:p-10"><h2 class="text-3xl font-bold">Start with the platform</h2><p class="mt-4 max-w-2xl leading-8 text-slate-300">Explore Tevroc VPS on the web or download the desktop app for free offline development.</p><a class="mt-6 inline-block rounded-xl bg-cyan-400 px-5 py-3 font-bold text-slate-950" href="app-tevrocvps.html">Explore Tevroc VPS</a></section>
+    </article>
+  </main>
+  <custom-footer></custom-footer>
+  <script>if (window.feather) window.feather.replace();</script>
+</body>
+</html>
