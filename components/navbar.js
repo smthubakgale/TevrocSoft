@@ -14,17 +14,24 @@ class CustomNavbar extends HTMLElement {
           --accent: #38bdf8;
           --accent-strong: #1d4ed8;
           --border: rgba(15, 23, 42, 0.08);
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
+          position: sticky;
+          top: 0;
+          z-index: 1030;
         }
  
-        @media (max-width: 767px) {
-          body { overflow-x:hidden !important; }  
-        }
+        body { overflow-x: hidden !important; }
 
         .nav-shell {
           position: sticky;
           top: 0;
           z-index: 1030;
-          width: 100vw;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .topbar {
@@ -32,6 +39,8 @@ class CustomNavbar extends HTMLElement {
           align-items: center;
           justify-content: space-between;
           gap: 1rem;
+          box-sizing: border-box;
+          max-width: 100%;
           padding: 0.85rem 1.25rem;
           background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.75));
           backdrop-filter: blur(18px);
@@ -52,6 +61,7 @@ class CustomNavbar extends HTMLElement {
           font-weight: 700;
           color: var(--primary);
           text-decoration: none;
+          flex: 0 0 auto;
         }
 
         .brand img {
@@ -64,6 +74,8 @@ class CustomNavbar extends HTMLElement {
           align-items: center;
           gap: 0.2rem;
           margin-left: auto;
+          min-width: 0;
+          max-width: 100%;
         }
 
         .nav-link,
@@ -80,6 +92,7 @@ class CustomNavbar extends HTMLElement {
           text-decoration: none;
           cursor: pointer;
           transition: background 0.2s ease, color 0.2s ease;
+          white-space: nowrap;
         }
 
         .nav-link .lucide,
@@ -191,6 +204,7 @@ class CustomNavbar extends HTMLElement {
           display: flex;
           align-items: center;
           gap: 0.6rem;
+          flex: 0 0 auto;
         }
 
         .btn-primary {
@@ -372,7 +386,9 @@ class CustomNavbar extends HTMLElement {
           position: fixed;
           left: 0; 
           bottom: 0;
-          width:100vw;
+          width:100%;
+          max-width:100%;
+          box-sizing:border-box;
           z-index: 1025;
           display: flex;
           justify-content: space-around;
@@ -416,6 +432,13 @@ class CustomNavbar extends HTMLElement {
             display: none;
           }
         }
+
+        @media (min-width: 992px) and (max-width: 1200px) {
+          .topbar { gap: 0.45rem; padding-left: 0.75rem; padding-right: 0.75rem; }
+          .desktop-nav { gap: 0; }
+          .nav-link, .dropdown-trigger { padding-left: 0.5rem; padding-right: 0.5rem; font-size: 0.88rem; }
+          .btn-primary { padding-left: 0.75rem; padding-right: 0.75rem; font-size: 0.88rem; }
+        }
       </style>
 
       <div class="nav-shell">
@@ -428,11 +451,10 @@ class CustomNavbar extends HTMLElement {
           <nav class="desktop-nav" aria-label="Primary navigation">
             <a class="nav-link" href="index.html"><i data-lucide="home"></i>Home</a>
             <a class="nav-link" href="services.html"><i data-lucide="server"></i>Services</a>
-            <a class="nav-link" href="pricing.html"><i data-lucide="badge-dollar-sign"></i>Pricing</a>
+            <a class="nav-link" href="pricing.html"><i data-lucide="wallet-cards"></i>Pricing</a>
             <a class="nav-link" href="portfolios.html"><i data-lucide="smartphone"></i>Apps</a>
-            <a class="nav-link" href="about.html"><i data-lucide="info"></i>About</a>
+            <a class="nav-link" href="about.html"><i data-lucide="users-round"></i>About</a>
             <a class="nav-link" href="blogs.html"><i data-lucide="book-open"></i>Blogs</a>
-            <a class="nav-link" href="contact.html"><i data-lucide="mail"></i>Contact</a>
             <div class="dropdown-shell">
               <button class="dropdown-trigger" type="button"><i data-lucide="archive"></i>Resources</button>
               <div class="dropdown-panel">
@@ -489,11 +511,10 @@ class CustomNavbar extends HTMLElement {
             <div class="drawer-group-title">Main</div>
             <a class="drawer-link" href="index.html"><i data-lucide="home"></i>Home</a>
             <a class="drawer-link" href="services.html"><i data-lucide="server"></i>Services</a>
-            <a class="drawer-link" href="pricing.html"><i data-lucide="badge-dollar-sign"></i>Pricing</a>
+            <a class="drawer-link" href="pricing.html"><i data-lucide="wallet-cards"></i>Pricing</a>
             <a class="drawer-link" href="portfolios.html"><i data-lucide="smartphone"></i>Apps</a>
-            <a class="drawer-link" href="about.html"><i data-lucide="info"></i>About</a>
+            <a class="drawer-link" href="about.html"><i data-lucide="users-round"></i>About</a>
             <a class="drawer-link" href="blogs.html"><i data-lucide="book-open"></i>Blogs</a>
-            <a class="drawer-link" href="contact.html"><i data-lucide="mail"></i>Contact</a>
           </div>
 
           <div class="drawer-group">
@@ -537,7 +558,7 @@ class CustomNavbar extends HTMLElement {
         <a href="index.html"><i data-lucide="house"></i><span>Home</span></a>
         <a href="portfolios.html"><i data-lucide="smartphone"></i><span>Apps</span></a>
         <a href="blogs.html"><i data-lucide="book-open"></i><span>Blogs</span></a>
-        <a href="pricing.html"><i data-lucide="list-checks"></i><span>Pricing</span></a>
+        <a href="pricing.html"><i data-lucide="wallet-cards"></i><span>Pricing</span></a>
       </nav>
     `;
 
