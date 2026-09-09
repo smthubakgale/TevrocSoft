@@ -234,9 +234,9 @@ custom-footer .footer-link:hover {
     .hero,
     body > custom-navbar,
     body > custom-footer,
-    header,
-    nav,
-    footer,
+    body > header,
+    body > nav,
+    body > footer,
     .no-print,
     .print-hidden {
         display: none !important;
@@ -257,10 +257,149 @@ custom-footer .footer-link:hover {
     }
 
     .legal-document {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        color: #111827 !important;
+        background: #ffffff !important;
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 10.5pt !important;
+        line-height: 1.55 !important;
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
         padding: 0 !important;
+    }
+
+    .legal-document > .document-header {
+        display: block !important;
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+        margin: 0 0 14mm !important;
+        padding: 0 0 7mm !important;
+        border-bottom: 1.5pt solid #111827 !important;
+        page-break-after: avoid !important;
+    }
+
+    .legal-document > .document-header > div:first-child {
+        display: flex !important;
+        align-items: center !important;
+        gap: 5mm !important;
+        margin-bottom: 5mm !important;
+    }
+
+    .legal-document > .document-header img {
+        width: 21mm !important;
+        height: 21mm !important;
+        padding: 2mm !important;
+        border: 0.5pt solid #9ca3af !important;
+        border-radius: 0 !important;
+        background: #ffffff !important;
+    }
+
+    .legal-document > .document-header p {
+        margin: 0 0 1mm !important;
+        color: #374151 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 8pt !important;
+        letter-spacing: 0.12em !important;
+    }
+
+    .legal-document > .document-header h1 {
+        margin: 0 !important;
+        color: #111827 !important;
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 21pt !important;
+        line-height: 1.15 !important;
+        letter-spacing: 0 !important;
+    }
+
+    .legal-document > .document-header > div:last-child {
+        display: flex !important;
+        justify-content: space-between !important;
+        gap: 8mm !important;
+        margin: 0 !important;
+        padding: 3mm 0 0 !important;
+        border-top: 0.5pt solid #9ca3af !important;
+        color: #374151 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 8.5pt !important;
+    }
+
+    .legal-document > .mb-10:not(.prose) {
+        margin: 0 0 9mm !important;
+        padding: 4mm 5mm !important;
+        border: 0.5pt solid #9ca3af !important;
+        border-radius: 0 !important;
+        background: #f3f4f6 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .legal-document > .mb-10:not(.prose) p {
+        margin: 0 0 1mm !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 8.5pt !important;
+        line-height: 1.35 !important;
+    }
+
+    .legal-document .prose {
+        max-width: none !important;
+    }
+
+    .legal-document h2,
+    .legal-document h3 {
+        color: #111827 !important;
+        page-break-after: avoid !important;
+    }
+
+    .legal-document h2 {
+        margin-top: 8mm !important;
+        margin-bottom: 3mm !important;
+        padding-bottom: 1.5mm !important;
+        border-bottom: 0.5pt solid #9ca3af !important;
+        font-size: 13pt !important;
+    }
+
+    .legal-document h3 {
+        margin-top: 5mm !important;
+        margin-bottom: 2mm !important;
+        font-size: 11pt !important;
+    }
+
+    .legal-document p,
+    .legal-document li,
+    .legal-document address {
+        color: #111827 !important;
+    }
+
+    .legal-document p {
+        margin-top: 0 !important;
+        margin-bottom: 3mm !important;
+    }
+
+    .legal-document ul {
+        margin-top: 2mm !important;
+        margin-bottom: 4mm !important;
+    }
+
+    .legal-document a {
+        color: #111827 !important;
+        text-decoration: underline !important;
+    }
+
+    .legal-document > .mt-12 {
+        margin-top: 12mm !important;
+        padding-top: 4mm !important;
+        border-top: 0.75pt solid #111827 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .legal-document > .mt-12 p,
+    .legal-document > .mt-12 address {
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 8.5pt !important;
+        line-height: 1.4 !important;
     }
 }
 
