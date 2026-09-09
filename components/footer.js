@@ -142,11 +142,17 @@ class CustomFooter extends HTMLElement {
           <div>
             <h4>Services</h4>
             <ul>
-              <li><a class="footer-link" href="#"><i data-feather="chevron-right"></i> Custom Web Apps</a></li>
-              <li><a class="footer-link" href="#"><i data-feather="chevron-right"></i> Mobile Apps</a></li>
-              <li><a class="footer-link" href="#"><i data-feather="chevron-right"></i> UI/UX Design</a></li>
-              <li><a class="footer-link" href="#"><i data-feather="chevron-right"></i> Automation</a></li>
-              <li><a class="footer-link" href="#"><i data-feather="chevron-right"></i> Cloud & SEO</a></li>
+              <li><a class="footer-link" href="web-development.html"><i data-feather="chevron-right"></i> Custom Web Apps</a></li>
+              <li><a class="footer-link" href="mobile-apps.html"><i data-feather="chevron-right"></i> Mobile Apps</a></li>
+              <li><a class="footer-link" href="desktop-apps.html"><i data-feather="chevron-right"></i> Desktop Apps</a></li>
+              <li><a class="footer-link" href="ui-ux-design.html"><i data-feather="chevron-right"></i> UI/UX Design</a></li>
+              <li><a class="footer-link" href="automation-ai.html"><i data-feather="chevron-right"></i> Automation &amp; AI</a></li>
+              <li><a class="footer-link" href="seo-performance.html"><i data-feather="chevron-right"></i> SEO &amp; Performance</a></li>
+              <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> VPS Hosting</a></li>
+              <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> Cloud &amp; Support</a></li>
+              <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> Domain Management</a></li>
+              <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> Hosting Assistance</a></li>
+              <li><a class="footer-link" href="automation-ai.html"><i data-feather="chevron-right"></i> AI Chatbots</a></li>
             </ul>
           </div>
 
