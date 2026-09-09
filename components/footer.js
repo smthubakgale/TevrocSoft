@@ -155,11 +155,11 @@ class CustomFooter extends HTMLElement {
             <h4>Contact Us</h4>
             <div class="contact-item">
               <i data-feather="map-pin"></i>
-              <span>Stand No. 745K Sejwetla, Alexandra, Johannesburg 2090</span>
+              <span>Johannesburg, South Africa</span>
             </div>
             <div class="contact-item">
               <i data-feather="map-pin"></i>
-              <span>Registered office: 573 Ga-Makanye, Sovenga, Polokwane, Limpopo 0727</span>
+              <span>Registered office area: Polokwane, Limpopo, South Africa</span>
             </div>
             <div class="contact-item">
               <i data-feather="phone"></i>
