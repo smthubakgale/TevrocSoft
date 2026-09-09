@@ -127,6 +127,17 @@ class CustomFooter extends HTMLElement {
             </ul>
           </div>
 
+          <!-- Legal -->
+          <div>
+            <h4>Legal</h4>
+            <ul>
+              <li><a class="footer-link" href="terms.html"><i data-feather="chevron-right"></i> Terms &amp; Conditions</a></li>
+              <li><a class="footer-link" href="privacy.html"><i data-feather="chevron-right"></i> Privacy / POPIA</a></li>
+              <li><a class="footer-link" href="refund.html"><i data-feather="chevron-right"></i> Refund &amp; Cancellation</a></li>
+              <li><a class="footer-link" href="cookies.html"><i data-feather="chevron-right"></i> Cookie Policy</a></li>
+            </ul>
+          </div>
+
           <!-- Services -->
           <div>
             <h4>Services</h4>
@@ -144,23 +155,27 @@ class CustomFooter extends HTMLElement {
             <h4>Contact Us</h4>
             <div class="contact-item">
               <i data-feather="map-pin"></i>
-              <span>Johannesburg, South Africa</span>
+              <span>Stand No. 745K Sejwetla, Alexandra, Johannesburg 2090</span>
             </div>
             <div class="contact-item">
               <i data-feather="map-pin"></i>
-              <span>Remote delivery worldwide</span>
+              <span>Registered office: 573 Ga-Makanye, Sovenga, Polokwane, Limpopo 0727</span>
             </div>
             <div class="contact-item">
               <i data-feather="phone"></i>
-              <span>066 2531653</span>
+              <span>066 253 1653</span>
             </div>
             <div class="contact-item">
               <i data-feather="mail"></i>
-              <span>info@tevrocsoft.co.za</span>
+              <a class="footer-link" href="mailto:info@tevrocsoft.co.za">info@tevrocsoft.co.za</a>
             </div>
             <div class="contact-item">
               <i data-feather="clock"></i>
               <span>Mon-Fri: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="contact-item">
+              <i data-feather="file-text"></i>
+              <span>Reg. no. 2024/790053/07</span>
             </div>
           </div>
         </div>
