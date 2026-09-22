@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tevroc SDK Tutorial | TevrocSoft Blog</title>
-    <meta name="description" content="Learn how to install and use Tevroc SDK for JavaScript apps, with auth, entity data, integrations, and offline support." />
+    <title>Tevroc SDK npm Package Guide | TevrocSoft Blog</title>
+    <meta name="description" content="Learn how to install and use the Tevroc SDK npm package for JavaScript apps, with auth, entity data, integrations, payments, native persistence, and offline support." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://tevrocsoft.co.za/blogs/tevrocsdk.html">
     <base href="../">
@@ -28,7 +28,7 @@
         --doc-border: #e2e8f0;
       }
       html, body { min-height: 100%; margin: 0; }
-      body { background: #f8fafc; color: #0f172a; overflow-x: hidden; }
+      body { background: #eef4f8; color: #0f172a; overflow-x: hidden; }
       html { scroll-behavior: smooth; }
       main { padding: 0; margin: 0; }
       .sidebar-panel { border-radius: 0; border: none; background: var(--doc-surface); box-shadow: none; }
@@ -46,7 +46,15 @@
         width: 100%;
         padding: 0 15px 20px;
       }
-      .doc-hero { background: linear-gradient(180deg, rgba(15,23,42,0.72), rgba(15,23,42,0.46)), url("../img/blogs/tevrocsdk-hero.png") center/cover no-repeat; border: 1px solid rgba(255,255,255,0.18); box-shadow: 0 32px 90px rgba(15,23,42,.08); backdrop-filter: blur(18px); animation: fadeInUp 0.9s ease both; color: #f8fafc; position: relative; overflow: hidden; }
+      .doc-hero { min-height: 430px; background: linear-gradient(105deg, rgba(4,18,34,.98) 0%, rgba(5,36,61,.86) 52%, rgba(8,119,145,.44) 100%), url("../img/blogs/tevrocsdk/TevrocSDK_Poster_720x1080.png") 78% 32% / cover no-repeat; border: 0; border-radius: 0 0 22px 22px; box-shadow: 0 24px 60px rgba(15,23,42,.16); animation: fadeInUp 0.9s ease both; color: #f8fafc; position: relative; overflow: hidden; }
+      .doc-hero:after { content: ''; position: absolute; width: 440px; height: 440px; right: -170px; bottom: -250px; border: 1px solid rgba(125,240,255,.36); border-radius: 50%; box-shadow: 0 0 0 24px rgba(125,240,255,.06), 0 0 0 54px rgba(125,240,255,.04); pointer-events: none; }
+      .doc-hero > div { position: relative; z-index: 1; }
+      .doc-hero.section-compact { min-height: 15vh; height: 15vh; display: flex; align-items: center; background: linear-gradient(105deg, #071827, #0b3f5a 66%, #087e9a); border-radius: 0 0 16px 16px; box-shadow: 0 12px 30px rgba(7,21,37,.12); }
+      .doc-hero.section-compact:after { width: 230px; height: 230px; right: -80px; bottom: -150px; }
+      .doc-hero.section-compact > div { width: 100%; padding: 1rem 2rem !important; }
+      .doc-hero.section-compact h1 { margin: 0; max-width: 900px; font-size: clamp(1.5rem, 3vw, 2.7rem); letter-spacing: -.035em; }
+      .doc-hero.section-compact .section-hero-kicker { display: inline-flex; margin-bottom: .4rem; color: #9af3fc; font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+      .doc-hero.section-compact p, .doc-hero.section-compact .doc-hero-pill, .doc-hero.section-compact .text-slate-400, .doc-hero.section-compact .mt-8 { display: none; }
       .doc-hero .doc-hero-pill { background: rgba(255,255,255,0.18); color: #f8fafc; border: 1px solid rgba(255,255,255,0.3); }
       .doc-hero h1 { color: #ffffff; animation: glowPulse 4s ease-in-out infinite alternate; }
       .doc-hero p { color: rgba(248,250,252,0.87); }
@@ -54,7 +62,9 @@
       .doc-cta { background: var(--doc-primary); }
       .doc-hero-image { width: 100%; max-width: 980px; aspect-ratio: 16 / 9; height: auto; display: block; border-radius: 2rem; border: 1px solid rgba(255,255,255,0.55); box-shadow: 0 32px 80px rgba(15,23,42,.12); animation: floatUp 10s ease-in-out infinite; object-fit: cover; }
       .feature-image { width: 100%; max-height: 420px; aspect-ratio: 16 / 9; height: auto; display: block; object-fit: cover; }
-      .doc-section { border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 2.5rem; margin-bottom: 2.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.26); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 18px 44px rgba(15,23,42,0.06); backdrop-filter: blur(12px); transition: transform .35s ease, opacity .35s ease, border-color .35s ease, box-shadow .35s ease; }
+      .doc-section { border-bottom: 1px solid #d9e4eb; padding: 2rem 2.25rem 2.75rem; margin-bottom: 2rem; background: rgba(255,255,255,.94); border: 1px solid #d9e4eb; box-shadow: 0 14px 34px rgba(15,23,42,.055); backdrop-filter: blur(12px); transition: transform .35s ease, opacity .35s ease, border-color .35s ease, box-shadow .35s ease; }
+      .doc-section h2 { color: #09253b; letter-spacing: -.025em; }
+      .doc-section h3 { color: #123b56; }
       section[data-section] { display: none; opacity: 0; transform: translateY(24px); max-height: 0; overflow: hidden; transition: opacity .45s ease, transform .45s ease, max-height .45s ease; }
       section.active { display: block; opacity: 1; transform: translateY(0); max-height: unset; }
       section {
@@ -62,7 +72,7 @@
         width: 100%;
         padding: 0 15px 20px;
       }
-      .liquid-card { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); box-shadow: 0 20px 38px rgba(15,23,42,0.08); backdrop-filter: blur(18px); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+      .liquid-card { background: rgba(255,255,255,.94); border: 1px solid #d9e4eb; box-shadow: 0 14px 34px rgba(15,23,42,.055); backdrop-filter: blur(18px); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
       .liquid-card:hover { transform: translateY(-4px); box-shadow: 0 28px 60px rgba(15,23,42,0.12); }
       .highlight-block { border-left: 4px solid rgba(14,165,233,0.75); padding-left: 1rem; background: linear-gradient(90deg, rgba(14,165,233,0.08), rgba(59,130,246,0.03)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7); }
       .info-note { border: 1px solid rgba(59,130,246,0.18); background: linear-gradient(135deg, rgba(224,242,254,0.8), rgba(248,250,252,0.95)); border-left: 4px solid rgba(37,99,235,0.75); box-shadow: 0 12px 32px rgba(15,23,42,0.06); }
@@ -72,7 +82,7 @@
       .feature-image { width: 100%; border-radius: 1.75rem; border: 1px solid rgba(255,255,255,0.45); box-shadow: 0 30px 80px rgba(15,23,42,.12); object-fit: cover; }
       .toc-button { width: 100%; text-align: left; border: none; transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; padding: 1.25rem 1rem; position: relative; }
       .toc-button:hover { background: rgba(14,165,233,0.08); box-shadow: inset 0 0 0 1px rgba(14,165,233,0.12); }
-      .toc-button.active, .toc-button[aria-current="page"] { background: rgba(14, 165, 233, 0.14); color: var(--doc-primary-dark); }
+      .toc-button.active, .toc-button[aria-current="page"] { background: #e3f8fc; color: var(--doc-primary-dark); box-shadow: inset 3px 0 0 #0ea5e9; }
       .mobile-toc-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.38); backdrop-filter: blur(10px); z-index: 50; }
       #mobileToc { position: fixed; inset: 0; display: none; z-index: 60; }
       #mobileToc.active { display: block; }
@@ -149,6 +159,7 @@
                             <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2">Installation</button>
                             <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2">Setup notes: Capacitor SQLite</button>
                             <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2">Setup notes: Tauri SQL</button>
+                            <button type="button" data-section-button="local-setup" class="toc-button rounded-xl px-3 py-2">Local app setup</button>
                             <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2">Create a client</button>
                             <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2">Authentication</button>
                             <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2">Entities</button>
@@ -179,8 +190,9 @@
                             <span class="doc-hero-pill inline-flex items-center rounded-full px-3 py-1">Developer guide</span>
                             <span class="text-slate-400">Tevroc SDK</span>
                         </div>
-                        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Tevroc SDK: Build scalable Tevroc apps with JavaScript</h1>
-                        <p class="mt-4 max-w-3xl text-lg doc-lead">A structured developer guide for installing Tevroc SDK, creating the client, and using auth, entities, integrations, and offline support across browser and native apps.</p>
+                        <span class="section-hero-kicker" aria-hidden="true">Tevroc SDK developer notes</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight" data-main-title="Tevroc SDK: Install one npm package, build across runtimes">Tevroc SDK: Install one npm package, build across runtimes</h1>
+                        <p class="mt-4 max-w-3xl text-lg doc-lead">A practical guide to installing the public <code>tevrocsdk</code> npm package, creating a client, and using auth, entities, integrations, payments, native persistence, and offline support across browser, Capacitor, and Tauri applications.</p>
                         <div class="mt-8 grid gap-4 sm:grid-cols-3 text-sm text-slate-500">
                             <span class="inline-flex items-center gap-2"><strong class="font-semibold text-slate-700">Updated</strong>August 8, 2026</span>
                             <span class="inline-flex items-center gap-2"><strong class="font-semibold text-slate-700">Read time</strong>8 min</span>
@@ -189,8 +201,22 @@
                     </div>
                 </div>
 
+                <section data-section="overview" class="grid gap-6 lg:grid-cols-[1.05fr_.95fr]" aria-label="Tevroc SDK package overview">
+                  <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">This is a package, not a standalone app</p>
+                    <h2 class="mt-3 text-3xl font-bold text-slate-900">Install Tevroc SDK from npm</h2>
+                    <p class="mt-3 leading-7 text-slate-600">Tevroc SDK is a public JavaScript dependency that your own web, Capacitor, or Tauri application imports. It does not have separate end-user Windows, macOS, Linux, iOS, or Android installers. The host application owns the platform shell; the SDK provides a consistent client for Tevroc services and native-aware helpers.</p>
+                    <pre class="mt-5 overflow-x-auto rounded-xl bg-slate-950 p-4 text-slate-100"><code>npm install tevrocsdk</code></pre>
+                    <a class="mt-5 inline-flex font-semibold text-sky-700" href="https://www.npmjs.com/package/tevrocsdk" target="_blank" rel="noopener">Open tevrocsdk on npm <span class="ml-2">↗</span></a>
+                  </div>
+                  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                    <figure class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><img src="../img/blogs/tevrocsdk/2026-09-22_161716.png" alt="tevrocsdk public npm package page and install command" class="w-full"><figcaption class="p-3 text-sm text-slate-600">The npm page shows the public package, current version, license, install command, and SDK capability summary.</figcaption></figure>
+                    <figure class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"><img src="../img/blogs/tevrocsdk/2026-09-22_161900.png" alt="tevrocsdk npm release history and current tag" class="w-full"><figcaption class="p-3 text-sm text-slate-600">Version history and current tags make package releases visible to teams maintaining their app dependencies.</figcaption></figure>
+                  </div>
+                </section>
+
                 <section id="overview" data-section="overview" class="space-y-4 doc-section liquid-card">
-                    <p class="text-slate-700 leading-relaxed text-lg">Welcome to the <strong>Tevroc SDK</strong> learning path. In this chapter, you will discover how a single JavaScript client can power <em>authentication</em>, <u>data access</u>, <em>payments</em>, <u>files</u>, <em>integrations</em>, and <u>offline-first behavior</u> across web and native apps. Think of this guide as a hands-on roadmap that builds your Tevroc app story step by step.</p>
+                  <p class="text-slate-700 leading-relaxed text-lg">Welcome to the <strong>Tevroc SDK</strong> learning path. In this chapter, you will discover how the public <code>tevrocsdk</code> npm package gives one JavaScript client the power to handle <em>authentication</em>, <u>data access</u>, <em>payments</em>, <u>files</u>, <em>integrations</em>, and <u>offline-first behavior</u> across browser and native host apps. Think of this guide as a hands-on roadmap for building with the package, not installing another end-user application.</p>
                     <p class="text-slate-700 leading-relaxed">By the end of this guide, you will understand the core SDK concepts and have practical examples you can copy into your own project. The focus is on real developer workflows: installing the SDK, wiring a client, authenticating users, working with entities, and extending functionality with integrations and offline sync.</p>
                     <div class="highlight-block rounded-3xl p-6 liquid-card">
                         <h3 class="text-xl font-semibold mb-3">Why this matters</h3>
@@ -763,7 +789,7 @@ listen("deep-link://open-url", (event) => {
                     </div>
                 </section>
 
-                <section id="setup-notes" data-section="setup-notes" class="space-y-6 doc-section liquid-card">
+                <section id="local-setup" data-section="local-setup" class="space-y-6 doc-section liquid-card">
                     <h2 class="text-3xl font-semibold">Setup notes for local apps and desktop shells</h2>
                     <p class="text-slate-700 leading-relaxed">If you are consuming the SDK from a monorepo or local workspace, point your app dependency at the local package folder and rebuild the SDK output before launching the app.</p>
                     <pre class="rounded-3xl bg-slate-950/95 p-6 text-sm text-slate-100 overflow-x-auto"><code class="language-bash">npm install ../tevrocsdk
@@ -1274,6 +1300,7 @@ try {
               <button type="button" data-section-button="installation" class="toc-button rounded-xl px-3 py-2 w-full text-left">Installation</button>
               <button type="button" data-section-button="setup-notes" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes: Capacitor SQLite</button>
               <button type="button" data-section-button="tauri-setup" class="toc-button rounded-xl px-3 py-2 w-full text-left">Setup notes: Tauri SQL</button>
+              <button type="button" data-section-button="local-setup" class="toc-button rounded-xl px-3 py-2 w-full text-left">Local app setup</button>
               <button type="button" data-section-button="create-a-client" class="toc-button rounded-xl px-3 py-2 w-full text-left">Create a client</button>
               <button type="button" data-section-button="authentication" class="toc-button rounded-xl px-3 py-2 w-full text-left">Authentication</button>
               <button type="button" data-section-button="entities" class="toc-button rounded-xl px-3 py-2 w-full text-left">Entities</button>
@@ -1297,12 +1324,48 @@ try {
         feather.replace();
 
         function setActiveSection(sectionId) {
+          const matchingSections = document.querySelectorAll(`section[data-section="${sectionId}"]`);
+          if (!matchingSections.length) return;
+
+          const sectionLabels = {
+            overview: 'Overview',
+            'getting-started': 'Getting started',
+            installation: 'Installation',
+            'setup-notes': 'Setup notes: Capacitor SQLite',
+            'tauri-setup': 'Setup notes: Tauri SQL',
+            'local-setup': 'Local app setup',
+            'create-a-client': 'Create a client',
+            authentication: 'Authentication',
+            entities: 'Entities',
+            files: 'Files',
+            offline: 'Offline support',
+            payments: 'Payments',
+            'custom-functions': 'Custom functions',
+            integrations: 'Integrations',
+            'agents-connectors': 'Agents & connectors',
+            errors: 'Error handling',
+            'native-integration': 'Native integration',
+            'next-steps': 'Next steps',
+          };
+
           document.querySelectorAll('[data-section-button]').forEach((button) => {
             button.classList.toggle('active', button.dataset.sectionButton === sectionId);
+            if (button.dataset.sectionButton === sectionId) button.setAttribute('aria-current', 'page');
+            else button.removeAttribute('aria-current');
           });
           document.querySelectorAll('section[data-section]').forEach((section) => {
             section.classList.toggle('active', section.dataset.section === sectionId);
           });
+
+          const hero = document.querySelector('.doc-hero');
+          const heroTitle = hero?.querySelector('[data-main-title]');
+          const heroKicker = hero?.querySelector('.section-hero-kicker');
+          if (hero) hero.classList.toggle('section-compact', sectionId !== 'overview');
+          if (heroTitle) heroTitle.textContent = sectionId === 'overview' ? heroTitle.dataset.mainTitle : sectionLabels[sectionId] || sectionId;
+          if (heroKicker) heroKicker.textContent = sectionId === 'overview' ? 'Tevroc SDK developer guide' : 'Selected chapter';
+
+          const article = document.querySelector('article');
+          if (article) article.scrollIntoView({ block: 'start', behavior: 'smooth' });
         }
 
         function openMobileToc() {
@@ -1314,9 +1377,9 @@ try {
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-          document.getElementById('tocToggle').addEventListener('click', openMobileToc);
-          document.getElementById('mobileTocClose').addEventListener('click', closeMobileToc);
-          document.getElementById('mobileTocBackdrop').addEventListener('click', closeMobileToc);
+          document.getElementById('tocToggle')?.addEventListener('click', openMobileToc);
+          document.getElementById('mobileTocClose')?.addEventListener('click', closeMobileToc);
+          document.getElementById('mobileTocBackdrop')?.addEventListener('click', closeMobileToc);
 
           const buttons = document.querySelectorAll('[data-section-button]');
           buttons.forEach((button) => {
@@ -1338,7 +1401,7 @@ try {
             codeBlocks.forEach((block) => hljs.highlightElement(block));
           }
 
-          setActiveSection('overview');
+          setActiveSection(window.location.hash.slice(1) || 'overview');
         });
     </script>
     <script src="../js/mermain.js"></script>

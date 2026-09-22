@@ -5,6 +5,17 @@ class CustomDoctorCard extends HTMLElement {
     const detail = this.getAttribute('detail') || 'Focused delivery';
     const image = this.getAttribute('image') || 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80';
     const link = this.getAttribute('link') || '';
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const pageDepth = pathParts.length && /\.[^/]+$/.test(pathParts[pathParts.length - 1])
+      ? pathParts.length - 1
+      : pathParts.length;
+    const assetPrefix = '../'.repeat(pageDepth) || './';
+    const resolveLocalUrl = (value) => {
+      if (!value || value.startsWith('#') || value.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(value)) return value;
+      return `${assetPrefix}${value.replace(/^\.\//, '')}`;
+    };
+    const resolvedImage = resolveLocalUrl(image);
+    const resolvedLink = resolveLocalUrl(link);
 
     this.attachShadow({ mode: 'open' });
 
@@ -116,7 +127,7 @@ class CustomDoctorCard extends HTMLElement {
 
       <div class="doctor-card">
         <div class="relative">
-          <img src="${image}" alt="${name}" class="doctor-image">
+          <img src="${resolvedImage}" alt="${name}" class="doctor-image">
           <div class="social-icons">
             <a href="#"><i data-feather="facebook"></i></a>
             <a href="#"><i data-feather="twitter"></i></a>
@@ -127,7 +138,7 @@ class CustomDoctorCard extends HTMLElement {
           <h3>${name}</h3>
           <p class="specialty">${specialty}</p>
           <p class="experience"><i data-feather="award"></i>${detail}</p>
-          ${link ? `<a href="${link}" class="book-btn" target="_blank" rel="noopener noreferrer">View Project</a>` : `<a href="contact.html" class="book-btn">View Project</a>`}
+          ${link ? `<a href="${resolvedLink}" class="book-btn" target="_blank" rel="noopener noreferrer">View Project</a>` : `<a href="${resolveLocalUrl('contact.html')}" class="book-btn">View Project</a>`}
         </div>
       </div>
     `;

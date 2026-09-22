@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltFlow: The IoT Electronics Design Workspace | TevrocSoft</title>
+    <meta name="description" content="Discover VoltFlow, TevrocSoft's electronics and IoT design workspace for Arduino, ESP32, Raspberry Pi Pico, circuit simulation, code, Bluetooth, GPS, schematics, and PCB planning.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/voltflow.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="VoltFlow: The IoT Electronics Design Workspace">
+    <meta property="og:description" content="Explore VoltFlow's circuit editor, microcontroller code tools, simulation, connectivity workflows, schematics, and PCB planning features.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/blogs/voltflow.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/voltflow/voltflow-poster.png">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <style>
+        :root { --ink: #071525; --muted: #536274; --line: #dbe5ed; --cyan: #18c8e8; --blue: #1675e8; --amber: #ffb454; --paper: #f4f8fb; }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body.voltflow-page { margin: 0; width: 100%; max-width: 100%; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+        .voltflow-page h1, .voltflow-page h2, .voltflow-page h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0; }
+        .voltflow-shell { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+        .vf-hero { position: relative; min-height: 720px; overflow: hidden; background: #061321; color: white; isolation: isolate; }
+        .vf-hero:before { content: ''; position: absolute; inset: 0; z-index: -2; background: linear-gradient(110deg, rgba(3,16,29,.98) 8%, rgba(3,16,29,.82) 46%, rgba(3,16,29,.2) 100%), url('../img/blogs/voltflow/voltflow-poster.png') 70% 42% / cover no-repeat; }
+        .vf-hero:after { content: ''; position: absolute; z-index: -1; width: 650px; height: 650px; right: -180px; bottom: -290px; border: 1px solid rgba(24,200,232,.38); border-radius: 50%; box-shadow: 0 0 0 28px rgba(24,200,232,.05), 0 0 0 68px rgba(24,200,232,.04), 0 0 90px rgba(24,200,232,.2); }
+        .vf-hero-inner { min-height: 720px; display: grid; align-items: end; padding-top: 100px; padding-bottom: 74px; }
+        .vf-hero-copy { max-width: 760px; }
+        .vf-kicker, .vf-label { display: inline-flex; align-items: center; gap: 9px; color: #a9f5ff; font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+        .vf-kicker:before { content: ''; width: 30px; height: 2px; background: var(--cyan); }
+        .vf-hero h1 { max-width: 780px; margin: 20px 0 22px; font-size: clamp(3rem, 7vw, 6.8rem); line-height: .94; letter-spacing: -.055em; }
+        .vf-hero-lead { max-width: 660px; margin: 0; color: #d7eaf0; font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.55; }
+        .vf-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
+        .vf-button { display: inline-flex; align-items: center; gap: 10px; border-radius: 7px; padding: 13px 18px; font-size: .95rem; font-weight: 700; text-decoration: none; transition: transform .2s ease, background .2s ease, color .2s ease; }
+        .vf-button:hover { transform: translateY(-3px); }
+        .vf-button-primary { background: var(--cyan); color: #031321; }
+        .vf-button-primary:hover { background: #8af3ff; color: #031321; }
+        .vf-button-ghost { border: 1px solid rgba(255,255,255,.32); color: white; }
+        .vf-button-ghost:hover { border-color: white; background: rgba(255,255,255,.1); color: white; }
+        .vf-hero-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 42px; color: #a9bac4; font-size: .86rem; }
+        .vf-hero-meta strong { color: white; font-weight: 600; }
+        .vf-intro { position: relative; margin-top: -58px; z-index: 2; }
+        .vf-intro-card { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 38px; align-items: center; border: 1px solid var(--line); border-radius: 16px; padding: 34px 38px; background: rgba(255,255,255,.96); box-shadow: 0 22px 55px rgba(7,21,37,.12); }
+        .vf-intro-card p { margin: 0; color: var(--muted); font-size: 1.18rem; line-height: 1.7; }
+        .vf-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .vf-stat { border-left: 3px solid var(--cyan); padding: 10px 0 10px 15px; }
+        .vf-stat strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; }
+        .vf-stat span { color: var(--muted); font-size: .82rem; }
+        .vf-availability { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; margin-top: 24px; padding: 26px 30px; border: 1px solid #b9e8ef; border-radius: 14px; background: linear-gradient(110deg, #e9fbfd, #f8fcfd); }
+        .vf-availability h2 { margin: 0 0 7px; font-size: 1.55rem; letter-spacing: -.025em; }
+        .vf-availability p { max-width: 650px; margin: 0; color: var(--muted); line-height: 1.6; }
+        .vf-platforms { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 390px; }
+        .vf-platform { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #b7dbe1; border-radius: 999px; padding: 8px 11px; background: white; color: #075d73; font-size: .82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        a.vf-platform:hover { border-color: #087ea2; background: #e6faff; color: #075d73; }
+        .vf-platform i { width: 14px; height: 14px; }
+        .vf-main { padding: 120px 0 96px; }
+        .vf-section { margin-bottom: 112px; }
+        .vf-section:last-child { margin-bottom: 0; }
+        .vf-section-heading { max-width: 730px; margin-bottom: 38px; }
+        .vf-label { color: #087ea2; }
+        .vf-section h2 { margin: 12px 0 14px; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.02; letter-spacing: -.045em; }
+        .vf-section-heading > p, .vf-prose { color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+        .vf-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .vf-feature { min-height: 218px; border: 1px solid var(--line); border-radius: 12px; padding: 25px; background: white; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+        .vf-feature:hover { transform: translateY(-5px); border-color: #9bdce8; box-shadow: 0 16px 30px rgba(7,21,37,.08); }
+        .vf-feature-icon { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 23px; border-radius: 9px; background: #e6faff; color: #087ea2; }
+        .vf-feature h3 { margin: 0 0 10px; font-size: 1.2rem; }
+        .vf-feature p { margin: 0; color: var(--muted); font-size: .94rem; line-height: 1.65; }
+        .vf-ide-section { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 42px; align-items: stretch; padding: 42px; border: 1px solid #bfeaf0; border-radius: 16px; background: linear-gradient(135deg, #eafcff 0%, #f8fbfd 58%, #eef5ff 100%); }
+        .vf-ide-section h2 { margin-top: 12px; }
+        .vf-ide-section .vf-prose { margin: 0; }
+        .vf-ide-points { display: grid; gap: 12px; margin: 26px 0 0; }
+        .vf-ide-point { display: flex; gap: 13px; align-items: flex-start; }
+        .vf-ide-point i { flex: 0 0 auto; margin-top: 3px; color: #087ea2; }
+        .vf-ide-point strong { display: block; margin-bottom: 3px; color: var(--ink); }
+        .vf-ide-point span { color: var(--muted); font-size: .93rem; line-height: 1.55; }
+        .vf-example-panel { overflow: hidden; border: 1px solid #18344b; border-radius: 13px; background: #071525; color: white; box-shadow: 0 18px 34px rgba(7,21,37,.16); }
+        .vf-example-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 17px; border-bottom: 1px solid rgba(255,255,255,.12); color: #a9f5ff; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+        .vf-example-dots { display: flex; gap: 5px; }
+        .vf-example-dots span { width: 8px; height: 8px; border-radius: 50%; background: #ffb454; }
+        .vf-example-dots span:nth-child(2) { background: #18c8e8; }
+        .vf-example-dots span:nth-child(3) { background: #77d69b; }
+        .vf-example-code { margin: 0; padding: 22px; color: #d8f6fa; font: .84rem/1.75 Consolas, 'Courier New', monospace; white-space: pre-wrap; }
+        .vf-example-actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 17px; border-top: 1px solid rgba(255,255,255,.12); }
+        .vf-example-action { border: 1px solid rgba(255,255,255,.18); border-radius: 5px; padding: 7px 10px; color: #d4e7ed; font-size: .75rem; }
+        .vf-image-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; align-items: center; }
+        .vf-image-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: #eaf1f5; box-shadow: 0 18px 42px rgba(7,21,37,.11); }
+        .vf-image-frame img { display: block; width: 100%; height: auto; }
+        .vf-image-frame figcaption { padding: 14px 17px; color: #6a7885; font-size: .82rem; line-height: 1.5; background: white; }
+        .vf-checklist { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }
+        .vf-checklist li { display: flex; gap: 12px; align-items: flex-start; color: var(--muted); line-height: 1.55; }
+        .vf-checklist i { flex: 0 0 auto; margin-top: 3px; color: #0b9bb8; }
+        .vf-dark-section { overflow: hidden; border-radius: 16px; padding: 72px 44px; background: #071525; color: white; }
+        .vf-dark-section .vf-section-heading > p, .vf-dark-section .vf-prose { color: #afc0cb; }
+        .vf-dark-section .vf-label { color: #80edf8; }
+        .vf-dark-section h2 { color: white; }
+        .vf-iot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 1180px; }
+        .vf-iot-card { border: 1px solid rgba(255,255,255,.13); border-radius: 12px; padding: 26px; background: rgba(255,255,255,.045); }
+        .vf-iot-card h3 { margin: 0 0 9px; color: #9af3fc; font-size: 1.25rem; }
+        .vf-iot-card p { margin: 0; color: #b8c8d0; line-height: 1.65; }
+        .vf-impact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .vf-impact { border-top: 3px solid var(--cyan); border-radius: 0 0 12px 12px; padding: 27px; background: white; box-shadow: 0 10px 24px rgba(7,21,37,.05); }
+        .vf-impact h3 { margin: 0 0 10px; font-size: 1.35rem; }
+        .vf-impact p { margin: 0; color: var(--muted); line-height: 1.7; }
+        .vf-gallery { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 14px; min-width: 0; }
+        .vf-gallery figure { min-width: 0; overflow: hidden; margin: 0; border-radius: 12px; background: #dfe9ef; }
+        .vf-gallery figure:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+        .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3) { grid-column: span 5; }
+        .vf-gallery figure:nth-child(n+4) { grid-column: span 3; }
+        .vf-gallery img { display: block; width: 100%; height: 100%; min-height: 180px; object-fit: cover; transition: transform .5s ease; }
+        .vf-gallery figure:hover img { transform: scale(1.04); }
+        .vf-media-layout { display: grid; gap: 42px; }
+        .vf-media-group h3 { margin: 0 0 6px; font-size: 1.45rem; }
+        .vf-media-group > p { margin: 0 0 17px; color: var(--muted); line-height: 1.6; }
+        .vf-story-list { display: grid; gap: 26px; }
+        .vf-story { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 34px; align-items: center; padding: 22px; border: 1px solid var(--line); border-radius: 15px; background: white; box-shadow: 0 10px 24px rgba(7,21,37,.05); }
+        .vf-story:nth-child(even) { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); background: #f8fcfd; }
+        .vf-story:nth-child(even) .vf-story-media { order: 2; }
+        .vf-story-media { overflow: hidden; min-width: 0; border-radius: 10px; background: #dfe9ef; }
+        .vf-story-media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .5s ease; }
+        .vf-story:hover .vf-story-media img { transform: scale(1.03); }
+        .vf-story-copy { padding: 10px 12px; }
+        .vf-story-copy h3 { margin: 10px 0 9px; font-size: 1.65rem; }
+        .vf-story-copy p { margin: 0; color: var(--muted); line-height: 1.7; }
+        .vf-story-mobile { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+        .vf-story-mobile:nth-child(even) { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+        .vf-story-mobile .vf-story-media img { aspect-ratio: 9 / 16; max-height: 420px; }
+        .vf-desktop-gallery, .vf-mobile-gallery { display: grid; gap: 14px; }
+        .vf-desktop-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .vf-mobile-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .vf-desktop-gallery figure, .vf-mobile-gallery figure { min-width: 0; overflow: hidden; margin: 0; border: 1px solid var(--line); border-radius: 12px; background: #dfe9ef; }
+        .vf-desktop-gallery img, .vf-mobile-gallery img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+        .vf-desktop-gallery figure { aspect-ratio: 16 / 9; }
+        .vf-mobile-gallery figure { aspect-ratio: 9 / 16; }
+        .vf-desktop-gallery figure:hover img, .vf-mobile-gallery figure:hover img { transform: scale(1.04); }
+        .vf-safety { margin-top: 24px; border-left: 4px solid var(--amber); border-radius: 0 9px 9px 0; padding: 18px 21px; background: #fff8eb; color: #674d26; line-height: 1.65; }
+        .vf-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: center; min-width: 0; padding: 43px; border-radius: 16px; background: linear-gradient(120deg, #0b2b46, #087e9a); color: white; box-shadow: 0 22px 44px rgba(8,126,154,.18); }
+        .vf-cta h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.04em; }
+        .vf-cta p { max-width: 650px; margin: 0; color: #d3f6fa; line-height: 1.65; overflow-wrap: anywhere; }
+        .vf-cta .vf-button { white-space: nowrap; }
+        @media (max-width: 900px) { .vf-intro-card, .vf-image-feature, .vf-cta, .vf-availability, .vf-ide-section, .vf-story, .vf-story:nth-child(even), .vf-story-mobile, .vf-story-mobile:nth-child(even) { grid-template-columns: 1fr; } .vf-feature-grid { grid-template-columns: repeat(2, 1fr); } .vf-platforms { justify-content: flex-start; max-width: none; } .vf-story:nth-child(even) .vf-story-media { order: 0; } .vf-gallery figure:nth-child(1) { grid-column: span 12; grid-row: auto; } .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3) { grid-column: span 6; } .vf-gallery figure:nth-child(n+4) { grid-column: span 4; } .vf-mobile-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        @media (max-width: 620px) { .voltflow-shell { padding: 0 16px; } .vf-hero, .vf-hero-inner { min-height: 650px; } .vf-hero-inner { padding-top: 80px; padding-bottom: 48px; } .vf-hero h1 { font-size: 3.3rem; } .vf-intro-card { padding: 25px 22px; } .vf-availability { padding: 23px 20px; } .vf-ide-section { padding: 26px 21px; } .vf-main { padding-top: 82px; } .vf-section { margin-bottom: 78px; } .vf-feature-grid, .vf-impact-grid, .vf-iot-grid { grid-template-columns: 1fr; } .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3), .vf-gallery figure:nth-child(n+4) { grid-column: span 12; } .vf-gallery img { min-height: 220px; } .vf-desktop-gallery { grid-template-columns: 1fr; } .vf-mobile-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vf-cta { padding: 30px 24px; } }
+        @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+    </style>
+</head>
+<body class="voltflow-page">
+    <custom-navbar></custom-navbar>
+
+    <header class="vf-hero">
+        <div class="voltflow-shell vf-hero-inner">
+            <div class="vf-hero-copy">
+                <span class="vf-kicker">TevrocSoft product story</span>
+                <h1>Build the connected idea.</h1>
+                <p class="vf-hero-lead">VoltFlow brings components, code, simulation, connectivity, schematics, and PCB planning into one electronics design workspace for the next generation of IoT makers.</p>
+                <div class="vf-hero-actions">
+                    <a class="vf-button vf-button-primary" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=windows">Download VoltFlow <i data-feather="arrow-down"></i></a>
+                    <a class="vf-button vf-button-ghost" href="#features">Explore the platform <i data-feather="arrow-down"></i></a>
+                </div>
+                <div class="vf-hero-meta"><span><strong>Arduino</strong> and MicroPython</span><span><strong>Desktop</strong> and mobile ready</span><span><strong>Built for IoT</strong> workflows</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="vf-main">
+        <div class="voltflow-shell">
+            <section class="vf-intro" aria-label="VoltFlow overview">
+                <div class="vf-intro-card">
+                    <p>VoltFlow is TevrocSoft's electronics and IoT design platform for the space between a first idea and a buildable connected device. It helps makers, learners, engineers, and product teams see the circuit, write the behavior, and explain the design in one place.</p>
+                    <div class="vf-stat-grid"><div class="vf-stat"><strong>01</strong><span>Visual circuit canvas</span></div><div class="vf-stat"><strong>02</strong><span>Code-to-circuit workflow</span></div><div class="vf-stat"><strong>03</strong><span>Connected device tools</span></div><div class="vf-stat"><strong>04</strong><span>Project exports</span></div></div>
+                </div>
+                <div class="vf-availability">
+                    <div><h2>Available wherever your build happens.</h2><p>Use VoltFlow in the browser for fast access, or take the workspace to desktop and mobile across Windows, Linux, macOS, iOS, and Android. Select a platform to get its latest release.</p></div>
+                    <div class="vf-platforms" aria-label="VoltFlow platforms"><span class="vf-platform"><i data-feather="globe"></i>Web</span><a class="vf-platform" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=windows"><i data-feather="monitor"></i>Windows</a><a class="vf-platform" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=linux"><i data-feather="terminal"></i>Linux</a><a class="vf-platform" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=macos"><i data-feather="monitor"></i>macOS</a><a class="vf-platform" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=ios"><i data-feather="smartphone"></i>iOS</a><a class="vf-platform" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=android"><i data-feather="smartphone"></i>Android</a></div>
+                </div>
+            </section>
+
+            <section class="vf-section" id="features">
+                <div class="vf-section-heading"><span class="vf-label">The platform</span><h2>Everything you need to make the circuit legible.</h2><p>IoT projects become difficult when hardware, firmware, and documentation live in separate places. VoltFlow keeps the important decisions visible together, from the first component to the behavior you want to test.</p></div>
+                <div class="vf-feature-grid">
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="grid"></i></div><h3>Broad component library</h3><p>Work with resistors, capacitors, LEDs, RGB LEDs, diodes, transistors, potentiometers, switches, batteries, power supplies, motors, servos, breadboards, displays, buzzers, relays, and sensors.</p></article>
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="cpu"></i></div><h3>Microcontroller projects</h3><p>Build around Arduino Uno, Nano, and Mega boards, ESP8266, ESP32, ATtiny85, or Raspberry Pi Pico targets with useful starter code.</p></article>
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="code"></i></div><h3>Arduino C and MicroPython</h3><p>Open a code editor from the circuit, import or export code, reset to a working sketch, and run the logic from the project surface.</p></article>
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="activity"></i></div><h3>Interactive simulation</h3><p>Test pin behavior before hardware is connected. See active components and LEDs, react to switches and motion inputs, and evaluate ultrasonic thresholds.</p></article>
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="terminal"></i></div><h3>Serial and debug visibility</h3><p>Follow serial output from sketches, inspect project behavior in the debug console, and find logic or wiring problems earlier.</p></article>
+                    <article class="vf-feature"><div class="vf-feature-icon"><i data-feather="layers"></i></div><h3>Schematic, PCB, and exports</h3><p>Move between the circuit, schematic view, and PCB view, then export JSON, JavaScript, CSV component data, images, and code files.</p></article>
+                </div>
+            </section>
+
+            <section class="vf-section vf-ide-section" aria-labelledby="inline-ide-title">
+                <div>
+                    <span class="vf-label">The embedded IDE</span>
+                    <h2 id="inline-ide-title">Code where the circuit lives.</h2>
+                    <p class="vf-prose">VoltFlow is more than a circuit canvas. Its inline code editor turns the project into a practical electronics IDE: choose a board, open its code beside the wiring, change the behavior, and run the result without losing the hardware context. For makers who want one place for circuit design, firmware, simulation, and connected-device thinking, VoltFlow is built to be the best all-in-one workspace in the workflow.</p>
+                    <div class="vf-ide-points">
+                        <div class="vf-ide-point"><i data-feather="play-circle"></i><div><strong>Start with working examples</strong><span>Load startup examples for Arduino Uno, Nano, Mega, ESP8266, ESP32, ATtiny85, and Raspberry Pi Pico instead of beginning with a blank file.</span></div></div>
+                        <div class="vf-ide-point"><i data-feather="edit-3"></i><div><strong>Edit inline</strong><span>Adjust Arduino C or MicroPython directly from the selected microcontroller and keep the code tied to the component it controls.</span></div></div>
+                        <div class="vf-ide-point"><i data-feather="repeat"></i><div><strong>Run, reset, import, and export</strong><span>Test an idea, return to its starter sketch, bring in existing code, or export a code file when the project is ready to move forward.</span></div></div>
+                    </div>
+                </div>
+                <div class="vf-example-panel" aria-label="VoltFlow inline code editor example">
+                    <div class="vf-example-bar"><span>Arduino Uno / starter sketch</span><div class="vf-example-dots"><span></span><span></span><span></span></div></div>
+                    <pre class="vf-example-code">void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);
+  Serial.println("LED ON");
+  delay(1000);
+}</pre>
+                    <div class="vf-example-actions"><span class="vf-example-action">Run code</span><span class="vf-example-action">Reset example</span><span class="vf-example-action">Import</span><span class="vf-example-action">Export</span></div>
+                </div>
+            </section>
+
+            <section class="vf-section vf-image-feature">
+                <div>
+                    <span class="vf-label">A familiar workbench</span><h2>Stay close to the circuit as it changes.</h2>
+                    <p class="vf-prose">The component library stays close at hand, the canvas gives a design room to breathe, and tools for wiring, selection, zooming, saving, and debugging remain part of the working surface.</p>
+                    <ul class="vf-checklist"><li><i data-feather="check-circle"></i><span>Search and place components without leaving the project.</span></li><li><i data-feather="check-circle"></i><span>Keep wires, labels, code, and board targets in the same mental model.</span></li><li><i data-feather="check-circle"></i><span>Move from a quick experiment to a project that can be saved and shared.</span></li></ul>
+                </div>
+                <figure class="vf-image-frame"><img src="../img/blogs/voltflow/2026-09-22_135731.png" alt="VoltFlow circuit workspace showing an Arduino and Bluetooth circuit"><figcaption>A connected circuit workspace with an Arduino board, Bluetooth module, and clearly visible wiring.</figcaption></figure>
+            </section>
+
+            <section class="vf-section vf-dark-section">
+                <div class="vf-section-heading"><span class="vf-label">Connected-device workflows</span><h2>Where electronics meets the IoT workflow.</h2><p>VoltFlow is useful at the point where an IoT concept needs to become understandable to more than one specialist. Hardware developers, firmware developers, founders, educators, and product teams can work from the same project reference.</p></div>
+                <div class="vf-iot-grid">
+                    <article class="vf-iot-card"><h3>Bluetooth workflows</h3><p>Discover devices, connect to a target, send messages, and keep Bluetooth behavior close to the circuit project.</p></article>
+                    <article class="vf-iot-card"><h3>GPS workflows</h3><p>Explore GPS detection, device presence, position selection, and sending location data as part of a connected prototype.</p></article>
+                    <article class="vf-iot-card"><h3>SD-card projects</h3><p>Inspect SD-card files and connect storage ideas to the same microcontroller project instead of treating storage as an afterthought.</p></article>
+                    <article class="vf-iot-card"><h3>Project continuity</h3><p>Save projects with metadata, components, wires, and code so experiments can become reusable references for the next build.</p></article>
+                </div>
+            </section>
+
+            <section class="vf-section">
+                <div class="vf-section-heading"><span class="vf-label">Why it matters</span><h2>A more direct path to better IoT prototypes.</h2><p>The IoT industry needs faster experimentation without losing clarity. VoltFlow brings the visual and technical sides of a prototype closer together.</p></div>
+                <div class="vf-impact-grid"><article class="vf-impact"><h3>Shorter prototype cycles</h3><p>Teams spend less time translating between whiteboards, breadboards, firmware notes, and disconnected simulators. A shared workspace helps validate an idea earlier.</p></article><article class="vf-impact"><h3>A shared language</h3><p>A visual project gives engineers, educators, founders, and technical stakeholders a common reference for sensors, power, control logic, communications, and data movement.</p></article><article class="vf-impact"><h3>Better learning and onboarding</h3><p>Learners can see a component, connect it, attach code, run a behavior, and inspect output in one progression that makes embedded concepts easier to approach.</p></article><article class="vf-impact"><h3>More explainable decisions</h3><p>Saved projects and exports make design intent easier to share for handoffs, classroom review, customer demonstrations, and future device maintenance.</p></article></div>
+                <p class="vf-safety"><strong>A responsible place to start:</strong> VoltFlow is a design and simulation workspace, not a replacement for electrical safety review, hardware validation, or production certification. Its value is helping teams reason clearly and iterate earlier before those formal stages.</p>
+            </section>
+
+            <section class="vf-section">
+                <div class="vf-section-heading"><span class="vf-label">Feature stories</span><h2>See what the app makes possible.</h2><p>Every screenshot below is tied to a practical VoltFlow capability, from arranging a circuit to reviewing a project on the move.</p></div>
+                <div class="vf-story-list">
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_135944.png" alt="VoltFlow PCB Design view with board layers and Arduino footprint"></figure><div class="vf-story-copy"><span class="vf-label">PCB Design</span><h3>Turn a circuit into a board conversation.</h3><p>This PCB Design view shows a green prototype board with an Arduino footprint, mounting holes, silkscreen labels, and visible board dimensions. The layer panel separates component graphics, routes, copper layers, and silkscreen, while board settings control width, height, hole radius, title, colors, and prototype information. Auto route and 2D/3D controls make the next hardware step visible without leaving VoltFlow.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_135812.png" alt="VoltFlow component library and circuit canvas"></figure><div class="vf-story-copy"><span class="vf-label">Component discovery</span><h3>Find the building block the idea needs.</h3><p>Searchable component views keep common parts close to the design. Students can learn by trying, while experienced makers can move quickly from a concept to a concrete arrangement.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_140324.png" alt="VoltFlow circuit components and wiring"></figure><div class="vf-story-copy"><span class="vf-label">Wiring and behavior</span><h3>Make signal paths visible before debugging hardware.</h3><p>Clear wiring and component placement help teams reason about inputs, outputs, power, and control logic. That shared visual context is especially valuable when hardware and firmware work in parallel.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_140631.png" alt="VoltFlow board design workspace"></figure><div class="vf-story-copy"><span class="vf-label">Board thinking</span><h3>Move from schematic intent toward a board-ready conversation.</h3><p>Schematic and PCB-oriented views help turn an experiment into something that can be discussed, documented, reviewed, and handed to the next stage of the build.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_140744.png" alt="VoltFlow connected electronics project"></figure><div class="vf-story-copy"><span class="vf-label">Connected prototypes</span><h3>Keep connectivity close to the circuit.</h3><p>Bluetooth, GPS, and storage ideas are easier to discuss when they remain part of the same project. VoltFlow helps a connected-device concept stay connected from the start.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_140920.png" alt="VoltFlow Project AI Assistant planning a circuit task"></figure><div class="vf-story-copy"><span class="vf-label">Project AI Assistant</span><h3>Turn a plain-language goal into an inspectable build plan.</h3><p>The Project AI Assistant can interpret a request such as creating two blinking LEDs, analyze relevant reference projects, and lay out a sequence of approved actions: add the controller, place resistors and LEDs, wire the pins, program the behavior, test the circuit, and inspect simulation and debug output. Permission mode keeps changes reviewable instead of making the design a black box.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_140946.png" alt="VoltFlow electronics design workspace"></figure><div class="vf-story-copy"><span class="vf-label">Desktop workflow</span><h3>Give complex projects the room they deserve.</h3><p>The desktop experience provides space for the canvas, component library, code, and project controls to work together without turning the design into a maze of separate windows.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_152506.png" alt="VoltFlow Arduino Uno R3 inline code editor with SD-card sketch"></figure><div class="vf-story-copy"><span class="vf-label">Focused IDE</span><h3>Build with the circuit and code in the same view.</h3><p>The inline editor is shown here as an Arduino Uno R3 workspace with Arduino C syntax highlighting, line numbers, SPI and SD-card includes, named button pins, session-file logic, and serial logging. Save Code, reset, import, and export actions sit in the editor header, while the footer explains that code can run virtually during simulation and send output to the console. This is the difference between a diagram tool and a practical electronics IDE.</p></div></article>
+                    <article class="vf-story"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154801.png" alt="VoltFlow desktop circuit workspace"></figure><div class="vf-story-copy"><span class="vf-label">Review and handoff</span><h3>Make a technical idea easier to explain.</h3><p>A clear desktop project view gives teammates, educators, and clients a concrete way to review the circuit, ask better questions, and understand what should happen next.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154634.png" alt="VoltFlow mobile circuit view with Arduino and motor driver"></figure><div class="vf-story-copy"><span class="vf-label">Mobile review</span><h3>Carry the project beyond the workbench.</h3><p>The mobile circuit view keeps a real connected design in reach: an Arduino board drives a motor-driver module while colored wires run to a control input, a meter, and a rotary component. The bottom navigation exposes Components, Select, Run, Examples, and Sign in, so a phone can remain useful for reviewing the build, opening examples, and checking the next action.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154723.png" alt="VoltFlow mobile circuit screen"></figure><div class="vf-story-copy"><span class="vf-label">Mobile circuit view</span><h3>Review the important connections at a glance.</h3><p>A compact screen can still keep the circuit’s purpose visible, making it easier to explain a project during a lesson, meeting, or field conversation.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154858.png" alt="VoltFlow mobile project screen"></figure><div class="vf-story-copy"><span class="vf-label">Project continuity</span><h3>Keep saved work close to the next decision.</h3><p>Mobile access supports the project loop beyond creation: revisit an experiment, confirm its direction, and return to the desktop with the context intact.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154859.png" alt="VoltFlow mobile design screen"></figure><div class="vf-story-copy"><span class="vf-label">Responsive design</span><h3>Use the same product language on every screen.</h3><p>VoltFlow is designed to remain recognizable across platforms, so the move from a large workspace to a phone does not mean relearning the product.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_154861.png" alt="VoltFlow mobile electronics screen"></figure><div class="vf-story-copy"><span class="vf-label">Learning anywhere</span><h3>Make embedded ideas easier to share.</h3><p>Mobile views lower the barrier to showing a circuit to a learner, teammate, or client, making electronics work easier to discuss outside a specialist lab.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_155150.png" alt="VoltFlow mobile workspace"></figure><div class="vf-story-copy"><span class="vf-label">Field context</span><h3>Bring the design into the conversation.</h3><p>When project context is available on a mobile device, feedback from the field can return to the same design instead of being lost in disconnected notes.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_155427.png" alt="VoltFlow mobile app workflow"></figure><div class="vf-story-copy"><span class="vf-label">Cross-platform workflow</span><h3>Start on one device and continue on another.</h3><p>VoltFlow’s platform range supports a more flexible rhythm for makers and teams: design where the screen fits the moment, then continue the deeper work later.</p></div></article>
+                    <article class="vf-story vf-story-mobile"><figure class="vf-story-media"><img src="../img/blogs/voltflow/2026-09-22_155428.png" alt="VoltFlow mobile project workflow"></figure><div class="vf-story-copy"><span class="vf-label">A complete IDE experience</span><h3>Keep the idea moving from sketch to system.</h3><p>Across Web, Windows, Linux, macOS, iOS, and Android, VoltFlow is built to keep the circuit, code, and next action close at hand.</p></div></article>
+                </div>
+            </section>
+
+            <section class="vf-cta"><div><span class="vf-label">Start building</span><h2>Make the next connected idea visible.</h2><p>Download VoltFlow and move from components to code, simulation, connectivity, and a clearer handoff for the people who will build what comes next.</p></div><a class="vf-button vf-button-primary" href="https://download.tevrocsoft.co.za/download?app=VoltFlow&platform=windows">Download VoltFlow <i data-feather="arrow-down"></i></a></section>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+    <script>feather.replace();</script>
+    <script src="../script.js"></script>
+</body>
+</html>

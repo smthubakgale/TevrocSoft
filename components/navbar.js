@@ -2,7 +2,14 @@ class CustomNavbar extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: "open" });
 
-    this.ensureHeadMeta();
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    const pageDepth = pathParts.length && /\.[^/]+$/.test(pathParts[pathParts.length - 1])
+      ? pathParts.length - 1
+      : pathParts.length;
+    const assetPrefix = "../".repeat(pageDepth) || "./";
+    this.assetPrefix = assetPrefix;
+
+    this.ensureHeadMeta(assetPrefix);
 
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
@@ -444,7 +451,7 @@ class CustomNavbar extends HTMLElement {
       <div class="nav-shell">
         <header class="topbar">
           <a class="brand" href="index.html">
-            <img src="img/logo.svg" alt="TevrocSoft logo" />
+            <img src="${assetPrefix}img/logo.svg" alt="TevrocSoft logo" />
             <span>TevrocSoft</span>
           </a>
 
@@ -498,7 +505,7 @@ class CustomNavbar extends HTMLElement {
       <aside class="drawer" id="navDrawer" aria-label="Mobile navigation">
         <div class="drawer-top">
           <a class="brand" href="index.html">
-            <img src="img/logo.svg" alt="TevrocSoft logo" />
+            <img src="${assetPrefix}img/logo.svg" alt="TevrocSoft logo" />
             <span>TevrocSoft</span>
           </a>
           <button class="menu-toggle" id="drawerClose" type="button" aria-label="Close menu">
@@ -562,6 +569,7 @@ class CustomNavbar extends HTMLElement {
       </nav>
     `;
 
+    this.resolveLocalLinks();
     this.loadGoogleAnalytics(); 
     this.loadLucide();
     this.setupInteractions();
@@ -629,7 +637,15 @@ class CustomNavbar extends HTMLElement {
     document.head.appendChild(script);
   }
 
-  ensureHeadMeta() {
+  resolveLocalLinks() {
+    this.shadowRoot.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(href)) return;
+      link.setAttribute('href', `${this.assetPrefix}${href.replace(/^\.\//, '')}`);
+    });
+  }
+
+  ensureHeadMeta(assetPrefix = './') {
     if (!document.head) return;
 
     let title = document.head.querySelector('title');
@@ -649,8 +665,8 @@ class CustomNavbar extends HTMLElement {
       }
     };
 
-    addLink('icon', 'img/favicon.png', 'image/x-icon');
-    addLink('shortcut icon', 'img/favicon.png', 'image/x-icon');
+    addLink('icon', `${assetPrefix}img/favicon.png`, 'image/x-icon');
+    addLink('shortcut icon', `${assetPrefix}img/favicon.png`, 'image/x-icon');
   }
 
   setupInteractions() {

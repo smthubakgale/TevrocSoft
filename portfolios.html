@@ -3,166 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps | TevrocSoft</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="img/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
-
-    <meta name="description" content="Explore TevrocSoft apps including ClientFlow, TevrocDev, Tevroc SDK, and Tevroc VPS, with web, mobile, desktop, and offline options.">
-    <meta name="keywords" content="apps showcase, ClientFlow, TevrocDev, Tevroc SDK, Tevroc VPS, desktop apps, mobile apps, offline apps">
+    <title>Apps and Digital Products | TevrocSoft</title>
+    <meta name="description" content="Explore TevrocSoft products and see how custom software can turn business workflows, technical ideas, and data challenges into owned digital products.">
+    <meta name="keywords" content="custom apps, software products, business automation, ClientFlow, VoltFlow, TevrocDev, Tevroc SDK, Tevroc VPS">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://tevrocsoft.co.za/portfolios.html">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Apps | TevrocSoft">
-    <meta property="og:description" content="Explore TevrocSoft apps including ClientFlow, TevrocDev, Tevroc SDK, and Tevroc VPS, with web, mobile, desktop, and offline options.">
-    <meta property="og:url" content="https://tevrocsoft.co.za/portfolios.html">
-    <meta property="og:image" content="https://tevrocsoft.co.za/img/logo.svg">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Apps | TevrocSoft">
-    <meta name="twitter:description" content="Explore TevrocSoft apps including ClientFlow, TevrocDev, Tevroc SDK, and Tevroc VPS, with web, mobile, desktop, and offline options.">
-    <meta name="twitter:image" content="https://tevrocsoft.co.za/img/logo.svg">
-
-    <!-- Stylesheets -->
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="components/navbar.js"></script>
+    <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
-    <script src="components/doctor-card.js"></script>
 </head>
-<body class="portfolio-page bg-gray-50">
+<body class="products-page">
     <custom-navbar></custom-navbar>
 
-    <main class="container mx-auto px-4 py-16 lg:py-24">
-        <section class="portfolio-hero mb-16 overflow-hidden rounded-3xl p-6 shadow-2xl sm:p-10 md:p-14">
-            <div class="grid items-center gap-6 sm:gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10">
-                <div class="text-white">
-                    <span class="inline-flex items-center rounded-full border border-cyan-300/40 bg-white/10 px-4 py-2 text-sm font-medium text-cyan-100">App portfolio</span>
-                    <h1 class="mt-4 max-w-3xl text-3xl font-bold leading-tight sm:mt-6 sm:text-5xl md:text-6xl">Software with a place to go.</h1>
-                    <p class="mt-3 max-w-2xl text-base text-blue-100 sm:mt-4 sm:text-lg">A working collection of products for running teams, building apps, and hosting relational data. Use the web, or take the work offline.</p>
-                    <div class="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
-                        <span class="portfolio-pill rounded-full bg-white/15 px-3 py-2 text-sm sm:px-4">Client portals</span>
-                        <span class="portfolio-pill rounded-full bg-white/15 px-3 py-2 text-sm sm:px-4">Business apps</span>
-                        <span class="portfolio-pill rounded-full bg-white/15 px-3 py-2 text-sm sm:px-4">Workflow platforms</span>
-                        <span class="portfolio-pill rounded-full bg-white/15 px-3 py-2 text-sm sm:px-4">Digital products</span>
-                    </div>
-                </div>
-                <div class="portfolio-feature rounded-2xl border border-white/20 bg-white/10 p-4 backdrop-blur-sm sm:p-5">
-                    <div class="rounded-xl bg-slate-950/60 p-4 sm:p-5">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-cyan-200">Featured delivery</p>
-                                <h2 class="text-2xl font-semibold text-white">Tevroc VPS</h2>
-                            </div>
-                            <span class="rounded-full bg-cyan-400/20 px-3 py-1 text-sm font-medium text-cyan-100">Live now</span>
-                        </div>
-                        <div class="mt-5 space-y-3">
-                            <div class="rounded-lg bg-white/10 p-3">
-                                <p class="text-sm text-blue-100">Relational database hosting for app teams</p>
-                            </div>
-                            <div class="rounded-lg bg-white/10 p-3"><p class="text-sm text-blue-100">Web access plus free offline desktop apps</p></div>
-                            <div class="rounded-lg bg-white/10 p-3"><p class="text-sm text-blue-100">Windows, macOS, Linux, Android, and iOS</p></div>
-                        </div>
-                    </div>
-                </div>
+    <header class="products-hero">
+        <div class="products-shell products-hero-inner">
+            <div class="products-hero-copy">
+                <span class="products-kicker">TevrocSoft product showcase</span>
+                <h1>Software should give your work an advantage.</h1>
+                <p>These products show what happens when a workflow, technical idea, or data problem gets its own focused digital home. We design and build software that fits the way your organization actually works.</p>
+                <div class="products-actions"><a class="products-button products-button-primary" href="contact.html">Request your app <i data-feather="arrow-up-right"></i></a><a class="products-button products-button-ghost" href="#products">Explore our work <i data-feather="arrow-down"></i></a></div>
             </div>
-        </section>
+            <div class="products-hero-panel"><span>What ownership unlocks</span><strong>A system built around your workflow.</strong><p>Less copying between tools. More control over your data, customer experience, automation, and next move.</p><div class="products-hero-line"><i data-feather="check"></i> Your process, your product, your roadmap.</div></div>
+        </div>
+    </header>
 
-        <section class="mb-16">
-            <div class="mx-auto max-w-7xl">
-                <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 justify-items-center">
-                    <div class="portfolio-card w-full max-w-sm">
-                        <custom-doctor-card name="ClientFlow" specialty="Operations Platform" detail="Client portals, scheduling, orders, and workflow automation for service teams." link="app-clientflow.html" image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
-                    </div>
-                    <div class="portfolio-card w-full max-w-sm">
-                        <custom-doctor-card name="TevrocDev" specialty="Product & App Platform" detail="A product workspace for shaping ideas, workflows, and launch plans." link="app-tevrocdev.html" image="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
-                    </div>
-                    <div class="portfolio-card w-full max-w-sm">
-                        <custom-doctor-card name="Tevroc SDK" specialty="JavaScript Library" detail="A JavaScript foundation for auth, data, files, integrations, and offline-first apps." link="app-tevrocsdk.html" image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
-                    </div>
-                    <div class="portfolio-card portfolio-card-featured w-full max-w-sm">
-                        <custom-doctor-card name="Tevroc VPS" specialty="Relational Database Platform" detail="In-house database hosting with web access and free offline desktop apps for development." link="app-tevrocvps.html" image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80"></custom-doctor-card>
-                    </div>
+    <main class="products-main" id="products">
+        <div class="products-shell">
+            <section class="products-intro"><div><span class="products-label">Why own the app?</span><h2>Turn the way you work into an asset.</h2></div><p>Off-the-shelf software can be useful, but it often makes your team adapt to someone else’s assumptions. A custom app lets you shape the workflow, capture the right data, automate the repetitive parts, and keep improving the product as your business grows.</p></section>
+
+            <section class="benefits-grid"><article><i data-feather="sliders"></i><h3>Fit the real workflow</h3><p>Design screens, permissions, statuses, reports, and automations around the work your team already understands.</p></article><article><i data-feather="database"></i><h3>Own the operating data</h3><p>Keep the information that drives your decisions organized, connected, and available to the people who need it.</p></article><article><i data-feather="zap"></i><h3>Remove repeated work</h3><p>Replace spreadsheets, message chasing, duplicate capture, and manual handoffs with one dependable flow.</p></article><article><i data-feather="trending-up"></i><h3>Build a product that grows</h3><p>Start with the highest-value workflow and keep adding capabilities as your customers, team, and market develop.</p></article></section>
+
+            <section class="product-section">
+                <div class="section-heading"><span class="products-label">Existing products</span><h2>Different problems. The same product discipline.</h2><p>Our portfolio spans business operations, electronics, developer infrastructure, and relational data. Each product is a working example of turning a specific need into a clearer experience.</p></div>
+                <div class="product-stories">
+                    <article class="product-story product-story-wide"><div class="product-story-media"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85" alt="ClientFlow operations dashboard"></div><div class="product-story-copy"><span class="products-label">Operations platform</span><h3>ClientFlow keeps service work moving.</h3><p>ClientFlow brings client portals, scheduling, orders, inventory, invoicing, delivery, and team coordination into a connected operations experience.</p><ul><li>One source of truth for customer and job information</li><li>Clearer handoffs between office and field teams</li><li>Less administration across everyday service delivery</li></ul><a href="app-clientflow.html">Explore ClientFlow <i data-feather="arrow-up-right"></i></a></div></article>
+                    <article class="product-story"><div class="product-story-media"><img src="img/blogs/voltflow/voltflow-poster.png" alt="VoltFlow electronics design workspace"></div><div class="product-story-copy"><span class="products-label">Electronics and IoT IDE</span><h3>VoltFlow makes connected ideas buildable.</h3><p>From circuit canvas and inline code to simulation, Bluetooth, GPS, PCB planning, and project exports, VoltFlow gives electronics work a place to become a product.</p><a href="blogs/voltflow.html">Read the VoltFlow story <i data-feather="arrow-up-right"></i></a></div></article>
+                    <article class="product-story"><div class="product-story-media"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85" alt="TevrocDev product workspace"></div><div class="product-story-copy"><span class="products-label">Product and app platform</span><h3>TevrocDev helps shape what comes next.</h3><p>A product workspace for turning early ideas into clearer requirements, workflows, decisions, and launch plans.</p><a href="app-tevrocdev.html">Explore TevrocDev <i data-feather="arrow-up-right"></i></a></div></article>
+                    <article class="product-story"><div class="product-story-media"><img src="img/blogs/tevrocsdk/TevrocSDK_Poster_720x1080.png" alt="Tevroc SDK npm developer package"></div><div class="product-story-copy"><span class="products-label">Developer tool</span><h3>Tevroc SDK gives apps a shared foundation.</h3><p>The public npm package provides one JavaScript client for authentication, entities, files, integrations, payments, native persistence, and offline support.</p><a href="app-tevrocsdk.html">View the SDK package <i data-feather="arrow-up-right"></i></a></div></article>
+                    <article class="product-story product-story-wide"><div class="product-story-media"><img src="img/blogs/tevrocvps/tevroc_vps_poster.png" alt="Tevroc VPS relational database platform"></div><div class="product-story-copy"><span class="products-label">Relational data platform</span><h3>Tevroc VPS gives app data a proper home.</h3><p>Secure access, collaboration, capacity plans, payments, operational logs, schema tools, entity navigation, web access, and offline desktop workflows come together for app teams.</p><ul><li>Relational structure for real business domains</li><li>Shared workspaces and visible operational activity</li><li>Web access plus free Windows, macOS, and Linux desktop workflows</li></ul><a href="app-tevrocvps.html">Explore Tevroc VPS <i data-feather="arrow-up-right"></i></a></div></article>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="mb-16 bg-gradient-to-r from-blue-700 to-sky-500 text-white rounded-xl p-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Have a product in mind?</h2>
-            <p class="text-xl mb-6 max-w-2xl mx-auto">Bring us the workflow, the data problem, or the rough idea. We can shape the right web, mobile, desktop, or offline experience.</p>
-            <a href="contact.html" class="inline-block bg-white text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-lg font-medium text-center transition duration-300">Start a Project</a>
-        </section>
+            <section class="decision-section"><div><span class="products-label">A better starting point</span><h2>Do not start with a feature list. Start with the friction.</h2><p>The best custom app is not the one with the most buttons. It is the one that removes the most expensive confusion from your day: missed handoffs, lost context, duplicate admin, slow decisions, or data you cannot trust.</p></div><div class="decision-steps"><div><strong>01</strong><span>Map the work</span></div><div><strong>02</strong><span>Choose the highest-value workflow</span></div><div><strong>03</strong><span>Build, test, and improve</span></div></div></section>
+
+            <section class="products-cta"><div><span class="products-label">Your product could be next</span><h2>Bring us the workflow you want to own.</h2><p>Tell us what your team is doing manually, what your customers struggle to access, or what your next product needs to make possible.</p></div><a class="products-button products-button-primary" href="contact.html">Start a project <i data-feather="arrow-up-right"></i></a></section>
+        </div>
     </main>
 
-    <style>
-        .portfolio-page { font-family: 'DM Sans', sans-serif; background: #f5f7fb !important; color: #122033; }
-        .portfolio-page h1, .portfolio-page h2, .portfolio-page h3 { font-family: 'Space Grotesk', sans-serif; }
-        .portfolio-hero { background: radial-gradient(circle at 85% 18%, rgba(45,212,191,.34), transparent 28%), linear-gradient(125deg, #07111f 0%, #123568 62%, #0891b2 100%); position: relative; isolation: isolate; animation: heroEnter .8s ease both; }
-        .portfolio-hero:before { content: ''; position: absolute; inset: 10% 14% auto auto; width: 14rem; height: 14rem; border: 1px solid rgba(255,255,255,.2); border-radius: 50%; box-shadow: 0 0 0 24px rgba(255,255,255,.035), 0 0 0 48px rgba(255,255,255,.025); animation: orbitPulse 8s ease-in-out infinite; pointer-events: none; z-index: -1; }
-        .portfolio-hero:after { content: ''; position: absolute; inset: auto -8% -42% 45%; height: 70%; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; transform: rotate(-12deg); animation: heroSweep 12s ease-in-out infinite alternate; pointer-events: none; }
-        .portfolio-hero h1 { animation: titleReveal .75s .12s ease both; }
-        .portfolio-hero p { animation: titleReveal .75s .22s ease both; }
-        .portfolio-pill { border: 1px solid rgba(255,255,255,.12); transition: background .25s ease, transform .25s ease, border-color .25s ease; animation: pillReveal .6s ease both; }
-        .portfolio-pill:nth-child(2) { animation-delay: .08s; }
-        .portfolio-pill:nth-child(3) { animation-delay: .16s; }
-        .portfolio-pill:nth-child(4) { animation-delay: .24s; }
-        .portfolio-pill:hover { background: rgba(255,255,255,.26); border-color: rgba(255,255,255,.4); transform: translateY(-3px); }
-        .portfolio-feature { animation: featureFloat 6s ease-in-out infinite; transition: transform .35s ease, box-shadow .35s ease; }
-        .portfolio-feature:hover { transform: translateY(-8px) rotate(.5deg); box-shadow: 0 24px 60px rgba(2, 6, 23, .3); }
-        .portfolio-card { opacity: 0; animation: portfolioRise .65s ease forwards; transition: transform .35s ease, filter .35s ease; }
-        .portfolio-card:hover { transform: translateY(-8px); filter: saturate(1.08); }
-        .portfolio-card-featured { animation-delay: .24s; }
-        .portfolio-grid { align-items: start; }
-        .portfolio-grid .portfolio-card:nth-child(2) { transform: translateY(2rem); }
-        .portfolio-grid .portfolio-card:nth-child(3) { transform: translateY(-.75rem); }
-        .portfolio-grid .portfolio-card:nth-child(4) { transform: translateY(1.25rem); }
-        .portfolio-grid .portfolio-card:nth-child(2):hover,
-        .portfolio-grid .portfolio-card:nth-child(3):hover,
-        .portfolio-grid .portfolio-card:nth-child(4):hover { transform: translateY(0) scale(1.02); }
-        .portfolio-grid .portfolio-card:nth-child(1) custom-doctor-card,
-        .portfolio-grid .portfolio-card:nth-child(4) custom-doctor-card { min-height: 30rem; }
-        .portfolio-grid .portfolio-card:nth-child(2) custom-doctor-card,
-        .portfolio-grid .portfolio-card:nth-child(3) custom-doctor-card { min-height: 25rem; }
-        .portfolio-page custom-doctor-card { display: block; height: 100%; }
-        .portfolio-page custom-doctor-card::part(card) { height: 100%; }
-        .portfolio-page .mb-16:last-of-type { transition: transform .35s ease, box-shadow .35s ease; }
-        .portfolio-page .mb-16:last-of-type:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(30, 64, 175, .25); }
-        @keyframes heroEnter { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes titleReveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pillReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes orbitPulse { 0%, 100% { transform: translate(0, 0) scale(1); opacity: .55; } 50% { transform: translate(-14px, 10px) scale(1.08); opacity: .9; } }
-        @keyframes heroSweep { from { transform: translateX(-3%) rotate(-12deg); } to { transform: translateX(4%) rotate(-7deg); } }
-        @keyframes featureFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        @keyframes portfolioRise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
-        @media (min-width: 1280px) {
-            .portfolio-grid .portfolio-card:nth-child(1),
-            .portfolio-grid .portfolio-card:nth-child(4) { grid-column: span 2; max-width: none; }
-            .portfolio-grid .portfolio-card:nth-child(1) custom-doctor-card,
-            .portfolio-grid .portfolio-card:nth-child(4) custom-doctor-card { display: grid; grid-template-columns: .85fr 1.15fr; }
-        }
-        @media (max-width: 1279px) {
-            .portfolio-grid .portfolio-card:nth-child(n) { transform: none; }
-            .portfolio-grid .portfolio-card:nth-child(n):hover { transform: translateY(-8px) scale(1.01); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .portfolio-page *, .portfolio-page *::before, .portfolio-page *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-            .portfolio-card { opacity: 1; }
-            .portfolio-grid .portfolio-card:nth-child(n) { transform: none; }
-        }
-    </style>
-
     <custom-footer></custom-footer>
-
+    <style>
+        .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+        .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .benefits-grid article, .product-story, .decision-steps div { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, background-color .3s ease; }
+        .benefits-grid article:hover { transform: translateY(-7px); border-color: #9bdce8; box-shadow: 0 18px 32px rgba(7,21,37,.1); }
+        .product-story:hover { transform: translateY(-6px); border-color: #9bdce8; box-shadow: 0 20px 36px rgba(7,21,37,.11); }
+        .product-story .product-story-media { overflow: hidden; }
+        .product-story .product-story-media img { transition: transform .55s ease, filter .35s ease; }
+        .product-story:hover .product-story-media img { transform: scale(1.045); filter: saturate(1.08); }
+        .product-story a { transition: gap .25s ease, color .25s ease; }
+        .product-story a:hover { gap: 13px; color: #1675e8; }
+        .decision-steps div:hover { transform: translateX(6px); border-color: #9bdce8; box-shadow: 0 10px 22px rgba(7,21,37,.08); }
+        .products-cta { transition: transform .3s ease, box-shadow .3s ease; }
+        .products-cta:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(8,126,154,.2); }
+        @media (prefers-reduced-motion: reduce) { .scroll-reveal { opacity: 1; transform: none; transition: none; } .benefits-grid article, .product-story, .decision-steps div, .products-cta { transition: none; } .product-story:hover .product-story-media img { transform: none; } }
+    </style>
+    <style>
+        :root { --ink:#071525; --muted:#536274; --line:#dbe5ed; --cyan:#18c8e8; --blue:#1675e8; --paper:#f4f8fb; }
+        * { box-sizing:border-box; } body.products-page { margin:0; overflow-x:hidden; background:var(--paper); color:var(--ink); font-family:'DM Sans',sans-serif; } .products-page h1,.products-page h2,.products-page h3 { font-family:'Space Grotesk',sans-serif; letter-spacing:0; }
+        .products-shell { max-width:1240px; margin:0 auto; padding:0 24px; } .products-hero { min-height:680px; display:flex; align-items:end; overflow:hidden; color:white; background:radial-gradient(circle at 84% 18%,rgba(45,212,191,.3),transparent 25%),linear-gradient(115deg,#061321,#123568 62%,#087e9a); } .products-hero-inner { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.7fr); gap:70px; align-items:end; width:100%; padding:100px 0 70px; } .products-kicker,.products-label { color:#087ea2; font-size:.74rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; } .products-kicker { color:#9af3fc; } .products-hero h1 { max-width:780px; margin:18px 0; font-size:clamp(3rem,7vw,6.5rem); line-height:.94; letter-spacing:-.055em; } .products-hero-copy > p { max-width:680px; color:#d9edf2; font-size:1.3rem; line-height:1.6; } .products-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; } .products-button { display:inline-flex; align-items:center; gap:9px; padding:13px 18px; border-radius:7px; font-weight:700; text-decoration:none; transition:transform .2s,background .2s; } .products-button:hover { transform:translateY(-3px); } .products-button-primary { background:var(--cyan); color:#031321; } .products-button-ghost { border:1px solid rgba(255,255,255,.35); color:white; } .products-hero-panel { padding:25px; border:1px solid rgba(255,255,255,.2); border-radius:14px; background:rgba(255,255,255,.08); backdrop-filter:blur(16px); } .products-hero-panel span { color:#9af3fc; font-size:.78rem; text-transform:uppercase; letter-spacing:.16em; } .products-hero-panel strong { display:block; margin:12px 0; font-size:1.65rem; } .products-hero-panel p { color:#c8e2e8; line-height:1.6; } .products-hero-line { display:flex; gap:9px; align-items:center; margin-top:22px; color:#dffbff; font-size:.9rem; } .products-main { padding:100px 0 90px; } .products-intro { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:60px; align-items:end; } .products-intro h2,.section-heading h2,.decision-section h2,.products-cta h2 { margin:11px 0 0; font-size:clamp(2.2rem,4vw,3.8rem); line-height:1.02; letter-spacing:-.045em; } .products-intro > p,.section-heading > p,.decision-section p,.products-cta p { margin:0; color:var(--muted); font-size:1.08rem; line-height:1.75; } .benefits-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; margin-top:45px; } .benefits-grid article { min-height:205px; padding:24px; border:1px solid var(--line); border-radius:12px; background:white; box-shadow:0 10px 24px rgba(7,21,37,.05); } .benefits-grid i { color:#087ea2; } .benefits-grid h3 { margin:22px 0 9px; font-size:1.15rem; } .benefits-grid p { margin:0; color:var(--muted); line-height:1.6; font-size:.94rem; } .product-section { margin-top:110px; } .section-heading { max-width:760px; margin-bottom:35px; } .product-stories { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } .product-story { overflow:hidden; border:1px solid var(--line); border-radius:15px; background:white; box-shadow:0 12px 28px rgba(7,21,37,.06); } .product-story-wide { grid-column:span 2; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); } .product-story-media { min-height:265px; background:#dfe9ef; } .product-story-media img { display:block; width:100%; height:100%; min-height:265px; object-fit:cover; } .product-story-copy { padding:30px; } .product-story-copy h3 { margin:10px 0 12px; font-size:1.75rem; } .product-story-copy p { margin:0; color:var(--muted); line-height:1.7; } .product-story-copy ul { margin:18px 0 0; padding-left:19px; color:var(--muted); line-height:1.8; } .product-story-copy a { display:inline-flex; align-items:center; gap:7px; margin-top:22px; color:#087ea2; font-weight:700; text-decoration:none; } .decision-section { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.8fr); gap:50px; align-items:center; margin-top:110px; padding:48px; border-radius:16px; background:#e8faff; border:1px solid #b9e8ef; } .decision-steps { display:grid; gap:12px; } .decision-steps div { display:flex; align-items:center; gap:15px; padding:17px; border:1px solid #b9e8ef; border-radius:9px; background:white; } .decision-steps strong { color:#087ea2; font-size:1.3rem; } .decision-steps span { color:var(--muted); font-weight:600; } .products-cta { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:35px; align-items:center; margin-top:110px; padding:45px; border-radius:16px; background:linear-gradient(120deg,#0b2b46,#087e9a); color:white; } .products-cta h2 { color:white; } .products-cta p { max-width:650px; margin-top:15px; color:#d3f6fa; } .products-cta .products-label { color:#9af3fc; } @media(max-width:900px){.products-hero-inner,.products-intro,.decision-section,.products-cta{grid-template-columns:1fr}.benefits-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-story-wide{grid-column:span 2}.products-hero-panel{max-width:500px}} @media(max-width:620px){.products-shell{padding:0 16px}.products-hero{min-height:650px}.products-main{padding-top:78px}.benefits-grid,.product-stories{grid-template-columns:1fr}.product-story-wide{grid-column:auto;display:block}.decision-section,.products-cta{padding:28px 22px}.product-story-copy{padding:24px}}
+    </style>
+    <style>
+        /* The portfolio hero uses a catalog-like visual language, separate from the editorial blog heroes. */
+        .products-hero { min-height: 590px; color: #071525; background: #eaf7fb; border-bottom: 1px solid #b9e8f5; position: relative; isolation: isolate; }
+        .products-hero:before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .65; background-image: linear-gradient(#b9e8f5 1px, transparent 1px), linear-gradient(90deg, #b9e8f5 1px, transparent 1px); background-size: 46px 46px; mask-image: linear-gradient(90deg, black, transparent 78%); }
+        .products-hero:after { content: 'TEVROCSOFT / PRODUCTS'; position: absolute; top: 32px; right: 32px; color: #1675e8; font: 700 .7rem/1 'DM Sans', sans-serif; letter-spacing: .2em; transform: rotate(90deg) translateX(100%); transform-origin: top right; }
+        .products-hero-inner { min-height: 590px; grid-template-columns: minmax(0, 1fr) minmax(300px, .62fr); align-items: center; padding-top: 70px; padding-bottom: 55px; }
+        .products-kicker { display: inline-flex; align-items: center; gap: 10px; color: #087ea2; }
+        .products-kicker:before { content: ''; width: 34px; height: 2px; background: #18c8e8; }
+        .products-hero h1 { max-width: 760px; color: #071525; font-size: clamp(3.4rem, 7vw, 6.8rem); letter-spacing: -.065em; }
+        .products-hero-copy > p { max-width: 650px; color: #536274; }
+        .products-button-primary { background: #071525; color: #fff; box-shadow: 5px 5px 0 #55c7ee; }
+        .products-button-primary:hover { background: #1675e8; color: #fff; }
+        .products-button-ghost { border: 1px solid #7fcfe3; color: #075d73; background: rgba(255,255,255,.55); }
+        .products-button-ghost:hover { background: #fff; color: #075d73; }
+        .products-hero-panel { position: relative; overflow: hidden; max-width: 390px; justify-self: end; padding: 32px; border: 1px solid #9bdce8; border-radius: 0; background: #fff; box-shadow: 14px 14px 0 #b9e8f5; backdrop-filter: none; transform: rotate(2deg); }
+        .products-hero-panel:before { content: ''; position: absolute; top: 0; right: 0; width: 95px; height: 95px; border-left: 1px solid #b9e8f5; border-bottom: 1px solid #b9e8f5; background: #eaf7fb; }
+        .products-hero-panel span { position: relative; color: #087ea2; font-size: .72rem; }
+        .products-hero-panel strong { position: relative; color: #071525; font-size: 1.85rem; line-height: 1.05; }
+        .products-hero-panel p { position: relative; color: #536274; line-height: 1.65; }
+        .products-hero-line { position: relative; color: #075d73; font-weight: 700; }
+        @media (max-width: 900px) { .products-hero-inner { min-height: 650px; } .products-hero-panel { justify-self: start; transform: rotate(0); } .products-hero:after { display: none; } }
+        @media (max-width: 620px) { .products-hero-inner { min-height: 690px; padding-top: 80px; } .products-hero-panel { padding: 25px; box-shadow: 8px 8px 0 #b9e8f5; } }
+    </style>
     <script>
-        feather.replace();
+        if (window.feather) window.feather.replace();
+
+        const revealItems = document.querySelectorAll('.products-intro, .benefits-grid article, .product-section, .product-story, .decision-section, .products-cta');
+        revealItems.forEach((item, index) => {
+            item.classList.add('scroll-reveal');
+            item.style.transitionDelay = `${Math.min(index * 55, 330)}ms`;
+        });
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            revealItems.forEach((item) => item.classList.add('is-visible'));
+        } else if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+            revealItems.forEach((item) => revealObserver.observe(item));
+        } else {
+            revealItems.forEach((item) => item.classList.add('is-visible'));
+        }
     </script>
     <script src="script.js"></script>
 </body>

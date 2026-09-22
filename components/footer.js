@@ -1,6 +1,11 @@
 class CustomFooter extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const pageDepth = pathParts.length && /\.[^/]+$/.test(pathParts[pathParts.length - 1])
+      ? pathParts.length - 1
+      : pathParts.length;
+    this.assetPrefix = '../'.repeat(pageDepth) || './';
     this.shadowRoot.innerHTML = `
       <style>
         :host {
@@ -119,7 +124,7 @@ class CustomFooter extends HTMLElement {
           <div>
             <h4>Quick Links</h4>
             <ul>
-              <li><a class="footer-link" href="/"><i data-feather="chevron-right"></i> Home</a></li>
+              <li><a class="footer-link" href="index.html"><i data-feather="chevron-right"></i> Home</a></li>
               <li><a class="footer-link" href="about.html"><i data-feather="chevron-right"></i> About</a></li>
               <li><a class="footer-link" href="services.html"><i data-feather="chevron-right"></i> Services</a></li>
               <li><a class="footer-link" href="portfolios.html"><i data-feather="chevron-right"></i> Portfolio</a></li>
@@ -195,6 +200,16 @@ class CustomFooter extends HTMLElement {
         feather.replace();
       </script>
     `;
+
+    this.resolveLocalLinks();
+  }
+
+  resolveLocalLinks() {
+    this.shadowRoot.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(href)) return;
+      link.setAttribute('href', `${this.assetPrefix}${href.replace(/^\.\//, '')}`);
+    });
   }
 }
 
