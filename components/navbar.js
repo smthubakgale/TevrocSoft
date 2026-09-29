@@ -472,6 +472,7 @@ class CustomNavbar extends HTMLElement {
                   </button>
                   <div class="submenu-links" id="policies-submenu">
                     <a href="privacy.html">Privacy Policy</a>
+                    <a href="data-subject-rights.html">Data Subject Rights</a>
                     <a href="refund.html">Refund Policy</a>
                     <a href="terms.html">Terms & Conditions</a>
                     <a href="cookies.html">Cookie Policy</a>
@@ -536,6 +537,7 @@ class CustomNavbar extends HTMLElement {
               </button>
               <div class="drawer-submenu-links" id="drawer-policies">
                 <a class="drawer-link" href="privacy.html">Privacy Policy</a>
+                <a class="drawer-link" href="data-subject-rights.html">Data Subject Rights</a>
                 <a class="drawer-link" href="refund.html">Refund Policy</a>
                 <a class="drawer-link" href="terms.html">Terms & Conditions</a>
                 <a class="drawer-link" href="cookies.html">Cookie Policy</a>

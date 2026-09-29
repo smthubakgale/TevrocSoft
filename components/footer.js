@@ -138,6 +138,7 @@ class CustomFooter extends HTMLElement {
             <ul>
               <li><a class="footer-link" href="terms.html"><i data-feather="chevron-right"></i> Terms &amp; Conditions</a></li>
               <li><a class="footer-link" href="privacy.html"><i data-feather="chevron-right"></i> Privacy / POPIA</a></li>
+              <li><a class="footer-link" href="data-subject-rights.html"><i data-feather="chevron-right"></i> Data Subject Rights</a></li>
               <li><a class="footer-link" href="refund.html"><i data-feather="chevron-right"></i> Refund &amp; Cancellation</a></li>
               <li><a class="footer-link" href="cookies.html"><i data-feather="chevron-right"></i> Cookie Policy</a></li>
             </ul>
