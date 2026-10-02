@@ -17,6 +17,7 @@
     <meta name="twitter:description" content="Read TevrocSoft insights on software development, digital design, and business automation for South African companies.">
     <meta name="twitter:image" content="https://tevrocsoft.co.za/img/logo.svg">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/blogs.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -24,12 +25,12 @@
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 blogs-page">
     <custom-navbar></custom-navbar>
 
     <main class="container mx-auto px-4 py-20">
         <!-- Blog Hero -->
-        <section class="mb-16 text-center relative overflow-hidden rounded-3xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');">
+        <section class="blogs-hero mb-16 text-center relative overflow-hidden rounded-3xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');">
             <div class="absolute inset-0 bg-sky-900/70"></div>
             <div class="relative px-6 py-24 md:py-32">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Insights & Digital Thinking</h1>
@@ -38,8 +39,8 @@
         </section>
 
         <!-- Featured Post -->
-        <section class="mb-16">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <section class="featured-section mb-16">
+            <div class="featured-post bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="md:w-1/2">
                         <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="ClientFlow business dashboard" class="w-full h-full object-cover">
@@ -65,60 +66,49 @@
         </section>
 
         <!-- Blog Categories -->
-        <section class="mb-16">
+        <section class="categories-section mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">Browse by Category</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <button type="button" data-category="all" aria-pressed="true" class="blog-category is-active bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-feather="grid" class="text-blue-600"></i>
+                    </div>
+                    <h3 class="font-medium">All Articles</h3>
+                </button>
+                <button type="button" data-category="product-design" aria-pressed="false" class="blog-category bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
                     <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                         <i data-feather="layout" class="text-blue-600"></i>
                     </div>
                     <h3 class="font-medium">Product Design</h3>
-                </a>
-                <a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
+                </button>
+                <button type="button" data-category="development" aria-pressed="false" class="blog-category bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
                     <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                         <i data-feather="code" class="text-blue-600"></i>
                     </div>
                     <h3 class="font-medium">Development</h3>
-                </a>
-                <a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
+                </button>
+                <button type="button" data-category="growth" aria-pressed="false" class="blog-category bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
                     <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                         <i data-feather="bar-chart-2" class="text-blue-600"></i>
                     </div>
                     <h3 class="font-medium">Growth</h3>
-                </a>
-                <a href="#" class="bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
+                </button>
+                <button type="button" data-category="automation" aria-pressed="false" class="blog-category bg-white rounded-lg shadow-sm p-6 text-center hover:shadow-md transition duration-300">
                     <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                         <i data-feather="zap" class="text-blue-600"></i>
                     </div>
                     <h3 class="font-medium">Automation</h3>
-                </a>
+                </button>
             </div>
         </section>
 
         <!-- Recent Articles -->
-        <section class="mb-16">
+        <section class="recent-section mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">Recent Articles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Article: VoltFlow Microsoft Store announcement -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                    <img src="img/blogs/voltflow/voltflow-poster.png" alt="VoltFlow electronics design workspace now available in the Microsoft Store" class="w-full h-48 object-cover object-top">
-                    <div class="p-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-2">
-                            <span>September 22, 2026</span>
-                            <span class="mx-2">•</span>
-                            <span>3 min read</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">VoltFlow for Windows Is Now in the Microsoft Store</h3>
-                        <p class="text-gray-600 mb-4">VoltFlow is now available for Windows through the Microsoft Store. Find the app, open its Store page, and explore the connected electronics design workspace.</p>
-                        <a href="blogs/voltflow-windows-store.html" class="text-cyan-700 font-medium flex items-center">
-                            Read the announcement
-                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
+            <p id="blog-filter-status" class="text-center text-sm text-gray-500 mb-5" role="status" aria-live="polite">Showing all 11 articles</p>
+            <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Article: VoltFlow -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article blog-card-lead relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="product-design development">
                     <img src="img/blogs/voltflow/voltflow-poster.png" alt="VoltFlow electronics design platform" class="w-full h-48 object-cover object-top">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -137,8 +127,44 @@
                     </div>
                 </div>
 
+                <!-- Article: VoltFlow on Huawei AppGallery -->
+                <div class="blog-article blog-card-store relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="product-design development">
+                    <img src="img/blogs/voltflow/voltflow_huawei_poster.jpeg" alt="VoltFlow is now available on Huawei AppGallery" class="h-80 sm:h-96 w-full object-contain bg-slate-950">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>October 2, 2026</span>
+                            <span class="mx-2">•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">VoltFlow is now on Huawei AppGallery</h3>
+                        <p class="text-gray-600 mb-4">VoltFlow is now available to Huawei users through AppGallery, bringing its electronics design workspace for circuits, code, simulation, and connected-device projects to another mobile platform.</p>
+                        <a href="blogs/voltflow-huawei-appgallery.html" class="text-cyan-700 font-medium flex items-center">
+                            Read More
+                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article: VoltFlow on Microsoft Store -->
+                <div class="blog-article blog-card-store relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="product-design development">
+                    <img src="img/blogs/voltflow/voltflow_microsoft_poster.jpeg" alt="VoltFlow is available on Microsoft Store for Windows" class="h-80 sm:h-96 w-full object-contain bg-slate-950">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>September 22, 2026</span>
+                            <span class="mx-2">•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">VoltFlow arrives on Microsoft Store</h3>
+                        <p class="text-gray-600 mb-4">The Windows edition of VoltFlow is available on Microsoft Store, making it easier to install the electronics design workspace for circuit planning, embedded code, simulation, and IoT projects.</p>
+                        <a href="blogs/voltflow-microsoft-store.html" class="text-cyan-700 font-medium flex items-center">
+                            Read More
+                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Article: AI Chatbots -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="automation growth">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="AI chatbot support and automation" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -156,7 +182,7 @@
                 </div>
 
                 <!-- Article: VPS Hosting -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="VPS hosting and cloud infrastructure" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -174,7 +200,7 @@
                 </div>
 
                 <!-- Article 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article blog-card-wide relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development growth automation">
                     <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="ClientFlow business platform" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -192,7 +218,7 @@
                 </div>
 
                 <!-- Article 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development growth">
                     <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="TevrocDev tech and tools workspace" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -210,8 +236,8 @@
                 </div>
 
                 <!-- Article 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                    <img src="img/blogs/tevrocsdk/TevrocSDK_Poster_720x1080.png" alt="TevrocSDK unified developer SDK poster" class="w-full h-48 object-cover object-top">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development">
+                    <img src="img/blogs/tevrocsdk/TevrocSDK_Poster_720x1080.png" alt="TevrocSDK unified developer SDK poster" class="h-80 sm:h-96 w-full object-contain bg-slate-950">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <span>August 8, 2026</span>
@@ -228,8 +254,8 @@
                 </div>
 
                 <!-- Article: Tevroc VPS -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                    <img src="img/blogs/tevrocvps/tevroc_vps_poster.png" alt="Tevroc VPS deploy host scale poster" class="w-full h-48 object-cover object-top">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development">
+                    <img src="img/blogs/tevrocvps/tevroc_vps_poster.png" alt="Tevroc VPS deploy host scale poster" class="h-80 sm:h-96 w-full object-contain bg-slate-950">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2"><span>September 5, 2026</span><span class="mx-2">•</span><span>8 min read</span></div>
                         <h3 class="text-xl font-bold mb-3">Tevroc VPS: Relational database hosting for app builders</h3>
@@ -239,7 +265,7 @@
                 </div>
 
                 <!-- Article 4 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development growth">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Development process" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -257,7 +283,7 @@
                 </div>
 
                 <!-- Article 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                <div class="blog-article blog-card-outro relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="growth">
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Growth strategy planning" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
@@ -277,7 +303,7 @@
         </section>
 
         <!-- Newsletter -->
-        <section class="bg-gradient-to-r from-blue-700 to-sky-500 text-white rounded-xl p-8 text-center">
+        <section class="newsletter-section bg-gradient-to-r from-blue-700 to-sky-500 text-white rounded-xl p-8 text-center">
             <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
             <p class="text-xl mb-6 max-w-2xl mx-auto">Subscribe to our newsletter for the latest product thinking, launch updates, and digital strategy ideas.</p>
             <form class="max-w-md mx-auto flex flex-col gap-3 sm:flex-row">
@@ -295,5 +321,6 @@
         feather.replace();
     </script>
     <script src="script.js"></script>
+    <script src="js/blogs.js"></script>
 </body>
 </html>

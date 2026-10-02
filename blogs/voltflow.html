@@ -59,6 +59,16 @@
         .vf-platform { display: inline-flex; align-items: center; gap: 7px; border: 1px solid #b7dbe1; border-radius: 999px; padding: 8px 11px; background: white; color: #075d73; font-size: .82rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
         a.vf-platform:hover { border-color: #087ea2; background: #e6faff; color: #075d73; }
         .vf-platform i { width: 14px; height: 14px; }
+        .vf-store-launch { display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, .65fr); gap: 34px; align-items: center; padding: 34px; border: 1px solid #bfeaf0; border-radius: 16px; background: linear-gradient(125deg, #effbfd, #fff 62%); }
+        .vf-store-launch h2 { margin: 12px 0; font-size: 2rem; }
+        .vf-store-launch p { max-width: 620px; margin: 0; color: var(--muted); line-height: 1.7; }
+        .vf-store-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+        .vf-store-link { display: inline-flex; align-items: center; gap: 8px; border-radius: 6px; padding: 11px 14px; background: #087e9a; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+        .vf-store-link:hover { transform: translateY(-2px); background: #075d73; color: white; }
+        .vf-store-link-secondary { border: 1px solid #087e9a; background: white; color: #075d73; }
+        .vf-store-link-secondary:hover { background: #e6faff; color: #075d73; }
+        .vf-store-poster { margin: 0; padding: 12px; border-radius: 12px; background: #071525; }
+        .vf-store-poster img { display: block; width: auto; max-width: 100%; max-height: 420px; height: auto; margin: 0 auto; object-fit: contain; }
         .vf-main { padding: 120px 0 96px; }
         .vf-section { margin-bottom: 112px; }
         .vf-section:last-child { margin-bottom: 0; }
@@ -144,7 +154,7 @@
         .vf-cta h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.04em; }
         .vf-cta p { max-width: 650px; margin: 0; color: #d3f6fa; line-height: 1.65; overflow-wrap: anywhere; }
         .vf-cta .vf-button { white-space: nowrap; }
-        @media (max-width: 900px) { .vf-intro-card, .vf-image-feature, .vf-cta, .vf-availability, .vf-ide-section, .vf-story, .vf-story:nth-child(even), .vf-story-mobile, .vf-story-mobile:nth-child(even) { grid-template-columns: 1fr; } .vf-feature-grid { grid-template-columns: repeat(2, 1fr); } .vf-platforms { justify-content: flex-start; max-width: none; } .vf-story:nth-child(even) .vf-story-media { order: 0; } .vf-gallery figure:nth-child(1) { grid-column: span 12; grid-row: auto; } .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3) { grid-column: span 6; } .vf-gallery figure:nth-child(n+4) { grid-column: span 4; } .vf-mobile-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+        @media (max-width: 900px) { .vf-intro-card, .vf-image-feature, .vf-cta, .vf-availability, .vf-ide-section, .vf-story, .vf-story:nth-child(even), .vf-story-mobile, .vf-story-mobile:nth-child(even), .vf-store-launch { grid-template-columns: 1fr; } .vf-feature-grid { grid-template-columns: repeat(2, 1fr); } .vf-platforms { justify-content: flex-start; max-width: none; } .vf-story:nth-child(even) .vf-story-media { order: 0; } .vf-gallery figure:nth-child(1) { grid-column: span 12; grid-row: auto; } .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3) { grid-column: span 6; } .vf-gallery figure:nth-child(n+4) { grid-column: span 4; } .vf-mobile-gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
         @media (max-width: 620px) { .voltflow-shell { padding: 0 16px; } .vf-hero, .vf-hero-inner { min-height: 650px; } .vf-hero-inner { padding-top: 80px; padding-bottom: 48px; } .vf-hero h1 { font-size: 3.3rem; } .vf-intro-card { padding: 25px 22px; } .vf-availability { padding: 23px 20px; } .vf-ide-section { padding: 26px 21px; } .vf-main { padding-top: 82px; } .vf-section { margin-bottom: 78px; } .vf-feature-grid, .vf-impact-grid, .vf-iot-grid { grid-template-columns: 1fr; } .vf-gallery figure:nth-child(2), .vf-gallery figure:nth-child(3), .vf-gallery figure:nth-child(n+4) { grid-column: span 12; } .vf-gallery img { min-height: 220px; } .vf-desktop-gallery { grid-template-columns: 1fr; } .vf-mobile-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vf-cta { padding: 30px 24px; } }
         @media (prefers-reduced-motion: reduce) { *, *:before, *:after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
     </style>
