@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why We Added VPS Hosting & Infrastructure Services | TevrocSoft Blog</title>
-    <meta name="description" content="Learn why TevrocSoft expanded to offer VPS hosting, domain management, and hosting assistance to help clients deploy and scale their applications." />
+    <meta name="description" content="Explore how TevrocSoft supports application delivery with VPS hosting, Tevroc VPS relational data, project workflows, and controlled Workers that can run complete websites." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://tevrocsoft.co.za/blogs/vps-hosting-services.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Why We Added VPS Hosting & Infrastructure Services | TevrocSoft">
-    <meta property="og:description" content="Learn why TevrocSoft expanded to offer VPS hosting, domain management, and hosting assistance to help clients deploy and scale their applications.">
+    <meta property="og:description" content="Learn how TevrocSoft hosting, Tevroc VPS, APIs, and controlled Worker environments support application delivery, including full website UIs.">
     <meta property="og:url" content="https://tevrocsoft.co.za/blogs/vps-hosting-services.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/tevrocvps/tevroc_vps_poster.png">
     <base href="../">
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,68 +20,539 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../components/navbar.js"></script>
     <script src="../components/footer.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .vps-article-hero {
+            position: relative;
+            display: flex;
+            min-height: 620px;
+            overflow: hidden;
+            align-items: flex-end;
+            background: #061321;
+            color: #fff;
+            isolation: isolate;
+        }
+
+        .vps-article-hero::before {
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            background: url("../img/blogs/tevrocvps/tevroc_vps_poster.png") 70% 42% / cover no-repeat;
+            content: '';
+        }
+
+        .vps-article-hero::after {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background: linear-gradient(110deg, rgba(3, 16, 29, .96) 8%, rgba(3, 16, 29, .78) 48%, rgba(3, 16, 29, .2) 100%);
+            content: '';
+            pointer-events: none;
+        }
+
+        .vps-article-hero-inner {
+            display: grid;
+            width: min(1240px, calc(100% - 48px));
+            min-height: inherit;
+            margin: 0 auto;
+            align-items: end;
+            padding: 112px 0 74px;
+        }
+
+        .vps-article-hero-copy {
+            max-width: 760px;
+        }
+
+        .vps-article-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: #bfdbfe;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .vps-article-kicker::before {
+            width: 30px;
+            height: 2px;
+            background: #38bdf8;
+            content: '';
+        }
+
+        .vps-article-hero h1 {
+            max-width: 850px;
+            margin: 20px 0 22px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            line-height: .98;
+            letter-spacing: -.055em;
+            text-wrap: balance;
+        }
+
+        .vps-article-hero-lead {
+            max-width: 680px;
+            margin: 0;
+            color: #dbeafe;
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            line-height: 1.65;
+        }
+
+        .vps-article-main {
+            padding-top: 48px;
+            padding-bottom: 48px;
+        }
+
+        .vps-article-card {
+            color: #102638;
+        }
+
+        .vps-article-content {
+            padding: clamp(20px, 4vw, 40px);
+        }
+
+        .vps-article-content h2 {
+            margin-top: 1.25rem;
+            color: #102d52;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -.025em;
+        }
+
+        .vps-article-content > .vps-article-intro {
+            border-left: 4px solid #2563eb;
+            border-radius: 0 18px 18px 0;
+            padding: 24px;
+            background: linear-gradient(100deg, #edf4ff, #f8fbff);
+            font-size: 1.15rem;
+        }
+
+        .vps-article-content > .vps-article-quote {
+            position: relative;
+            border: 1px solid #dbe7f5;
+            border-radius: 20px;
+            padding: 28px;
+            background: linear-gradient(135deg, #f5f9ff, #fff);
+            box-shadow: 0 14px 32px rgba(20, 58, 115, .07);
+        }
+
+        .vps-article-quote p {
+            margin: 0;
+            color: #17375f;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.2rem, 2.6vw, 1.65rem);
+            line-height: 1.45;
+        }
+
+        .vps-section-kicker {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #2563eb;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .vps-service-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .vps-service-list li {
+            border: 1px solid #dbe7f5;
+            border-radius: 16px;
+            padding: 18px 20px;
+            background: #fbfdff;
+        }
+
+        .vps-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .vps-benefits li {
+            border: 1px solid #dbe7f5;
+            border-radius: 16px;
+            padding: 20px;
+            background: linear-gradient(150deg, #fff, #f4f8ff);
+            color: #475569;
+            line-height: 1.65;
+        }
+
+        .vps-benefits strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #17438a;
+        }
+
+        .vps-platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .vps-platform-card {
+            overflow: hidden;
+            border: 1px solid #dbe7f5;
+            border-radius: 20px;
+            background: linear-gradient(150deg, #fff, #f2f7ff);
+            box-shadow: 0 14px 35px rgba(20, 58, 115, .08);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .vps-platform-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 42px rgba(20, 58, 115, .14);
+        }
+
+        .vps-platform-card figure {
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            margin: 0;
+            background: #0b1428;
+        }
+
+        .vps-platform-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: top center;
+            transition: transform .35s ease;
+        }
+
+        .vps-platform-card:hover img {
+            transform: scale(1.035);
+        }
+
+        .vps-platform-card-copy {
+            padding: 22px;
+        }
+
+        .vps-platform-card h3 {
+            margin: 0 0 10px;
+            color: #17438a;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .vps-platform-card p {
+            margin: 0;
+            color: #475569;
+            line-height: 1.65;
+        }
+
+        .vps-worker-section {
+            border: 1px solid #d6e3f5;
+            border-radius: 24px;
+            padding: clamp(22px, 4vw, 36px);
+            background: linear-gradient(145deg, #f3f8ff, #fff 72%);
+        }
+
+        .vps-worker-section > p {
+            color: #475569;
+            line-height: 1.75;
+        }
+
+        .vps-worker-flow {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .vps-worker-step {
+            border: 1px solid #dbe7f5;
+            border-radius: 16px;
+            padding: 18px;
+            background: #fff;
+        }
+
+        .vps-worker-step > span {
+            display: grid;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 13px;
+            place-items: center;
+            border-radius: 11px;
+            background: #eaf2ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .vps-worker-step h3 {
+            margin: 0 0 7px;
+            color: #17438a;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .vps-worker-step p {
+            margin: 0;
+            color: #526579;
+            font-size: .92rem;
+            line-height: 1.6;
+        }
+
+        .vps-worker-example {
+            margin-top: 26px;
+            border: 1px solid #dbe7f5;
+            border-radius: 20px;
+            padding: clamp(18px, 3vw, 28px);
+            background: #fff;
+        }
+
+        .vps-worker-example h3 {
+            margin: 0 0 12px;
+            color: #17375f;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+        }
+
+        .vps-worker-example p {
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .vps-worker-screenshots {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .vps-worker-screenshots figure {
+            overflow: hidden;
+            margin: 0;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            background: #f0f5fc;
+        }
+
+        .vps-worker-screenshots img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .vps-worker-screenshots figcaption {
+            padding: 12px 14px;
+            color: #526579;
+            font-size: .88rem;
+            line-height: 1.5;
+        }
+
+        .vps-worker-note {
+            margin: 18px 0 0;
+            border-left: 3px solid #60a5fa;
+            padding: 12px 16px;
+            background: #f3f8ff;
+            color: #334e68;
+            font-size: .92rem;
+            line-height: 1.65;
+        }
+
+        .vps-delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .vps-delivery-card {
+            border: 1px solid #dbe7f5;
+            border-radius: 16px;
+            padding: 22px;
+            background: linear-gradient(150deg, #fff, #f4f8ff);
+        }
+
+        .vps-delivery-card h3 {
+            margin: 0 0 9px;
+            color: #17438a;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .vps-delivery-card p {
+            margin: 0;
+            color: #526579;
+            line-height: 1.65;
+        }
+
+        .vps-bottom-line {
+            border: 1px solid #c6d9fa;
+            border-radius: 22px;
+            padding: clamp(24px, 4vw, 36px);
+            background: linear-gradient(120deg, #edf4ff, #f8fbff);
+        }
+
+        .vps-article-cta {
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 22px;
+            padding: clamp(28px, 5vw, 48px);
+            background: linear-gradient(120deg, #092d5b, #1d4ed8 72%, #38bdf8);
+            color: white;
+            text-align: center;
+        }
+
+        .vps-article-cta h2 {
+            margin-top: 0;
+            color: white;
+        }
+
+        .vps-article-cta p {
+            color: #dbeafe;
+        }
+
+        @media (max-width: 767px) {
+            .vps-article-hero { min-height: 560px; }
+            .vps-article-hero-inner { width: min(100% - 40px, 1240px); padding: 96px 0 54px; }
+            .vps-platform-grid { grid-template-columns: 1fr; }
+            .vps-benefits { grid-template-columns: 1fr; }
+            .vps-worker-flow, .vps-worker-screenshots, .vps-delivery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <custom-navbar></custom-navbar>
-    <main class="container mx-auto px-4 py-20">
-        <article class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div class="relative">
-                <div class="relative w-full h-96 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80" alt="Cloud hosting and infrastructure" class="h-full w-full object-cover">
-                    <div class="absolute inset-0 bg-blue-950/60"></div>
-                    <div class="absolute inset-0 flex items-end p-8 text-white">
-                        <div>
-                            <p class="uppercase tracking-[0.24em] text-sm text-sky-100 mb-2">Company Update</p>
-                            <h1 class="text-4xl md:text-5xl font-bold leading-tight">Why We Added VPS Hosting & Infrastructure Services</h1>
-                        </div>
-                    </div>
-                </div>
+    <header class="vps-article-hero">
+        <div class="vps-article-hero-inner">
+            <div class="vps-article-hero-copy">
+                <p class="vps-article-kicker">TevrocSoft · Hosting &amp; infrastructure</p>
+                <h1>Why We Added VPS Hosting &amp; Infrastructure Services</h1>
+                <p class="vps-article-hero-lead">From relational data and project workflows to full websites running in controlled Worker environments, we help teams connect the software they build with the infrastructure it needs.</p>
             </div>
-            <section class="p-8 md:p-12 space-y-8">
-                <div class="text-sm text-gray-500 uppercase tracking-[0.24em]">Blog · 6 min read</div>
-                <p class="text-lg text-slate-700 leading-relaxed">For years, we built great software for our clients. But we kept hearing the same challenge: "What do we do after launch?" Getting hosting right, managing domains, and keeping servers secure became a natural next step for TevrocSoft.</p>
+        </div>
+    </header>
+    <main class="vps-article-main container mx-auto px-4">
+        <article class="vps-article-card max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+            <section class="vps-article-content space-y-8">
+                <div class="vps-section-kicker">Blog · 8 min read</div>
+                <p class="vps-article-intro text-slate-700 leading-relaxed">For years, we built software for clients and kept hearing the same question: “What do we do after launch?” Helping with hosting, domains, and the infrastructure that keeps an application available became a natural next step for TevrocSoft. A finished application still needs a reliable home, a data layer that fits its work, and a clear way for users and connected services to reach it.</p>
                 
                 <h2 class="text-3xl font-semibold">The Problem We Kept Seeing</h2>
-                <p class="text-slate-700 leading-relaxed">Many of our clients would finish their projects with us, only to struggle with finding the right hosting provider, configuring servers, managing DNS records, or understanding the difference between shared hosting and VPS. Some ended up on unreliable platforms. Others didn't know how to scale when their traffic grew.</p>
+                <p class="text-slate-700 leading-relaxed">Many clients would finish their projects and then have to choose a hosting provider, configure a server, point DNS records to the right place, and keep certificates and updates current. Those tasks span application code, databases, domains, and server operations. When the responsibilities are split between unfamiliar providers, a small configuration issue can turn into a long handoff before anyone knows where to look.</p>
+                <p class="text-slate-700 leading-relaxed">A virtual private server gives an application a defined environment for its runtime and supporting services. It can be a good fit when a project needs more control than a basic shared plan, but it also brings operational decisions: which services run there, how updates are applied, how data is backed up, and how the team checks that the application is healthy. Hosting is part of the product lifecycle, not a final button to press after development.</p>
                 
-                <div class="rounded-3xl border border-slate-200 p-6 bg-slate-50">
-                    <p class="text-slate-700"><strong>"We built something great,"</strong> they'd say, <strong>"but now we're worried about keeping it running."</strong></p>
+                <div class="vps-article-quote">
+                    <p>“We built something great. Now we need a clear path to keep it running.”</p>
                 </div>
 
+                <span class="vps-section-kicker">What we provide</span>
                 <h2 class="text-3xl font-semibold">Our Solution: End-to-End Support</h2>
                 <p class="text-slate-700 leading-relaxed">That's why we expanded TevrocSoft to offer comprehensive infrastructure services. We now provide:</p>
                 
-                <ul class="space-y-4 text-slate-700">
+                <ul class="vps-service-list text-slate-700">
                     <li class="flex gap-4">
-                        <span class="text-cyan-600 font-bold flex-shrink-0">→</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">→</span>
                         <div>
                             <strong>VPS Hosting</strong><br>
                             Scalable servers that support Node.js, Java, Python, .NET, and any framework your app needs. No surprises, no vendor lock-in.
                         </div>
                     </li>
                     <li class="flex gap-4">
-                        <span class="text-cyan-600 font-bold flex-shrink-0">→</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">→</span>
                         <div>
                             <strong>Domain Management</strong><br>
                             Registration, DNS configuration, SSL certificates, and renewal tracking—all managed so you don't have to.
                         </div>
                     </li>
                     <li class="flex gap-4">
-                        <span class="text-cyan-600 font-bold flex-shrink-0">→</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">→</span>
                         <div>
                             <strong>Hosting Assistance</strong><br>
                             Expert guidance on platform selection, migration, deployment, and ongoing optimization.
                         </div>
                     </li>
                     <li class="flex gap-4">
-                        <span class="text-cyan-600 font-bold flex-shrink-0">→</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">→</span>
                         <div>
                             <strong>24/7 Support</strong><br>
                             From deployment to troubleshooting, our team keeps your app running smoothly.
                         </div>
                     </li>
                 </ul>
+                <p class="text-slate-700 leading-relaxed">The goal is to make the handoff from development to a running service less fragmented. That can mean choosing a suitable environment, planning a migration, configuring a domain and SSL, deploying the application, or helping diagnose an issue after launch. The right level of support depends on the application and the team's needs; not every project needs the same server setup.</p>
 
+                <section aria-labelledby="tevroc-vps-workflows">
+                    <h2 id="tevroc-vps-workflows" class="text-3xl font-semibold">How Tevroc VPS supports the work behind an application</h2>
+                    <p class="text-slate-700 leading-relaxed">Alongside infrastructure and hosting assistance, Tevroc VPS is our relational data platform for app teams. It brings data structure and shared workspace tools into the development process, complementing the services we provide around application delivery.</p>
+                    <div class="vps-platform-grid mt-6">
+                        <div class="vps-platform-card">
+                            <figure><img src="img/blogs/tevrocvps/2026-09-22_173949.png" alt="Tevroc VPS entity browser showing application data grouped into business domains" loading="lazy"></figure>
+                            <div class="vps-platform-card-copy">
+                                <h3>Database design</h3>
+                                <p>Use Tevroc VPS to model relational entities, inspect schemas, and keep connected application data understandable as requirements evolve.</p>
+                            </div>
+                        </div>
+                        <div class="vps-platform-card">
+                            <figure><img src="img/blogs/tevrocvps/2026-09-22_164317.png" alt="Tevroc VPS shared workspace for collaborators and project data" loading="lazy"></figure>
+                            <div class="vps-platform-card-copy">
+                                <h3>Project workflows</h3>
+                                <p>Shared workspaces and collaborator roles give a project team a common place to coordinate around the database and application data they are building. It supports project delivery rather than replacing a dedicated project-management tool.</p>
+                            </div>
+                        </div>
+                        <div class="vps-platform-card">
+                            <figure><img src="img/blogs/tevrocvps/2026-10-04_152341.png" alt="Tevroc Worker environment showing a running project, HTTP health routes, and successful deployment status" loading="lazy"></figure>
+                            <div class="vps-platform-card-copy">
+                                <h3>Worker environments</h3>
+                                <p>A Worker is a controlled project environment that can serve a website UI and run application code. An API is a separate interface the application may expose; TevrocSoft can help plan the environment, deploy the site, and configure integrations with its data layer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="vps-worker-section" aria-labelledby="worker-support-heading">
+                    <span class="vps-section-kicker">Website runtime and application interfaces</span>
+                    <h2 id="worker-support-heading" class="text-3xl font-semibold">APIs and Workers are different parts of an application</h2>
+                    <p>An API is an interface: it defines how another system requests or exchanges information, including routes, inputs, responses, and error behavior. A Worker is a controlled project environment where application code runs. It can serve a website's UI and static files as well as execute the logic behind the site. A Worker-hosted website may include an API, but the API is one interface in that application—not another name for the Worker.</p>
+                    <p>This separation helps teams reason about deployment. The website UI is what a visitor sees; the API describes how that interface or another client exchanges data; the Worker is the controlled environment that can run the site and its code. Tevroc VPS is a separate relational data platform for structuring application records. When a project needs persistent data, its Worker can be configured to connect to the selected database with the required permissions. TevrocSoft can help plan those boundaries and test the integration.</p>
+                    <div class="vps-worker-flow">
+                        <div class="vps-worker-step"><span>1</span><h3>Design the API</h3><p>Define routes, request fields, response formats, and the errors clients should expect.</p></div>
+                        <div class="vps-worker-step"><span>2</span><h3>Build the website</h3><p>Prepare the UI and static files the Worker environment will serve to visitors.</p></div>
+                        <div class="vps-worker-step"><span>3</span><h3>Configure the project</h3><p>Set up runtime configuration and any permitted database connection the app needs.</p></div>
+                        <div class="vps-worker-step"><span>4</span><h3>Publish and verify</h3><p>Run the website in its controlled environment, then test its UI, API routes, and logs.</p></div>
+                    </div>
+
+                    <div class="vps-worker-example">
+                        <h3>A website and API in one Worker environment: weather telemetry</h3>
+                        <p>VoltFlow's ESP8266 weather telemetry project shows these pieces working together without treating them as the same thing. The ESP8266 reads a DHT22 sensor and sends measurements to the project's API route. The Worker environment runs the application code, serves the static dashboard UI, and streams live updates to that dashboard. The example stores readings in SQLite through its configured database binding and provides a latest-report endpoint. The Worker must be published before the device simulation can call its API.</p>
+                        <p>This example demonstrates how a controlled Worker project can include both the visible website UI and server-side application code, while an API remains the separate contract used by the device and dashboard to exchange readings. Its SQLite database is not a claim that the example runs on Tevroc VPS. Tevroc VPS is the relational data platform we can help teams evaluate and integrate when it fits their application's requirements.</p>
+                        <div class="vps-worker-screenshots">
+                            <figure>
+                                <img src="img/blogs/voltflow/2026-10-01_142539.png" alt="VoltFlow weather telemetry Worker project serving static website files, registering API routes, using a database binding, and streaming updates" loading="lazy">
+                                <figcaption>The Worker project serves the UI and runs application logic; its routes define the API used to exchange data.</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="img/blogs/voltflow/2026-10-01_142551.png" alt="VoltFlow weather telemetry Worker details showing its published and running status and service description" loading="lazy">
+                                <figcaption>The published service details make its running state, endpoint, and purpose visible to the project team.</figcaption>
+                            </figure>
+                        </div>
+                        <p class="vps-worker-note">The website environment, API contract, and database are related but distinct parts of a deployment. Each needs appropriate configuration, permissions, and verification.</p>
+                    </div>
+                </section>
+
+                <section aria-labelledby="deployment-details-heading">
+                    <span class="vps-section-kicker">Beyond server setup</span>
+                    <h2 id="deployment-details-heading" class="text-3xl font-semibold">The details that make deployment dependable</h2>
+                    <p class="text-slate-700 leading-relaxed">A successful launch is not just a machine with the application copied onto it. A dependable setup has clear ownership for the parts that make the service reachable, secure, and maintainable:</p>
+                    <div class="vps-delivery-grid">
+                        <div class="vps-delivery-card"><h3>Domain and HTTPS</h3><p>DNS records direct the domain to the right service; an SSL certificate enables an encrypted connection and needs to remain valid.</p></div>
+                        <div class="vps-delivery-card"><h3>Runtime and configuration</h3><p>The server needs the right runtime and environment-specific settings. Keep credentials out of application code and limit access to what each service needs.</p></div>
+                        <div class="vps-delivery-card"><h3>Data and recovery</h3><p>Plan where application records live, how backups are taken, and how a restore would work before an incident happens.</p></div>
+                        <div class="vps-delivery-card"><h3>Website and API</h3><p>Check that the Worker-served UI loads correctly, then test the API routes, expected status codes, and invalid-request handling separately.</p></div>
+                        <div class="vps-delivery-card"><h3>Logs and maintenance</h3><p>Use available logs and checks to investigate issues, apply updates, and understand changes after deployment.</p></div>
+                        <div class="vps-delivery-card"><h3>Capacity planning</h3><p>Review application traffic, storage, and database needs periodically so infrastructure can change as the product grows.</p></div>
+                    </div>
+                </section>
+
+                <span class="vps-section-kicker">Built for different stages</span>
                 <h2 class="text-3xl font-semibold">Who Benefits Most?</h2>
                 <p class="text-slate-700 leading-relaxed">These services were built for businesses like:</p>
                 
@@ -103,18 +575,19 @@
                     </div>
                 </div>
 
+                <span class="vps-section-kicker">One connected team</span>
                 <h2 class="text-3xl font-semibold">Why This Makes Sense for Our Clients</h2>
-                <ul class="list-disc list-inside text-slate-700 space-y-3">
-                    <li><strong>Continuity:</strong> The same team that built your app manages the infrastructure. No handoff, no guesswork.</li>
-                    <li><strong>Reliability:</strong> We monitor performance, handle updates, and fix issues before they affect your users.</li>
-                    <li><strong>Flexibility:</strong> Support for any framework means your tech choices aren't locked into one platform.</li>
-                    <li><strong>Cost Efficiency:</strong> Pay for what you use. Scale up or down without long-term contracts.</li>
-                    <li><strong>Peace of Mind:</strong> Security hardening, backups, SSL management—all handled so you can focus on your business.</li>
+                <ul class="vps-benefits">
+                    <li><strong>Continuity</strong>The same team that built your app can help manage its infrastructure—without a confusing handoff.</li>
+                    <li><strong>Reliability</strong>Monitoring, updates, and troubleshooting help keep the application available for its users.</li>
+                    <li><strong>Flexibility</strong>Support for different frameworks keeps technology choices aligned with your project.</li>
+                    <li><strong>Cost efficiency</strong>Plan infrastructure around your needs and review the options as your application grows.</li>
+                    <li><strong>Peace of mind</strong>Get help with security hardening, backups, and SSL management so you can focus on your business.</li>
                 </ul>
 
-                <div class="rounded-3xl border border-slate-200 p-6 bg-blue-50 border-blue-200">
+                <div class="vps-bottom-line">
                     <h3 class="text-2xl font-semibold text-blue-900 mb-3">The Bottom Line</h3>
-                    <p class="text-blue-900 leading-relaxed">Great software deserves great infrastructure. By adding VPS hosting, domain management, and hosting assistance to our service lineup, TevrocSoft now supports clients from idea through launch, scale, and beyond. Your success is our success.</p>
+                    <p class="text-blue-950 leading-relaxed mb-0">Great software deserves great infrastructure. By adding VPS hosting, domain management, and hosting assistance to our service lineup, TevrocSoft supports clients from idea through launch, scale, and beyond.</p>
                 </div>
 
                 <h2 class="text-3xl font-semibold">Real Examples</h2>
@@ -122,27 +595,29 @@
                 
                 <ul class="space-y-4 text-slate-700">
                     <li class="flex gap-4">
-                        <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">✓</span>
                         <div>
                             <strong>A Financial Services Company</strong> migrated from shared hosting to our VPS solution and reduced page load times by 60%.
                         </div>
                     </li>
                     <li class="flex gap-4">
-                        <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">✓</span>
                         <div>
                             <strong>An E-Commerce Startup</strong> launched their Shopify alternative on our infrastructure and handles 5x the traffic they initially expected.
                         </div>
                     </li>
                     <li class="flex gap-4">
-                        <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+                        <span class="text-blue-600 font-bold flex-shrink-0">✓</span>
                         <div>
                             <strong>A Software Agency</strong> uses our hosting to white-label solutions for their own clients—all managed by our team.
                         </div>
                     </li>
                 </ul>
 
-                <div class="mt-8 text-center">
-                    <a href="../cloud-support.html" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-white font-semibold hover:bg-sky-700 transition">Explore Our Hosting Services</a>
+                <div class="vps-article-cta mt-8">
+                    <h2 class="text-3xl font-semibold">Need a clearer path from build to launch?</h2>
+                    <p class="mx-auto max-w-2xl leading-relaxed">Explore hosting, domain management, and deployment support for the infrastructure behind your next application.</p>
+                    <a href="../cloud-support.html" class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 font-semibold text-blue-800 transition hover:bg-blue-50">Explore Our Hosting Services</a>
                 </div>
             </section>
         </article>

@@ -30,36 +30,54 @@
 
     <main class="container mx-auto px-4 py-20">
         <!-- Blog Hero -->
-        <section class="blogs-hero mb-16 text-center relative overflow-hidden rounded-3xl bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80');">
-            <div class="absolute inset-0 bg-sky-900/70"></div>
-            <div class="relative px-6 py-24 md:py-32">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Insights & Digital Thinking</h1>
-                <p class="text-xl text-sky-100 max-w-2xl mx-auto">Practical stories, tutorials, and ideas from our team around software, design, and growth.</p>
+        <section class="blogs-hero mb-16 relative overflow-hidden rounded-3xl">
+            <div class="blogs-hero-inner">
+                <div class="blogs-hero-copy">
+                    <span class="blogs-hero-kicker"><i data-feather="zap"></i> TevrocSoft journal</span>
+                    <h1>Ideas for building what’s next.</h1>
+                    <p>Product news, practical guides, and fresh thinking for makers, teams, and ambitious businesses.</p>
+                    <div class="blogs-hero-actions">
+                        <a href="#recent-articles" class="blogs-hero-primary">Explore the articles <i data-feather="arrow-down"></i></a>
+                        <a href="#featured-article" class="blogs-hero-secondary">Meet the latest VoltFlow update <i data-feather="arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blogs-hero-visual" aria-label="VoltFlow by TevrocSoft">
+                    <div class="blogs-hero-orbit blogs-hero-orbit-one"></div>
+                    <div class="blogs-hero-orbit blogs-hero-orbit-two"></div>
+                    <div class="blogs-hero-logo-card">
+                        <img src="img/blogs/voltflow/voltflow-logo.png" alt="VoltFlow logo">
+                    </div>
+                    <div class="blogs-hero-product-label">
+                        <span class="blogs-hero-live-dot"></span>
+                        <span><strong>VoltFlow</strong><small>Electronics design, in one workspace</small></span>
+                    </div>
+                    <span class="blogs-hero-floating-chip"><i data-feather="cpu"></i> Design · Simulate · Build</span>
+                </div>
             </div>
         </section>
 
         <!-- Featured Post -->
-        <section class="featured-section mb-16">
+        <section class="featured-section mb-16" id="featured-article">
             <div class="featured-post bg-white rounded-xl shadow-md overflow-hidden">
                 <div class="md:flex">
                     <div class="md:w-1/2">
-                        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="ClientFlow business dashboard" class="w-full h-full object-cover">
+                        <img src="img/blogs/voltflow/2026-10-01_142611.png" alt="VoltFlow running as a mobile app with a live weather telemetry dashboard" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8 md:w-1/2">
-                        <div class="uppercase tracking-wide text-sm text-blue-600 font-semibold mb-1">Featured Post</div>
-                        <h2 class="text-3xl font-bold mb-4">ClientFlow: A New Business Experience from TevrocSoft</h2>
-                        <p class="text-gray-600 mb-4">Learn how ClientFlow brings client management, booking, delivery tracking and business automation into one modern experience for South African service teams.</p>
+                        <div class="uppercase tracking-wide text-sm text-blue-600 font-semibold mb-1">Featured · Google Play</div>
+                        <h2 class="text-3xl font-bold mb-4">VoltFlow is on Google Play—and open for reviews</h2>
+                        <p class="text-gray-600 mb-4">VoltFlow is published on Google Play, and Android users can now join the testing program, try the electronics design workspace, and share feedback to help shape what comes next.</p>
                         <div class="flex items-center">
-                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=200&q=80" alt="ClientFlow team collaboration" class="w-10 h-10 rounded-full mr-3">
+                            <span class="featured-author-mark mr-3"><i data-feather="zap"></i></span>
                             <div>
-                                <p class="text-sm font-medium">TevrocSoft Team</p>
-                                <p class="text-xs text-gray-500">July 26, 2026 · 6 min read</p>
+                                <p class="text-sm font-medium">VoltFlow by TevrocSoft</p>
+                                <p class="text-xs text-gray-500">October 11, 2026 · 3 min read</p>
                             </div>
                         </div>
-                        <a href="blogs/client-flow.html" class="mt-4 inline-block text-blue-600 font-medium flex items-center">
-                            Read Article
-                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
-                        </a>
+                        <div class="featured-actions">
+                            <a href="https://play.google.com/apps/testing/com.voltflow.app" target="_blank" rel="noopener noreferrer" class="featured-play-link">Join the Google Play test <i data-feather="external-link"></i></a>
+                            <a href="https://play.google.com/store/apps/details?id=com.voltflow.app" target="_blank" rel="noopener noreferrer" class="featured-store-link">Open Android listing <i data-feather="arrow-up-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,13 +121,31 @@
         </section>
 
         <!-- Recent Articles -->
-        <section class="recent-section mb-16">
+        <section class="recent-section mb-16" id="recent-articles">
             <h2 class="text-3xl font-bold mb-8 text-center">Recent Articles</h2>
-            <p id="blog-filter-status" class="text-center text-sm text-gray-500 mb-5" role="status" aria-live="polite">Showing all 11 articles</p>
+            <p id="blog-filter-status" class="text-center text-sm text-gray-500 mb-5" role="status" aria-live="polite">Showing all 13 articles</p>
             <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article: VoltFlow Google Play reviews -->
+                <div class="blog-article blog-card-store relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="product-design development">
+                    <img src="img/blogs/voltflow/2026-10-01_142132.png" alt="VoltFlow examples library with an ESP8266 weather station project" class="h-80 sm:h-96 w-full object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>October 11, 2026</span>
+                            <span class="mx-2">•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">VoltFlow is open for reviews on Google Play</h3>
+                        <p class="text-gray-600 mb-4">Try VoltFlow on Android, join the Google Play testing program, and share your feedback to help us improve the electronics design workspace.</p>
+                        <a href="blogs/voltflow-google-play-reviews.html" class="text-cyan-700 font-medium flex items-center">
+                            Read More
+                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Article: VoltFlow -->
                 <div class="blog-article blog-card-lead relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="product-design development">
-                    <img src="img/blogs/voltflow/voltflow-poster.png" alt="VoltFlow electronics design platform" class="w-full h-48 object-cover object-top">
+                    <img src="img/blogs/voltflow/2026-10-01_142520.png" alt="VoltFlow circuit editor showing an ESP8266 project wired to sensors and a display" class="w-full h-48 object-cover object-top">
                     <div class="p-6">
                         <div class="flex items-center text-sm text-gray-500 mb-2">
                             <span>September 22, 2026</span>
@@ -247,6 +283,24 @@
                         <h3 class="text-xl font-bold mb-3">Tevroc SDK: The npm package for Tevroc apps</h3>
                         <p class="text-gray-600 mb-4">Install the public JavaScript package and learn how one client handles auth, entities, files, integrations, payments, native persistence, and offline support.</p>
                         <a href="blogs/tevrocsdk.html" class="text-blue-600 font-medium flex items-center">
+                            Read More
+                            <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article: Tevroc VPS on Microsoft Store -->
+                <div class="blog-article blog-card-store relative rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300" data-category="development">
+                    <img src="img/blogs/tevrocvps/tevroc_vps_poster.png" alt="Tevroc VPS is now available on Microsoft Store" class="h-80 sm:h-96 w-full object-contain bg-slate-950">
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-2">
+                            <span>October 9, 2026</span>
+                            <span class="mx-2">•</span>
+                            <span>3 min read</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Tevroc VPS is now on Microsoft Store</h3>
+                        <p class="text-gray-600 mb-4">Find the Windows edition of Tevroc VPS on Microsoft Store and explore desktop tools for relational data, schema management, and app development.</p>
+                        <a href="blogs/tevrocvps-microsoft-store.html" class="text-cyan-700 font-medium flex items-center">
                             Read More
                             <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
                         </a>

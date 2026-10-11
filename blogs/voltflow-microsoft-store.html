@@ -11,7 +11,7 @@
     <meta property="og:title" content="VoltFlow arrives on Microsoft Store">
     <meta property="og:description" content="The Windows edition of VoltFlow is now available on Microsoft Store.">
     <meta property="og:url" content="https://tevrocsoft.co.za/blogs/voltflow-microsoft-store.html">
-    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/voltflow/voltflow_microsoft_poster.jpeg">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/voltflow/2026-10-01_142132.png">
     <link rel="icon" href="../img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,54 +21,129 @@
     <script src="../components/navbar.js"></script>
     <script src="../components/footer.js"></script>
     <style>
+        :root { --launch-blue: #2563eb; --launch-sky: #38bdf8; --launch-ink: #102638; }
         * { box-sizing: border-box; }
-        body { margin: 0; background: #f4f8fb; color: #102333; font-family: 'DM Sans', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; background: #f3f7fc; color: var(--launch-ink); font-family: 'DM Sans', sans-serif; }
         h1, h2 { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0; }
         .launch-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
-        .launch-hero { padding: 78px 0 52px; background: #092534; color: white; }
-        .launch-kicker { color: #91e5c7; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-        .launch-hero h1 { max-width: 850px; margin: 14px 0; font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1; }
-        .launch-hero p { max-width: 720px; margin: 0; color: #d4e7e2; font-size: 1.15rem; line-height: 1.7; }
-        .launch-date { display: inline-block; margin-top: 24px; color: #b3c9cf; font-size: .92rem; }
-        .launch-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .75fr); gap: 48px; align-items: start; padding: 56px 0 90px; }
-        .launch-copy h2 { margin: 0 0 14px; font-size: 1.8rem; }
-        .launch-copy p { color: #526675; font-size: 1.05rem; line-height: 1.8; }
-        .launch-poster { margin: 0; padding: 12px; border: 1px solid #d7e2e6; border-radius: 10px; background: #fff; }
-        .launch-poster img { display: block; width: 100%; height: auto; }
-        .launch-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-        .launch-button { display: inline-flex; align-items: center; gap: 9px; padding: 12px 16px; border-radius: 6px; background: #087c66; color: white; font-weight: 700; text-decoration: none; }
-        .launch-button:hover { background: #075b4c; color: white; }
-        .launch-secondary { border: 1px solid #b8c9cf; background: white; color: #123440; }
-        .launch-secondary:hover { background: #e9f1f2; color: #123440; }
-        .launch-back { display: inline-block; margin-top: 36px; color: #087c66; font-weight: 700; text-decoration: none; }
-        @media (max-width: 760px) { .launch-main { grid-template-columns: 1fr; gap: 32px; padding-top: 38px; } .launch-poster { max-width: 520px; margin: 0 auto; } .launch-hero { padding-top: 58px; } }
+        .launch-hero { position: relative; overflow: hidden; padding: 58px 0 72px; background: radial-gradient(ellipse at 76% 20%, rgba(56, 189, 248, .3), transparent 23rem), linear-gradient(120deg, #071a35 0%, #123e8a 58%, #2563eb 100%); color: white; isolation: isolate; }
+        .launch-hero::before, .launch-hero::after { position: absolute; z-index: -1; border: 1px solid rgba(191, 219, 254, .14); border-radius: 50%; content: ''; pointer-events: none; }
+        .launch-hero::before { width: 620px; height: 620px; top: -440px; right: 4%; box-shadow: 0 0 0 44px rgba(191, 219, 254, .035), 0 0 0 96px rgba(191, 219, 254, .025); }
+        .launch-hero::after { width: 420px; height: 420px; right: -250px; bottom: -310px; }
+        .launch-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); gap: clamp(32px, 6vw, 76px); align-items: center; }
+        .launch-kicker { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(191, 219, 254, .32); border-radius: 999px; padding: 8px 12px; background: rgba(8, 27, 57, .34); color: #bfdbfe; font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .launch-kicker svg { width: 15px; height: 15px; color: #7dd3fc; }
+        .launch-hero h1 { max-width: 680px; margin: 22px 0 18px; font-size: clamp(2.8rem, 5.8vw, 5rem); line-height: .98; letter-spacing: -.055em; text-wrap: balance; }
+        .launch-hero p { max-width: 600px; margin: 0; color: #dbeafe; font-size: 1.12rem; line-height: 1.75; }
+        .launch-date { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: #bfdbfe; font-size: .9rem; }
+        .launch-date::before { width: 6px; height: 6px; border-radius: 50%; background: #7dd3fc; content: ''; }
+        .launch-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+        .launch-hero-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(219, 234, 254, .38); border-radius: 999px; padding: 11px 15px; color: #eff6ff; font-size: .87rem; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .launch-hero-actions a:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .12); color: #fff; }
+        .launch-hero-actions .launch-hero-primary { border-color: #fff; background: #fff; color: #1748a0; }
+        .launch-hero-actions .launch-hero-primary:hover { background: #dbeafe; color: #123b84; }
+        .launch-hero-actions svg { width: 16px; height: 16px; }
+        .launch-hero-visual { position: relative; min-height: 310px; }
+        .launch-screen-frame { position: absolute; inset: 12px 16px 18px 18px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .48); border-radius: 22px; background: #dceafe; box-shadow: 0 30px 80px rgba(2, 13, 36, .42); transform: rotate(2deg); }
+        .launch-screen-frame::after { position: absolute; inset: 0; border: 8px solid rgba(9, 28, 58, .88); border-radius: inherit; content: ''; pointer-events: none; }
+        .launch-screen-frame img { display: block; width: 100%; height: 100%; min-height: 280px; object-fit: cover; object-position: center; }
+        .launch-visual-tag { position: absolute; z-index: 2; right: 0; bottom: 0; display: inline-flex; align-items: center; gap: 11px; border: 1px solid rgba(219, 234, 254, .25); border-radius: 14px; padding: 12px 15px; background: rgba(7, 26, 57, .92); box-shadow: 0 16px 38px rgba(2, 13, 36, .28); color: #eff6ff; backdrop-filter: blur(12px); }
+        .launch-visual-tag-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 10px; background: linear-gradient(135deg, #2563eb, #38bdf8); }
+        .launch-visual-tag-mark svg { width: 18px; height: 18px; }
+        .launch-visual-tag strong, .launch-visual-tag small { display: block; }
+        .launch-visual-tag strong { font-size: .87rem; }
+        .launch-visual-tag small { margin-top: 2px; color: #bfdbfe; font-size: .7rem; }
+        .launch-main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .8fr); gap: clamp(34px, 6vw, 70px); align-items: start; padding: 58px 0 90px; }
+        .launch-copy { padding-top: 9px; }
+        .launch-section-label { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; color: #2563eb; font-size: .76rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+        .launch-section-label svg { width: 16px; height: 16px; }
+        .launch-copy h2 { margin: 0 0 16px; color: #102638; font-size: clamp(1.8rem, 3vw, 2.35rem); line-height: 1.1; letter-spacing: -.035em; }
+        .launch-copy p { color: #526675; font-size: 1.02rem; line-height: 1.8; }
+        .launch-benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 26px; }
+        .launch-benefit { min-height: 100px; border: 1px solid #dbe7f5; border-radius: 14px; padding: 15px 13px; background: linear-gradient(150deg, #fff, #f0f6ff); }
+        .launch-benefit svg { display: block; width: 19px; height: 19px; margin-bottom: 13px; color: #2563eb; }
+        .launch-benefit strong { display: block; color: #193752; font-size: .83rem; }
+        .launch-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+        .launch-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 16px; border: 1px solid transparent; border-radius: 999px; background: #2563eb; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease; }
+        .launch-button:hover { transform: translateY(-2px); background: #1d4ed8; box-shadow: 0 10px 22px rgba(37, 99, 235, .22); color: white; }
+        .launch-button svg { width: 16px; height: 16px; }
+        .launch-secondary { border-color: #c7d9ff; background: white; color: #1d4ed8; }
+        .launch-secondary:hover { background: #edf4ff; color: #1d4ed8; }
+        .launch-back { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; color: #2563eb; font-weight: 700; text-decoration: none; }
+        .launch-back svg { width: 16px; height: 16px; }
+        .launch-showcase { position: relative; margin: 0; border: 1px solid #d8e5f5; border-radius: 20px; padding: 12px; background: linear-gradient(145deg, #fff, #eaf2ff); box-shadow: 0 24px 55px rgba(16, 52, 95, .13); transform: rotate(1deg); }
+        .launch-showcase::before { position: absolute; z-index: -1; inset: 16px -12px -12px 16px; border: 1px solid #c8daf8; border-radius: 20px; background: #e3edfc; content: ''; }
+        .launch-showcase img { display: block; width: 100%; aspect-ratio: 1.45; border-radius: 12px; object-fit: cover; }
+        .launch-showcase figcaption { display: flex; align-items: center; gap: 10px; padding: 14px 8px 5px; color: #526675; font-size: .82rem; line-height: 1.5; }
+        .launch-showcase figcaption svg { width: 17px; height: 17px; flex: 0 0 17px; color: #2563eb; }
+        @media (max-width: 760px) {
+            .launch-shell { width: min(100% - 32px, 560px); }
+            .launch-hero { padding: 46px 0 52px; }
+            .launch-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+            .launch-hero h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+            .launch-hero-visual { min-height: 250px; margin: 0 6px 8px 0; }
+            .launch-screen-frame { inset: 5px 12px 12px 10px; }
+            .launch-screen-frame img { min-height: 230px; }
+            .launch-main { grid-template-columns: 1fr; gap: 34px; padding: 40px 0 76px; }
+            .launch-benefits { gap: 8px; }
+            .launch-benefit { padding: 13px 10px; }
+            .launch-showcase { max-width: 500px; margin: 0 auto; }
+        }
+        @media (max-width: 390px) {
+            .launch-benefits { grid-template-columns: 1fr; }
+            .launch-benefit { display: flex; min-height: 0; align-items: center; gap: 12px; }
+            .launch-benefit svg { margin: 0; }
+        }
     </style>
 </head>
 <body>
     <custom-navbar></custom-navbar>
     <header class="launch-hero">
-        <div class="launch-shell">
-            <span class="launch-kicker">Product launch · Microsoft Store</span>
-            <h1>VoltFlow arrives on Microsoft Store.</h1>
-            <p>The Windows edition of VoltFlow is available on Microsoft Store, giving Windows users a straightforward way to install the electronics design workspace.</p>
-            <time class="launch-date" datetime="2026-09-22">September 22, 2026 · 3 min read</time>
+        <div class="launch-shell launch-hero-inner">
+            <div class="launch-hero-copy">
+                <span class="launch-kicker"><i data-feather="monitor"></i> Product launch · Microsoft Store</span>
+                <h1>VoltFlow, ready for your Windows workspace.</h1>
+                <p>VoltFlow is now on Microsoft Store. Bring circuit design, embedded code, and connected-device ideas into one desktop workspace.</p>
+                <time class="launch-date" datetime="2026-09-22">September 22, 2026 <span>·</span> 3 min read</time>
+                <div class="launch-hero-actions">
+                    <a class="launch-hero-primary" href="https://apps.microsoft.com/detail/9PHCWR1QHSX5" target="_blank" rel="noopener noreferrer">Get VoltFlow for Windows <i data-feather="external-link"></i></a>
+                    <a href="#inside-voltflow">Explore the workspace <i data-feather="arrow-down"></i></a>
+                </div>
+            </div>
+            <div class="launch-hero-visual">
+                <div class="launch-screen-frame">
+                    <img src="../img/blogs/voltflow/2026-10-01_142132.png" alt="VoltFlow desktop workspace with its electronics project examples open">
+                </div>
+                <div class="launch-visual-tag">
+                    <span class="launch-visual-tag-mark"><i data-feather="monitor"></i></span>
+                    <span><strong>VoltFlow for Windows</strong><small>Available on Microsoft Store</small></span>
+                </div>
+            </div>
         </div>
     </header>
-    <main class="launch-shell launch-main">
+    <main class="launch-shell launch-main" id="inside-voltflow">
         <article class="launch-copy">
-            <h2>From a Windows install to a connected project</h2>
+            <div class="launch-section-label"><i data-feather="layers"></i> Your desktop build space</div>
+            <h2>Go from circuit idea to connected project.</h2>
             <p>VoltFlow brings circuit design, embedded code, and simulation together. Users can place components, connect microcontrollers and sensors, and explore how a project behaves before moving toward physical hardware.</p>
             <p>The workspace supports Arduino C and MicroPython projects, serial and debug output, schematic and PCB views, and exports for sharing project details. Its connected-device tools also help makers think through Bluetooth, GPS, storage, and IoT workflows alongside the circuit.</p>
             <p>With the Windows edition on Microsoft Store, VoltFlow is easier to find and install as part of a desktop electronics workflow. The store listing is the direct place to view the app and its availability.</p>
+            <div class="launch-benefits">
+                <div class="launch-benefit"><i data-feather="edit-3"></i><strong>Design circuits</strong></div>
+                <div class="launch-benefit"><i data-feather="code"></i><strong>Build with code</strong></div>
+                <div class="launch-benefit"><i data-feather="activity"></i><strong>Test with simulation</strong></div>
+            </div>
             <div class="launch-actions">
-                <a class="launch-button" href="https://apps.microsoft.com/store/detail/XP8C6NSN1XM977" target="_blank" rel="noopener noreferrer">View in Microsoft Store <i data-feather="external-link"></i></a>
-                <a class="launch-button launch-secondary" href="ms-windows-store://pdp/?productid=XP8C6NSN1XM977">Open Store app <i data-feather="arrow-up-right"></i></a>
+                <a class="launch-button" href="https://apps.microsoft.com/detail/9PHCWR1QHSX5" target="_blank" rel="noopener noreferrer">View in Microsoft Store <i data-feather="external-link"></i></a>
+                <a class="launch-button launch-secondary" href="ms-windows-store://pdp/?productid=9PHCWR1QHSX5">Open Store app <i data-feather="arrow-up-right"></i></a>
                 <a class="launch-button launch-secondary" href="voltflow.html">Explore VoltFlow <i data-feather="arrow-right"></i></a>
             </div>
-            <a class="launch-back" href="../blogs.html">Back to all insights</a>
+            <a class="launch-back" href="../blogs.html"><i data-feather="arrow-left"></i> Back to all insights</a>
         </article>
-        <figure class="launch-poster">
-            <img src="../img/blogs/voltflow/voltflow_microsoft_poster.jpeg" alt="VoltFlow Microsoft Store launch poster for Windows">
+        <figure class="launch-showcase">
+            <img src="../img/blogs/voltflow/2026-10-01_142551.png" alt="VoltFlow Windows workspace showing published worker details for an electronics project">
+            <figcaption><i data-feather="cpu"></i> Keep your circuit, code, and connected project tools close at hand.</figcaption>
         </figure>
     </main>
     <custom-footer></custom-footer>

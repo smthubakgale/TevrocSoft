@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tevroc VPS is now on Microsoft Store | TevrocSoft</title>
+    <meta name="description" content="Get Tevroc VPS for Windows from Microsoft Store. Explore relational database tools, shared workspaces, schema controls, and offline desktop development.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/tevrocvps-microsoft-store.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Tevroc VPS is now on Microsoft Store">
+    <meta property="og:description" content="Tevroc VPS is available on Microsoft Store, bringing its desktop database tools to Windows users.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/blogs/tevrocvps-microsoft-store.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/tevrocvps/tevroc_vps_poster.png">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f3f7fc; color: #102333; font-family: 'DM Sans', sans-serif; }
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0; }
+        .launch-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+        .launch-hero { position: relative; isolation: isolate; overflow: hidden; padding: 72px 0; background: radial-gradient(circle at 78% 28%, rgba(56, 189, 248, .34), transparent 19rem), linear-gradient(120deg, #081b36, #16469f 68%, #2563eb); color: white; }
+        .launch-hero::after { position: absolute; z-index: -1; width: 420px; height: 420px; right: -170px; bottom: -300px; border: 1px solid rgba(219, 234, 254, .2); border-radius: 50%; box-shadow: 0 0 0 38px rgba(219, 234, 254, .04), 0 0 0 82px rgba(219, 234, 254, .035); content: ''; pointer-events: none; }
+        .launch-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 300px); gap: 56px; align-items: center; }
+        .launch-hero-copy { max-width: 760px; }
+        .launch-kicker { display: inline-flex; border: 1px solid rgba(191, 219, 254, .35); border-radius: 999px; padding: 8px 12px; background: rgba(8, 27, 57, .3); color: #bfdbfe; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .launch-hero h1 { max-width: 850px; margin: 18px 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; letter-spacing: -.045em; }
+        .launch-hero p { max-width: 720px; margin: 0; color: #dbeafe; font-size: 1.15rem; line-height: 1.7; }
+        .launch-date { display: inline-block; margin-top: 24px; color: #bfdbfe; font-size: .92rem; }
+        .launch-hero-art { display: grid; min-height: 360px; margin: 0; padding: 22px; place-items: center; border: 1px solid rgba(219, 234, 254, .42); border-radius: 28px; background: radial-gradient(circle at 50% 42%, #fff, #e9f2ff 72%); box-shadow: 0 24px 65px rgba(2, 13, 36, .34); transform: rotate(2deg); }
+        .launch-hero-art img { display: block; width: min(100%, 245px); height: auto; border-radius: 18px; box-shadow: 0 20px 50px rgba(18, 61, 130, .2); }
+        .launch-main { padding: 62px 0 36px; }
+        .launch-copy { padding: clamp(24px, 5vw, 48px); border: 1px solid #d9e5f5; border-radius: 24px; background: #fff; box-shadow: 0 18px 48px rgba(24, 66, 125, .08); }
+        .launch-copy h2 { margin: 0 0 16px; color: #102d52; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+        .launch-copy p { color: #526675; font-size: 1.05rem; line-height: 1.8; }
+        .launch-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+        .launch-button { display: inline-flex; align-items: center; gap: 9px; padding: 12px 17px; border: 1px solid transparent; border-radius: 999px; background: #2563eb; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .launch-button:hover { transform: translateY(-2px); background: #1d4ed8; color: white; }
+        .launch-secondary { border-color: #c7d9ff; background: white; color: #1d4ed8; }
+        .launch-secondary:hover { background: #edf4ff; color: #1d4ed8; }
+        .launch-back { display: inline-block; margin-top: 30px; color: #2563eb; font-weight: 700; text-decoration: none; }
+        .launch-highlights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 22px 0 72px; }
+        .launch-highlight { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border: 1px solid #d9e5f5; border-radius: 18px; background: linear-gradient(145deg, #fff, #f2f7ff); }
+        .launch-highlight i { display: grid; width: 42px; height: 42px; flex: 0 0 42px; place-items: center; border-radius: 13px; background: #e3edff; color: #2563eb; }
+        .launch-highlight strong { display: block; color: #17344a; font-size: .98rem; }
+        .launch-highlight p { margin: 5px 0 0; color: #526675; font-size: .88rem; line-height: 1.55; }
+        .launch-gallery { padding: 0 0 88px; }
+        .launch-section-kicker { display: block; margin-bottom: 10px; color: #2563eb; font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .launch-gallery h2 { margin: 0 0 12px; color: #102d52; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+        .launch-gallery-intro { max-width: 720px; margin: 0 0 28px; color: #526675; font-size: 1.05rem; line-height: 1.7; }
+        .launch-gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+        .launch-gallery figure { overflow: hidden; margin: 0; border: 1px solid #d8e4f2; border-radius: 18px; background: #fff; box-shadow: 0 12px 32px rgba(24, 66, 125, .07); transition: transform .2s ease, box-shadow .2s ease; }
+        .launch-gallery figure:hover { transform: translateY(-3px); box-shadow: 0 18px 38px rgba(24, 66, 125, .13); }
+        .launch-gallery img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #0b1931; }
+        .launch-gallery figcaption { padding: 16px 18px 20px; color: #526675; }
+        .launch-gallery figcaption strong { display: block; color: #17344a; font-size: 1rem; }
+        .launch-gallery figcaption p { margin: 7px 0 0; font-size: .93rem; font-weight: 400; line-height: 1.65; }
+        @media (max-width: 760px) {
+            .launch-shell { width: min(100% - 32px, 560px); }
+            .launch-hero { padding: 52px 0; }
+            .launch-hero-inner { grid-template-columns: 1fr; gap: 30px; }
+            .launch-hero-art { width: min(100%, 340px); min-height: 0; margin: 0 auto; padding: 18px; border-radius: 22px; transform: none; }
+            .launch-hero-art img { width: min(100%, 230px); }
+            .launch-main { padding: 32px 0 18px; }
+            .launch-copy { padding: 24px; border-radius: 18px; }
+            .launch-highlights { grid-template-columns: 1fr; gap: 12px; padding: 16px 0 56px; }
+            .launch-gallery-grid { grid-template-columns: 1fr; gap: 16px; }
+            .launch-gallery { padding-bottom: 64px; }
+            .launch-gallery figcaption { padding: 14px 16px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <custom-navbar></custom-navbar>
+    <header class="launch-hero">
+        <div class="launch-shell launch-hero-inner">
+            <div class="launch-hero-copy">
+                <span class="launch-kicker">Tevroc VPS · Microsoft Store</span>
+                <h1>Tevroc VPS is now on Microsoft Store.</h1>
+                <p>Tevroc VPS is available on Microsoft Store, giving Windows users a direct way to find and install its desktop tools for relational data and application development.</p>
+                <time class="launch-date" datetime="2026-10-09">October 9, 2026 · 3 min read</time>
+            </div>
+            <figure class="launch-hero-art">
+                <img src="../img/blogs/tevrocvps/tevroc_vps_poster.png" alt="Tevroc VPS cloud infrastructure and development tools">
+            </figure>
+        </div>
+    </header>
+    <main class="launch-shell launch-main">
+        <article class="launch-copy">
+            <h2>Your app data workflow, ready for Windows</h2>
+            <p>Tevroc VPS gives app builders a practical workspace for relational databases, shared projects, schema operations, and database activity. The Windows desktop edition brings those development tools to a familiar desktop environment.</p>
+            <p>Use Tevroc VPS to work with connected data, inspect and manage schemas, and keep database tasks close to the applications they support. For teams, the web version provides shared access, while desktop workflows support local development.</p>
+            <p>Find the Windows edition on Microsoft Store, or visit the Tevroc VPS page to explore the platform and its web, Windows, macOS, and Linux options.</p>
+            <div class="launch-actions">
+                <a class="launch-button" href="https://apps.microsoft.com/detail/9P5BGBF8B92C" target="_blank" rel="noopener noreferrer">View in Microsoft Store <i data-feather="external-link"></i></a>
+                <a class="launch-button launch-secondary" href="ms-windows-store://pdp/?productid=9P5BGBF8B92C">Open Store app <i data-feather="arrow-up-right"></i></a>
+                <a class="launch-button launch-secondary" href="../app-tevrocvps.html">Explore Tevroc VPS <i data-feather="arrow-right"></i></a>
+            </div>
+            <a class="launch-back" href="../blogs.html">Back to all insights</a>
+        </article>
+    </main>
+    <section class="launch-shell launch-highlights" aria-label="Tevroc VPS highlights">
+        <article class="launch-highlight">
+            <i data-feather="database" aria-hidden="true"></i>
+            <div><strong>Relational data tools</strong><p>Work with connected data and manage the schemas behind your applications.</p></div>
+        </article>
+        <article class="launch-highlight">
+            <i data-feather="layers" aria-hidden="true"></i>
+            <div><strong>Project workspaces</strong><p>Keep project data and development tasks organized around the apps they support.</p></div>
+        </article>
+        <article class="launch-highlight">
+            <i data-feather="monitor" aria-hidden="true"></i>
+            <div><strong>Windows desktop access</strong><p>Find and install the desktop edition directly from Microsoft Store.</p></div>
+        </article>
+    </section>
+    <section class="launch-shell launch-gallery" aria-labelledby="desktop-preview-heading">
+        <span class="launch-section-kicker">Inside the desktop app</span>
+        <h2 id="desktop-preview-heading">A closer look at Tevroc VPS on desktop</h2>
+        <p class="launch-gallery-intro">Explore a few of the tools and workflows available in the Tevroc VPS desktop experience.</p>
+        <div class="launch-gallery-grid">
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_152153.png" alt="Tevroc VPS desktop start page with example projects" loading="lazy">
+                <figcaption>
+                    <strong>Start from example projects</strong>
+                    <p>The desktop workspace offers retail, property, and dining starter designs alongside a blank project. Each starter includes a dedicated project database, giving you a structured starting point that you can adapt to your own application.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_152236.png" alt="Tevroc VPS logs view in the desktop app" loading="lazy">
+                <figcaption>
+                    <strong>Review workspace logs</strong>
+                    <p>The Logs view collects activity from the selected project, including database-isolation entries and the local database paths used by project services. This helps you trace what the app did when diagnosing a workspace issue.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_152256.png" alt="Tevroc VPS app information and deployment controls" loading="lazy">
+                <figcaption>
+                    <strong>Manage app information</strong>
+                    <p>The configuration workspace displays app information as project data that can be searched and managed. Its table includes controls for viewing and editing entries, while the import and export actions support moving configuration data.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_152341.png" alt="Tevroc VPS REST API workspace with code and request tools" loading="lazy">
+                <figcaption>
+                    <strong>Build and run a REST API Worker</strong>
+                    <p>The Worker editor shows project files and route code, with a live status and console for runtime and publish messages. In this example, the code registers simple HTTP routes, including a health check, while the Worker environment runs the application.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_152427.png" alt="Tevroc VPS AI tester workspace" loading="lazy">
+                <figcaption>
+                    <strong>Test API requests with the API tester</strong>
+                    <p>Select a project endpoint, send a request, and inspect its HTTP response in the tester. The view also provides a request URL and integration-code area, making it easier to check an API response before using that route in another client.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_183206.png" alt="Tevroc VPS corporate app code and API workspace" loading="lazy">
+                <figcaption>
+                    <strong>Inspect application code and runtime output</strong>
+                    <p>This example project shows its package configuration alongside a running Worker and debug console. The console records runtime and publish events, so developers can check whether the application started and where its local endpoint is available.</p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="../img/blogs/tevrocvps/2026-10-04_183216.png" alt="Tevroc VPS preview of a business application screen" loading="lazy">
+                <figcaption>
+                    <strong>Preview a business app workflow</strong>
+                    <p>The preview opens a working records screen for the example application, with a form, record selector, search, and refresh controls. It demonstrates how project data can be presented through a user-facing interface, rather than only through code or API tools.</p>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+    <custom-footer></custom-footer>
+    <script>feather.replace();</script>
+    <script src="../script.js"></script>
+</body>
+</html>

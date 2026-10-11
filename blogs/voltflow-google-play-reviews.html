@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoltFlow is open for reviews on Google Play | TevrocSoft</title>
+    <meta name="description" content="VoltFlow is open for reviews on Google Play. Join the testing program, try the electronics design workspace on Android, and share your feedback.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/voltflow-google-play-reviews.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="VoltFlow is open for reviews on Google Play">
+    <meta property="og:description" content="Join the VoltFlow Google Play testing program, explore the Android app, and share your feedback.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/blogs/voltflow-google-play-reviews.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/voltflow/logo_512x512.png">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f3f7fc; color: #102333; font-family: 'DM Sans', sans-serif; }
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0; }
+        .launch-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+        .launch-hero { position: relative; overflow: hidden; padding: 72px 0; background: radial-gradient(circle at 78% 28%, rgba(56, 189, 248, .34), transparent 19rem), linear-gradient(120deg, #081b36, #16469f 68%, #2563eb); color: white; }
+        .launch-hero::after { position: absolute; width: 420px; height: 420px; right: -170px; bottom: -300px; border: 1px solid rgba(219, 234, 254, .2); border-radius: 50%; box-shadow: 0 0 0 38px rgba(219, 234, 254, .04), 0 0 0 82px rgba(219, 234, 254, .035); content: ''; pointer-events: none; }
+        .launch-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 46px; align-items: center; }
+        .launch-hero-copy { max-width: 760px; }
+        .launch-kicker { display: inline-flex; border: 1px solid rgba(191, 219, 254, .35); border-radius: 999px; padding: 8px 12px; background: rgba(8, 27, 57, .3); color: #bfdbfe; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .launch-hero h1 { max-width: 850px; margin: 18px 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; letter-spacing: -.045em; }
+        .launch-hero p { max-width: 720px; margin: 0; color: #dbeafe; font-size: 1.15rem; line-height: 1.7; }
+        .launch-date { display: inline-block; margin-top: 24px; color: #bfdbfe; font-size: .92rem; }
+        .launch-brandmark { display: grid; width: 196px; height: 196px; place-items: center; border: 1px solid rgba(255, 255, 255, .72); border-radius: 34px; background: linear-gradient(145deg, #fff, #e9f2ff); box-shadow: 0 24px 65px rgba(2, 13, 36, .34); transform: rotate(-5deg); }
+        .launch-brandmark img { display: block; width: 154px; height: 154px; object-fit: contain; }
+        .launch-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .75fr); gap: 48px; align-items: start; padding: 56px 0 90px; }
+        .launch-copy h2 { margin: 0 0 14px; font-size: 1.8rem; }
+        .launch-copy p { color: #526675; font-size: 1.05rem; line-height: 1.8; }
+        .launch-poster { display: grid; min-height: 340px; margin: 0; place-items: center; border: 1px solid #d4e1f3; border-radius: 20px; background: radial-gradient(circle at 50% 42%, #fff, #edf4ff 72%); box-shadow: 0 18px 45px rgba(16, 52, 95, .1); }
+        .launch-poster img { display: block; width: min(76%, 300px); height: auto; border-radius: 22%; box-shadow: 0 20px 50px rgba(18, 61, 130, .15); }
+        .launch-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+        .launch-button { display: inline-flex; align-items: center; gap: 9px; padding: 12px 16px; border: 1px solid transparent; border-radius: 999px; background: #2563eb; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .launch-button:hover { transform: translateY(-2px); background: #1d4ed8; color: white; }
+        .launch-secondary { border-color: #c7d9ff; background: white; color: #1d4ed8; }
+        .launch-secondary:hover { background: #edf4ff; color: #1d4ed8; }
+        .launch-back { display: inline-block; margin-top: 36px; color: #2563eb; font-weight: 700; text-decoration: none; }
+        @media (max-width: 760px) { .launch-main { grid-template-columns: 1fr; gap: 32px; padding-top: 38px; } .launch-poster { min-height: 260px; max-width: 520px; margin: 0 auto; } .launch-hero { padding: 52px 0; } .launch-hero-inner { grid-template-columns: 1fr; gap: 32px; } .launch-brandmark { width: 140px; height: 140px; margin: 0 auto; border-radius: 28px; } .launch-brandmark img { width: 110px; height: 110px; } }
+    </style>
+</head>
+<body>
+    <custom-navbar></custom-navbar>
+    <header class="launch-hero">
+        <div class="launch-shell launch-hero-inner">
+            <div class="launch-hero-copy">
+                <span class="launch-kicker">VoltFlow · Google Play testing</span>
+                <h1>VoltFlow is open for reviews on Google Play.</h1>
+                <p>Help us improve VoltFlow. The Android app is open for reviews, and your feedback can help shape the electronics design workspace.</p>
+                <time class="launch-date" datetime="2026-10-11">October 11, 2026 · 3 min read</time>
+            </div>
+            <div class="launch-brandmark">
+                <img src="../img/blogs/voltflow/logo_512x512.png" alt="VoltFlow logo">
+            </div>
+        </div>
+    </header>
+    <main class="launch-shell launch-main">
+        <article class="launch-copy">
+            <h2>Try VoltFlow and tell us what you think</h2>
+            <p>VoltFlow brings electronics project tools together, including circuit design, embedded code, and simulation. We are inviting Android users to try it and share their experience as we continue improving the app.</p>
+            <p>Join the Google Play testing program from the web link, then use the Android listing to open VoltFlow on your device. After trying the app, please leave an honest review or feedback through Google Play.</p>
+            <div class="launch-actions">
+                <a class="launch-button" href="https://play.google.com/apps/testing/com.voltflow.app" target="_blank" rel="noopener noreferrer">Join the Google Play test <i data-feather="external-link"></i></a>
+                <a class="launch-button launch-secondary" href="https://play.google.com/store/apps/details?id=com.voltflow.app" target="_blank" rel="noopener noreferrer">Open Android listing <i data-feather="arrow-up-right"></i></a>
+                <a class="launch-button launch-secondary" href="voltflow.html">Explore VoltFlow <i data-feather="arrow-right"></i></a>
+            </div>
+            <a class="launch-back" href="../blogs.html">Back to all insights</a>
+        </article>
+        <figure class="launch-poster">
+            <img src="../img/blogs/voltflow/logo_512x512.png" alt="VoltFlow logo">
+        </figure>
+    </main>
+    <custom-footer></custom-footer>
+    <script>feather.replace();</script>
+    <script src="../script.js"></script>
+</body>
+</html>
