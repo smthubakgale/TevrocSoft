@@ -21,32 +21,41 @@
     <script src="../components/navbar.js"></script>
     <script src="../components/footer.js"></script>
     <style>
-        :root { --ink: #071525; --muted: #536274; --line: #dbe5ed; --cyan: #18c8e8; --paper: #f4f8fb; }
+        :root { --ink: #102333; --muted: #526675; --line: #d4e1f3; --blue: #2563eb; --paper: #f3f7fc; }
         * { box-sizing: border-box; }
         body.model-preview-page { margin: 0; background: var(--paper); color: var(--ink); font-family: 'DM Sans', sans-serif; }
         .model-preview-page h1, .model-preview-page h2 { font-family: 'Space Grotesk', sans-serif; }
-        .mp-shell { width: min(1040px, calc(100% - 40px)); margin: 0 auto; }
-        .mp-hero { padding: 74px 0 46px; background: #071525; color: white; }
-        .mp-kicker { color: #87eaf7; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-        .mp-hero h1 { max-width: 850px; margin: 16px 0; font-size: clamp(2.5rem, 7vw, 5.4rem); line-height: 1.02; letter-spacing: -.045em; }
-        .mp-lead { max-width: 740px; margin: 0; color: #c8dce5; font-size: 1.2rem; line-height: 1.7; }
-        .mp-meta { margin-top: 25px; color: #a8bbc7; font-size: .9rem; }
+        .mp-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+        .mp-hero { position: relative; overflow: hidden; padding: 72px 0; background: radial-gradient(circle at 78% 28%, rgba(56,189,248,.34), transparent 19rem), linear-gradient(120deg, #081b36, #16469f 68%, #2563eb); color: white; }
+        .mp-hero::after { position: absolute; width: 420px; height: 420px; right: -170px; bottom: -300px; border: 1px solid rgba(219,234,254,.2); border-radius: 50%; box-shadow: 0 0 0 38px rgba(219,234,254,.04), 0 0 0 82px rgba(219,234,254,.035); content: ''; pointer-events: none; }
+        .mp-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1fr) 220px; gap: 46px; align-items: center; }
+        .mp-hero-copy { max-width: 760px; }
+        .mp-kicker { display: inline-flex; border: 1px solid rgba(191,219,254,.35); border-radius: 999px; padding: 8px 12px; background: rgba(8,27,57,.3); color: #bfdbfe; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .mp-hero h1 { max-width: 850px; margin: 18px 0; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1; letter-spacing: -.045em; }
+        .mp-lead { max-width: 720px; margin: 0; color: #dbeafe; font-size: 1.15rem; line-height: 1.7; }
+        .mp-meta { display: inline-block; margin-top: 24px; color: #bfdbfe; font-size: .92rem; }
+        .mp-brandmark { display: grid; width: 196px; height: 196px; place-items: center; border: 1px solid rgba(255,255,255,.72); border-radius: 34px; background: linear-gradient(145deg,#fff,#e9f2ff); box-shadow: 0 24px 65px rgba(2,13,36,.34); transform: rotate(-5deg); }
+        .mp-brandmark img { display: block; width: 154px; height: 154px; object-fit: contain; }
         .mp-main { padding: 42px 0 80px; }
-        .mp-notice { margin-bottom: 30px; border: 1px solid #f2d49d; border-radius: 10px; padding: 16px 19px; background: #fff8e9; color: #604710; line-height: 1.6; }
-        .mp-media { overflow: hidden; margin: 0 0 42px; border: 1px solid var(--line); border-radius: 14px; background: #061321; box-shadow: 0 18px 44px rgba(7,21,37,.12); }
-        .mp-media video { display: block; width: 100%; max-height: 600px; background: #061321; }
+        .mp-notice { margin-bottom: 30px; border: 1px solid #c7d9ff; border-radius: 12px; padding: 16px 19px; background: #edf4ff; color: #21456f; line-height: 1.6; }
+        .mp-media { overflow: hidden; margin: 0 0 42px; border: 1px solid var(--line); border-radius: 20px; background: radial-gradient(circle at 50% 42%,#fff,#edf4ff 72%); box-shadow: 0 18px 45px rgba(16,52,95,.1); }
+        .mp-media video { display: block; width: 100%; max-height: 600px; background: #081b36; }
         .mp-media figcaption { padding: 12px 16px; background: white; color: var(--muted); font-size: .9rem; line-height: 1.55; }
         .mp-copy { max-width: 780px; margin: 0 auto; }
         .mp-copy h2 { margin: 40px 0 12px; font-size: 1.8rem; }
         .mp-copy p { margin: 0 0 18px; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
         .mp-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 34px 0; }
-        .mp-gallery figure { overflow: hidden; margin: 0; border: 1px solid var(--line); border-radius: 12px; background: white; }
+        .mp-gallery figure { overflow: hidden; margin: 0; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: 0 12px 32px rgba(16,52,95,.07); }
         .mp-gallery img { display: block; width: 100%; height: 290px; object-fit: cover; }
         .mp-gallery figcaption { padding: 12px 14px; color: var(--muted); font-size: .88rem; line-height: 1.5; }
-        .mp-back { display: inline-block; margin-top: 28px; color: #087e9a; font-weight: 700; text-decoration: none; }
+        .mp-back { display: inline-flex; align-items: center; margin-top: 28px; border: 1px solid transparent; border-radius: 999px; padding: 12px 16px; background: var(--blue); color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .mp-back:hover { transform: translateY(-2px); background: #1d4ed8; color: white; }
         @media (max-width: 680px) {
-            .mp-hero { padding: 52px 0 36px; }
+            .mp-hero { padding: 52px 0; }
             .mp-shell { width: min(100% - 28px, 1040px); }
+            .mp-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+            .mp-brandmark { width: 140px; height: 140px; margin: 0 auto; border-radius: 28px; }
+            .mp-brandmark img { width: 110px; height: 110px; }
             .mp-gallery { grid-template-columns: 1fr; }
             .mp-gallery img { height: auto; max-height: 320px; }
         }
@@ -55,22 +64,27 @@
 <body class="model-preview-page">
     <custom-navbar></custom-navbar>
     <header class="mp-hero">
-        <div class="mp-shell">
-            <span class="mp-kicker">VoltFlow · Upcoming feature preview</span>
-            <h1>A new dimension for circuit design.</h1>
-            <p class="mp-lead">A circuit sketch describes how the electronics connect. The Model tab brings the physical build into view, too. Here is an early look through VoltFlow's Robot Rover project.</p>
-            <p class="mp-meta">VoltFlow by TevrocSoft &nbsp;·&nbsp; October 18, 2026 &nbsp;·&nbsp; 4 min read</p>
+        <div class="mp-shell mp-hero-inner">
+            <div class="mp-hero-copy">
+                <span class="mp-kicker">VoltFlow · Upcoming feature preview</span>
+                <h1>A new dimension for circuit design.</h1>
+                <p class="mp-lead">A circuit sketch describes how the electronics connect. The Model tab brings the physical build into view, too. Here is an early look through VoltFlow's Robot Rover project.</p>
+                <p class="mp-meta">VoltFlow by TevrocSoft &nbsp;·&nbsp; October 18, 2026 &nbsp;·&nbsp; 4 min read</p>
+            </div>
+            <div class="mp-brandmark">
+                <img src="../img/blogs/voltflow/logo_512x512.png" alt="VoltFlow logo">
+            </div>
         </div>
     </header>
     <main class="mp-main">
         <div class="mp-shell">
-            <aside class="mp-notice"><strong>Preview in development:</strong> The Model tab and rover simulation are still being refined. This feature preview shows the current 3D assembly and course concept; it is not a release announcement or a claim that every simulation behavior is production-ready.</aside>
+            <aside class="mp-notice"><strong>Preview in development:</strong> The Model tab and rover simulation are still being refined. The recording shows the current prototype in action; it is not a release announcement or a claim that every simulation behavior is production-ready.</aside>
             <figure class="mp-media">
                 <video controls playsinline preload="metadata" poster="../img/blogs/voltflow/voltflow-model-tab-rover-showcase-framed.png">
                     <source src="../VoltFlow-Model-Tab-Preview.mp4" type="video/mp4">
                     Your browser does not support the video element. You can still explore the images below.
                 </video>
-                <figcaption>Preview reel: the Robot Rover assembly showcase followed by a live VoltFlow recording of the rover on its obstacle course. The feature is still in development.</figcaption>
+                <figcaption>Preview reel with an original electronic soundtrack: the Robot Rover assembly showcase followed by a live VoltFlow recording of the rover on its obstacle course. The feature is still in development.</figcaption>
             </figure>
             <article class="mp-copy">
                 <h2>From connected components to a build you can inspect</h2>
