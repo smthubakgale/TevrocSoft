@@ -131,6 +131,42 @@
     font-weight: 800;
 }
 
+.service-icon-list {
+    display: grid;
+    gap: .85rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.service-icon-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    color: #475569;
+    line-height: 1.7;
+}
+
+.service-icon-list li > i,
+.service-icon-list li > svg {
+    display: grid;
+    width: 1.9rem;
+    height: 1.9rem;
+    flex: 0 0 1.9rem;
+    place-items: center;
+    margin-top: .05rem;
+    padding: .42rem;
+    border: 1px solid #bfdbfe;
+    border-radius: .65rem;
+    background: #eff6ff;
+    color: #2563eb;
+    stroke-width: 2;
+}
+
+.service-icon-list strong {
+    color: #0f172a;
+}
+
 .service-hero {
     position: relative;
     overflow: hidden;
