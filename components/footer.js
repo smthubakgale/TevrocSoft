@@ -159,6 +159,8 @@ class CustomFooter extends HTMLElement {
               <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> Domain Management</a></li>
               <li><a class="footer-link" href="cloud-support.html"><i data-feather="chevron-right"></i> Hosting Assistance</a></li>
               <li><a class="footer-link" href="automation-ai.html"><i data-feather="chevron-right"></i> AI Chatbots</a></li>
+              <li><a class="footer-link" href="whatsapp-chatbots.html"><i data-feather="chevron-right"></i> WhatsApp Chatbots</a></li>
+              <li><a class="footer-link" href="whatsapp-ai-automation.html"><i data-feather="chevron-right"></i> WhatsApp AI Automation</a></li>
             </ul>
           </div>
 

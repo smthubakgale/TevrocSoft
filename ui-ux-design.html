@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/service-pages.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -40,15 +41,25 @@
 <body class="bg-gray-50">
     <custom-navbar></custom-navbar>
 
-    <main class="container mx-auto px-4 py-20">
-        <section class="mb-12 text-center">
-            <span class="inline-flex items-center rounded-full bg-sky-100 text-sky-700 px-4 py-2 text-sm font-semibold mb-4">UI/UX Design</span>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Designs That Delight and Convert</h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">We create interface designs and user journeys that make digital products feel intuitive, trustworthy, and easy to use.</p>
+    <main class="container mx-auto px-4 py-12 md:py-20">
+        <section class="service-hero mb-14 px-6 py-14 text-white md:px-14 md:py-20">
+            <div class="service-hero-content">
+                <div>
+                    <a href="services.html" class="service-back-link"><i data-feather="arrow-left"></i> All services</a>
+                    <p class="service-eyebrow">UI/UX Design</p>
+                    <h1>Make every tap, click, and choice feel natural.</h1>
+                    <p class="service-lead">We turn complex ideas into clear, inviting digital experiences—with thoughtful journeys, confident visual design, and interfaces made for real people.</p>
+                    <div class="service-hero-actions">
+                        <a href="contact.html" class="service-button service-button-primary">Discuss your design project <i data-feather="arrow-right"></i></a>
+                        <a href="#design-capabilities" class="service-button service-button-secondary">Explore the service <i data-feather="chevron-down"></i></a>
+                    </div>
+                </div>
+                <div class="service-hero-icon"><i data-feather="pen-tool"></i></div>
+            </div>
         </section>
 
-        <section class="grid gap-8 lg:grid-cols-2 mb-16">
-            <div class="bg-white rounded-3xl shadow-xl p-10">
+        <section id="design-capabilities" class="grid gap-8 lg:grid-cols-2 mb-16">
+            <div class="service-content-card p-8 md:p-10">
                 <h2 class="text-2xl font-semibold mb-4">Our design process</h2>
                 <ul class="space-y-3 text-gray-700">
                     <li>• Research and user discovery</li>
@@ -58,7 +69,7 @@
                     <li>• Developer-ready design handoff</li>
                 </ul>
             </div>
-            <div class="bg-white rounded-3xl shadow-xl p-10">
+            <div class="service-content-card p-8 md:p-10">
                 <h2 class="text-2xl font-semibold mb-4">What makes our design better</h2>
                 <p class="text-gray-700 mb-4">We design products that are easy to understand, quick to use, and built to support your business goals.</p>
                 <div class="space-y-4">
@@ -74,10 +85,10 @@
             </div>
         </section>
 
-        <section class="bg-slate-950 text-white rounded-3xl p-10">
+        <section class="service-cta">
             <h2 class="text-3xl font-bold mb-4">Ready to improve your digital experience?</h2>
             <p class="text-gray-200 mb-8 max-w-3xl">From mobile apps to web platforms, we turn ideas into polished interfaces that people enjoy using.</p>
-            <a href="contact.html" class="inline-flex items-center justify-center rounded-full bg-sky-500 px-8 py-3 text-white font-semibold hover:bg-sky-400 transition">Discuss your design project</a>
+            <a href="contact.html" class="service-button service-button-primary">Discuss your design project <i data-feather="arrow-right"></i></a>
         </section>
     </main>
 

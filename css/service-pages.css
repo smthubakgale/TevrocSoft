@@ -1,0 +1,197 @@
+.service-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(circle at 82% 18%, rgba(147, 197, 253, .3), transparent 18rem),
+        linear-gradient(125deg, #10244f, #2563eb 62%, #39c6f4);
+}
+
+.service-hero::after {
+    position: absolute;
+    right: -10rem;
+    bottom: -16rem;
+    width: 24rem;
+    height: 24rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2rem rgba(255, 255, 255, .04), 0 0 0 4rem rgba(255, 255, 255, .035);
+    content: "";
+    pointer-events: none;
+}
+
+.service-hero-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.service-hero-icon {
+    display: grid;
+    width: 5rem;
+    height: 5rem;
+    place-items: center;
+    margin-inline: auto;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, .12);
+    color: #dbeafe;
+}
+
+.service-hero-icon svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.service-hero .service-eyebrow {
+    margin-bottom: 1rem;
+    color: #bfdbfe;
+    font-size: .875rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+}
+
+.service-hero h1 {
+    max-width: 52rem;
+    margin-bottom: 1.25rem;
+    color: white;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1.12;
+}
+
+.service-hero .service-lead {
+    max-width: 48rem;
+    margin-bottom: 2rem;
+    color: #eff6ff;
+    font-size: clamp(1.125rem, 2.4vw, 1.25rem);
+    line-height: 1.75;
+}
+
+.service-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
+    color: #dbeafe;
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.service-back-link:hover {
+    color: white;
+}
+
+.service-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.service-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 3rem;
+    padding: .75rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.service-button-primary {
+    background: white;
+    color: #1d4ed8;
+}
+
+.service-button-primary:hover {
+    background: #eff6ff;
+    color: #1e40af;
+}
+
+.service-button-secondary {
+    border-color: rgba(255, 255, 255, .4);
+    color: white;
+}
+
+.service-button-secondary:hover {
+    background: rgba(255, 255, 255, .1);
+    color: white;
+}
+
+.service-content-card {
+    border: 1px solid #dbeafe;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 12px 32px rgba(30, 64, 175, .06);
+}
+
+.service-content-card h2 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.service-content-card h3 {
+    color: #1e40af;
+    font-weight: 650;
+}
+
+.service-cta {
+    border-radius: 1.5rem;
+    background: #020617;
+    padding: clamp(2rem, 5vw, 3rem);
+    color: white;
+}
+
+.service-cta h2 {
+    margin-bottom: 1rem;
+    color: white;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.service-cta p {
+    max-width: 48rem;
+    margin-bottom: 2rem;
+    color: #cbd5e1;
+    line-height: 1.75;
+}
+
+.service-cta .service-button-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.service-cta .service-button-primary:hover {
+    background: #39c6f4;
+    color: #10244f;
+}
+
+@media (min-width: 768px) {
+    .service-hero-content {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .service-hero-icon {
+        margin-inline: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .service-content-card {
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .service-content-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 38px rgba(30, 64, 175, .1);
+    }
+}
