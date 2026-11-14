@@ -1,3 +1,136 @@
+.service-hero,
+.service-cta,
+.service-content-card,
+.service-process {
+    isolation: isolate;
+}
+
+.service-hero {
+    box-shadow: 0 28px 70px rgba(30, 64, 175, .18);
+}
+
+.service-hero::before {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .09) 60%, transparent 82%);
+    content: "";
+    pointer-events: none;
+}
+
+.service-hero-icon {
+    width: clamp(5rem, 11vw, 7rem);
+    height: clamp(5rem, 11vw, 7rem);
+    border-radius: 2rem;
+    box-shadow: 0 16px 38px rgba(2, 6, 23, .16);
+}
+
+.service-hero-icon svg {
+    width: clamp(2.5rem, 5vw, 3.25rem);
+    height: clamp(2.5rem, 5vw, 3.25rem);
+    stroke-width: 1.65;
+}
+
+.service-back-link {
+    padding: .5rem .75rem;
+    margin-left: -.75rem;
+    border-radius: 9999px;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.service-back-link:hover {
+    background: rgba(255, 255, 255, .12);
+}
+
+.service-hero-actions .service-button {
+    min-height: 3.25rem;
+}
+
+.service-content-card {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(30, 64, 175, .055);
+}
+
+.service-content-card::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #39c6f4);
+    content: "";
+}
+
+.service-content-card h2 {
+    letter-spacing: -.025em;
+}
+
+.service-content-card h3 {
+    letter-spacing: -.015em;
+}
+
+.service-content-card p,
+.service-content-card li {
+    line-height: 1.75;
+}
+
+.service-section-heading {
+    max-width: 50rem;
+    margin-bottom: 2rem;
+}
+
+.service-section-heading > p:first-child {
+    margin-bottom: .65rem;
+    color: #1d4ed8;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.service-section-heading h2 {
+    margin-bottom: 1rem;
+    color: #0f172a;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.15;
+}
+
+.service-section-heading > p:last-child {
+    color: #475569;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+}
+
+.service-note {
+    border: 1px solid #bfdbfe;
+    border-radius: 1.5rem;
+    background:
+        radial-gradient(circle at 100% 0, rgba(57, 198, 244, .13), transparent 18rem),
+        #eff6ff;
+}
+
+.service-step-card {
+    border: 1px solid #dbeafe;
+    border-radius: 1.25rem;
+    background: white;
+    padding: 1.5rem;
+    box-shadow: 0 10px 28px rgba(30, 64, 175, .055);
+}
+
+.service-step-number {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    margin-bottom: 1rem;
+    border: 1px solid #bfdbfe;
+    border-radius: .85rem;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: .875rem;
+    font-weight: 800;
+}
+
 .service-hero {
     position: relative;
     overflow: hidden;
@@ -144,12 +277,33 @@
 }
 
 .service-cta {
+    position: relative;
+    overflow: hidden;
     border-radius: 1.5rem;
     background:
         radial-gradient(circle at 88% 20%, rgba(57, 198, 244, .2), transparent 18rem),
         linear-gradient(125deg, #10244f, #1d4ed8 70%, #2563eb);
     padding: clamp(2rem, 5vw, 3rem);
     color: white;
+    box-shadow: 0 24px 60px rgba(30, 64, 175, .2);
+}
+
+.service-cta::after {
+    position: absolute;
+    right: -7rem;
+    bottom: -13rem;
+    width: 21rem;
+    height: 21rem;
+    border: 1px solid rgba(255, 255, 255, .17);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1.5rem rgba(255, 255, 255, .035), 0 0 0 3rem rgba(255, 255, 255, .025);
+    content: "";
+    pointer-events: none;
+}
+
+.service-cta > * {
+    position: relative;
+    z-index: 1;
 }
 
 .service-cta h2 {
@@ -213,5 +367,29 @@
     .service-content-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 18px 38px rgba(30, 64, 175, .1);
+    }
+
+    .service-step-card {
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .service-step-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 34px rgba(30, 64, 175, .1);
+    }
+}
+
+@media (max-width: 640px) {
+    .service-hero {
+        border-radius: 1.25rem;
+    }
+
+    .service-hero-actions .service-button {
+        width: 100%;
+    }
+
+    .service-content-card,
+    .service-step-card {
+        border-radius: 1rem;
     }
 }

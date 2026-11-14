@@ -27,12 +27,21 @@
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <style>
-        .wa-hero { position: relative; overflow: hidden; border-radius: 1.5rem; background: radial-gradient(circle at 82% 18%, rgba(134,239,172,.3), transparent 18rem), linear-gradient(125deg,#063b2b,#087e4d 62%,#12a05b); }
+        .wa-hero { position: relative; overflow: hidden; border-radius: 1.5rem; background: radial-gradient(circle at 82% 18%, rgba(134,239,172,.3), transparent 18rem), linear-gradient(125deg,#063b2b,#087e4d 62%,#12a05b); box-shadow: 0 28px 70px rgba(6,59,43,.18); }
         .wa-hero::after { position:absolute; width:24rem; height:24rem; right:-10rem; bottom:-16rem; border:1px solid rgba(255,255,255,.2); border-radius:50%; box-shadow:0 0 0 2rem rgba(255,255,255,.04),0 0 0 4rem rgba(255,255,255,.035); content:''; pointer-events:none; }
-        .wa-icon { display:grid; width:5rem; height:5rem; place-items:center; border:1px solid rgba(255,255,255,.35); border-radius:1.5rem; background:rgba(255,255,255,.12); color:#dcfce7; font-size:2.5rem; }
-        .wa-card { border:1px solid #dcefe4; border-radius:1.25rem; background:white; box-shadow:0 12px 32px rgba(6,59,43,.06); }
+        .wa-icon { display:grid; width:clamp(5rem,11vw,7rem); height:clamp(5rem,11vw,7rem); place-items:center; border:1px solid rgba(255,255,255,.35); border-radius:2rem; background:rgba(255,255,255,.12); color:#dcfce7; font-size:2.5rem; box-shadow:0 16px 38px rgba(2,6,23,.16); }
+        .wa-card { position:relative; overflow:hidden; border:1px solid #dcefe4; border-radius:1.25rem; background:white; box-shadow:0 12px 32px rgba(6,59,43,.06); }
+        .wa-card::before { position:absolute; inset:0 0 auto; height:3px; background:linear-gradient(90deg,#087e4d,#4ade80); content:''; }
         .wa-card-icon { display:grid; width:2.75rem; height:2.75rem; place-items:center; border-radius:.9rem; background:#e8f7ed; color:#087e4d; font-size:1.25rem; }
+        .wa-section-heading { max-width:50rem; margin-bottom:2rem; }
+        .wa-section-heading > p:first-child { margin-bottom:.65rem; color:#087e4d; font-size:.75rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+        .wa-section-heading h2 { margin-bottom:1rem; color:#0f172a; font-size:clamp(1.75rem,4vw,2.5rem); font-weight:800; letter-spacing:-.035em; line-height:1.15; }
+        .wa-section-heading > p:last-child { color:#475569; font-size:1.0625rem; line-height:1.8; }
+        .wa-cta { position:relative; overflow:hidden; border-radius:1.5rem; background:radial-gradient(circle at 88% 20%,rgba(74,222,128,.2),transparent 18rem),linear-gradient(125deg,#063b2b,#087e4d 70%,#12a05b); padding:clamp(2rem,5vw,3rem); color:white; box-shadow:0 24px 60px rgba(6,59,43,.2); }
+        .wa-cta h2 { color:white; font-size:clamp(1.75rem,4vw,2.25rem); font-weight:800; line-height:1.2; }
+        .wa-cta p { color:#dcfce7; line-height:1.75; }
         @media (prefers-reduced-motion:no-preference) { .wa-card { transition:transform .2s ease, box-shadow .2s ease; } .wa-card:hover { transform:translateY(-4px); box-shadow:0 18px 38px rgba(6,59,43,.1); } }
+        @media (max-width:640px) { .wa-hero { border-radius:1.25rem; } .wa-card { border-radius:1rem; } }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -138,7 +147,7 @@
             </div>
         </section>
 
-        <section class="rounded-3xl bg-slate-950 p-8 text-center text-white md:p-12">
+        <section class="wa-cta text-center">
             <p class="mb-3 text-sm font-bold uppercase tracking-[.18em] text-green-300">Start with the conversation</p>
             <h2 class="mb-4 text-3xl font-bold md:text-4xl">Which messages take up your team’s day?</h2>
             <p class="mx-auto mb-8 max-w-2xl leading-8 text-slate-300">Share a few common enquiries and the systems your team uses. We’ll help identify where WhatsApp AI automation could fit—and where a person should stay in the loop.</p>
