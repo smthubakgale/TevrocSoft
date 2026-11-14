@@ -13,7 +13,7 @@ class CustomServiceCard extends HTMLElement {
         :host {
           --primary: #1B4DFF;
           --primary-light: #2563EB;
-          --accent: #39C6F4;
+          --accent: #e8f1ff;
         }
 
         .service-card {
@@ -41,7 +41,7 @@ class CustomServiceCard extends HTMLElement {
           width: 4rem;
           height: 4rem;
           border-radius: 50%;
-          background-color: var(--accent, #e0f7f5);
+          background-color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -56,8 +56,20 @@ class CustomServiceCard extends HTMLElement {
 
         .icon {
           font-size: 1.5rem;
-          color: var(--primary);
+          color: var(--primary-light);
           transition: color 0.3s ease;
+        }
+
+        :host([icon="whatsapp"]) .icon-container {
+          background-color: #e7f8ee;
+        }
+
+        :host([icon="whatsapp"]) .icon {
+          color: #128c4a;
+        }
+
+        :host([icon="whatsapp"]) .service-card:hover .icon-container {
+          background-color: #128c4a;
         }
 
         .service-card:hover .icon {
