@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A better desk for the busy work: ClientFlow on Windows | TevrocSoft</title>
+    <meta name="description" content="Meet ClientFlow for Windows: keep products, delivery progress, sales conversations, and business app projects in one desktop workspace.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/clientflow-microsoft-store.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="A better desk for the busy work: ClientFlow on Windows">
+    <meta property="og:description" content="Bring products, delivery progress, sales conversations, and business app projects together with ClientFlow for Windows.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/blogs/clientflow-microsoft-store.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/clientflow/ClientFlow_BoxArt_1080x1080.png">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #fff8f3; color: #29211d; font-family: 'DM Sans', sans-serif; }
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; }
+        .launch-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+        .launch-hero { position: relative; overflow: hidden; padding: 66px 0; background: radial-gradient(circle at 78% 28%, rgba(255, 255, 255, .2), transparent 19rem), linear-gradient(120deg, #a83208, #f45a0a 65%, #ff8a22); color: white; }
+        .launch-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 48px; align-items: center; }
+        .launch-kicker { display: inline-flex; border: 1px solid rgba(255, 255, 255, .45); border-radius: 999px; padding: 8px 12px; background: rgba(106, 34, 8, .2); color: #fff4e8; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .launch-hero h1 { max-width: 720px; margin: 20px 0 16px; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1; letter-spacing: -.045em; }
+        .launch-hero p { max-width: 680px; margin: 0; color: #fff0e4; font-size: 1.12rem; line-height: 1.75; }
+        .launch-date { display: inline-block; margin-top: 22px; color: #ffe0c5; font-size: .92rem; }
+        .launch-hero-actions, .launch-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 25px; }
+        .launch-hero-actions a, .launch-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 999px; padding: 12px 16px; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .launch-hero-actions a:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .12); color: white; }
+        .launch-hero-actions .launch-primary { border-color: white; background: white; color: #c34108; }
+        .launch-hero-actions .launch-primary:hover { background: #fff2e5; color: #a83208; }
+        .launch-hero-actions svg, .launch-button svg { width: 16px; height: 16px; }
+        .launch-hero-art { display: grid; width: 190px; min-height: 190px; margin: 0 auto; padding: 18px; place-items: center; border: 1px solid rgba(255, 255, 255, .65); border-radius: 26px; background: white; box-shadow: 0 24px 65px rgba(89, 29, 8, .28); transform: rotate(3deg); }
+        .launch-hero-art img { display: block; width: 124px; height: 124px; max-width: 100%; object-fit: contain; border-radius: 22%; }
+        .launch-hero-art figcaption { margin-top: 12px; color: #66564d; font-size: .88rem; line-height: 1.55; text-align: center; }
+        .launch-main { padding: 58px 0 34px; }
+        .launch-copy { padding: clamp(24px, 5vw, 48px); border: 1px solid #f1dfd4; border-radius: 24px; background: white; box-shadow: 0 18px 48px rgba(89, 44, 21, .07); }
+        .launch-copy h2, .launch-story-copy h2 { margin: 0 0 16px; color: #3a251b; font-size: clamp(1.7rem, 3vw, 2.3rem); }
+        .launch-copy p, .launch-story-copy p { color: #66564d; font-size: 1.04rem; line-height: 1.8; }
+        .launch-button { border-color: transparent; background: #e94e0b; color: white; }
+        .launch-button:hover { transform: translateY(-2px); background: #c94108; color: white; }
+        .launch-secondary { border-color: #f3c6ad; background: white; color: #bc3d0b; }
+        .launch-secondary:hover { background: #fff1e8; color: #a83208; }
+        .launch-stories { display: grid; gap: 26px; padding: 22px 0 72px; }
+        .launch-story { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 34px; align-items: center; padding: 22px; border: 1px solid #f1dfd4; border-radius: 20px; background: white; box-shadow: 0 12px 32px rgba(89, 44, 21, .06); }
+        .launch-story:nth-child(even) { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); background: #fffdfa; }
+        .launch-story:nth-child(even) .launch-story-media { order: 2; }
+        .launch-story-media { display: grid; min-width: 0; min-height: 280px; margin: 0; place-items: center; overflow: hidden; border: 1px solid #f1dfd4; border-radius: 14px; background: #fff8f3; }
+        .launch-story-media img { display: block; width: 100%; max-height: 600px; object-fit: contain; }
+        .launch-story-copy { padding: 12px; }
+        .launch-story-copy h2 { margin-top: 10px; }
+        .launch-story-copy p { margin: 0 0 14px; }
+        .launch-section-kicker { display: block; margin-bottom: 10px; color: #d84a0b; font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .launch-back { display: inline-block; margin-top: 28px; color: #c34108; font-weight: 700; text-decoration: none; }
+        @media (max-width: 760px) {
+            .launch-shell { width: min(100% - 32px, 560px); }
+            .launch-hero { padding: 48px 0; }
+            .launch-hero-inner { grid-template-columns: 1fr; gap: 30px; }
+            .launch-hero-art { width: 160px; min-height: 160px; transform: none; }
+            .launch-hero-art img { width: 104px; height: 104px; }
+            .launch-main { padding: 32px 0 18px; }
+            .launch-copy { padding: 24px; border-radius: 18px; }
+            .launch-stories { gap: 14px; padding: 16px 0 56px; }
+            .launch-story, .launch-story:nth-child(even) { grid-template-columns: 1fr; gap: 18px; padding: 16px; }
+            .launch-story:nth-child(even) .launch-story-media { order: 0; }
+            .launch-story-media { min-height: 0; }
+            .launch-story-copy { padding: 4px; }
+        }
+    </style>
+</head>
+<body>
+    <custom-navbar></custom-navbar>
+    <header class="launch-hero">
+        <div class="launch-shell launch-hero-inner">
+            <div>
+                <span class="launch-kicker"><i data-feather="monitor"></i> Product launch · Microsoft Store</span>
+                <h1>A better desk for the busy work.</h1>
+                <p>ClientFlow is now on Microsoft Store. Bring products, orders, customer conversations, and business app projects together on your Windows desktop—and give the day’s moving parts room to breathe.</p>
+                <time class="launch-date" datetime="2026-11-14">November 14, 2026 <span>·</span> 7 min read</time>
+                <div class="launch-hero-actions">
+                    <a class="launch-primary" href="ms-windows-store://pdp/?productid=9NG6RF5RS3J7">Get ClientFlow <i data-feather="arrow-up-right"></i></a>
+                    <a href="#inside-clientflow">See the desktop app <i data-feather="arrow-down"></i></a>
+                </div>
+            </div>
+            <figure class="launch-hero-art">
+                <img src="../img/blogs/clientflow-mobile/icon-512.png" alt="ClientFlow app logo">
+            </figure>
+        </div>
+    </header>
+    <main class="launch-shell launch-main" id="inside-clientflow">
+        <article class="launch-copy">
+            <span class="launch-section-kicker">The Windows release</span>
+            <h2>One desktop. A lot less bouncing around.</h2>
+            <p>ClientFlow has landed on Microsoft Store, making the Windows edition easier to find and install. Inside, product records, fulfillment, sales conversations, and business app projects share one workspace—so the workday can feel less like a tour of disconnected tabs.</p>
+            <p>Take a closer look at the screens below: start with the catalog, follow an order’s journey, answer a customer, then switch gears to a business app project. Different jobs, one place to pick up the thread.</p>
+            <p>Whether you are running a shop, coordinating orders, or helping a customer find the right product, the Windows release gives these workflows room on a larger screen. Here is a look at how the pieces connect.</p>
+        </article>
+    </main>
+    <section class="launch-shell launch-stories" aria-label="ClientFlow Windows release features">
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/main.png" alt="ClientFlow desktop product catalog showing product images, prices, and inventory details" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">Products and inventory</span><h2>First stop: the product shelf</h2><p>The Products page puts the catalog up front, with routes to related work like payments, point of sale, inventory, and suppliers close by. Each card brings an item’s image, name, SKU, price, and stock into one glance. Find what you sell, check the details, and keep moving through the tasks that make a sale happen.</p><p>That shared view is handy when product information is part of a bigger conversation: a team can refer to the same catalog while moving between the tools that support the order.</p></div>
+        </article>
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/2026-11-13_053918.png" alt="ClientFlow order dashboard summarizing packing, collection, transit, delivery, and shipping metrics" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">Orders and fulfillment</span><h2>From “still packing” to “delivered”</h2><p>The dashboard lays out the delivery journey: awaiting packing, awaiting collection, in transit, and delivered. Shipping revenue, costs, and failed deliveries get their own callouts, while charts make room to spot movement without opening every order one by one. The example shows zero-value sample data, so it’s a tour of the dashboard—not a live business report.</p><p>When orders are moving through several stages, a shared overview can help a team decide where to look next—whether that is a package awaiting collection or a delivery that needs follow-up.</p></div>
+        </article>
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/apps.png" alt="ClientFlow sales workspace with the WhatsApp inbox open to a customer conversation" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">Sales conversations</span><h2>A customer question, right where the team can help</h2><p>Products, Customers, the WhatsApp inbox, Product finder, and Sales scanner all have a place in the Sales workspace. The selected conversation shows a business-selection prompt and the reply that follows. The useful bit? The team can see the conversation while they work, instead of chasing context across separate screens.</p><p>Keeping the thread beside the sales tools makes it easier to understand what the customer has already asked and which business they want help with before composing a response.</p></div>
+        </article>
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/2026-11-13_054103.png" alt="ClientFlow App Projects page with a selected project, draft status, data-sharing mode, and editor action" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">App projects</span><h2>Keep your business app ideas moving</h2><p>App Projects gives owners a quick project overview and a way back into a selected project’s editor. There’s also a serious note among the controls: a project link contains a private access key, and anyone holding it may access connected data. Treat that link like a credential—share it carefully and rotate it if it may have escaped the right hands.</p><p>It is a helpful reminder when projects are shared across a team: convenience is great, but access links should go only to the people who need them.</p></div>
+        </article>
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/2026-11-13_053844.png" alt="Furniture storefront shown in the ClientFlow desktop project preview" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">Customer-facing projects</span><h2>Step into the storefront before your customers do</h2><p>This preview opens on a furniture storefront, complete with announcement bar, navigation, collection search, and a promotional hero. It’s a customer-facing page inside the project workflow—not an inventory screen—and a glimpse of how ClientFlow projects can connect back-office work with the experience a business puts online.</p><p>That connection is useful for businesses that need both a place to manage operations and a way to shape the pages customers see. The preview makes the storefront part of the same project story.</p></div>
+        </article>
+        <article class="launch-story">
+            <figure class="launch-story-media"><img src="../img/blogs/clientflow/2026-11-13_053900.png" alt="Desktop project editor showing source files, an open code file, and terminal output" loading="lazy"></figure>
+            <div class="launch-story-copy"><span class="launch-section-kicker">Project development</span><h2>Behind the preview: files, code, and a running project</h2><p>Here’s the workshop behind the storefront: a project file tree, an open configuration file, and terminal output as the preview starts and business data loads. This is the supporting development environment, not another management screen—and it shows the edit-and-preview context around a business app project.</p><p>Seeing the preview alongside its project files helps distinguish the customer-facing result from the tools used to build and check it.</p></div>
+        </article>
+    </section>
+    <section class="launch-shell launch-copy" aria-labelledby="clientflow-windows-availability">
+        <span class="launch-section-kicker">Get started</span>
+        <h2 id="clientflow-windows-availability">Ready to make room for a smoother workday?</h2>
+        <p>Open the Microsoft Store listing for current product details and installation options. Or explore the wider ClientFlow platform and its web version.</p>
+        <div class="launch-actions">
+            <a class="launch-button" href="ms-windows-store://pdp/?productid=9NG6RF5RS3J7">Open in Microsoft Store <i data-feather="external-link"></i></a>
+            <a class="launch-button launch-secondary" href="../app-clientflow.html">Explore ClientFlow <i data-feather="arrow-right"></i></a>
+            <a class="launch-button launch-secondary" href="https://clientflow.tevrocsoft.co.za" target="_blank" rel="noopener noreferrer">Open web version <i data-feather="external-link"></i></a>
+        </div>
+        <a class="launch-back" href="../blogs.html"><i data-feather="arrow-left"></i> Back to all insights</a>
+    </section>
+    <custom-footer></custom-footer>
+    <script>feather.replace();</script>
+    <script src="../script.js"></script>
+</body>
+</html>

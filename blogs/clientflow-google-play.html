@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your business, in your pocket: ClientFlow on Google Play | TevrocSoft</title>
+    <meta name="description" content="Meet ClientFlow for Android: take product lookups, sales conversations, and app projects on the go with the business workspace now on Google Play.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tevrocsoft.co.za/blogs/clientflow-google-play.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Your business, in your pocket: ClientFlow on Google Play">
+    <meta property="og:description" content="Take product lookups, sales conversations, and app projects on the go with ClientFlow for Android.">
+    <meta property="og:url" content="https://tevrocsoft.co.za/blogs/clientflow-google-play.html">
+    <meta property="og:image" content="https://tevrocsoft.co.za/img/blogs/clientflow-mobile/ClientFlow_Feature_Image_1024x500.png">
+    <link rel="icon" href="../img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../components/navbar.js"></script>
+    <script src="../components/footer.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #fff8f3; color: #29211d; font-family: 'DM Sans', sans-serif; }
+        h1, h2 { font-family: 'Space Grotesk', sans-serif; }
+        .launch-shell { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+        .launch-hero { position: relative; overflow: hidden; padding: 66px 0; background: radial-gradient(circle at 78% 28%, rgba(255, 255, 255, .2), transparent 19rem), linear-gradient(120deg, #a83208, #f45a0a 65%, #ff8a22); color: white; }
+        .launch-hero-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr); gap: 56px; align-items: center; }
+        .launch-kicker { display: inline-flex; border: 1px solid rgba(255, 255, 255, .45); border-radius: 999px; padding: 8px 12px; background: rgba(106, 34, 8, .2); color: #fff4e8; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+        .launch-hero h1 { max-width: 720px; margin: 20px 0 16px; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: 1; letter-spacing: -.045em; }
+        .launch-hero p { max-width: 680px; margin: 0; color: #fff0e4; font-size: 1.12rem; line-height: 1.75; }
+        .launch-date { display: inline-block; margin-top: 22px; color: #ffe0c5; font-size: .92rem; }
+        .launch-hero-actions, .launch-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 25px; }
+        .launch-hero-actions a, .launch-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 999px; padding: 12px 16px; color: white; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+        .launch-hero-actions a:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .12); color: white; }
+        .launch-hero-actions .launch-primary { border-color: white; background: white; color: #c34108; }
+        .launch-hero-actions .launch-primary:hover { background: #fff2e5; color: #a83208; }
+        .launch-hero-actions svg, .launch-button svg { width: 16px; height: 16px; }
+        .launch-hero-art { display: grid; width: min(100%, 180px); min-height: 180px; margin: 0 auto; padding: 18px; place-items: center; overflow: hidden; border: 1px solid rgba(255, 255, 255, .55); border-radius: 22px; background: white; box-shadow: 0 24px 65px rgba(89, 29, 8, .28); transform: rotate(2deg); }
+        .launch-hero-art img { display: block; width: 112px; height: 112px; object-fit: contain; border-radius: 22%; }
+        .launch-hero-art figcaption { padding: 12px 16px; color: #66564d; font-size: .9rem; line-height: 1.6; }
+        .launch-main { padding: 58px 0 34px; }
+        .launch-copy { padding: clamp(24px, 5vw, 48px); border: 1px solid #f1dfd4; border-radius: 24px; background: white; box-shadow: 0 18px 48px rgba(89, 44, 21, .07); }
+        .launch-copy h2, .launch-story-copy h2 { margin: 0 0 16px; color: #3a251b; font-size: clamp(1.7rem, 3vw, 2.3rem); }
+        .launch-copy p, .launch-story-copy p { color: #66564d; font-size: 1.04rem; line-height: 1.8; }
+        .launch-button { border-color: transparent; background: #e94e0b; color: white; }
+        .launch-button:hover { transform: translateY(-2px); background: #c94108; color: white; }
+        .launch-secondary { border-color: #f3c6ad; background: white; color: #bc3d0b; }
+        .launch-secondary:hover { background: #fff1e8; color: #a83208; }
+        .launch-stories { display: grid; gap: 26px; padding: 22px 0 72px; }
+        .launch-story { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 34px; align-items: center; padding: 22px; border: 1px solid #f1dfd4; border-radius: 20px; background: white; box-shadow: 0 12px 32px rgba(89, 44, 21, .06); }
+        .launch-story:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); background: #fffdfa; }
+        .launch-story:nth-child(even) .launch-story-media { order: 2; }
+        .launch-story-media { display: grid; min-width: 0; min-height: 280px; margin: 0; place-items: center; overflow: hidden; border: 1px solid #f1dfd4; border-radius: 14px; background: #fff8f3; }
+        .launch-story-media img { display: block; width: 100%; max-height: 600px; object-fit: contain; }
+        .launch-story-copy { padding: 12px; }
+        .launch-story-copy h2 { margin-top: 10px; }
+        .launch-story-copy p { margin: 0 0 14px; }
+        .launch-section-kicker { display: block; margin-bottom: 10px; color: #d84a0b; font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .launch-back { display: inline-block; margin-top: 28px; color: #c34108; font-weight: 700; text-decoration: none; }
+        @media (max-width: 760px) {
+            .launch-shell { width: min(100% - 32px, 560px); }
+            .launch-hero { padding: 48px 0; }
+            .launch-hero-inner { grid-template-columns: 1fr; gap: 30px; }
+            .launch-hero-art { width: 130px; min-height: 130px; transform: none; }
+            .launch-hero-art img { width: 80px; height: 80px; }
+            .launch-main { padding: 32px 0 18px; }
+            .launch-copy { padding: 24px; border-radius: 18px; }
+            .launch-stories { gap: 14px; padding: 16px 0 56px; }
+            .launch-story, .launch-story:nth-child(even) { grid-template-columns: 1fr; gap: 18px; padding: 16px; }
+            .launch-story:nth-child(even) .launch-story-media { order: 0; }
+            .launch-story-media { min-height: 0; }
+            .launch-story-copy { padding: 4px; }
+        }
+    </style>
+</head>
+<body>
+    <custom-navbar></custom-navbar>
+    <header class="launch-hero">
+        <div class="launch-shell launch-hero-inner">
+            <div>
+                <span class="launch-kicker"><i data-feather="smartphone"></i> Product launch · Google Play</span>
+                <h1>Your business, in your pocket.</h1>
+                <p>Meet ClientFlow for Android: a handy way to keep products, sales conversations, and app projects within reach when the day takes you away from your desk.</p>
+                <time class="launch-date" datetime="2026-11-14">November 14, 2026 <span>·</span> 7 min read</time>
+                <div class="launch-hero-actions">
+                    <a class="launch-primary" href="https://play.google.com/store/apps/details?id=com.tevroc.clientflow" target="_blank" rel="noopener noreferrer">Get ClientFlow on Google Play <i data-feather="external-link"></i></a>
+                    <a href="#inside-clientflow">See the mobile app <i data-feather="arrow-down"></i></a>
+                </div>
+            </div>
+            <figure class="launch-hero-art">
+                <img src="../img/blogs/clientflow-mobile/icon-512.png" alt="ClientFlow app logo">
+            </figure>
+        </div>
+    </header>
+    <main class="launch-shell launch-main" id="inside-clientflow">
+        <article class="launch-copy">
+            <span class="launch-section-kicker">The Android release</span>
+            <h2>Meet your business between the busy bits</h2>
+            <p>ClientFlow is now on Google Play, bringing its business workspace to Android. Check a product, pick up a sales conversation, or revisit an app project from your phone—whether you are between meetings, on the shop floor, or simply away from your desk.</p>
+            <p>Think of this as a quick tour through a working day: find the item, get the customer context, and see how a storefront looks on a small screen. The examples below show how those jobs fit together in ClientFlow.</p>
+            <p>A phone is not a desktop squeezed into your pocket; it is a handy way to get to the information you need in the moment. The following screens show the mobile workflows in context, including where a web storefront preview is different from the ClientFlow app itself.</p>
+        </article>
+        <section class="launch-stories" aria-label="ClientFlow Android release features">
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/product-management.png" alt="ClientFlow Android product catalog with add-product, search, category, status, and view controls" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Product management</span><h2>“Do we have that one?” Find out fast.</h2><p>The mobile Products screen puts search and category, subcategory, and status filters right beside the catalog. Each card brings the item image, name, SKU, category, price, and stock into view, with Add product and display controls nearby. It is a useful starting point when a customer asks about an item and you need its details without heading back to a desktop. The figures shown are sample workspace data, not a live stock guarantee.</p><p>Search by name, SKU, or barcode to narrow the list, then switch between grid and list views to suit the task. The screen keeps useful product facts together, so you can spend less time hunting and more time helping.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/sales-assistance.png" alt="ClientFlow Android sales inbox showing a customer request and selected business context" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Sales inbox</span><h2>A sales request is more than a notification</h2><p>Products, Customers, and the WhatsApp inbox meet in the Sales workspace. Here, a customer is asked to choose a business, then sees that choice confirmed. The team can follow the conversation as it unfolds, with the context close by when it is time to help.</p><p>That little bit of context matters: the right company is clear before the conversation gets into product questions or a hand-off to sales. Instead of starting from a blank screen, the team can see what has already happened.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/sales-interaction.png" alt="ClientFlow Android sales conversation where a returning customer chooses a business before asking about products" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Conversation continuity</span><h2>Pick up where the conversation left off</h2><p>A returning customer wants to continue, then asks about products. ClientFlow offers a simple choice: stick with the previous company or select a new one. That small step helps everyone know which business the question is about before the conversation moves on. This is the ClientFlow inbox view, not a separate WhatsApp app screen.</p><p>For teams serving more than one business, confirming that choice can prevent a muddled start and make the next reply feel like a continuation, not a reset.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/whatsapp-customer.jpeg" alt="Customer-side WhatsApp chat showing a company menu and a product question" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Customer perspective</span><h2>Now flip the phone around</h2><p>From the customer’s side, the exchange starts with a greeting, then a service notice and company menu. After making a selection, the customer can ask about products. Put this alongside the inbox view and you can follow the whole hand-off—from the first message to the team ready to respond.</p><p>The two perspectives tell a fuller story: customers get a clear next step, while the sales team sees the request in its workspace. It is a small example of how a familiar chat can connect to organized business support.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/create-app.png" alt="ClientFlow Android App Projects page with project counts, sharing controls, and private-link warning" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">App projects</span><h2>Your projects can come along for the ride</h2><p>App Projects gives you a quick view of project and publishing activity, plus a route back into a selected project’s editor. There is one important “handle with care” note: anyone with a project link containing a private access key may be able to reach connected data. Share these links only with the right people and rotate them if they may have been exposed.</p><p>The warning is worth pausing for: a convenient share link is also a key to the connected project data. Keep it private, and if it lands somewhere it should not, replace it rather than hoping nobody noticed.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/preview-app.png" alt="Mobile-sized storefront preview shown inside the ClientFlow project editor" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Project preview</span><h2>Give your storefront the small-screen test</h2><p>Here, a storefront sits inside a phone-sized preview, complete with its announcement, navigation, and collection content. It is a chance to check how a business page feels on mobile before sharing or publishing. This is the project editor’s preview, rather than a native ClientFlow app screen.</p><p>Phone previews make it easier to notice whether key content is easy to scan and whether the page feels coherent at a narrower size. It is a useful review step before sending the experience to customers.</p></div>
+            </article>
+            <article class="launch-story">
+                <figure class="launch-story-media"><img src="../img/blogs/clientflow-mobile/live-app.jpeg" alt="Furniture storefront displayed in a mobile web browser" loading="lazy"></figure>
+                <div class="launch-story-copy"><span class="launch-section-kicker">Customer-facing web experience</span><h2>And here it is out in the wild</h2><p>The storefront now appears in a mobile browser, with its browser controls, shop navigation, and promotional content in view. Compare it with the editor preview to see the customer-facing page beyond the project tool. This is a website example, not a ClientFlow native Android screen.</p><p>Together, the preview and browser capture show two different moments in the project journey: checking a page while building it, then viewing the resulting web experience in a browser.</p></div>
+            </article>
+        </section>
+        <section class="launch-copy" aria-labelledby="clientflow-play-availability">
+            <span class="launch-section-kicker">Get started</span>
+            <h2 id="clientflow-play-availability">Ready to take ClientFlow with you?</h2>
+            <p>Visit the official Google Play listing for current app details and installation options. Want the bigger picture? Explore ClientFlow or open the web version.</p>
+            <div class="launch-actions">
+                <a class="launch-button" href="https://play.google.com/store/apps/details?id=com.tevroc.clientflow" target="_blank" rel="noopener noreferrer">View on Google Play <i data-feather="external-link"></i></a>
+                <a class="launch-button launch-secondary" href="../app-clientflow.html">Explore ClientFlow <i data-feather="arrow-right"></i></a>
+                <a class="launch-button launch-secondary" href="https://clientflow.tevrocsoft.co.za" target="_blank" rel="noopener noreferrer">Open web version <i data-feather="external-link"></i></a>
+            </div>
+            <a class="launch-back" href="../blogs.html"><i data-feather="arrow-left"></i> Back to all insights</a>
+        </section>
+    </main>
+    <custom-footer></custom-footer>
+    <script>feather.replace();</script>
+    <script src="../script.js"></script>
+</body>
+</html>
